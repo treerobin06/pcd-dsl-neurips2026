@@ -1,0 +1,16 @@
+{
+  "model": "openai/gpt-4o-mini",
+  "n_problems": 20,
+  "direct": {
+    "correct": 8,
+    "total": 20,
+    "accuracy": 40.0
+  },
+  "compile": {
+    "correct": 0,
+    "total": 17,
+    "accuracy": 0,
+    "failed": true
+  },
+  "random_baseline": 29.13095238095239
+}

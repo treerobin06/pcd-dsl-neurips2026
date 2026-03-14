@@ -1,0 +1,27 @@
+{
+  "task_name": "bayesian_network_inference",
+  "inference_family": "variable_elimination",
+  "state_structure": {
+    "type": "bayesian_network",
+    "hypothesis": "",
+    "features": [],
+    "values_per_feature": [],
+    "n_arms": 0,
+    "prior_alpha": 1.0,
+    "prior_beta": 1.0
+  },
+  "observation_model": {
+    "type": "cpt_given",
+    "temperature": 1.0,
+    "input": "bn_structure_and_cpt_text"
+  },
+  "decision_rule": {
+    "type": "exact_probability",
+    "utility": "conditional_probability_query"
+  },
+  "data_format": {
+    "rounds": "single_shot",
+    "options_per_round": 0,
+    "feedback": "none"
+  }
+}

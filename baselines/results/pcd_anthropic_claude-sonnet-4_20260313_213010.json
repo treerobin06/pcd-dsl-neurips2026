@@ -1,0 +1,94 @@
+{
+  "bn": {
+    "task": "bn",
+    "model": "anthropic/claude-sonnet-4",
+    "n_samples": 900,
+    "parse_accuracy": 0.3055555555555556,
+    "parse_field_accuracy": {
+      "variables": 1.0,
+      "edges": 0.9966666666666667,
+      "query_variable": 0.3088888888888889,
+      "query_value": 0.3711111111111111,
+      "evidence": 0.9922222222222222,
+      "cpt_values": 1.0
+    },
+    "compute_accuracy": 0.2911111111111111,
+    "compute_depth_stats": {
+      "2": {
+        "total": 100,
+        "correct": 82
+      },
+      "3": {
+        "total": 100,
+        "correct": 55
+      },
+      "4": {
+        "total": 100,
+        "correct": 37
+      },
+      "5": {
+        "total": 100,
+        "correct": 24
+      },
+      "6": {
+        "total": 100,
+        "correct": 15
+      },
+      "7": {
+        "total": 100,
+        "correct": 19
+      },
+      "8": {
+        "total": 100,
+        "correct": 9
+      },
+      "9": {
+        "total": 100,
+        "correct": 12
+      },
+      "10": {
+        "total": 100,
+        "correct": 9
+      }
+    },
+    "decide_accuracy": 1.0,
+    "parse_by_depth": {
+      "2": {
+        "total": 100,
+        "correct": 81
+      },
+      "3": {
+        "total": 100,
+        "correct": 56
+      },
+      "4": {
+        "total": 100,
+        "correct": 38
+      },
+      "5": {
+        "total": 100,
+        "correct": 25
+      },
+      "6": {
+        "total": 100,
+        "correct": 19
+      },
+      "7": {
+        "total": 100,
+        "correct": 23
+      },
+      "8": {
+        "total": 100,
+        "correct": 12
+      },
+      "9": {
+        "total": 100,
+        "correct": 11
+      },
+      "10": {
+        "total": 100,
+        "correct": 10
+      }
+    }
+  }
+}
