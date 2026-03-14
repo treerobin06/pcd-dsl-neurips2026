@@ -56,6 +56,10 @@ This repository contains the complete implementation of:
     └── test_gate3_ablation.py      # Gate 3 ablation (requires API)
 ```
 
+## Safety Note
+
+Baseline experiments (PAL, compile-time code generation) execute LLM-generated Python code in subprocesses. While we limit the execution environment (no network access, restricted PATH), this is **not a sandbox**. We recommend running these experiments in a container or virtual machine if you have security concerns. The core DSL tests (`test_dsl.py`, `test_compiler.py`) do not execute any LLM-generated code and are safe to run directly.
+
 ## Setup
 
 ### Requirements
