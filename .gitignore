@@ -1,0 +1,29 @@
+# 数据文件（太大）
+bayes/data/
+BLInD/
+TextBandit/
+server-experiments/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# 实验检查点
+bayesclaudecode/sidecar_checkpoints/
+
+# 编译产物
+meta-skill/paper/*.aux
+meta-skill/paper/*.bbl
+meta-skill/paper/*.blg
+meta-skill/paper/*.log
+meta-skill/paper/*.out
+meta-skill/paper/*.pdf
+meta-skill/paper/*.synctex.gz
+meta-skill/paper/overleaf-sync/
+
+# 系统文件
+.DS_Store
+*.swp

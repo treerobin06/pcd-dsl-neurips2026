@@ -1,0 +1,26 @@
+{
+  "experiment": "e2e_pipeline",
+  "model": "openai/gpt-4o-mini",
+  "n_samples": 624,
+  "timestamp": "20260325_101317",
+  "parse_success_rate": 0.9983974358974359,
+  "gold_pipeline_accuracy": 0.7435897435897436,
+  "e2e_accuracy": 0.7431781701444623,
+  "e2e_ci_95": [
+    0.709470304975923,
+    0.7784911717495987
+  ],
+  "gold_solver_match": 0.9983948635634029,
+  "gold_solver_match_ci_95": [
+    0.9951845906902087,
+    1.0
+  ],
+  "feature_exact_match": 0.9997057249866238,
+  "feature_close_match": 0.9997057249866238,
+  "per_feature_exact_match": {
+    "departure_time": 0.9994649545211343,
+    "duration": 0.9993579454253612,
+    "stops": 1.0,
+    "price": 1.0
+  }
+}

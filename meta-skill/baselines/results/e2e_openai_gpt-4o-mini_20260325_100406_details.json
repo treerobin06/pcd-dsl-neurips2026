@@ -1,0 +1,52 @@
+[
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  }
+]

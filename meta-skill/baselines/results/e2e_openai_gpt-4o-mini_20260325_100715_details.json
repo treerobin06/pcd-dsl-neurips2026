@@ -1,0 +1,1992 @@
+[
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": false,
+    "error": "json_parse_error",
+    "raw_response": "```json\n{\n  \"rounds\": [\n    {\n      \"options\": [\n        {\"departure_hour\": 10.8, \"duration_min\": 1200, \"stops\": 1, \"price\": 550},\n        {\"departure_hour\": 14.0, \"duration_min\": 30, \"stops\": 1, \"price\": 550},\n        {\"departure_hour\": 20.4, \"duration_min\": 381, \"stops\": 0, \"price\": 550}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 7.6, \"duration_min\": 381, \"stops\": 1, \"price\": 190},\n        {\"departure_hour\": 17.2, \"duration_min\": 1083, \"stops\": 0, \"price\": 280},\n       "
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 0.9833333333333333,
+    "feature_close_match": 0.9833333333333333
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 0.9833333333333333,
+    "feature_close_match": 0.9833333333333333
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 0.9833333333333333,
+    "feature_close_match": 0.9833333333333333
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 0.9833333333333333,
+    "feature_close_match": 0.9833333333333333
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": false,
+    "error": "json_parse_error",
+    "raw_response": "```json\n{\n  \"rounds\": [\n    {\n      \"options\": [\n        {\"departure_hour\": 6.0, \"duration_min\": 1083, \"stops\": 2, \"price\": 1000},\n        {\"departure_hour\": 12.4, \"duration_min\": 966, \"stops\": 0, \"price\": 370},\n        {\"departure_hour\": 20.4, \"duration_min\": 498, \"stops\": 0, \"price\": 1000}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 10.8, \"duration_min\": 1200, \"stops\": 1, \"price\": 550},\n        {\"departure_hour\": 12.4, \"duration_min\": 1200, \"stops\": 1, \"price\": 1000},\n  "
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 2,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 0,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 0.9833333333333333,
+    "feature_close_match": 0.9833333333333333
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 1,
+    "gold_solver_rec": 1,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 1,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 1,
+    "e2e_correct": false,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0
+  }
+]
