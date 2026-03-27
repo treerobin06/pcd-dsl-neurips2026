@@ -111,11 +111,11 @@ Since LLMs can identify what to compute but not how, we separate these roles.
 We let the LLM perform structural induction \emph{once, at compile time}, producing a declarative specification of the task's mathematical structure, and hand the actual computation to a \emph{deterministic solver} that runs without any LLM involvement (Figure~\ref{fig:overview}).
 
 Concretely, we build a typed probabilistic domain-specific language (DSL) with seven core operations, a deterministic compiler that translates declarative task specifications into exact solvers, and a verifier-guided inductor that infers these specifications from 3--5 examples.
-The inductor runs on GPT-4o-mini, the cheapest model in our evaluation, yet produces solvers that match hand-written gold references across 1,800+ test instances with zero errors.
+A three-gate verifier checks code sanity, ground-truth consistency, and optional reference matching before the compiled solver is deployed.
+The inductor runs on GPT-4o-mini, the cheapest model in our evaluation, yet produces solvers that match hand-written gold references with zero errors across 1,200+ test instances in three families.
 By constraining the LLM to fill a declarative specification rather than write executable code, the DSL reduces the required model capability: GPT-4o-mini succeeds where only GPT-5.4 can produce a working solver via unconstrained code generation.
 On real-world Bayesian networks with up to 37 nodes, per-instance code generation (PAL) fails entirely, yet the compiled solver maintains 100\% accuracy.
 When run end-to-end on natural-language inputs, the pipeline matches the gold-feature oracle at 74\% on preference learning (Section~\ref{sec:e2e}).
-A three-gate verifier checks code sanity, ground-truth consistency, and optional reference matching before the compiled solver is deployed.
 
 \textbf{Contributions.}
 \begin{itemize}
@@ -602,7 +602,7 @@ HMM forward filtering differs structurally from all three training families: it 
 \begin{table}[t]
 \centering
 \small
-\caption{Two held-out inference families. Core-ops-only matches free code at 100\% on both families, confirming macros are syntactic sugar. PCD pattern reproduces with the same signature: low Compute, high Decide. 95\% Wilson confidence intervals (CIs) in brackets where $n \geq 100$.}
+\caption{Two held-out inference families. Core-ops-only matches unconstrained code generation at 100\% on both families, confirming macros are syntactic sugar. PCD pattern reproduces with the same signature: low Compute, high Decide. 95\% Wilson confidence intervals (CIs) in brackets where $n \geq 100$.}
 \label{tab:held_out}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
@@ -676,9 +676,7 @@ Our DSL excels when distributions are specified or derivable; it adds nothing wh
 
 \subsection{Model Scaling Does Not Close the Gap}
 
-Across our PCD experiments, stronger models achieve higher Compute accuracy, from GPT-4o-mini at 22--28\% to Opus at 78\%, with GPT-4o, GPT-5.4, Sonnet, and Gemini in between.
-Yet even Opus still has a 22\% computation error rate on preference learning, and GPT-5.4 reaches only 11\% on BN inference at depth 10.
-Scaling helps but does not close the gap.
+The PCD results in \S\ref{sec:pcd} show that stronger models achieve higher Compute accuracy (22--78\% across six models), but no model eliminates computation errors: Opus still fails on 22\% of preference instances, and GPT-5.4 reaches only 11\% at BN depth 10.
 PAL with GPT-5.4 (code generation plus execution) achieves 98.1\% on BN inference, partially bridging the gap, but still falls short of 100\% at $310\times$ higher cost than our DSL.
 No model--tool combination tested guarantees correctness.
 
