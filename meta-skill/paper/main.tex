@@ -94,7 +94,7 @@ Across preference learning~\citep{qiu2026bayesian}, Bayesian network (BN) infere
 Existing remedies are piecemeal: ProbLog code generation for Bayesian networks~\citep{nafar2025blind,deraedt2007problog}, fine-tuning on Bayesian model predictions for preference tasks~\citep{qiu2026bayesian}.
 Each new task family demands a new, hand-designed tool.
 
-One concrete setting where this matters is interactive preference learning.
+A concrete case is interactive preference learning.
 In shopping, travel, or personalized ranking, an LLM assistant may observe a sequence of user choices and need to infer a latent preference model before recommending the next option.
 This interaction requires repeated posterior updates over hidden preferences---exactly the kind of probabilistic computation that current LLMs struggle to perform reliably, even when they understand the task structure (Section~\ref{sec:pcd}).
 
@@ -721,19 +721,19 @@ Autoformalization~\citep{wu2022autoformalization} translates informal mathematic
 \paragraph{Scope and Scale.}
 The DSL covers exact inference over discrete distributions only, excluding continuous variables, approximate methods, and prediction-bottlenecked tasks (\S\ref{sec:dellma}).
 Extending to continuous families and approximate backends is a natural next step.
-Five inference families across eight datasets establish the PCD pattern, with held-out generalization on NB with $n{=}200$ and HMM with $n{=}100$; further validation on external benchmarks such as QUITE~\citep{schrader2024quite} would strengthen breadth claims.
+Five inference families across eight datasets establish the PCD pattern, including held-out tests on NB ($n{=}200$) and HMM ($n{=}100$); validation on additional benchmarks such as QUITE~\citep{schrader2024quite} would strengthen generality claims.
 
 \paragraph{PCD Methodology and Inductor.}
-PCD uses interventional probes, not formal causal identification; Compute$\mid$GoldParse conflates algorithm selection with arithmetic execution, and the near-perfect Decide scores likely reflect a simple decision surface (argmax over utilities) rather than a universal LLM property.
+PCD uses interventional probes, not formal causal identification. Compute$\mid$GoldParse conflates algorithm selection with arithmetic execution, and the near-perfect Decide scores likely reflect a simple decision surface (argmax over utilities) rather than a universal LLM capability.
 BN depth also correlates with token count, a confound that controlled experiments could resolve; however, Parse accuracy remains $\geq$96\% across all depths, suggesting that token-length effects alone do not explain the Compute degradation.
 The inductor succeeds on all tasks tested (6/6 LOO, first attempt), which may reflect task simplicity; stress-testing on larger state spaces and adversarial specifications is needed.
-Although PCD demonstrates that LLMs can parse individual problem instances, family-level induction is a stronger capability that our experiments validate empirically rather than derive from PCD alone.
+PCD shows that LLMs can parse individual instances; family-level induction is a stronger capability that our experiments validate empirically rather than derive from PCD alone.
 
 \paragraph{DSL Design and Verification.}
-The seven core operations and three macros were designed by the authors using probabilistic inference domain knowledge; extending to a new inference family may require adding operations, such as \texttt{log} for information-theoretic quantities or \texttt{max-marginalize} for maximum a posteriori (MAP) inference.
+The seven core operations and three macros were hand-designed using probabilistic inference domain knowledge; extending to a new family may require new operations (\eg \texttt{log} for information-theoretic quantities or \texttt{max-marginalize} for maximum a posteriori inference).
 The current scope covers posterior queries and optimal-action decisions over discrete distributions; we do not claim completeness over all discrete inference tasks.
-Compiler equivalence (``0.0 max error'') is verified against gold reference solvers that were independently implemented and cross-checked with pgmpy~\citep{ankan2015pgmpy} on BN queries, but is empirical, not a formal correctness proof.
-Gate~3 (reference match) is optional and not required for deployment; Gates~1--2 require only a small held-out validation set, not a pre-existing complete solver.
+Compiler equivalence (``0.0 max error'') is checked against independently implemented gold solvers cross-validated with pgmpy~\citep{ankan2015pgmpy} on BN queries; this verification is empirical, not a formal correctness proof.
+Gate~3 (reference match) is optional; Gates~1--2 require only a small held-out validation set, not a pre-existing complete solver.
 The inductor is a stochastic LLM call; preliminary reliability testing (20 runs on two families) shows 100\% success, but broader stress-testing across more families and adversarial inputs is needed before deployment.
 DSL solver output is deterministic; PCD experiments report 95\% CIs throughout. All prompts, specifications, and compiled solvers will be released.
 
@@ -742,18 +742,18 @@ DSL solver output is deterministic; PCD experiments report 95\% CIs throughout. 
 \label{sec:conclusion}
 % ============================================================
 
-LLMs parse probabilistic problem structure and follow computed answers reliably, yet fail at the computation that connects the two.
+LLMs reliably parse probabilistic problem structure and act on computed answers, yet fail at the computation that connects parsing to decision.
 The Parse--Compute--Decide diagnostic framework makes this precise: across six models, three vendors, and five inference families, computation is consistently the dominant failure mode.
 
 This diagnosis motivates a principled division of labor: let the LLM contribute structural induction once, at compile time, and delegate all computation to a deterministic solver.
 A typed probabilistic DSL, a deterministic compiler, and a verifier-guided inductor implement this division.
 On BN inference, the system achieves 100\% accuracy using only GPT-4o-mini for induction, at $14\times$ lower cost than GPT-5.4 compile-time code and $310\times$ lower than per-instance PAL with GPT-5.4, which reaches 98.1\% but cannot guarantee correctness.
-The DSL also lowers the model-capability threshold: unconstrained code generation requires GPT-5.4 to succeed, while our declarative specification enables GPT-4o-mini to achieve the same result.
+The DSL also lowers the minimum model capability needed: unconstrained code generation requires GPT-5.4, while our declarative specification lets GPT-4o-mini achieve the same result.
 
 The approach has clear boundaries: it works when the hard part is computing with given distributions, not predicting them from world knowledge.
-Within those boundaries, the PCD pattern reproduces on two held-out families outside the DSL's macro coverage, including HMM forward filtering, a sequential temporal computation absent from all training tasks. Core operations alone suffice, demonstrating that the seven typed primitives capture a general structure underlying discrete probabilistic reasoning.
+Within those boundaries, the PCD pattern reproduces on two held-out families outside the DSL's macro coverage, including HMM forward filtering---a sequential temporal computation absent from all training tasks. Core operations alone suffice, suggesting that the seven typed primitives capture a general structure shared across discrete probabilistic reasoning.
 
-More broadly, the results suggest a practical architecture for interactive LLM systems: use the LLM for language understanding and structure extraction, but delegate posterior updates and downstream decision computation to a deterministic probabilistic backend.
+More broadly, our results point toward a practical architecture for LLM systems: use the LLM for language understanding and structure extraction, and delegate posterior computation to a deterministic probabilistic backend.
 
 {\small
 \bibliographystyle{plainnat}

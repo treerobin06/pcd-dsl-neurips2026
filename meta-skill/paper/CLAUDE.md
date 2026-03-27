@@ -39,6 +39,7 @@
 - [2026-03-28 16:00] push | NeurIPS结构审查: Abstract首句改为evidence-led, Contribution#2删DeLLMa细节, E2E从Analysis移入Experiments, Limitations从4段压到3段(合并Statistical Reporting), Related Work合并最后两段为一段, S5.2加claim声明
 - [2026-03-28 16:30] push | 第二轮修复: 删line1中文乱码, \bigtimes fallback定义, Abstract 3%→3-11%统一, 27-70%→27-65%数据修正, Contribution#1从5行压到2行
 - [2026-03-28 03:37] push | Prose polish L243-658 (PCD/Method/Experiments): 30处修改, 去冗余/紧凑语言/修复vague referent/强化transitions
+- [2026-03-28 03:39] push | Prose polish L73-241 (Abstract/Intro/Problem Setup): 12处修改, 修vague referent(it→that structure), 修dangling modifier, 去冗余(dominant/rather than), 统一术语(free code→unconstrained code generation), 合并choppy sentences
 
 ## 论文概况
 
