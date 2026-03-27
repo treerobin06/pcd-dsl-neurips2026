@@ -72,12 +72,13 @@
 % ============================================================
 \begin{abstract}
 % ============================================================
-Gold-injection diagnostics across six frontier large language models (LLMs) reveal that probabilistic reasoning fails at computation, not comprehension: Parse and Decide accuracy exceed 95\%, yet Compute accuracy ranges from 22\% to 78\% and drops to 3--11\% on deep Bayesian networks even for the strongest models.
-This asymmetry motivates a compile-once division of labor: the LLM infers the mathematical structure of a task family once, then hands all computation to a deterministic solver.
-We realize this idea with a typed probabilistic domain-specific language (DSL), a deterministic compiler, and a verifier-guided inductor.
-Given 3--5 examples, GPT-4o-mini infers a declarative task specification that compiles to an exact solver, achieving 100\% accuracy on every tested Bayesian network (BN) benchmark, including real-world networks with up to 37 nodes on which per-instance code generation fails entirely.
-The same GPT-4o-mini pipeline matches GPT-5.4 unconstrained code generation at $14\times$ lower cost.
-On two held-out inference families outside the DSL's macro coverage, core operations alone reach 100\%, confirming that the approach generalizes beyond the families used during design.
+Large language models (LLMs) can \emph{parse} a probabilistic reasoning problem and \emph{act} on its answer, but they cannot reliably \emph{compute} the answer itself.
+We test six models on tasks ranging from Bayesian network inference to preference learning: Parse and Decide accuracy exceed 95\%, yet Compute accuracy ranges from 22\% to 78\% and drops to 3--11\% on deeper networks.
+The bottleneck is arithmetic, not comprehension.
+This finding suggests a simple fix: let the LLM figure out the mathematical structure of a task once, then hand all number-crunching to a solver that runs without any LLM in the loop.
+We build a typed probabilistic domain-specific language (DSL) with seven core operations, a compiler that turns declarative task descriptions into exact solvers, and a verifier that checks correctness before deployment.
+Given a few examples, GPT-4o-mini---the cheapest model in our evaluation---produces solvers that achieve 100\% accuracy on every tested Bayesian network (BN) benchmark, including real-world networks with up to 37 nodes where per-instance code generation fails entirely, matching GPT-5.4 at $14\times$ lower cost.
+On two held-out families not covered by built-in macros, the seven core operations alone reach 100\%, confirming that the approach generalizes beyond the tasks used during design.
 \end{abstract}
 
 % ============================================================
@@ -85,37 +86,38 @@ On two held-out inference families outside the DSL's macro coverage, core operat
 \label{sec:intro}
 % ============================================================
 
-Ask a frontier language model to perform variable elimination on a ten-node Bayesian network, and it will get the answer wrong 89\% of the time.
-Ask it to \emph{identify the variables, parse the conditional probability tables, and state the query}, and it will succeed on 99\% of instances~\citep{nafar2025blind}.
-The same model that flawlessly extracts the structure of a probabilistic problem cannot carry out the arithmetic that structure implies.
+Probabilistic reasoning---updating beliefs from evidence, computing posteriors, choosing actions under uncertainty---is central to many applications where LLMs are now deployed.
+Recommending products from past purchases, diagnosing conditions from symptoms, and managing portfolios under risk all require Bayesian computation that is mathematically well understood but, as we show, surprisingly hard for current language models.
 
-This gap is not a quirk of any particular model or task.
-Across preference learning~\citep{qiu2026bayesian}, Bayesian network (BN) inference~\citep{nafar2025blind}, and multi-armed bandits~\citep{lim2025textbandit}, LLMs consistently fall short of even simple Bayesian oracles by 20 to 60 percentage points, despite correctly recognizing the structure of the problems they fail to solve.
-Existing remedies are piecemeal: ProbLog code generation for Bayesian networks~\citep{nafar2025blind,deraedt2007problog}, fine-tuning on Bayesian model predictions for preference tasks~\citep{qiu2026bayesian}.
-Each new task family demands a new, hand-designed tool.
+Consider a concrete example.
+Ask a frontier model to perform variable elimination on a ten-node Bayesian network, and it will get the answer wrong 89\% of the time.
+Ask the same model to \emph{identify the variables, parse the conditional probability tables, and state the query}, and it succeeds on 99\% of instances~\citep{nafar2025blind}.
+The model understands the problem but cannot do the math.
 
-A concrete case is interactive preference learning.
-In shopping, travel, or personalized ranking, an LLM assistant may observe a sequence of user choices and need to infer a latent preference model before recommending the next option.
-This interaction requires repeated posterior updates over hidden preferences---exactly the kind of probabilistic computation that current LLMs struggle to perform reliably, even when they understand the task structure (Section~\ref{sec:pcd}).
+This pattern is consistent across tasks.
+On preference learning~\citep{qiu2026bayesian}, Bayesian network (BN) inference~\citep{nafar2025blind}, and multi-armed bandits~\citep{lim2025textbandit}, LLMs fall short of simple Bayesian oracles by 20--60 percentage points, even when they correctly parse the problem structure.
+Current solutions are task-specific: ProbLog code generation for Bayesian networks~\citep{nafar2025blind,deraedt2007problog}, fine-tuning for preference tasks~\citep{qiu2026bayesian}.
+Each new task requires a new tool.
 
-To localize the failure mode, we introduce \emph{Parse--Compute--Decide} (PCD), a diagnostic framework that intervenes at each stage of probabilistic reasoning by injecting gold (correct) intermediate results.
-\textbf{Parse} measures whether the model can extract problem structure.
-\textbf{Compute$\mid$GoldParse} supplies perfect structure and tests whether the model can perform the computation.
-\textbf{Decide$\mid$GoldPosterior} supplies the correct posterior and tests whether the model can act on it.
+To pinpoint where reasoning breaks down, we introduce \emph{Parse--Compute--Decide} (\method{}), a diagnostic that tests each stage separately by feeding in correct intermediate results.
+\textbf{Parse} tests whether the model can extract problem structure.
+\textbf{Compute$\mid$GoldParse} gives the model perfect structure and tests whether it can do the computation.
+\textbf{Decide$\mid$GoldPosterior} gives the model the correct answer and tests whether it can act on it.
 
-Across six models from OpenAI, Anthropic, and Google, Parse accuracy sits at 82--100\%, Decide accuracy at 100\%, and Compute accuracy between 22\% and 78\%, degrading sharply as problem complexity grows.
-At depth 10 on Bayesian networks, GPT-5.4 computes the correct probability only 11\% of the time, despite parsing the network without error.
+The results are striking.
+Across six models (OpenAI, Anthropic, Google), Parse accuracy is 82--100\% and Decide accuracy is 100\%, but Compute accuracy is only 22--78\%.
+On deeper Bayesian networks, it gets worse: GPT-5.4 computes the correct probability only 11\% of the time at depth~10, despite parsing the network perfectly.
 The bottleneck is computation, not understanding.
 
-Since LLMs can identify what to compute but not how, we separate these roles.
-We let the LLM perform structural induction \emph{once, at compile time}, producing a declarative specification of the task's mathematical structure, and hand the actual computation to a \emph{deterministic solver} that runs without any LLM involvement (Figure~\ref{fig:overview}).
+Since LLMs can figure out \emph{what} to compute but not \emph{how}, we separate these two jobs (Figure~\ref{fig:overview}).
+The LLM looks at a few examples and infers the mathematical structure of a task family---once.
+A compiler then turns this description into an exact solver that runs without any LLM involvement at inference time.
 
-Concretely, we build a typed probabilistic domain-specific language (DSL) with seven core operations, a deterministic compiler that translates declarative task specifications into exact solvers, and a verifier-guided inductor that infers these specifications from 3--5 examples.
-A three-gate verifier checks code sanity, ground-truth consistency, and optional reference matching before the compiled solver is deployed.
-The inductor runs on GPT-4o-mini, the cheapest model in our evaluation, yet produces solvers that match hand-written gold references with zero errors across 1,200+ test instances in three families.
-By constraining the LLM to fill a declarative specification rather than write executable code, the DSL reduces the required model capability: GPT-4o-mini succeeds where only GPT-5.4 can produce a working solver via unconstrained code generation.
-On real-world Bayesian networks with up to 37 nodes, per-instance code generation (PAL) fails entirely, yet the compiled solver maintains 100\% accuracy.
-When run end-to-end on natural-language inputs, the pipeline matches the gold-feature oracle at 74\% on preference learning (Section~\ref{sec:e2e}).
+We implement this with a typed probabilistic DSL containing seven core operations, a compiler, and a three-gate verifier.
+GPT-4o-mini, the cheapest model we test, produces solvers that match hand-written references across 1,200+ test instances with zero errors.
+Because the LLM fills a structured specification rather than writing arbitrary code, weaker models can succeed: GPT-4o-mini achieves the same accuracy as GPT-5.4's unconstrained code generation at $14\times$ lower cost.
+On real-world Bayesian networks with up to 37 nodes, per-instance code generation (PAL) fails entirely; our compiled solver stays at 100\%.
+End-to-end on natural-language inputs, the pipeline matches the gold-feature oracle at 74\% on preference learning (Section~\ref{sec:e2e}).
 
 \textbf{Contributions.}
 \begin{itemize}
