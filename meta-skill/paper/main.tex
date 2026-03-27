@@ -1,5 +1,4 @@
-
-就是这边有\documentclass{article}
+\documentclass{article}
 \PassOptionsToPackage{numbers,compress}{natbib}
 \usepackage{neurips_2026}
 
@@ -20,6 +19,7 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{xspace}
+\providecommand{\bigtimes}{\mathop{\mathchoice{\textstyle\prod}{\prod}{\prod}{\prod}}\nolimits}  % fallback if stmaryrd unavailable
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,backgrounds,patterns}
 \usepackage{pgfplots}
@@ -72,7 +72,7 @@
 % ============================================================
 \begin{abstract}
 % ============================================================
-Gold-injection diagnostics across six frontier large language models (LLMs) reveal that probabilistic reasoning fails at computation, not comprehension: Parse and Decide accuracy exceed 95\%, yet Compute accuracy ranges from 22\% to 78\% and collapses to 3\% on deep Bayesian networks.
+Gold-injection diagnostics across six frontier large language models (LLMs) reveal that probabilistic reasoning fails at computation, not comprehension: Parse and Decide accuracy exceed 95\%, yet Compute accuracy ranges from 22\% to 78\%, dropping to 3--11\% on deep Bayesian networks even for frontier models.
 This asymmetry motivates a compile-once division of labor: let the LLM infer the mathematical structure of a task family once, then hand all computation to a deterministic solver.
 We implement this with a typed probabilistic domain-specific language (DSL), a deterministic compiler, and a verifier-guided inductor.
 Given 3--5 examples, GPT-4o-mini infers a declarative task specification that compiles into an exact solver, achieving 100\% accuracy on all tested Bayesian network (BN) benchmarks, including real-world networks with up to 37 nodes where per-instance code generation fails entirely.
@@ -119,7 +119,7 @@ A three-gate verifier checks code sanity, ground-truth consistency, and optional
 
 \textbf{Contributions.}
 \begin{itemize}
-    \item \textbf{Compile-once solver induction}: a typed DSL, deterministic compiler, and verifier-guided inductor that synthesize exact solvers from 3--5 examples. GPT-4o-mini produces solvers matching GPT-5.4 free code generation at $14\times$ lower cost; on real-world networks ($\geq$20 nodes) where PAL fails entirely, the compiled solver maintains 100\%. Two held-out inference families, including HMM forward filtering, confirm that the approach generalizes beyond the families used during design.
+    \item \textbf{Compile-once solver induction}: a typed DSL, compiler, and verifier that synthesize exact solvers from 3--5 examples. GPT-4o-mini matches GPT-5.4 free code at $14\times$ lower cost; on real-world networks ($\geq$20 nodes) where PAL fails, the solver maintains 100\%. Two held-out families confirm generalization.
     \item \textbf{Diagnostic evidence for the compute bottleneck}: gold-injection interventions (Parse--Compute--Decide) across six models, three vendors, and five task families show that computation---not parsing or decision-making---is the dominant failure mode.
 \end{itemize}
 
@@ -626,7 +626,7 @@ Decide$\mid$GoldPosterior & 100.0\% {\scriptsize [98,100]} & 100.0\% {\scriptsiz
 
 Table~\ref{tab:held_out} shows two main results.
 Core operations without macros reach 100\% on both held-out families, matching unconstrained code generation and confirming that the macros are syntactic sugar.
-The same Parse/Compute/Decide pattern appears on these unseen tasks: Compute sits at 27--70\% while Parse $\geq$99\% and Decide $\geq$98\%, and direct prompting remains far behind (32--61\%).
+The same Parse/Compute/Decide pattern appears on these unseen tasks: Compute sits at 27--65\% while Parse $\geq$99\% and Decide $\geq$98\%, and direct prompting remains far behind (32--61\%).
 HMM forward filtering is particularly informative: the inductor must compose an iterated multiply--marginalize--normalize loop over a time axis, a computation pattern absent from all three training macros.
 This suggests that the inductor is not simply selecting from the existing macros; it constructs novel operation sequences from core primitives.
 
