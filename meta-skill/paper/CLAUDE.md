@@ -37,6 +37,8 @@
 - [2026-03-18 20:09] push | 加入理论公式: PCD形式化(Eq1-3), family-level induction objective(Eq4), DSL program space(Eq5), compiler equivalence(Eq6), cost break-even(Eq7)
 - [2026-03-25 10:30] push | 新增 Section 6 "End-to-End Pipeline Validation": E2E 74.3%≈Gold 74.4%, Intro加一句引用
 - [2026-03-28 16:00] push | NeurIPS结构审查: Abstract首句改为evidence-led, Contribution#2删DeLLMa细节, E2E从Analysis移入Experiments, Limitations从4段压到3段(合并Statistical Reporting), Related Work合并最后两段为一段, S5.2加claim声明
+- [2026-03-28 16:30] push | 第二轮修复: 删line1中文乱码, \bigtimes fallback定义, Abstract 3%→3-11%统一, 27-70%→27-65%数据修正, Contribution#1从5行压到2行
+- [2026-03-28 03:37] push | Prose polish L243-658 (PCD/Method/Experiments): 30处修改, 去冗余/紧凑语言/修复vague referent/强化transitions
 
 ## 论文概况
 
