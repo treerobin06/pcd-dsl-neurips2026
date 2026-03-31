@@ -21,7 +21,7 @@
 \usepackage{xspace}
 \providecommand{\bigtimes}{\mathop{\mathchoice{\textstyle\prod}{\prod}{\prod}{\prod}}\nolimits}  % fallback if stmaryrd unavailable
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,backgrounds,patterns}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,backgrounds,patterns,calc}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepgfplotslibrary{fillbetween}
@@ -73,14 +73,15 @@
 \begin{abstract}
 % ============================================================
 Large language models (LLMs) can \emph{understand} probabilistic reasoning problems but cannot \emph{solve} them reliably.
-We test six models on tasks spanning Bayesian network inference, preference learning, bandits, and two held-out families.
-Parse and Decide accuracy exceed 95\%, yet Compute accuracy ranges from 22\% to 78\%---and drops to 3\% on deeper networks.
-The bottleneck is arithmetic, not comprehension.
-This suggests a clean division of labor: let the LLM infer the mathematical structure of a task family once, then hand all computation to a verified solver that requires no further LLM calls.
+We test six models on tasks spanning Bayesian network (BN) inference, preference learning, and bandits.
+All models can read a problem and act on its answer (over 95\% accuracy on parsing the structure and deciding from a computed result), yet their ability to perform the probabilistic computation in between ranges from 22\% to 78\% and drops to 3--11\% on depth-10 networks.
+Computation, rather than language understanding, is the limiting factor.
+This motivates a division of labor: let the LLM infer the mathematical structure of a task family once, then hand all computation to a verified solver that requires no further LLM calls.
+Unlike per-instance code generation, which demands an LLM call for every problem, our inductor is called once per inference family; the compiled solver handles all subsequent instances deterministically.
 We implement this with a typed probabilistic DSL (seven core operations), a deterministic compiler, and a three-gate verifier.
-Given a few examples, GPT-4o-mini---the cheapest model in our evaluation---produces solvers that achieve 100\% accuracy on all tested Bayesian network benchmarks, including real-world networks with up to 37 nodes where per-instance code generation fails entirely.
-The same accuracy matches GPT-5.4 unconstrained code generation at $14\times$ lower cost.
-On two held-out inference families with no corresponding built-in macro, the seven core operations alone reach 100\%, confirming generalization beyond the task families used during design.
+Given as few as one example, GPT-4o-mini (the cheapest model in our evaluation) produces solvers that achieve 100\% compute-stage accuracy on all tested BN benchmarks, including real-world networks with up to 37 nodes where per-instance code generation fails entirely.
+This matches GPT-5.4 unconstrained code generation at $14\times$ lower cost and PAL at $310\times$ lower cost.
+On two held-out inference families with no corresponding built-in macro, the seven core operations alone reach 100\%, demonstrating generalization beyond the task families used during design.
 \end{abstract}
 
 % ============================================================
@@ -88,143 +89,47 @@ On two held-out inference families with no corresponding built-in macro, the sev
 \label{sec:intro}
 % ============================================================
 
-Probabilistic reasoning---updating beliefs from evidence, computing posteriors, choosing actions under uncertainty---is central to many applications where LLMs are now deployed, from product recommendation to medical diagnosis to portfolio management.
-The underlying Bayesian computation is mathematically well understood, but, as we show, surprisingly hard for current language models.
+Probabilistic reasoning is central to many applications where LLMs are now deployed, from medical diagnosis to portfolio management: given observed data, compute a posterior, then choose an action under uncertainty.
+The underlying Bayesian computation is mathematically well understood but surprisingly hard for current language models.
 
 Consider a concrete example: ask a frontier language model to perform variable elimination on a ten-node Bayesian network, and it will get the answer wrong 89\% of the time.
 Yet ask it to \emph{identify the variables, parse the conditional probability tables, and state the query}, and it succeeds on 99\% of instances~\citep{nafar2025blind}.
 The model understands the problem but cannot do the math.
 
-This is not a quirk of one model or one task.
-On preference learning~\citep{qiu2026bayesian}, Bayesian network (BN) inference~\citep{nafar2025blind}, and multi-armed bandits~\citep{lim2025textbandit}, LLMs fall short of Bayesian oracles by 20--60 percentage points, even when they correctly recognize the problem structure.
-Current fixes are task-specific---ProbLog for Bayesian networks~\citep{nafar2025blind,deraedt2007problog}, fine-tuning for preference tasks~\citep{qiu2026bayesian}---and each new task demands a new tool.
+The pattern is consistent across tasks.
+On preference learning~\citep{qiu2026bayesian}, BN inference~\citep{nafar2025blind}, and multi-armed bandits~\citep{lim2025textbandit}, LLMs fall short of Bayesian oracles by 20--60 percentage points, even when they correctly recognize the problem structure.
+Current fixes are task-specific: ProbLog for Bayesian networks~\citep{nafar2025blind,deraedt2007problog}, fine-tuning for preference tasks~\citep{qiu2026bayesian}. Each new task demands a new tool.
 
 To pinpoint where reasoning breaks down, we introduce \emph{Parse--Compute--Decide} (\method{}), a diagnostic that isolates each stage by injecting gold intermediate results.
 \textbf{Parse} asks whether the model can extract problem structure;
 \textbf{Compute$\mid$GoldParse} gives it perfect structure and tests the computation;
 \textbf{Decide$\mid$GoldPosterior} gives it the correct posterior and tests whether it can act on it.
 
-Across six models from OpenAI, Anthropic, and Google, Parse accuracy is 82--100\% and Decide accuracy is 100\%, but Compute accuracy is only 22--78\%.
+Across six models from OpenAI, Anthropic, and Google, Parse accuracy is 82--100\% on primary task families and Decide accuracy is 100\%, but Compute accuracy is only 22--78\%.
 The gap widens with problem complexity: GPT-5.4 computes the correct probability only 11\% of the time on depth-10 Bayesian networks, despite parsing the network perfectly.
-The bottleneck is computation, not understanding.
+Computation, not language understanding, is the bottleneck.
 
-Since LLMs can identify \emph{what} to compute but not \emph{how}, we separate these two jobs (Figure~\ref{fig:overview}).
-The LLM examines a few examples and infers the mathematical structure of a task family---once.
-A deterministic compiler then turns that description into an exact solver that runs without any LLM involvement at inference time.
+LLMs can identify \emph{what} to compute; the difficulty is \emph{how}. We therefore separate these two jobs (Figure~\ref{fig:overview}).
+The LLM examines a few examples and infers the mathematical structure of a task family once. A deterministic compiler then turns that description into an exact solver that requires no further LLM calls.
+This demands more than instance-level parsing: the LLM must generalize from examples to the mathematical structure of an entire task \emph{family}. We validate this empirically.
 
 We implement this with a typed probabilistic DSL (seven core operations), a deterministic compiler, and a three-gate verifier.
-GPT-4o-mini---the cheapest model we test---produces solvers that match hand-written references across 1,200+ test instances with zero errors.
-Because the LLM fills a structured specification rather than writing arbitrary code, weaker models succeed where stronger ones are needed otherwise: GPT-4o-mini matches GPT-5.4's unconstrained code generation at $14\times$ lower cost.
-On real-world Bayesian networks with up to 37 nodes, per-instance code generation (PAL) fails entirely; our compiled solver stays at 100\%.
+Because the LLM fills a structured specification instead of writing arbitrary code, even GPT-4o-mini (the cheapest model we test) produces solvers that match hand-written references across 1,200+ instances with zero compute-stage errors. This matches GPT-5.4 unconstrained code generation at $14\times$ lower cost.
+On real-world Bayesian networks with up to 37 nodes, per-instance code generation (PAL) fails entirely, while our compiled solver stays at 100\%.
 End-to-end on natural-language inputs, the pipeline matches the gold-feature oracle at 74\% accuracy on preference learning (Section~\ref{sec:e2e}).
 
 \textbf{Contributions.}
 \begin{itemize}
-    \item \textbf{Compile-once solver induction}: a typed DSL, compiler, and verifier that synthesize exact solvers from 3--5 examples. GPT-4o-mini matches GPT-5.4 unconstrained code generation at $14\times$ lower cost; on real-world networks ($\geq$20 nodes) where PAL fails, the solver maintains 100\%. Two held-out families confirm generalization.
-    \item \textbf{Diagnostic evidence for the compute bottleneck}: gold-injection interventions (Parse--Compute--Decide) across six models, three vendors, and five task families show that computation---not parsing or decision-making---is the dominant failure mode.
+    \item \textbf{A compile-once solver induction system}: a typed DSL, compiler, and verifier that produce exact solvers from as few as one example. One induction call covers an entire task family with zero LLM involvement at test time. On networks with $\geq$20 nodes where PAL fails, the compiled solver maintains 100\%; two held-out families confirm generalization.
+    \item \textbf{A diagnostic tool for reasoning bottlenecks}: gold-injection interventions (Parse, Compute, Decide) across six models, three vendors, and five task families isolate computation as the primary failure mode. The same decomposition applies to any reasoning domain with identifiable parse, compute, and decide stages.
 \end{itemize}
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
-\resizebox{\textwidth}{!}{%
-\begin{tikzpicture}[
-    >=Stealth,
-    node distance=0.35cm and 0.5cm,
-    every node/.style={font=\small},
-    box/.style={draw, rounded corners=4pt, minimum height=0.9cm, minimum width=3cm, align=center, thick, text width=2.8cm},
-    diagbox/.style={box, fill=red!8, draw=red!60!black},
-    sysbox/.style={box, fill=blue!8, draw=blue!60!black},
-    verbox/.style={draw, rounded corners=4pt, minimum height=1.2cm, minimum width=2cm, align=center, thick, fill=green!8, draw=green!50!black, text width=1.8cm},
-    datbox/.style={box, fill=gray!8, draw=gray!50, dashed},
-    resbox/.style={box, fill=orange!8, draw=orange!60!black, line width=1.5pt},
-    arr/.style={->, thick, >=Stealth},
-    darr/.style={->, thick, >=Stealth, dashed, gray!70},
-    phase/.style={font=\small\bfseries, rounded corners=3pt, inner sep=4pt, minimum width=3.5cm},
-]
-
-% ==================== Left: PCD Diagnosis ====================
-\node[phase, text=red!60!black, fill=red!5, draw=red!30] (pcdlabel) {PCD Diagnosis (\S\ref{sec:pcd})};
-
-\node[diagbox, below=0.3cm of pcdlabel] (parse) {%
-    \textbf{Parse}\\
-    {\scriptsize Extract variables, CPTs, query}\\
-    {\scriptsize\color{green!50!black}\bfseries 82--100\%\, \checkmark}};
-
-\node[diagbox, below=0.25cm of parse] (compute) {%
-    \textbf{Compute}\\
-    {\scriptsize Probabilistic calculation}\\
-    {\scriptsize\color{red!70!black}\bfseries 22--78\%\, \texttimes}};
-
-\node[diagbox, below=0.25cm of compute] (decide) {%
-    \textbf{Decide}\\
-    {\scriptsize Act on computed posterior}\\
-    {\scriptsize\color{green!50!black}\bfseries 100\%\, \checkmark}};
-
-% PCD arrows
-\draw[arr, red!70!black, line width=2.5pt] (parse) -- (compute)
-    node[midway, right=3pt, font=\scriptsize\bfseries, text=red!70!black, fill=white, inner sep=2pt, rounded corners=2pt] {bottleneck};
-\draw[arr] (compute) -- (decide);
-
-% ==================== Right: Compile-Once Pipeline ====================
-\node[phase, text=blue!60!black, fill=blue!5, draw=blue!30, right=2.8cm of pcdlabel] (syslabel) {Compile-Once Pipeline (\S\ref{sec:method})};
-
-\node[datbox, below=0.3cm of syslabel, text width=3.2cm] (examples) {%
-    \textbf{3--5 task examples}\\
-    {\scriptsize One inference family}};
-
-\node[sysbox, below=0.25cm of examples, text width=3.2cm] (inductor) {%
-    \textbf{LLM Inductor}\\
-    {\scriptsize GPT-4o-mini (\$0.008)}\\
-    {\scriptsize One-time call, temp=0}};
-
-\node[sysbox, below=0.25cm of inductor, text width=3.2cm] (taskspec) {%
-    \textbf{\taskspec{}}\\
-    {\scriptsize Declarative JSON}\\
-    {\scriptsize Family + state + obs + decision}};
-
-\node[sysbox, below=0.25cm of taskspec, text width=3.2cm] (compiler) {%
-    \textbf{Deterministic Compiler}\\
-    {\scriptsize 7 core ops + 3 macros}\\
-    {\scriptsize Same spec $\to$ same solver}};
-
-\node[resbox, below=0.25cm of compiler, text width=3.2cm] (solver) {%
-    \textbf{Verified Exact Solver}\\
-    {\scriptsize\bfseries 100\% accuracy}\\
-    {\scriptsize No LLM at inference time}};
-
-% Verifier
-\node[verbox, right=0.7cm of taskspec] (verifier) {%
-    \textbf{3-Gate Verifier}\\[1pt]
-    {\scriptsize G1: Code sanity}\\
-    {\scriptsize G2: Ground truth}\\
-    {\scriptsize G3: Ref.\ match}};
-
-% Pipeline arrows
-\draw[arr, blue!60!black] (examples) -- (inductor);
-\draw[arr, blue!60!black] (inductor) -- (taskspec);
-\draw[arr, blue!60!black] (taskspec) -- (compiler);
-\draw[arr, blue!60!black, line width=2pt] (compiler) -- (solver);
-
-% Verifier connections
-\draw[arr, green!50!black] (compiler.east) -| (verifier.south)
-    node[pos=0.25, below, font=\scriptsize] {verify};
-\draw[darr, green!50!black] (verifier.west) -- (taskspec.east)
-    node[midway, above, font=\scriptsize, text=green!40!black] {refine};
-
-% ==================== Connecting arrow ====================
-\draw[darr, blue!50!black, line width=1.5pt] (compute.east) -- ++(0.7,0) |- ([yshift=0.05cm]inductor.west)
-    node[pos=0.22, above, font=\scriptsize\itshape, text=blue!50!black] {motivates};
-
-% ==================== Bottom tagline ====================
-\node[below=0.1cm of solver, font=\scriptsize\itshape, text=gray!60!black] {%
-    LLM contributes structure once\,$\to$\,solver runs deterministically};
-
-\end{tikzpicture}%
-}% end resizebox
-\vspace{-2pt}
-\caption{Overview. \textbf{Left:} PCD diagnosis decomposes LLM probabilistic reasoning into Parse, Compute, and Decide; computation is the dominant failure mode. \textbf{Right:} The compile-once pipeline induces a declarative \taskspec{} from a few examples and compiles it into a verified exact solver that runs without any LLM involvement.}
+\includegraphics[width=\textwidth]{figures/figure1_overview.png}
+\caption{Overview. \textbf{Left:} \method{} diagnosis decomposes LLM probabilistic reasoning into Parse, Compute, and Decide, identifying computation as the primary failure mode (22--78\% accuracy vs.\ $\geq$95\% on Parse and Decide). \textbf{Right:} The compile-once pipeline. An LLM inductor infers a declarative \taskspec{} from a few examples; a deterministic compiler produces an exact solver; a three-gate verifier checks correctness before deployment. The compiled solver achieves 100\% compute-stage accuracy with no LLM involvement at test time.}
 \label{fig:overview}
-\end{figure}
+\end{figure*}
 
 % ============================================================
 \section{Problem Setup}
@@ -235,8 +140,8 @@ Our tasks share a common skeleton~\citep{griffiths2008bayesian,koller2009pgm}: o
 What varies is the \emph{inference family}: hypothesis enumeration for preference learning (Flight/Hotel, $n{=}748$), conjugate update for bandits (TextBandit), or variable elimination (VE) for BN inference (BLInD $n{=}900$ + bnlearn $n{=}120$).
 Two additional families, Naive Bayes (NB, $n{=}200$) and HMM forward filtering ($n{=}100$), are held out for generalization testing; see Appendix~\ref{app:families} for the full family table.
 
-Prior work documents the failures: LLMs perform poorly on BN queries without tools~\citep{nafar2025blind}, symbolic solvers outperform them by wide margins~\citep{schrader2024quite}, even basic probability estimation is unreliable~\citep{paruchuri2024odds}, and chain-of-thought (CoT) prompting can make things worse~\citep{wei2022cot,wang2023selfconsistency}.
-None of these studies separate parsing, computation, and decision-making as distinct failure modes---the gap PCD fills.
+Prior work documents the failures: LLMs perform poorly on BN queries without tools~\citep{nafar2025blind}, symbolic solvers outperform them by wide margins~\citep{schrader2024quite}, even basic probability estimation is unreliable~\citep{paruchuri2024odds}, and chain-of-thought (CoT) prompting~\citep{wei2022cot,wang2023selfconsistency} can further degrade performance on probabilistic tasks (\S\ref{sec:analysis}).
+None of these studies separate parsing, computation, and decision-making as distinct failure modes. PCD fills this gap.
 
 % ============================================================
 \section{PCD: Diagnosing the Compute Bottleneck}
@@ -246,24 +151,25 @@ None of these studies separate parsing, computation, and decision-making as dist
 \subsection{Method: Gold-Injection Interventions}
 
 We decompose probabilistic reasoning into three stages with well-defined interfaces.
+The decomposition is general: any reasoning task with a parse--compute--decide structure, such as mathematical proof, planning, or causal inference, can be diagnosed the same way by defining a gold oracle for each stage. We instantiate it here for probabilistic inference.
 For a problem instance $x$ from family $F$, the gold computation pipeline is:
 \begin{equation}
 s^* = \mathcal{P}^*(x), \qquad y^* = \mathcal{C}^*(s^*), \qquad a^* = \mathcal{D}^*(y^*) = \arg\max_{a \in \mathcal{A}}\; \mathbb{E}_{p(\theta \mid \text{obs}(s^*))}[u(a, \theta)],
 \label{eq:gold_pipeline}
 \end{equation}
 where $s^* = (\mathcal{V}, \mathcal{E}, \{\phi_i\}, Q, \mathbf{e})$ is the structured representation (variables, edges, CPT factors, query, evidence), $y^*$ is the exact posterior or expected utilities, and $a^*$ is the optimal action.
-An LLM $\phi$ implements approximate versions $P_\phi$, $C_\phi$, $D_\phi$ of each stage, yielding $\hat{a} = D_\phi(C_\phi(P_\phi(x)))$.
+An LLM $\psi$ implements approximate versions $P_\psi$, $C_\psi$, $D_\psi$ of each stage, yielding $\hat{a} = D_\psi(C_\psi(P_\psi(x)))$.
 PCD isolates each stage via gold-injection interventions:
 \begin{align}
-\text{ParseAcc}_\phi &= \frac{1}{|\mathcal{D}|}\sum_{x \in \mathcal{D}} \prod_{f \in \mathcal{F}} \mathbf{1}\!\left\{P_\phi^{(f)}(x) = s^{*(f)}\right\}, \label{eq:parse}\\[4pt]
-\text{CompAcc}_\phi &= \frac{1}{|\mathcal{D}|}\sum_{x \in \mathcal{D}} \mathbf{1}\!\left\{\left\|C_\phi\!\left(\mathcal{P}^*(x)\right) - \mathcal{C}^*\!\left(\mathcal{P}^*(x)\right)\right\|_\infty < \epsilon\right\}, \label{eq:compute}\\[4pt]
-\text{DecAcc}_\phi &= \frac{1}{|\mathcal{D}|}\sum_{x \in \mathcal{D}} \mathbf{1}\!\left\{D_\phi\!\left(\mathcal{C}^*(s^*)\right) = a^*\right\}, \label{eq:decide}
+\text{ParseAcc}_\psi &= \frac{1}{|\mathcal{D}|}\sum_{x \in \mathcal{D}} \prod_{f \in \mathcal{F}} \mathbf{1}\!\left\{P_\psi^{(f)}(x) = s^{*(f)}\right\}, \label{eq:parse}\\[4pt]
+\text{CompAcc}_\psi &= \frac{1}{|\mathcal{D}|}\sum_{x \in \mathcal{D}} \mathbf{1}\!\left\{\left\|C_\psi\!\left(\mathcal{P}^*(x)\right) - \mathcal{C}^*\!\left(\mathcal{P}^*(x)\right)\right\|_\infty < \epsilon\right\}, \label{eq:compute}\\[4pt]
+\text{DecAcc}_\psi &= \frac{1}{|\mathcal{D}|}\sum_{x \in \mathcal{D}} \mathbf{1}\!\left\{D_\psi\!\left(\mathcal{C}^*(s^*)\right) = a^*\right\}, \label{eq:decide}
 \end{align}
 where $\mathcal{F}$ indexes the structural fields (variables, edges, CPTs, query variable, evidence assignments) and Parse is scored correct only when \emph{all} fields match.
 A signature of $\text{ParseAcc} \approx 1,\; \text{DecAcc} \approx 1,\; \text{CompAcc} \ll 1$ indicates a compute bottleneck.
 We observe exactly this pattern across every model and task.
 
-\subsection{Results: The Universal Compute Bottleneck}
+\subsection{Results: A Consistent Compute Bottleneck}
 
 On preference learning, Compute ranges from 28\% (GPT-4o-mini) to 78\% (Opus) while Decide = 100\% for every model.
 On BN inference, the same pattern holds and amplifies with depth: Compute drops from $\sim$82\% at depth 2 to single digits by depth 10, while Parse stays $\geq$96\% and Decide at 100\%.
@@ -274,7 +180,7 @@ On BN inference, the same pattern holds and amplifies with depth: Compute drops 
 \vspace{0pt}
 \centering
 \small
-\captionof{table}{PCD on preference learning (Flight, 200 samples). Decide = 100\% for all (omitted).}
+\captionof{table}{PCD on preference learning (Flight, $n{=}200$). Parse $\geq$82\% and Decide = 100\% for all models, but Compute peaks at 78\% (Opus) and is only 28\% for GPT-4o-mini. 95\% CIs in brackets.}
 \label{tab:pcd_preference}
 \vspace{4pt}
 \begin{tabular}{@{}lcc@{}}
@@ -315,41 +221,61 @@ Our DSL & --- & 100\% \\
 \addplot[color=green!50!black, line width=2pt, solid, mark=square*, mark options={fill=green!50!black}]
     coordinates {(2,100)(3,100)(4,100)(5,100)(6,100)(7,100)(8,100)(9,100)(10,100)};
 \addlegendentry{Our DSL}
-\addplot[color=blue!70!black, mark=triangle*, mark options={fill=blue!70!black}]
-    coordinates {(2,81)(3,56)(4,41)(5,24)(6,20)(7,23)(8,13)(9,12)(10,11)};
+% GPT-5.4 with Wilson 95% CI error bars (n=100 per depth)
+\addplot[color=blue!70!black, mark=triangle*, mark options={fill=blue!70!black},
+    error bars/.cd, y dir=both, y explicit]
+    coordinates {
+        (2,81) +- (0,8.8) (3,56) +- (0,9.8) (4,41) +- (0,9.8)
+        (5,24) +- (0,9.2) (6,20) +- (0,8.9) (7,23) +- (0,9.2)
+        (8,13) +- (0,8.0) (9,12) +- (0,7.8) (10,11) +- (0,7.6)
+    };
 \addlegendentry{GPT-5.4}
-\addplot[color=red!70!black, dotted, mark=diamond*, mark options={fill=red!70!black}]
-    coordinates {(2,82)(3,55)(4,37)(5,24)(6,15)(7,19)(8,9)(9,12)(10,9)};
+% Sonnet 4 with Wilson 95% CI
+\addplot[color=red!70!black, dotted, mark=diamond*, mark options={fill=red!70!black},
+    error bars/.cd, y dir=both, y explicit]
+    coordinates {
+        (2,82) +- (0,8.7) (3,55) +- (0,9.8) (4,37) +- (0,9.8)
+        (5,24) +- (0,9.2) (6,15) +- (0,8.3) (7,19) +- (0,8.8)
+        (8,9) +- (0,7.2) (9,12) +- (0,7.8) (10,9) +- (0,7.2)
+    };
 \addlegendentry{Sonnet 4}
-\addplot[color=gray!60!black, densely dashed, mark=star, mark options={fill=gray!60!black}]
-    coordinates {(2,82)(3,49)(4,30)(5,11)(6,12)(7,8)(8,4)(9,2)(10,3)};
+% GPT-4o-mini with Wilson 95% CI
+\addplot[color=gray!60!black, densely dashed, mark=star, mark options={fill=gray!60!black},
+    error bars/.cd, y dir=both, y explicit]
+    coordinates {
+        (2,82) +- (0,8.7) (3,49) +- (0,9.7) (4,30) +- (0,9.6)
+        (5,11) +- (0,7.6) (6,12) +- (0,7.8) (7,8) +- (0,7.0)
+        (8,4) +- (0,5.8) (9,2) +- (0,5.0) (10,3) +- (0,5.5)
+    };
 \addlegendentry{GPT-4o-mini}
 \end{axis}
 \end{tikzpicture}
-\captionof{figure}{Compute$\mid$GoldParse vs.\ BN depth (BLInD, 900 samples, 100 per depth). LLM accuracy declines sharply; the DSL remains at 100\%.}
+\captionof{figure}{Compute$\mid$GoldParse accuracy vs.\ BN depth (BLInD, $n{=}900$, 100 per depth). Error bars show 95\% Wilson CIs. All three LLMs degrade from $\sim$82\% at depth~2 to single digits by depth~10; our DSL solver maintains 100\% at every depth.}
 \label{fig:depth}
 \end{minipage}
 \end{figure*}
 
-The pattern is consistent across every model and task family, including two held-out families introduced in \S\ref{sec:held_out}.
-Scaling helps, but not enough: upgrading from GPT-4o-mini to GPT-5.4---a $67\times$ price increase---improves Compute by only 9 percentage points on BN inference.
+The pattern is consistent across every model and task family, including two held-out families (Naive Bayes and HMM forward filtering) evaluated in \S\ref{sec:held_out}.
+Scaling helps, but not enough: upgrading from GPT-4o-mini to GPT-5.4 (a $67\times$ price increase) improves Compute by only 9 percentage points on BN inference.
 At depth 10, GPT-5.4 still produces the wrong answer 89\% of the time.
+These results motivate a system that uses the LLM's strong parsing ability while bypassing its weak computation entirely.
 
 % ============================================================
 \section{Method: Typed DSL and Verified Solver Induction}
 \label{sec:method}
 % ============================================================
 
-The \method{} results establish that LLMs can identify \emph{what} needs to be computed but not \emph{how}.
-This holds for individual instances. Can LLMs also generalize from a few examples to infer the mathematical structure of an entire task \emph{family}? That is a stronger capability, and we test it empirically.
+PCD reveals that computation, not parsing, limits LLM probabilistic reasoning.
+We now ask whether LLMs can use their parsing strength differently: given a few labeled examples, can they infer the mathematical structure of an entire task \emph{family}?
+That is a stronger capability than instance-level parsing, and we test it empirically.
 
 Given a few labeled examples from a task family, an LLM (the ``inductor'') infers the task's mathematical structure, and a compiler turns that specification into an exact solver.
 Let $F$ denote an inference family with latent task specification $\tau_F \in \mathcal{T}$, where $\mathcal{T}$ is the space of valid specifications (inference family, state structure, observation model, decision rule), and let $p_F$ denote the distribution over problem instances in $F$.
-Given $k$ labeled examples $\mathcal{D}_F^{(k)} = \{(x_i, y_i^*)\}_{i=1}^k$ drawn from $p_F$, the inductor $I_\phi$ (an LLM with parameters $\phi$) infers a specification $\hat{\tau}$, and the deterministic compiler $C$ produces a solver $\hat{S}$:
+Given $k$ labeled examples $\mathcal{D}_F^{(k)} = \{(x_i, y_i^*)\}_{i=1}^k$ drawn from $p_F$, the inductor $I_\psi$ (an LLM with parameters $\psi$) infers a specification $\hat{\tau}$, and the deterministic compiler $C$ produces a solver $\hat{S}$:
 \begin{equation}
 \hat{\tau}^{(r)} = \begin{cases}
-I_\phi\!\left(\mathcal{D}_F^{(k)}\right) & r = 0, \\[2pt]
-I_\phi\!\left(\mathcal{D}_F^{(k)},\; \text{diag}\!\left(V\!\left(C(\hat{\tau}^{(r-1)}),\, \mathcal{D}_{\text{val}}\right)\right)\right) & r \geq 1,
+I_\psi\!\left(\mathcal{D}_F^{(k)}\right) & r = 0, \\[2pt]
+I_\psi\!\left(\mathcal{D}_F^{(k)},\; \text{diag}\!\left(V\!\left(C(\hat{\tau}^{(r-1)}),\, \mathcal{D}_{\text{val}}\right)\right)\right) & r \geq 1,
 \end{cases}
 \qquad \hat{S} = C(\hat{\tau}^{(r^*)}),
 \label{eq:inductor}
@@ -409,11 +335,12 @@ Once verified, the solver is deployed without further LLM calls.
 
 The compiler translates a \taskspec{} into an executable solver composed exclusively of DSL primitives.
 Because both the schema and the operations are formally defined, the compiler is deterministic: the same specification always yields the same solver.
-Compiled solvers match independent gold-reference implementations---cross-checked against pgmpy~\citep{ankan2015pgmpy} on BN queries---with 0.0 maximum absolute error across all 1,200 test instances spanning three families (Flight 250, BLInD 900, TextBandit 50; Appendix~\ref{app:equivalence}).
+Compiled solvers match independent gold-reference implementations, cross-checked against pgmpy~\citep{ankan2015pgmpy} on BN queries, with maximum absolute error below $10^{-12}$ (floating-point precision) across all 1,200 test instances spanning three families (Flight 250, BLInD 900, TextBandit 50; Appendix~\ref{app:equivalence}).
+Because the compiled solver is deterministic and mathematically equivalent to the gold reference, 100\% accuracy on finite test sets reflects exact computation rather than statistical overfitting.
 
 \subsection{Verifier-Guided Inductor}
 
-The inductor calls GPT-4o-mini once to analyze 3--5 task examples and output a \taskspec{}.
+The inductor calls GPT-4o-mini once to analyze a small set of task examples (as few as one; we use 3--5 for robustness) and output a \taskspec{}.
 A three-gate verifier then checks the result:
 \begin{enumerate}
     \item \textbf{Gate 1 (Code Sanity)}: The compiled solver executes without errors.
@@ -455,7 +382,7 @@ All 6 pass all verification gates on the first attempt without self-refinement, 
 \paragraph{Inductor Reliability.}
 To measure variance, we run the inductor 20 times per family (Flight, BN) at temperature 0.7.
 All 40 trials pass verification on the first attempt.
-Even with a single example ($k{=}1$), the inductor produces a valid \taskspec{} on both families; we use $k{=}3$--5 in practice for robustness.
+A single example ($k{=}1$) suffices for both families; we default to $k{=}3$--5 for robustness but the system works with minimal supervision.
 This reliability reflects the constrained output space: filling a declarative JSON specification is far easier than generating arbitrary probabilistic code.
 
 % ============================================================
@@ -482,9 +409,10 @@ Our DSL sidesteps this entirely: GPT-4o-mini reaches 100\% through TaskSpec indu
 \subsection{Scaling to Real-World Networks}
 
 BLInD's small binary networks are an ideal case for PAL: the generated code is short and the state space is tractable.
-To test whether PAL holds up at scale, we evaluate on four standard bnlearn networks~\citep{scutari2010bnlearn}: Asia (8 nodes), Child (20 nodes, multi-valued), Insurance (27 nodes, 52 edges), and Alarm (37 nodes, 46 edges)---widely used PGM benchmarks with categorical variables taking up to 5 values.
+Real-world networks are larger, multi-valued, and harder to handle.
+To test whether PAL holds up at scale, we evaluate on four standard bnlearn networks~\citep{scutari2010bnlearn}: Asia (8 nodes), Child (20 nodes, multi-valued), Insurance (27 nodes, 52 edges), and Alarm (37 nodes, 46 edges), all widely used PGM benchmarks with categorical variables taking up to 5 values.
 
-On Asia, PAL with GPT-5.4 still reaches 90\%, but \textbf{on all networks with $\geq$20 nodes, PAL drops to 0--3\%} for both models (Figure~\ref{fig:bnlearn_scaling}).
+On Asia, PAL with GPT-5.4 still reaches 90\%, but \textbf{on all networks with $\geq$20 nodes, PAL drops to 0--3\%} for both models (Figure~\ref{fig:scaling_cost}).
 Fewer than 10\% of generated programs even execute: the variable-elimination code crashes on multi-valued CPTs, deep elimination chains, and complex factor products.
 Our DSL maintains \textbf{100\%} across all four networks using the same \texttt{ve\_query} macro compiled from BLInD, with no additional induction.
 The gap widens from 2 percentage points on small synthetic networks to $\sim$100 on real-world-scale ones.
@@ -581,22 +509,21 @@ The gap widens from 2 percentage points on small synthetic networks to $\sim$100
 % ---- subcaption 行 ----
 {\hfill\scriptsize (a) bnlearn real-world networks (30 queries each).\hfill\mbox{}} & {\hfill\scriptsize (b) Cost--accuracy on BLInD (small networks).\hfill\mbox{}}\tabularnewline
 \end{tabular}
-\caption{Scaling and cost comparison. \textbf{(a)} On real-world networks ($\geq$20 nodes), all baselines fail (0--3\%); our DSL maintains 100\%. \textbf{(b)} On small synthetic networks, PAL+GPT-5.4 approaches 98\% but costs $310\times$ more and the advantage vanishes at scale.}
-\label{fig:bnlearn_scaling}
-\label{fig:pareto}
+\caption{Scaling and cost. \textbf{(a)} On standard bnlearn networks with $\geq$20 nodes, PAL drops to 0--3\% and Direct Answer to 0\%; our DSL stays at 100\% using the same VE macro compiled from BLInD. \textbf{(b)} Cost--accuracy Pareto on BLInD: our DSL achieves 100\% at \$0.008 (one induction call), matching GPT-5.4 compile-time code at $14\times$ lower cost and PAL at $310\times$ lower cost.}
+\label{fig:scaling_cost}
 \end{figure*}
 
 \subsection{Held-Out Families: Naive Bayes and HMM}
 \label{sec:held_out}
 
 To test whether the DSL generalizes beyond its design families, we freeze it and evaluate on two unseen inference families: Naive Bayes medical diagnosis (3--6 diseases, 4--8 symptoms, $n{=}200$) and HMM forward filtering (3--5 hidden states, 4--8 observation steps, $n{=}100$).
-No macro covers either family.
+Neither family has a corresponding built-in macro, forcing the inductor to compose solvers from core operations alone.
 HMM is the stronger test: it requires \emph{sequential temporal reasoning} via iterated multiply--marginalize--normalize over a time axis, a pattern absent from all three training macros.
 
 \begin{table}[t]
 \centering
 \small
-\caption{Two held-out inference families. Core-ops-only matches unconstrained code generation at 100\% on both families, confirming macros are syntactic sugar. PCD pattern reproduces with the same signature: low Compute, high Decide. 95\% Wilson confidence intervals (CIs) in brackets where $n \geq 100$.}
+\caption{Held-out inference families (no macro support). Core-ops-only solvers match unconstrained code generation at 100\% on both NB and HMM, confirming that macros are syntactic sugar. The PCD signature reproduces: Compute is 27--65\% while Parse and Decide remain $\geq$98\%. 95\% Wilson CIs in brackets.}
 \label{tab:held_out}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
@@ -606,7 +533,7 @@ Condition & GPT-4o-mini & GPT-5.4 & GPT-4o-mini & GPT-5.4 \\
 \midrule
 \multicolumn{5}{l}{\textit{Task accuracy}} \\
 Direct Answer & 44.0\% & 68.5\% & 32.0\% & 61.0\% \\
-Compile-time Free Code & \textbf{100.0\%} & \textbf{100.0\%} & \textbf{100.0\%} & \textbf{100.0\%} \\
+Unconstrained Code Gen. & \textbf{100.0\%} & \textbf{100.0\%} & \textbf{100.0\%} & \textbf{100.0\%} \\
 Core-ops Constrained & \textbf{100.0\%} & \textbf{100.0\%} & \textbf{100.0\%} & \textbf{100.0\%} \\
 \midrule
 \multicolumn{5}{l}{\textit{PCD diagnostic}} \\
@@ -618,10 +545,9 @@ Decide$\mid$GoldPosterior & 100.0\% {\scriptsize [98,100]} & 100.0\% {\scriptsiz
 \end{table}
 
 Table~\ref{tab:held_out} shows two results.
-First, core operations without macros reach 100\% on both held-out families, matching unconstrained code generation---the macros are syntactic sugar, not load-bearing.
+First, core operations without macros reach 100\% on both held-out families, matching unconstrained code generation. The macros are syntactic sugar, not load-bearing.
 Second, the PCD signature reproduces: Compute is 27--65\% while Parse $\geq$99\% and Decide $\geq$98\%; direct prompting lags at 32--61\%.
-The HMM result is the more telling: the inductor must compose an iterated multiply--marginalize--normalize loop over a time axis, a pattern absent from all training macros.
-It is not selecting from existing macros; it constructs new operation sequences from core primitives.
+The HMM result is the more telling: the inductor must compose an iterated multiply--marginalize--normalize loop over a time axis, constructing new operation sequences from core primitives rather than selecting from existing macros.
 
 \paragraph{Anomalies.}
 GPT-4o-mini achieves only 3\% Parse on NB because it omits absent-symptom entries; on HMM, its Decide drops to 98\% due to near-tied posteriors. Neither anomaly affects core-ops results.
@@ -633,9 +559,9 @@ Disabling Gate~3 (Reference Match) and rerunning the full induction pipeline, al
 Gate~3 is a useful safety check but not required for correctness.
 
 \paragraph{Cost and Scaling.}
-On BLInD (small networks), our DSL costs \$0.008 for 100\% accuracy vs.\ \$0.11 for compile-time GPT-5.4 ($14\times$) and \$2.50 for PAL GPT-5.4 ($310\times$, 98.1\%; Figure~\ref{fig:pareto}).
+On BLInD's small networks, our DSL costs \$0.008 for 100\% accuracy, compared to \$0.11 for compile-time GPT-5.4 ($14\times$) and \$2.50 for PAL GPT-5.4 at 98.1\% ($310\times$; Figure~\ref{fig:scaling_cost}).
 The cost advantage stems from the compile-once design: a single induction call is amortized over all subsequent queries, which run deterministically at zero LLM cost.
-On bnlearn networks ($\geq$20 nodes), our DSL is the only method that produces correct answers (Figure~\ref{fig:bnlearn_scaling}); PAL fails entirely regardless of model or budget.
+On bnlearn networks ($\geq$20 nodes), our DSL is the only method that produces correct answers (Figure~\ref{fig:scaling_cost}); PAL fails entirely regardless of model or budget.
 
 \subsection{End-to-End Pipeline Validation}
 \label{sec:e2e}
@@ -651,28 +577,31 @@ Compared to the best prompt-based strategy (tool-calling at 58.3\%), the compile
 \label{sec:analysis}
 % ============================================================
 
+The results above validate the compile-once pipeline; we now analyze \emph{why} it works by examining how accuracy varies with the degree of computation offloaded, and where the approach fails.
+
 \subsection{The 23-Strategy Gradient}
 
 A 23-strategy ablation on preference learning (Flight, 624 samples, GPT-4o-mini; full results in Appendix~\ref{app:strategies}) provides independent evidence for the compute bottleneck.
-Accuracy rises monotonically with the fraction of computation offloaded: pure CoT scores $\leq$33\%, at or below random; partial math injection reaches 50--64\%; tool-calling with full computation reaches 73\%; direct result injection hits 74.8\%, matching the Oracle.
-The gradient is clean: the more math the LLM must do, the worse it performs.
+Accuracy rises monotonically with the fraction of computation offloaded: pure CoT scores $\leq$33\%, at or below the 3-way random baseline; partial math injection reaches 50--64\%; tool-calling with full computation reaches 73\%; direct result injection reaches 74.8\%, matching the Oracle.
+In short, the more math the LLM must do, the worse it performs.
+Pure CoT is ineffective, confirming that self-reflection alone does not improve probabilistic computation.
 
 \subsection{Applicability Boundary: DeLLMa}
 \label{sec:dellma}
 
 Not all probabilistic tasks are computation-bottlenecked.
-DeLLMa~\citep{liu2025dellma} asks LLMs to choose agricultural strategies under weather uncertainty; here our compile-time solvers score 17--29\% against a 29\% baseline across three models---no better than random.
+DeLLMa~\citep{liu2025dellma} asks LLMs to choose agricultural strategies under weather uncertainty; here our compile-time solvers score 17--29\% against a 29\% baseline across three models, no better than random.
 
 The difference is that DeLLMa requires the model to \emph{estimate} distributions from historical context, not compute with distributions already given.
-Our DSL excels when distributions are specified or derivable; it adds nothing when the bottleneck is prediction rather than computation.
+Our DSL works well when distributions are specified or derivable; it adds nothing when the bottleneck is prediction rather than computation.
 
 \subsection{Model Scaling Does Not Close the Gap}
 
-Stronger models raise Compute accuracy (22--78\% across six models), but none eliminate errors: Opus still fails on 22\% of preference instances, and GPT-5.4 reaches only 11\% at BN depth 10.
+Stronger models raise Compute accuracy (22--78\% across six models), but none eliminate errors. Opus still fails on 22\% of preference instances, and GPT-5.4 reaches only 11\% at BN depth 10.
 PAL with GPT-5.4 bridges part of the gap (98.1\% on BN inference) but falls short of 100\% at $310\times$ our cost.
 No model--tool combination tested guarantees correctness.
 
-On bnlearn networks with 8--37 nodes, Compute$\mid$GoldParse drops to 0\% and PAL collapses to 0--3\% on $\geq$20-node networks (Figure~\ref{fig:bnlearn_scaling}), while our DSL stays at 100\%.
+On bnlearn networks with 8--37 nodes, Compute$\mid$GoldParse drops to 0\% and PAL collapses to 0--3\% on $\geq$20-node networks (Figure~\ref{fig:scaling_cost}), while our DSL stays at 100\%.
 
 % ============================================================
 \section{Related Work}
@@ -682,24 +611,30 @@ On bnlearn networks with 8--37 nodes, Compute$\mid$GoldParse drops to 0\% and PA
 \paragraph{Program-Aided LLM Reasoning.}
 PAL~\citep{gao2023pal} and Program of Thoughts~\citep{chen2023pot} offload arithmetic to a Python interpreter by generating code per instance.
 This works for deterministic computation (GSM8K, symbolic math) but breaks down on non-trivial probabilistic algorithms: on our BN baseline, execution success drops from 100\% at depth~2 to 57\% at depth~10 as generated VE code accumulates errors (Appendix~\ref{app:pal_depth}).
-Three design choices distinguish our system: synthesis at the \emph{family} level rather than per-instance, a \emph{typed DSL} that constrains outputs to well-formed probabilistic programs, and \emph{compile-once} execution that removes the LLM from the inference loop entirely.
+Our system differs in two key respects: synthesis at the \emph{family} level rather than per-instance, and a \emph{typed DSL} that constrains outputs to well-formed probabilistic programs. Once compiled, the solver runs deterministically with no LLM in the loop.
 
 \paragraph{Neuro-Symbolic Reasoning.}
-Several systems translate natural language into formal representations and delegate reasoning to sound solvers: SatLM~\citep{ye2023satlm} targets Boolean satisfiability, Logic-LM~\citep{pan2023logiclm} first-order logic, LINC~\citep{olausson2023linc} first-order theorem proving, Logic.py~\citep{kesseli2025logicpy} a dedicated logic DSL, and \citet{michailidis2024cp} use in-context learning to produce constraint programming specifications.
+Several systems translate natural language into formal representations for sound solvers: SatLM~\citep{ye2023satlm} targets Boolean satisfiability; Logic-LM~\citep{pan2023logiclm} first-order logic; LINC~\citep{olausson2023linc} first-order theorem proving; Logic.py~\citep{kesseli2025logicpy} a dedicated logic DSL; \citet{michailidis2024cp} constraint programming specifications.
 All of these address \emph{logical} or \emph{combinatorial} reasoning; none handle probabilistic inference.
+Logic.py is the closest in design: both systems pair a typed DSL with an external solver, and the LLM fills a structured specification rather than writing arbitrary code.
+The systems differ in two respects: (1)~Logic.py solves constraint satisfaction, whereas our DSL targets probabilistic computation (factor products, marginalization, normalization) and compiles once per \emph{family} rather than per \emph{instance}; (2)~Logic.py does not diagnose \emph{why} LLMs fail at the target task, the gap that PCD fills.
 On the probabilistic side, BLInD~\citep{nafar2025blind} uses ProbLog~\citep{deraedt2007problog} for Bayesian network queries and QUITE~\citep{schrader2024quite} benchmarks real-world Bayesian reasoning.
-Our work differs from BLInD in three ways: (1)~\emph{scope}---ProbLog targets BN inference only, while our DSL covers multiple inference families with the same seven typed primitives; (2)~\emph{granularity}---BLInD translates each instance into a ProbLog program, whereas our inductor compiles once per family; (3)~\emph{interface}---the LLM fills a declarative JSON specification rather than writing PPL code, eliminating syntax errors as a failure mode.
+Compared to BLInD: ProbLog targets BN inference only, while our DSL covers multiple inference families with the same seven typed primitives; BLInD translates each instance into a ProbLog program, whereas our inductor compiles once per family; and the LLM fills a declarative JSON specification rather than writing PPL code, eliminating syntax errors as a failure mode.
 Neither BLInD nor QUITE separates parsing, computation, and decision as distinct failure modes.
+LLM-BI~\citep{huang2025llmbi} also translates natural language into a structured JSON specification for probabilistic modeling, but targets continuous Bayesian inference via MCMC; it automates \emph{model specification} such as choosing priors and likelihoods, not \emph{inference computation} on a given model, and does not compile reusable solvers.
 
 \paragraph{Tool Use and Library Learning.}
 Toolformer~\citep{schick2023toolformer} and ReAct~\citep{yao2023react} equip LLMs with external tool calls at inference time; LILO~\citep{grand2024lilo} and DreamCoder~\citep{ellis2021dreamcoder} learn reusable code libraries through iterative abstraction.
 Our system is more constrained: the LLM emits a declarative specification, not executable code, and a three-gate verifier certifies the compiled solver before deployment.
 This moves the trust boundary from ``does the generated code happen to work?''\ to ``does the specification pass verification?''
-Unlike general-purpose PPLs (WebPPL, Stan, Pyro), our DSL is intentionally narrow: discrete exact inference only, accepting a declarative JSON specification rather than executable code.
+Unlike general-purpose PPLs such as WebPPL, Stan, and Pyro, our DSL is intentionally narrow, covering discrete exact inference only.
 
 \paragraph{Program Synthesis, Search, and Autoformalization.}
-LLM-guided synthesis methods keep the model in the loop at test time: \citet{ellis2023hypothesis} reweight LLM-proposed hypotheses per instance, FunSearch~\citep{romeraparedes2024funsearch} searches program space, and Tree-of-Thoughts~\citep{yao2024tot} explores multiple reasoning paths.
-Our inductor shares the generate-and-verify pattern but produces a \emph{formal specification} compiled to a deterministic solver, removing the LLM from execution entirely.
+LLM-guided synthesis methods keep the model in the loop at test time. \citet{ellis2023hypothesis} reweight LLM-proposed hypotheses per instance; FunSearch~\citep{romeraparedes2024funsearch} searches program space; Tree-of-Thoughts~\citep{yao2024tot} explores multiple reasoning paths; PIPS~\citep{stein2025pips} synthesizes a program per problem instance with structural feedback.
+Our inductor shares the generate-and-verify pattern but produces a \emph{formal specification} compiled to a deterministic solver, with no LLM involvement at execution time.
+The key distinction from per-instance methods (PAL, PIPS) is granularity: one induction call covers an entire task family, and subsequent instances require zero LLM involvement.
+DisCIPL~\citep{lew2025discipl} uses probabilistic programming to steer a small ``follower'' LLM, achieving cost savings similar to ours; however, it constrains \emph{text generation}, not probabilistic \emph{computation}, and the LLM remains in the inference loop.
+\citet{curtis2025pomdp} apply LLM-guided probabilistic program induction to POMDP model estimation; their use of LLM-as-inductor is similar, but they target online planning rather than exact discrete inference.
 Autoformalization~\citep{wu2022autoformalization} translates informal mathematics into formal representations; our inductor targets a narrow typed DSL validated by a domain-specific verifier, not a general-purpose proof assistant.
 
 % ============================================================
@@ -708,12 +643,30 @@ Autoformalization~\citep{wu2022autoformalization} translates informal mathematic
 % ============================================================
 
 \paragraph{Scope and Scale.}
-The DSL covers exact inference over discrete distributions only---no continuous variables, approximate methods, or prediction-bottlenecked tasks (\S\ref{sec:dellma}).
+The DSL covers exact inference over discrete distributions only: no continuous variables, approximate methods, or prediction-bottlenecked tasks (\S\ref{sec:dellma}).
+Table~\ref{tab:scope} summarizes the applicability boundary.
 Extending to continuous families and approximate backends is a natural next step.
 Five inference families across eight datasets establish the PCD pattern, including held-out tests on NB ($n{=}200$) and HMM ($n{=}100$); validation on benchmarks such as QUITE~\citep{schrader2024quite} would strengthen generality claims.
 
+\begin{table}[ht]
+\centering
+\small
+\caption{Applicability boundary. The compile-once approach applies when the hard part is computing with given distributions, not predicting them.}
+\label{tab:scope}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Applicable} & \textbf{Not applicable} \\
+\midrule
+Distributions given or derivable & Distributions must be estimated from context \\
+Discrete exact inference & Continuous or approximate inference \\
+Parameterizable inference families & Open-ended, ad hoc reasoning \\
+Computation bottleneck (PCD) & Prediction or parsing bottleneck \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \paragraph{PCD Methodology and Inductor.}
-PCD uses interventional probes, not formal causal identification. Compute$\mid$GoldParse conflates algorithm selection with arithmetic execution, and the near-perfect Decide scores likely reflect a simple decision surface (argmax over utilities) rather than a universal LLM capability.
+PCD uses interventional probes, not formal causal identification. Compute$\mid$GoldParse conflates algorithm selection with arithmetic execution. The near-perfect Decide scores likely reflect a simple decision surface, argmax over utilities, rather than a universal LLM capability.
 BN depth correlates with token count, a confound that controlled experiments could resolve; however, Parse stays $\geq$96\% at all depths, suggesting token length alone does not explain the Compute degradation.
 The inductor succeeds on all tasks tested (6/6 LOO, first attempt), which may reflect task simplicity; stress-testing on larger state spaces and adversarial specifications is needed.
 Family-level induction is a stronger capability than instance-level parsing; our experiments validate it empirically rather than derive it from PCD.
@@ -721,7 +674,7 @@ Family-level induction is a stronger capability than instance-level parsing; our
 \paragraph{DSL Design and Verification.}
 The seven core operations and three macros were hand-designed; extending to a new family may require new operations (\eg \texttt{log} for information-theoretic quantities or \texttt{max-marginalize} for MAP inference).
 We do not claim completeness over all discrete inference tasks.
-Compiler equivalence (``0.0 max error'') is checked against gold solvers cross-validated with pgmpy~\citep{ankan2015pgmpy}---empirical, not a formal proof.
+Compiler equivalence (``0.0 max error'') is checked against gold solvers cross-validated with pgmpy~\citep{ankan2015pgmpy}; this is empirical verification, not a formal proof.
 Gates~1--2 require only a small held-out validation set; Gate~3 (reference match) is optional.
 The inductor is a stochastic LLM call: 20 runs on two families show 100\% success, but broader stress-testing is needed before deployment.
 All prompts, specifications, and compiled solvers will be released.
@@ -731,17 +684,16 @@ All prompts, specifications, and compiled solvers will be released.
 \label{sec:conclusion}
 % ============================================================
 
-LLMs can read probabilistic problems and follow computed answers, but they cannot reliably do the computation in between.
-\method{} makes this concrete: across six models and five task families, computation is consistently the weakest link.
+Across six models and five task families (over 2,000 test instances), we find a consistent pattern: LLM probabilistic reasoning fails at computation, not at parsing or decision-making.
+\method{} quantifies this gap.
 
-The remedy follows from the diagnosis: let the LLM infer the problem structure once, then let a deterministic solver handle all the math.
-Our typed DSL, compiler, and three-gate verifier implement this separation.
-On BN inference, GPT-4o-mini produces verified solvers at 100\% accuracy---$14\times$ cheaper than GPT-5.4 compile-time code and $310\times$ cheaper than per-instance PAL---and succeeds with our structured specification where only GPT-5.4 can write working code from scratch.
+Our typed DSL and three-gate verifier implement that remedy: the LLM handles structure extraction, while a deterministic compiler handles numerical computation.
+The compile-once design is accurate and economical: on BN inference, even GPT-4o-mini produces verified solvers at 100\% compute-stage accuracy. The cost is $14\times$ lower than GPT-5.4 compile-time code and $310\times$ lower than per-instance PAL.
 
-The approach has clear limits: it works when the hard part is computing with given distributions, not predicting them.
-Within those limits, the pattern extends to two held-out families not covered by built-in macros, including HMM forward filtering---a sequential computation absent from all training tasks.
-The seven core operations alone suffice, suggesting that they capture a useful shared structure in discrete probabilistic reasoning.
-The broader principle---use the LLM for language understanding and structure extraction, delegate posterior updates to a deterministic backend---applies wherever computation, not comprehension, is the bottleneck.
+The approach has clear limits: it applies when the hard part is computing with given or derivable distributions, not estimating them from unstructured context.
+Within those limits, the pattern extends to two held-out families not covered by built-in macros, including HMM forward filtering, a sequential computation absent from all training tasks.
+The seven core operations alone suffice, suggesting that they capture useful shared structure in discrete probabilistic inference.
+The same idea applies wherever computation, not comprehension, is the bottleneck: delegate exact inference to a deterministic backend.
 
 {\small
 \bibliographystyle{plainnat}
@@ -865,7 +817,7 @@ Full math analysis & 49.9\% & \textbf{58.3\%} & +8.4pp \\
 \end{table}
 
 The channel gain is largest for mid-complexity content (direct recommendation: +18.7pp) and smallest for content that is either useless (random: +2.8pp) or already highly informative (full math: +8.4pp).
-This suggests that function calling primarily improves \emph{compliance}---the LLM's willingness to follow the external signal---rather than adding computational ability.
+This suggests that function calling primarily improves \emph{compliance}, the LLM's willingness to follow the external signal, rather than adding computational ability.
 
 \section{Detailed PCD Protocol}
 \label{app:pcd_protocol}
@@ -904,7 +856,7 @@ The DSL defines four core types:
     \item \texttt{Distribution}: a discrete probability distribution over a finite support set, stored as aligned arrays of values and probabilities (non-negative, summing to~1).
     \item \texttt{Factor}: a multi-variable probabilistic factor mapping variable-assignment tuples to non-negative reals. Variable domains are inferred from table keys.
     \item \texttt{HypothesisSpace}: defines a set of hypotheses, either as a Cartesian product of per-dimension value lists or as an explicit enumeration.
-    \item \texttt{Evidence}: a generic container for observations (variable assignments for BN inference, choice indices for preference learning, arm/reward pairs for bandits).
+    \item \texttt{Evidence}: a generic container for observations. Concrete subtypes include variable assignments for BN inference, choice indices for preference learning, and arm/reward pairs for bandits.
 \end{itemize}
 
 \paragraph{Core Operations (7 typed ops).}
@@ -1004,12 +956,12 @@ We validate PCD on four standard Bayesian networks from the bnlearn repository~\
 These are widely used PGM benchmarks with real-world structure and multi-valued categorical variables.
 We generate 30 random inference queries per network (120 total).
 
-Both GPT-5.4 and GPT-4o-mini achieve Compute$\mid$GoldParse accuracy of 0\% across all 120 queries, a complete failure even with perfect structured input, while Decide$\mid$GoldPosterior remains at 99.2\% and 98.3\% respectively.
+Both GPT-5.4 and GPT-4o-mini score 0\% on Compute$\mid$GoldParse across all 120 queries, even with perfect structured input. Decide$\mid$GoldPosterior remains at 99.2\% and 98.3\% respectively.
 
 PAL (code generation + execution) fares no better on these larger networks.
 Table~\ref{tab:bnlearn_pal} shows the results: GPT-5.4's PAL achieves 97\% on Asia (8 nodes) but drops to \textbf{0\%} on Child (20 nodes), Insurance (27 nodes), and Alarm (37 nodes), with code execution success also falling to 0\%.
 GPT-4o-mini's PAL achieves only 15\% overall.
-Our DSL solver maintains 100\% accuracy across all four networks using the same \texttt{ve\_query} macro, demonstrating that the compile-once approach scales to real-world network sizes where both direct prompting and per-instance code generation fail completely.
+Our DSL solver maintains 100\% accuracy across all four networks using the same \texttt{ve\_query} macro. The compile-once approach scales to network sizes where both direct prompting and per-instance code generation fail.
 
 \begin{table}[ht]
 \centering
@@ -1103,7 +1055,7 @@ The full prompt ($\sim$2\,k tokens, dominated by the schema definition) is inclu
 To quantify the inductor's variance, we run it 20 times per family (Flight, BN) with temperature~0.7 using GPT-4o-mini.
 Table~\ref{tab:reliability} shows that all 40 trials pass verification on the first attempt, with no refinement rounds needed.
 Even with a single induction example ($k{=}1$), the inductor produces a valid \taskspec{} on both families.
-The high reliability reflects the constrained output space: the inductor fills a declarative JSON specification rather than generating arbitrary code.
+We attribute the high reliability to the constrained output space: the inductor fills a declarative JSON specification rather than generating arbitrary code.
 
 \begin{table}[ht]
 \centering
@@ -1149,7 +1101,7 @@ BLInD depth-OOD & -- & \checkmark & -- & -- & 100\% & 1 \\
 \label{app:cost}
 
 Table~\ref{tab:cost_detail} provides a detailed cost breakdown for each method on BN inference (BLInD, 900 problems).
-Our DSL incurs a one-time induction cost of \$0.001 (a single GPT-4o-mini call), after which the compiled solver runs deterministically with zero marginal cost per query.
+Our DSL incurs a one-time induction cost of \$0.001, a single GPT-4o-mini call. After that, the compiled solver runs deterministically at zero marginal cost per query.
 Per-instance methods incur cost proportional to the number of queries.
 
 \begin{table}[ht]
@@ -1177,10 +1129,10 @@ For our DSL, the break-even point against per-instance PAL (GPT-4o-mini) occurs 
 \section{Compile-Time Baseline Failure Analysis}
 \label{app:compile_failure}
 
-We provide a detailed analysis of why GPT-4o and GPT-4o-mini fail to produce working VE solvers via unconstrained code generation, even with 5 rounds of self-repair.
+GPT-4o and GPT-4o-mini both fail to produce working VE solvers via unconstrained code generation, even with 5 rounds of self-repair. We analyze the failure modes below.
 
 \paragraph{GPT-4o: algorithmic errors in variable elimination.}
-GPT-4o generates code with multiple algorithmic bugs: (1)~the CPT parsing regex is too greedy, failing on multi-condition entries; (2)~factor construction assigns identical tuples regardless of parent values; (3)~the \texttt{sum\_out} function treats tuple-based assignments as dictionaries, causing \texttt{KeyError}.
+GPT-4o generates code with multiple algorithmic bugs: the CPT parsing regex is too greedy, failing on multi-condition entries; factor construction assigns identical tuples regardless of parent values; and the \texttt{sum\_out} function treats tuple-based assignments as dictionaries, causing \texttt{KeyError}.
 Across 5 repair rounds, GPT-4o outputs \emph{identical} code (9,589 characters) every round, unable to diagnose its own bugs from the error feedback.
 
 \paragraph{GPT-4o-mini: data structure mismatch.}
@@ -1190,7 +1142,7 @@ Like GPT-4o, self-repair produces nearly identical code across all 5 rounds.
 
 \paragraph{Implications.}
 These failures are not prompt engineering artifacts: both models receive the same 5 training examples and the same self-repair protocol as GPT-5.4, which succeeds after 1 repair round.
-The failures reflect the inherent difficulty of implementing correct VE in unconstrained Python, where subtle algorithmic choices (CPT representation, factor product semantics, elimination ordering) must all be simultaneously correct.
+These failures stem from the difficulty of implementing correct VE in unconstrained Python: subtle algorithmic choices in CPT representation, factor product semantics, and elimination ordering must all be simultaneously correct.
 Our DSL eliminates this failure mode by constraining the inductor to a declarative specification, shifting the burden of correct implementation to the deterministic compiler.
 
 \section{Multi-Model PCD Detailed Results}
@@ -1273,7 +1225,7 @@ Opus 4.6 & 40.0\% & 17.6\% & 29.1\% \\
 The compile-time solver for GPT-4o-mini fails entirely due to code execution errors.
 GPT-5.4's solver produces answers at random-baseline level.
 DeLLMa's core challenge is distribution \emph{estimation} from sparse historical data, not computation with given distributions.
-This confirms the boundary of our approach: the DSL excels when distributions are specified or derivable from the problem statement, and adds nothing when the bottleneck is prediction rather than computation.
+This marks the boundary of our approach: the DSL works when distributions are specified or derivable from the problem statement, and adds nothing when the bottleneck is prediction rather than computation.
 
 \section{NeurIPS Paper Checklist}
 \label{app:checklist}
@@ -1287,7 +1239,7 @@ This confirms the boundary of our approach: the DSL excels when distributions ar
 
 \item \textbf{Experiments.}
 \begin{enumerate}
-    \item[(a)] Training/evaluation details: model names and vendors in Table~\ref{tab:pcd_preference} and Figure~\ref{fig:pareto}; DSL specification in Appendix~\ref{app:dsl}; TaskSpec schema in Appendix~\ref{app:taskspec}. [Yes]
+    \item[(a)] Training/evaluation details: model names and vendors in Table~\ref{tab:pcd_preference} and Figure~\ref{fig:scaling_cost}; DSL specification in Appendix~\ref{app:dsl}; TaskSpec schema in Appendix~\ref{app:taskspec}. [Yes]
     \item[(b)] Error bars: 95\% Wilson/Clopper--Pearson CIs reported for all PCD tables (Tables~\ref{tab:pcd_preference},~\ref{tab:held_out}) and Figure~\ref{fig:depth}. DSL solver output is deterministic (no sampling variance). [Yes]
     \item[(c)] Compute: all experiments run via commercial APIs (OpenAI, Anthropic, Google). No GPU training involved. Total API cost $<$\$50. [Yes]
 \end{enumerate}

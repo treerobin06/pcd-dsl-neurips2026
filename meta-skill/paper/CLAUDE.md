@@ -41,6 +41,9 @@
 - [2026-03-28 03:37] push | Prose polish L243-658 (PCD/Method/Experiments): 30处修改, 去冗余/紧凑语言/修复vague referent/强化transitions
 - [2026-03-28 03:39] push | Prose polish L73-241 (Abstract/Intro/Problem Setup): 12处修改, 修vague referent(it→that structure), 修dangling modifier, 去冗余(dominant/rather than), 统一术语(free code→unconstrained code generation), 合并choppy sentences
 - [2026-03-28 17:00] push | Full prose rewrite for NeurIPS: ~30 edits across all sections, tighter sentences, better rhythm, killed filler, stronger transitions, no AI vocabulary
+- [2026-03-28 19:05] push | 替换 figure1_overview.png: 使用 PaperBanana 生成的高质量架构图（Gemini 3.1 Pro + Flash Image）
+- [2026-03-29 17:30] push | Novelty check 修改8项: Abstract加family-level对比, PCD加可推广声明, Related Work加Logic.py详细对比+LLM-BI/PIPS/DisCIPL/Curtis引用, Contributions重写(per-instance对比+方法论定位), Limitations加scope表格, bib加4条
+- [2026-03-31 20:34] push | 去AI味(L608-1267): Related Work/Limitations/Conclusion/Appendix共~23处修改, 消除forced三项列举/em dash过度使用/双括号注释/passive voice/overexplanation, 拆长句制造节奏变化
 
 ## 论文概况
 
