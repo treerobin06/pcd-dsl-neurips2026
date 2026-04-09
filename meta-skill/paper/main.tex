@@ -111,7 +111,7 @@ Computation, not language understanding, is the bottleneck.
 
 LLMs can identify \emph{what} to compute; the difficulty is \emph{how}. We therefore separate these two jobs (Figure~\ref{fig:overview}).
 The LLM examines a few examples and infers the mathematical structure of a task family once. A deterministic compiler then turns that description into an exact solver that requires no further LLM calls.
-This demands more than instance-level parsing: the LLM must generalize from examples to the mathematical structure of an entire task \emph{family}. We validate this empirically.
+This demands more than instance-level parsing: the LLM must recognize the inference family, decide whether to reuse a built-in macro or compose a new workflow from typed primitives, and emit a complete declarative specification. We validate this empirically, including on two held-out families where the inductor must compose novel operation sequences from scratch.
 
 We implement this with a typed probabilistic DSL of seven core operations, a deterministic compiler, and a three-gate verifier.
 Because the LLM fills a structured specification instead of writing arbitrary code, even GPT-4o-mini, the cheapest model we test, produces solvers that match hand-written references across 1,200+ instances with zero compute-stage errors. This matches GPT-5.4 unconstrained code generation at $14\times$ lower cost.
@@ -120,14 +120,14 @@ End-to-end on natural-language inputs, the pipeline matches the gold-feature ora
 
 \textbf{Contributions.}
 \begin{itemize}
-    \item \textbf{A compile-once solver induction system}: a typed DSL, compiler, and verifier that produce exact solvers from as few as one example. One induction call covers an entire task family with zero LLM involvement at test time. On networks with $\geq$20 nodes where PAL fails, the compiled solver maintains 100\%; two held-out families confirm generalization.
+    \item \textbf{A compile-once solver induction system}: a typed DSL, compiler, and verifier that produce exact solvers from as few as one example. One induction call covers an entire task family with zero LLM involvement at test time. On networks with $\geq$20 nodes where PAL fails, the compiled solver maintains 100\%. On two held-out families with no built-in macro, the inductor composes novel workflows from core operations alone, demonstrating compositional generalization beyond template selection.
     \item \textbf{A diagnostic tool for reasoning bottlenecks}: gold-injection interventions (Parse, Compute, Decide) across six models, three vendors, and five task families isolate computation as the primary failure mode. The same decomposition applies to any reasoning domain with identifiable parse, compute, and decide stages.
 \end{itemize}
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/figure1_overview.png}
-\caption{Overview. \textbf{Left:} \method{} diagnosis decomposes LLM probabilistic reasoning into Parse, Compute, and Decide, identifying computation as the primary failure mode (22--78\% accuracy vs.\ $\geq$95\% on Parse and Decide). \textbf{Right:} The compile-once pipeline. An LLM inductor infers a declarative \taskspec{} from a few examples; a deterministic compiler produces an exact solver; a three-gate verifier checks correctness before deployment. The compiled solver achieves 100\% compute-stage accuracy with no LLM involvement at test time.}
+\caption{Overview. \textbf{Left:} \method{} diagnosis decomposes LLM probabilistic reasoning into Parse, Compute, and Decide, identifying computation as the primary failure mode (22--78\% accuracy vs.\ $\geq$95\% on Parse and Decide). \textbf{Right:} The compile-once pipeline. An LLM inductor recognizes the inference family, selects a built-in macro or composes a novel workflow from core operations (Table~\ref{tab:routes}), and emits a declarative \taskspec{}. A deterministic compiler produces an exact solver; a three-gate verifier checks correctness. The compiled solver runs with no LLM involvement at test time.}
 \label{fig:overview}
 \end{figure*}
 
@@ -722,8 +722,8 @@ Our typed DSL and three-gate verifier implement that remedy: the LLM handles str
 The compile-once design is accurate and economical: on BN inference, even GPT-4o-mini produces verified solvers at 100\% compute-stage accuracy. The cost is $14\times$ lower than GPT-5.4 compile-time code and $310\times$ lower than per-instance PAL.
 
 The approach has clear limits: it applies when the hard part is computing with given or derivable distributions, not estimating them from unstructured context.
-Within those limits, the pattern extends to two held-out families not covered by built-in macros, including HMM forward filtering, a sequential computation absent from all training tasks.
-The seven core operations alone suffice, suggesting that they capture useful shared structure in discrete probabilistic inference.
+Within those limits, the inductor generalizes compositionally: on two held-out families with no built-in macro, it assembles novel workflows from the same seven typed primitives, including an iterated temporal loop for HMM forward filtering that is absent from all training macros.
+This suggests that the core operations capture reusable structure in discrete probabilistic inference.
 The same idea applies wherever computation, not comprehension, is the bottleneck: delegate exact inference to a deterministic backend.
 
 {\small
