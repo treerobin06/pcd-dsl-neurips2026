@@ -103,32 +103,70 @@ LLM 能理解概率问题（Parse ≥95%）、能使用计算结果做决策（D
 
 ---
 
-## 五、已知弱点与待做
+## 五、战略决策（2026-04-09 Codex + Claude 共识）
 
-### 论文打磨（无需新实验）
+### 叙事决策
 
-- [ ] 检查引用准确性（curtis2025pomdp 作者名、lew2025discipl 会议）
-- [ ] 统一术语（compile-once vs compile-time、free code vs unconstrained）
-- [ ] 确保 100% claim 都有 "compute stage" 限定
+| 问题 | 决策 | 理由 |
+|------|------|------|
+| **主叙事** | 保持 "diagnose bottleneck → compile-once → verified exact" | 干净利落，NeurIPS problem-first 风格 |
+| **Skill 术语** | **不用**作为主叙事，仅在 Related Work 轻触 | 会引发与 EvoSkills/SoK 的不公平比较，定位漂移 |
+| **Self-Evolving** | **不用**这个词，用 "compositional generalization" 或 "no-macro composition" | HMM 是 one-shot composition，不是迭代进化；overclaim 风险 |
+| **Related Work 引用** | 加一句桥接 + 引 SoK/EvoSkills | "Our typed operators and verified macros can be interpreted as a domain-specific skill library for exact probabilistic reasoning" |
 
-### 需要补充的实验（按 ROI 排序）
+### 架构改进（最高优先级论文改动）
 
-| 优先级 | 实验 | 回应的攻击点 | 估计耗时 |
-|:------:|------|-----------|---------|
-| P0 | **多模型 NL Parse** — GPT-4o/5.4/Claude 重跑偏好学习自然语言 Parse | 跨模型一致性 | 1 天 |
-| P1 | **bnlearn 扩样** — 30→100 query/网络 | 测试集太小 | 0.5 天 |
-| P1 | **PAL + self-repair** — 给 PAL 加 3 轮 self-repair | baseline 不公平 | 1 天 |
-| P2 | **DSL ablation** — no macros / no verifier / no self-refine 对比 | gain 来源不清 | 1 天 |
-| P2 | **ProbLog/pgmpy baseline** — 直接调 ProbLog/pgmpy | "直接调库就行" | 1 天 |
-| P3 | **QUITE benchmark** — 30 个真实 BN，1,192 premises | 外部效度 | 2 天 |
-| P3 | **贵模型旁路注入** — gpt-4o / claude-sonnet-4 | Phase 1 遗留 | 1 天 |
+当前问题：Inductor 是黑箱，论文只有 15 行描述。HMM/NB 的 core-ops composition 路径（核心 novelty）完全没有展开。
 
-### 更长远方向
+**要做的改动**：
+1. **Figure 1 加 Inductor zoom-in inset**：展示 recognize → compose/reuse → emit spec 三步
+2. **Section 4.4 展开 3 段**：family recognition + composition path (HMM case study) + route analysis
+3. **加 Route Analysis 表**：每个 family 走的路径（macro reuse vs core-ops composition）
+
+| Family | Matching Macro | Path | Composition |
+|--------|:-------------:|------|-------------|
+| Flight/Hotel | `softmax_pref` | Macro reuse | 直接复用 |
+| TextBandit | `beta_bernoulli` | Macro reuse | 直接复用 |
+| BLInD/bnlearn | `ve_query` | Macro reuse | 直接复用 |
+| **Naive Bayes** | **None** | **Core-ops** | `enumerate → multiply → normalize → expectation → argmax` |
+| **HMM Forward** | **None** | **Core-ops** | `iterated(multiply → marginalize → normalize)` over time |
+
+**Codex 评分预测**：这一改动可将评分从 6.9 → 7.7/10。
+
+---
+
+## 六、待做事项（按优先级排序）
+
+### P0：论文架构改动（无需新实验，最高 ROI）
+
+- [ ] **Inductor 架构展开** — Figure 1 zoom-in + Section 4.4 扩写 + Route Analysis 表
+- [ ] **引用修复** — curtis2025pomdp 作者名、lew2025discipl 会议
+- [ ] **100% claim 限定** — 所有 "100%" 加 "compute stage" 限定
+- [ ] **术语统一** — compile-once vs compile-time、free code vs unconstrained
+- [ ] **Related Work 加 Skill 文献桥接** — 引 SoK: Agentic Skills + EvoSkills，一句话定位
+
+### P1：需要补充的实验
+
+| 实验 | 回应的攻击点 | 估计耗时 |
+|------|-----------|---------|
+| **多模型 NL Parse** — GPT-4o/5.4/Claude 重跑偏好学习 NL Parse | 跨模型一致性 | 1 天 |
+| **bnlearn 扩样** — 30→100 query/网络 | 测试集太小 | 0.5 天 |
+| **PAL + self-repair** — 给 PAL 加 3 轮 self-repair | baseline 不公平 | 1 天 |
+
+### P2：如果时间允许
+
+| 实验 | 回应的攻击点 | 估计耗时 |
+|------|-----------|---------|
+| DSL ablation — no macros / no verifier / no self-refine | gain 来源不清 | 1 天 |
+| ProbLog/pgmpy baseline | "直接调库就行" | 1 天 |
+| QUITE benchmark | 外部效度 | 2 天 |
+
+### 更长远方向（后续论文）
 
 - 连续分布 + 近似推理（MCMC/VI 后端）
-- 自动 DSL 扩展（发现新算子）
+- 自动发现新 primitive（Level 3 skill evolution）
+- 新 macro 蒸馏 + 库持久化 + 跨任务复用（真正的 self-evolving）
 - 与 Agent 框架集成（solver as tool）
-- 跨任务泛化（hotel/webshop）
 
 ---
 
