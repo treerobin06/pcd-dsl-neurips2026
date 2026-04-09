@@ -1,3 +1,7 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # PCD-DSL: Verified Solver Induction for LLM Probabilistic Reasoning
 
 > **最后更新**: 2026-04-09
@@ -186,7 +190,45 @@ meta-skill/
 
 ---
 
-## 七、常用命令
+## 七、架构关键细节
+
+### 数据流
+
+```
+TaskSpec (JSON) ──→ compiler.py ──→ Solver 对象 ──→ solver.solve(instance)
+                    │                                    │
+                    │  根据 inference_family 选择:        │  返回: posterior / recommendation
+                    │  hypothesis_enumeration → softmax_pref()
+                    │  conjugate_update → beta_bernoulli()
+                    │  variable_elimination → ve_query()
+                    │  (无匹配 macro → 纯 core ops 组合)
+```
+
+### 模块依赖关系
+
+- `dsl/` 是纯库，无外部依赖（只用 numpy）
+- `solvers/` 调用 `dsl/` 的 ops 和 macros
+- `taskspec/compiler.py` 根据 TaskSpec JSON 实例化 `solvers/`
+- `inductor/` 调用 OpenRouter API，输出 TaskSpec JSON
+- `verifier/gates.py` 调用 compiler + solvers 做验证
+- `baselines/` 的实验脚本调用 `phase1/` 的 BayesianSidecar 做 gold reference（通过 sys.path）
+- `tests/` 的 API 测试（inductor_e2e, loo_induction, gate3_ablation）需要 `OPENROUTER_API_KEY`
+
+### 测试分层
+
+| 层 | 文件 | 需要 API | 运行时间 |
+|----|------|:--------:|---------|
+| 单元 | test_dsl.py, test_compiler.py | 否 | <1s |
+| 集成 | test_equivalence_full.py | 否 | ~2s（加载数据） |
+| E2E | test_inductor_e2e.py | 是 | ~30s |
+| 泛化 | test_loo_induction.py | 是 | ~2min |
+| 消融 | test_gate3_ablation.py | 是 | ~2min |
+
+本地修改后至少跑前两层确认不破坏。
+
+---
+
+## 常用命令
 
 ```bash
 # 全部本地测试（不需要 API）
@@ -215,7 +257,7 @@ cd meta-skill/paper && bash sync_overleaf.sh push   # 推送
 
 ---
 
-## 八、与父项目的关系
+## 与父项目的关系
 
 本项目（`meta-skill/`）是 `bayes/` 项目的核心子项目：
 
@@ -225,7 +267,7 @@ cd meta-skill/paper && bash sync_overleaf.sh push   # 推送
 
 ---
 
-## 九、飞书文档
+## 飞书文档
 
 - **文档名称**: Bayes 项目概览 — 贝叶斯教学与LLM概率推理
 - **文档 ID**: `AcOIdoE0Gop4mexsificXAWbnNg`
@@ -233,7 +275,7 @@ cd meta-skill/paper && bash sync_overleaf.sh push   # 推送
 
 ---
 
-## 十、编码规范
+## 编码规范
 
 - 注释语言：中文
 - 新代码放在 `meta-skill/` 目录下
