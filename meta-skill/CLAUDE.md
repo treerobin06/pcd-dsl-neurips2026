@@ -139,11 +139,16 @@ LLM 能理解概率问题（Parse ≥95%）、能使用计算结果做决策（D
 
 ### P0：论文架构改动（无需新实验，最高 ROI）
 
-- [ ] **Inductor 架构展开** — Figure 1 zoom-in + Section 4.4 扩写 + Route Analysis 表
-- [ ] **引用修复** — curtis2025pomdp 作者名、lew2025discipl 会议
-- [ ] **100% claim 限定** — 所有 "100%" 加 "compute stage" 限定
+- [x] **Inductor 架构展开** — Section 4.4 扩写为 3 步 + Route Analysis 表 ✅ 2026-04-09
+- [x] **Related Work 加 Skill 文献桥接** — 引 SoK + EvoSkills ✅ 2026-04-09
+- [x] **叙述对齐** — Intro/Contribution/Held-Out/Conclusion 全部呼应 compositional generalization ✅ 2026-04-09
+- [x] **"given a new task" 统一** — 替换所有 "a few examples" ✅ 2026-04-09
+- [ ] **Figure 1 重新生成** — 去掉 PCD 左面板，只保留 compile-once pipeline 全宽图（4K，PaperBanana）
+- [ ] **Figure 1 caption 更新** — 匹配新的纯 pipeline 图
+- [ ] **考虑加 Figure 2(a) PCD 柱状图** — 如果 Figure 1 不再展示 PCD
+- [ ] **引用修复** — 全面检查 references.bib 准确性
 - [ ] **术语统一** — compile-once vs compile-time、free code vs unconstrained
-- [ ] **Related Work 加 Skill 文献桥接** — 引 SoK: Agentic Skills + EvoSkills，一句话定位
+- [ ] **100% claim 限定** — 确认所有 "100%" 都有 "compute stage" 限定
 
 ### P1：需要补充的实验
 
