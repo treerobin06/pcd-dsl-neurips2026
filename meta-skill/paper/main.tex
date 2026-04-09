@@ -110,7 +110,7 @@ The gap widens with problem complexity: GPT-5.4 computes the correct probability
 Computation, not language understanding, is the bottleneck.
 
 LLMs can identify \emph{what} to compute; the difficulty is \emph{how}. We therefore separate these two jobs (Figure~\ref{fig:overview}).
-The LLM examines a few examples and infers the mathematical structure of a task family once. A deterministic compiler then turns that description into an exact solver that requires no further LLM calls.
+Given a new task, the LLM infers the mathematical structure of its task family once. A deterministic compiler then turns that description into an exact solver that requires no further LLM calls.
 This demands more than instance-level parsing: the LLM must recognize the inference family, decide whether to reuse a built-in macro or compose a new workflow from typed primitives, and emit a complete declarative specification. We validate this empirically, including on two held-out families where the inductor must compose novel operation sequences from scratch.
 
 We implement this with a typed probabilistic DSL of seven core operations, a deterministic compiler, and a three-gate verifier.
@@ -267,10 +267,10 @@ These results motivate a system that uses the LLM's strong parsing ability while
 % ============================================================
 
 PCD reveals that computation, not parsing, limits LLM probabilistic reasoning.
-We now ask whether LLMs can use their parsing strength differently: given a few labeled examples, can they infer the mathematical structure of an entire task \emph{family}?
+We now ask whether LLMs can use their parsing strength differently: given a new task, can they infer the mathematical structure of an entire task \emph{family}?
 That is a stronger capability than instance-level parsing, and we test it empirically.
 
-Given a few labeled examples from a task family, an LLM (the ``inductor'') infers the task's mathematical structure, and a compiler turns that specification into an exact solver.
+Given a new task from an inference family, an LLM (the ``inductor'') infers the task's mathematical structure, and a compiler turns that specification into an exact solver.
 Let $F$ denote an inference family with latent task specification $\tau_F \in \mathcal{T}$, where $\mathcal{T}$ is the space of valid specifications (inference family, state structure, observation model, decision rule), and let $p_F$ denote the distribution over problem instances in $F$.
 Given $k$ labeled examples $\mathcal{D}_F^{(k)} = \{(x_i, y_i^*)\}_{i=1}^k$ drawn from $p_F$, the inductor $I_\psi$ (an LLM with parameters $\psi$) infers a specification $\hat{\tau}$, and the deterministic compiler $C$ produces a solver $\hat{S}$:
 \begin{equation}
@@ -341,7 +341,7 @@ Because the compiled solver is deterministic and mathematically equivalent to th
 
 \subsection{Verifier-Guided Inductor}
 
-Given 1--5 task examples, the inductor performs three steps in a single LLM call:
+Given a new task, the inductor performs three steps in a single LLM call:
 \begin{enumerate}[leftmargin=*]
     \item \textbf{Family recognition.} The inductor identifies the inference family from the examples---hypothesis enumeration, conjugate update, variable elimination, or none of the above.
     \item \textbf{Composition decision.} If the recognized family matches a built-in macro, the inductor selects it and fills the corresponding \taskspec{} fields. If no macro matches, the inductor composes a solver workflow from core operations alone. For HMM forward filtering, this produces an iterated \texttt{multiply}$\to$\texttt{marginalize}$\to$\texttt{normalize} loop over a time axis, a sequential pattern absent from all three built-in macros (\S\ref{sec:held_out}).
@@ -1041,7 +1041,7 @@ Compute & Posterior inference & Gold-parsed structure & JSON: recommendation ind
 Decide & Act on result & Gold expected utilities & Integer (option index) \\
 \midrule
 \multicolumn{4}{l}{\textit{Inductor}} \\
-Induce & Infer TaskSpec & 3--5 task examples + schema & JSON: complete TaskSpec \\
+Induce & Infer TaskSpec & Task examples ($k{\geq}1$) + schema & JSON: complete TaskSpec \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1074,7 +1074,7 @@ Output a JSON object: \{"recommendation": <int>\}
 \end{minipage}}
 
 \paragraph{Inductor prompt.}
-The inductor receives 3--5 task examples together with the full \taskspec{} schema definition (Appendix~\ref{app:taskspec}), including the three inference families and their required fields.
+The inductor receives task examples (as few as one; we default to $k{=}3$--5 for robustness) together with the full \taskspec{} schema definition (Appendix~\ref{app:taskspec}), including the three inference families and their required fields.
 It is instructed to analyze sample structure, determine the inference family, identify relevant variables and likelihood model, and emit a complete \taskspec{} JSON.
 The full prompt ($\sim$2\,k tokens, dominated by the schema definition) is included in the supplementary code release.
 
