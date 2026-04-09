@@ -341,8 +341,34 @@ Because the compiled solver is deterministic and mathematically equivalent to th
 
 \subsection{Verifier-Guided Inductor}
 
-The inductor calls GPT-4o-mini once to analyze a small set of task examples, as few as one, and output a \taskspec{}. We default to 3--5 examples for robustness.
-A three-gate verifier then checks the result:
+Given 1--5 task examples, the inductor performs three steps in a single LLM call:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Family recognition.} The inductor identifies the inference family from the examples---hypothesis enumeration, conjugate update, variable elimination, or none of the above.
+    \item \textbf{Composition decision.} If the recognized family matches a built-in macro, the inductor selects it and fills the corresponding \taskspec{} fields. If no macro matches, the inductor composes a solver workflow from core operations alone. For HMM forward filtering, this produces an iterated \texttt{multiply}$\to$\texttt{marginalize}$\to$\texttt{normalize} loop over a time axis, a sequential pattern absent from all three built-in macros (\S\ref{sec:held_out}).
+    \item \textbf{Specification emission.} The inductor outputs a complete \taskspec{} JSON.
+\end{enumerate}
+Table~\ref{tab:routes} shows the composition route for each tested family. Three families reuse macros; two require core-ops-only composition, confirming that the inductor performs genuine compositional synthesis rather than template selection.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Inductor composition routes. Families with a matching macro reuse it; held-out families compose novel workflows from core operations alone.}
+\label{tab:routes}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Family & Macro & Route & Core-ops composition \\
+\midrule
+Flight/Hotel & \texttt{softmax\_pref} & Macro reuse & --- \\
+TextBandit & \texttt{beta\_bernoulli} & Macro reuse & --- \\
+BLInD/bnlearn & \texttt{ve\_query} & Macro reuse & --- \\
+\midrule
+Naive Bayes & \emph{none} & Core-ops & enum $\to$ mult $\to$ norm $\to$ exp $\to$ argmax \\
+HMM Forward & \emph{none} & Core-ops & iter(mult $\to$ marg $\to$ norm) over $t$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A three-gate verifier checks the compiled solver:
 \begin{enumerate}
     \item \textbf{Gate~1, Code Sanity}: The compiled solver executes without errors.
     \item \textbf{Gate~2, Ground Truth}: Solver outputs match known correct answers on held-out validation samples, disjoint from induction examples and the final test set.
@@ -548,7 +574,10 @@ Decide$\mid$GoldPosterior & 100.0\% {\scriptsize [98,100]} & 100.0\% {\scriptsiz
 Table~\ref{tab:held_out} shows two results.
 First, core operations without macros reach 100\% on both held-out families, matching unconstrained code generation. The macros are syntactic sugar, not load-bearing.
 Second, the PCD signature reproduces: Compute is 27--65\% while Parse $\geq$99\% and Decide $\geq$98\%; direct prompting lags at 32--61\%.
-The HMM result is the more telling: the inductor must compose an iterated multiply--marginalize--normalize loop over a time axis, constructing new operation sequences from core primitives rather than selecting from existing macros.
+
+The HMM result demonstrates compositional generalization beyond template selection.
+The inductor receives examples of sequential observations with hidden states, recognizes that no built-in macro applies, and constructs a novel workflow: an iterated \texttt{multiply}$\to$\texttt{marginalize}$\to$\texttt{normalize} loop over a time axis (Table~\ref{tab:routes}).
+This sequential pattern---absent from all three training macros---is assembled from the same seven typed primitives, confirming that the core operations capture reusable structure in discrete probabilistic inference.
 
 \paragraph{Anomalies.}
 GPT-4o-mini achieves only 3\% Parse on NB because it omits absent-symptom entries; on HMM, its Decide drops to 98\% due to near-tied posteriors. Neither anomaly affects core-ops results.
@@ -622,12 +651,12 @@ The systems differ in two respects. First, Logic.py solves constraint satisfacti
 On the probabilistic side, BLInD~\citep{nafar2025blind} uses ProbLog~\citep{deraedt2007problog} for Bayesian network queries and QUITE~\citep{schrader2024quite} benchmarks real-world Bayesian reasoning.
 Compared to BLInD: ProbLog targets BN inference only, while our DSL covers multiple inference families with the same seven typed primitives; BLInD translates each instance into a ProbLog program, whereas our inductor compiles once per family; and the LLM fills a declarative JSON specification rather than writing PPL code, eliminating syntax errors as a failure mode.
 Neither BLInD nor QUITE separates parsing, computation, and decision as distinct failure modes.
-\citet{wong2023wordmodels} translate natural language into probabilistic programs (Church) via LLMs for broad cognitive reasoning across physical, social, and logical domains; however, translation occurs per instance with no verification, and the system does not diagnose where LLMs fail.
 LLM-BI~\citep{huang2025llmbi} also translates natural language into a structured JSON specification for probabilistic modeling, but targets continuous Bayesian inference via MCMC; it automates \emph{model specification} such as choosing priors and likelihoods, not \emph{inference computation} on a given model, and does not compile reusable solvers.
 
-\paragraph{Tool Use and Library Learning.}
+\paragraph{Tool Use, Library Learning, and Agentic Skills.}
 Toolformer~\citep{schick2023toolformer} and ReAct~\citep{yao2023react} equip LLMs with external tool calls at inference time; LILO~\citep{grand2024lilo} and DreamCoder~\citep{ellis2021dreamcoder} learn reusable code libraries through iterative abstraction.
-Our system is more constrained: the LLM emits a declarative specification, not executable code, and a three-gate verifier certifies the compiled solver before deployment.
+Recent work on agentic skills~\citep{jiang2026sok,zhang2026evoskills} frames reusable agent capabilities as structured packages of specifications, scripts, and domain knowledge that agents can compose and extend.
+Our typed operations and verified macros can be viewed as a domain-specific skill library for exact probabilistic reasoning; however, our system is more constrained: the LLM emits a declarative specification rather than executable code, and a three-gate verifier certifies the compiled solver before deployment.
 This moves the trust boundary from ``does the generated code happen to work?''\ to ``does the specification pass verification?''
 Unlike general-purpose PPLs such as WebPPL, Stan, and Pyro, our DSL is intentionally narrow, covering discrete exact inference only.
 
