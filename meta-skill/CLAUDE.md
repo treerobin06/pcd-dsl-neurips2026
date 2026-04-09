@@ -219,9 +219,9 @@ cd meta-skill/paper && bash sync_overleaf.sh push   # 推送
 
 本项目（`meta-skill/`）是 `bayes/` 项目的核心子项目：
 
-- **父项目 `bayes/bayesclaudecode/`**：Phase 1 贝叶斯旁路注入实验，23 种策略消融。提供了 Evidence 1（策略梯度）和 Evidence 6（多模型 baseline）的数据。
-- **共享数据**：`bayes/data/eval/interaction/`（Flight 624 条、Hotel 124 条）
-- **外部数据**：`BLInD/`（BN 推断 900 题）、`TextBandit/`（多臂赌博机）、`DeLLMa/`
+- **Phase 1 `phase1/`**：23 种策略旁路注入消融实验。提供了 Evidence 1（策略梯度）和 Evidence 6（多模型 baseline）的数据。
+- **共享数据**：`data/eval/interaction/`（Flight 624 条、Hotel 124 条）
+- **外部数据**：`data/external/BLInD/`（BN 推断 900 题）、`data/external/TextBandit/`（多臂赌博机）、`data/external/DeLLMa/`
 
 ---
 

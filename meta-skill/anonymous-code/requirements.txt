@@ -1,0 +1,4 @@
+httpx>=0.25.0
+openai>=1.0.0
+numpy>=1.20.0
+pgmpy>=0.1.20  # only for bnlearn experiments

@@ -1,0 +1,21 @@
+{
+  "bn": {
+    "task": "bn",
+    "dataset": "BLInD",
+    "model": "openai/gpt-4o-mini",
+    "n_samples": 100,
+    "accuracy": 0.95,
+    "mae": 0.011439082945833871,
+    "code_execution_rate": 1.0,
+    "correct": 95,
+    "depth_stats": {
+      "2": {
+        "total": 100,
+        "correct": 95,
+        "code_ok": 100
+      }
+    },
+    "error_types": {},
+    "elapsed": 72.97701811790466
+  }
+}

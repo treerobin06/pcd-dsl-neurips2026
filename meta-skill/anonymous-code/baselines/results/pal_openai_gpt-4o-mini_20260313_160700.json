@@ -1,0 +1,15 @@
+{
+  "preference": {
+    "task": "preference",
+    "dataset": "flight",
+    "model": "openai/gpt-4o-mini",
+    "n_samples": 50,
+    "accuracy": 0.18,
+    "code_execution_rate": 0.62,
+    "correct": 9,
+    "error_types": {
+      "exec_failed": 19
+    },
+    "elapsed": 55.00769782066345
+  }
+}

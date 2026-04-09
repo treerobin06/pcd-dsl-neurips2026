@@ -1,0 +1,258 @@
+{
+  "parse_details": {
+    "0": {
+      "correct": true,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": true,
+        "cpt_values": true
+      }
+    },
+    "1": {
+      "correct": true,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": true,
+        "cpt_values": true
+      }
+    },
+    "2": {
+      "correct": true,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": true,
+        "cpt_values": true
+      }
+    },
+    "3": {
+      "correct": true,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": true,
+        "cpt_values": true
+      }
+    },
+    "4": {
+      "correct": false,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": false,
+        "cpt_values": true
+      }
+    },
+    "5": {
+      "correct": false,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": false,
+        "cpt_values": true
+      }
+    },
+    "6": {
+      "correct": true,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": true,
+        "cpt_values": true
+      }
+    },
+    "7": {
+      "correct": true,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": true,
+        "cpt_values": true
+      }
+    },
+    "8": {
+      "correct": true,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": true,
+        "cpt_values": true
+      }
+    },
+    "9": {
+      "correct": false,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": false,
+        "cpt_values": true
+      }
+    }
+  },
+  "compute_details": {
+    "0": {
+      "correct": true,
+      "predicted": 0.39,
+      "gold": 0.38999999999999996,
+      "error_abs": 5.551115123125783e-17,
+      "depth": 2
+    },
+    "1": {
+      "correct": true,
+      "predicted": 0.3947,
+      "gold": 0.39470670568774646,
+      "error_abs": 6.7056877464666265e-06,
+      "depth": 2
+    },
+    "2": {
+      "correct": true,
+      "predicted": 0.68,
+      "gold": 0.68,
+      "error_abs": 0.0,
+      "depth": 2
+    },
+    "3": {
+      "correct": true,
+      "predicted": 0.675,
+      "gold": 0.675557056043214,
+      "error_abs": 0.0005570560432139882,
+      "depth": 2
+    },
+    "4": {
+      "correct": false,
+      "predicted": 0.096,
+      "gold": 0.07650000000000001,
+      "error_abs": 0.01949999999999999,
+      "depth": 2
+    },
+    "5": {
+      "correct": false,
+      "predicted": 0.3478,
+      "gold": 0.046200000000000005,
+      "error_abs": 0.3016,
+      "depth": 2
+    },
+    "6": {
+      "correct": true,
+      "predicted": 0.256,
+      "gold": 0.25622775800711745,
+      "error_abs": 0.0002277580071174401,
+      "depth": 2
+    },
+    "7": {
+      "correct": true,
+      "predicted": 0.2832,
+      "gold": 0.2832,
+      "error_abs": 0.0,
+      "depth": 2
+    },
+    "8": {
+      "correct": true,
+      "predicted": 0.975,
+      "gold": 0.9769736842105263,
+      "error_abs": 0.0019736842105263497,
+      "depth": 2
+    },
+    "9": {
+      "correct": false,
+      "predicted": 0.7569,
+      "gold": 0.657,
+      "error_abs": 0.09989999999999999,
+      "depth": 2
+    }
+  },
+  "decide_details": {
+    "0": {
+      "correct": true,
+      "predicted": 0.39,
+      "gold": 0.38999999999999996,
+      "depth": 2
+    },
+    "1": {
+      "correct": true,
+      "predicted": 0.3947,
+      "gold": 0.39470670568774646,
+      "depth": 2
+    },
+    "2": {
+      "correct": true,
+      "predicted": 0.68,
+      "gold": 0.68,
+      "depth": 2
+    },
+    "3": {
+      "correct": true,
+      "predicted": 0.6756,
+      "gold": 0.675557056043214,
+      "depth": 2
+    },
+    "4": {
+      "correct": true,
+      "predicted": 0.0765,
+      "gold": 0.07650000000000001,
+      "depth": 2
+    },
+    "5": {
+      "correct": true,
+      "predicted": 0.0462,
+      "gold": 0.046200000000000005,
+      "depth": 2
+    },
+    "6": {
+      "correct": true,
+      "predicted": 0.2562,
+      "gold": 0.25622775800711745,
+      "depth": 2
+    },
+    "7": {
+      "correct": true,
+      "predicted": 0.2832,
+      "gold": 0.2832,
+      "depth": 2
+    },
+    "8": {
+      "correct": true,
+      "predicted": 0.977,
+      "gold": 0.9769736842105263,
+      "depth": 2
+    },
+    "9": {
+      "correct": true,
+      "predicted": 0.657,
+      "gold": 0.657,
+      "depth": 2
+    }
+  }
+}

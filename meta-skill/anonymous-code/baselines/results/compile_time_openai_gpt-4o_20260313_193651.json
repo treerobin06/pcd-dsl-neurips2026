@@ -1,0 +1,88 @@
+{
+  "bn": {
+    "task": "bn",
+    "model": "openai/gpt-4o",
+    "method": "compile_time_baseline",
+    "k_examples": 5,
+    "max_repairs": 5,
+    "n_test": 900,
+    "overall_accuracy": 0.0,
+    "depth_stats": {
+      "2": {
+        "total": 100,
+        "correct": 0
+      },
+      "3": {
+        "total": 100,
+        "correct": 0
+      },
+      "4": {
+        "total": 100,
+        "correct": 0
+      },
+      "5": {
+        "total": 100,
+        "correct": 0
+      },
+      "6": {
+        "total": 100,
+        "correct": 0
+      },
+      "7": {
+        "total": 100,
+        "correct": 0
+      },
+      "8": {
+        "total": 100,
+        "correct": 0
+      },
+      "9": {
+        "total": 100,
+        "correct": 0
+      },
+      "10": {
+        "total": 100,
+        "correct": 0
+      }
+    },
+    "repair_history": [
+      {
+        "round": 0,
+        "code_len": 9589,
+        "train_correct": 0,
+        "train_total": 5
+      },
+      {
+        "round": 1,
+        "code_len": 9589,
+        "train_correct": 0,
+        "train_total": 5
+      },
+      {
+        "round": 2,
+        "code_len": 9589,
+        "train_correct": 0,
+        "train_total": 5
+      },
+      {
+        "round": 3,
+        "code_len": 9589,
+        "train_correct": 0,
+        "train_total": 5
+      },
+      {
+        "round": 4,
+        "code_len": 9589,
+        "train_correct": 0,
+        "train_total": 5
+      },
+      {
+        "round": 5,
+        "code_len": 9589,
+        "train_correct": 0,
+        "train_total": 5
+      }
+    ],
+    "final_code_length": 9589
+  }
+}

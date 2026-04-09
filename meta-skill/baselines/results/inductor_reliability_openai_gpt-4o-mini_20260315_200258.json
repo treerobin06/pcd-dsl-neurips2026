@@ -1,0 +1,266 @@
+{
+  "flight": {
+    "family": "flight",
+    "model": "openai/gpt-4o-mini",
+    "n_trials": 20,
+    "temperature": 0.7,
+    "successes": 20,
+    "success_rate": 1.0,
+    "avg_rounds_on_success": 1.0,
+    "avg_elapsed_s": 5.6,
+    "trials": [
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 6.662409543991089,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.899864912033081,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.138326644897461,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.616149663925171,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.321236848831177,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.480556488037109,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.864544868469238,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 6.1810503005981445,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.476525068283081,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.140086650848389,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.4520580768585205,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.9676501750946045,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.148959398269653,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.175211429595947,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 8.524457693099976,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 6.098601818084717,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.306656837463379,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.646578073501587,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.756038427352905,
+        "family": "hypothesis_enumeration"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.515931844711304,
+        "family": "hypothesis_enumeration"
+      }
+    ]
+  },
+  "bn": {
+    "family": "bn",
+    "model": "openai/gpt-4o-mini",
+    "n_trials": 20,
+    "temperature": 0.7,
+    "successes": 20,
+    "success_rate": 1.0,
+    "avg_rounds_on_success": 1.0,
+    "avg_elapsed_s": 4.8,
+    "trials": [
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.86153769493103,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.1404030323028564,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.829784631729126,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.317104816436768,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.986719846725464,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.059055805206299,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.989231586456299,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.700664520263672,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.040426969528198,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.536515235900879,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.282238483428955,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.740502119064331,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.772039175033569,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.4649131298065186,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.606694459915161,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.9569761753082275,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.585970878601074,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.076343297958374,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 4.0467774868011475,
+        "family": "variable_elimination"
+      },
+      {
+        "success": true,
+        "rounds": 1,
+        "elapsed": 5.453402996063232,
+        "family": "variable_elimination"
+      }
+    ]
+  }
+}

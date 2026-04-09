@@ -1,0 +1,64 @@
+{
+  "bn": {
+    "task": "bn",
+    "dataset": "BLInD",
+    "model": "openai/gpt-4o-mini",
+    "n_samples": 900,
+    "accuracy": 0.2644444444444444,
+    "mae": 0.18749484288318985,
+    "code_execution_rate": 0.7544444444444445,
+    "correct": 238,
+    "depth_stats": {
+      "2": {
+        "total": 100,
+        "correct": 93,
+        "code_ok": 100
+      },
+      "3": {
+        "total": 100,
+        "correct": 68,
+        "code_ok": 99
+      },
+      "4": {
+        "total": 100,
+        "correct": 35,
+        "code_ok": 92
+      },
+      "5": {
+        "total": 100,
+        "correct": 19,
+        "code_ok": 79
+      },
+      "6": {
+        "total": 100,
+        "correct": 10,
+        "code_ok": 78
+      },
+      "7": {
+        "total": 100,
+        "correct": 5,
+        "code_ok": 68
+      },
+      "8": {
+        "total": 100,
+        "correct": 5,
+        "code_ok": 55
+      },
+      "9": {
+        "total": 100,
+        "correct": 1,
+        "code_ok": 51
+      },
+      "10": {
+        "total": 100,
+        "correct": 2,
+        "code_ok": 57
+      }
+    },
+    "error_types": {
+      "exec_failed": 221,
+      "parse_failed": 10
+    },
+    "elapsed": 613.6953232288361
+  }
+}

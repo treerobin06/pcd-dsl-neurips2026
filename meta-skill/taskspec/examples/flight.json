@@ -1,0 +1,27 @@
+{
+  "task_name": "flight_preference_learning",
+  "inference_family": "hypothesis_enumeration",
+  "state_structure": {
+    "type": "discrete_hypothesis_space",
+    "hypothesis": "linear_preference_weights",
+    "features": ["departure_time", "duration", "number_of_stops", "price"],
+    "values_per_feature": [-1.0, -0.5, 0.0, 0.5, 1.0],
+    "n_arms": 0,
+    "prior_alpha": 1.0,
+    "prior_beta": 1.0
+  },
+  "observation_model": {
+    "type": "softmax_choice",
+    "temperature": 1.0,
+    "input": "user_choice_among_options"
+  },
+  "decision_rule": {
+    "type": "argmax_expected_utility",
+    "utility": "option_score_under_posterior_mean"
+  },
+  "data_format": {
+    "rounds": "sequential",
+    "options_per_round": 3,
+    "feedback": "chosen_option_index"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "preference": {
+    "task": "preference",
+    "model": "openai/gpt-5.4",
+    "method": "compile_time_baseline",
+    "k_examples": 5,
+    "max_repairs": 5,
+    "n_test": 624,
+    "overall_accuracy": 1.0,
+    "repair_history": [
+      {
+        "round": 0,
+        "code_len": 8124,
+        "train_correct": 5,
+        "train_total": 5
+      }
+    ],
+    "final_code_length": 8124
+  }
+}

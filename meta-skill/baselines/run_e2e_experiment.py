@@ -47,7 +47,7 @@ from openai import AsyncOpenAI
 SCRIPT_DIR = Path(__file__).parent
 PROJECT_ROOT = SCRIPT_DIR.parent.parent
 PROMPT_DIR = SCRIPT_DIR / "prompts"
-FLIGHT_DATA = PROJECT_ROOT / "bayes" / "data" / "eval" / "interaction" / "flight.jsonl"
+FLIGHT_DATA = PROJECT_ROOT / "data" / "eval" / "interaction" / "flight.jsonl"
 RESULTS_DIR = SCRIPT_DIR / "results"
 
 sys.path.insert(0, str(SCRIPT_DIR.parent))

@@ -1,0 +1,30 @@
+{
+  "category": "Agent & Reasoning",
+  "visual_intent": "Pipeline/Flow",
+  "domain_signals": [
+    "PCD Diagnosis",
+    "Compile-Once Pipeline",
+    "LLM Inductor",
+    "TaskSpec (JSON)",
+    "Compiler",
+    "Exact Solver",
+    "3-Gate Verifier",
+    "feedback loop"
+  ],
+  "selected_references": [
+    {
+      "id": "2601.07055v1",
+      "file": "/Users/robin/.agents/skills/paper-banana/assets/references/2601.07055v1.jpg",
+      "caption": "Self-Evolution Feedback Loop in Dr. Zero. The Proposer generates QA Pairs via Reason & Search, which the Solver attempts to solve. Predictions yield Difficulty Rewards and Outcome Rewards. Step 1 updates the Proposer via HRPO; Step 2 updates the Solver via GRPO.",
+      "description": "Self-Evolution Feedback Loop in Dr. Zero. The Proposer generates QA Pairs via Reason & Search, which the Solver attempts to solve. Predictions yield Difficulty Rewards and Outcome Rewards. Step 1 updates the Proposer via HRPO; Step 2 updates the Solver via GRPO.",
+      "reason": "This reference is an excellent match for the 'Agent & Reasoning' category, featuring a multi-step process with a 'Proposer' (analogous to LLM Inductor), a 'Solver', and a crucial 'Feedback Loop' (matching the '3-Gate Verifier'). Its structure aligns with a pipeline that involves intelligent components and iterative refinement."
+    },
+    {
+      "id": "2404.15806v1",
+      "file": "/Users/robin/.agents/skills/paper-banana/assets/references/2404.15806v1.jpg",
+      "caption": "Overview of StructMAE. (a) The overall pipeline: Input Graph -> SBS (Structure-based Scoring) -> SGM (Structure-guided Masking) -> Enc -> Dec -> Reconstructed Nodes. (b) SBS module with pre-defined/learnable scoring and TopK selection. (c) SGM module showing progressive masking across training epochs.",
+      "description": "Overview of StructMAE. (a) The overall pipeline: Input Graph -> SBS (Structure-based Scoring) -> SGM (Structure-guided Masking) -> Enc -> Dec -> Reconstructed Nodes. (b) SBS module with pre-defined/learnable scoring and TopK selection. (c) SGM module showing progressive masking across training epochs.",
+      "reason": "This reference provides a strong visual structural match for the user's request for a 'wide, flat horizontal pipeline diagram' with distinct modules and sub-modules. Its clean, academic style and clear flow are highly relevant for guiding the overall layout and aesthetic, despite being from a different primary category."
+    }
+  ]
+}

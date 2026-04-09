@@ -1,0 +1,30 @@
+{
+  "bn": {
+    "task": "bn",
+    "model": "openai/gpt-4o-mini",
+    "n_samples": 10,
+    "parse_accuracy": 0.7,
+    "parse_field_accuracy": {
+      "variables": 1.0,
+      "edges": 1.0,
+      "query_variable": 1.0,
+      "query_value": 1.0,
+      "evidence": 0.7,
+      "cpt_values": 1.0
+    },
+    "compute_accuracy": 0.7,
+    "compute_depth_stats": {
+      "2": {
+        "total": 10,
+        "correct": 7
+      }
+    },
+    "decide_accuracy": 1.0,
+    "parse_by_depth": {
+      "2": {
+        "total": 10,
+        "correct": 7
+      }
+    }
+  }
+}

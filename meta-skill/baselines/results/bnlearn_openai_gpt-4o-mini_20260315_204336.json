@@ -1,0 +1,20 @@
+{
+  "model": "openai/gpt-4o-mini",
+  "queries_per_net": 30,
+  "networks": [
+    "asia",
+    "child",
+    "insurance",
+    "alarm"
+  ],
+  "pal": {
+    "accuracy": 0.15,
+    "n_correct": 18,
+    "n_total": 120,
+    "code_success_rate": 0.325
+  },
+  "n_test_asia": 30,
+  "n_test_child": 30,
+  "n_test_insurance": 30,
+  "n_test_alarm": 30
+}

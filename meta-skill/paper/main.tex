@@ -622,6 +622,7 @@ The systems differ in two respects. First, Logic.py solves constraint satisfacti
 On the probabilistic side, BLInD~\citep{nafar2025blind} uses ProbLog~\citep{deraedt2007problog} for Bayesian network queries and QUITE~\citep{schrader2024quite} benchmarks real-world Bayesian reasoning.
 Compared to BLInD: ProbLog targets BN inference only, while our DSL covers multiple inference families with the same seven typed primitives; BLInD translates each instance into a ProbLog program, whereas our inductor compiles once per family; and the LLM fills a declarative JSON specification rather than writing PPL code, eliminating syntax errors as a failure mode.
 Neither BLInD nor QUITE separates parsing, computation, and decision as distinct failure modes.
+\citet{wong2023wordmodels} translate natural language into probabilistic programs (Church) via LLMs for broad cognitive reasoning across physical, social, and logical domains; however, translation occurs per instance with no verification, and the system does not diagnose where LLMs fail.
 LLM-BI~\citep{huang2025llmbi} also translates natural language into a structured JSON specification for probabilistic modeling, but targets continuous Bayesian inference via MCMC; it automates \emph{model specification} such as choosing priors and likelihoods, not \emph{inference computation} on a given model, and does not compile reusable solvers.
 
 \paragraph{Tool Use and Library Learning.}

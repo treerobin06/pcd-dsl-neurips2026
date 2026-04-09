@@ -1,0 +1,28 @@
+{
+  "model": "openai/gpt-4o-mini",
+  "n_problems": 105,
+  "mode": "all",
+  "family": "hmm",
+  "direct": {
+    "accuracy": 0.32,
+    "n_correct": 32,
+    "n_total": 100
+  },
+  "compile_free": {
+    "accuracy": 1.0,
+    "n_correct": 100,
+    "n_total": 100,
+    "failed": false
+  },
+  "compile_core_ops": {
+    "accuracy": 1.0,
+    "n_correct": 100,
+    "n_total": 100,
+    "failed": false
+  },
+  "pcd": {
+    "parse_accuracy": 1.0,
+    "compute_accuracy": 0.27,
+    "decide_accuracy": 0.98
+  }
+}

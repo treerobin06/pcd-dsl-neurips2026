@@ -1,8 +1,18 @@
-# 数据文件（太大）
-bayes/data/
-BLInD/
-TextBandit/
-server-experiments/
+# 数据文件（太大，本地保留但不提交）
+data/
+
+# Phase 1 实验代码（本地保留但不提交）
+phase1/
+
+# 外部数据集
+data/external/
+
+# 不跟踪的目录
+archive/
+docs/
+compliance/
+thesis/
+.obsidian/
 
 # Python
 __pycache__/
@@ -11,19 +21,19 @@ __pycache__/
 .venv/
 venv/
 
-# 实验检查点
-bayesclaudecode/sidecar_checkpoints/
-
-# 编译产物
-meta-skill/paper/*.aux
-meta-skill/paper/*.bbl
-meta-skill/paper/*.blg
-meta-skill/paper/*.log
-meta-skill/paper/*.out
-meta-skill/paper/*.pdf
-meta-skill/paper/*.synctex.gz
+# LaTeX 编译产物
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
 meta-skill/paper/overleaf-sync/
+meta-skill/paper/*.pdf
 
 # 系统文件
 .DS_Store
 *.swp
+*.env

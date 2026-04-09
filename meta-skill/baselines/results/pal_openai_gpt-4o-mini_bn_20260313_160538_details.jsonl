@@ -1,0 +1,10 @@
+{"gold": 0.38999999999999996, "predicted": 0.39, "error_abs": 5.551115123125783e-17, "correct": true, "error": null, "code_ok": true}
+{"gold": 0.39470670568774646, "predicted": 0.025194045043898716, "error_abs": 0.36951266064384775, "correct": false, "error": null, "code_ok": true}
+{"gold": 0.68, "predicted": 0.68, "error_abs": 0.0, "correct": true, "error": null, "code_ok": true}
+{"gold": 0.675557056043214, "predicted": 0.675557056043214, "error_abs": 0.0, "correct": true, "error": null, "code_ok": true}
+{"gold": 0.07650000000000001, "predicted": 0.0765, "error_abs": 1.3877787807814457e-17, "correct": true, "error": null, "code_ok": true}
+{"gold": 0.046200000000000005, "predicted": 0.0462, "error_abs": 6.938893903907228e-18, "correct": true, "error": null, "code_ok": true}
+{"gold": 0.25622775800711745, "predicted": 0.25622775800711745, "error_abs": 0.0, "correct": true, "error": null, "code_ok": true}
+{"gold": 0.2832, "predicted": 0.2832, "error_abs": 0.0, "correct": true, "error": null, "code_ok": true}
+{"gold": 0.9769736842105263, "predicted": 0.9769736842105263, "error_abs": 0.0, "correct": true, "error": null, "code_ok": true}
+{"gold": 0.657, "predicted": 0.657, "error_abs": 0.0, "correct": true, "error": null, "code_ok": true}

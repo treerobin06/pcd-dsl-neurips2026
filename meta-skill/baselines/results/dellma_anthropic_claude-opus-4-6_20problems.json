@@ -1,0 +1,17 @@
+{
+  "model": "anthropic/claude-opus-4-6",
+  "n_problems": 20,
+  "direct": {
+    "correct": 8,
+    "total": 20,
+    "accuracy": 40.0
+  },
+  "compile": {
+    "correct": 3,
+    "total": 17,
+    "accuracy": 17.647058823529413,
+    "errors": 0,
+    "code": "\ndef predict_best_fruit(fruits, stats_2021):\n    \"\"\"\n    Predict which fruit will have the highest utility (yield ¡Á price) in 2022\n    based on 2021 statistics.\n    \n    Args:\n        fruits: list of fruit names\n        stats_2021: dict with format {\"fruit_name\": {\"yield_val\": float, \"yield_unit\": str, \n                    \"price_val\": float, \"price_unit\": str}, ...}\n    \n    Returns:\n        Index (0-based) of the fruit predicted to have highest utility in 2022\n    \"\"\"\n    best_index = 0\n    be"
+  },
+  "random_baseline": 29.13095238095239
+}

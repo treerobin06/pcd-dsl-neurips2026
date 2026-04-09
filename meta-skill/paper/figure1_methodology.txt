@@ -1,0 +1,17 @@
+A wide, flat horizontal pipeline diagram (16:9 aspect ratio) with minimal text, clean academic NeurIPS style.
+
+TWO SECTIONS side by side:
+
+LEFT - "PCD Diagnosis" (warm/red background):
+Three boxes arranged horizontally with arrows between them:
+- Parse ✓ (82-100%) → [BOTTLENECK arrow, bold red] → Compute ✗ (22-78%, red border, emphasized) → Decide ✓ (100%)
+Minimal text. Icons speak louder than words.
+
+RIGHT - "Compile-Once Pipeline" (cool/blue background):
+Five boxes in a horizontal flow:
+- 1 Example → LLM Inductor (GPT-4o-mini, $0.008) → TaskSpec (JSON) → Compiler (7 ops) → Exact Solver (100%, green highlight, no LLM at test time)
+Below the Compiler-TaskSpec: a small "3-Gate Verifier" box with a feedback arrow back to TaskSpec.
+
+CONNECTING: A dashed "motivates" arrow from the Compute bottleneck (left) to the pipeline (right).
+
+STYLE: Rounded rectangles, sans-serif font, subtle pastel fills, very little text inside boxes — just the name and one key number. No long descriptions. Professional, elegant, publication-ready.

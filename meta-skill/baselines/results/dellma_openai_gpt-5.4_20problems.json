@@ -1,0 +1,17 @@
+{
+  "model": "openai/gpt-5.4",
+  "n_problems": 20,
+  "direct": {
+    "correct": 8,
+    "total": 20,
+    "accuracy": 40.0
+  },
+  "compile": {
+    "correct": 5,
+    "total": 17,
+    "accuracy": 29.411764705882355,
+    "errors": 0,
+    "code": "def predict_best_fruit(fruits, stats_2021):\n    def normalize_unit(unit):\n        if unit is None:\n            return \"\"\n        return str(unit).strip().upper()\n\n    best_index = 0\n    best_utility = float(\"-inf\")\n\n    for i, fruit in enumerate(fruits):\n        if fruit not in stats_2021:\n            utility = float(\"-inf\")\n        else:\n            data = stats_2021[fruit]\n            yield_val = float(data.get(\"yield_val\", 0))\n            price_val = float(data.get(\"price_val\", 0))\n          "
+  },
+  "random_baseline": 29.13095238095239
+}

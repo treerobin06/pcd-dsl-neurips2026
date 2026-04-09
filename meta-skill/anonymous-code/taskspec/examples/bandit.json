@@ -1,0 +1,27 @@
+{
+  "task_name": "multi_armed_bandit",
+  "inference_family": "conjugate_update",
+  "state_structure": {
+    "type": "beta_conjugate",
+    "hypothesis": "",
+    "features": [],
+    "values_per_feature": [],
+    "n_arms": 5,
+    "prior_alpha": 1.0,
+    "prior_beta": 1.0
+  },
+  "observation_model": {
+    "type": "bernoulli_reward",
+    "temperature": 1.0,
+    "input": "arm_selection_binary_outcome"
+  },
+  "decision_rule": {
+    "type": "argmax_posterior_mean",
+    "utility": "posterior_mean_reward_rate"
+  },
+  "data_format": {
+    "rounds": "sequential",
+    "options_per_round": 5,
+    "feedback": "binary_reward"
+  }
+}

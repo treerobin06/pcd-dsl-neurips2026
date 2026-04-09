@@ -1,0 +1,18 @@
+{
+  "preference": {
+    "task": "preference",
+    "model": "google/gemini-3.1-pro",
+    "n_samples": 200,
+    "parse_accuracy": 0.0,
+    "structural_parse_accuracy": 0.0,
+    "parse_field_accuracy": {
+      "n_features": 0.0,
+      "feature_names": 0.0,
+      "preference_values": 0.0,
+      "observations_choice": 0.0,
+      "current_options": 0.0
+    },
+    "compute_accuracy": 0.0,
+    "decide_accuracy": 0.0
+  }
+}

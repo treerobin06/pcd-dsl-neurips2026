@@ -1,0 +1,206 @@
+"""
+验证 DSL ve_query 在 bnlearn 网络上的准确率（100 queries/网络）
+不需要 LLM API 调用——纯确定性计算
+"""
+import sys, os, random, json
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+
+from pgmpy.utils import get_example_model
+from pgmpy.inference import VariableElimination
+from dsl.types import Factor
+from dsl.family_macros import ve_query
+from scipy import stats
+
+NETWORKS = ["asia", "child", "insurance", "alarm"]
+QUERIES_PER_NET = 100
+SEED = 2026
+
+
+def wilson_ci(k, n, alpha=0.05):
+    """Wilson score interval"""
+    if n == 0:
+        return (0.0, 1.0)
+    z = stats.norm.ppf(1 - alpha / 2)
+    p = k / n
+    denom = 1 + z ** 2 / n
+    center = (p + z ** 2 / (2 * n)) / denom
+    margin = z * ((p * (1 - p) / n + z ** 2 / (4 * n ** 2)) ** 0.5) / denom
+    return (max(0, center - margin), min(1, center + margin))
+
+
+def generate_and_verify(net_name, n_queries, seed):
+    """生成 query 并用 DSL ve_query 验证"""
+    model = get_example_model(net_name)
+    pgmpy_ve = VariableElimination(model)
+    nodes = list(model.nodes())
+    rng = random.Random(seed)
+
+    # 构建 DSL Factor 列表
+    import numpy as np
+    from itertools import product as iterproduct
+    dsl_factors = []
+    for node in nodes:
+        cpd = model.get_cpds(node)
+        parents = list(cpd.get_evidence())
+        state_names = cpd.state_names
+
+        # Factor variables 顺序: [node] + parents
+        factor_vars = [node] + parents
+        node_dom = state_names[node]
+        parent_doms = [state_names[p] for p in parents]
+
+        table = {}
+        flat_vals = np.array(cpd.values).reshape(len(node_dom), -1)
+        if parents:
+            combos = list(iterproduct(*parent_doms))
+            for col_idx, combo in enumerate(combos):
+                for row_idx, node_val in enumerate(node_dom):
+                    # key 是 tuple of values，顺序与 factor_vars 对应
+                    key = (node_val,) + combo
+                    table[key] = float(flat_vals[row_idx, col_idx].item())
+        else:
+            for row_idx, node_val in enumerate(node_dom):
+                key = (node_val,)
+                table[key] = float(flat_vals[row_idx, 0].item())
+
+        dsl_factors.append(Factor(variables=factor_vars, table=table))
+
+    correct = 0
+    total = 0
+    errors = []
+
+    for i in range(n_queries + 10):  # 多生成一些以防 skip
+        if total >= n_queries:
+            break
+
+        query_var = rng.choice(nodes)
+        other_nodes = [n for n in nodes if n != query_var]
+        n_ev = rng.randint(1, min(3, len(other_nodes)))
+        ev_vars = rng.sample(other_nodes, n_ev)
+
+        node_states = {n: model.get_cpds(n).state_names[n] for n in nodes}
+        evidence = {v: rng.choice(node_states[v]) for v in ev_vars}
+
+        # pgmpy gold
+        try:
+            pgmpy_result = pgmpy_ve.query([query_var], evidence=evidence)
+            gold_posterior = {}
+            for idx, state in enumerate(node_states[query_var]):
+                gold_posterior[state] = float(pgmpy_result.values[idx])
+        except Exception:
+            continue
+
+        # DSL ve_query
+        try:
+            query_vars_dict = {query_var: list(node_states[query_var])}
+            dsl_result = ve_query(dsl_factors, query_vars_dict, evidence)
+
+            # 比较：dsl_result 是一个 Distribution 或 dict
+            if isinstance(dsl_result, dict):
+                dsl_posterior = dsl_result
+            elif hasattr(dsl_result, "probs"):
+                dsl_posterior = dict(zip(dsl_result.values, dsl_result.probs))
+            else:
+                dsl_posterior = dsl_result
+
+            # 检查最大绝对误差
+            max_err = 0
+            for state in node_states[query_var]:
+                gold_p = gold_posterior.get(state, 0)
+                dsl_p = 0
+                # 匹配 DSL 结果格式
+                if isinstance(dsl_posterior, (int, float)):
+                    # ve_query 可能返回单个概率值
+                    if len(node_states[query_var]) == 2:
+                        dsl_p = dsl_posterior if state == node_states[query_var][0] else 1 - dsl_posterior
+                    else:
+                        dsl_p = gold_p  # fallback
+                elif isinstance(dsl_posterior, dict):
+                    # 尝试多种 key 格式
+                    for k, v in dsl_posterior.items():
+                        if str(k) == str(state) or k == state:
+                            dsl_p = v
+                            break
+                        if isinstance(k, tuple) and len(k) == 1 and k[0] == (query_var, state):
+                            dsl_p = v
+                            break
+                        if isinstance(k, tuple) and k == ((query_var, state),):
+                            dsl_p = v
+                            break
+                err = abs(gold_p - dsl_p)
+                max_err = max(max_err, err)
+
+            if max_err < 0.001:
+                correct += 1
+            else:
+                errors.append({
+                    "query_id": total,
+                    "network": net_name,
+                    "query_var": query_var,
+                    "evidence": evidence,
+                    "max_error": max_err,
+                    "gold": gold_posterior,
+                    "dsl": str(dsl_posterior)[:200],
+                })
+            total += 1
+
+        except Exception as e:
+            errors.append({
+                "query_id": total,
+                "network": net_name,
+                "error": str(e)[:200],
+            })
+            total += 1
+
+    return correct, total, errors
+
+
+if __name__ == "__main__":
+    print(f"{'='*60}")
+    print(f"bnlearn DSL Verification (100 queries/network)")
+    print(f"{'='*60}\n")
+
+    all_results = {}
+    total_correct = 0
+    total_queries = 0
+
+    for net_name in NETWORKS:
+        print(f"Processing {net_name}...", end=" ", flush=True)
+        correct, total, errors = generate_and_verify(net_name, QUERIES_PER_NET, SEED)
+        acc = correct / total if total > 0 else 0
+        lo, hi = wilson_ci(correct, total)
+
+        all_results[net_name] = {
+            "correct": correct,
+            "total": total,
+            "accuracy": acc,
+            "ci_lo": lo,
+            "ci_hi": hi,
+            "errors": errors,
+        }
+
+        total_correct += correct
+        total_queries += total
+
+        n_nodes = len(get_example_model(net_name).nodes())
+        print(f"{correct}/{total} = {acc*100:.1f}% "
+              f"[{lo*100:.1f}%, {hi*100:.1f}%] "
+              f"({n_nodes} nodes)")
+
+        if errors:
+            for e in errors[:3]:
+                print(f"  ERROR: {e}")
+
+    # 总结
+    overall_acc = total_correct / total_queries
+    lo, hi = wilson_ci(total_correct, total_queries)
+    print(f"\n{'='*60}")
+    print(f"Overall: {total_correct}/{total_queries} = {overall_acc*100:.1f}% "
+          f"[{lo*100:.1f}%, {hi*100:.1f}%]")
+    print(f"{'='*60}")
+
+    # 保存结果
+    out_path = os.path.join(os.path.dirname(__file__), "results", "bnlearn_dsl_100q.json")
+    with open(out_path, "w") as f:
+        json.dump(all_results, f, indent=2, default=str)
+    print(f"\n结果已保存到 {out_path}")

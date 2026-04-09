@@ -1,0 +1,4156 @@
+{
+  "parse_details": [
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": false,
+      "detail": "no_json",
+      "scores": {}
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    },
+    {
+      "correct": true,
+      "structural_correct": true,
+      "detail": "ok",
+      "scores": {
+        "n_features": true,
+        "feature_names": true,
+        "preference_values": true,
+        "observations_choice": true,
+        "current_options": true
+      }
+    }
+  ],
+  "compute_details": [
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 2,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 0,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 0
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": false,
+      "predicted": 1,
+      "gold": 2
+    }
+  ],
+  "decide_details": [
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 0,
+      "gold": 0
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 1,
+      "gold": 1
+    },
+    {
+      "correct": true,
+      "predicted": 2,
+      "gold": 2
+    }
+  ]
+}

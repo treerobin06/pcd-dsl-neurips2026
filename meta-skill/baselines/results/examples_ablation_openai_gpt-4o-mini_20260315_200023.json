@@ -1,0 +1,178 @@
+{
+  "flight": {
+    "family": "flight",
+    "model": "openai/gpt-4o-mini",
+    "k_values": [
+      1,
+      2,
+      3,
+      5,
+      10
+    ],
+    "results": {
+      "1": {
+        "k": 1,
+        "n_repeats": 1,
+        "successes": 1,
+        "success_rate": 1.0,
+        "trials": [
+          {
+            "success": true,
+            "rounds": 1,
+            "elapsed": 5.227751970291138,
+            "family_detected": "hypothesis_enumeration",
+            "reason": null
+          }
+        ]
+      },
+      "2": {
+        "k": 2,
+        "n_repeats": 1,
+        "successes": 1,
+        "success_rate": 1.0,
+        "trials": [
+          {
+            "success": true,
+            "rounds": 1,
+            "elapsed": 4.782883644104004,
+            "family_detected": "hypothesis_enumeration",
+            "reason": null
+          }
+        ]
+      },
+      "3": {
+        "k": 3,
+        "n_repeats": 1,
+        "successes": 1,
+        "success_rate": 1.0,
+        "trials": [
+          {
+            "success": true,
+            "rounds": 1,
+            "elapsed": 4.300439834594727,
+            "family_detected": "hypothesis_enumeration",
+            "reason": null
+          }
+        ]
+      },
+      "5": {
+        "k": 5,
+        "n_repeats": 1,
+        "successes": 1,
+        "success_rate": 1.0,
+        "trials": [
+          {
+            "success": true,
+            "rounds": 1,
+            "elapsed": 4.459476709365845,
+            "family_detected": "hypothesis_enumeration",
+            "reason": null
+          }
+        ]
+      },
+      "10": {
+        "k": 10,
+        "n_repeats": 1,
+        "successes": 1,
+        "success_rate": 1.0,
+        "trials": [
+          {
+            "success": true,
+            "rounds": 1,
+            "elapsed": 5.596176624298096,
+            "family_detected": "hypothesis_enumeration",
+            "reason": null
+          }
+        ]
+      }
+    }
+  },
+  "bn": {
+    "family": "bn",
+    "model": "openai/gpt-4o-mini",
+    "k_values": [
+      1,
+      2,
+      3,
+      5,
+      10
+    ],
+    "results": {
+      "1": {
+        "k": 1,
+        "n_repeats": 1,
+        "successes": 1,
+        "success_rate": 1.0,
+        "trials": [
+          {
+            "success": true,
+            "rounds": 1,
+            "elapsed": 4.000358581542969,
+            "family_detected": "variable_elimination",
+            "reason": null
+          }
+        ]
+      },
+      "2": {
+        "k": 2,
+        "n_repeats": 1,
+        "successes": 1,
+        "success_rate": 1.0,
+        "trials": [
+          {
+            "success": true,
+            "rounds": 1,
+            "elapsed": 4.592428922653198,
+            "family_detected": "variable_elimination",
+            "reason": null
+          }
+        ]
+      },
+      "3": {
+        "k": 3,
+        "n_repeats": 1,
+        "successes": 1,
+        "success_rate": 1.0,
+        "trials": [
+          {
+            "success": true,
+            "rounds": 1,
+            "elapsed": 4.547202825546265,
+            "family_detected": "variable_elimination",
+            "reason": null
+          }
+        ]
+      },
+      "5": {
+        "k": 5,
+        "n_repeats": 1,
+        "successes": 1,
+        "success_rate": 1.0,
+        "trials": [
+          {
+            "success": true,
+            "rounds": 1,
+            "elapsed": 4.5892298221588135,
+            "family_detected": "variable_elimination",
+            "reason": null
+          }
+        ]
+      },
+      "10": {
+        "k": 10,
+        "n_repeats": 1,
+        "successes": 1,
+        "success_rate": 1.0,
+        "trials": [
+          {
+            "success": true,
+            "rounds": 1,
+            "elapsed": 4.355368614196777,
+            "family_detected": "variable_elimination",
+            "reason": null
+          }
+        ]
+      }
+    }
+  }
+}

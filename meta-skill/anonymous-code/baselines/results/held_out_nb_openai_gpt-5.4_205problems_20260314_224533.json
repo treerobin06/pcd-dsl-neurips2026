@@ -1,0 +1,27 @@
+{
+  "model": "openai/gpt-5.4",
+  "n_problems": 205,
+  "mode": "all",
+  "direct": {
+    "accuracy": 0.685,
+    "n_correct": 137,
+    "n_total": 200
+  },
+  "compile_free": {
+    "accuracy": 1.0,
+    "n_correct": 200,
+    "n_total": 200,
+    "failed": false
+  },
+  "compile_core_ops": {
+    "accuracy": 1.0,
+    "n_correct": 200,
+    "n_total": 200,
+    "failed": false
+  },
+  "pcd": {
+    "parse_accuracy": 1.0,
+    "compute_accuracy": 0.645,
+    "decide_accuracy": 1.0
+  }
+}

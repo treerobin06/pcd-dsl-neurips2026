@@ -44,6 +44,7 @@
 - [2026-03-28 19:05] push | 替换 figure1_overview.png: 使用 PaperBanana 生成的高质量架构图（Gemini 3.1 Pro + Flash Image）
 - [2026-03-29 17:30] push | Novelty check 修改8项: Abstract加family-level对比, PCD加可推广声明, Related Work加Logic.py详细对比+LLM-BI/PIPS/DisCIPL/Curtis引用, Contributions重写(per-instance对比+方法论定位), Limitations加scope表格, bib加4条
 - [2026-03-31 20:34] push | 去AI味(L608-1267): Related Work/Limitations/Conclusion/Appendix共~23处修改, 消除forced三项列举/em dash过度使用/双括号注释/passive voice/overexplanation, 拆长句制造节奏变化
+- [2026-03-31 20:45] push | 括号清理+academic-writing-refiner: ~25处括号改为逗号/内联从句/独立句, em dash仅剩2处(合理appositive), AI标志词0处
 
 ## 论文概况
 

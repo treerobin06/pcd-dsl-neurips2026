@@ -1,0 +1,35 @@
+{
+  "model": "openai/gpt-5.4",
+  "queries_per_net": 30,
+  "networks": [
+    "asia",
+    "child",
+    "insurance",
+    "alarm"
+  ],
+  "direct": {
+    "accuracy": 0.6083333333333333,
+    "n_correct": 73,
+    "n_total": 120
+  },
+  "compile_free": {
+    "accuracy": 0.6083333333333333,
+    "n_correct": 73,
+    "n_total": 120
+  },
+  "compile_core_ops": {
+    "accuracy": 0,
+    "n_correct": 0,
+    "n_total": 120,
+    "failed": true
+  },
+  "pcd": {
+    "compute_accuracy": 0.0,
+    "decide_accuracy": 0.9916666666666667,
+    "n_total": 120
+  },
+  "n_test_asia": 30,
+  "n_test_child": 30,
+  "n_test_insurance": 30,
+  "n_test_alarm": 30
+}
