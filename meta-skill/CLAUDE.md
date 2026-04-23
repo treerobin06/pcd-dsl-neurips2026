@@ -238,6 +238,41 @@ LLM 能理解概率问题（Parse ≥95%）、能使用计算结果做决策（D
 
 > **"claim-first, artifact-later 工作方式是核心病根。没有 raw 就没有论文句子；没有统一 metric 就没有比较表；没有 clean split 就没有 generalization claim。"**
 
+#### 🎯 Tree 2026-04-24 指导原则（已授权）
+
+> **"如果不影响结论的小数字都可以改。"**
+
+含义：保 contribution + 小数字修成 raw 真实值 + overclaim 加 scope 限定。**不是**"降 scope 重写整个 framing"（Codex option 2 太保守），也**不是**"硬保原版"（风险过高）。
+
+**Tree 已授权可直接改（不需再确认）**：
+
+✅ **档 1 — 细节数字修正**（1 天工作量，纯找替换）:
+- L602 "two parse failures" → "one parse failure"（raw `parse_success_rate=0.9984` 624 中 1 个）
+- L339 "1,200 instances" → "1,150 instances"
+- 成本 $0.008/14× vs $0.001/60× 统一到一套（带 token trace 后决定哪套）
+- bib 作者修正 S6 S7（`lew2025discipl`、`jiang2026sok`、`schick2023toolformer`）
+- CI 政策统一：BN 用 Wilson、bootstrap 仅用于 E2E、全文注 1 处说明
+
+⚠️ **档 2 — overclaim 降调**（1-2 天，改 framing 不改 contribution）:
+- Abstract + Intro "Parse ≥95%" → "primary families 82-100%; structured NB-family 3%"
+- Abstract "Our DSL bnlearn 100%" → "verified deterministic backend reproduces exact VE posteriors (max_err < 1e-10 on hand-crafted factors); end-to-end LLM inductor→compile on bnlearn remains open"
+- "Compositional generalization" → "core-ops-constrained codegen on synthetic NB/HMM tasks"
+- "compile-once solver induction" → 标题保留，但 Contribution #1 改成 "family-level TaskSpec induction with verified deterministic backend"
+- 100% claim 全局加 "on the compute stage, conditional on correct parsing"
+
+❌ **档 3 — 仍需 Tree 单独拍板**（影响结论存否，不在自动授权范围）:
+- figure 硬编码 `our_dsl=[100,100,100,100]` 删除 / 改成真数字 / 撤 Figure 3a → 这条**改了等于撤 bnlearn 主 claim**
+- Inductor prompt scrub `reward_fn/answers/correct_diagnosis` → 改了重跑可能 LOO/E2E/reliability 数字**大幅掉点**
+- LOO `samples[:k]` 拆独立 split → 同上，可能数字变脸
+- Gate 2 `passed = True` 加阈值 → "6/6" 可能变成 "X/6"
+
+→ 档 3 每一条都涉及 headline 数字可能变化，**Tree 要在"能接受多少头条数字下跌"的基础上决定**
+
+**执行顺序**（Tree 回来拍板档 3 之前可并行做）:
+1. 档 1 全部改（任何时候都能做，不依赖其他）
+2. 档 2 降调（改 main.tex framing，不动代码）
+3. 档 3 逐条 Tree 决定 → 可能触发重跑实验
+
 #### 待决策时需看的材料
 - `paper/audits/2026-04-23-codex-review.md` — 完整 503 行（3 轮 verbatim + P0-P5 优先级表）
 - `paper/audits/2026-04-23-master-plan.md` — 原计划
