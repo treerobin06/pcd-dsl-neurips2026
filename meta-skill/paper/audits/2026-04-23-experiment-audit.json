@@ -1,0 +1,67 @@
+{
+  "date": "2026-04-23",
+  "auditor": "gpt-5.4-xhigh",
+  "executor": "claude-opus-4-7",
+  "project": "/Users/robin/Desktop/taoyao/bayes/meta-skill/",
+  "paper": "paper/main.tex",
+  "overall_verdict": "fail",
+  "integrity_status": "fail",
+  "severity": "HIGH",
+  "checks": {
+    "fake_gt_provenance": {
+      "status": "fail",
+      "details": "Gate 3 gold_solver in LOO and Gate3-off tests is the same implementation class (PreferenceSolver/BNReferenceSolver) as the compiler output. NB/HMM gold is deterministic hand-written closed-form. test_equivalence_full.py compares two independent in-repo implementations (BLInD 900/900, Flight 250/250 pass locally) but does not cover TextBandit 50/50 claim."
+    },
+    "se_optimism": {
+      "status": "warn",
+      "details": "CI methods inconsistent (Clopper-Pearson in compute_ci.py, bootstrap in run_e2e_experiment.py, Wilson in verify_bnlearn_dsl_100.py). Paper text mixes 'Wilson'/'Wilson/Clopper-Pearson'. n=6 LOO point estimate only; 95% exact CI lower bound ~54.1% (CP) or ~61.0% (Wilson) not disclosed."
+    },
+    "nested_leakage": {
+      "status": "fail",
+      "details": "LOO test induction set and verification set both use samples[:k] — overlapping. Inductor prompt json.dumps full sample including reward_fn/answers/correct_diagnosis fields. Prompt template explicitly instructs LLM to read reward_fn. Gate 2 preference has passed=True (no threshold). NB/HMM does not go through TaskSpec/compiler (valid_families set excludes them) — paper claims are mechanism-wise incorrect."
+    },
+    "metric_mixing": {
+      "status": "fail",
+      "details": "Cross-baseline 'correct' targets inconsistent: compile-time/PCD uses gold_solver_rec, PAL uses user_idx, E2E uses gold_user_choice AND gold_solver_match (two metrics). Paper compares these as if same denominator. verify_bnlearn_dsl_100.py contains dsl_p = gold_p fallback for multi-valued nodes, auto-satisfying 100%. bnlearn_openai_gpt-5.4_*211432.json only has PAL results — no 'DSL 100%' raw artifact found."
+    }
+  },
+  "claims": [
+    {"id": "L82_gpt4omini_100_compute", "main_tex_line": 82, "impact": "needs_rerun", "type": "C"},
+    {"id": "L84_nbhmm_coreops_100", "main_tex_line": 84, "impact": "needs_qualifier", "type": "B", "note": "mechanism mismatch: not inductor compositional generalization but independent codegen baseline"},
+    {"id": "L108_decide_100_six_models", "main_tex_line": 108, "impact": "needs_qualifier", "type": "B", "note": "decide stage trivial"},
+    {"id": "L118_37node_bn_100", "main_tex_line": 118, "impact": "needs_rerun", "type": "C"},
+    {"id": "L188_198_table1_decide_100_dsl_compute_100", "main_tex_line": 188, "impact": "mixed", "type": "B+C"},
+    {"id": "L254_all_depths_100_fig2", "main_tex_line": 254, "impact": "supported", "type": "A", "note": "qualify to 'implemented VE-compiled BLInD solver'"},
+    {"id": "L340_100_accuracy_exact_computation", "main_tex_line": 340, "impact": "needs_qualifier", "type": "B"},
+    {"id": "L407_6of6_loo_first_attempt_100_match", "main_tex_line": 407, "impact": "needs_rerun", "type": "C", "note": "same-solver self-reference + overlapping induction/verify + prompt answer leakage"},
+    {"id": "L444_four_networks_100", "main_tex_line": 444, "impact": "needs_rerun", "type": "C"},
+    {"id": "L588_gate3off_6of6_100", "main_tex_line": 588, "impact": "needs_rerun", "type": "C", "note": "ablation invalidated by vacuous Gate2 preference + same-solver gold"},
+    {"id": "L592_dsl_0008_100", "main_tex_line": 592, "impact": "needs_qualifier", "type": "B", "note": "token-cost estimate not API bill"},
+    {"id": "L602_feature_extraction_999_100", "main_tex_line": 602, "impact": "needs_qualifier", "type": "B", "note": "parse-successful cases only; not all gaps are malformed JSON"}
+  ],
+  "reruns_required": [
+    "LOO 6/6 with disjoint train/val/test, independent gold solver, Gate2 preference threshold, CI disclosure",
+    "bnlearn 4 networks with pgmpy gold and fixed verify_bnlearn_dsl_100.py (no dsl_p=gold_p fallback)",
+    "k=1 induction with non-overlapping val/test",
+    "NB/HMM either extend TaskSpec/compiler to support them OR rewrite claims as independent codegen baseline"
+  ],
+  "scope_qualifiers_needed": [
+    "L108/L188-198: decide stage trivial under gold injection",
+    "L84/L114/L123/L547-580: independent core-ops-constrained codegen baseline (not inductor/compiler)",
+    "L254: for implemented VE-compiled BLInD solver",
+    "L340: for implemented compiler families Flight/BLInD with verified equivalence",
+    "L592: token-cost estimate",
+    "L602: per-feature exact match among parse-successful cases"
+  ],
+  "suspicions_to_carry_forward": [
+    {"id": 1, "claim": "Gate 2 preference vacuous", "hook": "rg -n 'passed = True' verifier/gates.py"},
+    {"id": 2, "claim": "Gate 3 same-solver self-reference", "hook": "rg -n 'PreferenceSolver|BNReferenceSolver' taskspec/compiler.py tests/test_loo_induction.py tests/test_gate3_ablation.py"},
+    {"id": 3, "claim": "Inductor prompt answer-key leakage", "hook": "rg -n 'reward_fn|answers|json.dumps' inductor/"},
+    {"id": 4, "claim": "LOO split overlap", "hook": "rg -n 'samples\\[:max_induction_samples\\]|samples\\[:max_verify_samples\\]' tests/"},
+    {"id": 5, "claim": "Held-out family not same system", "hook": "rg -n 'valid_families|variable_elimination|compile_bn' taskspec/"},
+    {"id": 6, "claim": "Preference metric target mismatch", "hook": "rg -n 'gold_idx|gold_rec|e2e_matches_gold_solver' baselines/"},
+    {"id": 7, "claim": "bnlearn verifier fallback auto-100%", "hook": "rg -n 'dsl_p = gold_p' baselines/verify_bnlearn_dsl_100.py"},
+    {"id": 8, "claim": "6/6 CI sanity", "hook": "python3 -c 'from scipy import stats; print(stats.beta.ppf(0.025,6,1))'"}
+  ],
+  "eval_type": "mixed (deterministic_compile_with_non_independent_gold for LOO/Gate3, deterministic_gold for equivalence test, human_handwritten_closed_form for NB/HMM)"
+}
