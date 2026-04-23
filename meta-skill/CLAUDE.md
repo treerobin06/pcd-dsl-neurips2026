@@ -176,6 +176,82 @@ LLM 能理解概率问题（Parse ≥95%）、能使用计算结果做决策（D
 
 **API 渠道**：OpenRouter（主力，所有论文实验）+ Codex MCP（独立审查，gpt-5.4 xhigh）+ 本机 Python + pgmpy（零成本）
 
+### 2026-04-24 Codex Review 3 轮独立审查结论（⚠️ 待 Tree 战略决策）
+
+**报告**: `paper/audits/2026-04-23-codex-review.md` (503 行，3 轮 verbatim)
+**分数趋势**: Round 1 **5/10** → Round 2 **4.5/10** → Round 3 **4/10**（**持续下降，非改进饱和**）
+**Codex 核心判决**: Master plan 作为 **scoped-down salvage plan 可执行**；作为保原强标题/强 contribution 的终极修复 **不可执行**。
+
+#### Codex 识别的 3 条 CRITICAL（三轮稳定立场）
+
+1. **artifact discipline 未设硬门槛**（Round 2 升级为 "NEW EVIDENCE OF EVASION"）
+   - `paper/scripts/generate_figure3a_bnlearn.py:33` 仍硬编码 `our_dsl=[100,100,100,100]`
+   - `rg prompt_tokens` 全仓零命中——成本/token trace 基础设施整个不存在
+   - **行动**: 先定统一 raw schema（含 tokens/cost/model_id 强制字段）再允许任何新数字进论文
+
+2. **C3 身份危机**
+   - `taskspec/compiler.py:70` 仍 `return BNReferenceSolver()` —— "compile" 实为路由
+   - 原论文 "compile-once solver induction" 叙事在代码层**站不住**
+   - **行动**: 必须二选一—— (a) 论文降 scope 承认这是 "verified deterministic backend / family router"，或 (b) 真重构 TaskSpec + compiler 让 BN spec 参与编译（Codex 说 b 至少 2-4 天独立工作）
+
+3. **C5/C6/S2 代码层零动作**
+   - `inductor/inductor.py:35` 仍 `json.dumps(s)` 喂整个 sample
+   - `inductor/prompts/induction_prompt.md:17` 仍显示 `reward_fn`
+   - `tests/test_loo_induction.py:80` 仍 `samples[:k]` 两用
+   - `verifier/gates.py:196` 仍 `passed = True`
+   - **论文声称的 disjoint validation / Inductor reliability / LOO 6/6 在代码里根本不成立**
+
+#### 12 决策点 Codex 共识（YES 7 / NO 4 / DEPENDS 3）
+
+| # | 决策点 | 判定 |
+|:-:|---|:-:|
+| 1 | same-model 跨 method > 跨模型挑最好 | **YES**（前提 S4 先修 metric harmonization）|
+| 2 | bnlearn 叙事选 C（都报，硬分层）| **YES** |
+| 3 | 撤 C2 compositional generalization claim | **YES**（最多保留为 "core-ops-constrained codegen on synthetic NB/HMM"）|
+| 4 | Mixed E2E 65-70% 够不够 | **DEPENDS**（足以撑诚实 scoped；不足救当前强版）|
+| 5 | $30-55 预算够不够 | **DEPENDS**（够最小修补；不够同时 C3/C4 重构 + 全套 rerun）|
+| 6 | 撤 vs 重跑附录 | **DEPENDS**（便宜的重跑；无法 regenerate 的撤，不要 "from prior logs" 当主证据）|
+| 7 | C3 后置保原 story | **NO**（应先 scope down）|
+| 8 | 新实验强制结构化 raw artifact | **YES**（没 raw 没 claim）|
+| 9 | same-model 主表以 metric harmonization 为前置 | **YES** |
+| 10 | bnlearn 15q/net 做最终主图 | **NO**（只够 smoke test，per-network 至少回到 30-50q/net）|
+| 11 | LOO 6/6 + reliability 40/40 放 headline | **DEPENDS**（即便 survives 也适合 supporting，不该再 headline）|
+| 12 | C2/C3 部分修保原 scope | **NO**（reviewer 会认为"语言降调结构不降调"）|
+
+#### 5 条遗留分歧（Tree 裁决）
+
+1. **bnlearn 去留**：保留做"DSL 数学正确性 + LLM compile_core_ops 诚实数字"，还是整个撤？
+2. **C3 真修 vs 降 scope**：2-4 天重构 compiler 让 BN spec 真参与编译，还是直接降 scope 承认是 family router？
+3. **NB/HMM 保留形式**：撤、改为 synthetic-only、还是降为附录？
+4. **成本 claim**：$0.008/14× vs $0.001/60× 统一到哪套？（没 token trace 前任何 claim 都站不住）
+5. **Mixed E2E 时机**：现在跑（怕 scope 定错白跑），还是等 scope 定后再跑？
+
+#### Codex 最终推荐：**投稿策略选项 2**
+
+**立即降 scope 到 "PCD + verified deterministic backend"**：
+- 改标题（去掉 "compile once / solver induction" 强 framing）
+- 改 Contributions（承认 compile 是 family routing，不是 general TaskSpec→solver 编译）
+- 删除 unsupported evidence（LOO headline 数字、compositional generalization claim、bnlearn 冒充 100%）
+- **既不是转投 2027，也不是硬保原版**
+
+#### 元反思（Codex 金句，写入 CLAUDE 项目记忆）
+
+> **"claim-first, artifact-later 工作方式是核心病根。没有 raw 就没有论文句子；没有统一 metric 就没有比较表；没有 clean split 就没有 generalization claim。"**
+
+#### 待决策时需看的材料
+- `paper/audits/2026-04-23-codex-review.md` — 完整 503 行（3 轮 verbatim + P0-P5 优先级表）
+- `paper/audits/2026-04-23-master-plan.md` — 原计划
+- 10 条 Suspicions carry-forward 逐一核查清单（report 底部）
+
+#### Codex Review 引入的新 Critical 编号
+
+- **C9**（新）**artifact discipline 硬门槛**: 所有新 raw JSON 必须含 `prompt_tokens / completion_tokens / total_cost / model_id`；figure 脚本禁止硬编码，只能从 raw 读。**加入到 Layer 0 作为其他实验的前置条件**。
+- 原 C1-C8 保留，但**执行顺序**应按 Codex 建议改为：
+  - Layer 0': artifact schema + C5/C6/S2 + tiny rerun → **决定 title/scope** → full reruns → rewrite
+  - 原 plan 的 Layer 0/1/2 线性推进被 Codex 标为"风险过高"
+
+---
+
 ### 2026-04-23 审查发现：三 agent 并行审查结果（Critical Blockers）⚠️
 
 **审查方式**：`citation-verifier` / `result-to-claim` / `experiment-audit` / `paper-claim-audit` **四 agent 独立并行审查**，互不看 summary。四 agent 交叉印证确认不是单一 reviewer 误判。（第 4 agent 首次运行 1:48 后卡在写报告阶段被 kill，重启加 25 分钟硬限后 11 分钟完成）
