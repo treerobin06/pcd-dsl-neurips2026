@@ -90,43 +90,37 @@ def generate_and_verify(net_name, n_queries, seed):
         except Exception:
             continue
 
-        # DSL ve_query
+        # DSL ve_query：对每个 state 单独查询得到完整 posterior
+        # 注：ve_query 签名是 -> float（返回单个 P(query_var=state | evidence)）
+        # 原代码传 {query_var: [all_states]}（list 作为 value）→ ve_query 永远返回 0.0
+        # 然后 `dsl_p = gold_p` fallback 把这个永远为 0 的 bug 吞掉自动通过（fraud blocker C1, 2026-04-23 修复）
         try:
-            query_vars_dict = {query_var: list(node_states[query_var])}
-            dsl_result = ve_query(dsl_factors, query_vars_dict, evidence)
+            dsl_posterior = {}
+            for state in node_states[query_var]:
+                query_vars_dict = {query_var: state}  # 单个 value，不是 list
+                dsl_p = ve_query(dsl_factors, query_vars_dict, evidence)
+                dsl_posterior[state] = dsl_p
 
-            # 比较：dsl_result 是一个 Distribution 或 dict
-            if isinstance(dsl_result, dict):
-                dsl_posterior = dsl_result
-            elif hasattr(dsl_result, "probs"):
-                dsl_posterior = dict(zip(dsl_result.values, dsl_result.probs))
-            else:
-                dsl_posterior = dsl_result
+            # sanity check: posterior 应归一化到 1
+            prob_sum = sum(dsl_posterior.values())
+            if abs(prob_sum - 1.0) > 0.01:
+                errors.append({
+                    "query_id": total,
+                    "network": net_name,
+                    "query_var": query_var,
+                    "evidence": evidence,
+                    "error": f"DSL posterior does not sum to 1: sum={prob_sum:.4f}",
+                    "gold": gold_posterior,
+                    "dsl": dsl_posterior,
+                })
+                total += 1
+                continue
 
-            # 检查最大绝对误差
+            # 每个 state 的绝对误差
             max_err = 0
             for state in node_states[query_var]:
                 gold_p = gold_posterior.get(state, 0)
-                dsl_p = 0
-                # 匹配 DSL 结果格式
-                if isinstance(dsl_posterior, (int, float)):
-                    # ve_query 可能返回单个概率值
-                    if len(node_states[query_var]) == 2:
-                        dsl_p = dsl_posterior if state == node_states[query_var][0] else 1 - dsl_posterior
-                    else:
-                        dsl_p = gold_p  # fallback
-                elif isinstance(dsl_posterior, dict):
-                    # 尝试多种 key 格式
-                    for k, v in dsl_posterior.items():
-                        if str(k) == str(state) or k == state:
-                            dsl_p = v
-                            break
-                        if isinstance(k, tuple) and len(k) == 1 and k[0] == (query_var, state):
-                            dsl_p = v
-                            break
-                        if isinstance(k, tuple) and k == ((query_var, state),):
-                            dsl_p = v
-                            break
+                dsl_p = dsl_posterior[state]
                 err = abs(gold_p - dsl_p)
                 max_err = max(max_err, err)
 
@@ -140,7 +134,7 @@ def generate_and_verify(net_name, n_queries, seed):
                     "evidence": evidence,
                     "max_error": max_err,
                     "gold": gold_posterior,
-                    "dsl": str(dsl_posterior)[:200],
+                    "dsl": dsl_posterior,
                 })
             total += 1
 
