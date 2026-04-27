@@ -31,8 +31,11 @@ class StateStructure:
     n_arms: int = 0
     prior_alpha: float = 1.0
     prior_beta: float = 1.0
-    # bayesian_network 特有
-    # (BN 结构从数据中解析，不在 TaskSpec 中硬编码)
+    # bayesian_network 特有 (C3 真重构 2026-04-24)
+    # 实例级 DAG/CPT 仍 per-query 解析；schema 级配置参与编译。
+    bn_inference_method: str = "variable_elimination"  # ve | (future: junction_tree, sampling)
+    bn_input_format: str = "blind_text"  # blind_text | factors_dict
+    bn_numerical_precision: str = "float64"  # float64 | (future: mpfr)
 
 
 @dataclass
@@ -81,6 +84,9 @@ class TaskSpec:
                 "n_arms": self.state_structure.n_arms,
                 "prior_alpha": self.state_structure.prior_alpha,
                 "prior_beta": self.state_structure.prior_beta,
+                "bn_inference_method": self.state_structure.bn_inference_method,
+                "bn_input_format": self.state_structure.bn_input_format,
+                "bn_numerical_precision": self.state_structure.bn_numerical_precision,
             },
             "observation_model": {
                 "type": self.observation_model.type,

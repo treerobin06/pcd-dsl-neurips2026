@@ -66,5 +66,20 @@ def _compile_bandit(spec: TaskSpec) -> BanditSolver:
 
 
 def _compile_bn(spec: TaskSpec) -> BNReferenceSolver:
-    """编译贝叶斯网络推断 solver"""
-    return BNReferenceSolver()
+    """编译贝叶斯网络推断 solver
+
+    C3 真重构 (2026-04-24): spec 内容真参与编译。原 `return BNReferenceSolver()`
+    被 Codex CRITICAL 1 + 4-agent audit 标为身份危机—— "compile" 实为 routing。
+
+    现在 spec.state_structure 的三个 BN 字段决定 solver 的实际配置:
+    - bn_inference_method: ve / (future) junction_tree / sampling
+    - bn_input_format: blind_text / factors_dict
+    - bn_numerical_precision: float64 / (future) mpfr
+
+    不同 spec 编译出不同 solver；不支持的配置 raise ValueError。
+    """
+    return BNReferenceSolver(
+        inference_method=spec.state_structure.bn_inference_method,
+        input_format=spec.state_structure.bn_input_format,
+        numerical_precision=spec.state_structure.bn_numerical_precision,
+    )

@@ -41,7 +41,12 @@ Your TaskSpec must use exactly one of these inference families:
 - Conditional probability tables given as text
 - Query asks for P(X|Y) or P(X,Y)
 
-**state_structure**: `bayesian_network`
+**state_structure**: `bayesian_network` with three optional config fields:
+  - `bn_inference_method`: `"variable_elimination"` (default; only one supported currently)
+  - `bn_input_format`: `"blind_text"` (default, BLInD CSV format) | `"factors_dict"` (pre-parsed Factor list)
+  - `bn_numerical_precision`: `"float64"` (default; mpfr/任意精度 future)
+
+These fields drive compiler dispatch (C3 真重构 2026-04-24): different config produces different solver. Defaults are fine for most BLInD-style tasks; only override when the task description specifies otherwise.
 **observation_model**: `cpt_given`
 **decision_rule**: `exact_probability`
 
