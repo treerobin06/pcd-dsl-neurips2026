@@ -548,7 +548,7 @@ HMM is the stronger test: it requires \emph{sequential temporal reasoning} via i
 \begin{table}[t]
 \centering
 \small
-\caption{Held-out inference families (no macro support). Core-ops-only solvers match unconstrained code generation at 100\% on both NB and HMM, confirming that macros are syntactic sugar. The PCD signature reproduces: Compute is 27--65\% while Parse and Decide remain $\geq$98\%. 95\% Wilson CIs in brackets.}
+\caption{Held-out inference families (no macro support). Both unconstrained and core-ops-constrained code generation reach 100\% on NB and HMM (the algebra is simple; codegen scores alone are not the load-bearing evidence). Reference solvers \texttt{NBSolver} and \texttt{HMMSolver} composed from $\{\texttt{condition}, \texttt{multiply}, \texttt{marginalize}, \texttt{normalize}, \texttt{argmax}\}$ alone match hand-computed posteriors within $10^{-9}$ (text). The PCD signature reproduces: Compute is 27--65\% while Parse and Decide remain $\geq$98\%. 95\% Wilson CIs in brackets.}
 \label{tab:held_out}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
@@ -570,12 +570,12 @@ Decide$\mid$GoldPosterior & 100.0\% {\scriptsize [98,100]} & 100.0\% {\scriptsiz
 \end{table}
 
 Table~\ref{tab:held_out} shows two results.
-First, core operations without macros reach 100\% on both held-out families, matching unconstrained code generation. The macros are syntactic sugar, not load-bearing.
+First, on these held-out families, both unconstrained code generation and core-ops-constrained codegen reach 100\% with both models; NB and HMM are simple enough that the LLM writes correct math whether scaffolded or not, so codegen scores alone cannot distinguish ``the LLM accidentally got the math right'' from ``the seven core ops are sufficient to compose this family''.
+To establish the latter directly, we provide reference solvers \texttt{NBSolver} and \texttt{HMMSolver} composed exclusively from $\{\texttt{condition}, \texttt{multiply}, \texttt{marginalize}, \texttt{normalize}, \texttt{argmax}\}$ (no macro reuse, no LLM in the loop). Their outputs match hand-computed posteriors with maximum absolute error below $10^{-9}$ on independent sanity tests, with HMM using iteration over time, a pattern absent from any built-in macro. This algebra-level evidence shows the core ops are compositionally sufficient for both families.
 Second, the PCD signature reproduces: Compute is 27--65\% while Parse $\geq$99\% and Decide $\geq$98\%; direct prompting lags at 32--61\%.
 
-The HMM result demonstrates compositional generalization beyond template selection.
-The inductor receives examples of sequential observations with hidden states, recognizes that no built-in macro applies, and constructs a novel workflow: an iterated \texttt{multiply}$\to$\texttt{marginalize}$\to$\texttt{normalize} loop over a time axis (Table~\ref{tab:routes}).
-This sequential pattern---absent from all three training macros---is assembled from the same seven typed primitives, confirming that the core operations capture reusable structure in discrete probabilistic inference.
+\paragraph{Where free-code breaks.}
+The 100\% codegen scores on NB/HMM do not generalize to harder structured inference. On the same bnlearn networks where PAL collapses (Figure~\ref{fig:scaling_cost}), GPT-4o-mini reaches 0\% on \emph{both} unconstrained code generation and core-ops-constrained codegen (0/20 correct in each mode on a held-out smoke run); the model lacks the capacity to write correct variable-elimination code regardless of scaffolding strength. Only the deterministic compile-once route, where the LLM extracts structural parameters into a \taskspec{} and the compiler instantiates a solver composed of typed primitives, attains 100\% on these networks. NB and HMM remain reachable by either route because the underlying algebra is simple; complex BN inference is where the spec-emission discipline matters.
 
 \paragraph{Anomalies.}
 GPT-4o-mini achieves only 3\% Parse on NB because it omits absent-symptom entries; on HMM, its Decide drops to 98\% due to near-tied posteriors. Neither anomaly affects core-ops results.
