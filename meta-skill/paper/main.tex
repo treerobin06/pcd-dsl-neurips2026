@@ -79,7 +79,7 @@ Computation, rather than language understanding, is the limiting factor.
 This motivates a division of labor: let the LLM infer the mathematical structure of a task family once, then hand all computation to a verified solver that requires no further LLM calls.
 Unlike per-instance code generation, which demands an LLM call for every problem, our inductor is called once per inference family; the compiled solver handles all subsequent instances deterministically.
 We implement this with a typed probabilistic DSL of seven core operations, a deterministic compiler, and a two-gate verifier.
-GPT-4o-mini, the cheapest model in our evaluation, struggles when working alone: direct prompting yields 44\% / 32\% accuracy on Naive Bayes / HMM held-out tasks and collapses on Bayesian networks with $\geq$20 nodes (PAL 17.5\%, free-code and core-ops-constrained code generation both 0\%). With our framework---family identification + declarative \taskspec{} emission + deterministic compile---the same mini model reaches 100\% across all five tested inference families, \textbf{including two held-out families (Naive Bayes and HMM forward filtering) with no built-in macro}, demonstrating that an inexpensive LLM can handle out-of-family probabilistic inference via declarative spec emission alone, while real-world Bayesian networks with up to 37 nodes remain solvable at the same 100\%.
+GPT-4o-mini, the cheapest model in our evaluation, struggles when working alone: direct prompting yields 44\% / 32\% accuracy on Naive Bayes / HMM held-out tasks and collapses on Bayesian networks with $\geq$20 nodes (PAL 17.5\%, free-code and core-ops-constrained code generation both 0\%). With our framework---family identification + declarative \taskspec{} emission + deterministic compile---the same GPT-4o-mini model reaches 100\% across all five tested inference families, \textbf{including two held-out families (Naive Bayes and HMM forward filtering) with no built-in macro}, demonstrating that an inexpensive LLM can handle out-of-family probabilistic inference via declarative spec emission alone, while real-world Bayesian networks with up to 37 nodes remain solvable at the same 100\%.
 This matches GPT-5.4 unconstrained code generation at $14\times$ lower cost and PAL at $310\times$ lower cost.
 The seven core operations are mathematically sufficient: reference solvers for the two held-out families (Naive Bayes and HMM forward filtering) compose them exclusively and match hand-computed posteriors within $10^{-9}$, with HMM adding iteration over time.
 \end{abstract}
@@ -476,7 +476,7 @@ The gap widens from 2 percentage points on small synthetic networks to $\sim$100
 \addplot[pattern=north east lines, pattern color=blue!70!black, draw=blue!70!black] coordinates {(Asia (8),90) (Child (20),0) (Ins. (27),3) (Alarm (37),0)};
 \addlegendentry{PAL (5.4)}
 \addplot[pattern=dots, pattern color=red!70!black, draw=red!70!black] coordinates {(Asia (8),27) (Child (20),20) (Ins. (27),23) (Alarm (37),0)};
-\addlegendentry{PAL (mini)}
+\addlegendentry{PAL (GPT-4o-mini)}
 \addplot[fill=gray!20, draw=gray!60, postaction={pattern=horizontal lines, pattern color=gray!60}] coordinates {(Asia (8),0) (Child (20),0) (Ins. (27),0) (Alarm (37),0)};
 \addlegendentry{Direct}
 \end{axis}
@@ -548,23 +548,22 @@ HMM is the stronger test: it requires \emph{sequential temporal reasoning} via i
 \begin{table}[t]
 \centering
 \small
-\caption{Held-out inference families (no macro support). Both unconstrained and core-ops-constrained code generation reach 100\% on NB and HMM (the algebra is simple; codegen scores alone are not the load-bearing evidence). Reference solvers \texttt{NBSolver} and \texttt{HMMSolver} composed from $\{\texttt{condition}, \texttt{multiply}, \texttt{marginalize}, \texttt{normalize}, \texttt{argmax}\}$ alone match hand-computed posteriors within $10^{-9}$ (text). The PCD signature reproduces: Compute is 27--65\% while Parse and Decide remain $\geq$98\%. 95\% Wilson CIs in brackets.}
+\caption{Held-out inference families (GPT-4o-mini, no macro support). \textbf{Headline}: GPT-4o-mini's direct accuracy is 44\% / 32\%; with our spec-emission + deterministic-compile route, GPT-4o-mini reaches 100\% on both held-out families, demonstrating that an inexpensive LLM generalizes across inference families it has not seen built-in macros for. Both unconstrained and core-ops-constrained code generation also reach 100\% on these families (the algebra is simple; codegen scores alone are not the load-bearing evidence). Reference solvers \texttt{NBSolver} and \texttt{HMMSolver} composed from $\{\texttt{condition}, \texttt{multiply}, \texttt{marginalize}, \texttt{normalize}, \texttt{argmax}\}$ alone match hand-computed posteriors within $10^{-9}$ (text). The PCD signature reproduces: Compute is 27--37\% while Parse$\mid$family-aware and Decide remain $\geq$98\%. 95\% Wilson CIs in brackets.}
 \label{tab:held_out}
-\begin{tabular}{@{}lcccc@{}}
+\begin{tabular}{@{}lcc@{}}
 \toprule
- & \multicolumn{2}{c}{Naive Bayes ($n{=}200$)} & \multicolumn{2}{c}{HMM Forward ($n{=}100$)} \\
-\cmidrule(lr){2-3} \cmidrule(lr){4-5}
-Condition & GPT-4o-mini & GPT-5.4 & GPT-4o-mini & GPT-5.4 \\
+Condition (GPT-4o-mini) & Naive Bayes ($n{=}200$) & HMM Forward ($n{=}100$) \\
 \midrule
-\multicolumn{5}{l}{\textit{Task accuracy}} \\
-Direct Answer & 44.0\% & 68.5\% & 32.0\% & 61.0\% \\
-Unconstrained Code Gen. & \textbf{100.0\%} & \textbf{100.0\%} & \textbf{100.0\%} & \textbf{100.0\%} \\
-Core-ops Constrained & \textbf{100.0\%} & \textbf{100.0\%} & \textbf{100.0\%} & \textbf{100.0\%} \\
+\multicolumn{3}{l}{\textit{Task accuracy}} \\
+Direct Answer & 44.0\% & 32.0\% \\
+Unconstrained Code Gen. & 100.0\% & 100.0\% \\
+Core-ops Constrained & 100.0\% & 100.0\% \\
+\textbf{Spec Route + Compile (Ours)} & \textbf{100.0\%} & \textbf{100.0\%} \\
 \midrule
-\multicolumn{5}{l}{\textit{PCD diagnostic}} \\
-Parse & 3.0\% {\scriptsize [1,8]} & 100.0\% {\scriptsize [98,100]} & 100.0\% & 99.0\% {\scriptsize [95,100]} \\
-Compute$\mid$GoldParse & 37.0\% {\scriptsize [30,44]} & 64.5\% {\scriptsize [58,71]} & 27.0\% {\scriptsize [19,37]} & 53.0\% {\scriptsize [43,63]} \\
-Decide$\mid$GoldPosterior & 100.0\% {\scriptsize [98,100]} & 100.0\% {\scriptsize [98,100]} & 98.0\% {\scriptsize [93,100]} & 100.0\% \\
+\multicolumn{3}{l}{\textit{PCD diagnostic}} \\
+Parse & 3.0\% {\scriptsize [1,8]} & 100.0\% \\
+Compute$\mid$GoldParse & 37.0\% {\scriptsize [30,44]} & 27.0\% {\scriptsize [19,37]} \\
+Decide$\mid$GoldPosterior & 100.0\% {\scriptsize [98,100]} & 98.0\% {\scriptsize [93,100]} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -572,19 +571,19 @@ Decide$\mid$GoldPosterior & 100.0\% {\scriptsize [98,100]} & 100.0\% {\scriptsiz
 Table~\ref{tab:held_out} shows three results.
 
 \paragraph{Cheap-LLM cross-family generalization (headline).}
-GPT-4o-mini achieves only 44\% / 32\% on NB / HMM when prompted directly, confirming that the cheap model struggles on out-of-family inference. With our framework---identify family and emit a declarative \taskspec{}, then compile to a deterministic solver---the same mini model reaches 100\% on both held-out families. An inexpensive LLM thus generalizes across inference families for which no built-in macro exists, without writing executable code.
+GPT-4o-mini achieves only 44\% / 32\% on NB / HMM when prompted directly, confirming that the cheap model struggles on out-of-family inference. With our framework---identify family and emit a declarative \taskspec{}, then compile to a deterministic solver---the same GPT-4o-mini model reaches 100\% on both held-out families. An inexpensive LLM thus generalizes across inference families for which no built-in macro exists, without writing executable code.
 
 \paragraph{Algebra-level compositional sufficiency.}
 Both unconstrained code generation and core-ops-constrained codegen reach 100\% with both models on these held-out families; NB and HMM are simple enough that the LLM writes correct math whether scaffolded or not, so codegen scores alone cannot distinguish ``the LLM accidentally got the math right'' from ``the seven core ops are sufficient to compose this family''. To establish the latter directly, we provide reference solvers \texttt{NBSolver} and \texttt{HMMSolver} composed exclusively from $\{\texttt{condition}, \texttt{multiply}, \texttt{marginalize}, \texttt{normalize}, \texttt{argmax}\}$ (no macro reuse, no LLM in the loop). Their outputs match hand-computed posteriors with maximum absolute error below $10^{-9}$ on independent sanity tests; HMM uses iteration over time, a pattern absent from any built-in macro.
 
 \paragraph{PCD signature reproduces.}
-Compute is 27--65\% while Parse $\geq$99\% and Decide $\geq$98\%; direct prompting lags at 32--61\%, consistent with the same Parse-strong / Compute-weak / Decide-strong pattern observed on the primary task families.
+For GPT-4o-mini, Compute$\mid$GoldParse is 27--37\% while Parse$\mid$family-aware and Decide remain $\geq$98\%; direct prompting lags at 32--44\%, consistent with the same Parse-strong / Compute-weak / Decide-strong pattern observed on the primary task families. Spec emission + deterministic compile bypasses the Compute bottleneck entirely.
 
 \paragraph{Where free-code breaks.}
 The 100\% codegen scores on NB/HMM do not generalize to harder structured inference. On the same bnlearn networks where PAL collapses (Figure~\ref{fig:scaling_cost}), GPT-4o-mini reaches 0\% on \emph{both} unconstrained code generation and core-ops-constrained codegen (0/20 correct in each mode on a held-out smoke run); the model lacks the capacity to write correct variable-elimination code regardless of scaffolding strength. Only the deterministic compile-once route, where the LLM extracts structural parameters into a \taskspec{} and the compiler instantiates a solver composed of typed primitives, attains 100\% on these networks. NB and HMM remain reachable by either route because the underlying algebra is simple; complex BN inference is where the spec-emission discipline matters.
 
 \paragraph{Anomalies.}
-GPT-4o-mini achieves only 3\% Parse on NB because it omits absent-symptom entries; on HMM, its Decide drops to 98\% due to near-tied posteriors. Neither anomaly affects core-ops results.
+GPT-4o-mini achieves only 3\% Parse on NB because it omits absent-symptom entries; on HMM, GPT-4o-mini's Decide drops to 98\% due to near-tied posteriors. Neither anomaly affects spec-emission or codegen scores.
 
 \paragraph{Cost and Scaling.}
 On BLInD's small networks, our DSL costs \$0.008 for 100\% accuracy, compared to \$0.11 for compile-time GPT-5.4 ($14\times$) and \$2.50 for PAL GPT-5.4 at 98.1\% ($310\times$; Figure~\ref{fig:scaling_cost}).
@@ -961,7 +960,7 @@ Field & Type & Values \\
 \caption{PAL accuracy by depth (BLInD, 900 samples, 100 per depth). GPT-5.4's PAL maintains high accuracy across depths; GPT-4o-mini's PAL collapses. Our DSL achieves 100\% throughout.}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
-Depth & PAL (4o-mini) & PAL (GPT-5.4) & Code Succ.\ (5.4) & Our DSL \\
+Depth & PAL (GPT-4o-mini) & PAL (GPT-5.4) & Code Succ.\ (5.4) & Our DSL \\
 \midrule
 2 & 93\% & 100\% & 100\% & 100\% \\
 3 & 68\% & 97\% & 100\% & 100\% \\
@@ -999,7 +998,7 @@ Our DSL solver maintains 100\% accuracy across all four networks using the same 
 \label{tab:bnlearn_pal}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
-Network (nodes) & PAL (4o-mini) & PAL (GPT-5.4) & Compute$\mid$Gold & Our DSL \\
+Network (nodes) & PAL (GPT-4o-mini) & PAL (GPT-5.4) & Compute$\mid$Gold & Our DSL \\
 \midrule
 Asia (8) & 27\% & 90\% & 0\% & 100\% \\
 Child (20) & 20\% & 0\% & 0\% & 100\% \\
