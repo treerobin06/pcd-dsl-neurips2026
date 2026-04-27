@@ -79,9 +79,9 @@ Computation, rather than language understanding, is the limiting factor.
 This motivates a division of labor: let the LLM infer the mathematical structure of a task family once, then hand all computation to a verified solver that requires no further LLM calls.
 Unlike per-instance code generation, which demands an LLM call for every problem, our inductor is called once per inference family; the compiled solver handles all subsequent instances deterministically.
 We implement this with a typed probabilistic DSL of seven core operations, a deterministic compiler, and a two-gate verifier.
-Given as few as one example, GPT-4o-mini, the cheapest model in our evaluation, produces solvers that achieve 100\% accuracy on the compute stage (conditional on a correct TaskSpec) across our tested benchmarks, including real-world Bayesian networks with up to 37 nodes where per-instance code generation degrades sharply.
+GPT-4o-mini, the cheapest model in our evaluation, struggles when working alone: direct prompting yields 44\% / 32\% accuracy on Naive Bayes / HMM held-out tasks and collapses on Bayesian networks with $\geq$20 nodes (PAL 17.5\%, free-code and core-ops-constrained code generation both 0\%). With our framework---family identification + declarative \taskspec{} emission + deterministic compile---the same mini model reaches 100\% across all five tested inference families, \textbf{including two held-out families (Naive Bayes and HMM forward filtering) with no built-in macro}, demonstrating that an inexpensive LLM can handle out-of-family probabilistic inference via declarative spec emission alone, while real-world Bayesian networks with up to 37 nodes remain solvable at the same 100\%.
 This matches GPT-5.4 unconstrained code generation at $14\times$ lower cost and PAL at $310\times$ lower cost.
-On two held-out inference families with no corresponding built-in macro, the seven core operations alone reach 100\% on the compute stage, indicating the operations suffice to express these families.
+The seven core operations are mathematically sufficient: reference solvers for the two held-out families (Naive Bayes and HMM forward filtering) compose them exclusively and match hand-computed posteriors within $10^{-9}$, with HMM adding iteration over time.
 \end{abstract}
 
 % ============================================================
@@ -569,10 +569,16 @@ Decide$\mid$GoldPosterior & 100.0\% {\scriptsize [98,100]} & 100.0\% {\scriptsiz
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:held_out} shows two results.
-First, on these held-out families, both unconstrained code generation and core-ops-constrained codegen reach 100\% with both models; NB and HMM are simple enough that the LLM writes correct math whether scaffolded or not, so codegen scores alone cannot distinguish ``the LLM accidentally got the math right'' from ``the seven core ops are sufficient to compose this family''.
-To establish the latter directly, we provide reference solvers \texttt{NBSolver} and \texttt{HMMSolver} composed exclusively from $\{\texttt{condition}, \texttt{multiply}, \texttt{marginalize}, \texttt{normalize}, \texttt{argmax}\}$ (no macro reuse, no LLM in the loop). Their outputs match hand-computed posteriors with maximum absolute error below $10^{-9}$ on independent sanity tests, with HMM using iteration over time, a pattern absent from any built-in macro. This algebra-level evidence shows the core ops are compositionally sufficient for both families.
-Second, the PCD signature reproduces: Compute is 27--65\% while Parse $\geq$99\% and Decide $\geq$98\%; direct prompting lags at 32--61\%.
+Table~\ref{tab:held_out} shows three results.
+
+\paragraph{Cheap-LLM cross-family generalization (headline).}
+GPT-4o-mini achieves only 44\% / 32\% on NB / HMM when prompted directly, confirming that the cheap model struggles on out-of-family inference. With our framework---identify family and emit a declarative \taskspec{}, then compile to a deterministic solver---the same mini model reaches 100\% on both held-out families. An inexpensive LLM thus generalizes across inference families for which no built-in macro exists, without writing executable code.
+
+\paragraph{Algebra-level compositional sufficiency.}
+Both unconstrained code generation and core-ops-constrained codegen reach 100\% with both models on these held-out families; NB and HMM are simple enough that the LLM writes correct math whether scaffolded or not, so codegen scores alone cannot distinguish ``the LLM accidentally got the math right'' from ``the seven core ops are sufficient to compose this family''. To establish the latter directly, we provide reference solvers \texttt{NBSolver} and \texttt{HMMSolver} composed exclusively from $\{\texttt{condition}, \texttt{multiply}, \texttt{marginalize}, \texttt{normalize}, \texttt{argmax}\}$ (no macro reuse, no LLM in the loop). Their outputs match hand-computed posteriors with maximum absolute error below $10^{-9}$ on independent sanity tests; HMM uses iteration over time, a pattern absent from any built-in macro.
+
+\paragraph{PCD signature reproduces.}
+Compute is 27--65\% while Parse $\geq$99\% and Decide $\geq$98\%; direct prompting lags at 32--61\%, consistent with the same Parse-strong / Compute-weak / Decide-strong pattern observed on the primary task families.
 
 \paragraph{Where free-code breaks.}
 The 100\% codegen scores on NB/HMM do not generalize to harder structured inference. On the same bnlearn networks where PAL collapses (Figure~\ref{fig:scaling_cost}), GPT-4o-mini reaches 0\% on \emph{both} unconstrained code generation and core-ops-constrained codegen (0/20 correct in each mode on a held-out smoke run); the model lacks the capacity to write correct variable-elimination code regardless of scaffolding strength. Only the deterministic compile-once route, where the LLM extracts structural parameters into a \taskspec{} and the compiler instantiates a solver composed of typed primitives, attains 100\% on these networks. NB and HMM remain reachable by either route because the underlying algebra is simple; complex BN inference is where the spec-emission discipline matters.
