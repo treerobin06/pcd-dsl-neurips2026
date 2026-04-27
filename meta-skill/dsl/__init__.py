@@ -30,6 +30,10 @@ from .family_macros import (
     ve_query,
 )
 
+# 注意: dsl/macros_library.py 是 self-evolving vision 的 architecture sketch
+# **未连接主流程**——故意不在此 import / __all__ 中导出。论文里只在
+# Figure 1 / Discussion 提一嘴，不当作已实现 feature。
+
 __all__ = [
     # 类型
     "Distribution", "Factor", "HypothesisSpace", "Evidence",

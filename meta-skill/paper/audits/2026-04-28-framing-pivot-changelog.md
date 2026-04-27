@@ -44,11 +44,11 @@
 
 ## 2. 待做代码改动
 
-- [ ] **Task 2 (next-session)**: `dsl/macros_library.py` — self-evolving registry stub
-  - `FAMILY_REGISTRY: dict[str, MacroEntry]` 含现 3 macros (softmax_pref / beta_bernoulli / ve_query)
-  - `register_macro(name, fn, family_tag, verified_by, op_composition)` 接口
-  - `dsl/macros_registry.json` 持久化 schema
-  - `__init__.py` 加 `from .macros_library import register_macro, FAMILY_REGISTRY`
+- ✅ ~~`dsl/macros_library.py` self-evolving registry stub~~ — **重新定位为 VISION SKETCH**
+  - 2026-04-28 Tree 决策："自进化只是愿景，不需要真实现代码，只在架构图里提一嘴"
+  - macros_library.py 已写但**故意不连主流程**（dsl/__init__.py 不导出）
+  - 用途：paper Figure 1 / Discussion 引用作为 architecture sketch
+  - 后续真做 self-evolution 实验是 future work（毕业大论文 / 后续 paper）
 - [ ] **Task 3 (next-session)**: `tests/test_bn_pgmpy_equivalence.py` — internal sanity test
   - 4 networks (asia/child/insurance/alarm) × 100 query
   - `import _pgmpy_compat` 走 monkey-patch
@@ -115,13 +115,19 @@
 - [ ] Section 4 BN VE 段加 "a demonstration that the same 7 ops cover BN among other families"
 - [ ] Discussion / Related Work 加 "pgmpy/ProbLog are BN-only specialized libraries; ours spans preference/bandit/HMM via the same 7 typed ops"——直接回应"为什么不用 pgmpy"
 
-### 4.4 Self-evolving library 新增
+### 4.4 Self-evolving library — 仅在架构图 + Discussion 提一嘴（不开 Section）
 
-- [ ] Section 4.x 或 Discussion 加 self-evolving 段
-  - Family layer evolution（LLM 解出新 family + verified → macro 持久化 → 复用）
-  - Op layer evolution（新 op 提出 + 形式化 + verified → core set 增长）
-  - 引用 `dsl/macros_library.py` registry 接口当 architecture evidence
-  - **诚实标 "future work" / "architecture supports"**——不 overclaim 已实现 self-evolution
+**Tree 2026-04-28 决策**: self-evolving 是 *vision / future work*，不需要真实现，
+不开独立 Section，只在 Figure 1 + Discussion 一小段轻触：
+
+- [ ] Figure 1 / Algorithm 1 架构图加 "→ persistent macro library" 箭头（family layer reuse 视觉化）
+- [ ] Discussion 加 1 段（≤ 5 行）：
+  > "The architecture supports a self-evolving macro library: new families verified
+  > by the inductor-verifier loop can be persisted as reusable macros, and new core
+  > ops with formal type signatures can extend the foundation. This evolution is left
+  > to future work; see `dsl/macros_library.py` for the registry interface sketch."
+- [ ] **不**写独立 Section / Subsection
+- [ ] **不**跑 self-evolving experiment
 
 ### 4.5 Abstract / Intro / Conclusion 同步
 
