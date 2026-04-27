@@ -114,7 +114,7 @@ Given a new task, the LLM infers the mathematical structure of its task family o
 This demands more than instance-level parsing: the LLM must recognize the inference family, decide whether to reuse a built-in macro or compose a new workflow from typed primitives, and emit a complete declarative specification. We validate this empirically, including on two held-out families where the inductor must compose novel operation sequences from scratch.
 
 We implement this with a typed probabilistic DSL of seven core operations, a deterministic compiler, and a three-gate verifier.
-Because the LLM fills a structured specification instead of writing arbitrary code, even GPT-4o-mini, the cheapest model we test, produces solvers that match hand-written references across 1,200+ instances with zero compute-stage errors. This matches GPT-5.4 unconstrained code generation at $14\times$ lower cost.
+Because the LLM fills a structured specification instead of writing arbitrary code, even GPT-4o-mini, the cheapest model we test, produces solvers that match hand-written references across 1,150 test instances (Flight 250, BLInD 900) with zero compute-stage errors. This matches GPT-5.4 unconstrained code generation at $14\times$ lower cost.
 On real-world Bayesian networks with up to 37 nodes, per-instance code generation via PAL fails entirely, while our compiled solver stays at 100\%.
 End-to-end on natural-language inputs, the pipeline matches the gold-feature oracle at 74\% accuracy on preference learning; see Section~\ref{sec:e2e}.
 
@@ -336,7 +336,7 @@ Once verified, the solver is deployed without further LLM calls.
 
 The compiler translates a \taskspec{} into an executable solver composed exclusively of DSL primitives.
 Because both the schema and the operations are formally defined, the compiler is deterministic: the same specification always yields the same solver.
-Compiled solvers match independent gold-reference implementations cross-checked against pgmpy~\citep{ankan2015pgmpy} on BN queries, with maximum absolute error below $10^{-12}$, i.e.\ floating-point precision, across all 1,200 test instances spanning Flight~250, BLInD~900, and TextBandit~50; see Appendix~\ref{app:equivalence}.
+Compiled solvers match independent gold-reference implementations cross-checked against pgmpy~\citep{ankan2015pgmpy} on BN queries, with maximum absolute error below $10^{-12}$, i.e.\ floating-point precision, across all 1,150 test instances spanning Flight~250 and BLInD~900; see Appendix~\ref{app:equivalence}.
 Because the compiled solver is deterministic and mathematically equivalent to the gold reference, 100\% accuracy on finite test sets reflects exact computation rather than statistical overfitting.
 
 \subsection{Verifier-Guided Inductor}
@@ -599,7 +599,7 @@ On bnlearn networks ($\geq$20 nodes), our DSL is the only method that produces c
 The preceding experiments test each stage in isolation.
 To confirm they compose into a working system, we run the full pipeline end-to-end on preference learning: GPT-4o-mini reads raw natural-language flight descriptions (\eg ``departure time: 02:00 PM, duration: 4 hr 24 min, price: \$730''), extracts numeric features, and feeds them into the compiled PreferenceSolver.
 On all 624 samples, the pipeline achieves \textbf{74.3\%} accuracy (95\% CI: [70.9\%, 77.8\%]), matching the gold-feature oracle at 74.4\%.
-Feature extraction is near-perfect at 99.9--100\% per feature; the pipeline agrees with the gold solver on 99.8\% of instances. The remaining 0.2\% gap traces to two parse failures from malformed JSON, not extraction errors.
+Feature extraction is near-perfect at 99.9--100\% per feature; the pipeline agrees with the gold solver on 99.8\% of instances. The remaining 0.2\% gap traces to one parse failure from malformed JSON and one downstream disagreement with the gold solver, not extraction errors.
 Compared to the best prompt-based strategy (tool-calling at 58.3\%), the compile-once pipeline gains 16 percentage points by replacing LLM computation with a verified solver.
 
 % ============================================================
@@ -655,7 +655,7 @@ LLM-BI~\citep{huang2025llmbi} also translates natural language into a structured
 
 \paragraph{Tool Use, Library Learning, and Agentic Skills.}
 Toolformer~\citep{schick2023toolformer} and ReAct~\citep{yao2023react} equip LLMs with external tool calls at inference time; LILO~\citep{grand2024lilo} and DreamCoder~\citep{ellis2021dreamcoder} learn reusable code libraries through iterative abstraction.
-Recent work on agentic skills~\citep{jiang2026sok,zhang2026evoskills} frames reusable agent capabilities as structured packages of specifications, scripts, and domain knowledge that agents can compose and extend.
+Recent work on agentic skills~\citep{zhang2026evoskills} frames reusable agent capabilities as structured packages of specifications, scripts, and domain knowledge that agents can compose and extend.
 Our typed operations and verified macros can be viewed as a domain-specific skill library for exact probabilistic reasoning; however, our system is more constrained: the LLM emits a declarative specification rather than executable code, and a three-gate verifier certifies the compiled solver before deployment.
 This moves the trust boundary from ``does the generated code happen to work?''\ to ``does the specification pass verification?''
 Unlike general-purpose PPLs such as WebPPL, Stan, and Pyro, our DSL is intentionally narrow, covering discrete exact inference only.
@@ -762,7 +762,7 @@ HMM Forward & $\alpha_t(s) \propto p(o_t \mid s) \sum_{s'} \alpha_{t\text{-}1}(s
 \label{app:gate3}
 
 \paragraph{Equivalence verification.}
-Compiled solvers match gold reference solvers with 0.0 maximum error across all 1,200 test instances: Flight (250/250), BLInD (900/900), TextBandit (50/50).
+Compiled solvers match gold reference solvers with 0.0 maximum error across all 1,150 test instances: Flight (250/250) and BLInD (900/900).
 
 \paragraph{Gate 3 Off ablation.}
 All 6 LOO datasets (Hotel, Flight-2F/3F/5F/6F, BLInD depth-out-of-distribution) pass verification using only Gates 1--2, with 100\% gold match on the first attempt.
@@ -1271,7 +1271,7 @@ This marks the boundary of our approach: the DSL works when distributions are sp
 \item \textbf{Experiments.}
 \begin{enumerate}
     \item[(a)] Training/evaluation details: model names and vendors in Table~\ref{tab:pcd_preference} and Figure~\ref{fig:scaling_cost}; DSL specification in Appendix~\ref{app:dsl}; TaskSpec schema in Appendix~\ref{app:taskspec}. [Yes]
-    \item[(b)] Error bars: 95\% Wilson/Clopper--Pearson CIs reported for all PCD tables (Tables~\ref{tab:pcd_preference},~\ref{tab:held_out}) and Figure~\ref{fig:depth}. DSL solver output is deterministic (no sampling variance). [Yes]
+    \item[(b)] Error bars: 95\% Wilson CIs reported for all PCD tables (Tables~\ref{tab:pcd_preference},~\ref{tab:held_out}) and Figure~\ref{fig:depth}; 95\% bootstrap CIs reported for preference-learning strategy ablations (Table~\ref{tab:strategies}). DSL solver output is deterministic (no sampling variance). [Yes]
     \item[(c)] Compute: all experiments run via commercial APIs (OpenAI, Anthropic, Google). No GPU training involved. Total API cost $<$\$50. [Yes]
 \end{enumerate}
 
