@@ -141,7 +141,13 @@ class TaskSpec:
     def validate(self) -> List[str]:
         """验证 TaskSpec 的合法性，返回错误列表"""
         errors = []
-        valid_families = {"hypothesis_enumeration", "conjugate_update", "variable_elimination"}
+        valid_families = {
+            "hypothesis_enumeration",
+            "conjugate_update",
+            "variable_elimination",
+            "naive_bayes",      # C2 2026-04-28: 5-op compose via NBSolver
+            "hmm_forward",      # C2 2026-04-28: 5-op compose via HMMSolver
+        }
         if self.inference_family not in valid_families:
             errors.append(f"未知 inference_family: {self.inference_family}")
 
@@ -174,5 +180,25 @@ class TaskSpec:
                 errors.append("variable_elimination 需要 observation_model.type = cpt_given")
             if self.decision_rule.type != "exact_probability":
                 errors.append("variable_elimination 需要 decision_rule.type = exact_probability")
+
+        elif self.inference_family == "naive_bayes":
+            if self.state_structure.type != "naive_bayes_classes":
+                errors.append("naive_bayes 需要 state_structure.type = naive_bayes_classes")
+            if not self.state_structure.nb_classes:
+                errors.append("naive_bayes 需要 nb_classes 列表")
+            if not self.state_structure.nb_feature_likelihoods:
+                errors.append("naive_bayes 需要 nb_feature_likelihoods (P(f_j|c) CPT)")
+
+        elif self.inference_family == "hmm_forward":
+            if self.state_structure.type != "hmm_states":
+                errors.append("hmm_forward 需要 state_structure.type = hmm_states")
+            if not self.state_structure.hmm_states:
+                errors.append("hmm_forward 需要 hmm_states 列表")
+            if not self.state_structure.hmm_initial:
+                errors.append("hmm_forward 需要 hmm_initial 分布")
+            if not self.state_structure.hmm_transition:
+                errors.append("hmm_forward 需要 hmm_transition CPT")
+            if not self.state_structure.hmm_emission:
+                errors.append("hmm_forward 需要 hmm_emission CPT")
 
         return errors
