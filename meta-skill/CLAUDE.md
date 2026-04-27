@@ -547,7 +547,13 @@ cd meta-skill/paper && bash sync_overleaf.sh push   # 推送
 
 - 注释语言：中文
 - 新代码放在 `meta-skill/` 目录下
-- 并发优先：asyncio + AsyncOpenAI
-- API 统一走 OpenRouter
+- **批量 LLM 调用强制并发**: 任何 ≥5 次 LLM API 调用的脚本必须用 `asyncio` + `AsyncOpenAI` + `asyncio.Semaphore(20-30)` 控制并发上限, **绝不允许 sync `for` 循环串行调用**. 实测对比 (2026-04-28 Tree 提醒)：
+  - sync loop, 100 calls × ~5-8s/call = **8-13 min** (慢, 不可接受)
+  - async semaphore=10, 100 calls = **84 sec** (实测 NB+HMM 50+50)
+  - async semaphore=25-30, 100 calls = **~30-40 sec** (进一步 2× 快)
+  - 默认 sema=25, 复杂 prompt 或 OpenRouter rate limit 紧时降到 10
+  - 模板：见 `baselines/run_pcd_experiment.py` 的 `asyncio.gather` + Semaphore 用法
+- API 统一走 OpenRouter（环境变量 `OPENROUTER_API_KEY`，HTTPS_PROXY 默认 `http://127.0.0.1:7897`）
+- **Python 解释器必用 `.venv/bin/python3` 不用 system `python3`**（system 是 3.9, pgmpy 0.1.26 因 PEP 604 `int | float` syntax 报错）
 - 每个功能点完成后 git commit
 - 用 `python3` 不用 `python`
