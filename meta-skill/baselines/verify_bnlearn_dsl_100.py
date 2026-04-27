@@ -5,6 +5,11 @@
 import sys, os, random, json
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
+# pgmpy 0.1.26 + xgboost-without-libomp 修复 (2026-04-27)
+# 必须在 import pgmpy 之前 monkey-patch xgboost stub。详见 _pgmpy_compat.py
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _pgmpy_compat  # noqa: F401
+
 from pgmpy.utils import get_example_model
 from pgmpy.inference import VariableElimination
 from dsl.types import Factor
@@ -36,12 +41,17 @@ def generate_and_verify(net_name, n_queries, seed):
     rng = random.Random(seed)
 
     # 构建 DSL Factor 列表
+    # 注 (2026-04-27 bug 修): 必须用 cpd.variables[1:] 而非 cpd.get_evidence()，
+    # 因为 get_evidence() 返回 set/dict_keys，顺序不保证；cpd.values 的 axis
+    # 顺序由 cpd.variables 决定。之前用 list(get_evidence()) 导致 multi-state /
+    # multi-parent factor 构造时 axis 错位 → joint 分布错 → asia 60% / child 33%
+    # 假阳性。修后所有 query 数学完全正确。dsl/core_ops 本身并无 bug。
     import numpy as np
     from itertools import product as iterproduct
     dsl_factors = []
     for node in nodes:
         cpd = model.get_cpds(node)
-        parents = list(cpd.get_evidence())
+        parents = list(cpd.variables[1:])  # was: list(cpd.get_evidence())
         state_names = cpd.state_names
 
         # Factor variables 顺序: [node] + parents

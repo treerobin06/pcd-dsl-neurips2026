@@ -33,6 +33,11 @@ if sys.platform == "win32":
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
+# pgmpy 0.1.26 + xgboost-without-libomp 修复 (2026-04-27)
+# 必须在 import pgmpy 之前 monkey-patch xgboost stub。详见 _pgmpy_compat.py
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _pgmpy_compat  # noqa: F401
+
 import httpx
 from openai import AsyncOpenAI
 from pgmpy.utils import get_example_model
