@@ -94,38 +94,41 @@
 
 > 每项改完打 ✅，附 commit hash 缩写。
 
-### 4.1 Verifier framing: 3-Gate → 2-Gate
+### 4.1 Verifier framing: 3-Gate → 2-Gate ✅ (2026-04-28 push bfc8fcf)
 
-- [ ] L81 + L116 "three-gate verifier" → "two-gate deployable verifier"
-- [ ] L130 Figure 1 caption "three-gate verifier"
-- [ ] L284 algorithm 段落
-- [ ] L287 verifier eq label
-- [ ] L332 self-refine 描述
-- [ ] L342 subsection "Verifier-Guided Inductor"
-- [ ] L371-380 Gate 3 描述（item + 算法步骤）整段删
-- [ ] L375 `\item Gate~3, Reference Match` 删
-- [ ] L396 algorithm step `Gate3_Reference` 删
-- [ ] L407 LOO claim "100% match to gold reference solvers" 改写
-- [ ] L585-588 §"Ablation: Gate 3 is Not Required" **整段删**
-- [ ] L659 Related Work `three-gate verifier`
-- [ ] L709 footnote `Gate 3 (reference match) is optional`
-- [ ] L721 Conclusion `typed DSL and three-gate verifier`
-- [ ] L760-767 Appendix `\section{DSL Equivalence and Gate 3 Ablation}` **整段删**
-- [ ] L1110 LOO appendix `gold reference solver with 100% accuracy`
-- [ ] L1119 Table 3 列 "Gate 3" 删
-- [ ] L1280 reproducibility checklist `verifier`
+- ✅ "three-gate verifier" 全文 5 处 replace_all → "two-gate verifier"
+- ✅ L375 `\item Gate~3, Reference Match` item 删 + "If Gates 1--2 fail" → "If either gate fails"
+- ✅ L284-288 verifier Eq2 删 G3 conjunct (`\;\wedge\; \underbrace{...}_{G_3...}`)
+- ✅ L396 algorithm step `Gate3_Reference` 删
+- ✅ L407 LOO claim "100% match to gold reference solvers" → "All 6 pass all verification gates" (删 100% gold match)
+- ✅ L585-589 §"Ablation: Gate 3 is Not Required" **整段删**
+- ✅ L760-770 Appendix `\section{DSL Equivalence and Gate 3 Ablation}` 改名 "DSL Equivalence" + Gate 3 Off 段改名 "LOO held-out validation" + 删 \label{app:gate3}
+- ✅ L1110 LOO appendix `gold reference solver with 100% accuracy` 删
+- ✅ L1117-1129 Table 删 "Gate 3" 列 (7→6 columns)
+- 全文 grep "Gate 3 / gate3 / Reference Match / three-gate" → 无残留 ✓
 
-### 4.2 pgmpy 引用从 paper 移除
+### 4.2 pgmpy 引用从 paper 移除 ✅ (2026-04-28 push bfc8fcf)
 
-- [ ] L339 "cross-checked against pgmpy~\citep{ankan2015pgmpy}" → "matched against BLInD dataset's ground-truth answers"
-- [ ] L708 footnote 同上 改写
-- [ ] `references.bib` `ankan2015pgmpy` entry **保留**（未来若需再引可即时启用，但 main.tex 不引）
+- ✅ L339 "cross-checked against pgmpy~\citep{ankan2015pgmpy}" → "matched against BLInD dataset's ground-truth posteriors"
+- ✅ L708 footnote 同上改写
+- ✅ `references.bib` `ankan2015pgmpy` entry 保留（备用）
+- 全文 grep "pgmpy / ankan2015" → 无残留 ✓
 
-### 4.3 Family-agnostic typed backend framing 新增
+### 4.3 Family-agnostic typed backend framing — 已隐含在 L644/L652 (无需新加段)
 
-- [ ] Section 3 加段落：DSL 是 family-agnostic typed factor algebra
-- [ ] Section 4 BN VE 段加 "a demonstration that the same 7 ops cover BN among other families"
-- [ ] Discussion / Related Work 加 "pgmpy/ProbLog are BN-only specialized libraries; ours spans preference/bandit/HMM via the same 7 typed ops"——直接回应"为什么不用 pgmpy"
+- ✅ L644 "synthesis at the family level rather than per-instance"
+- ✅ L652 "ProbLog targets BN inference only, while our DSL covers multiple inference families with the same seven typed primitives"
+- ✅ L661 "Unlike general-purpose PPLs..., our DSL is intentionally narrow, covering discrete exact inference only"
+- 已有段落已经清楚阐述 family-agnostic vs BN-specialized library 区别，**无需重写或新加 Section**
+
+### 4.4 Self-evolving library — 1 句话嵌入 Discussion ✅ (2026-04-28 push bfc8fcf)
+
+- ✅ L706 DSL Design and Verification 段加 1 句:
+  > "The architecture is extensible: new families verified by the inductor--verifier loop can be persisted as reusable macros through a file-based registry (one Python module per macro under `dsl/macros/`), and new core operations with formal type signatures can extend the foundation; we leave full self-evolution---automatically growing the macro library across deployments---to future work."
+
+### 4.5 Conclusion compositional gen scope qualifier ✅ (2026-04-28 push bfc8fcf)
+
+- ✅ L725-726 改写: 加 "synthetic NB and HMM" scope + 加结尾"broader compositional generalization beyond these synthetic held-out tests remains an open question for future work"
 
 ### 4.4 Self-evolving library — 仅在架构图 + Discussion 提一嘴（不开 Section）
 

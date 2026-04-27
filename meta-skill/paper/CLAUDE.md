@@ -46,6 +46,7 @@
 - [2026-03-31 20:34] push | 去AI味(L608-1267): Related Work/Limitations/Conclusion/Appendix共~23处修改, 消除forced三项列举/em dash过度使用/双括号注释/passive voice/overexplanation, 拆长句制造节奏变化
 - [2026-03-31 20:45] push | 括号清理+academic-writing-refiner: ~25处括号改为逗号/内联从句/独立句, em dash仅剩2处(合理appositive), AI标志词0处
 - [2026-04-09 15:00] push | 架构展开: S4.4 Inductor拆为3步(recognize+compose+emit)+Route Analysis表+HMM compositional generalization强化+Related Work加Skill文献桥接(SoK+EvoSkills)+bib加2条
+- [2026-04-28 00:34] push | framing pivot (Tree 三轮讨论): 删 3-Gate Verifier→2-Gate Deployable (Gate 3 假独立+生产拿不到 gold), 删 pgmpy 引用换 BLInD GT (避免"为什么不用 pgmpy"攻击面), Discussion 加 self-evolving 一句 (file-based registry vision), Conclusion compositional gen 加 scope qualifier (synthetic NB/HMM held-out)。21页编译OK
 
 ## 论文概况
 

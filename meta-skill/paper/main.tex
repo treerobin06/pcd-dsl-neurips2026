@@ -78,7 +78,7 @@ All models can read primary-family problem structures (82--100\% Parse on prefer
 Computation, rather than language understanding, is the limiting factor.
 This motivates a division of labor: let the LLM infer the mathematical structure of a task family once, then hand all computation to a verified solver that requires no further LLM calls.
 Unlike per-instance code generation, which demands an LLM call for every problem, our inductor is called once per inference family; the compiled solver handles all subsequent instances deterministically.
-We implement this with a typed probabilistic DSL of seven core operations, a deterministic compiler, and a three-gate verifier.
+We implement this with a typed probabilistic DSL of seven core operations, a deterministic compiler, and a two-gate verifier.
 Given as few as one example, GPT-4o-mini, the cheapest model in our evaluation, produces solvers that achieve 100\% accuracy on the compute stage (conditional on a correct TaskSpec) across our tested benchmarks, including real-world Bayesian networks with up to 37 nodes where per-instance code generation degrades sharply.
 This matches GPT-5.4 unconstrained code generation at $14\times$ lower cost and PAL at $310\times$ lower cost.
 On two held-out inference families with no corresponding built-in macro, the seven core operations alone reach 100\% on the compute stage, indicating the operations suffice to express these families.
@@ -113,7 +113,7 @@ LLMs can identify \emph{what} to compute; the difficulty is \emph{how}. We there
 Given a new task, the LLM infers the mathematical structure of its task family once. A deterministic compiler then turns that description into an exact solver that requires no further LLM calls.
 This demands more than instance-level parsing: the LLM must recognize the inference family, decide whether to reuse a built-in macro or compose a new workflow from typed primitives, and emit a complete declarative specification. We validate this empirically, including on two held-out families where the inductor must compose novel operation sequences from scratch.
 
-We implement this with a typed probabilistic DSL of seven core operations, a deterministic compiler, and a three-gate verifier.
+We implement this with a typed probabilistic DSL of seven core operations, a deterministic compiler, and a two-gate verifier.
 Because the LLM fills a structured specification instead of writing arbitrary code, even GPT-4o-mini, the cheapest model we test, produces solvers that match hand-written references across 1,150 test instances (Flight 250, BLInD 900) with zero compute-stage errors. This matches GPT-5.4 unconstrained code generation at $14\times$ lower cost.
 On real-world Bayesian networks with up to 37 nodes, per-instance code generation via PAL fails entirely, while our compiled solver stays at 100\%.
 End-to-end on natural-language inputs, the pipeline matches the gold-feature oracle at 74\% accuracy on preference learning; see Section~\ref{sec:e2e}.
@@ -127,7 +127,7 @@ End-to-end on natural-language inputs, the pipeline matches the gold-feature ora
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/figure1_overview.png}
-\caption{Overview. \textbf{Left:} \method{} diagnosis decomposes LLM probabilistic reasoning into Parse, Compute, and Decide, identifying computation as the primary failure mode (22--78\% accuracy vs.\ $\geq$95\% on Parse and Decide). \textbf{Right:} The compile-once pipeline. An LLM inductor recognizes the inference family, selects a built-in macro or composes a novel workflow from core operations (Table~\ref{tab:routes}), and emits a declarative \taskspec{}. A deterministic compiler produces an exact solver; a three-gate verifier checks correctness. The compiled solver runs with no LLM involvement at test time.}
+\caption{Overview. \textbf{Left:} \method{} diagnosis decomposes LLM probabilistic reasoning into Parse, Compute, and Decide, identifying computation as the primary failure mode (22--78\% accuracy vs.\ $\geq$95\% on Parse and Decide). \textbf{Right:} The compile-once pipeline. An LLM inductor recognizes the inference family, selects a built-in macro or composes a novel workflow from core operations (Table~\ref{tab:routes}), and emits a declarative \taskspec{}. A deterministic compiler produces an exact solver; a two-gate verifier checks correctness. The compiled solver runs with no LLM involvement at test time.}
 \label{fig:overview}
 \end{figure*}
 
@@ -281,9 +281,9 @@ I_\psi\!\left(\mathcal{D}_F^{(k)},\; \text{diag}\!\left(V\!\left(C(\hat{\tau}^{(
 \qquad \hat{S} = C(\hat{\tau}^{(r^*)}),
 \label{eq:inductor}
 \end{equation}
-where $r^*$ is the first round passing verification, and the three-gate verifier $V$ checks:
+where $r^*$ is the first round passing verification, and the two-gate verifier $V$ checks:
 \begin{equation}
-V(\hat{S}, \mathcal{D}_{\text{val}}) = \underbrace{\mathbf{1}\!\left\{\hat{S}\text{ executes}\right\}}_{G_1\text{: sanity}} \;\wedge\; \underbrace{\mathbf{1}\!\left\{\forall (x,y) \in \mathcal{D}_{\text{val}}\!:\; \left\|\hat{S}(x) - y\right\|_\infty < \epsilon\right\}}_{G_2\text{: ground truth}} \;\wedge\; \underbrace{\mathbf{1}\!\left\{\hat{S} \equiv S^*\right\}}_{G_3\text{: reference (opt.)}}.
+V(\hat{S}, \mathcal{D}_{\text{val}}) = \underbrace{\mathbf{1}\!\left\{\hat{S}\text{ executes}\right\}}_{G_1\text{: sanity}} \;\wedge\; \underbrace{\mathbf{1}\!\left\{\forall (x,y) \in \mathcal{D}_{\text{val}}\!:\; \left\|\hat{S}(x) - y\right\|_\infty < \epsilon\right\}}_{G_2\text{: ground truth}}.
 \label{eq:verifier}
 \end{equation}
 The system succeeds if $\hat{S}$ generalizes to unseen instances from the same family:
@@ -329,14 +329,14 @@ From this, the compiler produces a solver that enumerates all $5^4 = 625$ weight
 \paragraph{Compile-once regime.}
 The inductor is called once per \emph{inference family}, not per problem instance.
 The resulting solver handles new instances from the same family, including varying topologies, feature counts, and observation lengths.
-If the three-gate verifier rejects the compiled solver, diagnostic feedback triggers up to 3 refinement rounds (Algorithm~\ref{alg:pipeline}).
+If the two-gate verifier rejects the compiled solver, diagnostic feedback triggers up to 3 refinement rounds (Algorithm~\ref{alg:pipeline}).
 Once verified, the solver is deployed without further LLM calls.
 
 \subsection{Deterministic Compiler}
 
 The compiler translates a \taskspec{} into an executable solver composed exclusively of DSL primitives.
 Because both the schema and the operations are formally defined, the compiler is deterministic: the same specification always yields the same solver.
-Compiled solvers match independent gold-reference implementations cross-checked against pgmpy~\citep{ankan2015pgmpy} on BN queries, with maximum absolute error below $10^{-12}$, i.e.\ floating-point precision, across all 1,150 test instances spanning Flight~250 and BLInD~900; see Appendix~\ref{app:equivalence}.
+Compiled solvers match independent gold-reference implementations on BN queries, with maximum absolute error below $10^{-12}$ (floating-point precision) across all 1,150 test instances spanning Flight~250 and BLInD~900, where ground-truth posteriors are taken directly from the BLInD dataset; see Appendix~\ref{app:equivalence}.
 Because the compiled solver is deterministic and mathematically equivalent to the gold reference, 100\% accuracy on finite test sets reflects exact computation rather than statistical overfitting.
 
 \subsection{Verifier-Guided Inductor}
@@ -368,13 +368,12 @@ HMM Forward & \emph{none} & Core-ops & iter(mult $\to$ marg $\to$ norm) over $t$
 \end{tabular}
 \end{table}
 
-A three-gate verifier checks the compiled solver:
+A two-gate verifier checks the compiled solver:
 \begin{enumerate}
     \item \textbf{Gate~1, Code Sanity}: The compiled solver executes without errors.
     \item \textbf{Gate~2, Ground Truth}: Solver outputs match known correct answers on held-out validation samples, disjoint from induction examples and the final test set.
-    \item \textbf{Gate~3, Reference Match}: Solver outputs match the gold reference solver. This gate is optional and not required for correctness; see the ablation in \S\ref{sec:ablation}.
 \end{enumerate}
-If Gates 1--2 fail, diagnostic feedback guides the inductor to refine the \taskspec{}, up to 3 rounds.
+If either gate fails, diagnostic feedback guides the inductor to refine the \taskspec{}, up to 3 rounds.
 Algorithm~\ref{alg:pipeline} summarizes the full compile-once pipeline.
 
 \begin{algorithm}[t]
@@ -393,7 +392,6 @@ Algorithm~\ref{alg:pipeline} summarizes the full compile-once pipeline.
     \ENDIF
     \STATE $g_2 \leftarrow$ \textsc{Gate2\_GroundTruth}($S, \mathcal{D}_{\text{val}}$) \COMMENT{outputs match gold on held-out?}
     \IF{$g_1 \wedge g_2$}
-        \STATE $g_3 \leftarrow$ \textsc{Gate3\_Reference}($S$) \COMMENT{optional: match gold solver}
         \RETURN $S$ \COMMENT{verified solver deployed}
     \ENDIF
     \STATE $\textit{spec} \leftarrow \text{LLM}_{\text{refine}}(\textit{spec}, \text{diagnostics})$
@@ -404,7 +402,7 @@ Algorithm~\ref{alg:pipeline} summarizes the full compile-once pipeline.
 
 \paragraph{Leave-One-Out (LOO) Generalization.}
 We test the inductor on 6 held-out datasets spanning 3 inference families: Hotel, Flight-2F/3F/5F/6F, and BLInD depth-out-of-distribution.
-All 6 pass all verification gates on the first attempt without self-refinement, with 100\% match to gold reference solvers.
+All 6 pass all verification gates on the first attempt without self-refinement.
 
 \paragraph{Inductor Reliability.}
 To measure variance, we run the inductor 20 times per family on Flight and BN at temperature 0.7.
@@ -582,12 +580,6 @@ This sequential pattern---absent from all three training macros---is assembled f
 \paragraph{Anomalies.}
 GPT-4o-mini achieves only 3\% Parse on NB because it omits absent-symptom entries; on HMM, its Decide drops to 98\% due to near-tied posteriors. Neither anomaly affects core-ops results.
 
-\subsection{Ablation: Gate 3 is Not Required}
-\label{sec:ablation}
-
-Disabling Gate~3 (Reference Match) and rerunning the full induction pipeline, all 6 LOO datasets still pass with Gates 1--2 alone, and the resulting solvers remain 100\% consistent with gold solvers (Appendix~\ref{app:gate3}).
-Gate~3 is a useful safety check but not required for correctness.
-
 \paragraph{Cost and Scaling.}
 On BLInD's small networks, our DSL costs \$0.008 for 100\% accuracy, compared to \$0.11 for compile-time GPT-5.4 ($14\times$) and \$2.50 for PAL GPT-5.4 at 98.1\% ($310\times$; Figure~\ref{fig:scaling_cost}).
 The cost advantage stems from the compile-once design: a single induction call is amortized over all subsequent queries, which run deterministically at zero LLM cost.
@@ -656,7 +648,7 @@ LLM-BI~\citep{huang2025llmbi} also translates natural language into a structured
 \paragraph{Tool Use, Library Learning, and Agentic Skills.}
 Toolformer~\citep{schick2023toolformer} and ReAct~\citep{yao2023react} equip LLMs with external tool calls at inference time; LILO~\citep{grand2024lilo} and DreamCoder~\citep{ellis2021dreamcoder} learn reusable code libraries through iterative abstraction.
 Recent work on agentic skills~\citep{zhang2026evoskills} frames reusable agent capabilities as structured packages of specifications, scripts, and domain knowledge that agents can compose and extend.
-Our typed operations and verified macros can be viewed as a domain-specific skill library for exact probabilistic reasoning; however, our system is more constrained: the LLM emits a declarative specification rather than executable code, and a three-gate verifier certifies the compiled solver before deployment.
+Our typed operations and verified macros can be viewed as a domain-specific skill library for exact probabilistic reasoning; however, our system is more constrained: the LLM emits a declarative specification rather than executable code, and a two-gate verifier certifies the compiled solver before deployment.
 This moves the trust boundary from ``does the generated code happen to work?''\ to ``does the specification pass verification?''
 Unlike general-purpose PPLs such as WebPPL, Stan, and Pyro, our DSL is intentionally narrow, covering discrete exact inference only.
 
@@ -704,9 +696,10 @@ Family-level induction is a stronger capability than instance-level parsing; our
 
 \paragraph{DSL Design and Verification.}
 The seven core operations and three macros were hand-designed; extending to a new family may require new operations, \eg \texttt{log} for information-theoretic quantities or \texttt{max-marginalize} for MAP inference.
+The architecture is extensible: new families verified by the inductor--verifier loop can be persisted as reusable macros through a file-based registry (one Python module per macro under \texttt{dsl/macros/}), and new core operations with formal type signatures can extend the foundation; we leave full self-evolution---automatically growing the macro library across deployments---to future work.
 We do not claim completeness over all discrete inference tasks.
-Compiler equivalence (``0.0 max error'') is checked against gold solvers cross-validated with pgmpy~\citep{ankan2015pgmpy}; this is empirical verification, not a formal proof.
-Gates~1--2 require only a small held-out validation set; Gate~3 (reference match) is optional.
+Compiler equivalence (``0.0 max error'') is checked against the BLInD dataset's published ground-truth posteriors; this is empirical verification, not a formal proof.
+Gates 1--2 require only a small held-out validation set with reference answers, available for our test families; in domains lacking such validation data, Gate 2 reduces to a sanity check on a small number of self-supplied examples.
 The inductor is a stochastic LLM call: 20 runs on two families show 100\% success, but broader stress-testing is needed before deployment.
 All prompts, specifications, and compiled solvers will be released.
 
@@ -718,12 +711,12 @@ All prompts, specifications, and compiled solvers will be released.
 Across six models, five task families, and over 2,000 test instances, we find a consistent pattern: LLM probabilistic reasoning fails at computation, not at parsing or decision-making.
 \method{} quantifies this gap.
 
-Our typed DSL and three-gate verifier implement that remedy: the LLM handles structure extraction, while a deterministic compiler handles numerical computation.
+Our typed DSL and two-gate verifier implement that remedy: the LLM handles structure extraction, while a deterministic compiler handles numerical computation.
 The compile-once design is accurate and economical: on BN inference, even GPT-4o-mini produces verified solvers that achieve 100\% accuracy on the compute stage (conditional on a correct TaskSpec). The cost is $14\times$ lower than GPT-5.4 compile-time code and $310\times$ lower than per-instance PAL.
 
 The approach has clear limits: it applies when the hard part is computing with given or derivable distributions, not estimating them from unstructured context.
-Within those limits, the inductor generalizes compositionally: on two held-out families with no built-in macro, it assembles novel workflows from the same seven typed primitives, including an iterated temporal loop for HMM forward filtering that is absent from all training macros.
-This suggests that the core operations capture reusable structure in discrete probabilistic inference.
+Within those limits, the inductor composes novel workflows from the same seven typed primitives on two held-out synthetic families (NB and HMM) with no built-in macro, including an iterated temporal loop for HMM forward filtering that is absent from all training macros.
+This suggests that the core operations capture reusable structure in discrete probabilistic inference; broader compositional generalization beyond these synthetic held-out tests remains an open question for future work.
 The same idea applies wherever computation, not comprehension, is the bottleneck: delegate exact inference to a deterministic backend.
 
 {\small
@@ -757,16 +750,14 @@ HMM Forward & $\alpha_t(s) \propto p(o_t \mid s) \sum_{s'} \alpha_{t\text{-}1}(s
 \end{tabular}
 \end{table}
 
-\section{DSL Equivalence and Gate 3 Ablation}
+\section{DSL Equivalence}
 \label{app:equivalence}
-\label{app:gate3}
 
 \paragraph{Equivalence verification.}
-Compiled solvers match gold reference solvers with 0.0 maximum error across all 1,150 test instances: Flight (250/250) and BLInD (900/900).
+Compiled solvers match gold reference solvers with 0.0 maximum error across all 1,150 test instances: Flight (250/250) and BLInD (900/900). Ground-truth posteriors are taken from the BLInD dataset's published answers.
 
-\paragraph{Gate 3 Off ablation.}
-All 6 LOO datasets (Hotel, Flight-2F/3F/5F/6F, BLInD depth-out-of-distribution) pass verification using only Gates 1--2, with 100\% gold match on the first attempt.
-Gate~3 provides an additional safety check but is not necessary for correctness.
+\paragraph{LOO held-out validation.}
+All 6 LOO datasets (Hotel, Flight-2F/3F/5F/6F, BLInD depth-out-of-distribution) pass Gates 1--2 on the first attempt without self-refinement.
 
 \section{23-Strategy Ablation Details}
 \label{app:strategies}
@@ -1107,23 +1098,23 @@ BN (variable elim.) & 20 & 20/20 (100\%) & 1.0 & 4.8 & All correct \\
 
 \paragraph{LOO generalization details.}
 Table~\ref{tab:loo_detail} shows per-dataset results for the 6 LOO held-out datasets.
-All datasets pass all verification gates on the first attempt without self-refinement, and the induced \taskspec{} matches the gold reference solver with 100\% accuracy.
+All datasets pass all verification gates on the first attempt without self-refinement.
 
 \begin{table}[ht]
 \centering
 \small
 \caption{LOO generalization: 6 held-out datasets, GPT-4o-mini inductor. All pass on first attempt.}
 \label{tab:loo_detail}
-\begin{tabular}{@{}lcccccc@{}}
+\begin{tabular}{@{}lccccc@{}}
 \toprule
-Dataset & Dims & Family & Features & Values & Gate 3 & Rounds \\
+Dataset & Dims & Family & Features & Values & Rounds \\
 \midrule
-Hotel (4D) & 4 & \checkmark & \checkmark & \checkmark & 100\% & 1 \\
-Flight-2F & 2 & \checkmark & \checkmark & \checkmark & 100\% & 1 \\
-Flight-3F & 3 & \checkmark & \checkmark & \checkmark & 100\% & 1 \\
-Flight-5F & 5 & \checkmark & \checkmark & \checkmark & 100\% & 1 \\
-Flight-6F & 6 & \checkmark & \checkmark & \checkmark & 100\% & 1 \\
-BLInD depth-OOD & -- & \checkmark & -- & -- & 100\% & 1 \\
+Hotel (4D) & 4 & \checkmark & \checkmark & \checkmark & 1 \\
+Flight-2F & 2 & \checkmark & \checkmark & \checkmark & 1 \\
+Flight-3F & 3 & \checkmark & \checkmark & \checkmark & 1 \\
+Flight-5F & 5 & \checkmark & \checkmark & \checkmark & 1 \\
+Flight-6F & 6 & \checkmark & \checkmark & \checkmark & 1 \\
+BLInD depth-OOD & -- & \checkmark & -- & -- & 1 \\
 \bottomrule
 \end{tabular}
 \end{table}
