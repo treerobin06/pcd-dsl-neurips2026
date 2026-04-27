@@ -600,6 +600,20 @@ On all 624 samples, the pipeline achieves \textbf{74.3\%} accuracy (95\% CI: [70
 Feature extraction is near-perfect at 99.9--100\% per feature; the pipeline agrees with the gold solver on 99.8\% of instances. The remaining 0.2\% gap traces to one parse failure from malformed JSON and one downstream disagreement with the gold solver, not extraction errors.
 Compared to the best prompt-based strategy (tool-calling at 58.3\%), the compile-once pipeline gains 16 percentage points by replacing LLM computation with a verified solver.
 
+\subsection{Mixed-family End-to-End Benchmark}
+\label{sec:mixed_e2e}
+
+The Flight E2E above tests one family in isolation; we now evaluate the framework as a general probabilistic reasoning agent.
+We shuffle samples from three distinct inference families---BLInD Bayesian network inference, Naive Bayes synthetic diagnosis, and HMM forward filtering---and present them to GPT-4o-mini one at a time \emph{without} telling the model which family each sample belongs to.
+The agent must (i) identify the inference family from the natural-language task description, (ii) emit a \taskspec{} for that family, (iii) compile to the appropriate deterministic solver, and (iv) produce the final answer.
+We run 30 samples per family in shuffled order ($n{=}90$ total).
+
+\textbf{Result}: GPT-4o-mini achieves perfect family identification (90/90 = 100\%, Wilson 95\% CI [95.9, 100]) and perfect overall end-to-end accuracy (90/90 = 100\%, Wilson 95\% CI [95.9, 100]).
+Per-family E2E accuracy is 30/30 on each of BLInD, NB, and HMM, with zero parse failures, family misclassifications, compile errors, or downstream solver errors.
+
+This standard-config 100\% should be read alongside the harder-task patterns documented in \S\ref{sec:held_out} (bnlearn networks with $\geq$20 nodes: PAL 17.5\%, free-code and core-ops codegen 0\%, deterministic compile 100\%) and \S\ref{sec:analysis} (direct prompting collapses with depth on BN inference, code generation fails on large networks regardless of scaffolding).
+The framework's value is dual: on standard cross-family tasks, a cheap LLM identifies the family and extracts spec parameters reliably enough that the deterministic compiler produces correct answers end-to-end; on harder tasks where every form of LLM code generation fails entirely, the same compile-once route is the only path that reaches 100\%.
+
 % ============================================================
 \section{Analysis}
 \label{sec:analysis}
