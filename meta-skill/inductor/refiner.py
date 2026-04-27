@@ -14,17 +14,17 @@ from inductor.inductor import induce_taskspec, induce_with_refinement
 
 def induce_and_verify(
     samples: List[Dict],
-    gold_solver: Optional[SolverType] = None,
     model_id: str = "openai/gpt-4o-mini",
     max_rounds: int = 3,
     max_samples: int = 5,
     verify_samples: Optional[List[Dict]] = None,
 ) -> Tuple[Optional[TaskSpec], VerificationResult, int]:
-    """运行 Inductor + Verifier self-refine 循环
+    """运行 Inductor + Verifier self-refine 循环（2-Gate Verifier）
+
+    2026-04-28 framing pivot: gold_solver 参数已移除（Gate 3 删 → 不需要独立 gold）。
 
     Args:
         samples: 样本数据，给 Inductor 用
-        gold_solver: 手写 gold solver（Gate 3 需要）
         model_id: LLM 模型
         max_rounds: 最大 refine 轮数
         max_samples: Inductor 使用的最大样本数
@@ -61,7 +61,7 @@ def induce_and_verify(
         print(f"  [Inductor] 推断: family={spec.inference_family}, task={spec.task_name}")
 
         # 验证（C6 修复：用独立 verify_set 而非 samples，防 train/test 泄漏）
-        result = verify_taskspec(spec, verify_set, gold_solver)
+        result = verify_taskspec(spec, verify_set)
         print(f"  [Verifier] {result.diagnostics()}")
 
         if result.passed:

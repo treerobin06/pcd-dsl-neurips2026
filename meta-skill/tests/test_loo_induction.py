@@ -65,13 +65,9 @@ def test_one_dataset(name, data_path, max_induction_samples=5, max_verify_sample
     print(f"  样本数: {len(samples)}")
     print(f"  features: {samples[0].get('features', '?')}")
 
-    # 构造 gold solver
+    # 2026-04-28 framing pivot: 不再构造 gold solver（Gate 3 删除）
     pref_vals = detect_preference_values(samples)
     dim = len(samples[0]["features"])
-    gold = PreferenceSolver(
-        feature_dim=dim,
-        preference_values=pref_vals,
-    )
     print(f"  维度: {dim}, 值域: {pref_vals}")
 
     # C6 修复 (2026-04-24): 显式 disjoint train/test split
@@ -86,11 +82,10 @@ def test_one_dataset(name, data_path, max_induction_samples=5, max_verify_sample
         raise ValueError(f"Dataset {name} has only {len(samples)} samples; need >={max_induction_samples + 1} for disjoint LOO split")
     print(f"  Disjoint split: induct={len(induct_samples)}, verify={len(verify_samples)}")
 
-    # 运行 Inductor
+    # 运行 Inductor (2-Gate Verifier: Code Sanity + Ground Truth)
     start = time.time()
     spec, result, rounds = induce_and_verify(
         induct_samples,
-        gold_solver=gold,
         max_rounds=3,
         max_samples=max_induction_samples,
         verify_samples=verify_samples,
@@ -181,12 +176,11 @@ def test_blind_depth_ood():
     induct_ids = {id(s) for s in shallow}
     verify_ids = {id(s) for s in shallow_verify}
     assert not (induct_ids & verify_ids), "C6 violation: BLInD-OOD induct/verify overlap"
-    gold = BNReferenceSolver()
 
     print(f"  Induction 样本: {len(shallow)} (depth=2), Disjoint verify: {len(shallow_verify)}")
 
     spec, result, rounds = induce_and_verify(
-        shallow, gold_solver=gold, max_rounds=2, max_samples=3,
+        shallow, max_rounds=2, max_samples=3,
         verify_samples=shallow_verify,
     )
 
