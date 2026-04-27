@@ -1,6 +1,26 @@
 """
 Figure 3a: bnlearn real-world network scaling.
 NeurIPS 2025 style following PaperBanana conventions.
+
+⚠️ 2026-04-24 ARTIFACT DISCIPLINE TODO (C9 fix pending):
+本文件 L33-36 当前为硬编码（Codex review CRITICAL 1 + 4-agent audit 指出）。
+
+数据来源历史:
+- our_dsl=[100,100,100,100]: 来自 verify_bnlearn_dsl_100.py 的旧版本，
+  该脚本含 `dsl_p = gold_p` fallback bug → 多值节点自动 100% (已修于 9963f2f)
+- pal_54 / pal_mini / direct: 来自 baselines/results/bnlearn_*.json overall
+  数字（per-network 拆分无 raw 留存，是 Codex 建议的 S12 缺失）
+
+正确做法（Phase C 跑完后实施）:
+1. 重跑 verify_bnlearn_dsl_100.py（已修 fallback）取真实 DSL 数学正确性
+2. 重跑 run_bnlearn_held_out.py（已修 multiply_factors）取真实 LLM
+   end-to-end compile_core_ops 数字
+3. C3 真重构 compiler 后再次重跑
+4. 本 figure 改为从 baselines/results/bnlearn_*.json 读 per-network
+   字段，不再硬编码
+
+在 Phase C 实验完成前，本 figure 数字保持现状以保持论文 build 不破，
+但**论文 prose 和 figure 必须在同一次 commit 里同步更新**——禁止只改一边。
 """
 import matplotlib
 matplotlib.use('Agg')
