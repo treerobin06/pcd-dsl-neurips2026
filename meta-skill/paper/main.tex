@@ -74,14 +74,14 @@
 % ============================================================
 Large language models (LLMs) can \emph{understand} probabilistic reasoning problems but cannot \emph{solve} them reliably.
 We test six models on tasks spanning Bayesian network (BN) inference, preference learning, and bandits.
-All models can read a problem and act on its answer, with over 95\% accuracy on both parsing the structure and deciding from a computed result, yet their ability to perform the probabilistic computation in between ranges from 22\% to 78\% and drops to 3--11\% on depth-10 networks.
+All models can read primary-family problem structures (82--100\% Parse on preference learning and basic BN inputs) and act on a computed answer (100\% Decide), yet their ability to perform the probabilistic computation in between ranges from 22\% to 78\% and drops to 3--11\% on depth-10 networks. On harder structured-input tasks, exact-match Parse itself drops sharply (3\% on Naive-Bayes-style natural-language inputs).
 Computation, rather than language understanding, is the limiting factor.
 This motivates a division of labor: let the LLM infer the mathematical structure of a task family once, then hand all computation to a verified solver that requires no further LLM calls.
 Unlike per-instance code generation, which demands an LLM call for every problem, our inductor is called once per inference family; the compiled solver handles all subsequent instances deterministically.
 We implement this with a typed probabilistic DSL of seven core operations, a deterministic compiler, and a three-gate verifier.
-Given as few as one example, GPT-4o-mini, the cheapest model in our evaluation, produces solvers that achieve 100\% compute-stage accuracy on all tested BN benchmarks, including real-world networks with up to 37 nodes where per-instance code generation fails entirely.
+Given as few as one example, GPT-4o-mini, the cheapest model in our evaluation, produces solvers that achieve 100\% accuracy on the compute stage (conditional on a correct TaskSpec) across our tested benchmarks, including real-world Bayesian networks with up to 37 nodes where per-instance code generation degrades sharply.
 This matches GPT-5.4 unconstrained code generation at $14\times$ lower cost and PAL at $310\times$ lower cost.
-On two held-out inference families with no corresponding built-in macro, the seven core operations alone reach 100\%, generalizing beyond the task families used during design.
+On two held-out inference families with no corresponding built-in macro, the seven core operations alone reach 100\% on the compute stage, indicating the operations suffice to express these families.
 \end{abstract}
 
 % ============================================================
@@ -105,7 +105,7 @@ To pinpoint where reasoning breaks down, we introduce \emph{Parse--Compute--Deci
 \textbf{Compute$\mid$GoldParse} gives it perfect structure and tests the computation;
 \textbf{Decide$\mid$GoldPosterior} gives it the correct posterior and tests whether it can act on it.
 
-Across six models from OpenAI, Anthropic, and Google, Parse accuracy is 82--100\% on primary task families and Decide accuracy is 100\%, but Compute accuracy is only 22--78\%.
+Across six models from OpenAI, Anthropic, and Google, Parse accuracy is 82--100\% on primary preference-learning tasks and Decide accuracy is 100\%, but Compute accuracy is only 22--78\%; on harder structured-input tasks (Naive-Bayes natural language), exact-match Parse drops sharply (Section~\ref{sec:held_out}).
 The gap widens with problem complexity: GPT-5.4 computes the correct probability only 11\% of the time on depth-10 Bayesian networks, despite parsing the network perfectly.
 Computation, not language understanding, is the bottleneck.
 
@@ -719,7 +719,7 @@ Across six models, five task families, and over 2,000 test instances, we find a 
 \method{} quantifies this gap.
 
 Our typed DSL and three-gate verifier implement that remedy: the LLM handles structure extraction, while a deterministic compiler handles numerical computation.
-The compile-once design is accurate and economical: on BN inference, even GPT-4o-mini produces verified solvers at 100\% compute-stage accuracy. The cost is $14\times$ lower than GPT-5.4 compile-time code and $310\times$ lower than per-instance PAL.
+The compile-once design is accurate and economical: on BN inference, even GPT-4o-mini produces verified solvers that achieve 100\% accuracy on the compute stage (conditional on a correct TaskSpec). The cost is $14\times$ lower than GPT-5.4 compile-time code and $310\times$ lower than per-instance PAL.
 
 The approach has clear limits: it applies when the hard part is computing with given or derivable distributions, not estimating them from unstructured context.
 Within those limits, the inductor generalizes compositionally: on two held-out families with no built-in macro, it assembles novel workflows from the same seven typed primitives, including an iterated temporal loop for HMM forward filtering that is absent from all training macros.
