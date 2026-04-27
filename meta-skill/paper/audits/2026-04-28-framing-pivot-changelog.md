@@ -44,11 +44,23 @@
 
 ## 2. 待做代码改动
 
-- ✅ ~~`dsl/macros_library.py` self-evolving registry stub~~ — **重新定位为 VISION SKETCH**
-  - 2026-04-28 Tree 决策："自进化只是愿景，不需要真实现代码，只在架构图里提一嘴"
-  - macros_library.py 已写但**故意不连主流程**（dsl/__init__.py 不导出）
-  - 用途：paper Figure 1 / Discussion 引用作为 architecture sketch
-  - 后续真做 self-evolution 实验是 future work（毕业大论文 / 后续 paper）
+- ✅ ~~`dsl/macros_library.py` self-evolving registry stub~~ — **VISION SKETCH (Option 2: Python module per file)**
+  - 2026-04-28 Tree 决策演化：
+    - 初版："自进化只是愿景，不需要真实现代码，只在架构图里提一嘴"
+    - 加深："如果简单+快+出效果可以加，参考 Claude skill-creator 架构"
+    - 终版：选 Option 2 (Python module per macro)，不是 JSON manifest
+  - 实际产物：
+    - `dsl/macros/` 目录 + `__init__.py`（package）
+    - 3 个 builtin macro manifests as Python modules:
+      - `softmax_pref_likelihood.py` (hypothesis_enumeration, ops=3)
+      - `beta_bernoulli_update.py` (conjugate_update, ops=2)
+      - `ve_query.py` (variable_elimination, ops=4)
+    - `dsl/macros_library.py` 用 importlib 扫描 dsl/macros/*.py 加载 METADATA + fn
+    - `register_macro_file()` 接口生成新 .py 模板（vision use case）
+    - `dsl/macros/README.md` 详细说明加 macro 流程
+  - **故意不连主流程**: dsl/__init__.py 不导出 macros_library，inductor/compiler/verifier 不依赖
+  - 用途：paper Figure 1 + Discussion 引用作为 architecture sketch（"file-based, drop-in extensible Python module per file"）
+  - Sanity ✓: python3 -m dsl.macros_library scan 出 3 manifests, fn callable 有效, 主 namespace 不污染
 - [ ] **Task 3 (next-session)**: `tests/test_bn_pgmpy_equivalence.py` — internal sanity test
   - 4 networks (asia/child/insurance/alarm) × 100 query
   - `import _pgmpy_compat` 走 monkey-patch

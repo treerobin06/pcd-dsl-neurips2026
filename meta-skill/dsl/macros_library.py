@@ -9,42 +9,44 @@ inductor / compiler / verifier 主流程不依赖它。论文里只在 Figure 1 
 提一嘴 "the architecture supports persistent macro library evolution"，
 不写独立实验或 evaluation Section。
 
-保留本文件用途：
-- Paper 可引用 `dsl/macros_library.py` 作为 architecture sketch reference
-- 后续真做 self-evolution 实验时（毕业大论文 / 后续 paper），从这个 stub 起步
-- 让 reader 理解 "registry interface" 长什么样
+架构（启发自 Claude skill-creator + Python module per file）：
+- 每个 macro 是 dsl/macros/<name>.py 一个独立 Python 模块
+- 模块顶部含 METADATA dict（常量）+ fn callable
+- macros_library 启动时扫描 dsl/macros/*.py → importlib import → 读 METADATA + fn
+- 加新 macro = 扔一个 .py 文件进 dsl/macros/，无需改 macros_library.py
+- 比 JSON manifest 优势：metadata + 实现同处、IDE 类型安全、可加 docstring/examples/自测、
+  fn 直接是 callable 不需要 dotted-path resolve
 
 设计哲学（vision，非已实现）：
 - 7 core ops 是稳定基石（type-checked、verified-correct）
-- Family macros 由 core ops 组合而来，每个登记为可复用 unit
-- 新 family / op 加入时，registry 持久化进 macros_registry.json
+- Family macros 由 core ops 组合而来，每个 manifest module 描述如何组合
+- 新 family / op 加入时，扔个 .py 文件进 dsl/macros/
 - LLM Inductor 看到 registry → 知道库里有什么可复用 → 不必每次重头组合
 
 两层进化（vision）：
-- Family layer: 新 family 解出 + verifier 通过 → 沉淀新 macro → register
+- Family layer: 新 family 解出 + verifier 通过 → 沉淀新 manifest .py → drop in
 - Op layer:    新 op 提出 + 形式化 + verified → 加入 core set
 """
 
-import json
 import os
+import glob
 import time
-from dataclasses import dataclass, field, asdict
+import importlib
+from dataclasses import dataclass, asdict
 from typing import Callable, Dict, List, Optional, Any
 
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-REGISTRY_PATH = os.path.join(_HERE, "macros_registry.json")
+MACROS_DIR = os.path.join(_HERE, "macros")
+_PACKAGE = "dsl.macros"
 
 
 @dataclass
 class MacroEntry:
-    """Family macro 注册项。
+    """Family macro 注册项 — 对应 dsl/macros/<name>.py 一个文件。
 
-    一个 macro 由这些定义：
-    - name / family_tag
-    - op_composition: 哪些 core ops 组合而来（self-evolving evidence）
-    - verified_by: 验证 evidence（test 路径 / paper section / 数值等价证明）
-    - added_at: 注册时间 ISO8601 UTC
+    fn 是运行时 callable（不进 to_dict 序列化），其余字段来自 manifest 文件
+    的 METADATA dict。
     """
     name: str
     family_tag: str
@@ -52,106 +54,51 @@ class MacroEntry:
     verified_by: str
     description: str = ""
     added_at: str = ""
-    inducible: bool = True  # LLM Inductor prompt 渲染时是否对外可见
+    inducible: bool = True
+    schema_version: str = "2026-04-28"
+    fn: Optional[Callable] = None
 
     def to_dict(self) -> Dict[str, Any]:
-        return asdict(self)
-
-    @classmethod
-    def from_dict(cls, d: Dict[str, Any]) -> "MacroEntry":
-        return cls(**d)
+        d = asdict(self)
+        d.pop("fn", None)  # callable 不可序列化
+        return d
 
 
-# Bootstrap — 现有 3 个 macro（dsl/family_macros.py 已实现）
-_BUILTIN_MACROS: List[MacroEntry] = [
-    MacroEntry(
-        name="softmax_pref_likelihood",
-        family_tag="hypothesis_enumeration",
-        op_composition=["enumerate_hypotheses", "multiply", "normalize"],
-        verified_by="tests/test_dsl.py + tests/test_equivalence_full.py",
-        description="Softmax 偏好似然更新（用户从 N 选项选择 → 更新偏好向量后验）",
-        added_at="2026-03-01T00:00:00Z",
-        inducible=True,
-    ),
-    MacroEntry(
-        name="beta_bernoulli_update",
-        family_tag="conjugate_update",
-        op_composition=["condition", "multiply"],
-        verified_by="tests/test_dsl.py",
-        description="Beta-Bernoulli 共轭更新（多臂赌博机后验，closed-form）",
-        added_at="2026-03-01T00:00:00Z",
-        inducible=True,
-    ),
-    MacroEntry(
-        name="ve_query",
-        family_tag="variable_elimination",
-        op_composition=["condition", "multiply", "marginalize", "normalize"],
-        verified_by="tests/test_equivalence_full.py + baselines/verify_bnlearn_dsl_100.py",
-        description="变量消除查询 P(query | evidence)（贝叶斯网络精确推断）",
-        added_at="2026-03-01T00:00:00Z",
-        inducible=True,
-    ),
-]
+# In-memory registry (loaded via _scan_registry on import)
+FAMILY_REGISTRY: Dict[str, MacroEntry] = {}
 
 
-FAMILY_REGISTRY: Dict[str, MacroEntry] = {m.name: m for m in _BUILTIN_MACROS}
+def _scan_registry() -> None:
+    """启动时扫描 dsl/macros/*.py → importlib → 读 METADATA + fn → 注册"""
+    global FAMILY_REGISTRY
+    if not os.path.isdir(MACROS_DIR):
+        return
 
+    pattern = os.path.join(MACROS_DIR, "*.py")
+    for path in sorted(glob.glob(pattern)):
+        fname = os.path.basename(path)
+        if fname.startswith("_"):  # 跳过 __init__.py 等
+            continue
+        module_name = fname[:-3]  # strip .py
+        full_module = f"{_PACKAGE}.{module_name}"
 
-def register_macro(
-    name: str,
-    fn: Optional[Callable],
-    family_tag: str,
-    op_composition: List[str],
-    verified_by: str,
-    description: str = "",
-    inducible: bool = True,
-    persist: bool = True,
-) -> MacroEntry:
-    """注册新 family macro 到 registry——self-evolving library 核心入口。
+        try:
+            mod = importlib.import_module(full_module)
+        except Exception as e:
+            print(f"[macros_library] Warning: failed to import {full_module}: {e}")
+            continue
 
-    使用场景：LLM Inductor 解出新 family + Verifier 通过 后，
-    沉淀为 macro 调用本接口注册。下次同 family 任务可直接复用。
+        meta = getattr(mod, "METADATA", None)
+        fn = getattr(mod, "fn", None)
+        if meta is None or fn is None:
+            print(f"[macros_library] Skipping {full_module}: missing METADATA or fn")
+            continue
 
-    Args:
-        name: macro 名字（必须 unique）
-        fn: 实现 callable（注册时不验证 signature；运行时由 caller 自行 lookup
-            到 dsl namespace 调用——callable 本身不写进 JSON）
-        family_tag: inference family 标签（hypothesis_enumeration /
-            conjugate_update / variable_elimination / 自定义新 tag）
-        op_composition: 由哪些 core ops 组合而来（registry 透明性 + Inductor
-            prompt 复用提示依据）
-        verified_by: 验证 evidence 来源
-        description: 一行描述（Inductor prompt 渲染时给 LLM 看）
-        inducible: LLM Inductor 看到这个 macro 时是否可推荐
-        persist: 是否同步写入 dsl/macros_registry.json
-
-    Returns:
-        新登记的 MacroEntry
-
-    Raises:
-        ValueError: name 已存在 (避免覆盖已 verified macro)
-    """
-    if name in FAMILY_REGISTRY:
-        raise ValueError(
-            f"Macro '{name}' already registered. "
-            f"Use unique name or update via separate API (not yet implemented)."
-        )
-
-    entry = MacroEntry(
-        name=name,
-        family_tag=family_tag,
-        op_composition=list(op_composition),
-        verified_by=verified_by,
-        description=description,
-        added_at=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        inducible=inducible,
-    )
-    FAMILY_REGISTRY[name] = entry
-
-    if persist:
-        _save_registry()
-
-    return entry
+        # 容忍 manifest 多余字段（向前兼容 schema 演化）
+        known = {f for f in MacroEntry.__dataclass_fields__}
+        entry_kwargs = {k: v for k, v in meta.items() if k in known}
+        entry = MacroEntry(fn=fn, **entry_kwargs)
+        FAMILY_REGISTRY[entry.name] = entry
 
 
 def list_inducible_macros() -> List[MacroEntry]:
@@ -164,47 +111,97 @@ def list_by_family(family_tag: str) -> List[MacroEntry]:
     return [m for m in FAMILY_REGISTRY.values() if m.family_tag == family_tag]
 
 
-def _save_registry() -> None:
-    """持久化 FAMILY_REGISTRY → macros_registry.json"""
-    payload = {
-        "version": 1,
-        "schema_version": "2026-04-28",
-        "n_macros": len(FAMILY_REGISTRY),
-        "macros": [m.to_dict() for m in FAMILY_REGISTRY.values()],
-    }
-    with open(REGISTRY_PATH, "w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2, ensure_ascii=False)
+def register_macro_file(
+    name: str,
+    family_tag: str,
+    op_composition: List[str],
+    verified_by: str,
+    description: str = "",
+    inducible: bool = True,
+    implementation_import: str = "",
+) -> str:
+    """生成 dsl/macros/<name>.py 文件骨架——self-evolving 入口（future work）。
+
+    使用场景：LLM Inductor 解出新 family + Verifier 通过后，调用本接口
+    生成新的 macro manifest 文件。若 implementation_import 提供（如
+    "dsl.family_macros.foo"），fn 重导出已有函数；否则生成 NotImplementedError
+    stub 等待手填。
+
+    Args:
+        name: macro 唯一 id（对应 .py 文件名，必须为 valid Python identifier）
+        family_tag: inference family 标签
+        op_composition: 由哪些 core ops 组合
+        verified_by: 验证 evidence 来源
+        description: 一行描述（Inductor prompt 渲染用）
+        inducible: LLM Inductor 是否可见此 macro
+        implementation_import: 已有 fn 的 dotted path（如
+            "dsl.family_macros.softmax_pref_likelihood"）
+
+    Returns:
+        生成的文件路径
+
+    Raises:
+        ValueError: 文件已存在
+    """
+    if not os.path.isdir(MACROS_DIR):
+        os.makedirs(MACROS_DIR)
+
+    target = os.path.join(MACROS_DIR, f"{name}.py")
+    if os.path.exists(target):
+        raise ValueError(f"Macro file '{target}' already exists.")
+
+    if implementation_import:
+        mod, fn_name = implementation_import.rsplit(".", 1)
+        impl_block = f"from {mod} import {fn_name} as fn"
+    else:
+        impl_block = (
+            "# TODO: 用 7 core ops 组合实现 fn\n"
+            "from dsl.core_ops import (\n"
+            "    condition, multiply, marginalize, normalize,\n"
+            "    enumerate_hypotheses, expectation, argmax,\n"
+            ")\n\n"
+            "def fn(*args, **kwargs):\n"
+            f"    raise NotImplementedError('Macro {name!r} fn not yet implemented.')"
+        )
+
+    added_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    content = f'''"""Macro manifest: {name} (auto-generated)"""
+{impl_block}
+
+METADATA = {{
+    "schema_version": "2026-04-28",
+    "name": "{name}",
+    "family_tag": "{family_tag}",
+    "op_composition": {op_composition!r},
+    "verified_by": "{verified_by}",
+    "description": "{description}",
+    "added_at": "{added_at}",
+    "inducible": {inducible},
+}}
+
+__all__ = ["fn", "METADATA"]
+'''
+    with open(target, "w", encoding="utf-8") as f:
+        f.write(content)
+    return target
 
 
-def _load_registry() -> None:
-    """从 macros_registry.json 加载（若文件存在），覆盖 in-memory 状态"""
-    global FAMILY_REGISTRY
-    if not os.path.exists(REGISTRY_PATH):
-        return
-    with open(REGISTRY_PATH, "r", encoding="utf-8") as f:
-        payload = json.load(f)
-    macros = [MacroEntry.from_dict(d) for d in payload.get("macros", [])]
-    FAMILY_REGISTRY = {m.name: m for m in macros}
-
-
-# 模块加载时自动恢复持久化状态
-_load_registry()
+# 启动时扫描
+_scan_registry()
 
 
 if __name__ == "__main__":
-    print(f"DSL Macros Registry — {len(FAMILY_REGISTRY)} macros")
-    print(f"Path: {REGISTRY_PATH}\n")
+    print(f"DSL Macros Registry — {len(FAMILY_REGISTRY)} manifests in {MACROS_DIR}\n")
     for m in FAMILY_REGISTRY.values():
+        impl = f"{m.fn.__module__}.{m.fn.__name__}" if m.fn else "(none)"
         print(f"  {m.name}")
         print(f"    family_tag    = {m.family_tag}")
         print(f"    op_composition= {m.op_composition}")
         print(f"    verified_by   = {m.verified_by}")
         print(f"    description   = {m.description}")
+        print(f"    fn            = {impl}")
         print(f"    added_at      = {m.added_at}")
         print(f"    inducible     = {m.inducible}\n")
 
-    if not os.path.exists(REGISTRY_PATH):
-        _save_registry()
-        print(f"[bootstrap] Wrote initial registry to {REGISTRY_PATH}")
-    else:
-        print(f"[ok] Registry already persisted at {REGISTRY_PATH}")
+    print("[ok] Scanned dsl/macros/ — Python module per file registry loaded.")
+    print("To add a macro: drop a .py file in dsl/macros/ following the schema.")
