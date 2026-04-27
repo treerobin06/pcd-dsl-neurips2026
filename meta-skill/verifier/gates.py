@@ -193,12 +193,22 @@ def _gate2_preference(solver, samples: List[Dict]) -> GateResult:
         )
 
     acc = correct / total
-    passed = True  # 偏好学习的准确率本身就受限于先验信息量，不设硬阈值
+    # S2 修复 (2026-04-24): 加真实阈值。原 passed=True 让所有 spec 自动通过，
+    # Codex review 发现是 "vacuous gate" — 5/6 LOO "通过" 实为代码能跑就算过。
+    # Threshold 0.30: 高于 5-option uniform 随机基线 (0.2) + 50% buffer，
+    # catch 明显错的 spec 但容许"正确 spec + 信息有限"场景。
+    # 论文 baseline 数字: PAL preference 29.3%, Bayesian oracle 74.8%.
+    PREFERENCE_GATE2_THRESHOLD = 0.30
+    passed = acc >= PREFERENCE_GATE2_THRESHOLD
+    msg = f"最后一轮推荐准确率: {acc*100:.1f}% ({correct}/{total})"
+    if not passed:
+        msg += f" — 低于阈值 {PREFERENCE_GATE2_THRESHOLD*100:.0f}%（疑 spec 退化为随机）"
     return GateResult(
         gate="Gate 2: Ground Truth",
         passed=passed,
-        message=f"最后一轮推荐准确率: {acc*100:.1f}% ({correct}/{total})",
-        details={"accuracy": acc, "correct": correct, "total": total},
+        message=msg,
+        details={"accuracy": acc, "correct": correct, "total": total,
+                 "threshold": PREFERENCE_GATE2_THRESHOLD},
     )
 
 

@@ -16,7 +16,7 @@ Your TaskSpec must use exactly one of these inference families:
 
 **state_structure**: `discrete_hypothesis_space` with features and values_per_feature
   - `features`: list of feature names (e.g., from option descriptions or data fields)
-  - `values_per_feature`: a **flat list of numeric values** representing possible preference weights (e.g., [-1.0, -0.5, 0.0, 0.5, 1.0]). Look at the `reward_fn` field in samples to discover these values — collect all unique values across all samples.
+  - `values_per_feature`: a **flat list of numeric values** representing possible preference weights. Default to `[-1.0, -0.5, 0.0, 0.5, 1.0]` (a symmetric 5-point grid commonly used in preference-learning benchmarks). If the task description or numeric features in `rounds[*].options` clearly suggest a different range, use that. Do NOT rely on any 'reward_fn' / 'answers' / 'correct_*' field — these have been removed for held-out evaluation (C5 fix).
   - IMPORTANT: `values_per_feature` must be numeric (float), NOT categorical strings.
 **observation_model**: `softmax_choice` (user picks option proportional to exp(utility))
 **decision_rule**: `argmax_expected_utility`
@@ -86,7 +86,7 @@ Your TaskSpec must use exactly one of these inference families:
 
 ## Important Notes
 
-- For `hypothesis_enumeration`: the `values_per_feature` field must be a **flat list** of **numeric values** (floats). These represent the set of possible preference weight values each feature can take. Look at the `reward_fn` field across samples to discover the complete set of unique values.
+- For `hypothesis_enumeration`: the `values_per_feature` field must be a **flat list** of **numeric values** (floats). Default to the symmetric 5-point grid `[-1.0, -0.5, 0.0, 0.5, 1.0]` unless the task description specifies otherwise. The `reward_fn`/`answers`/`correct_*` fields have been removed from samples (C5 fix); inferring values from those fields is no longer valid.
 - For `conjugate_update`: the `n_arms` field should be the number of arms/machines/options.
 - For `variable_elimination`: the BN structure is parsed from data at runtime, so `features` and `values_per_feature` can be empty.
 - All `values_per_feature` entries must be numbers, never strings or nested lists.

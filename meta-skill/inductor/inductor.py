@@ -25,14 +25,36 @@ def _load_prompt_template() -> str:
         return f.read()
 
 
+# C5 修复 (2026-04-24): 防止 Inductor 看到 ground-truth 答案字段。
+# 4-agent audit + Codex review 发现原代码 json.dumps(s) 把
+# reward_fn/answers/correct_*/user_idx 喂给 LLM，导致 LOO/E2E/reliability 虚高。
+_ANSWER_KEYS = {
+    "reward_fn", "answers", "gold_answer", "gold_posterior", "gold_user_choice",
+    "correct_answer", "correct_diagnosis", "correct_state", "correct_posterior",
+    "correct_arm", "correct_user_choice", "user_idx", "user_choice",
+    "true_arm", "true_label", "label", "gold",
+}
+
+
+def _scrub_sample(obj):
+    """递归移除答案字段，让 Inductor 看不到 ground truth。
+
+    应用于 list 元素和 dict value（rounds 是 list of dict 含 user_idx）。
+    """
+    if isinstance(obj, dict):
+        return {k: _scrub_sample(v) for k, v in obj.items() if k not in _ANSWER_KEYS}
+    if isinstance(obj, list):
+        return [_scrub_sample(item) for item in obj]
+    return obj
+
+
 def _format_samples(samples: List[Dict], max_samples: int = 5) -> str:
-    """格式化样本数据供 LLM 分析"""
+    """格式化样本数据供 LLM 分析（已 scrub 答案字段，C5 修复）"""
     selected = samples[:max_samples]
     parts = []
     for i, s in enumerate(selected):
         parts.append(f"### Sample {i+1}")
-        # 截断过长的样本
-        text = json.dumps(s, indent=2, ensure_ascii=False)
+        text = json.dumps(_scrub_sample(s), indent=2, ensure_ascii=False)
         if len(text) > 3000:
             text = text[:3000] + "\n... (truncated)"
         parts.append(text)

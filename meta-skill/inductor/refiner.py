@@ -18,20 +18,25 @@ def induce_and_verify(
     model_id: str = "openai/gpt-4o-mini",
     max_rounds: int = 3,
     max_samples: int = 5,
+    verify_samples: Optional[List[Dict]] = None,
 ) -> Tuple[Optional[TaskSpec], VerificationResult, int]:
     """运行 Inductor + Verifier self-refine 循环
 
     Args:
-        samples: 样本数据
+        samples: 样本数据，给 Inductor 用
         gold_solver: 手写 gold solver（Gate 3 需要）
         model_id: LLM 模型
         max_rounds: 最大 refine 轮数
         max_samples: Inductor 使用的最大样本数
+        verify_samples: (C6 修复, 2026-04-24) 用于 Verifier 的独立样本集；
+            None 时回退到 samples 本身（向后兼容）。LOO / held-out 评估
+            必须显式传与 samples 不重叠的子集，避免 train/test 泄漏。
 
     Returns:
         (TaskSpec, VerificationResult, rounds_used) — TaskSpec 可能为 None
     """
     diagnostics = ""
+    verify_set = verify_samples if verify_samples is not None else samples
 
     for round_idx in range(max_rounds):
         print(f"  [Inductor] 第 {round_idx + 1}/{max_rounds} 轮")
@@ -55,8 +60,8 @@ def induce_and_verify(
 
         print(f"  [Inductor] 推断: family={spec.inference_family}, task={spec.task_name}")
 
-        # 验证
-        result = verify_taskspec(spec, samples, gold_solver)
+        # 验证（C6 修复：用独立 verify_set 而非 samples，防 train/test 泄漏）
+        result = verify_taskspec(spec, verify_set, gold_solver)
         print(f"  [Verifier] {result.diagnostics()}")
 
         if result.passed:
