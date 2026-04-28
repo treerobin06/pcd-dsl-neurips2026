@@ -5,6 +5,11 @@
 import sys, os, random, json
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
+# pgmpy 0.1.26 + xgboost-without-libomp 修复 (2026-04-27)
+# 必须在 import pgmpy 之前 monkey-patch xgboost stub。详见 _pgmpy_compat.py
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _pgmpy_compat  # noqa: F401
+
 from pgmpy.utils import get_example_model
 from pgmpy.inference import VariableElimination
 from dsl.types import Factor
@@ -36,12 +41,17 @@ def generate_and_verify(net_name, n_queries, seed):
     rng = random.Random(seed)
 
     # 构建 DSL Factor 列表
+    # 注 (2026-04-27 bug 修): 必须用 cpd.variables[1:] 而非 cpd.get_evidence()，
+    # 因为 get_evidence() 返回 set/dict_keys，顺序不保证；cpd.values 的 axis
+    # 顺序由 cpd.variables 决定。之前用 list(get_evidence()) 导致 multi-state /
+    # multi-parent factor 构造时 axis 错位 → joint 分布错 → asia 60% / child 33%
+    # 假阳性。修后所有 query 数学完全正确。dsl/core_ops 本身并无 bug。
     import numpy as np
     from itertools import product as iterproduct
     dsl_factors = []
     for node in nodes:
         cpd = model.get_cpds(node)
-        parents = list(cpd.get_evidence())
+        parents = list(cpd.variables[1:])  # was: list(cpd.get_evidence())
         state_names = cpd.state_names
 
         # Factor variables 顺序: [node] + parents
@@ -90,43 +100,37 @@ def generate_and_verify(net_name, n_queries, seed):
         except Exception:
             continue
 
-        # DSL ve_query
+        # DSL ve_query：对每个 state 单独查询得到完整 posterior
+        # 注：ve_query 签名是 -> float（返回单个 P(query_var=state | evidence)）
+        # 原代码传 {query_var: [all_states]}（list 作为 value）→ ve_query 永远返回 0.0
+        # 然后 `dsl_p = gold_p` fallback 把这个永远为 0 的 bug 吞掉自动通过（fraud blocker C1, 2026-04-23 修复）
         try:
-            query_vars_dict = {query_var: list(node_states[query_var])}
-            dsl_result = ve_query(dsl_factors, query_vars_dict, evidence)
+            dsl_posterior = {}
+            for state in node_states[query_var]:
+                query_vars_dict = {query_var: state}  # 单个 value，不是 list
+                dsl_p = ve_query(dsl_factors, query_vars_dict, evidence)
+                dsl_posterior[state] = dsl_p
 
-            # 比较：dsl_result 是一个 Distribution 或 dict
-            if isinstance(dsl_result, dict):
-                dsl_posterior = dsl_result
-            elif hasattr(dsl_result, "probs"):
-                dsl_posterior = dict(zip(dsl_result.values, dsl_result.probs))
-            else:
-                dsl_posterior = dsl_result
+            # sanity check: posterior 应归一化到 1
+            prob_sum = sum(dsl_posterior.values())
+            if abs(prob_sum - 1.0) > 0.01:
+                errors.append({
+                    "query_id": total,
+                    "network": net_name,
+                    "query_var": query_var,
+                    "evidence": evidence,
+                    "error": f"DSL posterior does not sum to 1: sum={prob_sum:.4f}",
+                    "gold": gold_posterior,
+                    "dsl": dsl_posterior,
+                })
+                total += 1
+                continue
 
-            # 检查最大绝对误差
+            # 每个 state 的绝对误差
             max_err = 0
             for state in node_states[query_var]:
                 gold_p = gold_posterior.get(state, 0)
-                dsl_p = 0
-                # 匹配 DSL 结果格式
-                if isinstance(dsl_posterior, (int, float)):
-                    # ve_query 可能返回单个概率值
-                    if len(node_states[query_var]) == 2:
-                        dsl_p = dsl_posterior if state == node_states[query_var][0] else 1 - dsl_posterior
-                    else:
-                        dsl_p = gold_p  # fallback
-                elif isinstance(dsl_posterior, dict):
-                    # 尝试多种 key 格式
-                    for k, v in dsl_posterior.items():
-                        if str(k) == str(state) or k == state:
-                            dsl_p = v
-                            break
-                        if isinstance(k, tuple) and len(k) == 1 and k[0] == (query_var, state):
-                            dsl_p = v
-                            break
-                        if isinstance(k, tuple) and k == ((query_var, state),):
-                            dsl_p = v
-                            break
+                dsl_p = dsl_posterior[state]
                 err = abs(gold_p - dsl_p)
                 max_err = max(max_err, err)
 
@@ -140,7 +144,7 @@ def generate_and_verify(net_name, n_queries, seed):
                     "evidence": evidence,
                     "max_error": max_err,
                     "gold": gold_posterior,
-                    "dsl": str(dsl_posterior)[:200],
+                    "dsl": dsl_posterior,
                 })
             total += 1
 

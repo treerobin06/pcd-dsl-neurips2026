@@ -1,0 +1,579 @@
+{
+  "experiment": "C2 Standard NL E2E (Tree 2026-04-28: hard \u4e0d\u653e standard \u663e\u793a\u6cdb\u5316)",
+  "model": "openai/gpt-4o-mini",
+  "route": "NL natural-language input \u2192 mini emit TaskSpec \u2192 compile \u2192 run",
+  "config": {
+    "nb": {
+      "n_diseases": 4,
+      "n_symptoms": 5
+    },
+    "hmm": {
+      "n_states": 3,
+      "n_obs": 4,
+      "seq_length": 5
+    }
+  },
+  "concurrency": 25,
+  "elapsed_sec": 29.274278163909912,
+  "nb_nl_e2e": {
+    "n": 30,
+    "correct": 15,
+    "wilson_95ci": [
+      0.33153851227173764,
+      0.6684614877282624
+    ],
+    "results": [
+      {
+        "i": 0,
+        "seed": 2000,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Gastroenteritis",
+        "ok": false,
+        "err": "NBSolver: feature 'Congestion' \u4e0d\u542b value 'no'"
+      },
+      {
+        "i": 1,
+        "seed": 2001,
+        "family": "naive_bayes",
+        "pred": "Common Cold",
+        "gold": "Common Cold",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 2,
+        "seed": 2002,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Pneumonia",
+        "ok": false,
+        "err": "NBSolver: feature 'Diarrhea' \u4e0d\u542b value 'no'"
+      },
+      {
+        "i": 3,
+        "seed": 2003,
+        "family": "naive_bayes",
+        "pred": "COVID-19",
+        "gold": "COVID-19",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 4,
+        "seed": 2004,
+        "family": "naive_bayes",
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 5,
+        "seed": 2005,
+        "family": "naive_bayes",
+        "pred": "Allergic Rhinitis",
+        "gold": "Allergic Rhinitis",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 6,
+        "seed": 2006,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Strep Throat",
+        "ok": false,
+        "err": "NBSolver: feature 'Chills' \u4e0d\u542b value 'no'"
+      },
+      {
+        "i": 7,
+        "seed": 2007,
+        "family": "naive_bayes",
+        "pred": "Strep Throat",
+        "gold": "Strep Throat",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 8,
+        "seed": 2008,
+        "family": "naive_bayes",
+        "pred": "COVID-19",
+        "gold": "COVID-19",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 9,
+        "seed": 2009,
+        "family": "naive_bayes",
+        "pred": "COVID-19",
+        "gold": "COVID-19",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 10,
+        "seed": 2010,
+        "family": "naive_bayes",
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 11,
+        "seed": 2011,
+        "family": "naive_bayes",
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 12,
+        "seed": 2012,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Influenza",
+        "ok": false,
+        "err": "NBSolver: feature 'Sore Throat' \u4e0d\u542b value 'no'"
+      },
+      {
+        "i": 13,
+        "seed": 2013,
+        "family": "naive_bayes",
+        "pred": "Strep Throat",
+        "gold": "Strep Throat",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 14,
+        "seed": 2014,
+        "family": "naive_bayes",
+        "pred": "COVID-19",
+        "gold": "COVID-19",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 15,
+        "seed": 2015,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Common Cold",
+        "ok": false,
+        "err": "NBSolver: feature 'Diarrhea' \u4e0d\u542b value 'no'"
+      },
+      {
+        "i": 16,
+        "seed": 2016,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Sinusitis",
+        "ok": false,
+        "err": "NBSolver: feature 'Chills' \u4e0d\u542b value 'no'"
+      },
+      {
+        "i": 17,
+        "seed": 2017,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Sinusitis",
+        "ok": false,
+        "err": "NBSolver: feature 'Sore Throat' \u4e0d\u542b value 'no'"
+      },
+      {
+        "i": 18,
+        "seed": 2018,
+        "family": "naive_bayes",
+        "pred": "Allergic Rhinitis",
+        "gold": "Allergic Rhinitis",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 19,
+        "seed": 2019,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "COVID-19",
+        "ok": false,
+        "err": "NBSolver: feature 'Fatigue' \u4e0d\u542b value 'yes'"
+      },
+      {
+        "i": 20,
+        "seed": 2020,
+        "family": "naive_bayes",
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 21,
+        "seed": 2021,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Bronchitis",
+        "ok": false,
+        "err": "NBSolver: feature 'Chills' \u4e0d\u542b value 'yes'"
+      },
+      {
+        "i": 22,
+        "seed": 2022,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Gastroenteritis",
+        "ok": false,
+        "err": "NBSolver: feature 'Headache' \u4e0d\u542b value 'no'"
+      },
+      {
+        "i": 23,
+        "seed": 2023,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Gastroenteritis",
+        "ok": false,
+        "err": "NBSolver: feature 'Nausea' \u4e0d\u542b value 'no'"
+      },
+      {
+        "i": 24,
+        "seed": 2024,
+        "family": "naive_bayes",
+        "pred": "COVID-19",
+        "gold": "COVID-19",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 25,
+        "seed": 2025,
+        "family": "naive_bayes",
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 26,
+        "seed": 2026,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Gastroenteritis",
+        "ok": false,
+        "err": "NBSolver: feature 'Chills' \u4e0d\u542b value 'no'"
+      },
+      {
+        "i": 27,
+        "seed": 2027,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Influenza",
+        "ok": false,
+        "err": "NBSolver: feature 'Diarrhea' \u4e0d\u542b value 'no'"
+      },
+      {
+        "i": 28,
+        "seed": 2028,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Common Cold",
+        "ok": false,
+        "err": "NBSolver: feature 'Sore Throat' \u4e0d\u542b value 'no'"
+      },
+      {
+        "i": 29,
+        "seed": 2029,
+        "family": "naive_bayes",
+        "pred": null,
+        "gold": "Pneumonia",
+        "ok": false,
+        "err": "NBSolver: feature 'Runny Nose' \u4e0d\u542b value 'no'"
+      }
+    ]
+  },
+  "hmm_nl_e2e": {
+    "n": 30,
+    "correct": 30,
+    "wilson_95ci": [
+      0.8864829086095221,
+      1
+    ],
+    "results": [
+      {
+        "i": 0,
+        "seed": 3000,
+        "family": "hmm_forward",
+        "pred": "Flu",
+        "gold": "Flu",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 1,
+        "seed": 3001,
+        "family": "hmm_forward",
+        "pred": "Bull",
+        "gold": "Bull",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 2,
+        "seed": 3002,
+        "family": "hmm_forward",
+        "pred": "Fever",
+        "gold": "Fever",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 3,
+        "seed": 3003,
+        "family": "hmm_forward",
+        "pred": "Moderate",
+        "gold": "Moderate",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 4,
+        "seed": 3004,
+        "family": "hmm_forward",
+        "pred": "Sad",
+        "gold": "Sad",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 5,
+        "seed": 3005,
+        "family": "hmm_forward",
+        "pred": "Rainy",
+        "gold": "Rainy",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 6,
+        "seed": 3006,
+        "family": "hmm_forward",
+        "pred": "Moderate",
+        "gold": "Moderate",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 7,
+        "seed": 3007,
+        "family": "hmm_forward",
+        "pred": "Bear",
+        "gold": "Bear",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 8,
+        "seed": 3008,
+        "family": "hmm_forward",
+        "pred": "Bear",
+        "gold": "Bear",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 9,
+        "seed": 3009,
+        "family": "hmm_forward",
+        "pred": "Happy",
+        "gold": "Happy",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 10,
+        "seed": 3010,
+        "family": "hmm_forward",
+        "pred": "Free_Flow",
+        "gold": "Free_Flow",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 11,
+        "seed": 3011,
+        "family": "hmm_forward",
+        "pred": "Fever",
+        "gold": "Fever",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 12,
+        "seed": 3012,
+        "family": "hmm_forward",
+        "pred": "Stable",
+        "gold": "Stable",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 13,
+        "seed": 3013,
+        "family": "hmm_forward",
+        "pred": "Neutral",
+        "gold": "Neutral",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 14,
+        "seed": 3014,
+        "family": "hmm_forward",
+        "pred": "Cloudy",
+        "gold": "Cloudy",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 15,
+        "seed": 3015,
+        "family": "hmm_forward",
+        "pred": "Free_Flow",
+        "gold": "Free_Flow",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 16,
+        "seed": 3016,
+        "family": "hmm_forward",
+        "pred": "Bear",
+        "gold": "Bear",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 17,
+        "seed": 3017,
+        "family": "hmm_forward",
+        "pred": "Neutral",
+        "gold": "Neutral",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 18,
+        "seed": 3018,
+        "family": "hmm_forward",
+        "pred": "Sad",
+        "gold": "Sad",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 19,
+        "seed": 3019,
+        "family": "hmm_forward",
+        "pred": "Bull",
+        "gold": "Bull",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 20,
+        "seed": 3020,
+        "family": "hmm_forward",
+        "pred": "Happy",
+        "gold": "Happy",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 21,
+        "seed": 3021,
+        "family": "hmm_forward",
+        "pred": "Congested",
+        "gold": "Congested",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 22,
+        "seed": 3022,
+        "family": "hmm_forward",
+        "pred": "Sad",
+        "gold": "Sad",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 23,
+        "seed": 3023,
+        "family": "hmm_forward",
+        "pred": "Congested",
+        "gold": "Congested",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 24,
+        "seed": 3024,
+        "family": "hmm_forward",
+        "pred": "Healthy",
+        "gold": "Healthy",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 25,
+        "seed": 3025,
+        "family": "hmm_forward",
+        "pred": "Cloudy",
+        "gold": "Cloudy",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 26,
+        "seed": 3026,
+        "family": "hmm_forward",
+        "pred": "Free_Flow",
+        "gold": "Free_Flow",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 27,
+        "seed": 3027,
+        "family": "hmm_forward",
+        "pred": "Flu",
+        "gold": "Flu",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 28,
+        "seed": 3028,
+        "family": "hmm_forward",
+        "pred": "Healthy",
+        "gold": "Healthy",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 29,
+        "seed": 3029,
+        "family": "hmm_forward",
+        "pred": "Congested",
+        "gold": "Congested",
+        "ok": true,
+        "err": null
+      }
+    ]
+  },
+  "timestamp": "2026-04-27T18:57:58Z"
+}

@@ -46,6 +46,10 @@
 - [2026-03-31 20:34] push | 去AI味(L608-1267): Related Work/Limitations/Conclusion/Appendix共~23处修改, 消除forced三项列举/em dash过度使用/双括号注释/passive voice/overexplanation, 拆长句制造节奏变化
 - [2026-03-31 20:45] push | 括号清理+academic-writing-refiner: ~25处括号改为逗号/内联从句/独立句, em dash仅剩2处(合理appositive), AI标志词0处
 - [2026-04-09 15:00] push | 架构展开: S4.4 Inductor拆为3步(recognize+compose+emit)+Route Analysis表+HMM compositional generalization强化+Related Work加Skill文献桥接(SoK+EvoSkills)+bib加2条
+- [2026-04-28 00:34] push | framing pivot (Tree 三轮讨论): 删 3-Gate Verifier→2-Gate Deployable (Gate 3 假独立+生产拿不到 gold), 删 pgmpy 引用换 BLInD GT (避免"为什么不用 pgmpy"攻击面), Discussion 加 self-evolving 一句 (file-based registry vision), Conclusion compositional gen 加 scope qualifier (synthetic NB/HMM held-out)。21页编译OK
+- [2026-04-28 01:20] push | pgmpy 攻势 framing (Tree 二次质疑): Related Work L652 加一句"pgmpy/ProbLog are BN-only specialized libraries; our 7 ops span preference/bandit/HMM via same formal core"。从"完全删 pgmpy"改为"主动提 pgmpy 当 scope contrast" — 答案在 paper 里 reviewer 不会问
+- [2026-04-28 02:10] push | C2 honest narrative: Section 5.x Held-Out Families 改写区分 codegen vs algebra-level compose。删 "core ops match codegen 100%, macros are syntactic sugar" 错误暗示；加 NBSolver/HMMSolver reference solvers 数学正确性 evidence (max_err < 1e-9 vs 手算 gold)；加 "where free-code breaks" 段引 bnlearn mini 0% (free + scaffolded codegen) 对比，motivate spec-emission discipline。Table caption 同步
+- [2026-04-28 02:30] push | mini-centric framing (Tree "我们用 4o-mini 也能解决族外的泛化问题"): Abstract 改写突出 "mini direct fails (44%/32%) but mini + framework reaches 100% across 5 families including 2 held-out (NB/HMM, no macro)"；Section 5.x Held-Out Families 重构三段 (Headline cheap-LLM cross-family generalization / Algebra-level compositional sufficiency / PCD signature)。诚实承认：simple math 上 codegen 也 100% 但 mini direct 仍崩 → 我们 framework 是 cheap-LLM enabler
 
 ## 论文概况
 

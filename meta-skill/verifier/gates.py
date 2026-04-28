@@ -1,12 +1,18 @@
 """
-4-Gate Verifier — 验证自动生成的 solver
+2-Gate Deployable Verifier — 验证自动生成的 solver
 
-Gate 1: Code Sanity — solver 能实例化、能跑、输出格式正确
-Gate 2: Ground Truth — 对样本数据，solver 输出 ≈ 已知正确答案
-Gate 3: Reference Match — auto solver vs manual solver 100% 一致
-Gate 4: LLM Integration — 注入后 downstream accuracy 差距 < 2pp（半自动）
+Gate 1: Code Sanity — solver 能实例化、能跑、输出格式正确（always-on, deployable）
+Gate 2: Ground Truth — 对样本数据，solver 输出 ≈ 已知正确答案（when few-shot labels exist）
 
 验证失败时返回诊断信息，可反馈给 Inductor 做 self-refine。
+
+2026-04-28 framing pivot: Gate 3 (Reference Match) 已删除。理由：
+- 生产场景用户拿不到独立 gold solver（gold = self-implementation 即假独立）
+- paper 阶段 auto/gold 共享同一 backend class，Codex review 标"假独立"
+- BN family 数值正确性证据改用 BLInD 数据集自带 GT；pgmpy 仅作内部 sanity test
+- 对 preference / bandit / HMM 没有公认"标准库"做独立 cross-check，再加 Gate 3
+  本质仍是 self-validation，不如清晰的 2-gate 诚实
+详见 paper framing pivot memo (project memory: 2026-04-28).
 """
 
 import json
@@ -51,17 +57,15 @@ class VerificationResult:
 def verify_taskspec(
     spec: TaskSpec,
     samples: List[Dict],
-    gold_solver: Optional[SolverType] = None,
 ) -> VerificationResult:
-    """运行 4-Gate 验证
+    """运行 2-Gate 验证（Code Sanity + Ground Truth）
 
     Args:
         spec: 待验证的 TaskSpec
-        samples: 测试样本
-        gold_solver: 手写 gold reference solver（Gate 3 需要）
+        samples: 测试样本（含 few-shot ground truth labels）
 
     Returns:
-        验证结果
+        验证结果（Gate 1 fail 时短路返回，不跑 Gate 2）
     """
     result = VerificationResult()
 
@@ -74,11 +78,6 @@ def verify_taskspec(
     # Gate 2: Ground Truth
     g2 = _gate2_ground_truth(spec, solver, samples)
     result.gates.append(g2)
-
-    # Gate 3: Reference Match（如果有 gold solver）
-    if gold_solver is not None:
-        g3 = _gate3_reference_match(spec, solver, gold_solver, samples)
-        result.gates.append(g3)
 
     return result
 
@@ -193,12 +192,22 @@ def _gate2_preference(solver, samples: List[Dict]) -> GateResult:
         )
 
     acc = correct / total
-    passed = True  # 偏好学习的准确率本身就受限于先验信息量，不设硬阈值
+    # S2 修复 (2026-04-24): 加真实阈值。原 passed=True 让所有 spec 自动通过，
+    # Codex review 发现是 "vacuous gate" — 5/6 LOO "通过" 实为代码能跑就算过。
+    # Threshold 0.30: 高于 5-option uniform 随机基线 (0.2) + 50% buffer，
+    # catch 明显错的 spec 但容许"正确 spec + 信息有限"场景。
+    # 论文 baseline 数字: PAL preference 29.3%, Bayesian oracle 74.8%.
+    PREFERENCE_GATE2_THRESHOLD = 0.30
+    passed = acc >= PREFERENCE_GATE2_THRESHOLD
+    msg = f"最后一轮推荐准确率: {acc*100:.1f}% ({correct}/{total})"
+    if not passed:
+        msg += f" — 低于阈值 {PREFERENCE_GATE2_THRESHOLD*100:.0f}%（疑 spec 退化为随机）"
     return GateResult(
         gate="Gate 2: Ground Truth",
         passed=passed,
-        message=f"最后一轮推荐准确率: {acc*100:.1f}% ({correct}/{total})",
-        details={"accuracy": acc, "correct": correct, "total": total},
+        message=msg,
+        details={"accuracy": acc, "correct": correct, "total": total,
+                 "threshold": PREFERENCE_GATE2_THRESHOLD},
     )
 
 
@@ -249,69 +258,5 @@ def _gate2_bn(solver, samples: List[Dict]) -> GateResult:
     )
 
 
-def _gate3_reference_match(
-    spec: TaskSpec,
-    auto_solver: SolverType,
-    gold_solver: SolverType,
-    samples: List[Dict],
-) -> GateResult:
-    """Gate 3: auto solver vs gold solver 输出 100% 一致"""
-    family = spec.inference_family
-    mismatches = 0
-    total = 0
-
-    if family == "hypothesis_enumeration":
-        for sample in samples[:10]:
-            auto_solver.reset()
-            gold_solver.reset()
-            rounds_numpy = sample.get("rounds_numpy", [])
-            rounds = sample.get("rounds", [])
-
-            for r_idx in range(len(rounds)):
-                if r_idx >= len(rounds_numpy):
-                    break
-                user_choice = rounds[r_idx]["user_idx"]
-                options = rounds_numpy[r_idx]
-                auto_solver.update(user_choice, options)
-                gold_solver.update(user_choice, options)
-
-                # 比较后验
-                diff = np.max(np.abs(auto_solver.posterior.probs - gold_solver.posterior.probs))
-                if diff > 1e-10:
-                    mismatches += 1
-                total += 1
-
-    elif family == "conjugate_update":
-        rng = np.random.default_rng(42)
-        for _ in range(50):
-            arm = rng.integers(auto_solver.n_arms)
-            reward = rng.integers(2)
-            auto_solver.update(arm, reward)
-            gold_solver.update(arm, reward)
-
-            diff = np.max(np.abs(auto_solver.get_posterior_means() - gold_solver.get_posterior_means()))
-            if diff > 1e-10:
-                mismatches += 1
-            total += 1
-
-    elif family == "variable_elimination":
-        for sample in samples[:20]:
-            context = sample.get("contexts", "")
-            query = sample.get("query", "")
-            graph = sample.get("graph", "")
-
-            r_auto = auto_solver.solve_from_text(context, query, graph)
-            r_gold = gold_solver.solve_from_text(context, query, graph)
-
-            if r_auto is not None and r_gold is not None:
-                if abs(r_auto - r_gold) > 1e-10:
-                    mismatches += 1
-            total += 1
-
-    passed = mismatches == 0
-    return GateResult(
-        gate="Gate 3: Reference Match",
-        passed=passed,
-        message=f"{'完全一致' if passed else f'{mismatches} 个不一致'} ({total} 次比较)",
-        details={"mismatches": mismatches, "total": total},
-    )
+# Gate 3 (Reference Match) 已删除 (2026-04-28 framing pivot)
+# 详见 verify_taskspec 顶部 docstring + project memory: paper framing pivot

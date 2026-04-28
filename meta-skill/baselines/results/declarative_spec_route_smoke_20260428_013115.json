@@ -1,0 +1,108 @@
+{
+  "experiment": "C2 Phase 3 declarative spec route smoke (Tree 2026-04-28)",
+  "model": "openai/gpt-4o-mini",
+  "route": "LLM emit TaskSpec \u2192 compile \u2192 run",
+  "nb": {
+    "n": 5,
+    "correct": 5,
+    "results": [
+      {
+        "i": 0,
+        "seed": 200,
+        "family": "naive_bayes",
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 1,
+        "seed": 201,
+        "family": "naive_bayes",
+        "pred": "Strep Throat",
+        "gold": "Strep Throat",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 2,
+        "seed": 202,
+        "family": "naive_bayes",
+        "pred": "Sinusitis",
+        "gold": "Sinusitis",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 3,
+        "seed": 203,
+        "family": "naive_bayes",
+        "pred": "Sinusitis",
+        "gold": "Sinusitis",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 4,
+        "seed": 204,
+        "family": "naive_bayes",
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation",
+        "ok": true,
+        "err": null
+      }
+    ]
+  },
+  "hmm": {
+    "n": 5,
+    "correct": 5,
+    "results": [
+      {
+        "i": 0,
+        "seed": 300,
+        "family": "hmm_forward",
+        "pred": "Congested",
+        "gold": "Congested",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 1,
+        "seed": 301,
+        "family": "hmm_forward",
+        "pred": "Neutral",
+        "gold": "Neutral",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 2,
+        "seed": 302,
+        "family": "hmm_forward",
+        "pred": "Congested",
+        "gold": "Congested",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 3,
+        "seed": 303,
+        "family": "hmm_forward",
+        "pred": "Sunny",
+        "gold": "Sunny",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 4,
+        "seed": 304,
+        "family": "hmm_forward",
+        "pred": "Flu",
+        "gold": "Flu",
+        "ok": true,
+        "err": null
+      }
+    ]
+  },
+  "timestamp": "2026-04-27T17:31:15Z"
+}

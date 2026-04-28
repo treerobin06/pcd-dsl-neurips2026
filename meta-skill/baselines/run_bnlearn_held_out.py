@@ -33,6 +33,11 @@ if sys.platform == "win32":
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
+# pgmpy 0.1.26 + xgboost-without-libomp 修复 (2026-04-27)
+# 必须在 import pgmpy 之前 monkey-patch xgboost stub。详见 _pgmpy_compat.py
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _pgmpy_compat  # noqa: F401
+
 import httpx
 from openai import AsyncOpenAI
 from pgmpy.utils import get_example_model
@@ -260,14 +265,14 @@ def build_compile_prompt(train_queries: List[Dict], cpts_list: List[Dict], use_c
         examples += f"evidence: {json.dumps(q['evidence'])}\n"
         examples += f"correct_answer: {q['gold_answer']}\n"
         examples += f"correct_posterior: {json.dumps(q['gold_posterior'])}\n"
-        # 简化 CPT 表示
-        cpt_simple = {}
+        # CPT 完整表示（C1 修复：原代码 `entries[:3]` 截断让 LLM 看不到完整 CPT 结构）
+        cpt_full = {}
         for node, cpt in cpts.items():
             if not cpt["parents"]:
-                cpt_simple[node] = {"parents": [], "probs": cpt["probabilities"]}
+                cpt_full[node] = {"parents": [], "probs": cpt["probabilities"]}
             else:
-                cpt_simple[node] = {"parents": cpt["parents"], "entries": cpt["entries"][:3]}  # 截断
-        examples += f"cpts (truncated): {json.dumps(cpt_simple, default=str)[:2000]}\n"
+                cpt_full[node] = {"parents": cpt["parents"], "entries": cpt["entries"]}
+        examples += f"cpts: {json.dumps(cpt_full, default=str)}\n"
 
     core_ops_section = ""
     if use_core_ops:
@@ -280,18 +285,28 @@ def normalize(unnormalized: dict) -> dict:
     return {k: v/total for k, v in unnormalized.items()} if total > 0 else unnormalized
 
 def multiply_factors(factors: list) -> dict:
-    \"\"\"Multiply a list of factor dicts. Each factor is {(var_assignment_tuple): probability}.\"\"\"
-    from functools import reduce
-    def mul2(f1, f2):
-        result = {}
-        for k1, v1 in f1.items():
-            for k2, v2 in f2.items():
-                # Merge keys, check consistency
-                merged = {**dict(k1), **dict(k2)} if isinstance(k1, tuple) else {}
-                # Simplified: just multiply aligned entries
-                pass
-        return result
-    # You may implement this helper as needed using the factor representation
+    \"\"\"Multiply a list of factor dicts. Each factor is {tuple_of_(var,val)_pairs: probability}.\"\"\"
+    if not factors:
+        return {(): 1.0}
+    result = factors[0]
+    for f in factors[1:]:
+        new_result = {}
+        for k1, v1 in result.items():
+            d1 = dict(k1)
+            for k2, v2 in f.items():
+                d2 = dict(k2)
+                merged = dict(d1)
+                conflict = False
+                for var, val in d2.items():
+                    if var in merged and merged[var] != val:
+                        conflict = True
+                        break
+                    merged[var] = val
+                if not conflict:
+                    key = tuple(sorted(merged.items()))
+                    new_result[key] = new_result.get(key, 0) + v1 * v2
+        result = new_result
+    return result
 
 def marginalize(factor: dict, var_to_remove: str) -> dict:
     \"\"\"Sum out a variable from a factor\"\"\"
@@ -314,7 +329,13 @@ def argmax(scores: dict) -> str:
     return max(scores, key=scores.get)
 ```
 
-Your solver MUST use these core operations for factor manipulation. Do NOT use pgmpy or any external inference library.
+**Factor representation convention**: each factor is a dict whose keys are
+tuples of (variable_name, value) pairs in sorted order, and values are
+probabilities. E.g. P(A=a1,B=b1)=0.3 becomes {(('A','a1'),('B','b1')): 0.3}.
+
+Your solver MUST use these core operations for factor manipulation. Do NOT
+use pgmpy or any external inference library. The core operations above are
+fully implemented — call them directly rather than reimplementing them.
 """
 
     constraint = "only Python stdlib (no pgmpy/numpy/scipy)" if not use_core_ops else "ONLY the core operations above"

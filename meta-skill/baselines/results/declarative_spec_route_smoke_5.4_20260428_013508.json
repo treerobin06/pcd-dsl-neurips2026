@@ -1,0 +1,98 @@
+{
+  "experiment": "C2 Phase 3 declarative spec route smoke (5.4 cross-model)",
+  "model": "openai/gpt-5.4",
+  "route": "LLM emit TaskSpec \u2192 compile \u2192 run",
+  "nb": {
+    "n": 5,
+    "correct": 5,
+    "results": [
+      {
+        "i": 0,
+        "family": "naive_bayes",
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 1,
+        "family": "naive_bayes",
+        "pred": "Strep Throat",
+        "gold": "Strep Throat",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 2,
+        "family": "naive_bayes",
+        "pred": "Sinusitis",
+        "gold": "Sinusitis",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 3,
+        "family": "naive_bayes",
+        "pred": "Sinusitis",
+        "gold": "Sinusitis",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 4,
+        "family": "naive_bayes",
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation",
+        "ok": true,
+        "err": null
+      }
+    ]
+  },
+  "hmm": {
+    "n": 5,
+    "correct": 5,
+    "results": [
+      {
+        "i": 0,
+        "family": "hmm_forward",
+        "pred": "Congested",
+        "gold": "Congested",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 1,
+        "family": "hmm_forward",
+        "pred": "Neutral",
+        "gold": "Neutral",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 2,
+        "family": "hmm_forward",
+        "pred": "Congested",
+        "gold": "Congested",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 3,
+        "family": "hmm_forward",
+        "pred": "Sunny",
+        "gold": "Sunny",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 4,
+        "family": "hmm_forward",
+        "pred": "Flu",
+        "gold": "Flu",
+        "ok": true,
+        "err": null
+      }
+    ]
+  },
+  "timestamp": "2026-04-27T17:35:08Z"
+}

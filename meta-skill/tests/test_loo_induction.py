@@ -65,22 +65,30 @@ def test_one_dataset(name, data_path, max_induction_samples=5, max_verify_sample
     print(f"  样本数: {len(samples)}")
     print(f"  features: {samples[0].get('features', '?')}")
 
-    # 构造 gold solver
+    # 2026-04-28 framing pivot: 不再构造 gold solver（Gate 3 删除）
     pref_vals = detect_preference_values(samples)
     dim = len(samples[0]["features"])
-    gold = PreferenceSolver(
-        feature_dim=dim,
-        preference_values=pref_vals,
-    )
     print(f"  维度: {dim}, 值域: {pref_vals}")
 
-    # 运行 Inductor
+    # C6 修复 (2026-04-24): 显式 disjoint train/test split
+    induct_samples = samples[:max_induction_samples]
+    verify_samples = samples[max_induction_samples:max_induction_samples + max_verify_samples]
+    # 强制 disjoint check（按对象 id 而非内容相等）
+    induct_ids = {id(s) for s in induct_samples}
+    verify_ids = {id(s) for s in verify_samples}
+    assert not (induct_ids & verify_ids), \
+        f"C6 violation: induct/verify must be disjoint, overlap={len(induct_ids & verify_ids)}"
+    if len(verify_samples) == 0:
+        raise ValueError(f"Dataset {name} has only {len(samples)} samples; need >={max_induction_samples + 1} for disjoint LOO split")
+    print(f"  Disjoint split: induct={len(induct_samples)}, verify={len(verify_samples)}")
+
+    # 运行 Inductor (2-Gate Verifier: Code Sanity + Ground Truth)
     start = time.time()
     spec, result, rounds = induce_and_verify(
-        samples[:max_induction_samples],
-        gold_solver=gold,
+        induct_samples,
         max_rounds=3,
         max_samples=max_induction_samples,
+        verify_samples=verify_samples,
     )
     elapsed = time.time() - start
 
@@ -162,12 +170,18 @@ def test_blind_depth_ood():
 
     # 用 depth=2 的样本做 induction，在 depth=4,6,8 上验证
     shallow = [r for r in rows if int(r["depth"]) == 2][:5]
-    gold = BNReferenceSolver()
+    # C6 修复 (2026-04-24): induction 内部 verify 也用 disjoint shallow 子集
+    # （depth=2 后续 5 个样本，与 induction 集 disjoint）
+    shallow_verify = [r for r in rows if int(r["depth"]) == 2][5:10]
+    induct_ids = {id(s) for s in shallow}
+    verify_ids = {id(s) for s in shallow_verify}
+    assert not (induct_ids & verify_ids), "C6 violation: BLInD-OOD induct/verify overlap"
 
-    print(f"  Induction 样本: {len(shallow)} (depth=2)")
+    print(f"  Induction 样本: {len(shallow)} (depth=2), Disjoint verify: {len(shallow_verify)}")
 
     spec, result, rounds = induce_and_verify(
-        shallow, gold_solver=gold, max_rounds=2, max_samples=3,
+        shallow, max_rounds=2, max_samples=3,
+        verify_samples=shallow_verify,
     )
 
     print(f"  Induction: {'PASS' if result.passed else 'FAIL'} (第 {rounds} 轮)")

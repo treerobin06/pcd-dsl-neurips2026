@@ -22,7 +22,7 @@ import json
 @dataclass
 class StateStructure:
     """状态空间结构"""
-    type: str  # discrete_hypothesis_space | beta_conjugate | bayesian_network
+    type: str  # discrete_hypothesis_space | beta_conjugate | bayesian_network | naive_bayes_classes | hmm_states
     # hypothesis_enumeration 特有
     hypothesis: str = ""  # linear_preference_weights
     features: List[str] = field(default_factory=list)
@@ -31,8 +31,26 @@ class StateStructure:
     n_arms: int = 0
     prior_alpha: float = 1.0
     prior_beta: float = 1.0
-    # bayesian_network 特有
-    # (BN 结构从数据中解析，不在 TaskSpec 中硬编码)
+    # bayesian_network 特有 (C3 真重构 2026-04-24)
+    # 实例级 DAG/CPT 仍 per-query 解析；schema 级配置参与编译。
+    bn_inference_method: str = "variable_elimination"  # ve | (future: junction_tree, sampling)
+    bn_input_format: str = "blind_text"  # blind_text | factors_dict
+    bn_numerical_precision: str = "float64"  # float64 | (future: mpfr)
+    # naive_bayes 特有 (C2 真 ops 组合 2026-04-28)
+    # 实例级 classes / feature_likelihoods 通过 spec field 传 compiler
+    nb_classes: List[str] = field(default_factory=list)
+    # nb_feature_likelihoods: {fname: {fval: {class: prob}}}
+    nb_feature_likelihoods: Dict[str, Any] = field(default_factory=dict)
+    nb_prior: Dict[str, float] = field(default_factory=dict)  # optional, empty = uniform
+    # hmm_forward 特有 (C2 2026-04-28)
+    hmm_states: List[str] = field(default_factory=list)
+    hmm_observations: List[str] = field(default_factory=list)
+    # hmm_initial: {state: prob}
+    hmm_initial: Dict[str, float] = field(default_factory=dict)
+    # hmm_transition: {from_state: {to_state: prob}}
+    hmm_transition: Dict[str, Dict[str, float]] = field(default_factory=dict)
+    # hmm_emission: {state: {observation: prob}}
+    hmm_emission: Dict[str, Dict[str, float]] = field(default_factory=dict)
 
 
 @dataclass
@@ -81,6 +99,9 @@ class TaskSpec:
                 "n_arms": self.state_structure.n_arms,
                 "prior_alpha": self.state_structure.prior_alpha,
                 "prior_beta": self.state_structure.prior_beta,
+                "bn_inference_method": self.state_structure.bn_inference_method,
+                "bn_input_format": self.state_structure.bn_input_format,
+                "bn_numerical_precision": self.state_structure.bn_numerical_precision,
             },
             "observation_model": {
                 "type": self.observation_model.type,
@@ -120,7 +141,13 @@ class TaskSpec:
     def validate(self) -> List[str]:
         """验证 TaskSpec 的合法性，返回错误列表"""
         errors = []
-        valid_families = {"hypothesis_enumeration", "conjugate_update", "variable_elimination"}
+        valid_families = {
+            "hypothesis_enumeration",
+            "conjugate_update",
+            "variable_elimination",
+            "naive_bayes",      # C2 2026-04-28: 5-op compose via NBSolver
+            "hmm_forward",      # C2 2026-04-28: 5-op compose via HMMSolver
+        }
         if self.inference_family not in valid_families:
             errors.append(f"未知 inference_family: {self.inference_family}")
 
@@ -153,5 +180,25 @@ class TaskSpec:
                 errors.append("variable_elimination 需要 observation_model.type = cpt_given")
             if self.decision_rule.type != "exact_probability":
                 errors.append("variable_elimination 需要 decision_rule.type = exact_probability")
+
+        elif self.inference_family == "naive_bayes":
+            if self.state_structure.type != "naive_bayes_classes":
+                errors.append("naive_bayes 需要 state_structure.type = naive_bayes_classes")
+            if not self.state_structure.nb_classes:
+                errors.append("naive_bayes 需要 nb_classes 列表")
+            if not self.state_structure.nb_feature_likelihoods:
+                errors.append("naive_bayes 需要 nb_feature_likelihoods (P(f_j|c) CPT)")
+
+        elif self.inference_family == "hmm_forward":
+            if self.state_structure.type != "hmm_states":
+                errors.append("hmm_forward 需要 state_structure.type = hmm_states")
+            if not self.state_structure.hmm_states:
+                errors.append("hmm_forward 需要 hmm_states 列表")
+            if not self.state_structure.hmm_initial:
+                errors.append("hmm_forward 需要 hmm_initial 分布")
+            if not self.state_structure.hmm_transition:
+                errors.append("hmm_forward 需要 hmm_transition CPT")
+            if not self.state_structure.hmm_emission:
+                errors.append("hmm_forward 需要 hmm_emission CPT")
 
         return errors

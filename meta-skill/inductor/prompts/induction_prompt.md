@@ -16,7 +16,7 @@ Your TaskSpec must use exactly one of these inference families:
 
 **state_structure**: `discrete_hypothesis_space` with features and values_per_feature
   - `features`: list of feature names (e.g., from option descriptions or data fields)
-  - `values_per_feature`: a **flat list of numeric values** representing possible preference weights (e.g., [-1.0, -0.5, 0.0, 0.5, 1.0]). Look at the `reward_fn` field in samples to discover these values — collect all unique values across all samples.
+  - `values_per_feature`: a **flat list of numeric values** representing possible preference weights. Default to `[-1.0, -0.5, 0.0, 0.5, 1.0]` (a symmetric 5-point grid commonly used in preference-learning benchmarks). If the task description or numeric features in `rounds[*].options` clearly suggest a different range, use that. Do NOT rely on any 'reward_fn' / 'answers' / 'correct_*' field — these have been removed for held-out evaluation (C5 fix).
   - IMPORTANT: `values_per_feature` must be numeric (float), NOT categorical strings.
 **observation_model**: `softmax_choice` (user picks option proportional to exp(utility))
 **decision_rule**: `argmax_expected_utility`
@@ -41,18 +41,65 @@ Your TaskSpec must use exactly one of these inference families:
 - Conditional probability tables given as text
 - Query asks for P(X|Y) or P(X,Y)
 
-**state_structure**: `bayesian_network`
+**state_structure**: `bayesian_network` with three optional config fields:
+  - `bn_inference_method`: `"variable_elimination"` (default; only one supported currently)
+  - `bn_input_format`: `"blind_text"` (default, BLInD CSV format) | `"factors_dict"` (pre-parsed Factor list)
+  - `bn_numerical_precision`: `"float64"` (default; mpfr/任意精度 future)
+
+These fields drive compiler dispatch (C3 真重构 2026-04-24): different config produces different solver. Defaults are fine for most BLInD-style tasks; only override when the task description specifies otherwise.
 **observation_model**: `cpt_given`
 **decision_rule**: `exact_probability`
+
+### 4. `naive_bayes` (held-out family, no macro — composes 5 core ops)
+**When to use**: The task gives a discrete class label set (e.g. diseases, sentiments, document categories) and a set of observed feature values. Goal: infer most likely class via P(c | features) ∝ P(c) × ∏_j P(f_j | c).
+
+**Key signals**:
+- A list of class labels (e.g. `diseases`, `categories`)
+- For each class, P(feature | class) CPT given (e.g. `likelihoods[disease][symptom]`)
+- Optional `priors` over classes
+- Observed feature values to predict from
+
+**state_structure**: `naive_bayes_classes` with:
+  - `nb_classes`: list of class labels
+  - `nb_feature_likelihoods`: nested dict `{feature_name: {feature_value: {class: prob}}}` — full CPT
+    - For binary features (e.g. symptom present/absent), include both `True`/`False` (or `present`/`absent`) entries
+    - String keys throughout (LLM should normalize feature values to consistent strings)
+  - `nb_prior`: optional `{class: prob}` (empty = uniform)
+
+**observation_model**: `feature_independence` (NB assumption: features conditionally independent given class)
+**decision_rule**: `argmax_class_posterior`
+
+The compiler instantiates `NBSolver` which composes condition + multiply + marginalize + normalize + argmax (no LLM in the loop at solve time).
+
+### 5. `hmm_forward` (held-out family, no macro — composes 5 ops with iteration)
+**When to use**: The task involves a sequence of observations from a hidden state model (HMM). Goal: filter posterior P(s_T | o_0, ..., o_T) over hidden states given the observed sequence.
+
+**Key signals**:
+- Discrete hidden state set (e.g. `sunny`/`rainy`, POS tags)
+- Discrete observation set (e.g. `umbrella`/`no_umbrella`, words)
+- Initial state distribution + transition CPT P(s_t | s_{t-1}) + emission CPT P(o | s)
+- A sequence of observations to filter over
+
+**state_structure**: `hmm_states` with:
+  - `hmm_states`: list of hidden state names
+  - `hmm_observations`: list of observation values
+  - `hmm_initial`: `{state: pi(state)}`
+  - `hmm_transition`: `{prev_state: {next_state: P(next|prev)}}`
+  - `hmm_emission`: `{state: {observation: P(obs|state)}}`
+
+**observation_model**: `discrete_emission`
+**decision_rule**: `filter_posterior`
+
+The compiler instantiates `HMMSolver` which uses the same 5 ops as NB but iterates `multiply → marginalize → normalize` over the time axis (a sequential pattern absent from any built-in macro).
 
 ## TaskSpec Schema
 
 ```json
 {
   "task_name": "string — descriptive name",
-  "inference_family": "hypothesis_enumeration | conjugate_update | variable_elimination",
+  "inference_family": "hypothesis_enumeration | conjugate_update | variable_elimination | naive_bayes | hmm_forward",
   "state_structure": {
-    "type": "discrete_hypothesis_space | beta_conjugate | bayesian_network",
+    "type": "discrete_hypothesis_space | beta_conjugate | bayesian_network | naive_bayes_classes | hmm_states",
     "hypothesis": "what each hypothesis represents (for hypothesis_enumeration)",
     "features": ["feature names (for hypothesis_enumeration)"],
     "values_per_feature": [possible values each feature weight can take],
@@ -86,7 +133,7 @@ Your TaskSpec must use exactly one of these inference families:
 
 ## Important Notes
 
-- For `hypothesis_enumeration`: the `values_per_feature` field must be a **flat list** of **numeric values** (floats). These represent the set of possible preference weight values each feature can take. Look at the `reward_fn` field across samples to discover the complete set of unique values.
+- For `hypothesis_enumeration`: the `values_per_feature` field must be a **flat list** of **numeric values** (floats). Default to the symmetric 5-point grid `[-1.0, -0.5, 0.0, 0.5, 1.0]` unless the task description specifies otherwise. The `reward_fn`/`answers`/`correct_*` fields have been removed from samples (C5 fix); inferring values from those fields is no longer valid.
 - For `conjugate_update`: the `n_arms` field should be the number of arms/machines/options.
 - For `variable_elimination`: the BN structure is parsed from data at runtime, so `features` and `values_per_feature` can be empty.
 - All `values_per_feature` entries must be numbers, never strings or nested lists.

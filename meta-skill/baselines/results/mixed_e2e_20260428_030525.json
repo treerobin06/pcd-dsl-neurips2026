@@ -1,0 +1,948 @@
+{
+  "experiment": "C2 Mixed-family E2E benchmark (Tree 2026-04-28 Level 2)",
+  "model": "openai/gpt-4o-mini",
+  "concurrency": 25,
+  "elapsed_sec": 57.14619016647339,
+  "families": [
+    "hmm",
+    "blind",
+    "nb"
+  ],
+  "n_per_family": 30,
+  "n_total": 90,
+  "overall": {
+    "family_id_correct": 90,
+    "family_id_acc": 1.0,
+    "family_id_wilson95": [
+      0.9590629315783191,
+      0.9999999999999999
+    ],
+    "e2e_correct": 90,
+    "e2e_acc": 1.0,
+    "e2e_wilson95": [
+      0.9590629315783191,
+      0.9999999999999999
+    ]
+  },
+  "per_family": {
+    "hmm": {
+      "n": 30,
+      "family_correct": 30,
+      "e2e_correct": 30
+    },
+    "blind": {
+      "n": 30,
+      "family_correct": 30,
+      "e2e_correct": 30
+    },
+    "nb": {
+      "n": 30,
+      "family_correct": 30,
+      "e2e_correct": 30
+    }
+  },
+  "failure_modes": {},
+  "results": [
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Flu",
+      "gold": "Flu",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Fever",
+      "gold": "Fever",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Congested",
+      "gold": "Congested",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.4928",
+      "gold": "0.4928",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.059437062463135654",
+      "gold": "0.059437062463135654",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Free_Flow",
+      "gold": "Free_Flow",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.3030904723779023",
+      "gold": "0.3030904723779023",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Sinusitis",
+      "gold": "Sinusitis",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Bull",
+      "gold": "Bull",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Bear",
+      "gold": "Bear",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Bronchitis",
+      "gold": "Bronchitis",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Allergic Rhinitis",
+      "gold": "Allergic Rhinitis",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Moderate",
+      "gold": "Moderate",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Stable",
+      "gold": "Stable",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.11067838203522007",
+      "gold": "0.11067838203522007",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Bronchitis",
+      "gold": "Bronchitis",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Healthy",
+      "gold": "Healthy",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.428452",
+      "gold": "0.428452",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Moderate",
+      "gold": "Moderate",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.05133333333333333",
+      "gold": "0.05133333333333333",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Strep Throat",
+      "gold": "Strep Throat",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Happy",
+      "gold": "Happy",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.7718892261001518",
+      "gold": "0.7718892261001518",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.11075806845444572",
+      "gold": "0.11075806845444575",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.08569878140878555",
+      "gold": "0.08569878140878556",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.6870069071373753",
+      "gold": "0.6870069071373753",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Neutral",
+      "gold": "Neutral",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.050755787371611655",
+      "gold": "0.050755787371611655",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.2",
+      "gold": "0.2",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Neutral",
+      "gold": "Neutral",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.15658494499278885",
+      "gold": "0.1565849449927889",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Cloudy",
+      "gold": "Cloudy",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Pneumonia",
+      "gold": "Pneumonia",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Rainy",
+      "gold": "Rainy",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Neutral",
+      "gold": "Neutral",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Bronchitis",
+      "gold": "Bronchitis",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.5544473160863116",
+      "gold": "0.5544473160863116",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Pneumonia",
+      "gold": "Pneumonia",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.15679999999999997",
+      "gold": "0.15680000000000002",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Happy",
+      "gold": "Happy",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Strep Throat",
+      "gold": "Strep Throat",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.5942622107969151",
+      "gold": "0.594262210796915",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Pneumonia",
+      "gold": "Pneumonia",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Moderate",
+      "gold": "Moderate",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Cloudy",
+      "gold": "Cloudy",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Pneumonia",
+      "gold": "Pneumonia",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Free_Flow",
+      "gold": "Free_Flow",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.7601300989293942",
+      "gold": "0.7601300989293942",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Flu",
+      "gold": "Flu",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Stable",
+      "gold": "Stable",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Allergic Rhinitis",
+      "gold": "Allergic Rhinitis",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Cloudy",
+      "gold": "Cloudy",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.1462020546586807",
+      "gold": "0.14620205465868072",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Rainy",
+      "gold": "Rainy",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Allergic Rhinitis",
+      "gold": "Allergic Rhinitis",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Strep Throat",
+      "gold": "Strep Throat",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Influenza",
+      "gold": "Influenza",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.12849607073803349",
+      "gold": "0.12849607073803346",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.05560029022310903",
+      "gold": "0.05560029022310903",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Allergic Rhinitis",
+      "gold": "Allergic Rhinitis",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Stable",
+      "gold": "Stable",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Allergic Rhinitis",
+      "gold": "Allergic Rhinitis",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Healthy",
+      "gold": "Healthy",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Gastroenteritis",
+      "gold": "Gastroenteritis",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Allergic Rhinitis",
+      "gold": "Allergic Rhinitis",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Asthma Exacerbation",
+      "gold": "Asthma Exacerbation",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Free_Flow",
+      "gold": "Free_Flow",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Flu",
+      "gold": "Flu",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.13055672938367163",
+      "gold": "0.13055672938367163",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.580930956469467",
+      "gold": "0.5809309564694671",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.24056717800219918",
+      "gold": "0.24056717800219918",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.09600000000000002",
+      "gold": "0.09600000000000002",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Free_Flow",
+      "gold": "Free_Flow",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.23400000000000007",
+      "gold": "0.23399999999999996",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.7500000000000001",
+      "gold": "0.7500000000000001",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.7816890630106486",
+      "gold": "0.7816890630106486",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Gastroenteritis",
+      "gold": "Gastroenteritis",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.05558035520696809",
+      "gold": "0.05558035520696809",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.10599999999999998",
+      "gold": "0.10600000000000001",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.14022063270349908",
+      "gold": "0.14022063270349908",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Flu",
+      "gold": "Flu",
+      "ok": true,
+      "failure_mode": null
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Influenza",
+      "gold": "Influenza",
+      "ok": true,
+      "failure_mode": null
+    }
+  ],
+  "timestamp": "2026-04-27T19:05:25Z"
+}
