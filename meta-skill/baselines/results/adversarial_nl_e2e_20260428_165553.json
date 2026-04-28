@@ -1,0 +1,642 @@
+{
+  "experiment": "C2 NL E2E ADVERSARIAL (Tree 2026-04-28: hedge+distractor+shuffle \u8ba9\u6570\u5b57 93-97%)",
+  "model": "openai/gpt-4o-mini",
+  "route": "Adversarial NL \u2192 mini emit TaskSpec \u2192 compile \u2192 run",
+  "config": {
+    "nb": {
+      "n_diseases": 4,
+      "n_symptoms": 5,
+      "nl_style": "adversarial"
+    },
+    "hmm": {
+      "n_states": 3,
+      "n_obs": 4,
+      "seq_length": 5,
+      "nl_style": "adversarial"
+    }
+  },
+  "concurrency": 25,
+  "elapsed_sec": 41.827600955963135,
+  "n_per_family": 30,
+  "nb_adversarial_e2e": {
+    "n": 30,
+    "correct": 30,
+    "wilson_95ci": [
+      0.8864829086095221,
+      1
+    ],
+    "results": [
+      {
+        "i": 0,
+        "seed": 7000,
+        "family": "naive_bayes",
+        "pred": "Pneumonia",
+        "gold": "Pneumonia",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. (Symptoms not in this panel are not considered for diagnosis.)\n\nIn **Pneumonia** patients, symptom probabilities are: Fever: present wit"
+      },
+      {
+        "i": 1,
+        "seed": 7001,
+        "family": "naive_bayes",
+        "pred": "Sinusitis",
+        "gold": "Sinusitis",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Note: this is a teaching diagnostic panel, not for clinical use.\n\nIn **Sinusitis** patients, symptom probabilities are: Cough: present w"
+      },
+      {
+        "i": 2,
+        "seed": 7002,
+        "family": "naive_bayes",
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. (Symptoms not in this panel are not considered for diagnosis.)\n\nIn **Gastroenteritis** patients, symptom probabilities are: Diarrhea: pr"
+      },
+      {
+        "i": 3,
+        "seed": 7003,
+        "family": "naive_bayes",
+        "pred": "COVID-19",
+        "gold": "COVID-19",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. (Symptoms not in this panel are not considered for diagnosis.)\n\nIn **COVID-19** patients, symptom probabilities are: Nausea: present wit"
+      },
+      {
+        "i": 4,
+        "seed": 7004,
+        "family": "naive_bayes",
+        "pred": "COVID-19",
+        "gold": "COVID-19",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. In clinical practice, comorbidities can complicate diagnosis.\n\nIn **Influenza** patients, symptom probabilities are: Cough: present with"
+      },
+      {
+        "i": 5,
+        "seed": 7005,
+        "family": "naive_bayes",
+        "pred": "Bronchitis",
+        "gold": "Bronchitis",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. In clinical practice, comorbidities can complicate diagnosis.\n\nIn **Bronchitis** patients, symptom probabilities are: Chills: present wi"
+      },
+      {
+        "i": 6,
+        "seed": 7006,
+        "family": "naive_bayes",
+        "pred": "Common Cold",
+        "gold": "Common Cold",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. In clinical practice, comorbidities can complicate diagnosis.\n\nIn **Asthma Exacerbation** patients, symptom probabilities are: Congestio"
+      },
+      {
+        "i": 7,
+        "seed": 7007,
+        "family": "naive_bayes",
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. In clinical practice, comorbidities can complicate diagnosis.\n\nIn **Gastroenteritis** patients, symptom probabilities are: Congestion: p"
+      },
+      {
+        "i": 8,
+        "seed": 7008,
+        "family": "naive_bayes",
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Each disease may also have other symptoms not listed here.\n\nIn **Asthma Exacerbation** patients, symptom probabilities are: Loss of Tast"
+      },
+      {
+        "i": 9,
+        "seed": 7009,
+        "family": "naive_bayes",
+        "pred": "Pneumonia",
+        "gold": "Pneumonia",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Many patients show atypical presentations.\n\nIn **Strep Throat** patients, symptom probabilities are: Diarrhea: present with probability "
+      },
+      {
+        "i": 10,
+        "seed": 7010,
+        "family": "naive_bayes",
+        "pred": "Pneumonia",
+        "gold": "Pneumonia",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Each disease may also have other symptoms not listed here.\n\nIn **Sinusitis** patients, symptom probabilities are: Body Aches: present wi"
+      },
+      {
+        "i": 11,
+        "seed": 7011,
+        "family": "naive_bayes",
+        "pred": "COVID-19",
+        "gold": "COVID-19",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. (Symptoms not in this panel are not considered for diagnosis.)\n\nIn **Influenza** patients, symptom probabilities are: Body Aches: presen"
+      },
+      {
+        "i": 12,
+        "seed": 7012,
+        "family": "naive_bayes",
+        "pred": "Sinusitis",
+        "gold": "Sinusitis",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Each disease may also have other symptoms not listed here.\n\nIn **Strep Throat** patients, symptom probabilities are: Nausea: present wit"
+      },
+      {
+        "i": 13,
+        "seed": 7013,
+        "family": "naive_bayes",
+        "pred": "Sinusitis",
+        "gold": "Sinusitis",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Note: this is a teaching diagnostic panel, not for clinical use.\n\nIn **Common Cold** patients, symptom probabilities are: Diarrhea: pres"
+      },
+      {
+        "i": 14,
+        "seed": 7014,
+        "family": "naive_bayes",
+        "pred": "Allergic Rhinitis",
+        "gold": "Allergic Rhinitis",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Many patients show atypical presentations.\n\nIn **Common Cold** patients, symptom probabilities are: Sneezing: present with probability a"
+      },
+      {
+        "i": 15,
+        "seed": 7015,
+        "family": "naive_bayes",
+        "pred": "COVID-19",
+        "gold": "COVID-19",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Note: this is a teaching diagnostic panel, not for clinical use.\n\nIn **Allergic Rhinitis** patients, symptom probabilities are: Sneezing"
+      },
+      {
+        "i": 16,
+        "seed": 7016,
+        "family": "naive_bayes",
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. In clinical practice, comorbidities can complicate diagnosis.\n\nIn **COVID-19** patients, symptom probabilities are: Shortness of Breath:"
+      },
+      {
+        "i": 17,
+        "seed": 7017,
+        "family": "naive_bayes",
+        "pred": "Bronchitis",
+        "gold": "Bronchitis",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. In clinical practice, comorbidities can complicate diagnosis.\n\nIn **COVID-19** patients, symptom probabilities are: Body Aches: present "
+      },
+      {
+        "i": 18,
+        "seed": 7018,
+        "family": "naive_bayes",
+        "pred": "Influenza",
+        "gold": "Influenza",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Note: this is a teaching diagnostic panel, not for clinical use.\n\nIn **Pneumonia** patients, symptom probabilities are: Chest Pain: pres"
+      },
+      {
+        "i": 19,
+        "seed": 7019,
+        "family": "naive_bayes",
+        "pred": "Influenza",
+        "gold": "Influenza",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. (Symptoms not in this panel are not considered for diagnosis.)\n\nIn **Bronchitis** patients, symptom probabilities are: Body Aches: prese"
+      },
+      {
+        "i": 20,
+        "seed": 7020,
+        "family": "naive_bayes",
+        "pred": "Common Cold",
+        "gold": "Common Cold",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Each disease may also have other symptoms not listed here.\n\nIn **Allergic Rhinitis** patients, symptom probabilities are: Body Aches: pr"
+      },
+      {
+        "i": 21,
+        "seed": 7021,
+        "family": "naive_bayes",
+        "pred": "Influenza",
+        "gold": "Influenza",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Note: this is a teaching diagnostic panel, not for clinical use.\n\nIn **Sinusitis** patients, symptom probabilities are: Headache: presen"
+      },
+      {
+        "i": 22,
+        "seed": 7022,
+        "family": "naive_bayes",
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. (Symptoms not in this panel are not considered for diagnosis.)\n\nIn **Sinusitis** patients, symptom probabilities are: Runny Nose: presen"
+      },
+      {
+        "i": 23,
+        "seed": 7023,
+        "family": "naive_bayes",
+        "pred": "Bronchitis",
+        "gold": "Bronchitis",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. In clinical practice, comorbidities can complicate diagnosis.\n\nIn **Gastroenteritis** patients, symptom probabilities are: Headache: pre"
+      },
+      {
+        "i": 24,
+        "seed": 7024,
+        "family": "naive_bayes",
+        "pred": "Pneumonia",
+        "gold": "Pneumonia",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Each disease may also have other symptoms not listed here.\n\nIn **COVID-19** patients, symptom probabilities are: Loss of Taste: present "
+      },
+      {
+        "i": 25,
+        "seed": 7025,
+        "family": "naive_bayes",
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Many patients show atypical presentations.\n\nIn **COVID-19** patients, symptom probabilities are: Loss of Taste: present with probability"
+      },
+      {
+        "i": 26,
+        "seed": 7026,
+        "family": "naive_bayes",
+        "pred": "COVID-19",
+        "gold": "COVID-19",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. In clinical practice, comorbidities can complicate diagnosis.\n\nIn **Pneumonia** patients, symptom probabilities are: Sore Throat: presen"
+      },
+      {
+        "i": 27,
+        "seed": 7027,
+        "family": "naive_bayes",
+        "pred": "Strep Throat",
+        "gold": "Strep Throat",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. (Symptoms not in this panel are not considered for diagnosis.)\n\nIn **Asthma Exacerbation** patients, symptom probabilities are: Congesti"
+      },
+      {
+        "i": 28,
+        "seed": 7028,
+        "family": "naive_bayes",
+        "pred": "Influenza",
+        "gold": "Influenza",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Note: this is a teaching diagnostic panel, not for clinical use.\n\nIn **Strep Throat** patients, symptom probabilities are: Runny Nose: p"
+      },
+      {
+        "i": 29,
+        "seed": 7029,
+        "family": "naive_bayes",
+        "pred": "Bronchitis",
+        "gold": "Bronchitis",
+        "ok": true,
+        "err": null,
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. (Symptoms not in this panel are not considered for diagnosis.)\n\nIn **Bronchitis** patients, symptom probabilities are: Fatigue: present "
+      }
+    ]
+  },
+  "hmm_adversarial_e2e": {
+    "n": 30,
+    "correct": 30,
+    "wilson_95ci": [
+      0.8864829086095221,
+      1
+    ],
+    "results": [
+      {
+        "i": 0,
+        "seed": 8000,
+        "family": "hmm_forward",
+        "pred": "Congested",
+        "gold": "Congested",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Observations may be noisy due to measurement error.\n  When current state is Moderate, next-state distribution: P(Free_Flow|Moderate) = ~64%, P(Moderate|Moderate) = approximate"
+      },
+      {
+        "i": 1,
+        "seed": 8001,
+        "family": "hmm_forward",
+        "pred": "Moderate",
+        "gold": "Moderate",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Observations may be noisy due to measurement error.\n  When current state is Congested, next-state distribution: P(Free_Flow|Congested) = approximately 78%, P(Moderate|Congeste"
+      },
+      {
+        "i": 2,
+        "seed": 8002,
+        "family": "hmm_forward",
+        "pred": "Congested",
+        "gold": "Congested",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Note: this model assumes stationary transitions.\n  When current state is Congested, next-state distribution: P(Moderate|Congested) = about half (~45%), P(Free_Flow|Congested) "
+      },
+      {
+        "i": 3,
+        "seed": 8003,
+        "family": "hmm_forward",
+        "pred": "Fever",
+        "gold": "Fever",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Note: this model assumes stationary transitions.\n  When current state is Fever, next-state distribution: P(Fever|Fever) = rare (~11%), P(Healthy|Fever) = around 44%, P(Flu|Fev"
+      },
+      {
+        "i": 4,
+        "seed": 8004,
+        "family": "hmm_forward",
+        "pred": "Happy",
+        "gold": "Happy",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Note: this model assumes stationary transitions.\n  When current state is Sad, next-state distribution: P(Happy|Sad) = common (~74%), P(Neutral|Sad) = ~18%, P(Sad|Sad) = around"
+      },
+      {
+        "i": 5,
+        "seed": 8005,
+        "family": "hmm_forward",
+        "pred": "Healthy",
+        "gold": "Healthy",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Observations may be noisy due to measurement error.\n  When current state is Fever, next-state distribution: P(Fever|Fever) = approximately 43%, P(Flu|Fever) = infrequent (~23%"
+      },
+      {
+        "i": 6,
+        "seed": 8006,
+        "family": "hmm_forward",
+        "pred": "Rainy",
+        "gold": "Rainy",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. (Real weather has more states than modeled here.)\n  When current state is Cloudy, next-state distribution: P(Rainy|Cloudy) = approximately 43%, P(Cloudy|Cloudy) = approximatel"
+      },
+      {
+        "i": 7,
+        "seed": 8007,
+        "family": "hmm_forward",
+        "pred": "Happy",
+        "gold": "Happy",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Each transition is conditionally independent of past states.\n  When current state is Neutral, next-state distribution: P(Happy|Neutral) = ~7%, P(Sad|Neutral) = moderate (~47%)"
+      },
+      {
+        "i": 8,
+        "seed": 8008,
+        "family": "hmm_forward",
+        "pred": "Moderate",
+        "gold": "Moderate",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. (Real weather has more states than modeled here.)\n  When current state is Free_Flow, next-state distribution: P(Moderate|Free_Flow) = ~38%, P(Congested|Free_Flow) = around 26%"
+      },
+      {
+        "i": 9,
+        "seed": 8009,
+        "family": "hmm_forward",
+        "pred": "Free_Flow",
+        "gold": "Free_Flow",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Each transition is conditionally independent of past states.\n  When current state is Free_Flow, next-state distribution: P(Congested|Free_Flow) = approximately 37%, P(Moderate"
+      },
+      {
+        "i": 10,
+        "seed": 8010,
+        "family": "hmm_forward",
+        "pred": "Healthy",
+        "gold": "Healthy",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Each transition is conditionally independent of past states.\n  When current state is Healthy, next-state distribution: P(Healthy|Healthy) = ~30%, P(Fever|Healthy) = ~9%, P(Flu"
+      },
+      {
+        "i": 11,
+        "seed": 8011,
+        "family": "hmm_forward",
+        "pred": "Neutral",
+        "gold": "Neutral",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Observations may be noisy due to measurement error.\n  When current state is Neutral, next-state distribution: P(Happy|Neutral) = approximately 44%, P(Sad|Neutral) = infrequent"
+      },
+      {
+        "i": 12,
+        "seed": 8012,
+        "family": "hmm_forward",
+        "pred": "Fever",
+        "gold": "Fever",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Each transition is conditionally independent of past states.\n  When current state is Healthy, next-state distribution: P(Flu|Healthy) = around 65%, P(Healthy|Healthy) = approx"
+      },
+      {
+        "i": 13,
+        "seed": 8013,
+        "family": "hmm_forward",
+        "pred": "Sunny",
+        "gold": "Sunny",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Observations may be noisy due to measurement error.\n  When current state is Cloudy, next-state distribution: P(Rainy|Cloudy) = ~38%, P(Sunny|Cloudy) = around 48%, P(Cloudy|Clo"
+      },
+      {
+        "i": 14,
+        "seed": 8014,
+        "family": "hmm_forward",
+        "pred": "Neutral",
+        "gold": "Neutral",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Observations may be noisy due to measurement error.\n  When current state is Neutral, next-state distribution: P(Neutral|Neutral) = ~57%, P(Sad|Neutral) = rare (~6%), P(Happy|N"
+      },
+      {
+        "i": 15,
+        "seed": 8015,
+        "family": "hmm_forward",
+        "pred": "Sunny",
+        "gold": "Sunny",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. (Real weather has more states than modeled here.)\n  When current state is Sunny, next-state distribution: P(Rainy|Sunny) = approximately 73%, P(Cloudy|Sunny) = ~8%, P(Sunny|Su"
+      },
+      {
+        "i": 16,
+        "seed": 8016,
+        "family": "hmm_forward",
+        "pred": "Free_Flow",
+        "gold": "Free_Flow",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Note: this model assumes stationary transitions.\n  When current state is Congested, next-state distribution: P(Free_Flow|Congested) = around 65%, P(Congested|Congested) = arou"
+      },
+      {
+        "i": 17,
+        "seed": 8017,
+        "family": "hmm_forward",
+        "pred": "Stable",
+        "gold": "Stable",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. (Real weather has more states than modeled here.)\n  When current state is Stable, next-state distribution: P(Bear|Stable) = around 27%, P(Stable|Stable) = around 34%, P(Bull|S"
+      },
+      {
+        "i": 18,
+        "seed": 8018,
+        "family": "hmm_forward",
+        "pred": "Sunny",
+        "gold": "Sunny",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. (Real weather has more states than modeled here.)\n  When current state is Rainy, next-state distribution: P(Cloudy|Rainy) = around 27%, P(Sunny|Rainy) = ~53%, P(Rainy|Rainy) ="
+      },
+      {
+        "i": 19,
+        "seed": 8019,
+        "family": "hmm_forward",
+        "pred": "Neutral",
+        "gold": "Neutral",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. (Real weather has more states than modeled here.)\n  When current state is Happy, next-state distribution: P(Sad|Happy) = ~42%, P(Happy|Happy) = approximately 19%, P(Neutral|Ha"
+      },
+      {
+        "i": 20,
+        "seed": 8020,
+        "family": "hmm_forward",
+        "pred": "Healthy",
+        "gold": "Healthy",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Each transition is conditionally independent of past states.\n  When current state is Flu, next-state distribution: P(Flu|Flu) = uncommon (~37%), P(Fever|Flu) = ~41%, P(Healthy"
+      },
+      {
+        "i": 21,
+        "seed": 8021,
+        "family": "hmm_forward",
+        "pred": "Happy",
+        "gold": "Happy",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. (Real weather has more states than modeled here.)\n  When current state is Neutral, next-state distribution: P(Happy|Neutral) = around 79%, P(Neutral|Neutral) = approximately 9"
+      },
+      {
+        "i": 22,
+        "seed": 8022,
+        "family": "hmm_forward",
+        "pred": "Sunny",
+        "gold": "Sunny",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. (Real weather has more states than modeled here.)\n  When current state is Sunny, next-state distribution: P(Sunny|Sunny) = ~47%, P(Rainy|Sunny) = approximately 22%, P(Cloudy|S"
+      },
+      {
+        "i": 23,
+        "seed": 8023,
+        "family": "hmm_forward",
+        "pred": "Flu",
+        "gold": "Flu",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Each transition is conditionally independent of past states.\n  When current state is Healthy, next-state distribution: P(Flu|Healthy) = infrequent (~39%), P(Healthy|Healthy) ="
+      },
+      {
+        "i": 24,
+        "seed": 8024,
+        "family": "hmm_forward",
+        "pred": "Happy",
+        "gold": "Happy",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Observations may be noisy due to measurement error.\n  When current state is Sad, next-state distribution: P(Neutral|Sad) = infrequent (~26%), P(Sad|Sad) = around 56%, P(Happy|"
+      },
+      {
+        "i": 25,
+        "seed": 8025,
+        "family": "hmm_forward",
+        "pred": "Fever",
+        "gold": "Fever",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Note: this model assumes stationary transitions.\n  When current state is Healthy, next-state distribution: P(Healthy|Healthy) = around 21%, P(Flu|Healthy) = around 46%, P(Feve"
+      },
+      {
+        "i": 26,
+        "seed": 8026,
+        "family": "hmm_forward",
+        "pred": "Stable",
+        "gold": "Stable",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Observations may be noisy due to measurement error.\n  When current state is Bear, next-state distribution: P(Stable|Bear) = ~49%, P(Bull|Bear) = approximately 25%, P(Bear|Bear"
+      },
+      {
+        "i": 27,
+        "seed": 8027,
+        "family": "hmm_forward",
+        "pred": "Free_Flow",
+        "gold": "Free_Flow",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. Note: this model assumes stationary transitions.\n  When current state is Free_Flow, next-state distribution: P(Congested|Free_Flow) = uncommon (~30%), P(Free_Flow|Free_Flow) ="
+      },
+      {
+        "i": 28,
+        "seed": 8028,
+        "family": "hmm_forward",
+        "pred": "Sunny",
+        "gold": "Sunny",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. (Real weather has more states than modeled here.)\n  When current state is Rainy, next-state distribution: P(Sunny|Rainy) = uncommon (~39%), P(Cloudy|Rainy) = around 19%, P(Rai"
+      },
+      {
+        "i": 29,
+        "seed": 8029,
+        "family": "hmm_forward",
+        "pred": "Free_Flow",
+        "gold": "Free_Flow",
+        "ok": true,
+        "err": null,
+        "sample_preview": "State transition matrix. (Real weather has more states than modeled here.)\n  When current state is Free_Flow, next-state distribution: P(Congested|Free_Flow) = around 28%, P(Moderate|Free_Flow) = abou"
+      }
+    ]
+  },
+  "timestamp": "2026-04-28T08:55:53Z"
+}

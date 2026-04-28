@@ -1,0 +1,155 @@
+{
+  "experiment": "C2 NL E2E STRESS smoke (Tree 2026-04-28: \u52a0 stress config \u8ba9\u6570\u5b57 93-97%)",
+  "model": "openai/gpt-4o-mini",
+  "route": "NL natural-language input \u2192 mini emit TaskSpec \u2192 compile \u2192 run",
+  "config": {
+    "nb_stress": {
+      "n_diseases": 6,
+      "n_symptoms": 8
+    },
+    "hmm_stress": {
+      "n_states": 4,
+      "n_obs": 5,
+      "seq_length": 10
+    }
+  },
+  "concurrency": 25,
+  "elapsed_sec": 32.60245895385742,
+  "n_per_family": 5,
+  "nb_stress_e2e": {
+    "n": 5,
+    "correct": 5,
+    "wilson_95ci": [
+      0.5655085052479191,
+      1
+    ],
+    "results": [
+      {
+        "i": 0,
+        "seed": 5000,
+        "n_diseases": 6,
+        "n_symptoms": 8,
+        "family": "naive_bayes",
+        "pred": "Strep Throat",
+        "gold": "Strep Throat",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 1,
+        "seed": 5001,
+        "n_diseases": 6,
+        "n_symptoms": 8,
+        "family": "naive_bayes",
+        "pred": "Sinusitis",
+        "gold": "Sinusitis",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 2,
+        "seed": 5002,
+        "n_diseases": 6,
+        "n_symptoms": 8,
+        "family": "naive_bayes",
+        "pred": "Common Cold",
+        "gold": "Common Cold",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 3,
+        "seed": 5003,
+        "n_diseases": 6,
+        "n_symptoms": 8,
+        "family": "naive_bayes",
+        "pred": "Bronchitis",
+        "gold": "Bronchitis",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 4,
+        "seed": 5004,
+        "n_diseases": 6,
+        "n_symptoms": 8,
+        "family": "naive_bayes",
+        "pred": "Strep Throat",
+        "gold": "Strep Throat",
+        "ok": true,
+        "err": null
+      }
+    ]
+  },
+  "hmm_stress_e2e": {
+    "n": 5,
+    "correct": 5,
+    "wilson_95ci": [
+      0.5655085052479191,
+      1
+    ],
+    "results": [
+      {
+        "i": 0,
+        "seed": 6000,
+        "n_states": 4,
+        "n_obs": 5,
+        "seq_length": 10,
+        "family": "hmm_forward",
+        "pred": "rainy",
+        "gold": "rainy",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 1,
+        "seed": 6001,
+        "n_states": 4,
+        "n_obs": 5,
+        "seq_length": 10,
+        "family": "hmm_forward",
+        "pred": "rainy",
+        "gold": "rainy",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 2,
+        "seed": 6002,
+        "n_states": 4,
+        "n_obs": 5,
+        "seq_length": 10,
+        "family": "hmm_forward",
+        "pred": "sunny",
+        "gold": "sunny",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 3,
+        "seed": 6003,
+        "n_states": 4,
+        "n_obs": 5,
+        "seq_length": 10,
+        "family": "hmm_forward",
+        "pred": "rainy",
+        "gold": "rainy",
+        "ok": true,
+        "err": null
+      },
+      {
+        "i": 4,
+        "seed": 6004,
+        "n_states": 4,
+        "n_obs": 5,
+        "seq_length": 10,
+        "family": "hmm_forward",
+        "pred": "snowy",
+        "gold": "snowy",
+        "ok": true,
+        "err": null
+      }
+    ]
+  },
+  "timestamp": "2026-04-28T08:43:40Z"
+}
