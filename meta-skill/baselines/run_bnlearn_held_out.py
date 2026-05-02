@@ -25,6 +25,7 @@ import asyncio
 import argparse
 import subprocess
 import tempfile
+import math
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 from datetime import datetime
@@ -63,6 +64,40 @@ def get_client() -> AsyncOpenAI:
 # 从 bnlearn 网络生成推理问题
 # ==========================================
 
+def is_locally_impossible_evidence(model, evidence: Dict[str, Any]) -> bool:
+    """Detect evidence combinations ruled out by an observed node's CPT.
+
+    pgmpy can return a finite posterior for some zero-probability evidence
+    combinations instead of NaN. For generated benchmarks we should skip these
+    undefined conditional queries.
+    """
+    for node, node_val in evidence.items():
+        cpd = model.get_cpds(node)
+        parents = list(cpd.variables[1:])
+        if not parents or not all(parent in evidence for parent in parents):
+            continue
+
+        state_names = cpd.state_names
+        try:
+            row_idx = state_names[node].index(node_val)
+            parent_indices = [state_names[p].index(evidence[p]) for p in parents]
+        except ValueError:
+            return True
+
+        col_idx = 0
+        for idx, parent in enumerate(parents):
+            stride = 1
+            for later_parent in parents[idx + 1:]:
+                stride *= len(state_names[later_parent])
+            col_idx += parent_indices[idx] * stride
+
+        vals = cpd.values.reshape(len(state_names[node]), -1)
+        if float(vals[row_idx, col_idx]) == 0.0:
+            return True
+
+    return False
+
+
 def generate_queries_from_network(
     net_name: str,
     n_queries: int,
@@ -81,7 +116,9 @@ def generate_queries_from_network(
         cpd = model.get_cpds(node)
         node_states[node] = cpd.state_names[node]
         # 提取 CPT 为 dict 格式
-        parents = list(cpd.get_evidence())
+        # 必须用 cpd.variables[1:]，它与 cpd.values 的 parent axis 顺序一致。
+        # cpd.get_evidence() 的返回顺序可能与 values axis 不同，会把 CPT 列错配。
+        parents = list(cpd.variables[1:])
         if not parents:
             # 根节点：P(node)
             vals = cpd.values.flatten()
@@ -113,7 +150,10 @@ def generate_queries_from_network(
     edges = [(str(u), str(v)) for u, v in model.edges()]
 
     queries = []
-    for i in range(n_queries):
+    attempts = 0
+    max_attempts = n_queries * 20
+    while len(queries) < n_queries and attempts < max_attempts:
+        attempts += 1
         # 随机选 query variable
         query_var = rng.choice(nodes)
 
@@ -127,18 +167,23 @@ def generate_queries_from_network(
         for ev in evidence_vars:
             evidence[ev] = rng.choice(node_states[ev])
 
+        if is_locally_impossible_evidence(model, evidence):
+            continue
+
         # 用 pgmpy 计算 gold answer
         try:
             result = ve.query([query_var], evidence=evidence)
             gold_posterior = {}
             for idx, state in enumerate(node_states[query_var]):
                 gold_posterior[state] = round(float(result.values[idx]), 6)
+            if any(not math.isfinite(v) for v in gold_posterior.values()):
+                continue
             gold_answer = max(gold_posterior, key=gold_posterior.get)
         except Exception as e:
             continue  # 跳过不可推理的 query
 
         queries.append({
-            "query_id": i,
+            "query_id": len(queries),
             "network": net_name,
             "n_nodes": len(nodes),
             "n_edges": len(edges),

@@ -1,0 +1,3785 @@
+{
+  "experiment": "all_family_mixed_nl_e2e",
+  "model": "openai/gpt-4o-mini",
+  "concurrency": 5,
+  "elapsed_sec": 31.2904691696167,
+  "n_per_family": 3,
+  "n_unsupported": 3,
+  "families": {
+    "nb": 3,
+    "unsupported": 3,
+    "hmm": 3,
+    "blind": 3,
+    "hotel": 3,
+    "flight": 3,
+    "textbandit": 3
+  },
+  "overall": {
+    "n_total": 21,
+    "overall_correct": 20,
+    "overall_acc": 0.9523809523809523,
+    "overall_wilson95": [
+      0.7733018341376452,
+      0.9915442305280766
+    ],
+    "route_correct": 21,
+    "route_acc": 1.0,
+    "route_wilson95": [
+      0.8453561767357979,
+      0.9999999999999999
+    ],
+    "supported_correct": 17,
+    "n_supported": 18,
+    "supported_acc": 0.9444444444444444,
+    "supported_wilson95": [
+      0.7424220019799247,
+      0.9901250641690756
+    ],
+    "reject_correct": 3,
+    "n_unsupported": 3,
+    "reject_acc": 1.0,
+    "reject_wilson95": [
+      0.43849391955098227,
+      1.0
+    ],
+    "per_family": {
+      "nb": {
+        "n": 3,
+        "route_correct": 3,
+        "ok": 3
+      },
+      "unsupported": {
+        "n": 3,
+        "route_correct": 3,
+        "ok": 3
+      },
+      "hmm": {
+        "n": 3,
+        "route_correct": 3,
+        "ok": 3
+      },
+      "blind": {
+        "n": 3,
+        "route_correct": 3,
+        "ok": 3
+      },
+      "hotel": {
+        "n": 3,
+        "route_correct": 3,
+        "ok": 3
+      },
+      "flight": {
+        "n": 3,
+        "route_correct": 3,
+        "ok": 2
+      },
+      "textbandit": {
+        "n": 3,
+        "route_correct": 3,
+        "ok": 3
+      }
+    },
+    "failure_modes": {}
+  },
+  "results": [
+    {
+      "family_label": "nb",
+      "route": {
+        "decision": "supported",
+        "family": "nb",
+        "confidence": 0.95,
+        "reason": "All required priors and likelihoods are provided for the classification task."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"nb\",\n  \"confidence\": 0.95,\n  \"reason\": \"All required priors and likelihoods are provided for the classification task.\"\n}",
+      "route_correct": true,
+      "pred": "Bronchitis",
+      "gold": "Bronchitis",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3284,
+        "completion_tokens": 872,
+        "cost_usd": 0.0008718
+      },
+      "branch_details": {
+        "spec_family": "naive_bayes",
+        "raw_branch_response": "```json\n{\n  \"task_name\": \"Disease Diagnosis from Symptoms\",\n  \"inference_family\": \"naive_bayes\",\n  \"state_structure\": {\n    \"type\": \"naive_bayes_classes\",\n    \"nb_classes\": [\"Bronchitis\", \"Common Cold\", \"Strep Throat\", \"Pneumonia\"],\n    \"nb_feature_likelihoods\": {\n      \"Nausea\": {\n        \"present\": {\n          \"Bronchitis\": 0.29,\n          \"Common Cold\": 0.54,\n          \"Strep Throat\": 0.17,\n          \"Pneumonia\": 0.30\n        },\n        \"absent\": {\n          \"Bronchitis\": 0.71,\n          \"Common Cold\": 0.46,\n          \"Strep Throat\": 0.83,\n          \"Pneumonia\": 0.70\n        }\n      },\n      \"Fatigue\": {\n        \"present\": {\n          \"Bronchitis\": 0.67,\n          \"Common Cold\": 0.66,\n          \"Strep Throat\": 0.72,\n          \"Pneumonia\": 0.25\n        },\n        \"absent\": {\n          \"Bronchitis\": 0.33,\n          \"Common Cold\": 0.34,\n          \"Strep Throat\": 0.28,\n          \"Pneumonia\": 0.75\n        }\n      },\n      \"Sneezing\": {\n        \"present\": {\n          \"Bronchitis\": 0.13,\n          \"Common Cold\": 0.47,\n          \"Strep Throat\": 0.14,\n          \"Pneumonia\": 0.50\n        },\n        \"absent\": {\n          \"Bronchitis\": 0.87,\n          \"Common Cold\": 0.53,\n          \"Strep Throat\": 0.86,\n          \"Pneumonia\": 0.50\n        }\n      },\n      \"Loss of Taste\": {\n        \"present\": {\n          \"Bronchitis\": 0.39,\n          \"Common Cold\": 0.87,\n          \"Strep Throat\": 0.09,\n          \"Pneumonia\": 0.53\n        },\n        \"absent\": {\n          \"Bronchitis\": 0.61,\n          \"Common Cold\": 0.13,\n          \"Strep Throat\": 0.91,\n          \"Pneumonia\": 0.47\n        }\n      },\n      \"Diarrhea\": {\n        \"present\": {\n          \"Bronchitis\": 0.21,\n          \"Common Cold\": 0.40,\n          \"Strep Throat\": 0.19,\n          \"Pneumonia\": 0.75\n        },\n        \"absent\": {\n          \"Bronchitis\": 0.79,\n          \"Common Cold\": 0.60,\n          \"Strep Throat\": 0.81,\n          \"Pneumonia\": 0.25\n        }\n      }\n    },\n    \"nb_prior\": {\n      \"Bronchitis\": 0.267,\n      \"Common Cold\": 0.175,\n      \"Strep Throat\": 0.205,\n      \"Pneumonia\": 0.353\n    }\n  },\n  \"observation_model\": {\n    \"type\": \"feature_independence\",\n    \"temperature\": 1.0,\n    \"input\": \"Nausea present, Fatigue present, Sneezing absent, Loss of Taste absent, Diarrhea present\"\n  },\n  \"decision_rule\": {\n    \"type\": \"argmax_class_posterior\",\n    \"utility\": \"P(class | features)\"\n  },\n  \"data_format\": {\n    \"rounds\": \"single_shot\",\n    \"options_per_round\": 1,\n    \"feedback\": \"none\"\n  }\n}\n```",
+        "pred": "Bronchitis"
+      },
+      "source_meta": {
+        "dataset": "nb",
+        "seed": 6102
+      }
+    },
+    {
+      "family_label": "unsupported",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0.9,
+        "reason": "Missing priors and likelihoods for Naive Bayes classification."
+      },
+      "raw_route_response": "{\n  \"decision\": \"reject\",\n  \"family\": null,\n  \"confidence\": 0.9,\n  \"reason\": \"Missing priors and likelihoods for Naive Bayes classification.\"\n}",
+      "route_correct": true,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 414,
+        "completion_tokens": 43,
+        "cost_usd": 8.79e-05
+      },
+      "branch_details": {},
+      "source_meta": {
+        "subtype": "missing_likelihoods",
+        "template": "unsupported_missing_probabilities"
+      }
+    },
+    {
+      "family_label": "hmm",
+      "route": {
+        "decision": "supported",
+        "family": "hmm",
+        "confidence": 0.95,
+        "reason": "All required components for HMM forward filtering are provided."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"hmm\",\n  \"confidence\": 0.95,\n  \"reason\": \"All required components for HMM forward filtering are provided.\"\n}",
+      "route_correct": true,
+      "pred": "Happy",
+      "gold": "Happy",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3060,
+        "completion_tokens": 534,
+        "cost_usd": 0.0006353999999999999
+      },
+      "branch_details": {
+        "spec_family": "hmm_forward",
+        "raw_branch_response": "```json\n{\n  \"task_name\": \"Hidden Markov Model State Prediction\",\n  \"inference_family\": \"hmm_forward\",\n  \"state_structure\": {\n    \"type\": \"hmm_states\",\n    \"hmm_states\": [\"Happy\", \"Neutral\", \"Sad\"],\n    \"hmm_observations\": [\"Smiling\", \"Quiet\", \"Crying\", \"Restless\"],\n    \"hmm_initial\": {\n      \"Happy\": 0.328,\n      \"Neutral\": 0.350,\n      \"Sad\": 0.321\n    },\n    \"hmm_transition\": {\n      \"Happy\": {\n        \"Happy\": 0.386,\n        \"Neutral\": 0.129,\n        \"Sad\": 0.485\n      },\n      \"Neutral\": {\n        \"Happy\": 0.293,\n        \"Neutral\": 0.476,\n        \"Sad\": 0.231\n      },\n      \"Sad\": {\n        \"Happy\": 0.363,\n        \"Neutral\": 0.323,\n        \"Sad\": 0.314\n      }\n    },\n    \"hmm_emission\": {\n      \"Happy\": {\n        \"Smiling\": 0.210,\n        \"Quiet\": 0.296,\n        \"Crying\": 0.220,\n        \"Restless\": 0.274\n      },\n      \"Neutral\": {\n        \"Smiling\": 0.294,\n        \"Quiet\": 0.185,\n        \"Crying\": 0.356,\n        \"Restless\": 0.166\n      },\n      \"Sad\": {\n        \"Smiling\": 0.218,\n        \"Quiet\": 0.227,\n        \"Crying\": 0.355,\n        \"Restless\": 0.200\n      }\n    }\n  },\n  \"observation_model\": {\n    \"type\": \"discrete_emission\",\n    \"temperature\": 1.0,\n    \"input\": \"Observed sequence: Crying, Crying, Restless, Smiling, Restless\"\n  },\n  \"decision_rule\": {\n    \"type\": \"filter_posterior\",\n    \"utility\": \"N/A\"\n  },\n  \"data_format\": {\n    \"rounds\": \"single_shot\",\n    \"options_per_round\": 1,\n    \"feedback\": \"none\"\n  }\n}\n```",
+        "pred": "Happy"
+      },
+      "source_meta": {
+        "dataset": "hmm",
+        "seed": 6201
+      }
+    },
+    {
+      "family_label": "blind",
+      "route": {
+        "decision": "supported",
+        "family": "blind",
+        "confidence": 0.95,
+        "reason": "The input provides a Bayesian network structure, conditional probability tables, and a specific query for probability inference."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"blind\",\n  \"confidence\": 0.95,\n  \"reason\": \"The input provides a Bayesian network structure, conditional probability tables, and a specific query for probability inference.\"\n}",
+      "route_correct": true,
+      "pred": "0.3540079813523725",
+      "gold": "0.35400798135237255",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3594,
+        "completion_tokens": 226,
+        "cost_usd": 0.0005307
+      },
+      "branch_details": {
+        "spec_family": "variable_elimination",
+        "raw_branch_response": "```json\n{\n  \"task_name\": \"Bayesian network probability inference\",\n  \"inference_family\": \"variable_elimination\",\n  \"state_structure\": {\n    \"type\": \"bayesian_network\",\n    \"bn_inference_method\": \"variable_elimination\",\n    \"bn_input_format\": \"blind_text\",\n    \"bn_numerical_precision\": \"float64\"\n  },\n  \"observation_model\": {\n    \"type\": \"cpt_given\",\n    \"input\": \"Conditional probability tables provided in the context\"\n  },\n  \"decision_rule\": {\n    \"type\": \"exact_probability\",\n    \"utility\": \"Marginal probability of the queried variables\"\n  },\n  \"data_format\": {\n    \"rounds\": \"single_shot\",\n    \"options_per_round\": 0,\n    \"feedback\": \"none\"\n  }\n}\n```",
+        "pred": 0.3540079813523725
+      },
+      "source_meta": {
+        "dataset": "blind"
+      }
+    },
+    {
+      "family_label": "hotel",
+      "route": {
+        "decision": "supported",
+        "family": "hotel",
+        "confidence": 1,
+        "reason": "Task involves preference learning from historical hotel choices with marked selections."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"hotel\",\n  \"confidence\": 1,\n  \"reason\": \"Task involves preference learning from historical hotel choices with marked selections.\"\n}",
+      "route_correct": true,
+      "pred": "2",
+      "gold": "2",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 1766,
+        "completion_tokens": 606,
+        "cost_usd": 0.0006285
+      },
+      "branch_details": {
+        "success": true,
+        "e2e_recommendation": 2,
+        "gold_user_choice": 2,
+        "gold_solver_rec": 2,
+        "e2e_correct": true,
+        "e2e_matches_gold_solver": true,
+        "feature_exact_match": 1.0,
+        "feature_close_match": 1.0,
+        "feature_errors": [
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          }
+        ],
+        "raw_branch_response": "```json\n{\n  \"rounds\": [\n    {\n      \"options\": [\n        {\"distance_miles\": 3.0, \"price\": 550, \"rating_stars\": 1, \"amenities_count\": 2},\n        {\"distance_miles\": 3.0, \"price\": 820, \"rating_stars\": 2, \"amenities_count\": 3},\n        {\"distance_miles\": 3.0, \"price\": 370, \"rating_stars\": 1, \"amenities_count\": 1}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 9.0, \"price\": 910, \"rating_stars\": 1, \"amenities_count\": 2},\n        {\"distance_miles\": 4.0, \"price\": 730, \"rating_stars\": 4, \"amenities_count\": 3},\n        {\"distance_miles\": 2.0, \"price\": 730, \"rating_stars\": 5, \"amenities_count\": 2}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 0.0, \"price\": 100, \"rating_stars\": 5, \"amenities_count\": 0},\n        {\"distance_miles\": 4.0, \"price\": 190, \"rating_stars\": 5, \"amenities_count\": 1},\n        {\"distance_miles\": 10.0, \"price\": 1000, \"rating_stars\": 1, \"amenities_count\": 1}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 1.0, \"price\": 730, \"rating_stars\": 2, \"amenities_count\": 1},\n        {\"distance_miles\": 3.0, \"price\": 640, \"rating_stars\": 4, \"amenities_count\": 2},\n        {\"distance_miles\": 0.0, \"price\": 370, \"rating_stars\": 5, \"amenities_count\": 1}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 10.0, \"price\": 460, \"rating_stars\": 4, \"amenities_count\": 4},\n        {\"distance_miles\": 6.0, \"price\": 460, \"rating_stars\": 5, \"amenities_count\": 3},\n        {\"distance_miles\": 4.0, \"price\": 460, \"rating_stars\": 1, \"amenities_count\": 4}\n      ]\n    }\n  ]\n}\n```"
+      },
+      "source_meta": {
+        "dataset": "hotel",
+        "idx": 0
+      }
+    },
+    {
+      "family_label": "hotel",
+      "route": {
+        "decision": "supported",
+        "family": "hotel",
+        "confidence": 1,
+        "reason": "Task involves preference learning from historical hotel choices with marked selections."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"hotel\",\n  \"confidence\": 1,\n  \"reason\": \"Task involves preference learning from historical hotel choices with marked selections.\"\n}",
+      "route_correct": true,
+      "pred": "0",
+      "gold": "0",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 1770,
+        "completion_tokens": 578,
+        "cost_usd": 0.0006123
+      },
+      "branch_details": {
+        "success": true,
+        "e2e_recommendation": 0,
+        "gold_user_choice": 0,
+        "gold_solver_rec": 0,
+        "e2e_correct": true,
+        "e2e_matches_gold_solver": true,
+        "feature_exact_match": 0.9833333333333333,
+        "feature_close_match": 0.9833333333333333,
+        "feature_errors": [
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.75,
+            "error": 0.25
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          }
+        ],
+        "raw_branch_response": "```json\n{\n  \"rounds\": [\n    {\n      \"options\": [\n        {\"distance_miles\": 3, \"price\": 1000, \"rating_stars\": 1, \"amenities_count\": 1},\n        {\"distance_miles\": 5, \"price\": 910, \"rating_stars\": 4, \"amenities_count\": 0},\n        {\"distance_miles\": 5, \"price\": 100, \"rating_stars\": 2, \"amenities_count\": 2}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 4, \"price\": 280, \"rating_stars\": 1, \"amenities_count\": 3},\n        {\"distance_miles\": 2, \"price\": 1000, \"rating_stars\": 1, \"amenities_count\": 1},\n        {\"distance_miles\": 0, \"price\": 1000, \"rating_stars\": 3, \"amenities_count\": 2}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 10, \"price\": 730, \"rating_stars\": 4, \"amenities_count\": 2},\n        {\"distance_miles\": 9, \"price\": 280, \"rating_stars\": 4, \"amenities_count\": 3},\n        {\"distance_miles\": 3, \"price\": 280, \"rating_stars\": 4, \"amenities_count\": 4}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 1, \"price\": 280, \"rating_stars\": 4, \"amenities_count\": 1},\n        {\"distance_miles\": 10, \"price\": 190, \"rating_stars\": 5, \"amenities_count\": 2},\n        {\"distance_miles\": 6, \"price\": 820, \"rating_stars\": 4, \"amenities_count\": 2}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 3, \"price\": 100, \"rating_stars\": 1, \"amenities_count\": 0},\n        {\"distance_miles\": 6, \"price\": 370, \"rating_stars\": 3, \"amenities_count\": 3},\n        {\"distance_miles\": 8, \"price\": 820, \"rating_stars\": 1, \"amenities_count\": 2}\n      ]\n    }\n  ]\n}\n```"
+      },
+      "source_meta": {
+        "dataset": "hotel",
+        "idx": 1
+      }
+    },
+    {
+      "family_label": "flight",
+      "route": {
+        "decision": "supported",
+        "family": "flight",
+        "confidence": 1.0,
+        "reason": "Task involves preference learning from historical flight choices with detailed descriptions."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"flight\",\n  \"confidence\": 1.0,\n  \"reason\": \"Task involves preference learning from historical flight choices with detailed descriptions.\"\n}",
+      "route_correct": true,
+      "pred": "2",
+      "gold": "2",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 1882,
+        "completion_tokens": 564,
+        "cost_usd": 0.0006207000000000001
+      },
+      "branch_details": {
+        "success": true,
+        "e2e_recommendation": 2,
+        "gold_user_choice": 2,
+        "gold_solver_rec": 2,
+        "e2e_correct": true,
+        "e2e_matches_gold_solver": true,
+        "feature_exact_match": 1.0,
+        "feature_close_match": 1.0,
+        "feature_errors": [
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          }
+        ],
+        "raw_branch_response": "```json\n{\n  \"rounds\": [\n    {\n      \"options\": [\n        {\"departure_hour\": 14.0, \"duration_min\": 30, \"stops\": 2, \"price\": 370},\n        {\"departure_hour\": 18.8, \"duration_min\": 147, \"stops\": 1, \"price\": 370},\n        {\"departure_hour\": 10.8, \"duration_min\": 849, \"stops\": 0, \"price\": 190}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 10.8, \"duration_min\": 849, \"stops\": 0, \"price\": 820},\n        {\"departure_hour\": 22.0, \"duration_min\": 381, \"stops\": 1, \"price\": 730},\n        {\"departure_hour\": 18.8, \"duration_min\": 615, \"stops\": 2, \"price\": 730}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 9.2, \"duration_min\": 147, \"stops\": 2, \"price\": 730},\n        {\"departure_hour\": 18.8, \"duration_min\": 966, \"stops\": 2, \"price\": 460},\n        {\"departure_hour\": 9.2, \"duration_min\": 1083, \"stops\": 0, \"price\": 1000}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 7.6, \"duration_min\": 147, \"stops\": 1, \"price\": 910},\n        {\"departure_hour\": 14.0, \"duration_min\": 498, \"stops\": 2, \"price\": 190},\n        {\"departure_hour\": 14.0, \"duration_min\": 849, \"stops\": 0, \"price\": 280}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 9.2, \"duration_min\": 147, \"stops\": 1, \"price\": 550},\n        {\"departure_hour\": 20.4, \"duration_min\": 264, \"stops\": 1, \"price\": 910},\n        {\"departure_hour\": 7.6, \"duration_min\": 498, \"stops\": 0, \"price\": 370}\n      ]\n    }\n  ]\n}\n```"
+      },
+      "source_meta": {
+        "dataset": "flight",
+        "idx": 2
+      }
+    },
+    {
+      "family_label": "textbandit",
+      "route": {
+        "decision": "supported",
+        "family": "textbandit",
+        "confidence": 0.95,
+        "reason": "Input describes a Beta-Bernoulli bandit problem with a clear history of pulls and binary rewards."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"textbandit\",\n  \"confidence\": 0.95,\n  \"reason\": \"Input describes a Beta-Bernoulli bandit problem with a clear history of pulls and binary rewards.\"\n}",
+      "route_correct": true,
+      "pred": "2",
+      "gold": "2",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 1161,
+        "completion_tokens": 392,
+        "cost_usd": 0.00040935
+      },
+      "branch_details": {
+        "success": true,
+        "spec_family": "conjugate_update",
+        "n_arms": 2,
+        "observations_exact": true,
+        "parsed_observations": [
+          {
+            "arm": 1,
+            "reward": 0
+          },
+          {
+            "arm": 2,
+            "reward": 1
+          },
+          {
+            "arm": 1,
+            "reward": 1
+          },
+          {
+            "arm": 2,
+            "reward": 1
+          },
+          {
+            "arm": 2,
+            "reward": 1
+          },
+          {
+            "arm": 2,
+            "reward": 1
+          },
+          {
+            "arm": 1,
+            "reward": 0
+          },
+          {
+            "arm": 1,
+            "reward": 0
+          },
+          {
+            "arm": 1,
+            "reward": 0
+          },
+          {
+            "arm": 2,
+            "reward": 1
+          },
+          {
+            "arm": 1,
+            "reward": 1
+          }
+        ],
+        "pred_arm": 2,
+        "gold_arm": 2,
+        "e2e_correct": true,
+        "posterior_means": [
+          0.375,
+          0.8571428571428571
+        ],
+        "raw_branch_response": "{\n  \"task_spec\": {\n    \"task_name\": \"textbandit_beta_bernoulli\",\n    \"inference_family\": \"conjugate_update\",\n    \"state_structure\": {\n      \"type\": \"beta_conjugate\",\n      \"n_arms\": 2,\n      \"prior_alpha\": 1.0,\n      \"prior_beta\": 1.0\n    },\n    \"observation_model\": {\n      \"type\": \"bernoulli_reward\",\n      \"temperature\": 1.0,\n      \"input\": \"slot_machine_binary_feedback\"\n    },\n    \"decision_rule\": {\n      \"type\": \"argmax_posterior_mean\",\n      \"utility\": \"posterior_mean_reward_rate\"\n    },\n    \"data_format\": {\n      \"rounds\": \"sequential\",\n      \"options_per_round\": 2,\n      \"feedback\": \"binary_reward\"\n    }\n  },\n  \"observations\": [\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 1, \"reward\": 1}\n  ]\n}"
+      },
+      "source_meta": {
+        "dataset": "textbandit",
+        "id": 0
+      }
+    },
+    {
+      "family_label": "hotel",
+      "route": {
+        "decision": "supported",
+        "family": "hotel",
+        "confidence": 1,
+        "reason": "Task involves preference learning from historical hotel choices with marked selections."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"hotel\",\n  \"confidence\": 1,\n  \"reason\": \"Task involves preference learning from historical hotel choices with marked selections.\"\n}",
+      "route_correct": true,
+      "pred": "2",
+      "gold": "2",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 1772,
+        "completion_tokens": 577,
+        "cost_usd": 0.000612
+      },
+      "branch_details": {
+        "success": true,
+        "e2e_recommendation": 2,
+        "gold_user_choice": 2,
+        "gold_solver_rec": 2,
+        "e2e_correct": true,
+        "e2e_matches_gold_solver": true,
+        "feature_exact_match": 0.9833333333333333,
+        "feature_close_match": 0.9833333333333333,
+        "feature_errors": [
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.75,
+            "gold": 1.0,
+            "error": 0.25
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.25,
+            "gold": 0.25,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.75,
+            "gold": 0.75,
+            "error": 0.0
+          }
+        ],
+        "raw_branch_response": "```json\n{\n  \"rounds\": [\n    {\n      \"options\": [\n        {\"distance_miles\": 3, \"price\": 280, \"rating_stars\": 4, \"amenities_count\": 0},\n        {\"distance_miles\": 8, \"price\": 820, \"rating_stars\": 4, \"amenities_count\": 0},\n        {\"distance_miles\": 10, \"price\": 280, \"rating_stars\": 1, \"amenities_count\": 3}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 3, \"price\": 100, \"rating_stars\": 5, \"amenities_count\": 3},\n        {\"distance_miles\": 6, \"price\": 910, \"rating_stars\": 4, \"amenities_count\": 0},\n        {\"distance_miles\": 0, \"price\": 820, \"rating_stars\": 2, \"amenities_count\": 0}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 9, \"price\": 640, \"rating_stars\": 4, \"amenities_count\": 1},\n        {\"distance_miles\": 8, \"price\": 100, \"rating_stars\": 5, \"amenities_count\": 3},\n        {\"distance_miles\": 9, \"price\": 640, \"rating_stars\": 1, \"amenities_count\": 0}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 9, \"price\": 280, \"rating_stars\": 1, \"amenities_count\": 3},\n        {\"distance_miles\": 6, \"price\": 910, \"rating_stars\": 2, \"amenities_count\": 4},\n        {\"distance_miles\": 8, \"price\": 820, \"rating_stars\": 4, \"amenities_count\": 2}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 3, \"price\": 1000, \"rating_stars\": 5, \"amenities_count\": 3},\n        {\"distance_miles\": 6, \"price\": 550, \"rating_stars\": 4, \"amenities_count\": 0},\n        {\"distance_miles\": 8, \"price\": 460, \"rating_stars\": 3, \"amenities_count\": 3}\n      ]\n    }\n  ]\n}\n```"
+      },
+      "source_meta": {
+        "dataset": "hotel",
+        "idx": 2
+      }
+    },
+    {
+      "family_label": "textbandit",
+      "route": {
+        "decision": "supported",
+        "family": "textbandit",
+        "confidence": 0.95,
+        "reason": "Task involves a Beta-Bernoulli bandit with historical pull data and binary rewards."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"textbandit\",\n  \"confidence\": 0.95,\n  \"reason\": \"Task involves a Beta-Bernoulli bandit with historical pull data and binary rewards.\"\n}",
+      "route_correct": true,
+      "pred": "1",
+      "gold": "1",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 1116,
+        "completion_tokens": 376,
+        "cost_usd": 0.000393
+      },
+      "branch_details": {
+        "success": true,
+        "spec_family": "conjugate_update",
+        "n_arms": 4,
+        "observations_exact": true,
+        "parsed_observations": [
+          {
+            "arm": 1,
+            "reward": 0
+          },
+          {
+            "arm": 2,
+            "reward": 1
+          },
+          {
+            "arm": 4,
+            "reward": 0
+          },
+          {
+            "arm": 3,
+            "reward": 0
+          },
+          {
+            "arm": 2,
+            "reward": 0
+          },
+          {
+            "arm": 4,
+            "reward": 0
+          },
+          {
+            "arm": 1,
+            "reward": 0
+          },
+          {
+            "arm": 1,
+            "reward": 1
+          },
+          {
+            "arm": 2,
+            "reward": 0
+          },
+          {
+            "arm": 1,
+            "reward": 1
+          }
+        ],
+        "pred_arm": 1,
+        "gold_arm": 1,
+        "e2e_correct": true,
+        "posterior_means": [
+          0.5,
+          0.4,
+          0.3333333333333333,
+          0.25
+        ],
+        "raw_branch_response": "{\n  \"task_spec\": {\n    \"task_name\": \"textbandit_beta_bernoulli\",\n    \"inference_family\": \"conjugate_update\",\n    \"state_structure\": {\n      \"type\": \"beta_conjugate\",\n      \"n_arms\": 4,\n      \"prior_alpha\": 1.0,\n      \"prior_beta\": 1.0\n    },\n    \"observation_model\": {\n      \"type\": \"bernoulli_reward\",\n      \"temperature\": 1.0,\n      \"input\": \"slot_machine_binary_feedback\"\n    },\n    \"decision_rule\": {\n      \"type\": \"argmax_posterior_mean\",\n      \"utility\": \"posterior_mean_reward_rate\"\n    },\n    \"data_format\": {\n      \"rounds\": \"sequential\",\n      \"options_per_round\": 4,\n      \"feedback\": \"binary_reward\"\n    }\n  },\n  \"observations\": [\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 4, \"reward\": 0},\n    {\"arm\": 3, \"reward\": 0},\n    {\"arm\": 2, \"reward\": 0},\n    {\"arm\": 4, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 1}\n  ]\n}"
+      },
+      "source_meta": {
+        "dataset": "textbandit",
+        "id": 2
+      }
+    },
+    {
+      "family_label": "blind",
+      "route": {
+        "decision": "supported",
+        "family": "blind",
+        "confidence": 0.95,
+        "reason": "Valid Bayesian network inference with complete structure and query."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"blind\",\n  \"confidence\": 0.95,\n  \"reason\": \"Valid Bayesian network inference with complete structure and query.\"\n}",
+      "route_correct": true,
+      "pred": "0.38999999999999996",
+      "gold": "0.38999999999999996",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2620,
+        "completion_tokens": 221,
+        "cost_usd": 0.00038159999999999995
+      },
+      "branch_details": {
+        "spec_family": "variable_elimination",
+        "raw_branch_response": "```json\n{\n  \"task_name\": \"Bayesian network probability inference\",\n  \"inference_family\": \"variable_elimination\",\n  \"state_structure\": {\n    \"type\": \"bayesian_network\",\n    \"bn_inference_method\": \"variable_elimination\",\n    \"bn_input_format\": \"blind_text\",\n    \"bn_numerical_precision\": \"float64\"\n  },\n  \"observation_model\": {\n    \"type\": \"cpt_given\",\n    \"input\": \"Conditional probability tables provided in the context\"\n  },\n  \"decision_rule\": {\n    \"type\": \"exact_probability\",\n    \"utility\": \"Marginal probability of n0 being True given n1 is False\"\n  },\n  \"data_format\": {\n    \"rounds\": \"single_shot\",\n    \"options_per_round\": 0,\n    \"feedback\": \"none\"\n  }\n}\n```",
+        "pred": 0.38999999999999996
+      },
+      "source_meta": {
+        "dataset": "blind"
+      }
+    },
+    {
+      "family_label": "nb",
+      "route": {
+        "decision": "supported",
+        "family": "nb",
+        "confidence": 0.95,
+        "reason": "All required components for Naive Bayes classification are provided: priors, likelihoods, and observed features."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"nb\",\n  \"confidence\": 0.95,\n  \"reason\": \"All required components for Naive Bayes classification are provided: priors, likelihoods, and observed features.\"\n}",
+      "route_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3270,
+        "completion_tokens": 854,
+        "cost_usd": 0.0008589000000000001
+      },
+      "branch_details": {
+        "spec_family": "naive_bayes",
+        "raw_branch_response": "```json\n{\n  \"task_name\": \"Disease Diagnosis from Symptoms\",\n  \"inference_family\": \"naive_bayes\",\n  \"state_structure\": {\n    \"type\": \"naive_bayes_classes\",\n    \"nb_classes\": [\"Strep Throat\", \"Common Cold\", \"Influenza\", \"COVID-19\"],\n    \"nb_feature_likelihoods\": {\n      \"Cough\": {\n        \"present\": {\n          \"Strep Throat\": 0.46,\n          \"Common Cold\": 0.21,\n          \"Influenza\": 0.63,\n          \"COVID-19\": 0.30\n        },\n        \"absent\": {\n          \"Strep Throat\": 0.54,\n          \"Common Cold\": 0.79,\n          \"Influenza\": 0.37,\n          \"COVID-19\": 0.70\n        }\n      },\n      \"Fatigue\": {\n        \"present\": {\n          \"Strep Throat\": 0.50,\n          \"Common Cold\": 0.43,\n          \"Influenza\": 0.76,\n          \"COVID-19\": 0.05\n        },\n        \"absent\": {\n          \"Strep Throat\": 0.50,\n          \"Common Cold\": 0.57,\n          \"Influenza\": 0.24,\n          \"COVID-19\": 0.95\n        }\n      },\n      \"Chest Pain\": {\n        \"present\": {\n          \"Strep Throat\": 0.85,\n          \"Common Cold\": 0.33,\n          \"Influenza\": 0.82,\n          \"COVID-19\": 0.22\n        },\n        \"absent\": {\n          \"Strep Throat\": 0.15,\n          \"Common Cold\": 0.67,\n          \"Influenza\": 0.18,\n          \"COVID-19\": 0.78\n        }\n      },\n      \"Diarrhea\": {\n        \"present\": {\n          \"Strep Throat\": 0.80,\n          \"Common Cold\": 0.43,\n          \"Influenza\": 0.22,\n          \"COVID-19\": 0.22\n        },\n        \"absent\": {\n          \"Strep Throat\": 0.20,\n          \"Common Cold\": 0.57,\n          \"Influenza\": 0.78,\n          \"COVID-19\": 0.78\n        }\n      },\n      \"Nausea\": {\n        \"present\": {\n          \"Strep Throat\": 0.84,\n          \"Common Cold\": 0.87,\n          \"Influenza\": 0.72,\n          \"COVID-19\": 0.71\n        },\n        \"absent\": {\n          \"Strep Throat\": 0.16,\n          \"Common Cold\": 0.13,\n          \"Influenza\": 0.28,\n          \"COVID-19\": 0.29\n        }\n      }\n    },\n    \"nb_prior\": {\n      \"Strep Throat\": 0.314,\n      \"Common Cold\": 0.081,\n      \"Influenza\": 0.380,\n      \"COVID-19\": 0.225\n    }\n  },\n  \"observation_model\": {\n    \"type\": \"feature_independence\",\n    \"temperature\": 1.0,\n    \"input\": \"Cough absent, Fatigue absent, Chest Pain present, Diarrhea absent, Nausea absent\"\n  },\n  \"decision_rule\": {\n    \"type\": \"argmax_class_posterior\",\n    \"utility\": \"P(class | features)\"\n  },\n  \"data_format\": {\n    \"rounds\": \"single_shot\",\n    \"options_per_round\": 1,\n    \"feedback\": \"none\"\n  }\n}\n```",
+        "pred": "COVID-19"
+      },
+      "source_meta": {
+        "dataset": "nb",
+        "seed": 6101
+      }
+    },
+    {
+      "family_label": "nb",
+      "route": {
+        "decision": "supported",
+        "family": "nb",
+        "confidence": 0.95,
+        "reason": "All required components for Naive Bayes classification are provided: priors, likelihoods, and observed features."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"nb\",\n  \"confidence\": 0.95,\n  \"reason\": \"All required components for Naive Bayes classification are provided: priors, likelihoods, and observed features.\"\n}",
+      "route_correct": true,
+      "pred": "Strep Throat",
+      "gold": "Strep Throat",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3266,
+        "completion_tokens": 900,
+        "cost_usd": 0.0008859
+      },
+      "branch_details": {
+        "spec_family": "naive_bayes",
+        "raw_branch_response": "```json\n{\n  \"task_name\": \"Disease Diagnosis from Symptoms\",\n  \"inference_family\": \"naive_bayes\",\n  \"state_structure\": {\n    \"type\": \"naive_bayes_classes\",\n    \"nb_classes\": [\"Strep Throat\", \"COVID-19\", \"Influenza\", \"Asthma Exacerbation\"],\n    \"nb_feature_likelihoods\": {\n      \"Fever\": {\n        \"present\": {\n          \"Strep Throat\": 0.84,\n          \"COVID-19\": 0.72,\n          \"Influenza\": 0.71,\n          \"Asthma Exacerbation\": 0.85\n        },\n        \"absent\": {\n          \"Strep Throat\": 0.16,\n          \"COVID-19\": 0.28,\n          \"Influenza\": 0.29,\n          \"Asthma Exacerbation\": 0.15\n        }\n      },\n      \"Congestion\": {\n        \"present\": {\n          \"Strep Throat\": 0.43,\n          \"COVID-19\": 0.36,\n          \"Influenza\": 0.18,\n          \"Asthma Exacerbation\": 0.24\n        },\n        \"absent\": {\n          \"Strep Throat\": 0.57,\n          \"COVID-19\": 0.64,\n          \"Influenza\": 0.82,\n          \"Asthma Exacerbation\": 0.76\n        }\n      },\n      \"Cough\": {\n        \"present\": {\n          \"Strep Throat\": 0.92,\n          \"COVID-19\": 0.33,\n          \"Influenza\": 0.29,\n          \"Asthma Exacerbation\": 0.34\n        },\n        \"absent\": {\n          \"Strep Throat\": 0.08,\n          \"COVID-19\": 0.67,\n          \"Influenza\": 0.71,\n          \"Asthma Exacerbation\": 0.66\n        }\n      },\n      \"Nausea\": {\n        \"present\": {\n          \"Strep Throat\": 0.83,\n          \"COVID-19\": 0.26,\n          \"Influenza\": 0.24,\n          \"Asthma Exacerbation\": 0.13\n        },\n        \"absent\": {\n          \"Strep Throat\": 0.17,\n          \"COVID-19\": 0.74,\n          \"Influenza\": 0.76,\n          \"Asthma Exacerbation\": 0.87\n        }\n      },\n      \"Fatigue\": {\n        \"present\": {\n          \"Strep Throat\": 0.69,\n          \"COVID-19\": 0.17,\n          \"Influenza\": 0.89,\n          \"Asthma Exacerbation\": 0.63\n        },\n        \"absent\": {\n          \"Strep Throat\": 0.31,\n          \"COVID-19\": 0.83,\n          \"Influenza\": 0.11,\n          \"Asthma Exacerbation\": 0.37\n        }\n      }\n    },\n    \"nb_prior\": {\n      \"Strep Throat\": 0.131,\n      \"COVID-19\": 0.052,\n      \"Influenza\": 0.365,\n      \"Asthma Exacerbation\": 0.452\n    }\n  },\n  \"observation_model\": {\n    \"type\": \"feature_independence\",\n    \"temperature\": 1.0,\n    \"input\": \"Fever absent, Congestion absent, Cough present, Nausea present, Fatigue present\"\n  },\n  \"decision_rule\": {\n    \"type\": \"argmax_class_posterior\",\n    \"utility\": \"P(class | features)\"\n  },\n  \"data_format\": {\n    \"rounds\": \"single_shot\",\n    \"options_per_round\": 1,\n    \"feedback\": \"none\"\n  }\n}\n```",
+        "pred": "Strep Throat"
+      },
+      "source_meta": {
+        "dataset": "nb",
+        "seed": 6100
+      }
+    },
+    {
+      "family_label": "textbandit",
+      "route": {
+        "decision": "supported",
+        "family": "textbandit",
+        "confidence": 0.95,
+        "reason": "Task involves a Beta-Bernoulli bandit with historical slot-machine pulls and binary rewards."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"textbandit\",\n  \"confidence\": 0.95,\n  \"reason\": \"Task involves a Beta-Bernoulli bandit with historical slot-machine pulls and binary rewards.\"\n}",
+      "route_correct": true,
+      "pred": "1",
+      "gold": "1",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 1165,
+        "completion_tokens": 391,
+        "cost_usd": 0.00040935
+      },
+      "branch_details": {
+        "success": true,
+        "spec_family": "conjugate_update",
+        "n_arms": 3,
+        "observations_exact": true,
+        "parsed_observations": [
+          {
+            "arm": 1,
+            "reward": 1
+          },
+          {
+            "arm": 3,
+            "reward": 1
+          },
+          {
+            "arm": 2,
+            "reward": 1
+          },
+          {
+            "arm": 1,
+            "reward": 1
+          },
+          {
+            "arm": 3,
+            "reward": 1
+          },
+          {
+            "arm": 2,
+            "reward": 0
+          },
+          {
+            "arm": 1,
+            "reward": 1
+          },
+          {
+            "arm": 2,
+            "reward": 1
+          },
+          {
+            "arm": 2,
+            "reward": 0
+          },
+          {
+            "arm": 3,
+            "reward": 1
+          },
+          {
+            "arm": 3,
+            "reward": 0
+          }
+        ],
+        "pred_arm": 1,
+        "gold_arm": 1,
+        "e2e_correct": true,
+        "posterior_means": [
+          0.8,
+          0.5,
+          0.6666666666666666
+        ],
+        "raw_branch_response": "{\n  \"task_spec\": {\n    \"task_name\": \"textbandit_beta_bernoulli\",\n    \"inference_family\": \"conjugate_update\",\n    \"state_structure\": {\n      \"type\": \"beta_conjugate\",\n      \"n_arms\": 3,\n      \"prior_alpha\": 1.0,\n      \"prior_beta\": 1.0\n    },\n    \"observation_model\": {\n      \"type\": \"bernoulli_reward\",\n      \"temperature\": 1.0,\n      \"input\": \"slot_machine_binary_feedback\"\n    },\n    \"decision_rule\": {\n      \"type\": \"argmax_posterior_mean\",\n      \"utility\": \"posterior_mean_reward_rate\"\n    },\n    \"data_format\": {\n      \"rounds\": \"sequential\",\n      \"options_per_round\": 3,\n      \"feedback\": \"binary_reward\"\n    }\n  },\n  \"observations\": [\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 3, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 3, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 0},\n    {\"arm\": 3, \"reward\": 1},\n    {\"arm\": 3, \"reward\": 0}\n  ]\n}"
+      },
+      "source_meta": {
+        "dataset": "textbandit",
+        "id": 1
+      }
+    },
+    {
+      "family_label": "unsupported",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 1.0,
+        "reason": "Task involves continuous distributions and lacks specified priors."
+      },
+      "raw_route_response": "{\n  \"decision\": \"reject\",\n  \"family\": null,\n  \"confidence\": 1.0,\n  \"reason\": \"Task involves continuous distributions and lacks specified priors.\"\n}",
+      "route_correct": true,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 416,
+        "completion_tokens": 40,
+        "cost_usd": 8.64e-05
+      },
+      "branch_details": {},
+      "source_meta": {
+        "subtype": "continuous_or_missing_prior",
+        "template": "unsupported_continuous"
+      }
+    },
+    {
+      "family_label": "flight",
+      "route": {
+        "decision": "supported",
+        "family": "flight",
+        "confidence": 1.0,
+        "reason": "Task involves preference learning from historical flight choices with detailed descriptions."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"flight\",\n  \"confidence\": 1.0,\n  \"reason\": \"Task involves preference learning from historical flight choices with detailed descriptions.\"\n}",
+      "route_correct": true,
+      "pred": "0",
+      "gold": "1",
+      "ok": false,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 1872,
+        "completion_tokens": 569,
+        "cost_usd": 0.0006221999999999999
+      },
+      "branch_details": {
+        "success": true,
+        "e2e_recommendation": 0,
+        "gold_user_choice": 1,
+        "gold_solver_rec": 0,
+        "e2e_correct": false,
+        "e2e_matches_gold_solver": true,
+        "feature_exact_match": 1.0,
+        "feature_close_match": 1.0,
+        "feature_errors": [
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          }
+        ],
+        "raw_branch_response": "```json\n{\n  \"rounds\": [\n    {\n      \"options\": [\n        {\"departure_hour\": 14.0, \"duration_min\": 30, \"stops\": 1, \"price\": 370},\n        {\"departure_hour\": 14.0, \"duration_min\": 264, \"stops\": 0, \"price\": 730},\n        {\"departure_hour\": 15.6, \"duration_min\": 966, \"stops\": 0, \"price\": 1000}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 22.0, \"duration_min\": 264, \"stops\": 2, \"price\": 190},\n        {\"departure_hour\": 10.8, \"duration_min\": 966, \"stops\": 0, \"price\": 730},\n        {\"departure_hour\": 10.8, \"duration_min\": 966, \"stops\": 2, \"price\": 460}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 7.6, \"duration_min\": 498, \"stops\": 1, \"price\": 910},\n        {\"departure_hour\": 6.0, \"duration_min\": 615, \"stops\": 2, \"price\": 910},\n        {\"departure_hour\": 7.6, \"duration_min\": 147, \"stops\": 1, \"price\": 1000}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 20.4, \"duration_min\": 30, \"stops\": 0, \"price\": 280},\n        {\"departure_hour\": 20.4, \"duration_min\": 1083, \"stops\": 0, \"price\": 550},\n        {\"departure_hour\": 6.0, \"duration_min\": 1200, \"stops\": 1, \"price\": 460}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 20.4, \"duration_min\": 147, \"stops\": 1, \"price\": 820},\n        {\"departure_hour\": 7.6, \"duration_min\": 1083, \"stops\": 0, \"price\": 460},\n        {\"departure_hour\": 18.8, \"duration_min\": 1083, \"stops\": 1, \"price\": 640}\n      ]\n    }\n  ]\n}\n```"
+      },
+      "source_meta": {
+        "dataset": "flight",
+        "idx": 0
+      }
+    },
+    {
+      "family_label": "flight",
+      "route": {
+        "decision": "supported",
+        "family": "flight",
+        "confidence": 1.0,
+        "reason": "Task involves preference learning from historical flight choices with detailed descriptions."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"flight\",\n  \"confidence\": 1.0,\n  \"reason\": \"Task involves preference learning from historical flight choices with detailed descriptions.\"\n}",
+      "route_correct": true,
+      "pred": "0",
+      "gold": "0",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 1866,
+        "completion_tokens": 569,
+        "cost_usd": 0.0006213
+      },
+      "branch_details": {
+        "success": true,
+        "e2e_recommendation": 0,
+        "gold_user_choice": 0,
+        "gold_solver_rec": 0,
+        "e2e_correct": true,
+        "e2e_matches_gold_solver": true,
+        "feature_exact_match": 1.0,
+        "feature_close_match": 1.0,
+        "feature_errors": [
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 1,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.1,
+            "gold": 0.1,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 2,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.3,
+            "gold": 0.3,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 3,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.8,
+            "gold": 0.8,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.2,
+            "gold": 0.2,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 4,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 0,
+            "parsed": 0.4,
+            "gold": 0.4,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 1,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 2,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 0,
+            "feature_idx": 3,
+            "parsed": 0.9,
+            "gold": 0.9,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 0,
+            "parsed": 0.5,
+            "gold": 0.5,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 1,
+            "parsed": 0.0,
+            "gold": 0.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 1,
+            "feature_idx": 3,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 0,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 1,
+            "parsed": 0.6,
+            "gold": 0.6,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 2,
+            "parsed": 1.0,
+            "gold": 1.0,
+            "error": 0.0
+          },
+          {
+            "round": 5,
+            "option": 2,
+            "feature_idx": 3,
+            "parsed": 0.7,
+            "gold": 0.7,
+            "error": 0.0
+          }
+        ],
+        "raw_branch_response": "```json\n{\n  \"rounds\": [\n    {\n      \"options\": [\n        {\"departure_hour\": 7.6, \"duration_min\": 732, \"stops\": 2, \"price\": 820},\n        {\"departure_hour\": 7.6, \"duration_min\": 615, \"stops\": 1, \"price\": 820},\n        {\"departure_hour\": 20.4, \"duration_min\": 498, \"stops\": 0, \"price\": 370}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 10.8, \"duration_min\": 147, \"stops\": 0, \"price\": 640},\n        {\"departure_hour\": 22.0, \"duration_min\": 1200, \"stops\": 1, \"price\": 1000},\n        {\"departure_hour\": 18.8, \"duration_min\": 498, \"stops\": 2, \"price\": 550}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 15.6, \"duration_min\": 1200, \"stops\": 0, \"price\": 730},\n        {\"departure_hour\": 15.6, \"duration_min\": 498, \"stops\": 1, \"price\": 280},\n        {\"departure_hour\": 10.8, \"duration_min\": 1200, \"stops\": 2, \"price\": 640}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 17.2, \"duration_min\": 849, \"stops\": 1, \"price\": 820},\n        {\"departure_hour\": 15.6, \"duration_min\": 615, \"stops\": 1, \"price\": 550},\n        {\"departure_hour\": 12.4, \"duration_min\": 264, \"stops\": 2, \"price\": 1000}\n      ]\n    },\n    {\n      \"options\": [\n        {\"departure_hour\": 12.4, \"duration_min\": 1083, \"stops\": 0, \"price\": 910},\n        {\"departure_hour\": 14.0, \"duration_min\": 30, \"stops\": 2, \"price\": 730},\n        {\"departure_hour\": 22.0, \"duration_min\": 732, \"stops\": 2, \"price\": 730}\n      ]\n    }\n  ]\n}\n```"
+      },
+      "source_meta": {
+        "dataset": "flight",
+        "idx": 1
+      }
+    },
+    {
+      "family_label": "unsupported",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Task is outside scope; requires prediction from raw text without given probabilities."
+      },
+      "raw_route_response": "{\n  \"decision\": \"reject\",\n  \"family\": null,\n  \"confidence\": 0,\n  \"reason\": \"Task is outside scope; requires prediction from raw text without given probabilities.\"\n}",
+      "route_correct": true,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 402,
+        "completion_tokens": 42,
+        "cost_usd": 8.55e-05
+      },
+      "branch_details": {},
+      "source_meta": {
+        "subtype": "prediction_bottleneck",
+        "template": "unsupported_prediction"
+      }
+    },
+    {
+      "family_label": "hmm",
+      "route": {
+        "decision": "supported",
+        "family": "hmm",
+        "confidence": 1.0,
+        "reason": "All required components for HMM forward filtering are provided."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"hmm\",\n  \"confidence\": 1.0,\n  \"reason\": \"All required components for HMM forward filtering are provided.\"\n}",
+      "route_correct": true,
+      "pred": "Moderate",
+      "gold": "Moderate",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3166,
+        "completion_tokens": 546,
+        "cost_usd": 0.0006585
+      },
+      "branch_details": {
+        "spec_family": "hmm_forward",
+        "raw_branch_response": "```json\n{\n  \"task_name\": \"Hidden Markov Model State Prediction\",\n  \"inference_family\": \"hmm_forward\",\n  \"state_structure\": {\n    \"type\": \"hmm_states\",\n    \"hmm_states\": [\"Free_Flow\", \"Moderate\", \"Congested\"],\n    \"hmm_observations\": [\"Fast\", \"Slow\", \"Stopped\", \"Normal_Speed\"],\n    \"hmm_initial\": {\n      \"Free_Flow\": 0.25,\n      \"Moderate\": 0.172,\n      \"Congested\": 0.577\n    },\n    \"hmm_transition\": {\n      \"Free_Flow\": {\n        \"Free_Flow\": 0.324,\n        \"Moderate\": 0.394,\n        \"Congested\": 0.283\n      },\n      \"Moderate\": {\n        \"Free_Flow\": 0.133,\n        \"Moderate\": 0.747,\n        \"Congested\": 0.120\n      },\n      \"Congested\": {\n        \"Free_Flow\": 0.070,\n        \"Moderate\": 0.535,\n        \"Congested\": 0.395\n      }\n    },\n    \"hmm_emission\": {\n      \"Free_Flow\": {\n        \"Fast\": 0.514,\n        \"Slow\": 0.056,\n        \"Stopped\": 0.090,\n        \"Normal_Speed\": 0.340\n      },\n      \"Moderate\": {\n        \"Fast\": 0.473,\n        \"Slow\": 0.144,\n        \"Stopped\": 0.173,\n        \"Normal_Speed\": 0.209\n      },\n      \"Congested\": {\n        \"Fast\": 0.103,\n        \"Slow\": 0.231,\n        \"Stopped\": 0.322,\n        \"Normal_Speed\": 0.345\n      }\n    }\n  },\n  \"observation_model\": {\n    \"type\": \"discrete_emission\",\n    \"temperature\": 1.0,\n    \"input\": \"Observed sequence of states\"\n  },\n  \"decision_rule\": {\n    \"type\": \"filter_posterior\",\n    \"utility\": \"N/A\"\n  },\n  \"data_format\": {\n    \"rounds\": \"single_shot\",\n    \"options_per_round\": 1,\n    \"feedback\": \"none\"\n  }\n}\n```",
+        "pred": "Moderate"
+      },
+      "source_meta": {
+        "dataset": "hmm",
+        "seed": 6202
+      }
+    },
+    {
+      "family_label": "blind",
+      "route": {
+        "decision": "supported",
+        "family": "blind",
+        "confidence": 0.95,
+        "reason": "The input provides a Bayesian network structure, conditional probability tables, and a specific query."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"blind\",\n  \"confidence\": 0.95,\n  \"reason\": \"The input provides a Bayesian network structure, conditional probability tables, and a specific query.\"\n}",
+      "route_correct": true,
+      "pred": "0.6870069071373753",
+      "gold": "0.6870069071373753",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2772,
+        "completion_tokens": 234,
+        "cost_usd": 0.0005562
+      },
+      "branch_details": {
+        "spec_family": "variable_elimination",
+        "raw_branch_response": "```json\n{\n  \"task_name\": \"Bayesian network probability inference\",\n  \"inference_family\": \"variable_elimination\",\n  \"state_structure\": {\n    \"type\": \"bayesian_network\",\n    \"bn_inference_method\": \"variable_elimination\",\n    \"bn_input_format\": \"blind_text\",\n    \"bn_numerical_precision\": \"float64\"\n  },\n  \"observation_model\": {\n    \"type\": \"cpt_given\",\n    \"input\": \"conditional probability tables for n0, n1, n2\"\n  },\n  \"decision_rule\": {\n    \"type\": \"exact_probability\",\n    \"utility\": \"marginal probability of n2 being False given n1 is False\"\n  },\n  \"data_format\": {\n    \"rounds\": \"single_shot\",\n    \"options_per_round\": 0,\n    \"feedback\": \"none\"\n  }\n}\n```",
+        "pred": 0.6870069071373753
+      },
+      "source_meta": {
+        "dataset": "blind"
+      }
+    },
+    {
+      "family_label": "hmm",
+      "route": {
+        "decision": "supported",
+        "family": "hmm",
+        "confidence": 1.0,
+        "reason": "All required components for HMM forward filtering are provided."
+      },
+      "raw_route_response": "{\n  \"decision\": \"supported\",\n  \"family\": \"hmm\",\n  \"confidence\": 1.0,\n  \"reason\": \"All required components for HMM forward filtering are provided.\"\n}",
+      "route_correct": true,
+      "pred": "Flu",
+      "gold": "Flu",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3144,
+        "completion_tokens": 556,
+        "cost_usd": 0.0006324
+      },
+      "branch_details": {
+        "spec_family": "hmm_forward",
+        "raw_branch_response": "```json\n{\n  \"task_name\": \"Hidden Markov Model State Prediction\",\n  \"inference_family\": \"hmm_forward\",\n  \"state_structure\": {\n    \"type\": \"hmm_states\",\n    \"hmm_states\": [\"Healthy\", \"Fever\", \"Flu\"],\n    \"hmm_observations\": [\"Normal_Temp\", \"High_Temp\", \"Cough\", \"No_Symptoms\"],\n    \"hmm_initial\": {\n      \"Healthy\": 0.160,\n      \"Fever\": 0.149,\n      \"Flu\": 0.691\n    },\n    \"hmm_transition\": {\n      \"Healthy\": {\n        \"Healthy\": 0.127,\n        \"Fever\": 0.435,\n        \"Flu\": 0.438\n      },\n      \"Fever\": {\n        \"Healthy\": 0.402,\n        \"Fever\": 0.139,\n        \"Flu\": 0.460\n      },\n      \"Flu\": {\n        \"Healthy\": 0.667,\n        \"Fever\": 0.052,\n        \"Flu\": 0.281\n      }\n    },\n    \"hmm_emission\": {\n      \"Healthy\": {\n        \"Normal_Temp\": 0.341,\n        \"High_Temp\": 0.203,\n        \"Cough\": 0.304,\n        \"No_Symptoms\": 0.151\n      },\n      \"Fever\": {\n        \"Normal_Temp\": 0.261,\n        \"High_Temp\": 0.335,\n        \"Cough\": 0.098,\n        \"No_Symptoms\": 0.306\n      },\n      \"Flu\": {\n        \"Normal_Temp\": 0.146,\n        \"High_Temp\": 0.274,\n        \"Cough\": 0.495,\n        \"No_Symptoms\": 0.085\n      }\n    }\n  },\n  \"observation_model\": {\n    \"type\": \"discrete_emission\",\n    \"temperature\": 1.0,\n    \"input\": \"Observed sequence of symptoms\"\n  },\n  \"decision_rule\": {\n    \"type\": \"filter_posterior\",\n    \"utility\": \"N/A\"\n  },\n  \"data_format\": {\n    \"rounds\": \"single_shot\",\n    \"options_per_round\": 1,\n    \"feedback\": \"none\"\n  }\n}\n```",
+        "pred": "Flu"
+      },
+      "source_meta": {
+        "dataset": "hmm",
+        "seed": 6200
+      }
+    }
+  ],
+  "timestamp": "2026-05-02T14:05:42Z",
+  "_meta": {
+    "prompt_tokens": 43778,
+    "completion_tokens": 9690,
+    "total_cost_usd": 0.0111999,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "57f6e301",
+    "timestamp_utc": "2026-05-02T14:05:42.143196+00:00",
+    "script": "baselines/run_all_family_mixed_e2e.py",
+    "n_per_family": 3,
+    "n_unsupported": 3,
+    "concurrency": 5
+  }
+}

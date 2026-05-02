@@ -1,0 +1,143 @@
+{
+  "experiment": "C2 NL E2E ADVERSARIAL (Tree 2026-04-28: hedge+distractor+shuffle + slight stress)",
+  "model": "openai/gpt-4o-mini",
+  "route": "Adversarial NL \u2192 mini emit TaskSpec \u2192 compile \u2192 run",
+  "config": {
+    "nb": {
+      "n_diseases": 4,
+      "n_symptoms": 6,
+      "nl_style": "adversarial"
+    },
+    "hmm": {
+      "n_states": 4,
+      "n_obs": 5,
+      "seq_length": 8,
+      "nl_style": "adversarial"
+    }
+  },
+  "concurrency": 6,
+  "elapsed_sec": 14.399535655975342,
+  "nb_adversarial_e2e": {
+    "n": 3,
+    "correct": 3,
+    "wilson_95ci": [
+      0.43849391955098227,
+      1
+    ],
+    "results": [
+      {
+        "i": 0,
+        "seed": 7000,
+        "family": "naive_bayes",
+        "pred": "Pneumonia",
+        "gold": "Pneumonia",
+        "ok": true,
+        "err": null,
+        "usage": {
+          "prompt_tokens": 2640,
+          "completion_tokens": 925,
+          "cost_usd": 0.0007878
+        },
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Note: this is a teaching diagnostic panel, not for clinical use.\n\nIn **Pneumonia** patients, symptom probabilities are: Fever: present w"
+      },
+      {
+        "i": 1,
+        "seed": 7001,
+        "family": "naive_bayes",
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation",
+        "ok": true,
+        "err": null,
+        "usage": {
+          "prompt_tokens": 2651,
+          "completion_tokens": 954,
+          "cost_usd": 0.00081645
+        },
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Each disease may also have other symptoms not listed here.\n\nIn **Sinusitis** patients, symptom probabilities are: Runny Nose: present wi"
+      },
+      {
+        "i": 2,
+        "seed": 7002,
+        "family": "naive_bayes",
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation",
+        "ok": true,
+        "err": null,
+        "usage": {
+          "prompt_tokens": 2648,
+          "completion_tokens": 954,
+          "cost_usd": 0.0008256
+        },
+        "sample_preview": "P(symptom value | disease) \u2014 extracted from medical literature. Each disease may also have other symptoms not listed here.\n\nIn **Gastroenteritis** patients, symptom probabilities are: Diarrhea: presen"
+      }
+    ]
+  },
+  "hmm_adversarial_e2e": {
+    "n": 3,
+    "correct": 3,
+    "wilson_95ci": [
+      0.43849391955098227,
+      1
+    ],
+    "results": [
+      {
+        "i": 0,
+        "seed": 8000,
+        "family": "hmm_forward",
+        "pred": "S0",
+        "gold": "S0",
+        "ok": true,
+        "err": null,
+        "usage": {
+          "prompt_tokens": 2669,
+          "completion_tokens": 714,
+          "cost_usd": 0.00068475
+        },
+        "sample_preview": "State transition matrix. (Real weather has more states than modeled here.)\n  When current state is S2, next-state distribution: P(S3|S2) = approximately 25%, P(S1|S2) = ~18%, P(S0|S2) = around 28%, P("
+      },
+      {
+        "i": 1,
+        "seed": 8001,
+        "family": "hmm_forward",
+        "pred": "S0",
+        "gold": "S0",
+        "ok": true,
+        "err": null,
+        "usage": {
+          "prompt_tokens": 2666,
+          "completion_tokens": 713,
+          "cost_usd": 0.0006837
+        },
+        "sample_preview": "State transition matrix. Observations may be noisy due to measurement error.\n  When current state is S1, next-state distribution: P(S3|S1) = unusual (~10%), P(S1|S1) = about half (~45%), P(S0|S1) = ap"
+      },
+      {
+        "i": 2,
+        "seed": 8002,
+        "family": "hmm_forward",
+        "pred": "S3",
+        "gold": "S3",
+        "ok": true,
+        "err": null,
+        "usage": {
+          "prompt_tokens": 2692,
+          "completion_tokens": 714,
+          "cost_usd": 0.000669
+        },
+        "sample_preview": "State transition matrix. (Real weather has more states than modeled here.)\n  When current state is S3, next-state distribution: P(S0|S3) = approximately 11%, P(S2|S3) = infrequent (~35%), P(S1|S3) = u"
+      }
+    ]
+  },
+  "timestamp": "2026-05-02T12:56:33Z",
+  "_meta": {
+    "prompt_tokens": 15966,
+    "completion_tokens": 4974,
+    "total_cost_usd": 0.0044673000000000004,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "d16eac70",
+    "timestamp_utc": "2026-05-02T12:56:33.129558+00:00",
+    "script": "baselines/run_nl_e2e_stress.py",
+    "n_nb": 3,
+    "n_hmm": 3,
+    "concurrency": 6
+  }
+}

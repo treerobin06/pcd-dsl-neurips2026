@@ -41,9 +41,10 @@ from inductor.inductor import (
     _parse_taskspec_response,
 )
 from taskspec.compiler import compile_solver
+from _artifact_schema import accumulate_usage, save_artifact
 
-MODEL = "openai/gpt-4o-mini"
-SEMA = 25
+MODEL = os.environ.get("MODEL", "openai/gpt-4o-mini")
+SEMA = int(os.environ.get("SEMA", "25"))
 N = 60
 
 
@@ -228,9 +229,11 @@ async def induce_async(client: AsyncOpenAI, sample: Dict, model_id: str):
             max_tokens=4096,
             temperature=0.0,
         )
-        return _parse_taskspec_response(resp.choices[0].message.content or "")
-    except Exception:
-        return None
+        usage = accumulate_usage(resp.usage)
+        usage["cost_usd"] = float(getattr(resp.usage, "cost", 0) or 0)
+        return _parse_taskspec_response(resp.choices[0].message.content or ""), usage, None
+    except Exception as e:
+        return None, {"prompt_tokens": 0, "completion_tokens": 0, "cost_usd": 0.0}, str(e)[:200]
 
 
 # ─── Per-task runners ──────────────────────────────────────────────────
@@ -241,7 +244,7 @@ async def run_nb_adversarial(client, sema, i):
         p = generate_naive_bayes_problem(n_diseases=4, n_symptoms=6, seed=7000 + i)
         rng = random.Random(7000 + i + 99999)  # 独立 rng for adversarial
         sample = nb_adversarial_sample(p, rng)
-        spec = await induce_async(client, sample, MODEL)
+        spec, usage, api_err = await induce_async(client, sample, MODEL)
         family = spec.inference_family if spec else None
         pred = None
         err = None
@@ -257,7 +260,7 @@ async def run_nb_adversarial(client, sema, i):
             else:
                 err = f"validate_err:{errors}"
         elif spec is None:
-            err = "spec_parse_fail"
+            err = f"spec_parse_fail:{api_err}" if api_err else "spec_parse_fail"
         else:
             err = f"wrong_family:{family}"
         ok = pred == p["gold_diagnosis"]
@@ -269,6 +272,7 @@ async def run_nb_adversarial(client, sema, i):
             "gold": p["gold_diagnosis"],
             "ok": ok,
             "err": err,
+            "usage": usage,
             "sample_preview": sample["likelihoods_text"][:200],
         }
 
@@ -279,7 +283,7 @@ async def run_hmm_adversarial(client, sema, i):
         p = generate_hmm_problem(n_states=4, n_obs=5, seq_length=8, seed=8000 + i)
         rng = random.Random(8000 + i + 99999)
         sample = hmm_adversarial_sample(p, rng)
-        spec = await induce_async(client, sample, MODEL)
+        spec, usage, api_err = await induce_async(client, sample, MODEL)
         family = spec.inference_family if spec else None
         pred = None
         err = None
@@ -294,7 +298,7 @@ async def run_hmm_adversarial(client, sema, i):
             else:
                 err = f"validate_err:{errors}"
         elif spec is None:
-            err = "spec_parse_fail"
+            err = f"spec_parse_fail:{api_err}" if api_err else "spec_parse_fail"
         else:
             err = f"wrong_family:{family}"
         ok = pred == p["gold_state"]
@@ -306,6 +310,7 @@ async def run_hmm_adversarial(client, sema, i):
             "gold": p["gold_state"],
             "ok": ok,
             "err": err,
+            "usage": usage,
             "sample_preview": sample["transition_text"][:200],
         }
 
@@ -390,9 +395,25 @@ async def main():
         },
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
+    all_results = nb_results + hmm_results
+    prompt_tokens = sum(r["usage"]["prompt_tokens"] for r in all_results)
+    completion_tokens = sum(r["usage"]["completion_tokens"] for r in all_results)
+    total_cost_usd = sum(r["usage"].get("cost_usd", 0.0) for r in all_results)
     out_path = f"baselines/results/adversarial_nl_e2e_{time.strftime('%Y%m%d_%H%M%S')}.json"
-    with open(out_path, "w") as f:
-        json.dump(out, f, indent=2)
+    save_artifact(
+        out_path,
+        out,
+        prompt_tokens=prompt_tokens,
+        completion_tokens=completion_tokens,
+        total_cost_usd=total_cost_usd if total_cost_usd > 0 else None,
+        model_id=MODEL,
+        extra_meta={
+            "script": "baselines/run_nl_e2e_stress.py",
+            "n_nb": n_nb_target,
+            "n_hmm": n_hmm_target,
+            "concurrency": SEMA,
+        },
+    )
     print(f"\nSaved: {out_path}")
 
 

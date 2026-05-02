@@ -4,16 +4,49 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 # PCD-DSL: Verified Solver Induction for LLM Probabilistic Reasoning
 
-> **最后更新**: 2026-04-09
+> **最后更新**: 2026-05-02
 > **论文标题**: Compile Once, Reason Exactly: Verified Solver Induction for LLM Probabilistic Reasoning
 > **目标会议**: NeurIPS 2026
-> **当前状态**: 论文已完成初稿，综合评审 6-7/10，准备最终打磨或补实验
+> **当前状态**: 投稿收口中；核心 E2E 补实验已完成并写入论文/Overleaf，Figure 1 已更新为 reusable-registry 架构版；mixed 主表已改保守 aggregate；剩 claim/citation audit、数字一致性 sweep、post-audit final push
 
 ---
 
+## 2026-05-02 最新权威状态（接手先读）
+
+本节覆盖 2026-04-23/04-28 的旧 TODO。旧审查记录仍保留在下文作背景，但后续执行以本节为准。
+
+### 已完成
+
+- **官方 NeurIPS 2026 模板更新完成**：`paper/neurips_2026.sty` 已替换为官方版，新增 `paper/neurips_2026.tex` 和 `paper/checklist.tex`，`main.tex` 已 `\input{checklist.tex}`，`sync_overleaf.sh` 已同步这些文件。
+- **Overleaf 已推送**：`paper/sync_overleaf.sh push` 成功，Overleaf 端最新 commit 为 `8a2f917 Sync from local 2026-05-02 23:26`（包含 reusable-registry Figure 1、conservative mixed table、NB/HMM 原始 hard-split 计数、verifier/theory/LOO 降调，以及 Method 中 theorem-like 公式瘦身；模板更新最早推送 commit 为 `d28bf6b`）。
+- **Schema roundtrip bug 已修复**：`taskspec/schema.py` 的 `to_dict()` 已按 `inference_family` 过滤字段，避免 BN-only 字段污染 preference/bandit。验证：`.venv/bin/python3 -m unittest tests.test_compiler -v` 当前 13/13 OK。
+- **NB/HMM adversarial NL E2E 已在论文主表保留**：GPT-4o-mini，NB 91.7% [85.3, 95.4]，HMM 98.0% [93.0, 99.4]。这是 full natural-language pipeline，不是单纯 backend check。
+- **Hotel E2E 已跑全量**：`n=124`，Parse 100.0%，E2E 77.4% [70.2, 85.5]，gold solver match 96.0%，cost $0.0556。Raw: `baselines/results/e2e_hotel_openai_gpt-4o-mini_20260502_213825.json`。
+- **TextBandit-style E2E 已跑全量**：`n=100`，Parse/spec 96.0%，E2E 96.0% [90.2, 98.4]，4 个失败均为 observation-count omission，cost $0.0292。Raw: `baselines/results/textbandit_e2e_openai_gpt-4o-mini_20260502_213919.json`。
+- **All-family mixed E2E 已跑全量并进论文**：GPT-4o-mini，100 examples × 6 supported families + 50 unsupported，总计 650。Raw mixed runner 为 overall 598/650 = 92.0%、supported 548/600 = 91.3%、router 650/650 = 100.0%；但论文主表已删除全 100 的 Route acc. 列，并用 NB/HMM adversarial NL harder split 原始计数对齐（NB 110/120，HMM 98/100），保守 aggregate 改为 overall 606/670 = 90.4% [88.0, 92.4]、supported 556/620 = 89.7% [87.0, 91.8]。Raw: `baselines/results/all_family_mixed_e2e_openai_gpt-4o-mini_20260502_221603.json` + `baselines/results/adversarial_nl_e2e_20260428_172402.json`。
+- **旧 mixed sanity 已从论文删除**：`mixed_e2e_20260502_205650/205957.json` 的 BLInD+NB+HMM 90/90=100，以及 `mixed_open_set_e2e_20260502_211440/211531.json` 的 open-set 50/50=100，只能作历史 sanity，不得作为主结果。
+- **论文已做大幅重写**：abstract/intro/evidence map/held-out table/single-family E2E/all-family mixed/limitations 均已按“分层证据 + 完整 E2E”更新。
+- **2026-05-02 小修已进 `paper/main.tex`**：补了 E2E raw artifact provenance appendix，TaskSpec schema appendix 已加入 `naive_bayes` / `hmm_forward` 字段，PAL/bnlearn 主文措辞已改为具体网络结果，未使用的 `\todo` macro 已删除；Method 中 `inductor recurrence / verifier indicator / empirical risk` 三个 theorem-like 公式已删除，改为 prose + Algorithm。本地 `latexmk -g -pdf` 编译通过，`main.pdf` 30 页，无 undefined citation/reference/overfull。
+- **Figure 1 已重做为架构图**：`figures/figure1_overview.png` 已删去左侧 PCD 面板，改为 router/scope gate + compile-once induction/backend + reusable solver registry 三层架构；图中不再出现 `PCD` / `THREE-GATE` / `100%` / `self-evolving`，caption 已同步改为 router-mediated reuse 叙事。当前本地正式图备份为 `figures/figure1_registry_imagen.png`；`figures/figure1_architecture_imagen.png` 是上一版 self-evolving 标题图，不建议使用；旧 `figures/figure1_imagen.png` 是更素的单线 pipeline，`figures/figure1_imagen_alt.png` 因底部英文有 typo，不建议使用。PaperBanana 2026-05-02 新任务超过 10 分钟无输出后终止；旧 `fig1_paperbanana_*.png` 仍含 PCD/three-gate，不得使用。`sync_overleaf.sh` 已加入 `figures/figure1_overview.png`，后续 push 会同步图。
+- **2026-05-02 contribution wording patch 已完成**：self-evolving 已降为 future extension；Figure 1 标题/底层改为 `Reusable Solver Registry`；Method 新增 router/reusable registry 段；two-gate verifier 已限定为 primary deploy checks；NB/HMM 改称 structured-spec/backend sanity；LOO 6/6 降为 engineering sanity；mixed 主表删除 Route acc. 全 100 列并改报保守 aggregate 90.4% / 89.7%。2026-05-02 进一步做公式瘦身：删除 Method 中 `inductor recurrence / verifier indicator / empirical risk` 三个 theorem-like 公式，改成 prose + Algorithm；保留 PCD metric 公式和 DSL/op 定义公式作为诊断与接口锚点。
+- **2026-05-02 bnlearn 核心 claim 已恢复并补 raw**：Tree 确认 bnlearn 是核心贡献后，不再撤掉 backend 100%。`verify_bnlearn_dsl_100.py` 在 2026-04-27 父节点顺序修复基础上，新增零概率 evidence skip、一次性 posterior VE、indexed/sparse factor multiply 和统一 `_meta` artifact；最新 raw `baselines/results/bnlearn_dsl_100q_seed2026_20260502.json` 为 4 个 bnlearn 网络各 100 条 finite query，Overall **400/400 = 100.0% [99.0,100.0]**，schema valid，0 API 成本。`paper/main.tex` 已改为：bnlearn 支撑 **structured deterministic backend exactness**，同时 PAL/LLM Compute 120-query stress test 仍显示大网络 codegen/compute 崩溃；明确不 claim bnlearn natural-language E2E。`run_bnlearn_held_out.py` 也同步修 `cpd.variables[1:]` 和 zero-prob evidence 过滤，避免未来 LLM/PAL 重跑混入旧 bug。
+
+### 当前最高优先级 TODO
+
+1. ~~Self-evolving 降调为未来愿景~~ ✅ 2026-05-02 已完成：只保留 reusable registry 主叙事，automatic self-evolving macro library 放 Future Work。
+2. ~~Router / scope gate 方法段补齐~~ ✅ 2026-05-02 已完成：Method 增加 bounded router + reusable registry 段。
+3. ~~Verifier claim 对齐~~ ✅ 2026-05-02 已完成：正文限定 two-gate 为 primary deploy checks；NB/HMM 改为 backend/reference sanity。
+4. ~~Composition / generalization 降调~~ ✅ 2026-05-02 已完成：NB/HMM 改成 explicit TaskSpec + core-op-backed routes。
+5. ~~理论公式降调~~ ✅ 2026-05-02 已完成：删除 Method 里 theorem-like 的 inductor/verifier/risk 公式，保留 PCD metrics + DSL/op definitions。
+6. ~~LOO raw 决策~~ ✅ 2026-05-02 已完成：降调为 engineering sanity，不作为主 contribution；暂不重跑。
+7. **剩余数字一致性 sweep**：PAL/bnlearn 主文措辞与 `\todo` macro 已修；还需全篇 sweep S5/S8/S10、成本倍数、baseline wording 等小数字。
+8. **Claim/citation audit**：所有 contribution/theory wording patch 完后跑一次 zero-context paper-claim-audit，再做 citation-verifier。特别核 `lew2025discipl`、`schick2023toolformer`、匿名/代码发布 statement。
+9. **最终机械收口**：本地 `latexmk -g -pdf`/grep 已通过一次，Figure 1 架构版和公式瘦身已编译通过并推 Overleaf；完成 claim/citation audit 后再 clean compile，并做 post-audit final push。
+10. **主仓库整理**：当前 main repo 有大量 uncommitted/untracked results/scripts/paper changes；提交前需筛选保留新 full artifacts，旧 too-good mixed 仅归档或不进证据链。
+
 ## 一、核心思想（一段话版本）
 
-LLM 能理解概率问题（Parse ≥95%）、能使用计算结果做决策（Decide 100%），但无法可靠执行概率计算（Compute 22-78%），且随问题复杂度增加崩溃到个位数。我们提出 PCD 诊断框架定位这一瓶颈，并用 typed DSL（7 core ops + 3 macros）+ 确定性编译器 + 3-Gate 验证器实现 "compile-once" 范式：LLM 只做一次 family-level 的结构归纳（输出 TaskSpec JSON），之后所有实例用编译出的 solver 确定性求解，零 LLM 成本。最便宜的 GPT-4o-mini 即可达到 100% compute 精确度。
+LLM 能理解概率问题、能使用计算结果做决策，但无法可靠执行概率计算，且随问题复杂度增加崩溃到个位数。我们提出 PCD 诊断框架定位这一瓶颈，并用 typed DSL（7 core ops + 3 macros）+ 确定性编译器 + 2-Gate 验证器实现 "compile-once" 范式：LLM 做 family-level 的结构归纳（输出 TaskSpec JSON），之后实例由编译出的 solver 确定性求解。当前论文必须严格区分两层：backend exactness 是“给定有效 TaskSpec 后”的条件性结果；NL E2E 结果单独报告（Flight/Hotel/TextBandit/NB/HMM/all-family mixed）。
 
 ---
 
@@ -36,7 +69,7 @@ LLM 能理解概率问题（Parse ≥95%）、能使用计算结果做决策（D
          │
          ▼
 ┌─────────────────┐
-│  3-Gate Verifier │  Gate 1: Code Sanity → Gate 2: Ground Truth → Gate 3: Reference Match (可选)
+│  2-Gate Verifier │  Gate 1: Code Sanity → Gate 2: Ground Truth
 └────────┬────────┘
          │
     pass → 部署 verified solver（零 LLM 成本）
@@ -51,28 +84,31 @@ LLM 能理解概率问题（Parse ≥95%）、能使用计算结果做决策（D
 
 ---
 
-## 三、已完成实验与证据（18 项）
+## 三、已完成实验与证据（2026-05-02 更新）
 
 | # | Evidence | 核心结论 | 数据规模 |
 |---|----------|---------|---------|
 | 1 | 23 策略消融 (Flight) | user_separate 74.8% = Oracle；纯 CoT 无效（≤33%） | 624 样本 × 5 轮 |
 | 2 | 跨任务泛化 | Flight/Hotel/Bandit/BLInD 四个 family 全部 100% solver 精度 | 1,800+ 实例 |
-| 3 | DSL 等价性 | DSL solver = 原始 solver，max error = 0.0 | 1,200 实例 |
-| 4 | LOO 泛化 | 6/6 held-out 数据集第 1 轮通过全部验证门 | 6 数据集 |
+| 3 | DSL 等价性 | DSL solver = 原始 solver，max error = 0.0 | 1,150 实例 |
+| 4 | LOO 泛化 | 历史结果 6/6；若继续保留在论文 appendix，需补 `loo_2gate_*.json` raw 或降调 | 6 数据集 |
 | 5 | PAL baseline | BN: PAL 26.4% vs Our 100%；偏好: PAL 29.3% vs Our 74.8% | 900+624 |
 | 6 | 多模型 baseline | 最强模型 Opus=56.6% 仍远低于 Oracle 74.8% | 6 模型 |
 | 7 | PCD 因果诊断 (BN) | Parse 96-100% / Compute 3-82% (depth-dependent) / Decide 100% | 900 样本 |
 | 8 | 多模型 PCD | 6 模型 × 3 厂商全部展现相同 Parse 高/Compute 低/Decide 高 模式 | 6 模型 |
 | 9 | Compile-time baseline | GPT-5.4=100%, GPT-4o=0%, Our(mini)=100% | 900 样本 |
-| 10 | Gate 3 Off ablation | 6/6 通过，Gate 3 非必需，无数据泄漏 | 6 数据集 |
+| 10 | Verifier framing | 2026-04-28 pivot 后正文采用 2-Gate；旧 Gate 3 / gate3 ablation 不再作为主实验 | — |
 | 11 | Claude Sonnet PCD | Parse=100%, Compute=64%, Decide=100%（偏好学习） | 200 样本 |
 | 12 | **偏好学习 NL Parse** | 自然语言输入 Parse 89.5% / Compute 30.5% / Decide 100% | 200 样本 |
-| 13 | **端到端链路** | E2E 74.3% [70.9%,77.8%] ≈ Gold 74.4%，特征提取~100% | 624 样本 |
+| 13 | **Flight 单 family E2E** | E2E 74.3% [70.9%,77.8%] ≈ Gold 74.4%，特征提取~100% | 624 样本 |
 | 14 | DeLLMa 负面结果 | Compile-time solver ≈ 随机基线，精确刻画适用边界 | 20 样本 |
-| 15 | Held-out NB (n=200) | Core-ops 100%, PCD: Compute 37-64.5% | 200 样本 |
-| 16 | Held-out HMM (n=100) | Core-ops 100%, 顺序时序推理无需 macro | 100 样本 |
+| 15 | Held-out NB adversarial NL E2E | Direct 44.0%；ours 91.7% [85.3,95.4]，full NL parse + deterministic solve | 120/200 样本口径见论文表 |
+| 16 | Held-out HMM adversarial NL E2E | Direct 32.0%；ours 98.0% [93.0,99.4]，full NL parse + deterministic solve | 100 样本 |
 | 17 | Cost curve | Our $0.008 vs PAL $2.50 (310×) vs Compile GPT-5.4 $0.11 (14×) | — |
-| 18 | bnlearn 真实网络 | ≥20 节点 PAL→0%, Our→100% | 120 queries |
+| 18 | bnlearn 真实网络 | Structured DSL backend 400/400 finite queries；PAL/LLM Compute 在 ≥20 节点明显失效；不是 NL E2E claim | 400 backend + 120 PAL/PCD |
+| 19 | **Hotel 单 family E2E** | Parse 100.0%；E2E 77.4% [70.2,85.5]；gold solver match 96.0% | 124 样本 |
+| 20 | **TextBandit-style 单 family E2E** | Parse/spec 96.0%；E2E 96.0% [90.2,98.4]；4 个失败均为 observation-count | 100 样本 |
+| 21 | **All-family mixed E2E** | 主表改报保守 aggregate：Overall 90.4% [88.0,92.4]；supported 89.7%；Route acc. 全 100 列已删除，只作为 bounded sanity | 670 aggregate 样本 |
 
 ### 全模型偏好学习 PCD 汇总
 
@@ -137,6 +173,8 @@ LLM 能理解概率问题（Parse ≥95%）、能使用计算结果做决策（D
 
 ## 六、待做事项（按优先级排序）
 
+> **2026-05-02 状态提醒**：本章从 2026-04-23 审查延续而来，很多条目已经被后续实验/论文重写覆盖。执行前先看文件顶部“2026-05-02 最新权威状态”。当前不要再把 Mixed E2E 视为待跑；full all-family mixed 已完成，raw runner 为 92.0%，论文主表改报保守 aggregate 90.4%。也不要再跑或引用 `test_gate3_ablation.py`；two-gate pivot 后该方向已废弃。
+
 ### 2026-04-23 最新讨论：100% framing + Mixed E2E
 
 **问题**：论文里 100% 指标密度过高（DSL 等价性 / LOO 6/6 / Compute 100% / Held-out NB+HMM / bnlearn / Our DSL mini），审稿人第一眼会起疑 "cherry-picked / too clean"。Tree 担心所有指标都是 100% 不正常。
@@ -146,9 +184,10 @@ LLM 能理解概率问题（Parse ≥95%）、能使用计算结果做决策（D
 - **不能全换成端到端**，否则 "compile once, reason exactly" 标题和卖点同时塌
 - 正确策略三件套：**把 E2E 数字放主位 + 所有 100% 加 scope 限定 + 扩端到端实验**
 
-**老师建议的关键补实验**：所有数据集混合后完整 agent 端到端效果（Mixed E2E）——同时解决 100% 怀疑 + 论文从"per-family solver 集合"升级为"general probabilistic reasoning agent"。
-- 预期落点 **65-82%**，围绕 **74%** 附近（基于 Flight E2E 74.3% + Parse 85-100% + Compute 100% 推算）
-- 这个"不那么漂亮"的数字比一堆 100% 的可信度高一个数量级
+**老师建议的关键补实验已完成**：所有数据集混合后完整 agent 端到端效果（Mixed E2E）已跑 full all-family version。
+- 当前论文主表：670 条保守 aggregate，Overall **90.4%** [88.0,92.4]；Supported **89.7%** [87.0,91.8]；Route acc. 列已删除，router 650/650 只作 bounded sanity。
+- 解释口径：这是 bounded family set 下的完整系统跑通结果，证明 router + parser/spec induction + compiler + solver 可组合；unsupported 只覆盖小型 synthetic open-set，不能 claim comprehensive open-world solvability detection。
+- 旧 90/90=100 和 50/50=100 结果已从论文删除，避免“单独不到 100、混合反而 100”的怪感。
 
 ### 2026-04-23 晚 Tree 确立新战略（投稿前最终方向）
 
@@ -163,7 +202,7 @@ LLM 能理解概率问题（Parse ≥95%）、能使用计算结果做决策（D
 **实验规模（按"完整+量少"重设计）**：
 - bnlearn: 4 nets × 15q × 5 modes × (mini+5.4) = 600 调用 ≈ $8-15
 - Inductor scrubbed: 80 调用（mini）≈ $0.2
-- Mixed E2E: mini 300 + 5.4 300 对照 = 600 ≈ $7-12
+- Mixed E2E: **已完成 mini full all-family 650**，cost $0.372；gpt-5.4 对照目前不必要，除非 final audit 要求 cross-model robustness
 - Multi-model NL Parse: 3 模型 × 50 = 150 ≈ $2-4
 - PAL self-repair: 300 (mini) ≈ $0.5
 - Codex 审查 × 3 轮: ~15 调用 ≈ $10-20
@@ -224,7 +263,7 @@ LLM 能理解概率问题（Parse ≥95%）、能使用计算结果做决策（D
 2. **C3 真修 vs 降 scope**：2-4 天重构 compiler 让 BN spec 真参与编译，还是直接降 scope 承认是 family router？
 3. **NB/HMM 保留形式**：撤、改为 synthetic-only、还是降为附录？
 4. **成本 claim**：$0.008/14× vs $0.001/60× 统一到哪套？（没 token trace 前任何 claim 都站不住）
-5. **Mixed E2E 时机**：现在跑（怕 scope 定错白跑），还是等 scope 定后再跑？
+5. ~~**Mixed E2E 时机**：现在跑（怕 scope 定错白跑），还是等 scope 定后再跑？~~ **已执行并写入论文；后续只做 claim audit，不再重跑，除非发现脚本错误。**
 
 #### Codex 最终推荐：**投稿策略选项 2**
 
@@ -248,7 +287,7 @@ LLM 能理解概率问题（Parse ≥95%）、能使用计算结果做决策（D
 
 ✅ **档 1 — 细节数字修正**（1 天工作量，纯找替换）:
 - L602 "two parse failures" → "one parse failure"（raw `parse_success_rate=0.9984` 624 中 1 个）
-- L339 "1,200 instances" → "1,150 instances"
+- L339 "1,200 instances" → "1,150 instances"（已完成，当前论文使用 1,150）
 - 成本 $0.008/14× vs $0.001/60× 统一到一套（带 token trace 后决定哪套）
 - bib 作者修正 S6 S7（`lew2025discipl`、`jiang2026sok`、`schick2023toolformer`）
 - CI 政策统一：BN 用 Wilson、bootstrap 仅用于 E2E、全文注 1 处说明
@@ -305,7 +344,7 @@ Tree 直觉"这些实验我之前都跑通过"→ 深挖 `baselines/results/` + 
 
 **agent 说错的（降级）**：
 - **~~C7 LOO raw 缺失~~ → Serious**: 数据集全在 `data/eval/heldout/`（Hotel + flight_2/3/5/6/7_features + flight_full，共 16MB）——Tree 的记忆对。问题只是 `test_loo_induction.py` 用 pytest 没 dump JSON，重跑就补上
-- **~~C8 TextBandit 50~~ → Serious**: 确认 test_equivalence_full 只有 BLInD 900 + Flight ~250 = 1,150；paper "1,200" 是 approximate 不精确，改数字即可
+- **~~C8 TextBandit 50~~ → Serious**: 确认 test_equivalence_full 只有 BLInD 900 + Flight ~250 = 1,150；paper "1,200" 是 approximate 不精确。2026-05-02 已改为 1,150。
 
 **中间状态**：
 - pgmpy 1.0 `from pgmpy.inference import VariableElimination` import 极慢（10+ 分钟未完成，Monitor 超时），bnlearn 冒烟因此卡住。**C1 修复的重跑方案需要换：用 BIFReader 读本地 BIF + 自写 VE 绕过 pgmpy.inference**，或者等它 import 慢慢完成
@@ -319,11 +358,11 @@ Tree 直觉"这些实验我之前都跑通过"→ 深挖 `baselines/results/` + 
    - **行动（零成本 → 有成本）**：(a) 修 `multiply_factors` 实现 + 去 CPT 截断 + 删"Simplified..."误导注释；(b) 小规模冒烟（asia + 10 queries × mini）看 compile_core_ops 从 0% 能跳到多少；(c) 修 `verify_bnlearn_dsl_100.py` fallback（已完成）并重跑得 DSL 数学正确性真实数字；(d) 全量重跑 bnlearn（4 nets × 15 q × mini+5.4 ≈ $8-15）；(e) 论文改叙事：承认 Inductor 结构提取瓶颈 + 展示 "Our core-ops > Free-code, same model" + 明确区分"DSL 数学正确性 100%"与"LLM 端到端"是两层
 - [ ] **C2 NB/HMM "core-ops 组合 100%" 是叙事欺诈** — 2026-04-23 raw JSON 印证：`held_out_nb_mini_205` 实际 `parse_accuracy=0.03 / compute_accuracy=0.37 / compile_core_ops=1.0`。意思是 **NB Parse 仅 3%、Compute 仅 37%**，所谓 "100% core-ops composition" 是**绕过 LLM 的 Parse/Compute 后的纯 solver 分数**，不是 agent 端到端能力。而且 `taskspec/schema.py` + `inductor/prompts/induction_prompt.md` 只支持 3 family，NB/HMM 走独立 codegen 脚本，不是论文 L371-395 声称的 "inductor 组合 novel workflow"；prompt 给的 helper 已 family-shaped（NB 的 `condition()`、HMM 的 `marginalize(transition_fn)`）不是通用 core ops。**行动**: 要么重构 inductor 让它真能 core-ops 组合，要么撤/改 "compositional generalization" claim，**同时把 Abstract/Intro "Parse ≥95%" 全部改为"primary families 82-100%, NB 3%"**
 - [ ] **C3 DSL Compute 100% 近似 tautology** — `taskspec/compiler.py:68-70` 对 BN 直接忽略 spec 返回 `BNReferenceSolver()`，"编译"实为"路由到手写 solver"。**行动**: 改 compiler 做真编译 + 重跑 DSL 等价性测试
-- [ ] **C4 Gate 3 假独立** — LOO/Gate3-off 的 `gold_solver` 和 compiler 输出是**同一实现类两实例**，不是独立 gold。**行动**: 换独立 gold（如 pgmpy）+ 重跑 LOO/Gate3-off
+- [x] ~~**C4 Gate 3 假独立**~~ — **2026-04-28 framing pivot 后已废弃 Gate 3**；当前 verifier 是 2-Gate（Code Sanity + Ground Truth）。不要再重跑 Gate3-off；若保留 LOO 表，只需补 2-Gate raw JSON 或撤表。
 - [ ] **C5 Inductor prompt 喂答案** — 原样 `json.dumps(sample)` 含 `reward_fn` / `answers` / `correct_diagnosis`；prompt 模板还显式要求看 `reward_fn`。**行动**: scrub prompt 输入只保留 task description + 重跑所有 inductor 实验
 - [ ] **C6 LOO induction = verification（同样本两用）** — `samples[:k]` 既喂 induction 又做 verify，违反论文 L371-395 声明。**行动**: 拆独立 held-out split + 重跑 LOO
 - [x] ~~**C7 LOO 6 数据集 raw 完全缺失**~~ — **2026-04-23 重新定性为"数据管理问题"**：数据集 **完整存在** 于 `data/eval/heldout/`（Hotel + flight_2/3/5/6/7/full_features.json，共 16MB）。问题是 `tests/test_loo_induction.py` 是 **pytest 只打 stdout 不存 JSON**，App Table L1121-1126 的 6 个 100% + checkmark 没有结构化 raw 留存。**行动**: 重跑一次 test_loo_induction 并 dump JSON 到 `baselines/results/loo_*.json` 即可（降级到 Serious-tier）
-- [x] ~~**C8 TextBandit 50 samples 不存在**~~ — **2026-04-23 重新定性为"论文数字不精确"**：确认 `test_equivalence_full.py` 只有 BLInD 900 + Flight 前 50×~5 rounds≈250 比对 = **1,150**，TextBandit 不在 test 里。但这不是 fraud，是 paper "1,200" 的 approximate 描述。**行动**: 改 main.tex L339 数字为 "1,150" 或 "over 1,100"（降级到 Serious-tier）
+- [x] ~~**C8 TextBandit 50 samples 不存在**~~ — **2026-04-23 重新定性为"论文数字不精确"**：确认 `test_equivalence_full.py` 只有 BLInD 900 + Flight 前 50×~5 rounds≈250 比对 = **1,150**，TextBandit 不在 test 里。但这不是 fraud，是 paper "1,200" 的 approximate 描述。2026-05-02 已在论文中改为 "1,150"。
 
 #### Serious（限定/重算可救，7 条）
 
@@ -356,7 +395,7 @@ Tree 直觉"这些实验我之前都跑通过"→ 深挖 `baselines/results/` + 
 | S1 / S3 / S4 / S5 / S8 | 叙事统一 + 重算对比 + Parse 定义修正 | 1-1.5 天 |
 | S6 / S7 | bib 修复 | 0.5 天 |
 
-**合计 6.5-12 天**才能真正达到投稿水准。Mixed E2E 应在所有 Critical 修完后才跑。
+**历史估计**：6.5-12 天才能真正达到投稿水准。2026-05-02 后 Mixed E2E 和 Figure 1 架构替换已完成，剩余时间主要花在论文一致性、LOO raw、claim/citation audit 和 final compile/push。
 
 ### P0：论文架构改动（无需新实验，最高 ROI）
 
@@ -364,21 +403,21 @@ Tree 直觉"这些实验我之前都跑通过"→ 深挖 `baselines/results/` + 
 - [x] **Related Work 加 Skill 文献桥接** — 引 SoK + EvoSkills ✅ 2026-04-09
 - [x] **叙述对齐** — Intro/Contribution/Held-Out/Conclusion 全部呼应 compositional generalization ✅ 2026-04-09
 - [x] **"given a new task" 统一** — 替换所有 "a few examples" ✅ 2026-04-09
-- [ ] **Figure 1 重新生成** — 去掉 PCD 左面板，只保留 compile-once pipeline 全宽图（4K，PaperBanana）
-- [ ] **Figure 1 caption 更新** — 匹配新的纯 pipeline 图
+- [x] **Figure 1 重新生成** — 去掉 PCD 左面板，改为 router/scope gate + compile-once backend + self-evolving registry 三层架构图；当前正式本地图为 Imagen 架构候选，PaperBanana 新跑挂起未产图 ✅ 2026-05-02
+- [x] **Figure 1 caption 更新** — 匹配新的 router-mediated reuse 架构图 ✅ 2026-05-02
 - [ ] **考虑加 Figure 2(a) PCD 柱状图** — 如果 Figure 1 不再展示 PCD
 - [ ] **引用修复** — 全面检查 references.bib 准确性（`curtis2025pomdp`/`lew2025discipl`/`first2025alphaverify` 有编造作者名和会议错）
 - [ ] **术语统一** — compile-once vs compile-time、free code vs unconstrained
 - [ ] **100% 清单扫描与 framing 分类** — 扫 main.tex 所有 "100%" 位置，按 [A:设计保证 / B:需 scope 限定 / C:需补实验] 三类标注，逐条定修改方案（2026-04-23 新增）
 - [ ] **所有 B 类 100% 加 scope 限定** — Compute "on the compute stage, conditional on correct parsing"；LOO "first-round pass rate 6/6, n=6 held-out datasets"；Abstract L82 / Intro L117 / Conclusion L670 全覆盖（2026-04-23 新增）
-- [ ] **Abstract / Table 1 主位改报 E2E** — Flight E2E 74.3%（以及 Mixed E2E 跑完后的总数字）放首行，100% 作为分解诊断往后排（2026-04-23 新增）
+- [x] **Abstract / Table 1 主位改报 E2E** — Flight/Hotel/TextBandit + all-family mixed 已进入主文；100% backend 结果已限定为 conditional/structured-input evidence（2026-05-02）
 
 ### P1：需要补充的实验
 
 | 实验 | 回应的攻击点 | 估计耗时 |
 |------|-----------|---------|
-| **Mixed E2E benchmark（2026-04-23 新增，老师建议，P1 最高优先级）** — 所有数据集 shuffle 后完整 agent 管线：NL input → Inductor family-agnostic → compile → solve → decide；建议 6 family × 100 样本 × 3 seed + bootstrap CI；报 overall accuracy + family recognition rate + per-family 分解 | 100% claim 可疑 + "直接调 pgmpy 就行" + agent 完整性 | 1-2 天（含 pre-flight 冒烟），≈$5-10 |
-| **Per-family E2E 矩阵（2026-04-23 新增）** — Hotel/TextBandit/BLInD 各自端到端实验（目前只有 Flight 74.3%），形成 E2E 诊断矩阵 | E2E 覆盖面不足 | 1 天 |
+| ~~Mixed E2E benchmark~~ **已完成** — all-family mixed raw runner 650 条 overall 92.0%，但论文主表用 NB/HMM hard split 原始计数改报保守 aggregate 670 条 overall 90.4%、supported 89.7%，Route acc. 列删除；raw: `all_family_mixed_e2e_openai_gpt-4o-mini_20260502_221603.json` | 100% claim 可疑 + agent 完整性 | ✅ |
+| ~~Per-family E2E 矩阵~~ **基本完成** — Flight 74.3%、Hotel 77.4%、TextBandit-style 96.0%；BLInD/NB/HMM 在 mixed/held-out 表覆盖，注意区分 backend vs NL E2E | E2E 覆盖面不足 | ✅ |
 | **多模型 NL Parse** — GPT-4o/5.4/Claude 重跑偏好学习 NL Parse | 跨模型一致性 | 1 天 |
 | **bnlearn 扩样** — 30→100 query/网络 | 测试集太小 | 0.5 天 |
 | **PAL + self-repair** — 给 PAL 加 3 轮 self-repair | baseline 不公平 | 1 天 |
@@ -417,7 +456,7 @@ meta-skill/
 │   ├── refiner.py           # Verifier 反馈 → self-refine 循环
 │   └── prompts/             # Induction prompt 模板
 ├── verifier/
-│   └── gates.py             # 3-Gate 验证
+│   └── gates.py             # 2-Gate 验证（Code Sanity + Ground Truth）
 ├── solvers/                 # Gold reference solvers
 │   ├── preference_solver.py # 偏好学习（hypothesis_enumeration）
 │   ├── bn_solver.py         # BN 推断（variable_elimination）
@@ -437,10 +476,9 @@ meta-skill/
 ├── tests/                   # 测试套件
 │   ├── test_dsl.py          # DSL 单元测试 + 等价性
 │   ├── test_compiler.py     # 编译器测试
-│   ├── test_equivalence_full.py  # 全量等价性（1,200 实例）
+│   ├── test_equivalence_full.py  # 全量等价性（1,150 实例）
 │   ├── test_inductor_e2e.py      # 归纳器端到端（需 API）
-│   ├── test_loo_induction.py     # LOO 泛化（需 API）
-│   └── test_gate3_ablation.py    # Gate 3 消融（需 API）
+│   └── test_loo_induction.py     # LOO 泛化（需 API；若保留 appendix 表需补 raw JSON）
 ├── paper/                   # 论文
 │   ├── main.tex             # 主文件（NeurIPS 格式）
 │   ├── references.bib       # 引用
@@ -480,7 +518,7 @@ TaskSpec (JSON) ──→ compiler.py ──→ Solver 对象 ──→ solver.s
 - `inductor/` 调用 OpenRouter API，输出 TaskSpec JSON
 - `verifier/gates.py` 调用 compiler + solvers 做验证
 - `baselines/` 的实验脚本调用 `phase1/` 的 BayesianSidecar 做 gold reference（通过 sys.path）
-- `tests/` 的 API 测试（inductor_e2e, loo_induction, gate3_ablation）需要 `OPENROUTER_API_KEY`
+- `tests/` 的 API 测试（inductor_e2e, loo_induction）需要 `OPENROUTER_API_KEY`
 
 ### 测试分层
 
@@ -489,8 +527,7 @@ TaskSpec (JSON) ──→ compiler.py ──→ Solver 对象 ──→ solver.s
 | 单元 | test_dsl.py, test_compiler.py | 否 | <1s |
 | 集成 | test_equivalence_full.py | 否 | ~2s（加载数据） |
 | E2E | test_inductor_e2e.py | 是 | ~30s |
-| 泛化 | test_loo_induction.py | 是 | ~2min |
-| 消融 | test_gate3_ablation.py | 是 | ~2min |
+| 泛化 | test_loo_induction.py | 是 | ~2min；若论文保留 LOO 表，需改成 dump JSON |
 
 本地修改后至少跑前两层确认不破坏。
 
@@ -499,24 +536,29 @@ TaskSpec (JSON) ──→ compiler.py ──→ Solver 对象 ──→ solver.s
 ## 常用命令
 
 ```bash
-# 全部本地测试（不需要 API）
-cd meta-skill && python3 -m pytest tests/test_dsl.py tests/test_compiler.py tests/test_equivalence_full.py -v
+# 全部本地测试（不需要 API；使用 unittest/direct script，不依赖 pytest）
+cd meta-skill && .venv/bin/python3 tests/test_dsl.py
+cd meta-skill && .venv/bin/python3 -m unittest tests.test_compiler -v
+cd meta-skill && .venv/bin/python3 tests/test_equivalence_full.py
 
 # 需要 LLM API 的测试
-cd meta-skill && python3 -m pytest tests/test_inductor_e2e.py -v
-cd meta-skill && python3 -m pytest tests/test_loo_induction.py -v
+cd meta-skill && .venv/bin/python3 tests/test_inductor_e2e.py
+cd meta-skill && .venv/bin/python3 tests/test_loo_induction.py
 
 # PCD 因果诊断
-cd meta-skill/baselines && python3 run_pcd_experiment.py --task both --model openai/gpt-4o-mini --n 200
+cd meta-skill/baselines && ../.venv/bin/python3 run_pcd_experiment.py --task both --model openai/gpt-4o-mini --n 200
 
 # PAL baseline
-cd meta-skill/baselines && python3 run_pal_experiment.py --task bn --model openai/gpt-4o-mini
+cd meta-skill/baselines && ../.venv/bin/python3 run_pal_experiment.py --task bn --model openai/gpt-4o-mini
 
 # Compile-time baseline
-cd meta-skill/baselines && python3 run_compile_time_baseline.py --model openai/gpt-5.4 --task bn --k 5
+cd meta-skill/baselines && ../.venv/bin/python3 run_compile_time_baseline.py --model openai/gpt-5.4 --task bn --k 5
 
 # 端到端实验
-cd meta-skill/baselines && python3 run_e2e_experiment.py
+cd meta-skill && .venv/bin/python3 baselines/run_e2e_experiment.py --dataset flight --n 624 --concurrency 10 --model openai/gpt-4o-mini
+cd meta-skill && .venv/bin/python3 baselines/run_e2e_experiment.py --dataset hotel --n 124 --concurrency 10 --model openai/gpt-4o-mini
+cd meta-skill && .venv/bin/python3 baselines/run_textbandit_e2e.py --n 100 --concurrency 10 --model openai/gpt-4o-mini
+cd meta-skill && .venv/bin/python3 baselines/run_all_family_mixed_e2e.py --n-per-family 100 --n-unsupported 50 --concurrency 10 --model openai/gpt-4o-mini
 
 # Overleaf 同步
 cd meta-skill/paper && bash sync_overleaf.sh pull   # 拉取

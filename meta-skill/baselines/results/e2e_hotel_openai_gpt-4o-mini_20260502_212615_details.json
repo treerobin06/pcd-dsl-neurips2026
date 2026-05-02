@@ -1,0 +1,35 @@
+[
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 1.0,
+    "feature_close_match": 1.0,
+    "raw_response": "```json\n{\n  \"rounds\": [\n    {\n      \"options\": [\n        {\"distance_miles\": 3, \"price\": 550, \"rating_stars\": 1, \"amenities_count\": 2},\n        {\"distance_miles\": 3, \"price\": 820, \"rating_stars\": 2, \"amenities_count\": 3},\n        {\"distance_miles\": 3, \"price\": 370, \"rating_stars\": 1, \"amenities_count\": 1}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 9, \"price\": 910, \"rating_stars\": 1, \"amenities_count\": 2},\n        {\"distance_miles\": 4, \"price\": 730, \"rating_stars\": 4, \"amenities_count\": 3},\n        {\"distance_miles\": 2, \"price\": 730, \"rating_stars\": 5, \"amenities_count\": 2}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 0, \"price\": 100, \"rating_stars\": 5, \"amenities_count\": 0},\n        {\"distance_miles\": 4, \"price\": 190, \"rating_stars\": 5, \"amenities_count\": 1},\n        {\"distance_miles\": 10, \"price\": 1000, \"rating_stars\": 1, \"amenities_count\": 1}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 1, \"price\": 730, \"rating_stars\": 2, \"amenities_count\": 1},\n        {\"distance_miles\": 3, \"price\": 640, \"rating_stars\": 4, \"amenities_count\": 2},\n        {\"distance_miles\": 0, \"price\": 370, \"rating_stars\": 5, \"amenities_count\": 1}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 10, \"price\": 460, \"rating_stars\": 4, \"amenities_count\": 4},\n        {\"distance_miles\": 6, \"price\": 460, \"rating_stars\": 5, \"amenities_count\": 3},\n        {\"distance_miles\": 4, \"price\": 460, \"rating_stars\": 1, \"amenities_count\": 4}\n      ]\n    }\n  ]\n}\n```"
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 0,
+    "gold_user_choice": 0,
+    "gold_solver_rec": 0,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 0.9833333333333333,
+    "feature_close_match": 0.9833333333333333,
+    "raw_response": "```json\n{\n  \"rounds\": [\n    {\n      \"options\": [\n        {\"distance_miles\": 3, \"price\": 1000, \"rating_stars\": 1, \"amenities_count\": 1},\n        {\"distance_miles\": 5, \"price\": 910, \"rating_stars\": 4, \"amenities_count\": 0},\n        {\"distance_miles\": 5, \"price\": 100, \"rating_stars\": 2, \"amenities_count\": 2}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 4, \"price\": 280, \"rating_stars\": 1, \"amenities_count\": 3},\n        {\"distance_miles\": 2, \"price\": 1000, \"rating_stars\": 1, \"amenities_count\": 1},\n        {\"distance_miles\": 0, \"price\": 1000, \"rating_stars\": 3, \"amenities_count\": 2}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 10, \"price\": 730, \"rating_stars\": 4, \"amenities_count\": 2},\n        {\"distance_miles\": 9, \"price\": 280, \"rating_stars\": 4, \"amenities_count\": 3},\n        {\"distance_miles\": 3, \"price\": 280, \"rating_stars\": 4, \"amenities_count\": 4}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 1, \"price\": 280, \"rating_stars\": 4, \"amenities_count\": 1},\n        {\"distance_miles\": 10, \"price\": 190, \"rating_stars\": 5, \"amenities_count\": 2},\n        {\"distance_miles\": 6, \"price\": 820, \"rating_stars\": 4, \"amenities_count\": 2}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 3, \"price\": 100, \"rating_stars\": 1, \"amenities_count\": 0},\n        {\"distance_miles\": 6, \"price\": 370, \"rating_stars\": 3, \"amenities_count\": 3},\n        {\"distance_miles\": 8, \"price\": 820, \"rating_stars\": 1, \"amenities_count\": 2}\n      ]\n    }\n  ]\n}\n```"
+  },
+  {
+    "success": true,
+    "e2e_recommendation": 2,
+    "gold_user_choice": 2,
+    "gold_solver_rec": 2,
+    "e2e_correct": true,
+    "e2e_matches_gold_solver": true,
+    "feature_exact_match": 0.9833333333333333,
+    "feature_close_match": 0.9833333333333333,
+    "raw_response": "```json\n{\n  \"rounds\": [\n    {\n      \"options\": [\n        {\"distance_miles\": 3, \"price\": 280, \"rating_stars\": 4, \"amenities_count\": 0},\n        {\"distance_miles\": 8, \"price\": 820, \"rating_stars\": 4, \"amenities_count\": 0},\n        {\"distance_miles\": 10, \"price\": 280, \"rating_stars\": 1, \"amenities_count\": 3}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 3, \"price\": 100, \"rating_stars\": 5, \"amenities_count\": 3},\n        {\"distance_miles\": 6, \"price\": 910, \"rating_stars\": 4, \"amenities_count\": 0},\n        {\"distance_miles\": 0, \"price\": 820, \"rating_stars\": 2, \"amenities_count\": 0}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 9, \"price\": 640, \"rating_stars\": 4, \"amenities_count\": 1},\n        {\"distance_miles\": 8, \"price\": 100, \"rating_stars\": 5, \"amenities_count\": 3},\n        {\"distance_miles\": 9, \"price\": 640, \"rating_stars\": 1, \"amenities_count\": 0}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 9, \"price\": 280, \"rating_stars\": 1, \"amenities_count\": 3},\n        {\"distance_miles\": 6, \"price\": 910, \"rating_stars\": 2, \"amenities_count\": 4},\n        {\"distance_miles\": 8, \"price\": 820, \"rating_stars\": 4, \"amenities_count\": 2}\n      ]\n    },\n    {\n      \"options\": [\n        {\"distance_miles\": 3, \"price\": 1000, \"rating_stars\": 5, \"amenities_count\": 3},\n        {\"distance_miles\": 6, \"price\": 550, \"rating_stars\": 4, \"amenities_count\": 0},\n        {\"distance_miles\": 8, \"price\": 460, \"rating_stars\": 3, \"amenities_count\": 3}\n      ]\n    }\n  ]\n}\n```"
+  }
+]

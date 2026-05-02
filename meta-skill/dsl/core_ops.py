@@ -63,25 +63,40 @@ def _multiply_two(f1: Factor, f2: Factor) -> Factor:
         if v not in all_vars:
             all_vars.append(v)
 
-    new_table = {}
-    for vals1, prob1 in f1.table.items():
-        for vals2, prob2 in f2.table.items():
-            # 检查共享变量一致性
-            combined = {}
-            consistent = True
-            for i, v in enumerate(f1.variables):
-                combined[v] = vals1[i]
-            for i, v in enumerate(f2.variables):
-                if v in combined:
-                    if combined[v] != vals2[i]:
-                        consistent = False
-                        break
-                else:
-                    combined[v] = vals2[i]
+    f1_pos = {v: i for i, v in enumerate(f1.variables)}
+    f2_pos = {v: i for i, v in enumerate(f2.variables)}
+    shared = [v for v in f1.variables if v in f2_pos]
+    f2_only = [v for v in f2.variables if v not in f1_pos]
 
-            if consistent:
-                new_vals = tuple(combined[v] for v in all_vars)
-                new_table[new_vals] = new_table.get(new_vals, 0) + prob1 * prob2
+    new_table = {}
+    if shared:
+        buckets: Dict[tuple, List[Tuple[tuple, float]]] = {}
+        for vals2, prob2 in f2.table.items():
+            if prob2 == 0:
+                continue
+            key = tuple(vals2[f2_pos[v]] for v in shared)
+            buckets.setdefault(key, []).append((vals2, prob2))
+
+        for vals1, prob1 in f1.table.items():
+            if prob1 == 0:
+                continue
+            key = tuple(vals1[f1_pos[v]] for v in shared)
+            for vals2, prob2 in buckets.get(key, []):
+                prod = prob1 * prob2
+                if prod == 0:
+                    continue
+                new_vals = tuple(vals1) + tuple(vals2[f2_pos[v]] for v in f2_only)
+                new_table[new_vals] = new_table.get(new_vals, 0) + prod
+    else:
+        for vals1, prob1 in f1.table.items():
+            if prob1 == 0:
+                continue
+            for vals2, prob2 in f2.table.items():
+                prod = prob1 * prob2
+                if prod == 0:
+                    continue
+                new_vals = tuple(vals1) + tuple(vals2)
+                new_table[new_vals] = new_table.get(new_vals, 0) + prod
 
     return Factor(variables=all_vars, table=new_table)
 

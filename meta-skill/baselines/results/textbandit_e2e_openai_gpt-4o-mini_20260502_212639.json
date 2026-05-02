@@ -1,0 +1,374 @@
+{
+  "experiment": "textbandit_nl_e2e",
+  "model": "openai/gpt-4o-mini",
+  "n_samples": 3,
+  "concurrency": 3,
+  "seed": 20260502,
+  "history_range": [
+    8,
+    14
+  ],
+  "elapsed_sec": 8.098918914794922,
+  "parse_success_rate": 0.6666666666666666,
+  "observation_exact_rate": 1.0,
+  "e2e_correct": 2,
+  "e2e_accuracy": 0.6666666666666666,
+  "e2e_wilson95": [
+    0.2076549551264879,
+    0.9385096847238394
+  ],
+  "failure_modes": {
+    "observation_count": 1
+  },
+  "results": [
+    {
+      "success": false,
+      "failure_mode": "observation_count",
+      "error": "9 vs 11",
+      "parsed_observations": [
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        }
+      ],
+      "id": 0,
+      "n_arms_gold": 2,
+      "gold_arm": 2,
+      "gold_observations": [
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        }
+      ],
+      "gold_posterior_means": [
+        0.375,
+        0.8571428571428571
+      ],
+      "sample_text": "There are 2 slot machines. Each play returns only textual feedback.\nUse the history below to choose the machine with the highest posterior mean reward rate.\nHistory:\nRound 1: Slot Machine 1 lost.\nPull 2: machine 2 returned 'won a token'.\nPull 3: machine 1 returned 'won a token'.\nTrial 4: the player chose slot 2 and won a token.\nPull 5: machine 2 returned 'won a token'.\nRound 6: Slot Machine 2 won a token.\nRound 7: Slot Machine 1 lost.\nTrial 8: the player chose slot 1 and lost.\nRound 9: Slot Machine 1 lost.\nRound 10: Slot Machine 2 won a token.\nPull 11: machine 1 returned 'won a token'.\nQuestion: Which slot machine should be played next?",
+      "usage": {
+        "prompt_tokens": 498,
+        "completion_tokens": 312,
+        "cost_usd": 0.0002619
+      },
+      "raw_response": "{\n  \"task_spec\": {\n    \"task_name\": \"textbandit_beta_bernoulli\",\n    \"inference_family\": \"conjugate_update\",\n    \"state_structure\": {\n      \"type\": \"beta_conjugate\",\n      \"n_arms\": 2,\n      \"prior_alpha\": 1.0,\n      \"prior_beta\": 1.0\n    },\n    \"observation_model\": {\n      \"type\": \"bernoulli_reward\",\n      \"temperature\": 1.0,\n      \"input\": \"slot_machine_binary_feedback\"\n    },\n    \"decision_rule\": {\n      \"type\": \"argmax_posterior_mean\",\n      \"utility\": \"posterior_mean_reward_rate\"\n    },\n    \"data_format\": {\n      \"rounds\": \"sequential\",\n      \"options_per_round\": 2,\n      \"feedback\": \"binary_reward\"\n    }\n  },\n  \"observations\": [\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 1, \"reward\": 1}\n  ]\n}"
+    },
+    {
+      "success": true,
+      "spec_family": "conjugate_update",
+      "n_arms": 3,
+      "observations_exact": true,
+      "parsed_observations": [
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 3,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 3,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 3,
+          "reward": 1
+        },
+        {
+          "arm": 3,
+          "reward": 0
+        }
+      ],
+      "pred_arm": 1,
+      "gold_arm": 1,
+      "e2e_correct": true,
+      "posterior_means": [
+        0.8,
+        0.5,
+        0.6666666666666666
+      ],
+      "id": 1,
+      "n_arms_gold": 3,
+      "gold_observations": [
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 3,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 3,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 3,
+          "reward": 1
+        },
+        {
+          "arm": 3,
+          "reward": 0
+        }
+      ],
+      "gold_posterior_means": [
+        0.8,
+        0.5,
+        0.6666666666666666
+      ],
+      "sample_text": "There are 3 slot machines. Each play returns only textual feedback.\nUse the history below to choose the machine with the highest posterior mean reward rate.\nHistory:\nRound 1: Slot Machine 1 won a token.\nRound 2: Slot Machine 3 won a token.\nRound 3: Slot Machine 2 won a token.\nRound 4: Slot Machine 1 won a token.\nPull 5: machine 3 returned 'won a token'.\nPull 6: machine 2 returned 'lost'.\nTrial 7: the player chose slot 1 and won a token.\nRound 8: Slot Machine 2 won a token.\nTrial 9: the player chose slot 2 and lost.\nPull 10: machine 3 returned 'won a token'.\nPull 11: machine 3 returned 'lost'.\nQuestion: Which slot machine should be played next?",
+      "usage": {
+        "prompt_tokens": 500,
+        "completion_tokens": 338,
+        "cost_usd": 0.0002778
+      },
+      "raw_response": "{\n  \"task_spec\": {\n    \"task_name\": \"textbandit_beta_bernoulli\",\n    \"inference_family\": \"conjugate_update\",\n    \"state_structure\": {\n      \"type\": \"beta_conjugate\",\n      \"n_arms\": 3,\n      \"prior_alpha\": 1.0,\n      \"prior_beta\": 1.0\n    },\n    \"observation_model\": {\n      \"type\": \"bernoulli_reward\",\n      \"temperature\": 1.0,\n      \"input\": \"slot_machine_binary_feedback\"\n    },\n    \"decision_rule\": {\n      \"type\": \"argmax_posterior_mean\",\n      \"utility\": \"posterior_mean_reward_rate\"\n    },\n    \"data_format\": {\n      \"rounds\": \"sequential\",\n      \"options_per_round\": 3,\n      \"feedback\": \"binary_reward\"\n    }\n  },\n  \"observations\": [\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 3, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 3, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 0},\n    {\"arm\": 3, \"reward\": 1},\n    {\"arm\": 3, \"reward\": 0}\n  ]\n}"
+    },
+    {
+      "success": true,
+      "spec_family": "conjugate_update",
+      "n_arms": 4,
+      "observations_exact": true,
+      "parsed_observations": [
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 4,
+          "reward": 0
+        },
+        {
+          "arm": 3,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 4,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        }
+      ],
+      "pred_arm": 1,
+      "gold_arm": 1,
+      "e2e_correct": true,
+      "posterior_means": [
+        0.5,
+        0.4,
+        0.3333333333333333,
+        0.25
+      ],
+      "id": 2,
+      "n_arms_gold": 4,
+      "gold_observations": [
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 4,
+          "reward": 0
+        },
+        {
+          "arm": 3,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 4,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        }
+      ],
+      "gold_posterior_means": [
+        0.5,
+        0.4,
+        0.3333333333333333,
+        0.25
+      ],
+      "sample_text": "There are 4 slot machines. Each play returns only textual feedback.\nUse the history below to choose the machine with the highest posterior mean reward rate.\nHistory:\nPull 1: machine 1 returned 'lost'.\nPull 2: machine 2 returned 'won a token'.\nPull 3: machine 4 returned 'lost'.\nTrial 4: the player chose slot 3 and lost.\nPull 5: machine 2 returned 'lost'.\nPull 6: machine 4 returned 'lost'.\nPull 7: machine 1 returned 'lost'.\nRound 8: Slot Machine 1 won a token.\nRound 9: Slot Machine 2 lost.\nTrial 10: the player chose slot 1 and won a token.\nQuestion: Which slot machine should be played next?",
+      "usage": {
+        "prompt_tokens": 482,
+        "completion_tokens": 325,
+        "cost_usd": 0.0002673
+      },
+      "raw_response": "{\n  \"task_spec\": {\n    \"task_name\": \"textbandit_beta_bernoulli\",\n    \"inference_family\": \"conjugate_update\",\n    \"state_structure\": {\n      \"type\": \"beta_conjugate\",\n      \"n_arms\": 4,\n      \"prior_alpha\": 1.0,\n      \"prior_beta\": 1.0\n    },\n    \"observation_model\": {\n      \"type\": \"bernoulli_reward\",\n      \"temperature\": 1.0,\n      \"input\": \"slot_machine_binary_feedback\"\n    },\n    \"decision_rule\": {\n      \"type\": \"argmax_posterior_mean\",\n      \"utility\": \"posterior_mean_reward_rate\"\n    },\n    \"data_format\": {\n      \"rounds\": \"sequential\",\n      \"options_per_round\": 4,\n      \"feedback\": \"binary_reward\"\n    }\n  },\n  \"observations\": [\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 4, \"reward\": 0},\n    {\"arm\": 3, \"reward\": 0},\n    {\"arm\": 2, \"reward\": 0},\n    {\"arm\": 4, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 1}\n  ]\n}"
+    }
+  ],
+  "timestamp": "2026-05-02T13:26:39Z",
+  "_meta": {
+    "prompt_tokens": 1480,
+    "completion_tokens": 975,
+    "total_cost_usd": 0.000807,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "57f6e301",
+    "timestamp_utc": "2026-05-02T13:26:39.886979+00:00",
+    "script": "baselines/run_textbandit_e2e.py",
+    "n_samples": 3,
+    "concurrency": 3
+  }
+}

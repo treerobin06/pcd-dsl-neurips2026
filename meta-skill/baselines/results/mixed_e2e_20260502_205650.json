@@ -1,0 +1,104 @@
+{
+  "experiment": "C2 Mixed-family E2E benchmark (Tree 2026-04-28 Level 2)",
+  "model": "openai/gpt-4o-mini",
+  "concurrency": 3,
+  "elapsed_sec": 12.703696012496948,
+  "families": [
+    "blind",
+    "hmm",
+    "nb"
+  ],
+  "n_per_family": 1,
+  "n_total": 3,
+  "overall": {
+    "family_id_correct": 3,
+    "family_id_acc": 1.0,
+    "family_id_wilson95": [
+      0.43849391955098227,
+      1
+    ],
+    "e2e_correct": 3,
+    "e2e_acc": 1.0,
+    "e2e_wilson95": [
+      0.43849391955098227,
+      1
+    ]
+  },
+  "per_family": {
+    "blind": {
+      "n": 1,
+      "family_correct": 1,
+      "e2e_correct": 1
+    },
+    "hmm": {
+      "n": 1,
+      "family_correct": 1,
+      "e2e_correct": 1
+    },
+    "nb": {
+      "n": 1,
+      "family_correct": 1,
+      "e2e_correct": 1
+    }
+  },
+  "failure_modes": {},
+  "results": [
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.1462020546586807",
+      "gold": "0.14620205465868072",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2448,
+        "completion_tokens": 163,
+        "cost_usd": 0.0003114
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Free_Flow",
+      "gold": "Free_Flow",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2394,
+        "completion_tokens": 506,
+        "cost_usd": 0.0004995
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Asthma Exacerbation",
+      "gold": "Asthma Exacerbation",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2453,
+        "completion_tokens": 860,
+        "cost_usd": 0.00072075
+      }
+    }
+  ],
+  "timestamp": "2026-05-02T12:56:50Z",
+  "_meta": {
+    "prompt_tokens": 7295,
+    "completion_tokens": 1529,
+    "total_cost_usd": 0.00153165,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "d16eac70",
+    "timestamp_utc": "2026-05-02T12:56:50.996843+00:00",
+    "script": "baselines/run_mixed_e2e.py",
+    "n_per_family": 1,
+    "concurrency": 3
+  }
+}

@@ -2,7 +2,7 @@
 验证 DSL ve_query 在 bnlearn 网络上的准确率（100 queries/网络）
 不需要 LLM API 调用——纯确定性计算
 """
-import sys, os, random, json
+import sys, os, random, json, argparse, math
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 # pgmpy 0.1.26 + xgboost-without-libomp 修复 (2026-04-27)
@@ -13,7 +13,9 @@ import _pgmpy_compat  # noqa: F401
 from pgmpy.utils import get_example_model
 from pgmpy.inference import VariableElimination
 from dsl.types import Factor
-from dsl.family_macros import ve_query
+from dsl.core_ops import condition, multiply
+from dsl.family_macros import _eliminate_one
+from _artifact_schema import save_artifact
 from scipy import stats
 
 NETWORKS = ["asia", "child", "insurance", "alarm"]
@@ -31,6 +33,78 @@ def wilson_ci(k, n, alpha=0.05):
     center = (p + z ** 2 / (2 * n)) / denom
     margin = z * ((p * (1 - p) / n + z ** 2 / (4 * n ** 2)) ** 0.5) / denom
     return (max(0, center - margin), min(1, center + margin))
+
+
+def _domain_sizes(factors):
+    sizes = {}
+    for factor in factors:
+        for idx, var in enumerate(factor.variables):
+            vals = {key[idx] for key in factor.table}
+            sizes[var] = max(sizes.get(var, 0), len(vals))
+    return sizes
+
+
+def _estimated_join_size(factors, var, domain_sizes):
+    scope = []
+    for factor in factors:
+        if var not in factor.variables:
+            continue
+        for v in factor.variables:
+            if v not in scope:
+                scope.append(v)
+    size = 1
+    for v in scope:
+        size *= max(1, domain_sizes.get(v, 1))
+    return size
+
+
+def dsl_posterior_distribution(factors, query_var, query_states, evidence):
+    """Vectorized equivalent of ve_query for all states of one query variable.
+
+    The original checker called ve_query once per query state, which repeats the
+    same elimination work and is very slow on Insurance/Alarm. This helper uses
+    the same core ops and _eliminate_one, but normalizes the final factor once.
+    It also exposes P(evidence), so zero-probability evidence can be skipped.
+    """
+    conditioned = [condition(f, evidence) for f in factors]
+    if any(len(f.table) == 0 for f in conditioned):
+        return {}, 0.0
+
+    all_vars = set()
+    for factor in conditioned:
+        all_vars.update(factor.variables)
+
+    eliminate = set(all_vars) - {query_var} - set(evidence.keys())
+    current = conditioned
+    while eliminate:
+        domain_sizes = _domain_sizes(current)
+        var = min(
+            eliminate,
+            key=lambda v: (
+                _estimated_join_size([f for f in current if v in f.variables], v, domain_sizes),
+                v,
+            ),
+        )
+        current = _eliminate_one(current, var)
+        eliminate.remove(var)
+
+    product_factor = multiply(current)
+    evidence_prob = sum(product_factor.table.values())
+    if evidence_prob <= 1e-12 or not math.isfinite(evidence_prob):
+        return {}, evidence_prob
+
+    posterior = {state: 0.0 for state in query_states}
+    if query_var not in product_factor.variables:
+        return posterior, evidence_prob
+
+    q_idx = product_factor.variables.index(query_var)
+    for vals, prob in product_factor.table.items():
+        state = vals[q_idx]
+        if state in posterior:
+            posterior[state] += prob
+
+    posterior = {state: prob / evidence_prob for state, prob in posterior.items()}
+    return posterior, evidence_prob
 
 
 def generate_and_verify(net_name, n_queries, seed):
@@ -67,11 +141,15 @@ def generate_and_verify(net_name, n_queries, seed):
                 for row_idx, node_val in enumerate(node_dom):
                     # key 是 tuple of values，顺序与 factor_vars 对应
                     key = (node_val,) + combo
-                    table[key] = float(flat_vals[row_idx, col_idx].item())
+                    prob = float(flat_vals[row_idx, col_idx].item())
+                    if prob != 0.0:
+                        table[key] = prob
         else:
             for row_idx, node_val in enumerate(node_dom):
                 key = (node_val,)
-                table[key] = float(flat_vals[row_idx, 0].item())
+                prob = float(flat_vals[row_idx, 0].item())
+                if prob != 0.0:
+                    table[key] = prob
 
         dsl_factors.append(Factor(variables=factor_vars, table=table))
 
@@ -79,7 +157,10 @@ def generate_and_verify(net_name, n_queries, seed):
     total = 0
     errors = []
 
-    for i in range(n_queries + 10):  # 多生成一些以防 skip
+    max_attempts = n_queries * 20
+    skipped_invalid_gold = 0
+    skipped_zero_evidence = 0
+    for i in range(max_attempts):  # 多生成一些以防 skip
         if total >= n_queries:
             break
 
@@ -100,16 +181,22 @@ def generate_and_verify(net_name, n_queries, seed):
         except Exception:
             continue
 
-        # DSL ve_query：对每个 state 单独查询得到完整 posterior
-        # 注：ve_query 签名是 -> float（返回单个 P(query_var=state | evidence)）
-        # 原代码传 {query_var: [all_states]}（list 作为 value）→ ve_query 永远返回 0.0
-        # 然后 `dsl_p = gold_p` fallback 把这个永远为 0 的 bug 吞掉自动通过（fraud blocker C1, 2026-04-23 修复）
+        # 跳过零概率 evidence 导致的未定义条件概率。pgmpy 在这类 query 上会
+        # 返回 NaN；这不是推断器错误，而是 query 本身没有定义。
+        if any(not math.isfinite(v) for v in gold_posterior.values()):
+            skipped_invalid_gold += 1
+            continue
+
+        # DSL posterior：一次变量消元得到完整 posterior。若 P(evidence)=0，
+        # 条件概率本身未定义；pgmpy 有时不会返回 NaN，而是给一个有限但
+        # 没有数学语义的 posterior，必须显式跳过。
         try:
-            dsl_posterior = {}
-            for state in node_states[query_var]:
-                query_vars_dict = {query_var: state}  # 单个 value，不是 list
-                dsl_p = ve_query(dsl_factors, query_vars_dict, evidence)
-                dsl_posterior[state] = dsl_p
+            dsl_posterior, evidence_prob = dsl_posterior_distribution(
+                dsl_factors, query_var, node_states[query_var], evidence
+            )
+            if evidence_prob <= 1e-12 or not math.isfinite(evidence_prob):
+                skipped_zero_evidence += 1
+                continue
 
             # sanity check: posterior 应归一化到 1
             prob_sum = sum(dsl_posterior.values())
@@ -156,21 +243,32 @@ def generate_and_verify(net_name, n_queries, seed):
             })
             total += 1
 
-    return correct, total, errors
+    return correct, total, errors, skipped_invalid_gold, skipped_zero_evidence
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Verify DSL ve_query on bnlearn networks")
+    parser.add_argument("--queries-per-net", type=int, default=QUERIES_PER_NET)
+    parser.add_argument("--seed", type=int, default=SEED)
+    parser.add_argument("--out", default=None)
+    parser.add_argument("--networks", nargs="+", default=NETWORKS, choices=NETWORKS)
+    args = parser.parse_args()
+
     print(f"{'='*60}")
-    print(f"bnlearn DSL Verification (100 queries/network)")
+    print(f"bnlearn DSL Verification ({args.queries_per_net} queries/network)")
     print(f"{'='*60}\n")
 
     all_results = {}
     total_correct = 0
     total_queries = 0
+    total_skipped_invalid_gold = 0
+    total_skipped_zero_evidence = 0
 
-    for net_name in NETWORKS:
+    for net_name in args.networks:
         print(f"Processing {net_name}...", end=" ", flush=True)
-        correct, total, errors = generate_and_verify(net_name, QUERIES_PER_NET, SEED)
+        correct, total, errors, skipped_invalid_gold, skipped_zero_evidence = generate_and_verify(
+            net_name, args.queries_per_net, args.seed
+        )
         acc = correct / total if total > 0 else 0
         lo, hi = wilson_ci(correct, total)
 
@@ -180,16 +278,21 @@ if __name__ == "__main__":
             "accuracy": acc,
             "ci_lo": lo,
             "ci_hi": hi,
+            "skipped_invalid_gold": skipped_invalid_gold,
+            "skipped_zero_evidence": skipped_zero_evidence,
             "errors": errors,
         }
 
         total_correct += correct
         total_queries += total
+        total_skipped_invalid_gold += skipped_invalid_gold
+        total_skipped_zero_evidence += skipped_zero_evidence
 
         n_nodes = len(get_example_model(net_name).nodes())
         print(f"{correct}/{total} = {acc*100:.1f}% "
               f"[{lo*100:.1f}%, {hi*100:.1f}%] "
-              f"({n_nodes} nodes)")
+              f"({n_nodes} nodes; skipped invalid gold={skipped_invalid_gold}, "
+              f"zero evidence={skipped_zero_evidence})")
 
         if errors:
             for e in errors[:3]:
@@ -201,10 +304,41 @@ if __name__ == "__main__":
     print(f"\n{'='*60}")
     print(f"Overall: {total_correct}/{total_queries} = {overall_acc*100:.1f}% "
           f"[{lo*100:.1f}%, {hi*100:.1f}%]")
+    print(f"Skipped invalid gold queries: {total_skipped_invalid_gold}")
+    print(f"Skipped zero-probability evidence queries: {total_skipped_zero_evidence}")
     print(f"{'='*60}")
 
+    all_results["_overall"] = {
+        "correct": total_correct,
+        "total": total_queries,
+        "accuracy": overall_acc,
+        "ci_lo": lo,
+        "ci_hi": hi,
+        "skipped_invalid_gold": total_skipped_invalid_gold,
+        "skipped_zero_evidence": total_skipped_zero_evidence,
+        "queries_per_net": args.queries_per_net,
+        "seed": args.seed,
+        "networks": args.networks,
+    }
+
     # 保存结果
-    out_path = os.path.join(os.path.dirname(__file__), "results", "bnlearn_dsl_100q.json")
-    with open(out_path, "w") as f:
-        json.dump(all_results, f, indent=2, default=str)
+    out_path = args.out or os.path.join(
+        os.path.dirname(__file__),
+        "results",
+        f"bnlearn_dsl_{args.queries_per_net}q_seed{args.seed}.json",
+    )
+    save_artifact(
+        out_path,
+        all_results,
+        prompt_tokens=0,
+        completion_tokens=0,
+        total_cost_usd=0.0,
+        model_id="deterministic-dsl",
+        extra_meta={
+            "benchmark": "bnlearn",
+            "reference": "pgmpy.VariableElimination",
+            "zero_probability_evidence_policy": "skip",
+            "command": "baselines/verify_bnlearn_dsl_100.py",
+        },
+    )
     print(f"\n结果已保存到 {out_path}")

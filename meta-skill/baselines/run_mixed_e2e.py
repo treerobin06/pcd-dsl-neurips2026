@@ -38,10 +38,11 @@ from inductor.inductor import (
     _parse_taskspec_response,
 )
 from taskspec.compiler import compile_solver
+from _artifact_schema import accumulate_usage, save_artifact
 
-MODEL = "openai/gpt-4o-mini"
-SEMA = 25
-N_PER_FAMILY = 30
+MODEL = os.environ.get("MODEL", "openai/gpt-4o-mini")
+SEMA = int(os.environ.get("SEMA", "25"))
+N_PER_FAMILY = int(os.environ.get("N_PER_FAMILY", "30"))
 
 EXPECTED_FAMILY = {
     "blind": "variable_elimination",
@@ -89,15 +90,17 @@ async def induce_async(client: AsyncOpenAI, sample: Dict, model_id: str):
             max_tokens=4096,
             temperature=0.0,
         )
-        return _parse_taskspec_response(resp.choices[0].message.content or "")
-    except Exception:
-        return None
+        usage = accumulate_usage(resp.usage)
+        usage["cost_usd"] = float(getattr(resp.usage, "cost", 0) or 0)
+        return _parse_taskspec_response(resp.choices[0].message.content or ""), usage, None
+    except Exception as e:
+        return None, {"prompt_tokens": 0, "completion_tokens": 0, "cost_usd": 0.0}, str(e)[:200]
 
 
 async def run_one(client, sema, family_label: str, sample: Dict, gold, source_data: Dict = None):
     """Run one mixed E2E sample. Returns dict with detailed metrics."""
     async with sema:
-        spec = await induce_async(client, sample, MODEL)
+        spec, usage, api_err = await induce_async(client, sample, MODEL)
         emitted_family = spec.inference_family if spec else None
         expected_family = EXPECTED_FAMILY[family_label]
         family_correct = emitted_family == expected_family
@@ -105,7 +108,7 @@ async def run_one(client, sema, family_label: str, sample: Dict, gold, source_da
         failure_mode = None
 
         if spec is None:
-            failure_mode = "spec_parse_fail"
+            failure_mode = f"spec_parse_fail:{api_err}" if api_err else "spec_parse_fail"
         elif not family_correct:
             failure_mode = f"wrong_family:{emitted_family}"
         else:
@@ -154,6 +157,7 @@ async def run_one(client, sema, family_label: str, sample: Dict, gold, source_da
             "gold": str(gold),
             "ok": ok,
             "failure_mode": failure_mode,
+            "usage": usage,
         }
 
 
@@ -287,9 +291,23 @@ async def main():
         "results": results,
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
+    prompt_tokens = sum(r["usage"]["prompt_tokens"] for r in results)
+    completion_tokens = sum(r["usage"]["completion_tokens"] for r in results)
+    total_cost_usd = sum(r["usage"].get("cost_usd", 0.0) for r in results)
     out_path = f"baselines/results/mixed_e2e_{time.strftime('%Y%m%d_%H%M%S')}.json"
-    with open(out_path, "w") as f:
-        json.dump(out, f, indent=2)
+    save_artifact(
+        out_path,
+        out,
+        prompt_tokens=prompt_tokens,
+        completion_tokens=completion_tokens,
+        total_cost_usd=total_cost_usd if total_cost_usd > 0 else None,
+        model_id=MODEL,
+        extra_meta={
+            "script": "baselines/run_mixed_e2e.py",
+            "n_per_family": N_PER_FAMILY,
+            "concurrency": SEMA,
+        },
+    )
     print(f"\nSaved: {out_path}")
 
 

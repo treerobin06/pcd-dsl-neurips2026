@@ -1,0 +1,39 @@
+{
+  "experiment": "e2e_pipeline",
+  "dataset": "hotel",
+  "model": "openai/gpt-4o-mini",
+  "n_samples": 124,
+  "timestamp": "20260502_213825",
+  "parse_success_rate": 1.0,
+  "gold_pipeline_accuracy": 0.75,
+  "e2e_accuracy": 0.7741935483870968,
+  "e2e_ci_95": [
+    0.7016129032258065,
+    0.8548387096774194
+  ],
+  "gold_solver_match": 0.9596774193548387,
+  "gold_solver_match_ci_95": [
+    0.9193548387096774,
+    0.9919354838709677
+  ],
+  "feature_exact_match": 0.9782258064516128,
+  "feature_close_match": 0.9782258064516128,
+  "per_feature_exact_match": {
+    "distance": 1.0,
+    "price": 1.0,
+    "rating": 1.0,
+    "amenities": 0.9129032258064517
+  },
+  "_meta": {
+    "prompt_tokens": 104333,
+    "completion_tokens": 66501,
+    "total_cost_usd": 0.05555055,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "57f6e301",
+    "timestamp_utc": "2026-05-02T13:38:25.207843+00:00",
+    "script": "baselines/run_e2e_experiment.py",
+    "dataset": "hotel",
+    "n_samples": 124,
+    "concurrency": 10
+  }
+}

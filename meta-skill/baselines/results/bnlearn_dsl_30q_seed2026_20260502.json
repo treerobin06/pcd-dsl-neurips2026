@@ -1,0 +1,59 @@
+{
+  "asia": {
+    "correct": 30,
+    "total": 30,
+    "accuracy": 1.0,
+    "ci_lo": 0.8864866068260312,
+    "ci_hi": 0.9999999999999999,
+    "skipped_invalid_gold": 1,
+    "skipped_zero_evidence": 0,
+    "errors": []
+  },
+  "child": {
+    "correct": 30,
+    "total": 30,
+    "accuracy": 1.0,
+    "ci_lo": 0.8864866068260312,
+    "ci_hi": 0.9999999999999999,
+    "skipped_invalid_gold": 0,
+    "skipped_zero_evidence": 1,
+    "errors": []
+  },
+  "insurance": {
+    "correct": 30,
+    "total": 30,
+    "accuracy": 1.0,
+    "ci_lo": 0.8864866068260312,
+    "ci_hi": 0.9999999999999999,
+    "skipped_invalid_gold": 1,
+    "skipped_zero_evidence": 0,
+    "errors": []
+  },
+  "alarm": {
+    "correct": 30,
+    "total": 30,
+    "accuracy": 1.0,
+    "ci_lo": 0.8864866068260312,
+    "ci_hi": 0.9999999999999999,
+    "skipped_invalid_gold": 0,
+    "skipped_zero_evidence": 0,
+    "errors": []
+  },
+  "_overall": {
+    "correct": 120,
+    "total": 120,
+    "accuracy": 1.0,
+    "ci_lo": 0.9689808335812966,
+    "ci_hi": 1,
+    "skipped_invalid_gold": 2,
+    "skipped_zero_evidence": 1,
+    "queries_per_net": 30,
+    "seed": 2026,
+    "networks": [
+      "asia",
+      "child",
+      "insurance",
+      "alarm"
+    ]
+  }
+}

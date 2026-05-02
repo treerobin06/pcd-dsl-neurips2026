@@ -1,0 +1,1177 @@
+{
+  "experiment": "Mixed open-set E2E with supported-family routing and unsupported rejection",
+  "model": "openai/gpt-4o-mini",
+  "concurrency": 10,
+  "elapsed_sec": 30.08714509010315,
+  "n_per_supported_family": 10,
+  "n_unsupported": 20,
+  "families": {
+    "hmm": 10,
+    "unsupported": 20,
+    "nb": 10,
+    "blind": 10
+  },
+  "overall": {
+    "open_set_correct": 50,
+    "n_total": 50,
+    "open_set_acc": 1.0,
+    "open_set_wilson95": [
+      0.9286499658256813,
+      1.0
+    ],
+    "supported_correct": 30,
+    "n_supported": 30,
+    "supported_acc": 1.0,
+    "reject_correct": 20,
+    "n_unsupported": 20,
+    "reject_acc": 1.0
+  },
+  "per_family": {
+    "hmm": {
+      "n": 10,
+      "ok": 10,
+      "routed_or_rejected": 10
+    },
+    "unsupported": {
+      "n": 20,
+      "ok": 20,
+      "routed_or_rejected": 20
+    },
+    "nb": {
+      "n": 10,
+      "ok": 10,
+      "routed_or_rejected": 10
+    },
+    "blind": {
+      "n": 10,
+      "ok": 10,
+      "routed_or_rejected": 10
+    }
+  },
+  "failure_modes": {},
+  "results": [
+    {
+      "family_label": "hmm",
+      "expected_route": "hmm",
+      "route": {
+        "decision": "supported",
+        "family": "hmm",
+        "confidence": 1.0,
+        "reason": "All required components for HMM forward filtering are provided."
+      },
+      "spec_family": "hmm_forward",
+      "pred": "Cloudy",
+      "gold": "Cloudy",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2988,
+        "completion_tokens": 543,
+        "cost_usd": 0.00063
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Task is an ordinary math problem, not probabilistic."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 255,
+        "completion_tokens": 39,
+        "cost_usd": 6.165e-05
+      },
+      "source_meta": {
+        "subtype": "not_probabilistic_inference",
+        "template": "unsupported_non_probability"
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_route": "hmm",
+      "route": {
+        "decision": "supported",
+        "family": "hmm",
+        "confidence": 1.0,
+        "reason": "All required components for HMM forward filtering are provided."
+      },
+      "spec_family": "hmm_forward",
+      "pred": "Moderate",
+      "gold": "Moderate",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3052,
+        "completion_tokens": 561,
+        "cost_usd": 0.0006504
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Prediction task requires estimating probabilities from raw text, which is unsupported."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 278,
+        "completion_tokens": 40,
+        "cost_usd": 6.57e-05
+      },
+      "source_meta": {
+        "subtype": "prediction_bottleneck",
+        "template": "unsupported_prediction"
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_route": "nb",
+      "route": {
+        "decision": "supported",
+        "family": "nb",
+        "confidence": 0.95,
+        "reason": "All required components for Naive Bayes classification are provided: class priors, feature likelihoods, and observed features."
+      },
+      "spec_family": "naive_bayes",
+      "pred": "Pneumonia",
+      "gold": "Pneumonia",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3164,
+        "completion_tokens": 908,
+        "cost_usd": 0.0008753999999999999
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_route": "hmm",
+      "route": {
+        "decision": "supported",
+        "family": "hmm",
+        "confidence": 1.0,
+        "reason": "All required components for HMM forward filtering are provided."
+      },
+      "spec_family": "hmm_forward",
+      "pred": "Congested",
+      "gold": "Congested",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3046,
+        "completion_tokens": 563,
+        "cost_usd": 0.0006506999999999999
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "nb",
+      "expected_route": "nb",
+      "route": {
+        "decision": "supported",
+        "family": "nb",
+        "confidence": 1.0,
+        "reason": "All required components for Naive Bayes classification are provided."
+      },
+      "spec_family": "naive_bayes",
+      "pred": "Allergic Rhinitis",
+      "gold": "Allergic Rhinitis",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3160,
+        "completion_tokens": 924,
+        "cost_usd": 0.0008844
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "nb",
+      "expected_route": "nb",
+      "route": {
+        "decision": "supported",
+        "family": "nb",
+        "confidence": 1.0,
+        "reason": "All required components for Naive Bayes classification are provided."
+      },
+      "spec_family": "naive_bayes",
+      "pred": "Allergic Rhinitis",
+      "gold": "Allergic Rhinitis",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3136,
+        "completion_tokens": 909,
+        "cost_usd": 0.0010157999999999999
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Task is non-probabilistic and involves ordinary math."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 255,
+        "completion_tokens": 39,
+        "cost_usd": 6.165e-05
+      },
+      "source_meta": {
+        "subtype": "not_probabilistic_inference",
+        "template": "unsupported_non_probability"
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_route": "hmm",
+      "route": {
+        "decision": "supported",
+        "family": "hmm",
+        "confidence": 1.0,
+        "reason": "All required components for HMM forward filtering are provided."
+      },
+      "spec_family": "hmm_forward",
+      "pred": "Rainy",
+      "gold": "Rainy",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2988,
+        "completion_tokens": 553,
+        "cost_usd": 0.0006360000000000001
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "nb",
+      "expected_route": "nb",
+      "route": {
+        "decision": "supported",
+        "family": "nb",
+        "confidence": 1.0,
+        "reason": "All required components for Naive Bayes classification are provided."
+      },
+      "spec_family": "naive_bayes",
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3130,
+        "completion_tokens": 853,
+        "cost_usd": 0.0008373
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "nb",
+      "expected_route": "nb",
+      "route": {
+        "decision": "supported",
+        "family": "nb",
+        "confidence": 1.0,
+        "reason": "All required components for Naive Bayes classification are provided: class priors, feature likelihoods, and observed features."
+      },
+      "spec_family": "naive_bayes",
+      "pred": "Pneumonia",
+      "gold": "Pneumonia",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3166,
+        "completion_tokens": 875,
+        "cost_usd": 0.0008558999999999999
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_route": "hmm",
+      "route": {
+        "decision": "supported",
+        "family": "hmm",
+        "confidence": 1.0,
+        "reason": "All required components for HMM forward filtering are provided."
+      },
+      "spec_family": "hmm_forward",
+      "pred": "Free_Flow",
+      "gold": "Free_Flow",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3046,
+        "completion_tokens": 564,
+        "cost_usd": 0.0007953
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "blind",
+      "expected_route": "blind",
+      "route": {
+        "decision": "supported",
+        "family": "blind",
+        "confidence": 0.95,
+        "reason": "The input specifies a Bayesian network with a clear query and provides the necessary conditional probability tables."
+      },
+      "spec_family": "variable_elimination",
+      "pred": "0.0396",
+      "gold": "0.039599999999999996",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2824,
+        "completion_tokens": 230,
+        "cost_usd": 0.00041759999999999996
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "nb",
+      "expected_route": "nb",
+      "route": {
+        "decision": "supported",
+        "family": "nb",
+        "confidence": 1.0,
+        "reason": "All required components for Naive Bayes classification are provided."
+      },
+      "spec_family": "naive_bayes",
+      "pred": "Allergic Rhinitis",
+      "gold": "Allergic Rhinitis",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3164,
+        "completion_tokens": 892,
+        "cost_usd": 0.0008658
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_route": "hmm",
+      "route": {
+        "decision": "supported",
+        "family": "hmm",
+        "confidence": 0.95,
+        "reason": "All required components for HMM forward filtering are provided."
+      },
+      "spec_family": "hmm_forward",
+      "pred": "Sunny",
+      "gold": "Sunny",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2988,
+        "completion_tokens": 552,
+        "cost_usd": 0.0006354
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_route": "hmm",
+      "route": {
+        "decision": "supported",
+        "family": "hmm",
+        "confidence": 0.95,
+        "reason": "All required components for HMM forward filtering are provided."
+      },
+      "spec_family": "hmm_forward",
+      "pred": "Stable",
+      "gold": "Stable",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2924,
+        "completion_tokens": 523,
+        "cost_usd": 0.0006084
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Missing priors and likelihoods for Naive Bayes classification."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 290,
+        "completion_tokens": 41,
+        "cost_usd": 6.81e-05
+      },
+      "source_meta": {
+        "subtype": "missing_likelihoods",
+        "template": "unsupported_missing_probabilities"
+      }
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Missing priors and likelihoods for Naive Bayes classification."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 290,
+        "completion_tokens": 40,
+        "cost_usd": 6.75e-05
+      },
+      "source_meta": {
+        "subtype": "missing_likelihoods",
+        "template": "unsupported_missing_probabilities"
+      }
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Task is an ordinary math problem, not probabilistic."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 255,
+        "completion_tokens": 39,
+        "cost_usd": 6.165e-05
+      },
+      "source_meta": {
+        "subtype": "not_probabilistic_inference",
+        "template": "unsupported_non_probability"
+      }
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Prediction task requires estimating probabilities from raw text, which is unsupported."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 278,
+        "completion_tokens": 40,
+        "cost_usd": 6.57e-05
+      },
+      "source_meta": {
+        "subtype": "prediction_bottleneck",
+        "template": "unsupported_prediction"
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_route": "blind",
+      "route": {
+        "decision": "supported",
+        "family": "blind",
+        "confidence": 1.0,
+        "reason": "Complete Bayesian network structure and query provided."
+      },
+      "spec_family": "variable_elimination",
+      "pred": "0.1264564069485733",
+      "gold": "0.12645640694857327",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3778,
+        "completion_tokens": 178,
+        "cost_usd": 0.0005295
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "blind",
+      "expected_route": "blind",
+      "route": {
+        "decision": "supported",
+        "family": "blind",
+        "confidence": 1.0,
+        "reason": "Complete Bayesian network structure and query provided."
+      },
+      "spec_family": "variable_elimination",
+      "pred": "0.181073445688",
+      "gold": "0.181073445688",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3120,
+        "completion_tokens": 213,
+        "cost_usd": 0.00045180000000000003
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "blind",
+      "expected_route": "blind",
+      "route": {
+        "decision": "supported",
+        "family": "blind",
+        "confidence": 0.95,
+        "reason": "Valid Bayesian network inference with complete structure and query."
+      },
+      "spec_family": "variable_elimination",
+      "pred": "0.2555476020042949",
+      "gold": "0.2555476020042949",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2658,
+        "completion_tokens": 231,
+        "cost_usd": 0.0003741
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 1.0,
+        "reason": "Task involves continuous distributions and lacks specified priors."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 292,
+        "completion_tokens": 40,
+        "cost_usd": 6.78e-05
+      },
+      "source_meta": {
+        "subtype": "continuous_or_missing_prior",
+        "template": "unsupported_continuous"
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_route": "hmm",
+      "route": {
+        "decision": "supported",
+        "family": "hmm",
+        "confidence": 1.0,
+        "reason": "All required components for HMM forward filtering are provided."
+      },
+      "spec_family": "hmm_forward",
+      "pred": "Free_Flow",
+      "gold": "Free_Flow",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3048,
+        "completion_tokens": 559,
+        "cost_usd": 0.0006485999999999999
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 1.0,
+        "reason": "Task involves continuous distributions and lacks specified priors."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 292,
+        "completion_tokens": 40,
+        "cost_usd": 6.78e-05
+      },
+      "source_meta": {
+        "subtype": "continuous_or_missing_prior",
+        "template": "unsupported_continuous"
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_route": "nb",
+      "route": {
+        "decision": "supported",
+        "family": "nb",
+        "confidence": 1.0,
+        "reason": "All required components for Naive Bayes classification are provided: class priors, feature likelihoods, and observed features."
+      },
+      "spec_family": "naive_bayes",
+      "pred": "Pneumonia",
+      "gold": "Pneumonia",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3170,
+        "completion_tokens": 884,
+        "cost_usd": 0.0008619
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Missing priors and likelihoods for Naive Bayes classification."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 290,
+        "completion_tokens": 41,
+        "cost_usd": 6.81e-05
+      },
+      "source_meta": {
+        "subtype": "missing_likelihoods",
+        "template": "unsupported_missing_probabilities"
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_route": "blind",
+      "route": {
+        "decision": "supported",
+        "family": "blind",
+        "confidence": 0.95,
+        "reason": "The input specifies a Bayesian network with a clear query and provides the necessary conditional probabilities."
+      },
+      "spec_family": "variable_elimination",
+      "pred": "0.062",
+      "gold": "0.062",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2484,
+        "completion_tokens": 163,
+        "cost_usd": 0.0004704
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Task is an ordinary math problem, not probabilistic."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 255,
+        "completion_tokens": 39,
+        "cost_usd": 6.165e-05
+      },
+      "source_meta": {
+        "subtype": "not_probabilistic_inference",
+        "template": "unsupported_non_probability"
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_route": "nb",
+      "route": {
+        "decision": "supported",
+        "family": "nb",
+        "confidence": 1.0,
+        "reason": "All required components for Naive Bayes classification are provided: class priors, feature likelihoods, and observed features."
+      },
+      "spec_family": "naive_bayes",
+      "pred": "Bronchitis",
+      "gold": "Bronchitis",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3178,
+        "completion_tokens": 908,
+        "cost_usd": 0.0008775
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "hmm",
+      "expected_route": "hmm",
+      "route": {
+        "decision": "supported",
+        "family": "hmm",
+        "confidence": 1.0,
+        "reason": "All required components for HMM forward filtering are provided."
+      },
+      "spec_family": "hmm_forward",
+      "pred": "Flu",
+      "gold": "Flu",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3022,
+        "completion_tokens": 574,
+        "cost_usd": 0.0006536999999999999
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 1.0,
+        "reason": "Task involves continuous distributions and lacks specified priors."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 292,
+        "completion_tokens": 39,
+        "cost_usd": 6.72e-05
+      },
+      "source_meta": {
+        "subtype": "continuous_or_missing_prior",
+        "template": "unsupported_continuous"
+      }
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Task is an ordinary math problem, not probabilistic."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 255,
+        "completion_tokens": 39,
+        "cost_usd": 6.165e-05
+      },
+      "source_meta": {
+        "subtype": "not_probabilistic_inference",
+        "template": "unsupported_non_probability"
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_route": "hmm",
+      "route": {
+        "decision": "supported",
+        "family": "hmm",
+        "confidence": 1.0,
+        "reason": "All required components for HMM forward filtering are provided."
+      },
+      "spec_family": "hmm_forward",
+      "pred": "Sunny",
+      "gold": "Sunny",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2988,
+        "completion_tokens": 553,
+        "cost_usd": 0.0006360000000000001
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "blind",
+      "expected_route": "blind",
+      "route": {
+        "decision": "supported",
+        "family": "blind",
+        "confidence": 1.0,
+        "reason": "Complete Bayesian network structure and query provided."
+      },
+      "spec_family": "variable_elimination",
+      "pred": "0.26",
+      "gold": "0.26",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3450,
+        "completion_tokens": 215,
+        "cost_usd": 0.0006464999999999999
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "blind",
+      "expected_route": "blind",
+      "route": {
+        "decision": "supported",
+        "family": "blind",
+        "confidence": 1.0,
+        "reason": "The input specifies a Bayesian network with a clear query and complete conditional probability tables."
+      },
+      "spec_family": "variable_elimination",
+      "pred": "0.598181667303316",
+      "gold": "0.598181667303316",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3132,
+        "completion_tokens": 239,
+        "cost_usd": 0.0004692
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Missing priors and likelihoods for Naive Bayes classification."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 290,
+        "completion_tokens": 40,
+        "cost_usd": 6.75e-05
+      },
+      "source_meta": {
+        "subtype": "missing_likelihoods",
+        "template": "unsupported_missing_probabilities"
+      }
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Prediction task lacks specified probabilities and relies on raw text."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 278,
+        "completion_tokens": 39,
+        "cost_usd": 6.51e-05
+      },
+      "source_meta": {
+        "subtype": "prediction_bottleneck",
+        "template": "unsupported_prediction"
+      }
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Prediction task requires estimating probabilities from raw text, which is outside scope."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 278,
+        "completion_tokens": 41,
+        "cost_usd": 6.63e-05
+      },
+      "source_meta": {
+        "subtype": "prediction_bottleneck",
+        "template": "unsupported_prediction"
+      }
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 1.0,
+        "reason": "Task involves continuous distributions and lacks specified priors."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 292,
+        "completion_tokens": 40,
+        "cost_usd": 6.78e-05
+      },
+      "source_meta": {
+        "subtype": "continuous_or_missing_prior",
+        "template": "unsupported_continuous"
+      }
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Prediction task requires estimating probabilities from raw text, which is unsupported."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 278,
+        "completion_tokens": 40,
+        "cost_usd": 6.57e-05
+      },
+      "source_meta": {
+        "subtype": "prediction_bottleneck",
+        "template": "unsupported_prediction"
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_route": "nb",
+      "route": {
+        "decision": "supported",
+        "family": "nb",
+        "confidence": 0.95,
+        "reason": "All required components for Naive Bayes classification are provided: class priors, feature likelihoods, and observed features."
+      },
+      "spec_family": "naive_bayes",
+      "pred": "Gastroenteritis",
+      "gold": "Gastroenteritis",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3188,
+        "completion_tokens": 922,
+        "cost_usd": 0.0008874
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "nb",
+      "expected_route": "nb",
+      "route": {
+        "decision": "supported",
+        "family": "nb",
+        "confidence": 1.0,
+        "reason": "All required components for Naive Bayes classification are provided."
+      },
+      "spec_family": "naive_bayes",
+      "pred": "Influenza",
+      "gold": "Influenza",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3172,
+        "completion_tokens": 853,
+        "cost_usd": 0.0008436
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Missing priors and likelihoods for Naive Bayes classification."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 290,
+        "completion_tokens": 41,
+        "cost_usd": 6.81e-05
+      },
+      "source_meta": {
+        "subtype": "missing_likelihoods",
+        "template": "unsupported_missing_probabilities"
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_route": "blind",
+      "route": {
+        "decision": "supported",
+        "family": "blind",
+        "confidence": 0.95,
+        "reason": "The input provides a complete Bayesian network structure with conditional probability tables and a specific query."
+      },
+      "spec_family": "variable_elimination",
+      "pred": "0.9299999999999999",
+      "gold": "0.9299999999999999",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2496,
+        "completion_tokens": 239,
+        "cost_usd": 0.0003738
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "blind",
+      "expected_route": "blind",
+      "route": {
+        "decision": "supported",
+        "family": "blind",
+        "confidence": 1.0,
+        "reason": "Complete Bayesian network structure and query provided."
+      },
+      "spec_family": "variable_elimination",
+      "pred": "0.7826030425172279",
+      "gold": "0.7826030425172279",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3142,
+        "completion_tokens": 215,
+        "cost_usd": 0.0004563
+      },
+      "source_meta": null
+    },
+    {
+      "family_label": "unsupported",
+      "expected_route": "reject",
+      "route": {
+        "decision": "reject",
+        "family": null,
+        "confidence": 0,
+        "reason": "Task involves continuous distributions and lacks specified priors."
+      },
+      "spec_family": null,
+      "pred": null,
+      "gold": "reject",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 292,
+        "completion_tokens": 38,
+        "cost_usd": 6.66e-05
+      },
+      "source_meta": {
+        "subtype": "continuous_or_missing_prior",
+        "template": "unsupported_continuous"
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_route": "blind",
+      "route": {
+        "decision": "supported",
+        "family": "blind",
+        "confidence": 1.0,
+        "reason": "Complete Bayesian network with query and CPTs provided."
+      },
+      "spec_family": "variable_elimination",
+      "pred": "0.20137429202275928",
+      "gold": "0.20137429202275928",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 3274,
+        "completion_tokens": 226,
+        "cost_usd": 0.00048269999999999997
+      },
+      "source_meta": null
+    }
+  ],
+  "timestamp": "2026-05-02T13:15:31Z",
+  "_meta": {
+    "prompt_tokens": 97651,
+    "completion_tokens": 17417,
+    "total_cost_usd": 0.02133465,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "57f6e301",
+    "timestamp_utc": "2026-05-02T13:15:31.945123+00:00",
+    "script": "baselines/run_mixed_open_set_e2e.py",
+    "n_per_family": 10,
+    "n_unsupported": 20,
+    "concurrency": 10
+  }
+}

@@ -1,0 +1,509 @@
+{
+  "experiment": "C2 Mixed-family E2E benchmark (Tree 2026-04-28 Level 2)",
+  "model": "openai/gpt-4o-mini",
+  "concurrency": 10,
+  "elapsed_sec": 30.928571701049805,
+  "families": [
+    "hmm",
+    "nb",
+    "blind"
+  ],
+  "n_per_family": 10,
+  "n_total": 30,
+  "overall": {
+    "family_id_correct": 30,
+    "family_id_acc": 1.0,
+    "family_id_wilson95": [
+      0.8864829086095221,
+      1
+    ],
+    "e2e_correct": 30,
+    "e2e_acc": 1.0,
+    "e2e_wilson95": [
+      0.8864829086095221,
+      1
+    ]
+  },
+  "per_family": {
+    "hmm": {
+      "n": 10,
+      "family_correct": 10,
+      "e2e_correct": 10
+    },
+    "nb": {
+      "n": 10,
+      "family_correct": 10,
+      "e2e_correct": 10
+    },
+    "blind": {
+      "n": 10,
+      "family_correct": 10,
+      "e2e_correct": 10
+    }
+  },
+  "failure_modes": {},
+  "results": [
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Flu",
+      "gold": "Flu",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2384,
+        "completion_tokens": 531,
+        "cost_usd": 0.0005322
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Strep Throat",
+      "gold": "Strep Throat",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2450,
+        "completion_tokens": 815,
+        "cost_usd": 0.0007125
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Sinusitis",
+      "gold": "Sinusitis",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2457,
+        "completion_tokens": 831,
+        "cost_usd": 0.00072315
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2455,
+        "completion_tokens": 872,
+        "cost_usd": 0.00074745
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.5544473160863116",
+      "gold": "0.5544473160863116",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2602,
+        "completion_tokens": 160,
+        "cost_usd": 0.0003423
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Pneumonia",
+      "gold": "Pneumonia",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2461,
+        "completion_tokens": 852,
+        "cost_usd": 0.00073635
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.050755787371611655",
+      "gold": "0.050755787371611655",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2596,
+        "completion_tokens": 115,
+        "cost_usd": 0.0003144
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.3030904723779023",
+      "gold": "0.3030904723779023",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2684,
+        "completion_tokens": 115,
+        "cost_usd": 0.0003276
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.7718892261001518",
+      "gold": "0.7718892261001518",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2443,
+        "completion_tokens": 166,
+        "cost_usd": 0.00032205
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2445,
+        "completion_tokens": 812,
+        "cost_usd": 0.00070995
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Neutral",
+      "gold": "Neutral",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2338,
+        "completion_tokens": 489,
+        "cost_usd": 0.0005001
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Allergic Rhinitis",
+      "gold": "Allergic Rhinitis",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2450,
+        "completion_tokens": 879,
+        "cost_usd": 0.0007509
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2455,
+        "completion_tokens": 816,
+        "cost_usd": 0.00071385
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "Asthma Exacerbation",
+      "gold": "Asthma Exacerbation",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2453,
+        "completion_tokens": 863,
+        "cost_usd": 0.00072255
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.14022063270349905",
+      "gold": "0.14022063270349908",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2679,
+        "completion_tokens": 163,
+        "cost_usd": 0.00035565
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Moderate",
+      "gold": "Moderate",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2397,
+        "completion_tokens": 515,
+        "cost_usd": 0.00052455
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Cloudy",
+      "gold": "Cloudy",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2366,
+        "completion_tokens": 509,
+        "cost_usd": 0.0005163
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.10599999999999998",
+      "gold": "0.10600000000000001",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2114,
+        "completion_tokens": 143,
+        "cost_usd": 0.0002589
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Neutral",
+      "gold": "Neutral",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2338,
+        "completion_tokens": 489,
+        "cost_usd": 0.0005001
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Neutral",
+      "gold": "Neutral",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2339,
+        "completion_tokens": 490,
+        "cost_usd": 0.00050085
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Healthy",
+      "gold": "Healthy",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2381,
+        "completion_tokens": 528,
+        "cost_usd": 0.00052995
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.580930956469467",
+      "gold": "0.5809309564694671",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2284,
+        "completion_tokens": 183,
+        "cost_usd": 0.0003084
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Bull",
+      "gold": "Bull",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2333,
+        "completion_tokens": 484,
+        "cost_usd": 0.00049635
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2455,
+        "completion_tokens": 829,
+        "cost_usd": 0.00072165
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.15679999999999997",
+      "gold": "0.15680000000000002",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2525,
+        "completion_tokens": 114,
+        "cost_usd": 0.00030315
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.1462020546586807",
+      "gold": "0.14620205465868072",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2448,
+        "completion_tokens": 162,
+        "cost_usd": 0.0003108
+      }
+    },
+    {
+      "family_label": "blind",
+      "expected_family": "variable_elimination",
+      "emitted_family": "variable_elimination",
+      "family_correct": true,
+      "pred": "0.5942622107969151",
+      "gold": "0.594262210796915",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2284,
+        "completion_tokens": 168,
+        "cost_usd": 0.0002994
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Healthy",
+      "gold": "Healthy",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2383,
+        "completion_tokens": 530,
+        "cost_usd": 0.00053145
+      }
+    },
+    {
+      "family_label": "hmm",
+      "expected_family": "hmm_forward",
+      "emitted_family": "hmm_forward",
+      "family_correct": true,
+      "pred": "Free_Flow",
+      "gold": "Free_Flow",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2394,
+        "completion_tokens": 513,
+        "cost_usd": 0.0005037
+      }
+    },
+    {
+      "family_label": "nb",
+      "expected_family": "naive_bayes",
+      "emitted_family": "naive_bayes",
+      "family_correct": true,
+      "pred": "COVID-19",
+      "gold": "COVID-19",
+      "ok": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 2460,
+        "completion_tokens": 864,
+        "cost_usd": 0.0007434
+      }
+    }
+  ],
+  "timestamp": "2026-05-02T12:59:57Z",
+  "_meta": {
+    "prompt_tokens": 72853,
+    "completion_tokens": 15000,
+    "total_cost_usd": 0.01555995,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "d16eac70",
+    "timestamp_utc": "2026-05-02T12:59:57.740062+00:00",
+    "script": "baselines/run_mixed_e2e.py",
+    "n_per_family": 10,
+    "concurrency": 10
+  }
+}

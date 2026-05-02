@@ -1,0 +1,387 @@
+{
+  "experiment": "textbandit_nl_e2e",
+  "model": "openai/gpt-4o-mini",
+  "n_samples": 3,
+  "concurrency": 3,
+  "seed": 20260502,
+  "history_range": [
+    8,
+    14
+  ],
+  "elapsed_sec": 7.715177059173584,
+  "parse_success_rate": 1.0,
+  "observation_exact_rate": 1.0,
+  "e2e_correct": 3,
+  "e2e_accuracy": 1.0,
+  "e2e_wilson95": [
+    0.43849391955098227,
+    1.0
+  ],
+  "failure_modes": {},
+  "results": [
+    {
+      "success": true,
+      "spec_family": "conjugate_update",
+      "n_arms": 2,
+      "observations_exact": true,
+      "parsed_observations": [
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        }
+      ],
+      "pred_arm": 2,
+      "gold_arm": 2,
+      "e2e_correct": true,
+      "posterior_means": [
+        0.375,
+        0.8571428571428571
+      ],
+      "id": 0,
+      "n_arms_gold": 2,
+      "gold_observations": [
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        }
+      ],
+      "gold_posterior_means": [
+        0.375,
+        0.8571428571428571
+      ],
+      "sample_text": "There are 2 slot machines. Each play returns only textual feedback.\nUse the history below to choose the machine with the highest posterior mean reward rate.\nHistory:\nRound 1: played Slot Machine 1; feedback: lost.\nPull 2: played Slot Machine 2; feedback: won a token.\nPull 3: played Slot Machine 1; feedback: won a token.\nTrial 4: played Slot Machine 2; feedback: won a token.\nPull 5: played Slot Machine 2; feedback: won a token.\nRound 6: played Slot Machine 2; feedback: won a token.\nRound 7: played Slot Machine 1; feedback: lost.\nTrial 8: played Slot Machine 1; feedback: lost.\nRound 9: played Slot Machine 1; feedback: lost.\nRound 10: played Slot Machine 2; feedback: won a token.\nPull 11: played Slot Machine 1; feedback: won a token.\nQuestion: Which slot machine should be played next?",
+      "usage": {
+        "prompt_tokens": 570,
+        "completion_tokens": 338,
+        "cost_usd": 0.0002883
+      },
+      "raw_response": "{\n  \"task_spec\": {\n    \"task_name\": \"textbandit_beta_bernoulli\",\n    \"inference_family\": \"conjugate_update\",\n    \"state_structure\": {\n      \"type\": \"beta_conjugate\",\n      \"n_arms\": 2,\n      \"prior_alpha\": 1.0,\n      \"prior_beta\": 1.0\n    },\n    \"observation_model\": {\n      \"type\": \"bernoulli_reward\",\n      \"temperature\": 1.0,\n      \"input\": \"slot_machine_binary_feedback\"\n    },\n    \"decision_rule\": {\n      \"type\": \"argmax_posterior_mean\",\n      \"utility\": \"posterior_mean_reward_rate\"\n    },\n    \"data_format\": {\n      \"rounds\": \"sequential\",\n      \"options_per_round\": 2,\n      \"feedback\": \"binary_reward\"\n    }\n  },\n  \"observations\": [\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 1, \"reward\": 1}\n  ]\n}"
+    },
+    {
+      "success": true,
+      "spec_family": "conjugate_update",
+      "n_arms": 3,
+      "observations_exact": true,
+      "parsed_observations": [
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 3,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 3,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 3,
+          "reward": 1
+        },
+        {
+          "arm": 3,
+          "reward": 0
+        }
+      ],
+      "pred_arm": 1,
+      "gold_arm": 1,
+      "e2e_correct": true,
+      "posterior_means": [
+        0.8,
+        0.5,
+        0.6666666666666666
+      ],
+      "id": 1,
+      "n_arms_gold": 3,
+      "gold_observations": [
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 3,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 3,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 3,
+          "reward": 1
+        },
+        {
+          "arm": 3,
+          "reward": 0
+        }
+      ],
+      "gold_posterior_means": [
+        0.8,
+        0.5,
+        0.6666666666666666
+      ],
+      "sample_text": "There are 3 slot machines. Each play returns only textual feedback.\nUse the history below to choose the machine with the highest posterior mean reward rate.\nHistory:\nRound 1: played Slot Machine 1; feedback: won a token.\nRound 2: played Slot Machine 3; feedback: won a token.\nRound 3: played Slot Machine 2; feedback: won a token.\nRound 4: played Slot Machine 1; feedback: won a token.\nPull 5: played Slot Machine 3; feedback: won a token.\nPull 6: played Slot Machine 2; feedback: lost.\nTrial 7: played Slot Machine 1; feedback: won a token.\nRound 8: played Slot Machine 2; feedback: won a token.\nTrial 9: played Slot Machine 2; feedback: lost.\nPull 10: played Slot Machine 3; feedback: won a token.\nPull 11: played Slot Machine 3; feedback: lost.\nQuestion: Which slot machine should be played next?",
+      "usage": {
+        "prompt_tokens": 572,
+        "completion_tokens": 339,
+        "cost_usd": 0.0002892
+      },
+      "raw_response": "{\n  \"task_spec\": {\n    \"task_name\": \"textbandit_beta_bernoulli\",\n    \"inference_family\": \"conjugate_update\",\n    \"state_structure\": {\n      \"type\": \"beta_conjugate\",\n      \"n_arms\": 3,\n      \"prior_alpha\": 1.0,\n      \"prior_beta\": 1.0\n    },\n    \"observation_model\": {\n      \"type\": \"bernoulli_reward\",\n      \"temperature\": 1.0,\n      \"input\": \"slot_machine_binary_feedback\"\n    },\n    \"decision_rule\": {\n      \"type\": \"argmax_posterior_mean\",\n      \"utility\": \"posterior_mean_reward_rate\"\n    },\n    \"data_format\": {\n      \"rounds\": \"sequential\",\n      \"options_per_round\": 3,\n      \"feedback\": \"binary_reward\"\n    }\n  },\n  \"observations\": [\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 3, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 3, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 0},\n    {\"arm\": 3, \"reward\": 1},\n    {\"arm\": 3, \"reward\": 0}\n  ]\n}"
+    },
+    {
+      "success": true,
+      "spec_family": "conjugate_update",
+      "n_arms": 4,
+      "observations_exact": true,
+      "parsed_observations": [
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 4,
+          "reward": 0
+        },
+        {
+          "arm": 3,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 4,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        }
+      ],
+      "pred_arm": 1,
+      "gold_arm": 1,
+      "e2e_correct": true,
+      "posterior_means": [
+        0.5,
+        0.4,
+        0.3333333333333333,
+        0.25
+      ],
+      "id": 2,
+      "n_arms_gold": 4,
+      "gold_observations": [
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 1
+        },
+        {
+          "arm": 4,
+          "reward": 0
+        },
+        {
+          "arm": 3,
+          "reward": 0
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 4,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        },
+        {
+          "arm": 2,
+          "reward": 0
+        },
+        {
+          "arm": 1,
+          "reward": 1
+        }
+      ],
+      "gold_posterior_means": [
+        0.5,
+        0.4,
+        0.3333333333333333,
+        0.25
+      ],
+      "sample_text": "There are 4 slot machines. Each play returns only textual feedback.\nUse the history below to choose the machine with the highest posterior mean reward rate.\nHistory:\nPull 1: played Slot Machine 1; feedback: lost.\nPull 2: played Slot Machine 2; feedback: won a token.\nPull 3: played Slot Machine 4; feedback: lost.\nTrial 4: played Slot Machine 3; feedback: lost.\nPull 5: played Slot Machine 2; feedback: lost.\nPull 6: played Slot Machine 4; feedback: lost.\nPull 7: played Slot Machine 1; feedback: lost.\nRound 8: played Slot Machine 1; feedback: won a token.\nRound 9: played Slot Machine 2; feedback: lost.\nTrial 10: played Slot Machine 1; feedback: won a token.\nQuestion: Which slot machine should be played next?",
+      "usage": {
+        "prompt_tokens": 548,
+        "completion_tokens": 325,
+        "cost_usd": 0.0002772
+      },
+      "raw_response": "{\n  \"task_spec\": {\n    \"task_name\": \"textbandit_beta_bernoulli\",\n    \"inference_family\": \"conjugate_update\",\n    \"state_structure\": {\n      \"type\": \"beta_conjugate\",\n      \"n_arms\": 4,\n      \"prior_alpha\": 1.0,\n      \"prior_beta\": 1.0\n    },\n    \"observation_model\": {\n      \"type\": \"bernoulli_reward\",\n      \"temperature\": 1.0,\n      \"input\": \"slot_machine_binary_feedback\"\n    },\n    \"decision_rule\": {\n      \"type\": \"argmax_posterior_mean\",\n      \"utility\": \"posterior_mean_reward_rate\"\n    },\n    \"data_format\": {\n      \"rounds\": \"sequential\",\n      \"options_per_round\": 4,\n      \"feedback\": \"binary_reward\"\n    }\n  },\n  \"observations\": [\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 2, \"reward\": 1},\n    {\"arm\": 4, \"reward\": 0},\n    {\"arm\": 3, \"reward\": 0},\n    {\"arm\": 2, \"reward\": 0},\n    {\"arm\": 4, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 1},\n    {\"arm\": 2, \"reward\": 0},\n    {\"arm\": 1, \"reward\": 1}\n  ]\n}"
+    }
+  ],
+  "timestamp": "2026-05-02T13:28:36Z",
+  "_meta": {
+    "prompt_tokens": 1690,
+    "completion_tokens": 1002,
+    "total_cost_usd": 0.0008547,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "57f6e301",
+    "timestamp_utc": "2026-05-02T13:28:36.376934+00:00",
+    "script": "baselines/run_textbandit_e2e.py",
+    "n_samples": 3,
+    "concurrency": 3
+  }
+}

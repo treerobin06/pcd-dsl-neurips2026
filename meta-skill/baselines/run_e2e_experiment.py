@@ -8,7 +8,8 @@
 
 用法:
   # 快速验证（10 样本）
-  python run_e2e_experiment.py --n 10
+  python run_e2e_experiment.py --dataset flight --n 10
+  python run_e2e_experiment.py --dataset hotel --n 10
 
   # 完整实验（200 样本）
   python run_e2e_experiment.py --n 200
@@ -48,15 +49,31 @@ SCRIPT_DIR = Path(__file__).parent
 PROJECT_ROOT = SCRIPT_DIR.parent.parent
 PROMPT_DIR = SCRIPT_DIR / "prompts"
 FLIGHT_DATA = PROJECT_ROOT / "data" / "eval" / "interaction" / "flight.jsonl"
+HOTEL_DATA = PROJECT_ROOT / "data" / "eval" / "interaction" / "hotel.jsonl"
 RESULTS_DIR = SCRIPT_DIR / "results"
 
 sys.path.insert(0, str(SCRIPT_DIR.parent))
+
+from baselines._artifact_schema import accumulate_usage, save_artifact
 
 
 # ==========================================
 # OpenRouter 客户端
 # ==========================================
+def load_dotenv_if_present() -> None:
+    env_path = SCRIPT_DIR.parent / ".env"
+    if not env_path.exists():
+        return
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        os.environ.setdefault(key.strip(), value.strip().strip("'\""))
+
+
 def get_client() -> AsyncOpenAI:
+    load_dotenv_if_present()
     api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
         raise RuntimeError("OPENROUTER_API_KEY 环境变量未设置")
@@ -77,7 +94,7 @@ async def call_llm(
     prompt: str,
     semaphore: asyncio.Semaphore,
     max_tokens: int = 4096,
-) -> Tuple[bool, str]:
+) -> Tuple[bool, str, Dict[str, float]]:
     async with semaphore:
         try:
             resp = await client.chat.completions.create(
@@ -87,9 +104,11 @@ async def call_llm(
                 temperature=0.0,
             )
             text = resp.choices[0].message.content or ""
-            return True, text
+            usage = accumulate_usage(resp.usage)
+            usage["cost_usd"] = float(getattr(resp.usage, "cost", 0) or 0)
+            return True, text, usage
         except Exception as e:
-            return False, f"API error: {e}"
+            return False, f"API error: {e}", {"prompt_tokens": 0, "completion_tokens": 0, "cost_usd": 0.0}
 
 
 def extract_json(text: str) -> Optional[Dict]:
@@ -141,13 +160,36 @@ def normalize_price(price: float) -> float:
     return max(0.0, min(1.0, (price - 100.0) / 900.0))
 
 
-def normalize_features(raw: Dict) -> List[float]:
+def normalize_hotel_distance(distance_miles: float) -> float:
+    """英里数 → [0,1]。0→0.0, 10→1.0"""
+    return max(0.0, min(1.0, distance_miles / 10.0))
+
+
+def normalize_hotel_rating(rating: float) -> float:
+    """星级 → [0,1]。1星→0.0, 5星→1.0"""
+    return max(0.0, min(1.0, (rating - 1.0) / 4.0))
+
+
+def normalize_hotel_amenities(count: int) -> float:
+    """设施数量 → [0,1]。0项→0.0, 4项→1.0"""
+    return max(0.0, min(1.0, count / 4.0))
+
+
+def normalize_features(raw: Dict, dataset: str) -> List[float]:
     """将 LLM 提取的原始特征归一化到 [0,1]"""
-    dep = normalize_departure(float(raw.get("departure_hour", 0)))
-    dur = normalize_duration(float(raw.get("duration_min", 0)))
-    stp = normalize_stops(int(raw.get("stops", 0)))
-    prc = normalize_price(float(raw.get("price", 0)))
-    return [dep, dur, stp, prc]
+    if dataset == "flight":
+        dep = normalize_departure(float(raw.get("departure_hour", 0)))
+        dur = normalize_duration(float(raw.get("duration_min", 0)))
+        stp = normalize_stops(int(raw.get("stops", 0)))
+        prc = normalize_price(float(raw.get("price", 0)))
+        return [dep, dur, stp, prc]
+    if dataset == "hotel":
+        dist = normalize_hotel_distance(float(raw.get("distance_miles", 0)))
+        prc = normalize_price(float(raw.get("price", 0)))
+        rating = normalize_hotel_rating(float(raw.get("rating_stars", 1)))
+        amenities = normalize_hotel_amenities(int(raw.get("amenities_count", 0)))
+        return [dist, prc, rating, amenities]
+    raise ValueError(f"unknown dataset: {dataset}")
 
 
 def round_to_grid(val: float, grid_step: float = 0.1) -> float:
@@ -155,12 +197,40 @@ def round_to_grid(val: float, grid_step: float = 0.1) -> float:
     return round(round(val / grid_step) * grid_step, 4)
 
 
+def grid_step_for_feature(dataset: str, feature_idx: int) -> float:
+    if dataset == "hotel" and feature_idx in {2, 3}:
+        return 0.25
+    return 0.1
+
+
+def dataset_config(dataset: str) -> Dict[str, Any]:
+    configs = {
+        "flight": {
+            "path": FLIGHT_DATA,
+            "prompt": "e2e_parse_preference.md",
+            "option_label": "Flight",
+            "feature_names": ["departure_time", "duration", "stops", "price"],
+        },
+        "hotel": {
+            "path": HOTEL_DATA,
+            "prompt": "e2e_parse_hotel.md",
+            "option_label": "Hotel",
+            "feature_names": ["distance", "price", "rating", "amenities"],
+        },
+    }
+    if dataset not in configs:
+        raise ValueError(f"unknown dataset: {dataset}")
+    return configs[dataset]
+
+
 # ==========================================
 # Prompt 构建
 # ==========================================
-def build_e2e_parse_prompt(sample: Dict) -> str:
+def build_e2e_parse_prompt(sample: Dict, dataset: str) -> str:
     """构建端到端 NL Parse prompt"""
-    template = (PROMPT_DIR / "e2e_parse_preference.md").read_text(encoding="utf-8")
+    cfg = dataset_config(dataset)
+    template = (PROMPT_DIR / cfg["prompt"]).read_text(encoding="utf-8")
+    option_label = cfg["option_label"]
     rounds = sample["rounds"]
     n_rounds = len(rounds)
     n_history = n_rounds - 1
@@ -171,7 +241,7 @@ def build_e2e_parse_prompt(sample: Dict) -> str:
         r = rounds[r_idx]
         is_history = r_idx < n_history
         if is_history:
-            rounds_lines.append(f"Round {r_idx + 1} (user chose Flight {r['user_idx'] + 1}):")
+            rounds_lines.append(f"Round {r_idx + 1} (user chose {option_label} {r['user_idx'] + 1}):")
         else:
             rounds_lines.append(f"Round {r_idx + 1} (current round, no choice yet):")
         for o_idx, opt_text in enumerate(r["options"]):
@@ -225,6 +295,7 @@ def compute_gold_pipeline(sample: Dict) -> Dict:
 def run_parsed_pipeline(
     parsed_data: Dict,
     sample: Dict,
+    dataset: str,
 ) -> Dict:
     """用 LLM 解析结果跑 PreferenceSolver"""
     from solvers.preference_solver import PreferenceSolver
@@ -254,14 +325,14 @@ def run_parsed_pipeline(
 
         norm_opts = []
         for o_idx, raw_opt in enumerate(opts):
-            norm = normalize_features(raw_opt)
+            norm = normalize_features(raw_opt, dataset)
             # 四舍五入到网格（数据集用 0.1 步长）
-            norm = [round_to_grid(v) for v in norm]
+            norm = [round_to_grid(v, grid_step_for_feature(dataset, f_idx)) for f_idx, v in enumerate(norm)]
             norm_opts.append(norm)
 
             # 计算与 gold 的特征误差
             gold_feat = sample["rounds_numpy"][r_idx][o_idx]
-            for f_idx in range(4):
+            for f_idx in range(len(gold_feat)):
                 feature_errors.append({
                     "round": r_idx + 1,
                     "option": o_idx,
@@ -329,19 +400,23 @@ async def run_e2e(
     model: str,
     n_samples: int,
     concurrency: int,
+    dataset: str,
 ) -> Dict:
     """运行端到端链路实验"""
-    if not FLIGHT_DATA.exists():
-        print(f"  [跳过] 数据文件不存在: {FLIGHT_DATA}")
+    cfg = dataset_config(dataset)
+    data_path = cfg["path"]
+    feature_names = cfg["feature_names"]
+    if not data_path.exists():
+        print(f"  [跳过] 数据文件不存在: {data_path}")
         return {}
 
-    with open(FLIGHT_DATA, encoding="utf-8") as f:
+    with open(data_path, encoding="utf-8") as f:
         samples = [json.loads(line) for line in f]
     if n_samples > 0:
         samples = samples[:n_samples]
 
     print(f"\n{'='*60}")
-    print(f"端到端链路实验: NL → LLM Parse → Solver → Answer")
+    print(f"端到端链路实验: {dataset} NL → LLM Parse → Solver → Answer")
     print(f"模型: {model}, 样本数: {len(samples)}, 并发: {concurrency}")
     print(f"{'='*60}")
 
@@ -356,7 +431,7 @@ async def run_e2e(
     client = get_client()
     sem = asyncio.Semaphore(concurrency)
 
-    prompts = [build_e2e_parse_prompt(s) for s in samples]
+    prompts = [build_e2e_parse_prompt(s, dataset) for s in samples]
     tasks = [call_llm(client, model, p, sem) for p in prompts]
     responses = await asyncio.gather(*tasks)
 
@@ -364,7 +439,7 @@ async def run_e2e(
     print("  [3/3] 运行 E2E Pipeline...")
     e2e_results = []
     parse_failures = 0
-    for i, (ok, text) in enumerate(responses):
+    for i, (ok, text, _usage) in enumerate(responses):
         if not ok:
             e2e_results.append({"success": False, "error": "api_error", "raw_response": text[:200]})
             parse_failures += 1
@@ -376,7 +451,9 @@ async def run_e2e(
             parse_failures += 1
             continue
 
-        result = run_parsed_pipeline(parsed, samples[i])
+        result = run_parsed_pipeline(parsed, samples[i], dataset)
+        if len(samples) <= 3:
+            result["raw_response"] = text
         if not result["success"]:
             parse_failures += 1
         e2e_results.append(result)
@@ -401,7 +478,6 @@ async def run_e2e(
     avg_close = np.mean([r["feature_close_match"] for r in successful]) if successful else 0
 
     # 按特征维度统计误差
-    feature_names = ["departure_time", "duration", "stops", "price"]
     per_feature_exact = {fn: 0.0 for fn in feature_names}
     per_feature_count = {fn: 0 for fn in feature_names}
     for r in successful:
@@ -438,6 +514,7 @@ async def run_e2e(
 
     summary = {
         "experiment": "e2e_pipeline",
+        "dataset": dataset,
         "model": model,
         "n_samples": n_total,
         "timestamp": ts,
@@ -452,13 +529,29 @@ async def run_e2e(
         "per_feature_exact_match": per_feature_acc,
     }
 
-    summary_path = RESULTS_DIR / f"e2e_{model_tag}_{ts}.json"
-    with open(summary_path, "w", encoding="utf-8") as f:
-        json.dump(summary, f, indent=2, ensure_ascii=False)
+    prompt_tokens = sum(x[2]["prompt_tokens"] for x in responses)
+    completion_tokens = sum(x[2]["completion_tokens"] for x in responses)
+    total_cost_usd = sum(x[2].get("cost_usd", 0.0) for x in responses)
+
+    summary_path = RESULTS_DIR / f"e2e_{dataset}_{model_tag}_{ts}.json"
+    save_artifact(
+        str(summary_path),
+        summary,
+        prompt_tokens=prompt_tokens,
+        completion_tokens=completion_tokens,
+        total_cost_usd=total_cost_usd if total_cost_usd > 0 else None,
+        model_id=model,
+        extra_meta={
+            "script": "baselines/run_e2e_experiment.py",
+            "dataset": dataset,
+            "n_samples": n_total,
+            "concurrency": concurrency,
+        },
+    )
     print(f"\n  汇总保存: {summary_path}")
 
     # 保存详细结果
-    details_path = RESULTS_DIR / f"e2e_{model_tag}_{ts}_details.json"
+    details_path = RESULTS_DIR / f"e2e_{dataset}_{model_tag}_{ts}_details.json"
     # 去除 feature_errors（太大），保留关键字段
     details_slim = []
     for r in e2e_results:
@@ -478,13 +571,15 @@ async def main():
     parser = argparse.ArgumentParser(description="端到端链路实验")
     parser.add_argument("--model", "-m", nargs="+", default=["openai/gpt-4o-mini"],
                         help="模型列表")
+    parser.add_argument("--dataset", choices=["flight", "hotel"], default="flight",
+                        help="数据集")
     parser.add_argument("--n", "-n", type=int, default=200, help="样本数 (0=全部)")
     parser.add_argument("--concurrency", "-c", type=int, default=30, help="并发数")
     args = parser.parse_args()
 
     results = {}
     for model in args.model:
-        r = await run_e2e(model, args.n, args.concurrency)
+        r = await run_e2e(model, args.n, args.concurrency, args.dataset)
         results[model] = r
 
     # 多模型对比
