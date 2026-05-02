@@ -18,7 +18,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### 已完成
 
 - **官方 NeurIPS 2026 模板更新完成**：`paper/neurips_2026.sty` 已替换为官方版，新增 `paper/neurips_2026.tex` 和 `paper/checklist.tex`，`main.tex` 已 `\input{checklist.tex}`，`sync_overleaf.sh` 已同步这些文件。
-- **Overleaf 已推送**：`paper/sync_overleaf.sh push` 成功，Overleaf 端最新 commit 为 `c2d4d69 Sync from local 2026-05-03 02:15`（包含 reusable-registry Figure 1、conservative mixed table、NB/HMM 原始 hard-split 计数、verifier/theory/LOO 降调、Method 中 theorem-like 公式瘦身，以及 2026-05-03 reviewer-facing LLM-assembled solver framing / PCD Compute 口径修正；模板更新最早推送 commit 为 `d28bf6b`）。
+- **Overleaf 已推送**：`paper/sync_overleaf.sh push` 成功，Overleaf 端最新 commit 为 `ddf5f45 Sync from local 2026-05-03 02:18`（包含 reusable-registry Figure 1、conservative mixed table、NB/HMM 原始 hard-split 计数、verifier/theory/LOO 降调、Method 中 theorem-like 公式瘦身，以及 2026-05-03 reviewer-facing LLM-assembled solver framing / PCD Compute 口径修正；模板更新最早推送 commit 为 `d28bf6b`）。
 - **Schema roundtrip bug 已修复**：`taskspec/schema.py` 的 `to_dict()` 已按 `inference_family` 过滤字段，避免 BN-only 字段污染 preference/bandit。验证：`.venv/bin/python3 -m unittest tests.test_compiler -v` 当前 13/13 OK。
 - **NB/HMM adversarial NL E2E 已在论文主表保留**：GPT-4o-mini，NB 91.7% [85.3, 95.4]，HMM 98.0% [93.0, 99.4]。这是 full natural-language pipeline，不是单纯 backend check。
 - **Hotel E2E 已跑全量**：`n=124`，Parse 100.0%，E2E 77.4% [70.2, 85.5]，gold solver match 96.0%，cost $0.0556。Raw: `baselines/results/e2e_hotel_openai_gpt-4o-mini_20260502_213825.json`。

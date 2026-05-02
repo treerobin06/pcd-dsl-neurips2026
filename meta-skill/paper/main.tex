@@ -76,12 +76,12 @@ They are much less reliable as probabilistic calculators.
 We introduce Parse--Compute--Decide (PCD), a gold-injection diagnostic that separates structure extraction, probabilistic computation, and final action selection.
 Across six LLMs and several Bayesian reasoning tasks, models usually parse the inputs and act correctly given a posterior, but Compute accuracy ranges from 22\% to 78\% on preference learning and falls to 3--11\% on depth-10 Bayesian networks.
 This motivates a different division of labor.
-Instead of asking the LLM to solve every instance, we ask it to assemble a typed \taskspec{} for a task family once.
-The fixed compiler supplies the semantics of typed probabilistic atoms; the LLM chooses and parameterizes their composition, and the resulting solver is cached for reuse.
+Instead of asking the LLM to solve every instance, we ask it to assemble a reusable typed solver specification for a task family.
+The LLM chooses and parameterizes a composition of typed probabilistic atoms; a compiler materializes that assembly as an executable solver, caches it after validation, and reuses it on later instances.
 These LLM-assembled solvers match reference solvers on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks.
 On standard bnlearn networks, the compiled solver matches 400/400 finite queries while per-instance PAL collapses on larger networks.
 On natural-language inputs, GPT-4o-mini improves from 44\% / 32\% direct accuracy to \textbf{91.7\% / 98.0\%} on adversarial Naive Bayes and HMM tasks, two untemplated families.
-The contribution is a reusable probabilistic compiler interface for LLMs: use language models to assemble verified solver specifications, and reuse the compiled solver once it passes validation.
+The contribution is a reusable probabilistic compiler interface for LLMs: language models assemble solver specifications from probabilistic building blocks, and a validated assembly becomes a reusable solver.
 \end{abstract}
 
 % ============================================================
@@ -98,7 +98,7 @@ Chain-of-thought leaves the model doing the math.
 Program-aided prompting asks the model to write new code for each instance.
 Family-specific tools such as ProbLog for Bayesian networks~\citep{nafar2025blind,deraedt2007problog} solve one benchmark family at a time.
 A per-instance parser-to-library pipeline is safer than free-form code, but it still treats each input as a fresh extraction problem.
-Our question is different: can an LLM assemble a reusable solver specification from verified probabilistic atoms, pass a deploy check, and then reuse the compiled solver across future instances?
+Our question is different: can an LLM induce a reusable solver by composing verified probabilistic atoms, pass a deploy check once, and then reuse the compiled solver across future instances?
 
 We first show why this is the right split.
 Parse--Compute--Decide (PCD) isolates three stages by injecting gold intermediate results: Parse tests structure extraction; Compute$\mid$GoldParse tests numerical inference given perfect structure; Decide$\mid$GoldPosterior tests the final action given the correct posterior.
@@ -271,7 +271,7 @@ These results motivate a system that uses the LLM's strong parsing ability while
 % ============================================================
 
 PCD tells us what not to do: do not ask the LLM to carry out probabilistic inference token by token.
-Our method instead asks the LLM to write a compact specification of the task family.
+Our method instead asks the LLM to induce a compact solver specification for the task family.
 The compiler owns the numerical computation.
 
 \subsection{TaskSpec and typed operations}
@@ -282,11 +282,10 @@ For Flight preference learning, for instance, it specifies a hypothesis-enumerat
 For Bayesian networks, it specifies variables, CPT factors, query, and evidence; the compiler invokes variable elimination.
 
 \paragraph{What is assembled by the LLM?}
-The implementation fixes the semantics of typed atoms, just as a probabilistic programming language fixes the semantics of factor product or marginalization.
-The task-specific solver is not written as free-form Python for each instance.
-Instead, the LLM assembles a \taskspec{} that selects an inference route, binds the state and observation structure, chooses the decision rule, and supplies family parameters when they are part of the family description.
-Compilation turns that specification into an executable solver object; after validation, later instances reuse the same compiled route and only bind instance-level observations, evidence, or query fields.
-Thus ``compile once'' means once per validated solver specification, not once per natural-language sentence.
+The DSL defines the semantics of typed atoms, just as a probabilistic programming language defines factor product or marginalization.
+The task-specific solver logic is the LLM-assembled \taskspec{}: it selects an inference route, binds the state and observation structure, chooses the decision rule, and supplies family parameters when they are part of the family description.
+Compilation turns that assembly into an executable solver object; after validation, later instances reuse the same compiled route and only bind instance-level observations, evidence, or query fields.
+Thus ``compile once'' means that one validated LLM assembly can serve many later natural-language instances.
 
 The backend exposes seven typed operations:
 \texttt{condition}, \texttt{multiply}, \texttt{marginalize}, \texttt{normalize}, \texttt{enumerate\_hypotheses}, \texttt{expectation}, and \texttt{argmax}.
