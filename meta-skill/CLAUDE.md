@@ -30,6 +30,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Figure 1 已重做为架构图**：`figures/figure1_overview.png` 已删去左侧 PCD 面板，改为 router/scope gate + compile-once induction/backend + reusable solver registry 三层架构；图中不再出现 `PCD` / `THREE-GATE` / `100%` / `self-evolving`，caption 已同步改为 router-mediated reuse 叙事。当前本地正式图备份为 `figures/figure1_registry_imagen.png`；`figures/figure1_architecture_imagen.png` 是上一版 self-evolving 标题图，不建议使用；旧 `figures/figure1_imagen.png` 是更素的单线 pipeline，`figures/figure1_imagen_alt.png` 因底部英文有 typo，不建议使用。PaperBanana 2026-05-02 新任务超过 10 分钟无输出后终止；旧 `fig1_paperbanana_*.png` 仍含 PCD/three-gate，不得使用。`sync_overleaf.sh` 已加入 `figures/figure1_overview.png`，后续 push 会同步图。
 - **2026-05-02 contribution wording patch 已完成**：self-evolving 已降为 future extension；Figure 1 标题/底层改为 `Reusable Solver Registry`；Method 新增 router/reusable registry 段；two-gate verifier 已限定为 primary deploy checks；NB/HMM 改称 structured-spec/backend sanity；LOO 6/6 降为 engineering sanity；mixed 主表删除 Route acc. 全 100 列并改报保守 aggregate 90.4% / 89.7%。2026-05-02 进一步做公式瘦身：删除 Method 中 `inductor recurrence / verifier indicator / empirical risk` 三个 theorem-like 公式，改成 prose + Algorithm；保留 PCD metric 公式和 DSL/op 定义公式作为诊断与接口锚点。
 - **2026-05-02 bnlearn 核心 claim 已恢复并补 raw**：Tree 确认 bnlearn 是核心贡献后，不再撤掉 backend 100%。`verify_bnlearn_dsl_100.py` 在 2026-04-27 父节点顺序修复基础上，新增零概率 evidence skip、一次性 posterior VE、indexed/sparse factor multiply 和统一 `_meta` artifact；最新 raw `baselines/results/bnlearn_dsl_100q_seed2026_20260502.json` 为 4 个 bnlearn 网络各 100 条 finite query，Overall **400/400 = 100.0% [99.0,100.0]**，schema valid，0 API 成本。`paper/main.tex` 已改为：bnlearn 支撑 **structured deterministic backend exactness**，同时 PAL/LLM Compute 120-query stress test 仍显示大网络 codegen/compute 崩溃；明确不 claim bnlearn natural-language E2E。`run_bnlearn_held_out.py` 也同步修 `cpd.variables[1:]` 和 zero-prob evidence 过滤，避免未来 LLM/PAL 重跑混入旧 bug。
+- **2026-05-03 bnlearn registry-supported NL E2E sanity 已补**：新增 `baselines/run_bnlearn_nl_e2e.py`，默认 registry 模式让 GPT-4o-mini 只解析 registered network/evidence/query，再用 deterministic DSL backend 求解；full-CPT 模式保留为压力测试（Asia/Child 可跑，Insurance 单题因超长 JSON parse fail，不作为主结果）。正式 raw `baselines/results/bnlearn_registry_e2e_80q_gpt4omini_20260503.json`：严格单标签 **79/80 = 98.8% [93.3,99.8]**，唯一 mismatch 是 Child `HypDistrib` 的 exact MAP tie（Equal=0.5, Unequal=0.5），tie-aware **80/80**，cost $0.0045。论文只作为 bounded registry sanity，不改主 claim。
 
 ### 当前最高优先级 TODO
 
@@ -105,7 +106,7 @@ LLM 能理解概率问题、能使用计算结果做决策，但无法可靠执�
 | 15 | Held-out NB adversarial NL E2E | Direct 44.0%；ours 91.7% [85.3,95.4]，full NL parse + deterministic solve | 120/200 样本口径见论文表 |
 | 16 | Held-out HMM adversarial NL E2E | Direct 32.0%；ours 98.0% [93.0,99.4]，full NL parse + deterministic solve | 100 样本 |
 | 17 | Cost curve | Our $0.008 vs PAL $2.50 (310×) vs Compile GPT-5.4 $0.11 (14×) | — |
-| 18 | bnlearn 真实网络 | Structured DSL backend 400/400 finite queries；PAL/LLM Compute 在 ≥20 节点明显失效；不是 NL E2E claim | 400 backend + 120 PAL/PCD |
+| 18 | bnlearn 真实网络 | Structured DSL backend 400/400 finite queries；PAL/LLM Compute 在 ≥20 节点明显失效；registry-supported NL E2E sanity 79/80 strict（tie-aware 80/80），不是 open-ended full-CPT NL induction | 400 backend + 120 PAL/PCD + 80 registry E2E |
 | 19 | **Hotel 单 family E2E** | Parse 100.0%；E2E 77.4% [70.2,85.5]；gold solver match 96.0% | 124 样本 |
 | 20 | **TextBandit-style 单 family E2E** | Parse/spec 96.0%；E2E 96.0% [90.2,98.4]；4 个失败均为 observation-count | 100 样本 |
 | 21 | **All-family mixed E2E** | 主表改报保守 aggregate：Overall 90.4% [88.0,92.4]；supported 89.7%；Route acc. 全 100 列已删除，只作为 bounded sanity | 670 aggregate 样本 |
@@ -419,7 +420,7 @@ Tree 直觉"这些实验我之前都跑通过"→ 深挖 `baselines/results/` + 
 | ~~Mixed E2E benchmark~~ **已完成** — all-family mixed raw runner 650 条 overall 92.0%，但论文主表用 NB/HMM hard split 原始计数改报保守 aggregate 670 条 overall 90.4%、supported 89.7%，Route acc. 列删除；raw: `all_family_mixed_e2e_openai_gpt-4o-mini_20260502_221603.json` | 100% claim 可疑 + agent 完整性 | ✅ |
 | ~~Per-family E2E 矩阵~~ **基本完成** — Flight 74.3%、Hotel 77.4%、TextBandit-style 96.0%；BLInD/NB/HMM 在 mixed/held-out 表覆盖，注意区分 backend vs NL E2E | E2E 覆盖面不足 | ✅ |
 | **多模型 NL Parse** — GPT-4o/5.4/Claude 重跑偏好学习 NL Parse | 跨模型一致性 | 1 天 |
-| **bnlearn 扩样** — 30→100 query/网络 | 测试集太小 | 0.5 天 |
+| ~~**bnlearn 扩样 / registry sanity**~~ **已完成** — backend 100 query/网络；registry-supported NL E2E 80q strict 98.8%，tie-aware 100%；full-CPT 转录只保留为压力测试 | 测试集太小 + bnlearn E2E 边界 | ✅ |
 | **PAL + self-repair** — 给 PAL 加 3 轮 self-repair | baseline 不公平 | 1 天 |
 
 ### P2：如果时间允许

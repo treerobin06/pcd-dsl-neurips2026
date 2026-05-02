@@ -464,7 +464,8 @@ To test whether PAL holds up at scale, we evaluate on four standard bnlearn netw
 On Asia, PAL with GPT-5.4 still reaches 90\%, but \textbf{on networks with $\geq$20 nodes it drops to 0\% on Child, 3\% on Insurance, and 0\% on Alarm}; GPT-4o-mini is low overall (17.5\%) and also reaches 0\% on Alarm (Figure~\ref{fig:scaling_cost}).
 Only 27--29\% of generated programs execute successfully overall: the variable-elimination code often crashes on multi-valued CPTs, deep elimination chains, and complex factor products.
 In contrast, the deterministic DSL backend matches pgmpy variable-elimination references on \textbf{400/400} finite bnlearn queries (100 per network; Wilson 95\% CI [99.0, 100.0]).
-We therefore use bnlearn as a structured external backend check and a stress test for per-instance code generation, not as a natural-language E2E result.
+We therefore use bnlearn primarily as a structured external backend check and a stress test for per-instance code generation, not as a full-CPT natural-language induction result.
+A bounded registry-supported E2E sanity check, where GPT-4o-mini extracts only the registered network, evidence, and query variable before dispatching to the deterministic backend, reaches 79/80 strict single-label accuracy (98.8\%, Wilson 95\% CI [93.3, 99.8]); the sole mismatch is an exact MAP tie under the pgmpy reference posterior, and tie-aware accuracy is 80/80.
 The gap between per-instance generation and deterministic backends widens sharply as networks become larger and multi-valued.
 
 \begin{figure*}[t]
@@ -839,7 +840,7 @@ HMM Forward & $\alpha_t(s) \propto p(o_t \mid s) \sum_{s'} \alpha_{t\text{-}1}(s
 \section{Artifact Provenance}
 \label{app:e2e_artifacts}
 
-Table~\ref{tab:e2e_artifacts} lists the raw result files for the natural-language E2E results used in Tables~\ref{tab:held_out},~\ref{tab:single_family_e2e}, and~\ref{tab:all_family_mixed}, plus the deterministic bnlearn backend check used in Figure~\ref{fig:scaling_cost}. New May 2026 runs include token and cost metadata in the artifact's \texttt{\_meta} field.
+Table~\ref{tab:e2e_artifacts} lists the raw result files for the natural-language E2E results used in Tables~\ref{tab:held_out},~\ref{tab:single_family_e2e}, and~\ref{tab:all_family_mixed}, plus the bnlearn backend and registry sanity checks used in Figure~\ref{fig:scaling_cost} and Appendix~\ref{app:bnlearn}. New May 2026 runs include token and cost metadata in the artifact's \texttt{\_meta} field.
 
 \begin{table}[ht]
 \centering
@@ -856,6 +857,7 @@ Hotel E2E & 77.4\% ($n{=}124$) & \$0.0556 & \path{baselines/results/e2e_hotel_op
 TextBandit-style E2E & 96.0\% ($n{=}100$) & \$0.0292 & \path{baselines/results/textbandit_e2e_openai_gpt-4o-mini_20260502_213919.json} \\
 Conservative mixed aggregate & 90.4\% overall ($n{=}670$) & derived & \path{baselines/results/all_family_mixed_e2e_openai_gpt-4o-mini_20260502_221603.json} + Table~\ref{tab:held_out} \\
 bnlearn DSL backend & 400/400 finite queries & \$0.0000 & \path{baselines/results/bnlearn_dsl_100q_seed2026_20260502.json} \\
+bnlearn registry E2E sanity & 98.8\% strict ($n{=}80$) & \$0.0045 & \path{baselines/results/bnlearn_registry_e2e_80q_gpt4omini_20260503.json} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1088,7 +1090,7 @@ Depth & PAL (GPT-4o-mini) & PAL (GPT-5.4) & Code Succ.\ (5.4) & Our DSL \\
 
 We validate PCD on four standard Bayesian networks from the bnlearn repository~\citep{scutari2010bnlearn}: Asia (8 nodes), Child (20 nodes), Insurance (27 nodes), and Alarm (37 nodes).
 These are widely used PGM benchmarks with real-world structure and multi-valued categorical variables.
-We use two query sets: 30 random inference queries per network (120 total) for the LLM/PAL stress test, and 100 finite-evidence queries per network (400 total) for the deterministic DSL backend check.
+We use three query sets: 30 random inference queries per network (120 total) for the LLM/PAL stress test, 100 finite-evidence queries per network (400 total) for the deterministic DSL backend check, and 20 registry-supported natural-language queries per network (80 total) as a bounded E2E sanity check.
 
 Both GPT-5.4 and GPT-4o-mini score 0\% on Compute$\mid$GoldParse across all 120 queries, even with perfect structured input. Decide$\mid$GoldPosterior remains at 99.2\% and 98.3\% respectively.
 
@@ -1096,7 +1098,9 @@ PAL (code generation + execution) fares no better on these larger networks.
 Table~\ref{tab:bnlearn_pal} shows the results: GPT-5.4's PAL achieves 90\% on Asia (8 nodes) but drops to \textbf{0\%} on Child (20 nodes) and Alarm (37 nodes), and 3\% on Insurance (27 nodes), with code execution success also falling sharply.
 GPT-4o-mini's PAL achieves only 17.5\% overall.
 The deterministic DSL backend matches pgmpy references on 400/400 finite-evidence queries (100 per network); two pgmpy-NaN queries and one zero-probability-evidence query generated during sampling are skipped because the conditional posterior is undefined.
-We therefore use bnlearn as a structured external backend check and as a stress test for direct computation and per-instance code generation, not as a natural-language E2E result.
+As a separate registry-supported E2E sanity check, GPT-4o-mini parses a short natural-language query into a registered network key, evidence assignments, and a query variable before deterministic solving.
+This route scores 79/80 under strict single-label MAP accuracy (98.8\%, Wilson 95\% CI [93.3, 99.8]); the single strict mismatch occurs on a Child query whose pgmpy reference posterior is exactly tied (Equal 0.5, Unequal 0.5), so tie-aware accuracy is 80/80.
+We therefore use bnlearn as a structured external backend check, a bounded registry sanity check, and a stress test for direct computation and per-instance code generation, not as an open-ended full-CPT natural-language induction result.
 
 \begin{table}[ht]
 \centering
