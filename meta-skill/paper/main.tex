@@ -535,7 +535,7 @@ The gap widens from 2 percentage points on small synthetic networks to $\sim$100
 % ---- subcaption 行 ----
 {\hfill\scriptsize (a) bnlearn real-world networks (30 queries each).\hfill\mbox{}} & {\hfill\scriptsize (b) Cost--accuracy on BLInD (small networks).\hfill\mbox{}}\tabularnewline
 \end{tabular}
-\caption{Scaling and cost. \textbf{(a)} On standard bnlearn networks with $\geq$20 nodes, PAL drops to 0--3\% and Direct Answer to 0\%; our DSL stays at 100\% using the same VE macro compiled from BLInD. \textbf{(b)} Cost--accuracy Pareto on BLInD: our DSL achieves 100\% at \$0.008 (one induction call), matching GPT-5.4 compile-time code at $14\times$ lower cost and PAL at $310\times$ lower cost.}
+\caption{Scaling and cost. \textbf{(a)} On standard bnlearn networks with $\geq$20 nodes, PAL collapses (GPT-4o-mini 17.5\%, GPT-5.4 23.3\% overall; both reach 0\% on Alarm) and Direct Answer drops to 0\%; our DSL stays at 100\% using the same VE macro compiled from BLInD. \textbf{(b)} Cost--accuracy Pareto on BLInD: our DSL achieves 100\% at \$0.008 (one induction call), matching GPT-5.4 compile-time code at $14\times$ lower cost and PAL at $310\times$ lower cost.}
 \label{fig:scaling_cost}
 \end{figure*}
 
@@ -1002,8 +1002,8 @@ We generate 30 random inference queries per network (120 total).
 Both GPT-5.4 and GPT-4o-mini score 0\% on Compute$\mid$GoldParse across all 120 queries, even with perfect structured input. Decide$\mid$GoldPosterior remains at 99.2\% and 98.3\% respectively.
 
 PAL (code generation + execution) fares no better on these larger networks.
-Table~\ref{tab:bnlearn_pal} shows the results: GPT-5.4's PAL achieves 97\% on Asia (8 nodes) but drops to \textbf{0\%} on Child (20 nodes), Insurance (27 nodes), and Alarm (37 nodes), with code execution success also falling to 0\%.
-GPT-4o-mini's PAL achieves only 15\% overall.
+Table~\ref{tab:bnlearn_pal} shows the results: GPT-5.4's PAL achieves 90\% on Asia (8 nodes) but drops to \textbf{0\%} on Child (20 nodes) and Alarm (37 nodes), and 3\% on Insurance (27 nodes), with code execution success also falling sharply.
+GPT-4o-mini's PAL achieves only 17.5\% overall.
 Our DSL solver maintains 100\% accuracy across all four networks using the same \texttt{ve\_query} macro. The compile-once approach scales to network sizes where both direct prompting and per-instance code generation fail.
 
 \begin{table}[ht]
@@ -1144,7 +1144,7 @@ BLInD depth-OOD & -- & \checkmark & -- & -- & 1 \\
 \label{app:cost}
 
 Table~\ref{tab:cost_detail} provides a detailed cost breakdown for each method on BN inference (BLInD, 900 problems).
-Our DSL incurs a one-time induction cost of \$0.001, a single GPT-4o-mini call. After that, the compiled solver runs deterministically at zero marginal cost per query.
+Our DSL incurs a one-time induction cost of \$0.008, amortized over a small number of self-refine iterations against the verifier. After that, the compiled solver runs deterministically at zero marginal cost per query.
 Per-instance methods incur cost proportional to the number of queries.
 
 \begin{table}[ht]
@@ -1156,18 +1156,18 @@ Per-instance methods incur cost proportional to the number of queries.
 \toprule
 Method & Model & Accuracy & \#Calls & One-time & Total & Relative \\
 \midrule
-Our DSL & GPT-4o-mini & \textbf{100\%} & 1 & \$0.001 & \$0.001 & 1$\times$ \\
-Compile-time & GPT-5.4 & 100\% & 2 & \$0.06 & \$0.06 & 60$\times$ \\
-Compile-time & GPT-4o-mini & 0\% & 6 & \$0.014 & \$0.014 & -- \\
-PAL & GPT-5.4 & 98.1\% & 900 & -- & \$2.50 & 2500$\times$ \\
-PAL & GPT-4o-mini & 26.4\% & 900 & -- & \$0.97 & 970$\times$ \\
-Direct & GPT-5.4 & 31.2\% & 900 & -- & \$3.60 & 3600$\times$ \\
+Our DSL & GPT-4o-mini & \textbf{100\%} & 1--3 & \$0.008 & \$0.008 & 1$\times$ \\
+Compile-time & GPT-5.4 & 100\% & 2 & \$0.11 & \$0.11 & 14$\times$ \\
+Compile-time & GPT-4o-mini & 0\% & 6 & \$0.05 & \$0.05 & -- \\
+PAL & GPT-5.4 & 98.1\% & 900 & -- & \$2.50 & 310$\times$ \\
+PAL & GPT-4o-mini & 26.4\% & 900 & -- & \$0.84 & 105$\times$ \\
+Direct & GPT-5.4 & 31.2\% & 900 & -- & \$3.60 & 450$\times$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 The cost advantage of compile-once methods grows with the number of queries: one-time induction cost is amortized across all instances in the family.
-For our DSL, the break-even point against per-instance PAL (GPT-4o-mini) occurs after just 1 query, since the induction cost (\$0.001) is already lower than a single PAL call (\$0.001).
+For our DSL, the break-even point against per-instance PAL (GPT-4o-mini) is reached within the first dozen queries: the one-time induction cost (\$0.008) is amortized across all subsequent instances, while PAL pays a per-query cost on every problem.
 
 \section{Compile-Time Baseline Failure Analysis}
 \label{app:compile_failure}
