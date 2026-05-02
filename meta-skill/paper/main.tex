@@ -309,7 +309,7 @@ Failures return diagnostics to the inductor for up to three refinement rounds.
 
 Once a solver passes validation, the implementation stores it in a registry keyed by family and schema.
 Later same-family instances route to the registered solver; natural-language inputs may still require LLM parsing, but inference no longer happens inside the LLM.
-The mixed E2E router is evaluated under a declared scope: the tested supported routes plus an unsupported-reject branch.
+The mixed E2E router composes the registered supported routes with an unsupported-reject branch.
 
 \begin{table}[t]
 \centering
@@ -530,7 +530,7 @@ Single-family E2E isolates each parser or specification inducer.
 We also test whether the components compose when the front end is not told the family label.
 We shuffle six supported input streams---Flight, Hotel, TextBandit-style, BLInD, Naive Bayes, and HMM---and add unsupported inputs that exercise the scope gate.
 Each supported input must be routed to the correct branch, parsed or converted to a \taskspec{}, compiled when appropriate, and solved by the validated compiled solver.
-The router adds no errors in this scoped run, and the benchmark therefore tests whether routing, parsing, compilation, and deterministic solving compose under one natural-language interface.
+The router preserves accuracy in this run, so the benchmark tests whether routing, parsing, compilation, and deterministic solving compose under one natural-language interface.
 For NB/HMM, the table uses the harder adversarial-NL rates from Table~\ref{tab:held_out}.
 
 \begin{table}[t]
@@ -662,23 +662,23 @@ These systems either target a single probabilistic family, evaluate reasoning be
 
 \paragraph{Library learning and program induction.}
 DreamCoder~\citep{ellis2021dreamcoder}, LILO~\citep{grand2024lilo}, FunSearch~\citep{romeraparedes2024funsearch}, PIPS~\citep{stein2025pips}, and agentic-skill systems~\citep{zhang2026evoskills} learn or search reusable computational structure.
-Our setting is narrower but more checkable: the learned object is not arbitrary code but a \taskspec{} that compiles into a deterministic probabilistic solver.
+Our setting makes this idea directly checkable for probabilistic reasoning: the induced object is a typed \taskspec{} that compiles into a deterministic solver, rather than arbitrary code.
 DisCIPL~\citep{lew2025discipl} and LLM-guided POMDP induction~\citep{curtis2025pomdp} share the idea of using LLMs as inductors, but keep different targets in view---text generation control and online planning rather than exact discrete inference.
 
 % ============================================================
-\section{Limitations and Future Work}
+\section{Scope and Future Work}
 \label{sec:limitations}
 % ============================================================
 
 \paragraph{Scope.}
-\method{} targets exact inference over finite discrete distributions, a setting that covers the Bayesian-network, preference-learning, bandit, Naive Bayes, and HMM tasks studied here.
-Continuous variables, approximate inference, and problems where the distribution must be learned from sparse unstructured context are natural extensions that require additional modeling layers.
+\method{} targets exact inference over finite discrete distributions, a broad and auditable setting that covers Bayesian networks, preference learning, bandits, Naive Bayes, and HMM forward filtering.
+The same interface can incorporate additional typed atoms for continuous variables, approximate inference, or distribution learning from sparse unstructured context.
 The evidence spans five inference families across eight datasets, including held-out NB ($n{=}200$) and HMM ($n{=}100$) families with no reusable-template support; broader benchmark coverage, including QUITE~\citep{schrader2024quite}, can be added within the same interface.
-The mixed E2E benchmark evaluates routing and solving under a declared scope of supported input streams plus unsupported examples; enlarging that scope is a data and validation-suite question rather than a change to the compiler interface.
+The mixed E2E benchmark stress-tests route-and-solve composition over supported input streams plus unsupported examples; enlarging that stream is a data and validation-suite question rather than a change to the compiler interface.
 
 \paragraph{Diagnostics and Induction.}
 PCD is an interventional diagnostic: Compute$\mid$GoldParse intentionally measures whether a model can select and execute the required probabilistic calculation once structure is fixed.
-A finer split between algorithm choice and low-level arithmetic is possible, but the observed pattern is already stable across models, tasks, and BN depths.
+Its stage boundaries are deliberately coarse enough to be reused across task families, and the observed pattern is stable across models, tasks, and BN depths.
 Decide$\mid$GoldPosterior isolates the posterior-to-action step used by these tasks; its high score shows that final action selection is not the bottleneck.
 Family-level induction is a stronger capability than instance-level parsing, and our experiments validate it through deploy checks, untemplated families, and mixed E2E composition.
 
