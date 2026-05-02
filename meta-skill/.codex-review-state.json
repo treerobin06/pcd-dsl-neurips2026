@@ -1,0 +1,140 @@
+{
+  "round": 1,
+  "thread_id": "019dd047-aa69-79d1-a8b1-f56a028a1172",
+  "artifact_type": "D+C+E2",
+  "review_focus": "next-step plan + paper post-pivot + today's 15-commit framing pivot reasonableness + remaining gaps",
+  "scope_paths": [
+    "paper/main.tex",
+    "solvers/nb_solver.py",
+    "solvers/hmm_solver.py",
+    "taskspec/schema.py",
+    "taskspec/compiler.py",
+    "verifier/gates.py",
+    "dsl/macros_library.py",
+    "inductor/prompts/induction_prompt.md",
+    "inductor/refiner.py",
+    "baselines/_artifact_schema.py",
+    "baselines/results/declarative_spec_route_paper_n50_async_20260428_021125.json",
+    "baselines/results/declarative_spec_route_paper_n50_difficulty_var_20260428_021444.json",
+    "baselines/results/declarative_spec_route_nb_medium_20260428_021728.json",
+    "baselines/results/bnlearn_openai_gpt-4o-mini_20260428_010314.json",
+    "baselines/results/bnlearn_openai_gpt-4o-mini_20260428_011143.json",
+    "/Users/robin/.claude/plans/mossy-beaming-sky.md",
+    "/Users/robin/Desktop/taoyao/bayes/meta-skill/CLAUDE.md",
+    "paper/audits/2026-04-28-framing-pivot-changelog.md",
+    "paper/audits/2026-04-23-codex-review.md",
+    "paper/audits/2026-04-28-next-session-plan.md"
+  ],
+  "scope_signature": "33160306",
+  "scores": {
+    "paper_quality_avg": 4.6,
+    "paper_quality_dimensions": {
+      "framing_clarity": 5,
+      "evidence_strength": 4,
+      "narrative_coherence": 5,
+      "novelty_articulation": 5,
+      "related_work_positioning": 6,
+      "claim_data_fit": 3,
+      "reproducibility": 4
+    },
+    "plan_soundness_avg": 5.6,
+    "plan_soundness_dimensions": {
+      "completeness": 6,
+      "prioritization": 7,
+      "cost_benefit": 4,
+      "risk_awareness": 6,
+      "executability": 5
+    }
+  },
+  "severity_distribution_post_debate": {
+    "critical": 2,
+    "major": 8,
+    "minor": 1,
+    "suggestion": 1
+  },
+  "open_suspicions": [
+    {
+      "id": "S1",
+      "label": "C3 identity crisis — compile real synthesis vs routing",
+      "state": "STILL_SUSPICIOUS",
+      "hook": "rg -n 'BNReferenceSolver|solve_from_text|solve_from_factors' taskspec/compiler.py solvers/bn_solver.py"
+    },
+    {
+      "id": "S2",
+      "label": "Artifact discipline (_meta) enforcement",
+      "state": "NEW_EVIDENCE_OF_EVASION",
+      "hook": "for f in baselines/results/*20260428*.json; do python3 -c \"import json,sys; d=json.load(open(sys.argv[1])); print(sys.argv[1], '_meta' in d)\" \"$f\"; done"
+    },
+    {
+      "id": "S3",
+      "label": "C5 leakage — main path clean / legacy audited",
+      "state": "RESOLVED_main_STILL_SUSPICIOUS_legacy",
+      "hook": "rg -n 'correct_diagnosis|correct_state|reward_fn|answers' inductor baselines"
+    },
+    {
+      "id": "S4",
+      "label": "C6 disjoint verification — train/verify split",
+      "state": "STILL_SUSPICIOUS",
+      "hook": "rg -n 'verify_samples|samples\\[:max|samples\\[max' inductor tests"
+    },
+    {
+      "id": "S5",
+      "label": "Gate 2 vacuity for NB/HMM/Bandit",
+      "state": "STILL_SUSPICIOUS",
+      "hook": "rg -n 'passed=True|不支持的 family|naive_bayes|hmm_forward' verifier/gates.py"
+    },
+    {
+      "id": "S6",
+      "label": "Structured-route vs NL-E2E distinction in paper",
+      "state": "NEW_EVIDENCE_OF_EVASION",
+      "hook": "compare paper/main.tex table n with raw JSON .nb.n / .hmm.n; check abstract for 'given structured input' qualifier"
+    },
+    {
+      "id": "S7",
+      "label": "NB robustness — paper shows 50/100% only or also 36/50%",
+      "state": "NEW_EVIDENCE_OF_EVASION",
+      "hook": "rg 'difficulty|graceful|36|50%' paper/main.tex"
+    },
+    {
+      "id": "S8",
+      "label": "Cost trace metadata",
+      "state": "STILL_SUSPICIOUS",
+      "hook": "rg -n 'prompt_tokens|completion_tokens|total_cost|_meta' baselines/results paper/main.tex"
+    },
+    {
+      "id": "S9",
+      "label": "Schema consistency (test_roundtrip pass)",
+      "state": "NEW_EVIDENCE_OF_EVASION",
+      "hook": ".venv/bin/python3 -m unittest tests.test_compiler -v 2>&1 | grep -E 'FAIL|test_roundtrip'"
+    },
+    {
+      "id": "S10",
+      "label": "PAL number internal consistency",
+      "state": "NEW_EVIDENCE_OF_EVASION",
+      "hook": "rg 'PAL drops|17\\.5|23\\.3|0--3%|15%|fails entirely' paper/main.tex"
+    }
+  ],
+  "previous_review_resolution": {
+    "C3_identity_crisis": "PARTIAL_FIX",
+    "C5_leakage": "MOSTLY_RESOLVED_main",
+    "C6_disjoint": "PARTIAL",
+    "S2_vacuous_gate2": "PARTIAL",
+    "C9_artifact_discipline": "STILL_OPEN_NEW_EVIDENCE_OF_EVASION",
+    "claim_first_root_problem": "STILL_OPEN"
+  },
+  "verdict": {
+    "direction": "B",
+    "summary": "Plan needs revision (specific gaps before execution)",
+    "preconditions_before_p0p1p2": [
+      "5 raw JSON files migrate to save_artifact() to enforce _meta",
+      "abstract L82 + Table 3 caption add 'given structured spec input' qualifier",
+      "verifier/gates.py add _gate2_nb and _gate2_hmm dispatches",
+      "PAL number reconciliation (3 contradicting numbers in main.tex)",
+      "schema.py to_dict() by-family filter + test_roundtrip fix"
+    ],
+    "estimated_precondition_work": "5h, $0.50 API",
+    "estimated_total_to_submission_grade": "6-9 days, $5-15"
+  },
+  "last_run_at": "2026-04-28T19:02:03Z",
+  "auto_fix": false
+}

@@ -1,0 +1,19 @@
+{
+  "model": "openai/gpt-4o-mini",
+  "queries_per_net": 5,
+  "networks": [
+    "asia",
+    "child",
+    "insurance",
+    "alarm"
+  ],
+  "compile_core_ops": {
+    "accuracy": 0.0,
+    "n_correct": 0,
+    "n_total": 20
+  },
+  "n_test_asia": 5,
+  "n_test_child": 5,
+  "n_test_insurance": 5,
+  "n_test_alarm": 5
+}

@@ -3,12 +3,9 @@
   "inference_family": "variable_elimination",
   "state_structure": {
     "type": "bayesian_network",
-    "hypothesis": "",
-    "features": [],
-    "values_per_feature": [],
-    "n_arms": 0,
-    "prior_alpha": 1.0,
-    "prior_beta": 1.0
+    "bn_inference_method": "variable_elimination",
+    "bn_input_format": "blind_text",
+    "bn_numerical_precision": "float64"
   },
   "observation_model": {
     "type": "cpt_given",

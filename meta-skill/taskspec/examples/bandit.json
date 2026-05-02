@@ -3,9 +3,6 @@
   "inference_family": "conjugate_update",
   "state_structure": {
     "type": "beta_conjugate",
-    "hypothesis": "",
-    "features": [],
-    "values_per_feature": [],
     "n_arms": 5,
     "prior_alpha": 1.0,
     "prior_beta": 1.0

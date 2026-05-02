@@ -87,22 +87,47 @@ class TaskSpec:
     data_format: DataFormat
 
     def to_dict(self) -> Dict[str, Any]:
-        """序列化为字典"""
+        """序列化为字典（按 inference_family 过滤无关字段，避免跨 family 字段污染）"""
+        ss = self.state_structure
+        state_dict: Dict[str, Any] = {"type": ss.type}
+
+        if self.inference_family == "hypothesis_enumeration":
+            state_dict.update({
+                "hypothesis": ss.hypothesis,
+                "features": ss.features,
+                "values_per_feature": ss.values_per_feature,
+            })
+        elif self.inference_family == "conjugate_update":
+            state_dict.update({
+                "n_arms": ss.n_arms,
+                "prior_alpha": ss.prior_alpha,
+                "prior_beta": ss.prior_beta,
+            })
+        elif self.inference_family == "variable_elimination":
+            state_dict.update({
+                "bn_inference_method": ss.bn_inference_method,
+                "bn_input_format": ss.bn_input_format,
+                "bn_numerical_precision": ss.bn_numerical_precision,
+            })
+        elif self.inference_family == "naive_bayes":
+            state_dict.update({
+                "nb_classes": ss.nb_classes,
+                "nb_feature_likelihoods": ss.nb_feature_likelihoods,
+                "nb_prior": ss.nb_prior,
+            })
+        elif self.inference_family == "hmm_forward":
+            state_dict.update({
+                "hmm_states": ss.hmm_states,
+                "hmm_observations": ss.hmm_observations,
+                "hmm_initial": ss.hmm_initial,
+                "hmm_transition": ss.hmm_transition,
+                "hmm_emission": ss.hmm_emission,
+            })
+
         return {
             "task_name": self.task_name,
             "inference_family": self.inference_family,
-            "state_structure": {
-                "type": self.state_structure.type,
-                "hypothesis": self.state_structure.hypothesis,
-                "features": self.state_structure.features,
-                "values_per_feature": self.state_structure.values_per_feature,
-                "n_arms": self.state_structure.n_arms,
-                "prior_alpha": self.state_structure.prior_alpha,
-                "prior_beta": self.state_structure.prior_beta,
-                "bn_inference_method": self.state_structure.bn_inference_method,
-                "bn_input_format": self.state_structure.bn_input_format,
-                "bn_numerical_precision": self.state_structure.bn_numerical_precision,
-            },
+            "state_structure": state_dict,
             "observation_model": {
                 "type": self.observation_model.type,
                 "temperature": self.observation_model.temperature,

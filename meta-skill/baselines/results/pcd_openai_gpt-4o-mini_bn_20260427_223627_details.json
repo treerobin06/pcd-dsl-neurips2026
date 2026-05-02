@@ -1,0 +1,133 @@
+{
+  "parse_details": {
+    "0": {
+      "correct": true,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": true,
+        "cpt_values": true
+      }
+    },
+    "1": {
+      "correct": true,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": true,
+        "cpt_values": true
+      }
+    },
+    "2": {
+      "correct": true,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": true,
+        "cpt_values": true
+      }
+    },
+    "3": {
+      "correct": true,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": true,
+        "cpt_values": true
+      }
+    },
+    "4": {
+      "correct": false,
+      "detail": "ok",
+      "scores": {
+        "variables": true,
+        "edges": true,
+        "query_variable": true,
+        "query_value": true,
+        "evidence": false,
+        "cpt_values": true
+      }
+    }
+  },
+  "compute_details": {
+    "0": {
+      "correct": true,
+      "predicted": 0.39,
+      "gold": 0.38999999999999996,
+      "error_abs": 5.551115123125783e-17,
+      "depth": 2
+    },
+    "1": {
+      "correct": true,
+      "predicted": 0.3945,
+      "gold": 0.39470670568774646,
+      "error_abs": 0.0002067056877464446,
+      "depth": 2
+    },
+    "2": {
+      "correct": true,
+      "predicted": 0.68,
+      "gold": 0.68,
+      "error_abs": 0.0,
+      "depth": 2
+    },
+    "3": {
+      "correct": true,
+      "predicted": 0.675,
+      "gold": 0.675557056043214,
+      "error_abs": 0.0005570560432139882,
+      "depth": 2
+    },
+    "4": {
+      "correct": false,
+      "predicted": 0.096,
+      "gold": 0.07650000000000001,
+      "error_abs": 0.01949999999999999,
+      "depth": 2
+    }
+  },
+  "decide_details": {
+    "0": {
+      "correct": true,
+      "predicted": 0.39,
+      "gold": 0.38999999999999996,
+      "depth": 2
+    },
+    "1": {
+      "correct": true,
+      "predicted": 0.3947,
+      "gold": 0.39470670568774646,
+      "depth": 2
+    },
+    "2": {
+      "correct": true,
+      "predicted": 0.68,
+      "gold": 0.68,
+      "depth": 2
+    },
+    "3": {
+      "correct": true,
+      "predicted": 0.6756,
+      "gold": 0.675557056043214,
+      "depth": 2
+    },
+    "4": {
+      "correct": true,
+      "predicted": 0.0765,
+      "gold": 0.07650000000000001,
+      "depth": 2
+    }
+  }
+}

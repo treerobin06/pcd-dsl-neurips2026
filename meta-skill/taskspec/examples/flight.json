@@ -5,10 +5,7 @@
     "type": "discrete_hypothesis_space",
     "hypothesis": "linear_preference_weights",
     "features": ["departure_time", "duration", "number_of_stops", "price"],
-    "values_per_feature": [-1.0, -0.5, 0.0, 0.5, 1.0],
-    "n_arms": 0,
-    "prior_alpha": 1.0,
-    "prior_beta": 1.0
+    "values_per_feature": [-1.0, -0.5, 0.0, 0.5, 1.0]
   },
   "observation_model": {
     "type": "softmax_choice",
