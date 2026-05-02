@@ -50,6 +50,7 @@
 - [2026-04-28 01:20] push | pgmpy 攻势 framing (Tree 二次质疑): Related Work L652 加一句"pgmpy/ProbLog are BN-only specialized libraries; our 7 ops span preference/bandit/HMM via same formal core"。从"完全删 pgmpy"改为"主动提 pgmpy 当 scope contrast" — 答案在 paper 里 reviewer 不会问
 - [2026-04-28 02:10] push | C2 honest narrative: Section 5.x Held-Out Families 改写区分 codegen vs algebra-level compose。删 "core ops match codegen 100%, macros are syntactic sugar" 错误暗示；加 NBSolver/HMMSolver reference solvers 数学正确性 evidence (max_err < 1e-9 vs 手算 gold)；加 "where free-code breaks" 段引 bnlearn mini 0% (free + scaffolded codegen) 对比，motivate spec-emission discipline。Table caption 同步
 - [2026-04-28 02:30] push | mini-centric framing (Tree "我们用 4o-mini 也能解决族外的泛化问题"): Abstract 改写突出 "mini direct fails (44%/32%) but mini + framework reaches 100% across 5 families including 2 held-out (NB/HMM, no macro)"；Section 5.x Held-Out Families 重构三段 (Headline cheap-LLM cross-family generalization / Algebra-level compositional sufficiency / PCD signature)。诚实承认：simple math 上 codegen 也 100% 但 mini direct 仍崩 → 我们 framework 是 cheap-LLM enabler
+- [2026-05-03 02:05] push | NeurIPS framing consistency sweep: 主文统一成 LLM-assembled TaskSpec / compiled solver / reusable templates，弱化容易被误解成手写 solver 或 macro selector 的表述；mixed 口径从 all-family 改成 six input streams；同步记录 Figure 1 二次文字优化 TODO。
 
 ## 论文概况
 

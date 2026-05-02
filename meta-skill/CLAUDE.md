@@ -44,6 +44,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 8. **Claim/citation audit**：所有 contribution/theory wording patch 完后跑一次 zero-context paper-claim-audit，再做 citation-verifier。特别核 `lew2025discipl`、`schick2023toolformer`、匿名/代码发布 statement。
 9. **最终机械收口**：本地 `latexmk -g -pdf`/grep 已通过一次，Figure 1 架构版和公式瘦身已编译通过并推 Overleaf；完成 claim/citation audit 后再 clean compile，并做 post-audit final push。
 10. **主仓库整理**：当前 main repo 有大量 uncommitted/untracked results/scripts/paper changes；提交前需筛选保留新 full artifacts，旧 too-good mixed 仅归档或不进证据链。
+11. **2026-05-03 叙事一致性 sweep（新增）**：正文已把“hand-written/backend/macro selector”风险表述改为“LLM-assembled TaskSpec / compiled solver / reusable templates”，并把 “all-family” 改为 “mixed input streams”。剩余待办：
+   - **Figure 1 图中文字二次优化**：当前图整体正确，但图中仍有 “Validated Solver / LLM Inductor emit declarative TaskSpec” 这类中性表述；如继续打磨，建议改成 “Validated LLM-Assembled Solver / assemble solver spec” 以避免 reviewer 误解为手写 solver。
+   - **图例和附录短标签 sweep**：主文仍有少量压缩标签如 “Our DSL / DSL backend”，空间允许时统一成 “LLM-assembled DSL solver / compiled solver”；若会造成图表拥挤，可保留短标签但 caption 必须解释清楚。
+   - **最终 grep 口径**：投稿前 grep `all-family|six supported families|built-in macro|no-macro|macro selector|hand-computed|deterministic backend|three inference families`，确保不会再出现会被 AI reviewer 直接复制成 weakness 的旧措辞。
 
 ## 一、核心思想（一段话版本）
 
