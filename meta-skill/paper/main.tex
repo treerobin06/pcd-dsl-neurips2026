@@ -76,12 +76,12 @@ They are much less reliable as probabilistic calculators.
 We introduce Parse--Compute--Decide (PCD), a gold-injection diagnostic that separates structure extraction, probabilistic computation, and final action selection.
 Across six LLMs and several Bayesian reasoning tasks, models usually parse the inputs and act correctly given a posterior, but Compute accuracy ranges from 22\% to 78\% on preference learning and falls to 3--11\% on depth-10 Bayesian networks.
 This motivates a different division of labor.
-Instead of asking the LLM to solve every instance, we ask it to assemble a reusable typed solver specification for a task family.
+Instead of asking the LLM to solve every instance, we ask it to write and assemble a reusable typed solver specification for a task family.
 The LLM chooses and parameterizes a composition of typed probabilistic atoms; a compiler materializes that assembly as an executable solver, caches it after validation, and reuses it on later instances.
 These LLM-assembled solvers match reference solvers on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks.
 On standard bnlearn networks, the compiled solver matches 400/400 finite queries while per-instance PAL collapses on larger networks.
 On natural-language inputs, GPT-4o-mini improves from 44\% / 32\% direct accuracy to \textbf{91.7\% / 98.0\%} on adversarial Naive Bayes and HMM tasks, two untemplated families.
-The contribution is a reusable probabilistic compiler interface for LLMs: language models assemble solver specifications from probabilistic building blocks, and a validated assembly becomes a reusable solver.
+The contribution is a reusable probabilistic compiler interface for LLMs: language models write solver specifications from probabilistic building blocks, and a validated assembly becomes a reusable solver.
 \end{abstract}
 
 % ============================================================
@@ -96,9 +96,10 @@ This is the failure mode we study: the model often understands the problem but c
 The usual fixes do not quite address this abstraction gap.
 Chain-of-thought leaves the model doing the math.
 Program-aided prompting asks the model to write new code for each instance.
+Bayesian Teaching, introduced on the Flight/Hotel preference tasks~\citep{qiu2026bayesian}, takes a training-side route: fine-tune a model to follow Bayesian demonstrations.
 Family-specific tools such as ProbLog for Bayesian networks~\citep{nafar2025blind,deraedt2007problog} solve one benchmark family at a time.
 A per-instance parser-to-library pipeline is safer than free-form code, but it still treats each input as a fresh extraction problem.
-Our question is different: can an LLM induce a reusable solver by composing verified probabilistic atoms, pass a deploy check once, and then reuse the compiled solver across future instances?
+Our question is different: can an off-the-shelf LLM, with no weight updates, write a reusable solver by composing verified probabilistic atoms, pass a deploy check once, and then reuse the compiled solver across future instances?
 
 We first show why this is the right split.
 Parse--Compute--Decide (PCD) isolates three stages by injecting gold intermediate results: Parse tests structure extraction; Compute$\mid$GoldParse tests numerical inference given perfect structure; Decide$\mid$GoldPosterior tests the final action given the correct posterior.
@@ -106,7 +107,7 @@ Across six models, Parse is usually high and Decide is essentially solved, but C
 The problem is not simply that the model cannot read the task; it is that probabilistic inference is the wrong thing to leave inside the language model.
 
 We therefore build the LLM-facing interface as a compiler target rather than a prompt.
-The LLM emits a declarative \taskspec{} for a task family, effectively assembling a solver from typed probabilistic building blocks.
+The LLM writes a declarative \taskspec{} for a task family, effectively assembling a solver from typed probabilistic building blocks.
 A deterministic compiler lowers that specification to a small typed probabilistic DSL, validates the resulting solver against held-out labels when available, and stores it for reuse (Figure~\ref{fig:overview}).
 Later instances from the same family can be parsed and solved without asking the LLM to perform inference.
 
@@ -646,6 +647,11 @@ The approach is strongest when distributions are given or derivable; tasks that 
 \section{Related Work}
 \label{sec:related}
 % ============================================================
+
+\paragraph{Bayesian teaching and preference learning.}
+Qiu et al.'s Bayesian Teaching study~\citep{qiu2026bayesian} showed that targeted training can make a language model more Bayesian on Flight/Hotel-style preference tasks.
+We use that task family as a starting point but change the intervention: the model weights stay fixed, the LLM writes the reusable \taskspec{}, and the validated solver is reused on later instances.
+The same interface then covers TextBandit-style updates, Bayesian networks, Naive Bayes, and HMM filtering.
 
 \paragraph{Program-aided and tool-using LLMs.}
 PAL~\citep{gao2023pal}, Program of Thoughts~\citep{chen2023pot}, Toolformer~\citep{schick2023toolformer}, and ReAct~\citep{yao2023react} all put external computation behind an LLM interface.

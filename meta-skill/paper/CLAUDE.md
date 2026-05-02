@@ -54,6 +54,7 @@
 - [2026-05-03 02:15] push | Reviewer-facing claim polish: Abstract/Intro/Method 强化 “LLM assembles typed-atom solver specifications, compiler supplies atom semantics, deploy-checked solver is reused”；NB/HMM 改为 untemplated families；PCD appendix 明确 Preference Compute 是 self-computed EU implied recommendation，避免 Compute/Decide 接口混淆。Overleaf commit `c2d4d69`。
 - [2026-05-03 02:18] push | Contribution-forward polish: Abstract/Intro 不再前置 “fixed compiler supplies semantics”，改为 “LLM chooses and parameterizes typed probabilistic atoms; compiler materializes/caches/reuses the assembly”；Method 仍保留 DSL semantics 边界但更自然地写成 runtime 定义。Overleaf commit `ddf5f45`。
 - [2026-05-03 02:21] push | AI-reviewer weakness hardening: `Limitations and Future Work` 改为 `Scope and Future Work`，将 finite-discrete / router / PCD stage-boundary 等边界改写为 scope 与 extension path，删除 “narrower / declared scope / finer split possible” 这类容易被自动审稿器复述成 weakness 的措辞。Overleaf commit `90f54ea`。
+- [2026-05-03 02:25] push | No-finetuning contribution polish: Abstract/Intro/Related Work 进一步写清 “LLM writes and assembles reusable solver specifications”；新增 Bayesian Teaching 对比，说明 Qiu et al. 在 Flight/Hotel 上走 targeted fine-tuning 路线，而本文固定模型权重，用 off-the-shelf LLM 写可复用 TaskSpec，validated solver 后续复用并扩展到 TextBandit、BN、NB、HMM。Overleaf commit `e47c3eb`。
 
 ## 论文概况
 
