@@ -152,6 +152,21 @@ Appendix~\ref{app:families} summarizes the families and datasets.
 We decompose probabilistic reasoning into three stages with well-defined interfaces.
 For each task, a gold oracle supplies the structured representation, the exact posterior or expected utilities, and the resulting optimal action.
 PCD then runs three interventions: \textbf{Parse} asks the model to recover the structured inputs; \textbf{Compute$\mid$GoldParse} gives it the gold structure and scores the numerical posterior; \textbf{Decide$\mid$GoldPosterior} gives it the gold posterior and scores the final decision.
+For an instance $x$, write the gold pipeline as
+\begin{equation}
+s^*=\mathcal{P}^*(x),\qquad z^*=\mathcal{C}^*(s^*),\qquad a^*=\mathcal{D}^*(z^*),
+\label{eq:pcd_gold}
+\end{equation}
+where $s^*$ is the structured problem representation, $z^*$ is the posterior or expected utility vector, and $a^*$ is the final answer.
+PCD scores an LLM by replacing one stage at a time with its gold input:
+\begin{equation}
+\begin{aligned}
+\mathrm{Parse} &= \mathbf{1}\{\mathcal{P}_\psi(x)=s^*\},\\
+\mathrm{Compute}\mid\mathrm{GoldParse} &= \mathbf{1}\{d(\mathcal{C}_\psi(s^*),z^*)\le \epsilon\},\\
+\mathrm{Decide}\mid\mathrm{GoldPosterior} &= \mathbf{1}\{\mathcal{D}_\psi(z^*)=a^*\}.
+\end{aligned}
+\label{eq:pcd_scores}
+\end{equation}
 Parse is scored by exact field match, Compute by numerical tolerance, and Decide by agreement with the gold action.
 A signature of $\text{ParseAcc} \approx 1,\; \text{DecAcc} \approx 1,\; \text{CompAcc} \ll 1$ indicates a compute bottleneck.
 We observe this pattern across every model and task.
@@ -272,6 +287,12 @@ Appendices~\ref{app:dsl}--\ref{app:taskspec} give the operator definitions and s
 The inductor is called once per family, not once per instance.
 It recognizes the family, decides whether to use a macro or a core-op route, and emits a complete \taskspec{}.
 The compiler is deterministic: the same specification always yields the same solver.
+Formally, for family examples $\mathcal{E}_F$ and later instance $x$, the intended division of labor is
+\begin{equation}
+\tau_F = I_\psi(\mathcal{E}_F),\qquad S_F=\mathrm{Compile}(\tau_F),\qquad \hat{y}=S_F(R_\psi(x)),
+\label{eq:compile_once}
+\end{equation}
+where the LLM inductor $I_\psi$ is used once to produce a family specification $\tau_F$, $R_\psi$ only routes or parses later natural-language instances, and the compiled solver $S_F$ performs the probabilistic computation.
 When validation labels are available, a two-gate deploy check requires the solver to execute and to match held-out references within the task tolerance.
 Failures return diagnostics to the inductor for up to three refinement rounds.
 
