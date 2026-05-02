@@ -76,10 +76,11 @@ They are much less reliable as probabilistic calculators.
 We introduce Parse--Compute--Decide (PCD), a gold-injection diagnostic that separates structure extraction, probabilistic computation, and final action selection.
 Across six LLMs and several Bayesian reasoning tasks, models usually parse the inputs and act correctly given a posterior, but Compute accuracy ranges from 22\% to 78\% on preference learning and falls to 3--11\% on depth-10 Bayesian networks.
 This motivates a different division of labor.
-Instead of asking the LLM to solve every instance, we ask it to assemble a typed \taskspec{} for a task family once; a deterministic compiler then lowers that LLM-induced specification into reusable probabilistic operations.
-Conditional on valid LLM-induced specifications, the compiled solvers match reference solvers on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks.
+Instead of asking the LLM to solve every instance, we ask it to assemble a typed \taskspec{} for a task family once.
+The fixed compiler supplies the semantics of typed probabilistic atoms; the LLM chooses and parameterizes their composition, and the resulting solver is cached for reuse.
+These LLM-assembled solvers match reference solvers on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks.
 On standard bnlearn networks, the compiled solver matches 400/400 finite queries while per-instance PAL collapses on larger networks.
-On natural-language inputs, GPT-4o-mini improves from 44\% / 32\% direct accuracy to \textbf{91.7\% / 98.0\%} on adversarial Naive Bayes and HMM tasks, two held-out families with no reusable template.
+On natural-language inputs, GPT-4o-mini improves from 44\% / 32\% direct accuracy to \textbf{91.7\% / 98.0\%} on adversarial Naive Bayes and HMM tasks, two untemplated families.
 The contribution is a reusable probabilistic compiler interface for LLMs: use language models to assemble verified solver specifications, and reuse the compiled solver once it passes validation.
 \end{abstract}
 
@@ -96,7 +97,8 @@ The usual fixes do not quite address this abstraction gap.
 Chain-of-thought leaves the model doing the math.
 Program-aided prompting asks the model to write new code for each instance.
 Family-specific tools such as ProbLog for Bayesian networks~\citep{nafar2025blind,deraedt2007problog} solve one benchmark family at a time.
-Our question is different: can an LLM assemble a reusable solver specification once, verify it, and then reuse the compiled solver across future instances?
+A per-instance parser-to-library pipeline is safer than free-form code, but it still treats each input as a fresh extraction problem.
+Our question is different: can an LLM assemble a reusable solver specification from verified probabilistic atoms, pass a deploy check, and then reuse the compiled solver across future instances?
 
 We first show why this is the right split.
 Parse--Compute--Decide (PCD) isolates three stages by injecting gold intermediate results: Parse tests structure extraction; Compute$\mid$GoldParse tests numerical inference given perfect structure; Decide$\mid$GoldPosterior tests the final action given the correct posterior.
@@ -109,14 +111,14 @@ A deterministic compiler lowers that specification to a small typed probabilisti
 Later instances from the same family can be parsed and solved without asking the LLM to perform inference.
 
 This design gives a clean separation between backend correctness, language-interface robustness, and routing composition.
-Given valid LLM-assembled specifications, the compiled solvers match references on Flight/BLInD and finite-query bnlearn checks, including standard multi-valued bnlearn networks where per-instance generated code is unreliable.
-When the LLM must process natural language, the pipeline remains effective: it matches the preference-learning gold-feature oracle on Flight and reaches 91.7\% / 98.0\% on adversarial Naive Bayes / HMM inputs, two held-out families with no reusable template.
+Given LLM-assembled specifications that pass the deploy check, the compiled solvers match references on Flight/BLInD and finite-query bnlearn checks, including standard multi-valued bnlearn networks where per-instance generated code is unreliable.
+When the LLM must process natural language, the pipeline remains effective: it matches the preference-learning gold-feature oracle on Flight and reaches 91.7\% / 98.0\% on adversarial Naive Bayes / HMM inputs, two untemplated families.
 
 \textbf{Contributions.}
 \begin{itemize}
     \item \textbf{Diagnostic}: PCD shows that LLM probabilistic reasoning fails primarily in computation, not in parsing or final decision-making.
     \item \textbf{System}: a typed \taskspec{} interface, deterministic compiler, deploy check, and registry turn LLM-assembled family specifications into reusable exact solvers.
-    \item \textbf{Evidence}: the system spans preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering, with exact backend checks and natural-language E2E gains on held-out no-template families.
+    \item \textbf{Evidence}: the system spans preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering, with exact backend checks and natural-language E2E gains on untemplated families.
 \end{itemize}
 
 \begin{figure*}[t]
@@ -152,7 +154,7 @@ Appendix~\ref{app:families} summarizes the families and datasets.
 
 We decompose probabilistic reasoning into three stages with well-defined interfaces.
 For each task, a gold oracle supplies the structured representation, the exact posterior or expected utilities, and the resulting optimal action.
-PCD then runs three interventions: \textbf{Parse} asks the model to recover the structured inputs; \textbf{Compute$\mid$GoldParse} gives it the gold structure and scores the numerical posterior; \textbf{Decide$\mid$GoldPosterior} gives it the gold posterior and scores the final decision.
+PCD then runs three interventions: \textbf{Parse} asks the model to recover the structured inputs; \textbf{Compute$\mid$GoldParse} gives it the gold structure and scores the result of carrying out the probabilistic computation; \textbf{Decide$\mid$GoldPosterior} gives it the gold posterior or utilities and scores the final action.
 For an instance $x$, write the gold pipeline as
 \begin{equation}
 s^*=\mathcal{P}^*(x),\qquad z^*=\mathcal{C}^*(s^*),\qquad a^*=\mathcal{D}^*(z^*),
@@ -168,7 +170,9 @@ PCD scores an LLM by replacing one stage at a time with its gold input:
 \end{aligned}
 \label{eq:pcd_scores}
 \end{equation}
-Parse is scored by exact field match, Compute by numerical tolerance, and Decide by agreement with the gold action.
+Parse is scored by exact field match.
+For probability queries, Compute is scored by numerical tolerance; for preference learning, it is scored by whether the model's self-computed posterior expected utilities lead to the gold recommendation.
+Decide is scored after injecting the gold posterior or expected utilities directly.
 A signature of $\text{ParseAcc} \approx 1,\; \text{DecAcc} \approx 1,\; \text{CompAcc} \ll 1$ indicates a compute bottleneck.
 We observe this pattern across every model and task.
 
@@ -277,6 +281,13 @@ The inductor fills this object from a few examples.
 For Flight preference learning, for instance, it specifies a hypothesis-enumeration problem over a feature-weight space; the compiler then constructs the posterior update and expected-utility decision rule.
 For Bayesian networks, it specifies variables, CPT factors, query, and evidence; the compiler invokes variable elimination.
 
+\paragraph{What is assembled by the LLM?}
+The implementation fixes the semantics of typed atoms, just as a probabilistic programming language fixes the semantics of factor product or marginalization.
+The task-specific solver is not written as free-form Python for each instance.
+Instead, the LLM assembles a \taskspec{} that selects an inference route, binds the state and observation structure, chooses the decision rule, and supplies family parameters when they are part of the family description.
+Compilation turns that specification into an executable solver object; after validation, later instances reuse the same compiled route and only bind instance-level observations, evidence, or query fields.
+Thus ``compile once'' means once per validated solver specification, not once per natural-language sentence.
+
 The backend exposes seven typed operations:
 \texttt{condition}, \texttt{multiply}, \texttt{marginalize}, \texttt{normalize}, \texttt{enumerate\_hypotheses}, \texttt{expectation}, and \texttt{argmax}.
 Three reusable templates compose these operations for common inference patterns: \texttt{softmax\_pref}, \texttt{beta\_bernoulli}, and \texttt{ve\_query}.
@@ -285,15 +296,15 @@ Appendices~\ref{app:dsl}--\ref{app:taskspec} give the operator definitions and s
 
 \subsection{Induction, verification, and reuse}
 
-The inductor is called once per family, not once per instance.
-It recognizes the family, decides whether to use a macro or a core-op route, and emits a complete \taskspec{}.
+The inductor is called once per solver specification, not once per instance.
+It recognizes the family, decides whether to instantiate a reusable template or a core-op route, and emits a complete \taskspec{}.
 The compiler is deterministic: the same specification always yields the same solver.
 Formally, for family examples $\mathcal{E}_F$ and later instance $x$, the intended division of labor is
 \begin{equation}
 \tau_F = I_\psi(\mathcal{E}_F),\qquad S_F=\mathrm{Compile}(\tau_F),\qquad \hat{y}=S_F(R_\psi(x)),
 \label{eq:compile_once}
 \end{equation}
-where the LLM inductor $I_\psi$ is used once to produce a family specification $\tau_F$, $R_\psi$ only routes or parses later natural-language instances, and the compiled solver $S_F$ performs the probabilistic computation.
+where the LLM inductor $I_\psi$ is used once to produce a solver specification $\tau_F$, $R_\psi$ only routes or parses later natural-language instances, and the compiled solver $S_F$ performs the probabilistic computation.
 When validation labels are available, a two-gate deploy check requires the solver to execute and to match held-out references within the task tolerance.
 Failures return diagnostics to the inductor for up to three refinement rounds.
 
@@ -304,7 +315,7 @@ The mixed E2E router is evaluated under a declared scope: the tested supported r
 \begin{table}[t]
 \centering
 \small
-\caption{Inductor routes. Three inference patterns instantiate reusable templates; Naive Bayes and HMM are held-out no-template tests represented by LLM-assembled core-operation routes.}
+\caption{Inductor routes. Three inference patterns instantiate reusable templates; Naive Bayes and HMM are untemplated tests represented by LLM-assembled core-operation routes.}
 \label{tab:routes}
 \begin{tabular}{@{}llll@{}}
 \toprule
@@ -331,7 +342,7 @@ Second, does the typed interface extend beyond the macros it was designed with?
 Third, does the full natural-language pipeline compose when routing, parsing, compilation, and solving are all active?
 We keep three kinds of evidence separate.
 PCD is diagnostic: it identifies computation as the failure mode.
-Backend checks are conditional: they test compiled-solver correctness after a valid LLM-assembled specification.
+Backend checks isolate compiled-solver correctness once an LLM-assembled specification has passed the deploy interface.
 Natural-language E2E results are stricter: they include family recognition, parsing or induction, compilation, and solving.
 Baselines are direct answering, per-instance PAL code generation~\citep{gao2023pal}, and compile-time code generation from a few examples.
 
@@ -450,14 +461,15 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 \subsection{Does the interface extend beyond reusable templates?}
 \label{sec:held_out}
 
-To test whether the DSL generalizes beyond its design families, we freeze it and evaluate on two unseen inference families: Naive Bayes medical diagnosis (3--6 diseases, 4--8 symptoms, $n{=}200$) and HMM forward filtering (3--5 hidden states, 4--8 observation steps, $n{=}100$).
+To test whether the interface can assemble solvers beyond its reusable templates, we freeze the template library and evaluate on two untemplated inference families: Naive Bayes medical diagnosis (3--6 diseases, 4--8 symptoms, $n{=}200$) and HMM forward filtering (3--5 hidden states, 4--8 observation steps, $n{=}100$).
 Neither family has a corresponding reusable template, so the LLM must represent them through explicit \taskspec{} fields and core-op-backed solver routes.
+The schema provides typed slots for these families; it does not provide a family macro or executable solver recipe.
 HMM is the stronger test: it requires \emph{sequential temporal reasoning} via iterated multiply--marginalize--normalize over a time axis, a pattern absent from all three template-backed routes.
 
 \begin{table}[t]
 \centering
 \small
-\caption{Held-out no-template families (GPT-4o-mini). Direct answering is weak, but NL $\rightarrow$ \taskspec{} $\rightarrow$ compile $\rightarrow$ solve reaches 91.7\% / 98.0\%. Structured-spec rows are conditional backend checks.}
+\caption{Untemplated families (GPT-4o-mini). Direct answering is weak, but NL $\rightarrow$ \taskspec{} $\rightarrow$ compile $\rightarrow$ solve reaches 91.7\% / 98.0\%. Structured-spec rows are backend reference checks.}
 \label{tab:held_out}
 \begin{tabular}{@{}lcc@{}}
 \toprule
@@ -476,7 +488,7 @@ Direct LLM compute$\mid$gold parse & 37.0\% {\scriptsize [30,44]} & 27.0\% {\scr
 \end{tabular}
 \end{table}
 
-These held-out results test whether the interface is more than a template selector.
+These results test whether the interface is more than a template selector.
 Naive Bayes and HMM have no family template, and HMM requires a repeated forward update that is absent from the three template-backed routes.
 The same GPT-4o-mini model that answers only 44\% / 32\% of the tasks directly reaches 91.7\% / 98.0\% when it emits a \taskspec{} and lets the compiled solver compute.
 Given a valid \taskspec{}, the core-op solvers match independent reference posteriors with maximum absolute error below $10^{-9}$.
@@ -603,10 +615,10 @@ HMM forward & 100 & 98.0\% {\scriptsize [93.0, 99.4]} \\
 \end{axis}
 \end{tikzpicture}
 \tabularnewline[-4pt]
-{\centering\scriptsize (a) Held-out no-template families.\par} &
+{\centering\scriptsize (a) Untemplated families.\par} &
 {\centering\scriptsize (b) Single-stream and mixed full-pipeline runs.\par}
 \end{tabular}
-\caption{Natural-language end-to-end composition with GPT-4o-mini. \textbf{(a)} Direct answering vs.\ the compile-once path on two held-out no-template families. \textbf{(b)} Full-pipeline accuracy across supported input streams; the mixed supported aggregate is 556/620 (89.7\%).}
+\caption{Natural-language end-to-end composition with GPT-4o-mini. \textbf{(a)} Direct answering vs.\ the compile-once path on two untemplated families. \textbf{(b)} Full-pipeline accuracy across supported input streams; the mixed supported aggregate is 556/620 (89.7\%).}
 \label{fig:e2e_composition}
 \end{figure*}
 
@@ -641,6 +653,7 @@ PAL~\citep{gao2023pal}, Program of Thoughts~\citep{chen2023pot}, Toolformer~\cit
 Their unit of work is usually a single query: the model generates code or calls a tool for each instance.
 This is effective for deterministic arithmetic, but it is brittle for probabilistic algorithms: on BLInD, PAL code execution drops from 100\% at depth~2 to 57\% at depth~10 (Appendix~\ref{app:pal_depth}).
 Our inductor instead emits a typed family specification once; after verification, the compiled solver runs without LLM calls.
+This also differs from schema-constrained per-instance parsing into an existing library: \method{} makes the LLM assemble and validate the reusable solver route, then amortizes that route across later inputs.
 
 \paragraph{Formal solvers for reasoning.}
 SatLM~\citep{ye2023satlm}, Logic-LM~\citep{pan2023logiclm}, LINC~\citep{olausson2023linc}, Logic.py~\citep{kesseli2025logicpy}, and constraint-programming translators~\citep{michailidis2024cp} map natural language to formal solvers for logical or combinatorial problems.
@@ -668,14 +681,14 @@ The mixed E2E benchmark evaluates routing and solving under a declared scope of 
 PCD is an interventional diagnostic: Compute$\mid$GoldParse intentionally measures whether a model can select and execute the required probabilistic calculation once structure is fixed.
 A finer split between algorithm choice and low-level arithmetic is possible, but the observed pattern is already stable across models, tasks, and BN depths.
 Decide$\mid$GoldPosterior isolates the posterior-to-action step used by these tasks; its high score shows that final action selection is not the bottleneck.
-Family-level induction is a stronger capability than instance-level parsing, and our experiments validate it empirically through deploy checks, held-out no-template families, and mixed E2E composition.
+Family-level induction is a stronger capability than instance-level parsing, and our experiments validate it through deploy checks, untemplated families, and mixed E2E composition.
 
 \paragraph{Extensibility and Verification.}
 The operator basis is deliberately small: seven typed operations plus three reusable templates.
 This makes the trust boundary inspectable and lets new families either reuse core operations, as NB/HMM do, or add typed primitives behind the same validation loop.
-Compiler equivalence is empirical, checked against published or programmatic reference solvers; the deploy gates require execution and held-out-reference agreement before a solver is stored in the registry.
+Verification is operational: deploy gates execute the compiled solver and require agreement with published or programmatic reference solvers before the solver is stored in the registry.
 Induction uses a stochastic LLM only at compile time; once a specification passes validation, later inference is deterministic.
-All prompts, specifications, and compiled solvers will be released.
+The supplementary artifact includes prompts, specifications, and compiled solvers.
 
 % ============================================================
 \section{Conclusion}
@@ -854,7 +867,8 @@ The extracted structure is compared field-by-field against the gold parse; a sam
 The LLM receives the \emph{gold} structured inputs (not its own parse) and is asked to perform the probabilistic computation.
 For BN inference: compute $P(\text{query} \mid \text{evidence})$ via variable elimination.
 For preference learning: compute posterior-weighted expected utilities for each option.
-The output is compared against the gold computation result with a tolerance of $\epsilon = 0.01$.
+BN outputs are compared against the gold probability with tolerance $\epsilon = 0.01$.
+Preference outputs are scored by whether the model's self-computed utilities imply the gold recommendation.
 
 \paragraph{Decide$\mid$GoldPosterior.}
 The LLM receives the \emph{gold} computed posterior (or expected utilities) and is asked to make a decision.
@@ -865,7 +879,7 @@ The output is compared against the gold decision.
 All prompts use zero temperature where supported, \texttt{max\_\allowbreak tokens}=1024--8192 depending on task complexity, via the OpenRouter API gateway.
 Model identifiers: \texttt{openai/\allowbreak gpt-4o-mini}, \texttt{openai/\allowbreak gpt-4o}, \texttt{openai/\allowbreak gpt-5.4}, \texttt{anthropic/\allowbreak claude-sonnet-4}, \texttt{anthropic/\allowbreak claude-opus-4-6}, \texttt{google/\allowbreak gemini-3.1-pro}.
 All API calls made between March 8--15, 2026.
-Exact prompt templates will be released with the code.
+Exact prompt templates are included in the supplementary artifact.
 
 \section{DSL Specification}
 \label{app:dsl}
@@ -1013,11 +1027,11 @@ Alarm (37) & 0\% & 0\% & 0\% & 100/100 \\
 This appendix summarizes the prompt templates used in the PCD diagnostic protocol (\S\ref{sec:pcd}) and the inductor (\S\ref{sec:method}).
 Placeholders in braces (\texttt{\{...\}}) are filled programmatically at runtime.
 Table~\ref{tab:prompt_summary} gives an overview; we show two representative prompts below.
-All prompt templates will be released with the supplementary code.
+All prompt templates are included in the supplementary artifact.
 
 \begin{table}[ht]
 \centering
-\small
+\scriptsize
 \caption{Prompt template summary. Each PCD stage uses a separate LLM call with structured output.}
 \label{tab:prompt_summary}
 \begin{tabular}{@{}llll@{}}
@@ -1027,12 +1041,12 @@ Stage & Task & Input & Expected Output \\
 \multicolumn{4}{l}{\textit{PCD --- Bayesian Network Inference}} \\
 Parse & Extract structure & Network description + query & JSON: variables, edges, CPTs, query \\
 Compute & Exact inference & Gold-parsed network & Decimal probability \\
-Decide & Act on result & Gold expected utilities & Integer (option index) \\
+Decide & Act on injected posterior & Gold posterior & Integer/label \\
 \midrule
 \multicolumn{4}{l}{\textit{PCD --- Preference Learning}} \\
 Parse & Extract structure & Choice history + options & JSON: features, observations, options \\
-Compute & Posterior inference & Gold-parsed structure & JSON: recommendation index \\
-Decide & Act on result & Gold expected utilities & Integer (option index) \\
+Compute & Posterior+EU inference & Gold-parsed structure & JSON: implied recommendation \\
+Decide & Act on injected utilities & Gold utilities & Integer index \\
 \midrule
 \multicolumn{4}{l}{\textit{Inductor}} \\
 Induce & Infer TaskSpec & Task examples ($k{\geq}1$) + schema & JSON: complete TaskSpec \\
@@ -1054,7 +1068,7 @@ On the LAST line, output ONLY the final probability as a decimal number (e.g., 0
 \end{minipage}}
 
 \paragraph{Representative prompt: Preference Compute$\mid$GoldParse.}
-This prompt tests posterior inference over a hypothesis space.
+This prompt tests whether posterior inference over a hypothesis space leads to the correct recommendation.
 
 \smallskip
 \noindent\fcolorbox{gray!40}{gray!5}{\begin{minipage}{0.95\linewidth}\small\ttfamily
@@ -1068,9 +1082,9 @@ Output a JSON object: \{"recommendation": <int>\}
 \end{minipage}}
 
 \paragraph{Inductor prompt.}
-The inductor receives task examples (as few as one; we default to $k{=}3$--5 for stability) together with the full \taskspec{} schema definition (Appendix~\ref{app:taskspec}), including the five inference families and their required fields.
-It is instructed to analyze sample structure, determine the inference family, identify relevant variables and likelihood model, and emit a complete \taskspec{} JSON.
-The full prompt ($\sim$2\,k tokens, dominated by the schema definition) is included in the supplementary code release.
+The inductor receives task examples (as few as one; we default to $k{=}3$--5 for stability) together with the full \taskspec{} schema definition (Appendix~\ref{app:taskspec}), including allowable typed routes and their fields.
+It is instructed to analyze sample structure, select the inference route, identify relevant variables and likelihood model, and emit a complete \taskspec{} JSON.
+The full prompt ($\sim$2\,k tokens, dominated by the schema definition) is included in the supplementary artifact.
 
 
 \section{Inductor Reliability and LOO Generalization}

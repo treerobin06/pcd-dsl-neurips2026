@@ -18,7 +18,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### 已完成
 
 - **官方 NeurIPS 2026 模板更新完成**：`paper/neurips_2026.sty` 已替换为官方版，新增 `paper/neurips_2026.tex` 和 `paper/checklist.tex`，`main.tex` 已 `\input{checklist.tex}`，`sync_overleaf.sh` 已同步这些文件。
-- **Overleaf 已推送**：`paper/sync_overleaf.sh push` 成功，Overleaf 端最新 commit 为 `8a2f917 Sync from local 2026-05-02 23:26`（包含 reusable-registry Figure 1、conservative mixed table、NB/HMM 原始 hard-split 计数、verifier/theory/LOO 降调，以及 Method 中 theorem-like 公式瘦身；模板更新最早推送 commit 为 `d28bf6b`）。
+- **Overleaf 已推送**：`paper/sync_overleaf.sh push` 成功，Overleaf 端最新 commit 为 `c2d4d69 Sync from local 2026-05-03 02:15`（包含 reusable-registry Figure 1、conservative mixed table、NB/HMM 原始 hard-split 计数、verifier/theory/LOO 降调、Method 中 theorem-like 公式瘦身，以及 2026-05-03 reviewer-facing LLM-assembled solver framing / PCD Compute 口径修正；模板更新最早推送 commit 为 `d28bf6b`）。
 - **Schema roundtrip bug 已修复**：`taskspec/schema.py` 的 `to_dict()` 已按 `inference_family` 过滤字段，避免 BN-only 字段污染 preference/bandit。验证：`.venv/bin/python3 -m unittest tests.test_compiler -v` 当前 13/13 OK。
 - **NB/HMM adversarial NL E2E 已在论文主表保留**：GPT-4o-mini，NB 91.7% [85.3, 95.4]，HMM 98.0% [93.0, 99.4]。这是 full natural-language pipeline，不是单纯 backend check。
 - **Hotel E2E 已跑全量**：`n=124`，Parse 100.0%，E2E 77.4% [70.2, 85.5]，gold solver match 96.0%，cost $0.0556。Raw: `baselines/results/e2e_hotel_openai_gpt-4o-mini_20260502_213825.json`。
@@ -47,7 +47,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 11. **2026-05-03 叙事一致性 sweep（新增）**：正文已把“hand-written/backend/macro selector”风险表述改为“LLM-assembled TaskSpec / compiled solver / reusable templates”，并把 “all-family” 改为 “mixed input streams”。剩余待办：
    - **Figure 1 图中文字二次优化**：当前图整体正确，但图中仍有 “Validated Solver / LLM Inductor emit declarative TaskSpec” 这类中性表述；如继续打磨，建议改成 “Validated LLM-Assembled Solver / assemble solver spec” 以避免 reviewer 误解为手写 solver。
    - **图例和附录短标签 sweep**：主文仍有少量压缩标签如 “Our DSL / DSL backend”，空间允许时统一成 “LLM-assembled DSL solver / compiled solver”；若会造成图表拥挤，可保留短标签但 caption 必须解释清楚。
-   - **最终 grep 口径**：投稿前 grep `all-family|six supported families|built-in macro|no-macro|macro selector|hand-computed|deterministic backend|three inference families`，确保不会再出现会被 AI reviewer 直接复制成 weakness 的旧措辞。
+   - **真实性边界**：可以强 claim “LLM 组装 solver specification / route / typed-atom composition，deploy check 后复用”，但不要写成“raw Python solver source 全由 LLM 生成”。可信边界是：人定义 typed atoms/compiler 语义，LLM 选择并参数化组合，compiled solver 通过验证后缓存复用。
+   - **PCD Compute 口径**：Preference Compute 的 prompt 输出 recommendation，不是完整 posterior 数值；论文必须表述为“self-computed posterior/EU implied recommendation”，BN/HMM/NB 概率型任务才是数值 posterior tolerance。
+   - **最终 grep 口径**：投稿前 grep `all-family|six supported families|built-in macro|no-macro|macro selector|hand-computed|deterministic backend|three inference families|recommendation index|Gold expected utilities`，确保不会再出现会被 AI reviewer 直接复制成 weakness 的旧措辞。
 
 ## 一、核心思想（一段话版本）
 
