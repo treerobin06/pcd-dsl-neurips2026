@@ -307,27 +307,10 @@ The experiments answer three questions.
 First, is the bottleneck really computation, or can stronger per-instance tools remove it?
 Second, does the typed interface extend beyond the macros it was designed with?
 Third, does the full natural-language pipeline compose when routing, parsing, compilation, and solving are all active?
-Table~\ref{tab:evidence_map} gives the map from claim to evidence.
-
-\begin{table}[t]
-\centering
-\small
-\caption{Evidence summary. The table separates diagnostic evidence, conditional backend checks, and end-to-end natural-language results.}
-\label{tab:evidence_map}
-\begin{tabular}{@{}p{0.25\linewidth}p{0.40\linewidth}p{0.25\linewidth}@{}}
-\toprule
-Question & Evidence & Takeaway \\
-\midrule
-Where do LLMs fail? & PCD on preference learning and BLInD: Compute 22--78\%; depth-10 BN Compute 3--11\%. & The main bottleneck is probabilistic computation. \\
-Can a typed backend compute exactly? & Compiled solvers match references on Flight/BLInD ($n{=}1{,}150$); the VE backend matches bnlearn references ($n{=}400$). & Exactness holds once the specification is valid. \\
-Does the interface extend beyond macros? & Adversarial NB/HMM E2E: 91.7\% / 98.0\%, versus direct 44\% / 32\%. & Core ops cover two held-out families. \\
-Does the full pipeline compose? & Flight 74.3\%, Hotel 77.4\%, TextBandit-style 96.0\%; all-family aggregate 90.4\%. & Routing, parsing, compilation, and solving work together. \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-We keep conditional backend checks separate from natural-language E2E rows.
-The former test deterministic solver correctness after a valid specification; the latter include family recognition and parsing errors.
+We keep three kinds of evidence separate.
+PCD is diagnostic: it identifies computation as the failure mode.
+Backend checks are conditional: they test deterministic solver correctness after a valid specification.
+Natural-language E2E results are stricter: they include family recognition, parsing or induction, compilation, and solving.
 Baselines are direct answering, per-instance PAL code generation~\citep{gao2023pal}, and compile-time code generation from a few examples.
 
 \subsection{Can per-instance code generation replace a compiler?}
