@@ -82,6 +82,7 @@ The specification selects probabilistic atoms and an inference route; a determin
 Thus the LLM supplies probabilistic structure at compile time, while the validated solver performs exact inference at run time.
 We evaluate VSI across preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering.
 VSI-assembled solvers match references on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks; on larger multi-valued bnlearn networks, the compiled solver remains exact while per-instance PAL frequently fails.
+On a compute-hard QUITE split, the registered VSI path reaches 96.0\% while direct answering reaches 36.0\%--60.0\% and per-instance PAL reaches 24.0\%--88.0\%, at substantially higher cost.
 On natural-language inputs, GPT-4o-mini improves from 44\% / 32\% direct accuracy to \textbf{90.8\% / 97.6\%} on adversarial Naive Bayes and HMM tasks across five independently generated task sets.
 Together, PCD localizes the bottleneck and VSI provides a reusable compiler abstraction for reliable LLM probabilistic interfaces without fine-tuning.
 \end{abstract}
@@ -116,13 +117,14 @@ Later instances from the same family can be parsed and solved without asking the
 
 This design gives a clean separation between backend correctness, language-interface robustness, and routing composition.
 Given LLM-assembled specifications that pass the deploy check, the compiled solvers match references on Flight/BLInD and finite-query bnlearn checks, including standard multi-valued bnlearn networks where per-instance generated code is unreliable.
+On QUITE, a separate external Bayesian-inference corpus, the registered path reaches 96.0\% on a 75-query compute-hard split, compared with 60.0\% for direct GPT-5.4 and 88.0\% for PAL with GPT-5.4.
 When the LLM must process natural language, the pipeline remains effective: it matches the preference-learning gold-feature oracle on Flight and reaches 90.8\% / 97.6\% on adversarial Naive Bayes / HMM inputs across five task-set seeds, two untemplated families.
 
 \textbf{Contributions.}
 \begin{itemize}
     \item \textbf{Diagnostic}: PCD shows that LLM probabilistic reasoning fails primarily in computation, not in parsing or final decision-making.
     \item \textbf{System}: a typed \taskspec{} interface, deterministic compiler, deploy check, and registry turn LLM-assembled family specifications into reusable exact solvers.
-    \item \textbf{Evidence}: the system spans preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering, with exact backend checks and natural-language E2E gains on untemplated families.
+    \item \textbf{Evidence}: the system spans preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering, with exact backend checks, natural-language E2E gains on untemplated families, and an external QUITE compute-hard comparison.
 \end{itemize}
 
 \begin{figure*}[t]
@@ -146,7 +148,7 @@ We therefore report backend checks separately from natural-language end-to-end r
 Backend checks ask whether the compiled solver is exact once the LLM-assembled specification is valid.
 End-to-end results include the LLM-facing steps: family recognition, parsing or \taskspec{} induction, compilation, and solving.
 
-Our evaluation covers Flight/Hotel preference learning ($n{=}748$), TextBandit-style histories ($n{=}100$), BLInD Bayesian networks ($n{=}900$), standard bnlearn networks (400 finite backend queries and 120 PAL stress-test queries), held-out Naive Bayes and HMM tasks, and a mixed E2E benchmark over six input streams.
+Our evaluation covers Flight/Hotel preference learning ($n{=}748$), TextBandit-style histories ($n{=}100$), BLInD Bayesian networks ($n{=}900$), standard bnlearn networks (400 finite backend queries and 120 PAL stress-test queries), QUITE external Bayesian-inference queries, held-out Naive Bayes and HMM tasks, and a mixed E2E benchmark over six input streams.
 Appendix~\ref{app:families} summarizes the families and datasets.
 
 % ============================================================
@@ -461,6 +463,31 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 \label{fig:scaling_cost}
 \end{figure*}
 
+\paragraph{External compute-hard check on QUITE.}
+The bnlearn experiments use structured network definitions.
+To test the same parse-simple / compute-hard pattern on a separate natural-language Bayesian-inference corpus, we build a registered-network QUITE split~\citep{schrader2024quite}.
+The network is loaded once from QUITE's structured Problog artifact, and the LLM only maps short natural-language evidence/query text to variable and state names; exact posterior inference is then run by the compiled backend.
+Table~\ref{tab:quite_hard_compute} uses the same 75 numeric queries for all methods.
+VSI with GPT-4o-mini reaches 96.0\%, while direct GPT-5.4 reaches 60.0\% and PAL with GPT-5.4 reaches 88.0\% at roughly $300\times$ the API cost and $24\times$ the wall-clock time.
+
+\begin{table}[t]
+\centering
+\small
+\caption{External QUITE hard-compute comparison on the same 75-query registered-network split. Accuracy counts predictions within 0.05 absolute posterior error. Costs are OpenRouter runner metadata.}
+\label{tab:quite_hard_compute}
+\begin{tabular}{@{}llcccc@{}}
+\toprule
+Method & Model & Accuracy & MAE & Time & Cost \\
+\midrule
+\textbf{VSI registered solver} & GPT-4o-mini & \textbf{72/75 (96.0\%)} & 0.0059 & 16.9s & \$0.0083 \\
+Direct answer & GPT-4o-mini & 27/75 (36.0\%) & 0.2478 & 12.8s & \$0.0477 \\
+Direct answer & GPT-5.4 & 45/75 (60.0\%) & 0.0876 & 33.4s & \$0.2353 \\
+PAL code generation & GPT-4o-mini & 18/75 (24.0\%) & 0.2816 & 319.3s & \$0.1151 \\
+PAL code generation & GPT-5.4 & 66/75 (88.0\%) & 0.0054 & 402.9s & \$2.4897 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Does the interface extend beyond reusable templates?}
 \label{sec:held_out}
 
@@ -502,135 +529,38 @@ The remaining NB errors come from specification extraction on adversarial wordin
 \subsection{Does the natural-language pipeline compose?}
 \label{sec:e2e}
 
-The preceding experiments test each stage in isolation.
-To confirm they compose into working systems, we run the full pipeline end-to-end on three single-family natural-language inputs.
-For Flight and Hotel, GPT-4o-mini reads natural-language option descriptions, extracts numeric features, and feeds them into the compiled PreferenceSolver.
-For TextBandit-style histories, GPT-4o-mini extracts a \taskspec{} and the full sequence of binary observations; the compiled BanditSolver performs the Beta-Bernoulli updates and recommends the posterior-mean best arm.
-Table~\ref{tab:single_family_e2e} summarizes the results.
+The preceding experiments isolate the compiler and held-out core-op routes.
+We next ask whether the natural-language interface composes end to end.
+For Flight and Hotel, GPT-4o-mini reads natural-language option descriptions, extracts numeric features, and dispatches to the compiled PreferenceSolver.
+For TextBandit-style histories, it extracts a \taskspec{} and the sequence of binary observations; the compiled BanditSolver performs the Beta-Bernoulli updates.
+For NB/HMM, the full adversarial NL pipeline emits the untemplated \taskspec{} and uses the core-op solver routes from Table~\ref{tab:held_out}.
 
 \begin{table}[t]
 \centering
 \small
-\caption{Single-family natural-language E2E. Accuracy is the final decision after parsing or spec extraction plus deterministic solving.}
-\label{tab:single_family_e2e}
-\begin{tabular}{@{}lcccp{0.30\linewidth}@{}}
+\caption{Natural-language E2E coverage with GPT-4o-mini. Accuracy is the final decision after routing, parsing or \taskspec{} extraction, and deterministic solving. Mixed rows test a shuffled stream over six supported families plus unsupported rejection.}
+\label{tab:e2e_coverage}
+\begin{tabular}{@{}lclp{0.36\linewidth}@{}}
 \toprule
-Family & $n$ & Parse/spec & E2E acc. & Main diagnostic \\
+Stream & $n$ & VSI E2E & What to notice \\
 \midrule
-Flight preference & 624 & 99.8\% & 74.3\% {\scriptsize [70.9, 77.8]} & Matches gold-feature oracle (74.4\%); solver agreement 99.8\%. \\
-Hotel preference & 124 & 100.0\% & 77.4\% {\scriptsize [70.2, 85.5]} & Gold-feature oracle 75.0\%; solver agreement 96.0\%; amenities extraction is the main residual parse noise. \\
-TextBandit-style & 100 & 96.0\% & 96.0\% {\scriptsize [90.2, 98.4]} & All 4 failures are observation-count errors; successful parses have exact observation sequences. \\
+Flight preference & 624 & 74.3\% {\scriptsize [70.9, 77.8]} & Matches the gold-feature oracle (74.4\%); solver agreement 99.8\%. \\
+Hotel preference & 124 & 77.4\% {\scriptsize [70.2, 85.5]} & Gold-feature oracle 75.0\%; residual noise is feature extraction, not solver arithmetic. \\
+TextBandit-style & 100 & 96.0\% {\scriptsize [90.2, 98.4]} & All failures are observation-count extraction errors. \\
+Naive Bayes adversarial & 600 & 90.8\% {\scriptsize [88.3, 92.9]} & Untemplated core-op route; direct answer is 44.0\% on the base split. \\
+HMM forward adversarial & 500 & 97.6\% {\scriptsize [95.9, 98.6]} & Iterated core-op route; direct answer is 32.0\% on the base split. \\
+\midrule
+Mixed supported stream & 620 & 89.7\% {\scriptsize [87.0, 91.8]} & Six supported families, shuffled without family labels. \\
+Mixed + unsupported rejection & 670 & 90.4\% {\scriptsize [88.0, 92.4]} & Adds 50 unsupported inputs that the scope gate must reject. \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-On Flight, the pipeline achieves 74.3\% accuracy, matching the gold-feature oracle at 74.4\%; feature extraction is near-perfect and the pipeline agrees with the gold solver on 99.8\% of instances.
-On Hotel, E2E accuracy is 77.4\% while the gold-feature solver reaches 75.0\%; the pipeline agrees with the gold solver on 96.0\% of instances, and the residual disagreements trace mainly to amenities-count extraction.
-On TextBandit-style histories, the pipeline reaches 96.0\%; all failures are specification-extraction failures where the LLM omitted one history line, while the deterministic bandit update is exact whenever the observation sequence is extracted correctly.
-Compared to the best prompt-based strategy on Flight (tool-calling at 58.3\%), the compile-once pipeline gains 16 percentage points by replacing LLM computation with a compiled solver.
-
-\subsection{Mixed End-to-End}
-\label{sec:all_family_mixed}
-
-Single-family E2E isolates each parser or specification inducer.
-We also test whether the components compose when the front end is not told the family label.
-We shuffle six supported input streams---Flight, Hotel, TextBandit-style, BLInD, Naive Bayes, and HMM---and add unsupported inputs that exercise the scope gate.
-Each supported input must be routed to the correct branch, parsed or converted to a \taskspec{}, compiled when appropriate, and solved by the validated compiled solver.
-The router preserves accuracy in this run, so the benchmark tests whether routing, parsing, compilation, and deterministic solving compose under one natural-language interface.
-For NB/HMM, the table uses the representative 120/100 adversarial split used for the mixed aggregation; Table~\ref{tab:held_out} reports the five-seed stability check.
-
-\begin{table}[t]
-\centering
-\small
-\caption{Mixed E2E aggregate with GPT-4o-mini. NB/HMM use the adversarial-NL counts from Table~\ref{tab:held_out}; overall accuracy also includes 50 unsupported inputs that must be rejected.}
-\label{tab:all_family_mixed}
-\begin{tabular}{@{}lcc@{}}
-\toprule
-Input stream & $n$ & Final E2E acc. \\
-\midrule
-Flight preference & 100 & 70.0\% {\scriptsize [60.4, 78.1]} \\
-Hotel preference & 100 & 82.0\% {\scriptsize [73.3, 88.3]} \\
-TextBandit-style & 100 & 96.0\% {\scriptsize [90.2, 98.4]} \\
-BLInD BN & 100 & 100.0\% {\scriptsize [96.3, 100.0]} \\
-Naive Bayes & 120 & 91.7\% {\scriptsize [85.3, 95.4]} \\
-HMM forward & 100 & 98.0\% {\scriptsize [93.0, 99.4]} \\
-\midrule
-\textbf{Supported only} & 620 & \textbf{89.7\%} {\scriptsize [87.0, 91.8]} \\
-\textbf{Overall} & 670 & \textbf{90.4\%} {\scriptsize [88.0, 92.4]} \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure*}[t]
-\centering
-\begin{tabular}{@{}p{0.40\textwidth}@{\hspace{0.02\textwidth}}p{0.54\textwidth}@{}}
-\begin{tikzpicture}
-\begin{axis}[
-    width=0.92\linewidth,
-    height=4.15cm,
-    ybar,
-    bar width=12pt,
-    ymin=0, ymax=112,
-    ylabel={Accuracy (\%)},
-    symbolic x coords={NB,HMM},
-    xtick=data,
-    xticklabels={Naive Bayes,HMM},
-    x tick label style={font=\scriptsize},
-    ytick={0,20,40,60,80,100},
-    tick label style={font=\scriptsize},
-    label style={font=\scriptsize},
-    legend style={at={(0.5,1.04)}, anchor=south, legend columns=2, font=\scriptsize, draw=none},
-    grid=major,
-    grid style={gray!15},
-    nodes near coords={\pgfmathprintnumber[fixed,precision=1]{\pgfplotspointmeta}\%},
-    point meta=y,
-    every node near coord/.append style={font=\tiny, anchor=south},
-]
-\addplot[fill=gray!35, draw=gray!70] coordinates {(NB,44.0) (HMM,32.0)};
-\addlegendentry{Direct answer}
-\addplot[fill=teal!70!black, draw=teal!70!black] coordinates {(NB,90.8) (HMM,97.6)};
-\addlegendentry{Ours E2E}
-\end{axis}
-\end{tikzpicture}
-&
-\begin{tikzpicture}
-\begin{axis}[
-    width=0.88\linewidth,
-    height=4.15cm,
-    xbar,
-    xmin=0, xmax=112,
-    xlabel={Final E2E accuracy (\%)},
-    symbolic y coords={Flight,Hotel,TextBandit,NB,HMM,Mixed},
-    ytick=data,
-    yticklabels={Flight,Hotel,TextBandit,Naive Bayes,HMM,Mixed supported},
-    y dir=reverse,
-    x tick label style={font=\scriptsize},
-    y tick label style={font=\scriptsize},
-    tick label style={font=\scriptsize},
-    label style={font=\scriptsize},
-    bar width=8pt,
-    grid=major,
-    grid style={gray!15},
-    nodes near coords={\pgfmathprintnumber[fixed,precision=1]{\pgfplotspointmeta}\%},
-    point meta=x,
-    every node near coord/.append style={font=\tiny, anchor=west},
-]
-\addplot[fill=blue!55!black, draw=blue!55!black] coordinates
-    {(74.3,Flight) (77.4,Hotel) (96.0,TextBandit) (90.8,NB) (97.6,HMM) (89.7,Mixed)};
-\end{axis}
-\end{tikzpicture}
-\tabularnewline[-4pt]
-{\centering\scriptsize (a) Untemplated families.\par} &
-{\centering\scriptsize (b) Single-stream and mixed full-pipeline runs.\par}
-\end{tabular}
-\caption{Natural-language end-to-end composition with GPT-4o-mini. \textbf{(a)} Direct answering vs.\ the compile-once path on two untemplated families, using five adversarial task-set seeds for our path. \textbf{(b)} Full-pipeline accuracy across supported input streams; the mixed supported aggregate is 556/620 (89.7\%).}
-\label{fig:e2e_composition}
-\end{figure*}
-
-Table~\ref{tab:all_family_mixed} and Figure~\ref{fig:e2e_composition} show that orchestration adds modest overhead: supported-stream E2E is 556/620 and overall accuracy including rejections is 606/670.
-Flight and Hotel inherit the preference-learning oracle ceiling: in 45 of 48 preference-family errors, the pipeline matches the gold-feature solver but the solver disagrees with the recorded user choice.
-The remaining failures come from TextBandit observation-count omissions and NB/HMM natural-language parse errors.
-Thus the mixed benchmark confirms that the router, parsers, \taskspec{} induction, compiler, and solver can run as a single system, while preserving the realistic noise profile already visible in the single-family E2E experiments.
+The table keeps two facts separate.
+First, single-family E2E is already limited by parser noise or dataset labels: on Flight, the pipeline matches the gold-feature oracle; on Hotel, it slightly exceeds the noisy recorded-choice oracle; on TextBandit-style inputs, every failure is an omitted history line.
+Second, the mixed benchmark shows that the route--parse--compile--solve composition works as one system rather than as isolated scripts.
+Supported-stream E2E is 556/620, and overall accuracy including unsupported rejection is 606/670.
+In the preference-family errors, 45 of 48 pipeline outputs match the gold-feature solver but disagree with the recorded user choice; the remaining errors come from TextBandit observation-count omissions and NB/HMM natural-language specification errors.
 
 % ============================================================
 \section{Analysis}
@@ -644,7 +574,7 @@ In short, the more math the LLM must do, the worse it performs.
 Pure CoT is ineffective, confirming that self-reflection alone does not improve probabilistic computation.
 
 Stronger models raise Compute accuracy, from 22\% to 78\% across six models, but none eliminate errors. Opus still fails on 22\% of preference instances, and GPT-5.4 reaches only 11\% at BN depth 10.
-PAL with GPT-5.4 bridges part of the gap (98.1\% on BN inference) but falls short of 100\% at $310\times$ our cost.
+PAL with GPT-5.4 bridges part of the gap (98.1\% on BLInD and 88.0\% on the QUITE hard-compute split) but still trails the compiled path while paying per query.
 No model--tool combination tested guarantees correctness.
 The approach is strongest when distributions are given or derivable; tasks that require estimating distributions from sparse context, as in DeLLMa~\citep{liu2025dellma}, call for complementary modeling components.
 
@@ -669,7 +599,7 @@ This also differs from schema-constrained per-instance parsing into an existing 
 SatLM~\citep{ye2023satlm}, Logic-LM~\citep{pan2023logiclm}, LINC~\citep{olausson2023linc}, Logic.py~\citep{kesseli2025logicpy}, and constraint-programming translators~\citep{michailidis2024cp} map natural language to formal solvers for logical or combinatorial problems.
 We take the same trust-boundary lesson---make the LLM fill a constrained representation, then let a solver execute it---but the target operations are probabilistic: factor products, marginalization, normalization, posterior expectations, and decisions.
 Closest on the probabilistic side are BLInD~\citep{nafar2025blind}, ProbLog~\citep{deraedt2007problog}, pgmpy~\citep{ankan2015pgmpy}, QUITE~\citep{schrader2024quite}, and LLM-BI~\citep{huang2025llmbi}.
-These systems either target a single probabilistic family, evaluate reasoning behavior, or automate model specification; \method{} focuses on reusable exact inference across several discrete families and uses PCD to locate the failure stage.
+These systems either provide benchmark corpora, target a single probabilistic formalism, or automate probabilistic-program specification; \method{} focuses on reusable exact inference across several discrete families and uses PCD to locate the failure stage.
 
 \paragraph{Library learning and program induction.}
 DreamCoder~\citep{ellis2021dreamcoder}, LILO~\citep{grand2024lilo}, FunSearch~\citep{romeraparedes2024funsearch}, PIPS~\citep{stein2025pips}, and agentic-skill systems~\citep{zhang2026evoskills} learn or search reusable computational structure.
@@ -684,7 +614,8 @@ DisCIPL~\citep{lew2025discipl} and LLM-guided POMDP induction~\citep{curtis2025p
 \paragraph{Scope.}
 \method{} targets exact inference over finite discrete distributions, a broad and auditable setting that covers Bayesian networks, preference learning, bandits, Naive Bayes, and HMM forward filtering.
 The same interface can incorporate additional typed atoms for continuous variables, approximate inference, or distribution learning from sparse unstructured context.
-The evidence spans five inference families across eight datasets, including five adversarial task-set seeds for held-out NB ($n{=}600$) and HMM ($n{=}500$) families with no reusable-template support; broader full-system benchmark coverage, including QUITE~\citep{schrader2024quite}, can be added within the same interface.
+The evidence spans five inference families across eight datasets, plus an external QUITE compute-hard split that reuses the same registered-solver interface.
+It includes five adversarial task-set seeds for held-out NB ($n{=}600$) and HMM ($n{=}500$) families with no reusable-template support.
 The mixed E2E benchmark stress-tests route-and-solve composition over supported input streams plus unsupported examples; enlarging that stream is a data and validation-suite question rather than a change to the compiler interface.
 
 \paragraph{Diagnostics and Induction.}
@@ -710,7 +641,7 @@ PCD makes this failure mode visible: models often recover structure and act corr
 \method{} uses that diagnosis to change the role of the LLM.
 The model induces a typed family specification; the compiled solver performs inference and can be reused across instances.
 
-The evidence supports this division of labor across five inference families.
+The evidence supports this division of labor across five inference families and an external QUITE compute-hard benchmark.
 Backend exactness, natural-language robustness, and mixed routing composition are measured separately, making the claim precise rather than anecdotal.
 Within finite discrete inference, the result is a practical compiler abstraction for LLM probabilistic reasoning: language models identify reusable structure; verified solvers do the math.
 
@@ -749,34 +680,35 @@ HMM Forward & $\alpha_t(s) \propto p(o_t \mid s) \sum_{s'} \alpha_{t\text{-}1}(s
 \label{app:e2e_artifacts}
 
 Table~\ref{tab:e2e_artifacts} maps the main reported results to the released artifact bundle.
-The release includes the corresponding JSON outputs, scripts, and run metadata.
+The release includes JSON outputs, scripts, query plans, token metadata, and cost/time metadata when recorded by the runner.
 
 \begin{table}[ht]
 \centering
-\small
-\caption{Reproducibility summary for reported E2E and backend results. Each row is backed by a JSON result file and the runner used to produce it.}
+\scriptsize
+\caption{Reproducibility summary for reported E2E, backend, and external QUITE results. Legacy runs predate the unified artifact schema; new QUITE runs include prompt/completion tokens, cost, time, model id, and query plan.}
 \label{tab:e2e_artifacts}
-\begin{tabular}{@{}p{0.34\linewidth}p{0.28\linewidth}p{0.28\linewidth}@{}}
+\begin{tabular}{@{}p{0.26\linewidth}p{0.25\linewidth}p{0.20\linewidth}p{0.18\linewidth}@{}}
 \toprule
-Result group & Main result & Reproduction entry \\
+Result group & Main result & Script / source & Artifact entry \\
 \midrule
-Flight E2E & 74.3\% ($n{=}624$) & E2E runner output \\
-NB/HMM adversarial E2E & 90.8\% / 97.6\% over 5 seeds & Multi-seed adversarial E2E summary \\
-Structured JSON direct baseline & 23.3\% / 40.0\% on NB/HMM & Structured-direct output \\
-Hotel E2E & 77.4\% ($n{=}124$) & E2E runner output \\
-TextBandit-style E2E & 96.0\% ($n{=}100$) & Bandit E2E output \\
-Mixed E2E aggregate & 90.4\% overall ($n{=}670$) & Mixed-run output + aggregation \\
-bnlearn backend check & 400/400 finite queries & Backend-check output \\
-bnlearn registered-network E2E & 98.8\% strict ($n{=}80$) & Registered-E2E output \\
-QUITE direct baseline & 27.7\% within 0.05 error & External direct-baseline output \\
+Flight/Hotel E2E & 74.3\% / 77.4\% & E2E runners & legacy JSON outputs \\
+TextBandit-style E2E & 96.0\% ($n{=}100$) & Bandit E2E runner & JSON output \\
+NB/HMM adversarial E2E & 90.8\% / 97.6\% over 5 seeds & Multi-seed adversarial runners & summary JSON \\
+Structured JSON direct baseline & 23.3\% / 40.0\% on NB/HMM & structured-direct runner & JSON output \\
+Mixed E2E aggregate & 90.4\% overall ($n{=}670$) & mixed runner + aggregation & JSON + aggregation \\
+bnlearn backend / registered E2E & 400/400 finite; 79/80 strict & bnlearn backend and registered runners & JSON outputs \\
+QUITE hard-compute expanded & 96.0\% VSI vs.\ 36.0--60.0\% direct and 24.0--88.0\% PAL & QUITE registered/direct/PAL runners & summary file + raw JSON \\
+QUITE all-network smoke & 63/90 (70.0\%) over 30 networks & QUITE registered runner & same summary + raw JSON \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\paragraph{External direct-answer sanity check.}
-To test whether the compute bottleneck is specific to our synthetic held-out tasks, we also ran GPT-4o-mini as a direct probability estimator on the QUITE Bayesian-inference corpus~\citep{schrader2024quite}.
-The model parsed all 1,154 numeric and verbal-probability queries into valid JSON, but only 320/1,154 predictions fell within 0.05 absolute probability error (27.7\%; mean absolute error 0.365).
-We use this result only as external motivation: it confirms that natural-language probability calculation remains fragile, but it is not a full compile-once system evaluation on QUITE.
+\paragraph{External QUITE checks.}
+The main QUITE result uses the registered-network hard-compute split in Table~\ref{tab:quite_hard_compute}.
+As a broader non-hand-picked smoke test, we also run the registered path on the first three valid finite queries from each of 30 QUITE networks.
+This all-network smoke reaches 63/90 (70.0\%), with most failures coming from schema mismatches or parser ambiguity in networks not yet normalized by the registry.
+We treat this as a coverage stress test rather than as a headline accuracy claim.
+For additional context, a direct GPT-4o-mini probability-estimation pass over the full QUITE numeric/verbal-probability corpus scored 320/1,154 (27.7\%) within 0.05 absolute posterior error.
 
 \section{DSL Equivalence}
 \label{app:equivalence}
