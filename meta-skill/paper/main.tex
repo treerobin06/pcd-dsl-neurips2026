@@ -109,7 +109,7 @@ Program-aided prompting asks the model to write new code for each instance.
 Bayesian Teaching, introduced on the Flight/Hotel preference tasks~\citep{qiu2026bayesian}, takes a training-side route: fine-tune a model to follow Bayesian demonstrations.
 Family-specific tools such as ProbLog for Bayesian networks~\citep{nafar2025blind,deraedt2007problog} solve one benchmark family at a time.
 A per-instance parser-to-library pipeline is safer than free-form code, but it still treats each input as a fresh extraction problem.
-Our question is different: can an off-the-shelf LLM, with no weight updates, write a reusable solver by composing verified probabilistic atoms, pass a deploy check once, and then reuse the compiled solver across future instances?
+Our question is different: can an off-the-shelf LLM, with no weight updates, write a reusable solver by composing typed probabilistic atoms, pass a deploy check once, and then reuse the compiled solver across future instances?
 
 We first show why this is the right split.
 Parse--Compute--Decide (PCD) isolates three stages by injecting gold intermediate results: Parse tests structure extraction; Compute$\mid$GoldParse tests numerical inference given perfect structure; Decide$\mid$GoldPosterior tests the final action given the correct posterior.
@@ -280,7 +280,7 @@ On BN inference, the same pattern holds and amplifies with depth: Compute drops 
 \vspace{-2pt}
 {\centering\scriptsize (b) Compute$\mid$GoldParse vs.\ BN depth (BLInD, $n{=}900$).\par}
 \end{minipage}
-\caption{PCD localizes the bottleneck. \textbf{(a)} On preference learning, Parse and Decide are high for all six LLMs, while Compute remains substantially lower even for stronger models. \textbf{(b)} On BLInD Bayesian networks, Compute collapses with depth, while the compiled DSL solver remains exact. Error bars in (b) show 95\% Wilson CIs; exact PCD numbers are in Appendix~\ref{app:pcd_multimodel}.}
+\caption{PCD localizes the bottleneck. \textbf{(a)} On preference learning, Parse and Decide are high for all six LLMs, while Compute remains substantially lower even for stronger models. \textbf{(b)} On BLInD Bayesian networks, Compute collapses with depth, while the VSI compiled solver remains exact. Error bars in (b) show 95\% Wilson CIs; exact PCD numbers are in Appendix~\ref{app:pcd_multimodel}.}
 \label{fig:pcd_bottleneck}
 \end{figure*}
 
@@ -341,7 +341,7 @@ The mixed E2E router composes the registered supported routes with an unsupporte
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/figure3_vsi_4k_h096.png}
-\caption{VSI method zoom-in. Figure~\ref{fig:overview} shows the full routed system; this panel focuses on how a solver route is induced, checked, and reused. A few family examples are used once to have the LLM assemble a typed \taskspec{} and choose a route graph over the typed primitive interface. The seven primitive tiles form an unordered palette, not a fixed execution order; the route above them is one compiled composition selected for a task family. The deterministic compiler lowers that assembly, validation gates check execution and reference matches when available, and successful registry misses become cached routes for later same-family instances.}
+\caption{VSI method zoom-in. Figure~\ref{fig:overview} shows the full routed system; this panel focuses on how a solver route is induced, checked, and reused. A few family examples are used once to have the LLM assemble a typed \taskspec{} and choose a route graph over the typed primitive interface. The seven primitive tiles form an unordered palette, not a fixed execution order; the route above them is one compiled composition selected for a task family. The deterministic compiler lowers that assembly, validation gates check execution and reference matches when available, and successful routes discovered after a registry miss are cached for later same-family instances.}
 \label{fig:vsi_zoom}
 \end{figure}
 
@@ -373,7 +373,7 @@ We evaluate four standard bnlearn networks~\citep{scutari2010bnlearn}: Asia (8 n
 
 On Asia, PAL with GPT-5.4 still reaches 90\%, but \textbf{on networks with $\geq$20 nodes it drops to 0\% on Child, 3\% on Insurance, and 0\% on Alarm}; GPT-4o-mini is low overall (17.5\%) and also reaches 0\% on Alarm (Figure~\ref{fig:scaling_cost}).
 Only 27--29\% of generated programs execute successfully overall: the variable-elimination code often crashes on multi-valued CPTs, deep elimination chains, and complex factor products.
-In contrast, the compiled DSL solver matches pgmpy variable-elimination references on \textbf{400/400} finite bnlearn queries (100 per network; Wilson 95\% CI [99.0, 100.0]).
+In contrast, the VSI compiled solver matches pgmpy variable-elimination references on \textbf{400/400} finite bnlearn queries (100 per network; Wilson 95\% CI [99.0, 100.0]).
 We therefore use bnlearn as a structured external backend check, a registered-network parse-and-solve test, and a stress test for per-instance code generation.
 A registered-network E2E check, where GPT-4o-mini extracts the network key, evidence, and query variable before dispatching to the compiled solver, reaches 79/80 strict single-label accuracy (98.8\%, Wilson 95\% CI [93.3, 99.8]); the sole mismatch is an exact MAP tie under the pgmpy reference posterior.
 The gap between per-instance generation and compiled solvers widens sharply as networks become larger and multi-valued.
@@ -538,14 +538,14 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 \tabularnewline[-2pt]
 {\hfill\scriptsize (c) QUITE accuracy on the same 75-query split.\hfill\mbox{}} & {\hfill\scriptsize (d) QUITE time--cost tradeoff; labels show accuracy.\hfill\mbox{}}\tabularnewline
 \end{tabular}
-\caption{Scaling, external validation, and cost. \textbf{(a)} On standard bnlearn networks with $\geq$20 nodes, per-instance PAL is unreliable (GPT-4o-mini 17.5\%, GPT-5.4 23.3\% overall; both reach 0\% on Alarm), while the compiled solver matches pgmpy references on 400/400 finite queries. \textbf{(b)} Cost--accuracy Pareto on BLInD: the VSI compiled solver matches all references at \$0.008 (one induction call), matching GPT-5.4 compile-time code at $14\times$ lower cost and PAL at $310\times$ lower cost. \textbf{(c,d)} On QUITE, the registered path keeps the solver exact and cheap while direct answering and per-instance PAL trade off accuracy, time, and API cost.}
+\caption{Scaling, external validation, and cost. \textbf{(a)} On standard bnlearn networks with $\geq$20 nodes, per-instance PAL is unreliable (GPT-4o-mini 17.5\%, GPT-5.4 23.3\% overall; both reach 0\% on Alarm), while the VSI compiled solver matches pgmpy references on 400/400 finite queries. \textbf{(b)} Cost--accuracy Pareto on BLInD: the VSI compiled solver matches all references at \$0.008 (one induction call), matching GPT-5.4 compile-time code at $14\times$ lower cost and PAL at $310\times$ lower cost. \textbf{(c,d)} On QUITE, the registered path keeps exact inference outside the LLM while direct answering and per-instance PAL trade off accuracy, time, and API cost.}
 \label{fig:scaling_cost}
 \end{figure*}
 
 \paragraph{External check on QUITE.}
 The bnlearn experiments use structured network definitions.
 To test the same registered-solver pattern on a separate natural-language Bayesian-inference corpus, we build a QUITE split~\citep{schrader2024quite}.
-The network is loaded once from QUITE's structured Problog artifact, and the LLM only maps short natural-language evidence/query text to variable and state names; exact posterior inference is then run by the compiled backend.
+The network is loaded once from QUITE's structured Problog artifact, and the LLM only maps short natural-language evidence/query text to variable and state names; exact posterior inference is then run by the VSI compiled solver.
 Figure~\ref{fig:scaling_cost}c,d use the same 75 numeric queries for all methods.
 VSI with GPT-4o-mini reaches 96.0\%, while direct GPT-5.4 reaches 60.0\% and PAL with GPT-5.4 reaches 88.0\% at roughly $300\times$ the API cost and $24\times$ the wall-clock time.
 
@@ -608,8 +608,8 @@ Stream & $n$ & VSI E2E & What to notice \\
 Flight preference & 624 & 74.3\% {\scriptsize [70.9, 77.8]} & Matches the gold-feature oracle (74.4\%); solver agreement 99.8\%. \\
 Hotel preference & 124 & 77.4\% {\scriptsize [70.2, 85.5]} & Gold-feature oracle 75.0\%; residual noise is feature extraction, not solver arithmetic. \\
 TextBandit-style & 100 & 96.0\% {\scriptsize [90.2, 98.4]} & All failures are observation-count extraction errors. \\
-Naive Bayes adversarial & 600 & 90.8\% {\scriptsize [88.3, 92.9]} & Untemplated core-op route; direct answer is 44.0\% on the base split. \\
-HMM forward adversarial & 500 & 97.6\% {\scriptsize [95.9, 98.6]} & Iterated core-op route; direct answer is 32.0\% on the base split. \\
+Naive Bayes adversarial & 600 & 90.8\% {\scriptsize [88.3, 92.9]} & Held-out core-op route; direct answer is 44.0\% on the base split. \\
+HMM forward adversarial & 500 & 97.6\% {\scriptsize [95.9, 98.6]} & Held-out iterated core-op route; direct answer is 32.0\% on the base split. \\
 \midrule
 Mixed supported stream & 620 & 89.7\% {\scriptsize [87.0, 91.8]} & Six supported families, shuffled without family labels. \\
 Mixed + unsupported rejection & 670 & 90.4\% {\scriptsize [88.0, 92.4]} & Adds 50 unsupported inputs that the scope gate must reject. \\
@@ -704,7 +704,7 @@ The model induces a typed family specification; the compiled solver performs inf
 
 The evidence supports this division of labor across five inference families and an external QUITE benchmark.
 Backend exactness, natural-language robustness, and mixed routing composition are measured separately, making the claim precise rather than anecdotal.
-Within finite discrete inference, the result is a practical compiler abstraction for LLM probabilistic reasoning: language models identify reusable structure; verified solvers do the math.
+Within finite discrete inference, the result is a practical compiler abstraction for LLM probabilistic reasoning: language models identify reusable structure; validated solvers do the math.
 
 {\small
 \bibliographystyle{plainnat}
@@ -741,27 +741,27 @@ HMM Forward & $\alpha_t(s) \propto p(o_t \mid s) \sum_{s'} \alpha_{t\text{-}1}(s
 \label{app:e2e_artifacts}
 
 Table~\ref{tab:e2e_artifacts} maps the main reported results to the artifact bundle.
-The table records provenance at the experiment-family level; the supplementary package maps each row to exact JSON records, prompts, generated specifications, and runner metadata.
+The table is an evidence index: it records the reported number, scope, and available cost/time metadata for each result group, while the supplementary package maps each row to exact JSON records, prompts, generated specifications, and runner metadata.
 Exact QUITE cost and time values are reported in Table~\ref{tab:quite_external_detail}; BLInD cost accounting is reported in Appendix~\ref{app:cost}.
 
 \begin{table}[ht]
 \centering
 \scriptsize
 \setlength{\tabcolsep}{2.5pt}
-\caption{Artifact provenance for reported E2E, backend, and external QUITE results. Detailed filenames, prompts, generated \taskspec{}s, and raw runner metadata are provided in the supplementary artifact.}
+\caption{Evidence index for reported E2E, backend, and external QUITE results. Exact filenames, prompts, generated \taskspec{}s, and runner metadata are provided in the supplementary artifact; cost/time entries appear only when used in claims.}
 \label{tab:e2e_artifacts}
-\begin{tabular}{@{}p{0.22\linewidth}p{0.08\linewidth}p{0.25\linewidth}p{0.22\linewidth}p{0.15\linewidth}@{}}
+\begin{tabular}{@{}p{0.20\linewidth}p{0.08\linewidth}p{0.27\linewidth}p{0.20\linewidth}p{0.15\linewidth}@{}}
 \toprule
-Result group & Scope & Evaluation path & Cost / time record & Evidence package \\
+Result group & Scope & Reported result & Runner metadata & Evidence package \\
 \midrule
-Flight E2E & $624$ & NL parser + registered preference solver & archived run trace & E2E record \\
-Hotel E2E & $124$ & NL parser + registered preference solver & \$0.0556 & metadata record \\
-TextBandit-style E2E & $100$ & NL \taskspec{} extraction + bandit solver & \$0.0292; 45.3s & metadata record \\
-NB/HMM adversarial E2E & $600/500$ & multi-seed NL \taskspec{} extraction + core-op routes & five run traces & summary record \\
-Structured JSON direct baseline & $320$ & structured-output direct computation & \$0.0917; 85.8s & metadata record \\
-Mixed E2E aggregate & $670$ & router + parser/\taskspec{} extraction + compiled solvers & \$0.3720; 428.6s & metadata record \\
-bnlearn backend / registry check & $400/80$ & backend verifier + registered-network parse-and-solve & \$0 / \$0.0045 & JSON records \\
-QUITE comparison & $75$ & registered solver, direct answering, and PAL & Table~\ref{tab:quite_external_detail} & per-method records \\
+Flight E2E & $624$ & 74.3\% final accuracy & result record & E2E JSON \\
+Hotel E2E & $124$ & 77.4\% final accuracy & cost: \$0.0556 & metadata JSON \\
+TextBandit-style E2E & $100$ & 96.0\% final accuracy & cost/time: \$0.0292; 45.3s & metadata JSON \\
+NB/HMM adversarial E2E & $600/500$ & 90.8\% NB; 97.6\% HMM & per-seed records & summary JSON \\
+Structured JSON direct baseline & $320$ & 23.3\% NB; 40.0\% HMM & cost/time: \$0.0917; 85.8s & metadata JSON \\
+Mixed E2E aggregate & $670$ & 90.4\% overall; 89.7\% supported & cost/time: \$0.3720; 428.6s & metadata JSON \\
+bnlearn backend / registry check & $400/80$ & 400/400 backend; 79/80 registry strict & backend \$0; registry \$0.0045 & JSON records \\
+QUITE comparison & $75$ & VSI 96.0\%; direct 36.0/60.0\%; PAL 24.0/88.0\% & Table~\ref{tab:quite_external_detail} & per-method JSON \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1016,14 +1016,14 @@ Depth & PAL (GPT-4o-mini) & PAL (GPT-5.4) & Code Succ.\ (5.4) & Compiled solver 
 
 We validate PCD on four standard Bayesian networks from the bnlearn repository~\citep{scutari2010bnlearn}: Asia (8 nodes), Child (20 nodes), Insurance (27 nodes), and Alarm (37 nodes).
 These are widely used PGM benchmarks with real-world structure and multi-valued categorical variables.
-We use three query sets: 30 random inference queries per network (120 total) for the LLM/PAL stress test, 100 finite-evidence queries per network (400 total) for the compiled DSL solver check, and 20 registered-network natural-language queries per network (80 total) for a parse-and-solve E2E check.
+We use three query sets: 30 random inference queries per network (120 total) for the LLM/PAL stress test, 100 finite-evidence queries per network (400 total) for the VSI compiled-solver check, and 20 registered-network natural-language queries per network (80 total) for a parse-and-solve E2E check.
 
 Both GPT-5.4 and GPT-4o-mini score 0\% on Compute$\mid$GoldParse across all 120 queries, even with perfect structured input. Decide$\mid$GoldPosterior remains at 99.2\% and 98.3\% respectively.
 
 PAL (code generation + execution) fares no better on these larger networks.
 Table~\ref{tab:bnlearn_pal} shows the results: GPT-5.4's PAL achieves 90\% on Asia (8 nodes) but drops to \textbf{0\%} on Child (20 nodes) and Alarm (37 nodes), and 3\% on Insurance (27 nodes), with code execution success also falling sharply.
 GPT-4o-mini's PAL achieves only 17.5\% overall.
-The compiled DSL solver matches pgmpy references on 400/400 finite-evidence queries (100 per network); two pgmpy-NaN queries and one zero-probability-evidence query generated during sampling are skipped because the conditional posterior is undefined.
+The VSI compiled solver matches pgmpy references on 400/400 finite-evidence queries (100 per network); two pgmpy-NaN queries and one zero-probability-evidence query generated during sampling are skipped because the conditional posterior is undefined.
 As a separate registered-network E2E check, GPT-4o-mini parses a short natural-language query into a registered network key, evidence assignments, and a query variable before deterministic solving.
 This route scores 79/80 under strict single-label MAP accuracy (98.8\%, Wilson 95\% CI [93.3, 99.8]); the single strict mismatch occurs on a Child query whose pgmpy reference posterior is exactly tied (Equal 0.5, Unequal 0.5), so tie-aware accuracy is 80/80.
 We therefore use bnlearn as a structured external backend check, a registered-network E2E check, and a stress test for direct computation and per-instance code generation.
@@ -1031,7 +1031,7 @@ We therefore use bnlearn as a structured external backend check, a registered-ne
 \begin{table}[ht]
 \centering
 \small
-\caption{bnlearn standard-network results. PAL and LLM Compute$\mid$Gold use 30 queries per network; the compiled DSL solver uses 100 finite-evidence queries per network. Both PAL models collapse on networks with $\geq$20 nodes, while the compiled solver matches pgmpy references.}
+\caption{bnlearn standard-network results. PAL and LLM Compute$\mid$Gold use 30 queries per network; the VSI compiled solver uses 100 finite-evidence queries per network. Both PAL models collapse on networks with $\geq$20 nodes, while the compiled solver matches pgmpy references.}
 \label{tab:bnlearn_pal}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
@@ -1134,7 +1134,7 @@ Table~\ref{tab:reliability_summary} summarizes these checks.
 Check & Families / datasets & Trials & First pass & Final & Notes \\
 \midrule
 Template-backed induction & Flight, BN & 40 & 40/40 & 40/40 & GPT-4o-mini, temperature 0.7; no refinement needed. \\
-Untemplated induction & Naive Bayes, HMM & 100 & 95/100 & 96/100 & At most two refinement rounds; failures are parse/spec extraction errors. \\
+Held-out core-op induction & Naive Bayes, HMM & 100 & 95/100 & 96/100 & At most two refinement rounds; failures are parse/spec extraction errors. \\
 LOO implementation check & Hotel; Flight-2/3/5/6F; BLInD depth-OOD & 6 & 6/6 & 6/6 & Nearby schema variants pass without self-refinement. \\
 \bottomrule
 \end{tabular}
