@@ -75,7 +75,7 @@
 % ============================================================
 Large language models (LLMs) are attractive natural-language front ends for probabilistic reasoning: they can often recover variables, observations, and queries from text, yet remain brittle probabilistic calculators.
 We first make this failure mode explicit with Parse--Compute--Decide (PCD), a gold-injection diagnostic that separates structure extraction, probabilistic inference given gold structure, and decision-making given a gold posterior.
-Across six LLMs and several probabilistic tasks, models usually parse inputs and act correctly from a posterior, but fail at computation: Compute accuracy ranges from 22\% to 78\% on preference learning and falls to 3--11\% on depth-10 Bayesian networks.
+Across six LLMs and several probabilistic tasks, models usually parse inputs and act correctly from a posterior, but fail at computation: Compute accuracy ranges from 28\% to 78\% on preference learning and falls to 3--11\% on depth-10 Bayesian networks.
 Motivated by this diagnosis, we propose Verified Solver Induction (VSI), a compile-once design that changes the LLM's role.
 Instead of solving each instance or generating fresh code, an off-the-shelf LLM, with no weight updates, writes and assembles a reusable typed solver specification for a task family.
 The specification selects probabilistic atoms and an inference route; a deterministic compiler lowers it into an executable solver, validates it when checks are available, caches it, and reuses it on future same-family instances.
@@ -113,7 +113,7 @@ Our question is different: can an off-the-shelf LLM, with no weight updates, wri
 
 We first show why this is the right split.
 Parse--Compute--Decide (PCD) isolates three stages by injecting gold intermediate results: Parse tests structure extraction; Compute$\mid$GoldParse tests numerical inference given perfect structure; Decide$\mid$GoldPosterior tests the final action given the correct posterior.
-Across six models, Parse is usually high and Decide is essentially solved, but Compute remains poor: 22--78\% on preference learning and only 3--11\% at depth~10 on BLInD Bayesian networks.
+Across six models, Parse is usually high and Decide is essentially solved, but Compute remains poor: 28--78\% on preference learning and only 3--11\% at depth~10 on BLInD Bayesian networks.
 The problem is not simply that the model cannot read the task; it is that probabilistic inference is the wrong thing to leave inside the language model.
 
 We therefore build the LLM-facing interface as a compiler target rather than a prompt.
@@ -125,13 +125,13 @@ Later instances from the same family can be parsed and solved without asking the
 This design gives a clean separation between backend correctness, language-interface robustness, and routing composition.
 Given LLM-assembled specifications that pass the deploy check, the compiled solvers match references on Flight/BLInD and finite-query bnlearn checks, including standard multi-valued bnlearn networks where per-instance generated code is unreliable.
 On QUITE, a separate external Bayesian-inference corpus, the registered path reaches 96.0\% on the same 75-query split, compared with 60.0\% for direct GPT-5.4 and 88.0\% for PAL with GPT-5.4.
-When the LLM must process natural language, the pipeline remains effective: it matches the preference-learning gold-feature oracle on Flight and reaches 90.8\% / 97.6\% on adversarial Naive Bayes / HMM inputs across five task-set seeds, two untemplated families.
+When the LLM must process natural language, the pipeline remains effective: it matches the preference-learning gold-feature oracle on Flight and reaches 90.8\% / 97.6\% on adversarial Naive Bayes / HMM inputs across five task-set seeds, two families held out from the reusable-template registry.
 
 \textbf{Contributions.}
 \begin{itemize}
     \item \textbf{Diagnostic}: PCD shows that LLM probabilistic reasoning fails primarily in computation, not in parsing or final decision-making.
     \item \textbf{System}: a typed \taskspec{} interface, deterministic compiler, deploy check, and registry turn LLM-assembled family specifications into reusable exact solvers.
-    \item \textbf{Evidence}: the system spans preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering, with exact backend checks, natural-language E2E gains on untemplated families, and an external QUITE comparison.
+    \item \textbf{Evidence}: the system spans preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering, with exact backend checks, natural-language E2E gains beyond the reusable-template registry, and an external QUITE comparison.
 \end{itemize}
 
 % ============================================================
@@ -148,7 +148,7 @@ We therefore report backend checks separately from natural-language end-to-end r
 Backend checks ask whether the compiled solver is exact once the LLM-assembled specification is valid.
 End-to-end results include the LLM-facing steps: family recognition, parsing or \taskspec{} induction, compilation, and solving.
 
-Our evaluation covers Flight/Hotel preference learning ($n{=}748$), TextBandit-style histories ($n{=}100$), BLInD Bayesian networks ($n{=}900$), standard bnlearn networks (400 finite backend queries and 120 PAL stress-test queries), QUITE external Bayesian-inference queries, held-out Naive Bayes and HMM tasks, and a mixed E2E benchmark over six input streams.
+Our evaluation covers Flight/Hotel preference learning ($n{=}748$), TextBandit-style histories ($n{=}100$), BLInD Bayesian networks ($n{=}900$), standard bnlearn networks (400 finite backend queries and 120 PAL stress-test queries), QUITE external Bayesian-inference queries, template-registry held-out Naive Bayes and HMM tasks, and a mixed E2E benchmark over six input streams.
 Appendix~\ref{app:families} summarizes the families and datasets.
 
 % ============================================================
@@ -284,7 +284,7 @@ On BN inference, the same pattern holds and amplifies with depth: Compute drops 
 \label{fig:pcd_bottleneck}
 \end{figure*}
 
-The pattern is consistent across every model and task family, including two held-out families (Naive Bayes and HMM forward filtering) evaluated in \S\ref{sec:held_out}.
+The pattern is consistent across every model and task family, including the template-registry held-out Naive Bayes and HMM families evaluated in \S\ref{sec:held_out}.
 Scaling helps, but not enough: upgrading from GPT-4o-mini to GPT-5.4 (a $67\times$ price increase) improves Compute by only 9 percentage points on BN inference.
 At depth 10, GPT-5.4 still produces the wrong answer 89\% of the time.
 These results motivate a system that uses the LLM's strong parsing ability while bypassing its weak computation entirely.
@@ -552,15 +552,15 @@ VSI with GPT-4o-mini reaches 96.0\%, while direct GPT-5.4 reaches 60.0\% and PAL
 \subsection{Does the interface extend beyond reusable templates?}
 \label{sec:held_out}
 
-To test whether the interface can assemble solvers beyond its reusable templates, we freeze the template library and evaluate on two untemplated inference families: Naive Bayes medical diagnosis (3--6 diseases, 4--8 symptoms, $n{=}200$) and HMM forward filtering (3--5 hidden states, 4--8 observation steps, $n{=}100$).
-Neither family has a corresponding reusable template, so the LLM must represent them through explicit \taskspec{} fields and core-op-backed solver routes.
-The schema provides typed slots for these families; it does not provide a family macro or executable solver recipe.
+To test whether the interface can assemble solvers beyond its reusable templates, we freeze the template library and evaluate on two inference families held out from the reusable-template registry: Naive Bayes medical diagnosis (3--6 diseases, 4--8 symptoms, $n{=}200$) and HMM forward filtering (3--5 hidden states, 4--8 observation steps, $n{=}100$).
+Neither family has a corresponding reusable template, so the LLM must assemble the solver route through explicit \taskspec{} fields and core-op-backed compositions.
+The interface supplies typed extension slots, but not a family macro or executable solver recipe.
 HMM is the stronger test: it requires \emph{sequential temporal reasoning} via iterated multiply--marginalize--normalize over a time axis, a pattern absent from all three template-backed routes.
 
 \begin{table}[t]
 \centering
 \small
-\caption{Untemplated families (GPT-4o-mini). Structured JSON output alone does not solve the computation problem; NL $\rightarrow$ \taskspec{} $\rightarrow$ compile $\rightarrow$ solve is stable across five adversarial task sets. Structured-spec rows are backend reference checks.}
+\caption{Template-registry held-out families (GPT-4o-mini). Structured JSON output alone does not solve the computation problem; NL $\rightarrow$ \taskspec{} $\rightarrow$ compile $\rightarrow$ solve is stable across five adversarial task sets. Structured-spec rows are backend reference checks.}
 \label{tab:held_out}
 \begin{tabular}{@{}lcc@{}}
 \toprule
@@ -581,7 +581,7 @@ Direct LLM compute$\mid$gold parse & 37.0\% {\scriptsize [30,44]} & 27.0\% {\scr
 \end{table}
 
 These results test whether the interface is more than a template selector.
-Naive Bayes and HMM have no family template, and HMM requires a repeated forward update that is absent from the three template-backed routes.
+Naive Bayes and HMM have no reusable family template, and HMM requires a repeated forward update that is absent from the three template-backed routes.
 The same GPT-4o-mini model that answers only 44\% / 32\% of the tasks directly reaches 90.8\% / 97.6\% when it emits a \taskspec{} and lets the compiled solver compute, pooled across five independently generated adversarial task sets.
 Constraining the baseline to valid JSON is not enough: the same model, asked to compute directly while returning structured JSON, reaches only 23.3\% / 40.0\%.
 Given a valid \taskspec{}, the core-op solvers match independent reference posteriors with maximum absolute error below $10^{-9}$.
@@ -590,11 +590,11 @@ The remaining NB errors come from specification extraction on adversarial wordin
 \subsection{Does the natural-language pipeline compose?}
 \label{sec:e2e}
 
-The preceding experiments isolate the compiler and held-out core-op routes.
+The preceding experiments isolate the compiler and template-registry held-out core-op routes.
 We next ask whether the natural-language interface composes end to end.
 For Flight and Hotel, GPT-4o-mini reads natural-language option descriptions, extracts numeric features, and dispatches to the compiled PreferenceSolver.
 For TextBandit-style histories, it extracts a \taskspec{} and the sequence of binary observations; the compiled BanditSolver performs the Beta-Bernoulli updates.
-For NB/HMM, the full adversarial NL pipeline emits the untemplated \taskspec{} and uses the core-op solver routes from Table~\ref{tab:held_out}.
+For NB/HMM, the full adversarial NL pipeline emits the template-registry held-out \taskspec{} and uses the core-op solver routes from Table~\ref{tab:held_out}.
 
 \begin{table}[t]
 \centering
@@ -630,11 +630,11 @@ In the preference-family errors, 45 of 48 pipeline outputs match the gold-featur
 
 The results above validate the compile-once pipeline; we now summarize why it works and what trust boundary it establishes.
 A 23-strategy ablation on preference learning with 624 Flight samples and GPT-4o-mini provides independent evidence for the compute bottleneck (Appendix~\ref{app:strategies}).
-Accuracy rises monotonically with the fraction of computation offloaded: pure CoT scores $\leq$33\%, at or below the 3-way random baseline; partial math injection reaches 50--64\%; tool-calling with full computation reaches 73\%; direct result injection reaches 74.8\%, matching the Oracle.
+Accuracy rises with the fraction of computation offloaded: pure CoT scores $\leq$33\%, at or below the 3-way random baseline; partial math injection reaches roughly 50--58\%; direct result injection reaches 74.8\%, matching the Oracle.
 In short, the more math the LLM must do, the worse it performs.
 Pure CoT is ineffective, confirming that self-reflection alone does not improve probabilistic computation.
 
-Stronger models raise Compute accuracy, from 22\% to 78\% across six models, but none eliminate errors. Opus still fails on 22\% of preference instances, and GPT-5.4 reaches only 11\% at BN depth 10.
+Stronger models raise Compute accuracy, from 28\% to 78\% across six models, but none eliminate errors. Opus still fails on 22\% of preference instances, and GPT-5.4 reaches only 11\% at BN depth 10.
 PAL with GPT-5.4 bridges part of the gap (98.1\% on BLInD and 88.0\% on QUITE) but still trails the compiled path while paying per query.
 No model--tool combination tested guarantees correctness.
 The approach is strongest when distributions are given or derivable; tasks that require estimating distributions from sparse context, as in DeLLMa~\citep{liu2025dellma}, call for complementary modeling components.
@@ -652,7 +652,7 @@ The same interface then covers TextBandit-style updates, Bayesian networks, Naiv
 \paragraph{Program-aided and tool-using LLMs.}
 PAL~\citep{gao2023pal}, Program of Thoughts~\citep{chen2023pot}, Toolformer~\citep{schick2023toolformer}, and ReAct~\citep{yao2023react} all put external computation behind an LLM interface.
 Their unit of work is usually a single query: the model generates code or calls a tool for each instance.
-This is effective for deterministic arithmetic, but it is brittle for probabilistic algorithms: on BLInD, PAL code execution drops from 100\% at depth~2 to 57\% at depth~10 (Appendix~\ref{app:pal_depth}).
+This is effective for deterministic arithmetic, but it is brittle for probabilistic algorithms: on BLInD, GPT-4o-mini PAL accuracy drops from 93\% at depth~2 to 2\% at depth~10, while GPT-5.4 PAL remains strong but still pays per query and fails sharply on larger bnlearn networks (Appendix~\ref{app:pal_depth}).
 Our inductor instead emits a typed family specification once; after verification, the compiled solver runs without LLM calls.
 This also differs from schema-constrained per-instance parsing into an existing library: \method{} makes the LLM assemble and validate the reusable solver route, then amortizes that route across later inputs.
 
@@ -676,14 +676,14 @@ DisCIPL~\citep{lew2025discipl} and LLM-guided POMDP induction~\citep{curtis2025p
 \method{} targets exact inference over finite discrete distributions, a broad and auditable setting that covers Bayesian networks, preference learning, bandits, Naive Bayes, and HMM forward filtering.
 The same interface can incorporate additional typed atoms for continuous variables, approximate inference, or distribution learning from sparse unstructured context.
 The evidence spans five inference families across eight datasets, plus an external QUITE benchmark that reuses the same registered-solver interface.
-It includes five adversarial task-set seeds for held-out NB ($n{=}600$) and HMM ($n{=}500$) families with no reusable-template support.
+It includes five adversarial task-set seeds for NB ($n{=}600$) and HMM ($n{=}500$), two families held out from the reusable-template registry and solved through LLM-assembled core-op routes.
 The mixed E2E benchmark stress-tests route-and-solve composition over supported input streams plus unsupported examples; enlarging that stream is a data and validation-suite question rather than a change to the compiler interface.
 
 \paragraph{Diagnostics and Induction.}
 PCD is an interventional diagnostic: Compute$\mid$GoldParse intentionally measures whether a model can select and execute the required probabilistic calculation once structure is fixed.
 Its stage boundaries are deliberately coarse enough to be reused across task families, and the observed pattern is stable across models, tasks, and BN depths.
 Decide$\mid$GoldPosterior isolates the posterior-to-action step used by these tasks; its high score shows that final action selection is not the bottleneck.
-Family-level induction is a stronger capability than instance-level parsing, and our experiments validate it through deploy checks, untemplated families, and mixed E2E composition.
+Family-level induction is a stronger capability than instance-level parsing, and our experiments validate it through deploy checks, template-registry held-out families, and mixed E2E composition.
 
 \paragraph{Extensibility and Verification.}
 The operator basis is deliberately small: seven typed operations plus three reusable templates.
@@ -721,7 +721,7 @@ Within finite discrete inference, the result is a practical compiler abstraction
 
 \begin{table}[ht]
 \centering
-\small
+\scriptsize
 \caption{Inference families. The first three are primary targets with reusable templates; the last two use explicit core-op routes.}
 \begin{tabular}{@{}llll@{}}
 \toprule
@@ -731,8 +731,8 @@ Hypothesis Enum. & $p(\theta \mid \mathbf{x}) \propto \prod_t p(x_t \mid \theta)
 Conjugate Update & $\text{Beta}(\alpha{+}s, \beta{+}f)$ & TextBandit-style & 100 histories \\
 Variable Elim. & $p(Q \mid E) = \frac{\sum_H \prod_i \phi_i}{\sum_{Q,H} \prod_i \phi_i}$ & BLInD + bnlearn & 900+120 \\
 \midrule
-Naive Bayes & $p(d \mid \mathbf{s}) \propto p(d) \prod_j p(s_j \mid d)$ & Synthetic/adversarial NL & 200 / 120 E2E \\
-HMM Forward & $\alpha_t(s) \propto p(o_t \mid s) \sum_{s'} \alpha_{t\text{-}1}(s') p(s \mid s')$ & Synthetic/adversarial NL & 100 \\
+Naive Bayes & $p(d \mid \mathbf{s}) \propto p(d) \prod_j p(s_j \mid d)$ & Synthetic/adversarial NL & 200 base; 600 pooled \\
+HMM Forward & $\alpha_t(s) \propto p(o_t \mid s) \sum_{s'} \alpha_{t\text{-}1}(s') p(s \mid s')$ & Synthetic/adversarial NL & 100 base; 500 pooled \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -741,27 +741,27 @@ HMM Forward & $\alpha_t(s) \propto p(o_t \mid s) \sum_{s'} \alpha_{t\text{-}1}(s
 \label{app:e2e_artifacts}
 
 Table~\ref{tab:e2e_artifacts} maps the main reported results to the artifact bundle.
-We distinguish prior runs whose original runner did not record complete cost/time metadata from newer records that include model id, runner, query plan, token counts, API cost, and wall-clock time when available.
+The table records provenance at the experiment-family level; the supplementary package maps each row to exact JSON records, prompts, generated specifications, and runner metadata.
 Exact QUITE cost and time values are reported in Table~\ref{tab:quite_external_detail}; BLInD cost accounting is reported in Appendix~\ref{app:cost}.
 
 \begin{table}[ht]
 \centering
 \scriptsize
 \setlength{\tabcolsep}{2.5pt}
-\caption{Artifact manifest for reported E2E, backend, and external QUITE results. Cost and time fields are reported only when stored by the runner; older records are marked as not recorded rather than reconstructed.}
+\caption{Artifact provenance for reported E2E, backend, and external QUITE results. Detailed filenames, prompts, generated \taskspec{}s, and raw runner metadata are provided in the supplementary artifact.}
 \label{tab:e2e_artifacts}
 \begin{tabular}{@{}p{0.22\linewidth}p{0.08\linewidth}p{0.25\linewidth}p{0.22\linewidth}p{0.15\linewidth}@{}}
 \toprule
-Result group & Scope & Runner / model & Cost / time metadata & Artifact record \\
+Result group & Scope & Evaluation path & Cost / time record & Evidence package \\
 \midrule
-Flight E2E & $624$ & E2E runner, 4o-mini & not recorded & result JSON \\
-Hotel E2E & $124$ & E2E runner, 4o-mini & \$0.0556; time not recorded & metadata JSON \\
-TextBandit-style E2E & $100$ & Bandit E2E runner, 4o-mini & \$0.0292; 45.3s & metadata JSON \\
-NB/HMM adversarial E2E & $600/500$ & multi-seed adversarial runners, 4o-mini & five seed artifacts & summary JSON \\
-Structured JSON direct baseline & $320$ & structured-direct runner, 4o-mini & \$0.0917; 85.8s & metadata JSON \\
-Mixed E2E aggregate & $670$ & mixed runner + aggregation, 4o-mini & \$0.3720; 428.6s & metadata JSON \\
-bnlearn backend / registry check & $400/80$ & backend verifier + registry runner & backend: \$0; registry: \$0.0045 & JSON records \\
-QUITE comparison & $75$ & registered, direct, and PAL runners & see Table~\ref{tab:quite_external_detail} & per-method JSON \\
+Flight E2E & $624$ & NL parser + registered preference solver & archived run trace & E2E record \\
+Hotel E2E & $124$ & NL parser + registered preference solver & \$0.0556 & metadata record \\
+TextBandit-style E2E & $100$ & NL \taskspec{} extraction + bandit solver & \$0.0292; 45.3s & metadata record \\
+NB/HMM adversarial E2E & $600/500$ & multi-seed NL \taskspec{} extraction + core-op routes & five run traces & summary record \\
+Structured JSON direct baseline & $320$ & structured-output direct computation & \$0.0917; 85.8s & metadata record \\
+Mixed E2E aggregate & $670$ & router + parser/\taskspec{} extraction + compiled solvers & \$0.3720; 428.6s & metadata record \\
+bnlearn backend / registry check & $400/80$ & backend verifier + registered-network parse-and-solve & \$0 / \$0.0045 & JSON records \\
+QUITE comparison & $75$ & registered solver, direct answering, and PAL & Table~\ref{tab:quite_external_detail} & per-method records \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -906,8 +906,7 @@ The output is compared against the gold decision.
 
 All prompts use zero temperature where supported, \texttt{max\_\allowbreak tokens}=1024--8192 depending on task complexity, via the OpenRouter API gateway.
 Model identifiers: \texttt{openai/\allowbreak gpt-4o-mini}, \texttt{openai/\allowbreak gpt-4o}, \texttt{openai/\allowbreak gpt-5.4}, \texttt{anthropic/\allowbreak claude-sonnet-4}, \texttt{anthropic/\allowbreak claude-opus-4-6}, \texttt{google/\allowbreak gemini-3.1-pro}.
-All API calls made between March 8--15, 2026.
-Exact prompt templates are included in the supplementary artifact.
+All LLM calls use the OpenRouter API gateway; exact prompt templates, model identifiers, and runner metadata are included in the supplementary artifact.
 
 \section{DSL Specification}
 \label{app:dsl}
@@ -943,34 +942,33 @@ For example, \texttt{ve\_query} implements variable elimination as:
 \end{equation}
 where the marginalization iterates over hidden variables $\mathbf{H}$ in a chosen elimination ordering.
 Similarly, \texttt{softmax\_pref} composes \texttt{enumerate} $\to$ \texttt{multiply} (softmax likelihoods) $\to$ \texttt{normalize} $\to$ \texttt{expectation} $\to$ \texttt{argmax}, and \texttt{beta\_bernoulli} applies conjugate updates via \texttt{condition} $\to$ \texttt{normalize} $\to$ \texttt{argmax}.
-On held-out HMM forward filtering (\S\ref{sec:held_out}), the system uses a core-op-backed route over time that does not correspond to any existing macro.
+On template-registry held-out HMM forward filtering (\S\ref{sec:held_out}), the system uses a core-op-backed route over time that does not correspond to any existing macro.
 
 \section{TaskSpec Schema}
 \label{app:taskspec}
 
 A \taskspec{} is a JSON document with six top-level fields, summarized in Table~\ref{tab:taskspec_schema}.
-The compiler enforces consistency between \texttt{inference\_family} and the remaining fields (\eg \texttt{hypothesis\_enumeration} requires \texttt{softmax\_choice} and \texttt{argmax\_expected\_utility}).
+The compiler enforces consistency between the selected route family and the remaining fields (\eg a hypothesis-enumeration route requires a softmax choice model and an expected-utility decision rule).
 Violations are caught before compilation and returned as diagnostic messages to the inductor for self-refinement.
 
 \begin{table}[ht]
 \centering
 \footnotesize
-\caption{\taskspec{} schema. Each row shows a field, its type, and the allowed values per inference family.}
+\caption{Core \taskspec{} interface excerpt. The table shows the stable fields used by the compiler; family-specific extensions and generated \taskspec{} records are included in the supplementary artifact.}
 \label{tab:taskspec_schema}
 \begin{tabular}{@{}p{0.25\linewidth}p{0.16\linewidth}p{0.50\linewidth}@{}}
 \toprule
 Field & Type & Values \\
 \midrule
 \texttt{task\_name} & string & Descriptive name \\
-\texttt{inference\_family} & enum & \texttt{hypothesis\_enumeration}, \texttt{conjugate\_update}, \texttt{variable\_elimination}, \texttt{naive\_bayes}, \texttt{hmm\_forward} \\
+\texttt{inference\_family} & enum/string & Registry-backed template id or validated core-op route id \\
 \midrule
 \multicolumn{3}{@{}l}{\textit{state\_structure}} \\
-\quad \texttt{type} & enum & \texttt{discrete\_hypothesis\_space}, \texttt{beta\_conjugate}, \texttt{bayesian\_network}, \texttt{naive\_bayes\_classes}, \texttt{hmm\_states} \\
-\quad \texttt{features} & list[str] & Feature names (hypothesis enum.\ only) \\
+\quad \texttt{type} & enum/string & Template-backed state type or family-specific typed state extension \\
+\quad \texttt{features} & list[str] & Feature names for hypothesis-enumeration routes \\
 \quad \texttt{values\_per\_feature} & list[float] & Preference weight values \\
-\quad \texttt{n\_arms} & int & Number of arms (conjugate only) \\
-\quad \texttt{nb\_*} & dict/list & Classes, class priors, and feature likelihood tables (Naive Bayes only) \\
-\quad \texttt{hmm\_*} & dict/list & States, observations, initial distribution, transition table, and emission table (HMM only) \\
+\quad \texttt{n\_arms} & int & Number of arms for conjugate-update routes \\
+\quad \texttt{family\_*} & dict/list & Route-specific typed parameters supplied by the LLM assembly \\
 \midrule
 \multicolumn{3}{@{}l}{\textit{observation\_model}} \\
 \quad \texttt{type} & enum & \texttt{softmax\_choice}, \texttt{bernoulli\_reward}, \texttt{cpt\_given} \\
@@ -1121,7 +1119,7 @@ The full prompt ($\sim$2\,k tokens, dominated by the schema definition) is inclu
 \paragraph{Reliability checks.}
 We use three small checks to separate induction stability from primary accuracy claims.
 First, we repeat template-backed induction 20 times each for Flight and BN at temperature~0.7; all runs produce deployable \taskspec{}s on the first pass.
-Second, we repeat adversarial untemplated induction for Naive Bayes and HMM; the remaining failures are specification-extraction errors, not backend arithmetic failures.
+Second, we repeat adversarial induction for template-registry held-out Naive Bayes and HMM; the remaining failures are specification-extraction errors, not backend arithmetic failures.
 Third, we run a leave-one-out implementation check on six held-out datasets to ensure that the interface handles nearby schema variants.
 Table~\ref{tab:reliability_summary} summarizes these checks.
 
