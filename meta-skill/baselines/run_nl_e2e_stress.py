@@ -46,6 +46,8 @@ from _artifact_schema import accumulate_usage, save_artifact
 MODEL = os.environ.get("MODEL", "openai/gpt-4o-mini")
 SEMA = int(os.environ.get("SEMA", "25"))
 N = 60
+NB_BASE_SEED = int(os.environ.get("NB_BASE_SEED", "7000"))
+HMM_BASE_SEED = int(os.environ.get("HMM_BASE_SEED", "8000"))
 
 
 # ─── Hedge utilities ───────────────────────────────────────────────────
@@ -241,8 +243,9 @@ async def induce_async(client: AsyncOpenAI, sample: Dict, model_id: str):
 async def run_nb_adversarial(client, sema, i):
     async with sema:
         # 略大: n_dis=4, n_sym=6 + adversarial NL
-        p = generate_naive_bayes_problem(n_diseases=4, n_symptoms=6, seed=7000 + i)
-        rng = random.Random(7000 + i + 99999)  # 独立 rng for adversarial
+        seed = NB_BASE_SEED + i
+        p = generate_naive_bayes_problem(n_diseases=4, n_symptoms=6, seed=seed)
+        rng = random.Random(seed + 99999)  # 独立 rng for adversarial
         sample = nb_adversarial_sample(p, rng)
         spec, usage, api_err = await induce_async(client, sample, MODEL)
         family = spec.inference_family if spec else None
@@ -266,7 +269,7 @@ async def run_nb_adversarial(client, sema, i):
         ok = pred == p["gold_diagnosis"]
         return {
             "i": i,
-            "seed": 7000 + i,
+            "seed": seed,
             "family": family,
             "pred": pred,
             "gold": p["gold_diagnosis"],
@@ -280,8 +283,9 @@ async def run_nb_adversarial(client, sema, i):
 async def run_hmm_adversarial(client, sema, i):
     async with sema:
         # 比 standard 略大: n_states=4, n_obs=5, seq_length=8 + adversarial NL
-        p = generate_hmm_problem(n_states=4, n_obs=5, seq_length=8, seed=8000 + i)
-        rng = random.Random(8000 + i + 99999)
+        seed = HMM_BASE_SEED + i
+        p = generate_hmm_problem(n_states=4, n_obs=5, seq_length=8, seed=seed)
+        rng = random.Random(seed + 99999)
         sample = hmm_adversarial_sample(p, rng)
         spec, usage, api_err = await induce_async(client, sample, MODEL)
         family = spec.inference_family if spec else None
@@ -304,7 +308,7 @@ async def run_hmm_adversarial(client, sema, i):
         ok = pred == p["gold_state"]
         return {
             "i": i,
-            "seed": 8000 + i,
+            "seed": seed,
             "family": family,
             "pred": pred,
             "gold": p["gold_state"],
@@ -345,6 +349,7 @@ async def main():
     n_nb_target = int(os.environ.get("N_NB", "50"))
     n_hmm_target = int(os.environ.get("N_HMM", "60"))
     print(f"=== NL E2E ADVERSARIAL | sema={SEMA} | NB n={n_nb_target} | HMM n={n_hmm_target} | model={MODEL} ===")
+    print(f"  Seeds: NB base={NB_BASE_SEED}, HMM base={HMM_BASE_SEED}")
     print(f"  NL design: hedge words + distractor + order shuffle (problem config slightly stressed)")
     t0 = time.time()
     nb_results, hmm_results = await asyncio.gather(
@@ -378,6 +383,7 @@ async def main():
         "config": {
             "nb": {"n_diseases": 4, "n_symptoms": 6, "nl_style": "adversarial"},
             "hmm": {"n_states": 4, "n_obs": 5, "seq_length": 8, "nl_style": "adversarial"},
+            "seeds": {"nb_base": NB_BASE_SEED, "hmm_base": HMM_BASE_SEED},
         },
         "concurrency": SEMA,
         "elapsed_sec": elapsed,
@@ -411,6 +417,8 @@ async def main():
             "script": "baselines/run_nl_e2e_stress.py",
             "n_nb": n_nb_target,
             "n_hmm": n_hmm_target,
+            "nb_base_seed": NB_BASE_SEED,
+            "hmm_base_seed": HMM_BASE_SEED,
             "concurrency": SEMA,
         },
     )

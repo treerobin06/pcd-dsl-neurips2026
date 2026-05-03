@@ -1,0 +1,225 @@
+{
+  "experiment": "NB/HMM adversarial TaskSpec induction reliability",
+  "model": "openai/gpt-4o-mini",
+  "config": {
+    "model": "openai/gpt-4o-mini",
+    "n_nb": 2,
+    "n_hmm": 2,
+    "nb_base_seed": 7000,
+    "hmm_base_seed": 8000,
+    "max_rounds": 2,
+    "temperature": 0.7,
+    "sema": 4
+  },
+  "elapsed_sec": 11.305729866027832,
+  "summary": {
+    "overall": {
+      "n": 4,
+      "first_pass_correct": 4,
+      "first_pass_rate": 1.0,
+      "first_pass_wilson_95ci": [
+        0.5100999795960008,
+        1
+      ],
+      "final_correct": 4,
+      "final_rate": 1.0,
+      "final_wilson_95ci": [
+        0.5100999795960008,
+        1
+      ],
+      "failure_counts": {}
+    },
+    "nb": {
+      "n": 2,
+      "first_pass_correct": 2,
+      "first_pass_rate": 1.0,
+      "first_pass_wilson_95ci": [
+        0.34237195288961925,
+        1
+      ],
+      "final_correct": 2,
+      "final_rate": 1.0,
+      "final_wilson_95ci": [
+        0.34237195288961925,
+        1
+      ],
+      "failure_counts": {}
+    },
+    "hmm": {
+      "n": 2,
+      "first_pass_correct": 2,
+      "first_pass_rate": 1.0,
+      "first_pass_wilson_95ci": [
+        0.34237195288961925,
+        1
+      ],
+      "final_correct": 2,
+      "final_rate": 1.0,
+      "final_wilson_95ci": [
+        0.34237195288961925,
+        1
+      ],
+      "failure_counts": {}
+    }
+  },
+  "results": [
+    {
+      "family": "nb",
+      "i": 0,
+      "seed": 7000,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Pneumonia",
+        "gold": "Pneumonia"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Pneumonia",
+            "gold": "Pneumonia"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2640,
+        "completion_tokens": 932,
+        "cost_usd": 0.0007632
+      }
+    },
+    {
+      "family": "nb",
+      "i": 1,
+      "seed": 7001,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Asthma Exacerbation",
+            "gold": "Asthma Exacerbation"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2651,
+        "completion_tokens": 952,
+        "cost_usd": 0.00082485
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 0,
+      "seed": 8000,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S0",
+        "gold": "S0",
+        "scores": {
+          "S2": 0.1261804619740085,
+          "S1": 0.19316376229569343,
+          "S3": 0.22836059200041772,
+          "S0": 0.4522951837298804
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S0",
+            "gold": "S0",
+            "scores": {
+              "S2": 0.1261804619740085,
+              "S1": 0.19316376229569343,
+              "S3": 0.22836059200041772,
+              "S0": 0.4522951837298804
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2669,
+        "completion_tokens": 721,
+        "cost_usd": 0.00068895
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 1,
+      "seed": 8001,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S0",
+        "gold": "S0",
+        "scores": {
+          "S1": 0.09408758902671349,
+          "S0": 0.5021301942274451,
+          "S3": 0.23569774341655417,
+          "S2": 0.16808447332928725
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S0",
+            "gold": "S0",
+            "scores": {
+              "S1": 0.09408758902671349,
+              "S0": 0.5021301942274451,
+              "S3": 0.23569774341655417,
+              "S2": 0.16808447332928725
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2666,
+        "completion_tokens": 731,
+        "cost_usd": 0.0006945
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T10:37:00Z",
+  "_meta": {
+    "prompt_tokens": 10626,
+    "completion_tokens": 3336,
+    "total_cost_usd": 0.0029715,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "9a80bb50",
+    "timestamp_utc": "2026-05-03T10:37:00.602300+00:00",
+    "script": "baselines/run_inductor_reliability_nb_hmm.py",
+    "n_nb": 2,
+    "n_hmm": 2,
+    "max_rounds": 2,
+    "temperature": 0.7
+  }
+}

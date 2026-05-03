@@ -1,0 +1,204 @@
+{
+  "experiment": "structured_output_direct_answer",
+  "model": "openai/gpt-4o-mini",
+  "elapsed_sec": 6.205005168914795,
+  "config": {
+    "model": "openai/gpt-4o-mini",
+    "n_nb": 2,
+    "n_hmm": 2,
+    "n_blind": 2,
+    "blind_depth": 10,
+    "nb_base_seed": 7000,
+    "hmm_base_seed": 8000,
+    "blind_seed": 2026,
+    "shuffle_seed": 2026,
+    "sema": 3
+  },
+  "summary": {
+    "blind": {
+      "n": 2,
+      "correct": 0,
+      "accuracy": 0.0,
+      "wilson_95ci": [
+        0.0,
+        0.6576280471103807
+      ],
+      "parse_failures": 0
+    },
+    "hmm": {
+      "n": 2,
+      "correct": 0,
+      "accuracy": 0.0,
+      "wilson_95ci": [
+        0.0,
+        0.6576280471103807
+      ],
+      "parse_failures": 0
+    },
+    "nb": {
+      "n": 2,
+      "correct": 0,
+      "accuracy": 0.0,
+      "wilson_95ci": [
+        0.0,
+        0.6576280471103807
+      ],
+      "parse_failures": 1
+    },
+    "overall": {
+      "n": 6,
+      "correct": 0,
+      "accuracy": 0.0,
+      "wilson_95ci": [
+        0.0,
+        0.3903430336530645
+      ]
+    }
+  },
+  "results": [
+    {
+      "family": "blind",
+      "i": 0,
+      "seed": 0,
+      "pred": 0.0,
+      "gold": 0.1422490609724579,
+      "ok": false,
+      "parse_error": null,
+      "response_json": {
+        "family": "variable_elimination",
+        "answer_probability": 0.0,
+        "brief_reason": "Given the evidence, n2 is True and n3 is True, which contradicts the probabilities of n1 and n0 being True when n8 is False."
+      },
+      "raw_response": "{\n  \"family\": \"variable_elimination\",\n  \"answer_probability\": 0.0,\n  \"brief_reason\": \"Given the evidence, n2 is True and n3 is True, which contradicts the probabilities of n1 and n0 being True when n8 is False.\"\n}",
+      "usage": {
+        "prompt_tokens": 909,
+        "completion_tokens": 61,
+        "cost_usd": 0.00017295
+      }
+    },
+    {
+      "family": "nb",
+      "i": 1,
+      "seed": 7001,
+      "pred": null,
+      "gold": "Asthma Exacerbation",
+      "ok": false,
+      "parse_error": "json_parse_fail",
+      "response_json": null,
+      "raw_response": "{\n  \"family\": \"naive_bayes\",\n  \"answer\": \"Pneumonia\",\n  \"posterior\": {\n    \"Sinusitis\": 0.012 * 0.53 * 0.28 * 0.09 * 0.74 * 0.49,\n    \"Asthma Exacerbation\": 0.48 * 0.91 * 0.41 * 0.74 * 0.56 * 0.55,\n    \"Influenza\": 0.14 * 0.32 * 0.8 * 0.65 * 0.06 * 0.66,\n    \"Pneumonia\": 0.27 * 0.11 * 0.23 * 0.67 * 0.67 * 0.7\n  },\n  \"brief_reason\": \"Calculated posterior probabilities using prior and likelihoods; Pneumonia has the highest posterior probability.\"\n}",
+      "usage": {
+        "prompt_tokens": 884,
+        "completion_tokens": 201,
+        "cost_usd": 0.0002532
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 1,
+      "seed": 8001,
+      "pred": "S1",
+      "gold": "S0",
+      "ok": false,
+      "parse_error": null,
+      "response_json": {
+        "family": "hmm_forward",
+        "answer": "S1",
+        "posterior": {
+          "S0": 0.15,
+          "S1": 0.35,
+          "S2": 0.1,
+          "S3": 0.4
+        },
+        "brief_reason": "After applying the forward algorithm, S1 has the highest probability at the final time step."
+      },
+      "raw_response": "{\n  \"family\": \"hmm_forward\",\n  \"answer\": \"S1\",\n  \"posterior\": {\n    \"S0\": 0.15,\n    \"S1\": 0.35,\n    \"S2\": 0.10,\n    \"S3\": 0.40\n  },\n  \"brief_reason\": \"After applying the forward algorithm, S1 has the highest probability at the final time step.\"\n}",
+      "usage": {
+        "prompt_tokens": 828,
+        "completion_tokens": 92,
+        "cost_usd": 0.0001794
+      }
+    },
+    {
+      "family": "blind",
+      "i": 1,
+      "seed": 1,
+      "pred": 0.0,
+      "gold": 0.46050712687696527,
+      "ok": false,
+      "parse_error": null,
+      "response_json": {
+        "family": "variable_elimination",
+        "answer_probability": 0.0,
+        "brief_reason": "Given n0 is True, n6 is False, n7 is True, and n8 is False, the only way for n2 to be True is if n5 is True. However, n3 must be False (due to n8 being False), which leads to n5 being True with probability 96%. But n4 must be False, which contradicts the conditions set by n6 being False (n4 must be True). Thus, the joint probability is 0."
+      },
+      "raw_response": "{\n  \"family\": \"variable_elimination\",\n  \"answer_probability\": 0.0,\n  \"brief_reason\": \"Given n0 is True, n6 is False, n7 is True, and n8 is False, the only way for n2 to be True is if n5 is True. However, n3 must be False (due to n8 being False), which leads to n5 being True with probability 96%. But n4 must be False, which contradicts the conditions set by n6 being False (n4 must be True). Thus, the joint probability is 0.\"\n}",
+      "usage": {
+        "prompt_tokens": 889,
+        "completion_tokens": 127,
+        "cost_usd": 0.00020955
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 0,
+      "seed": 8000,
+      "pred": "S1",
+      "gold": "S0",
+      "ok": false,
+      "parse_error": null,
+      "response_json": {
+        "family": "hmm_forward",
+        "answer": "S1",
+        "posterior": {
+          "S2": 0.086,
+          "S1": 0.215,
+          "S3": 0.045,
+          "S0": 0.054
+        },
+        "brief_reason": "After applying the forward algorithm, S1 has the highest probability at the final time step based on the observations and transition/emission probabilities."
+      },
+      "raw_response": "{\n  \"family\": \"hmm_forward\",\n  \"answer\": \"S1\",\n  \"posterior\": {\n    \"S2\": 0.086,\n    \"S1\": 0.215,\n    \"S3\": 0.045,\n    \"S0\": 0.054\n  },\n  \"brief_reason\": \"After applying the forward algorithm, S1 has the highest probability at the final time step based on the observations and transition/emission probabilities.\"\n}",
+      "usage": {
+        "prompt_tokens": 831,
+        "completion_tokens": 100,
+        "cost_usd": 0.00018465
+      }
+    },
+    {
+      "family": "nb",
+      "i": 0,
+      "seed": 7000,
+      "pred": "Bronchitis",
+      "gold": "Pneumonia",
+      "ok": false,
+      "parse_error": null,
+      "response_json": {
+        "family": "naive_bayes",
+        "answer": "Bronchitis",
+        "posterior": {
+          "Pneumonia": 0.0001,
+          "Bronchitis": 0.0004,
+          "Gastroenteritis": 0.0001,
+          "Common Cold": 0.0001
+        },
+        "brief_reason": "Calculated posterior probabilities using prior probabilities and likelihoods for observed symptoms. Bronchitis had the highest posterior probability given the symptom profile."
+      },
+      "raw_response": "{\n  \"family\": \"naive_bayes\",\n  \"answer\": \"Bronchitis\",\n  \"posterior\": {\n    \"Pneumonia\": 0.0001,\n    \"Bronchitis\": 0.0004,\n    \"Gastroenteritis\": 0.0001,\n    \"Common Cold\": 0.0001\n  },\n  \"brief_reason\": \"Calculated posterior probabilities using prior probabilities and likelihoods for observed symptoms. Bronchitis had the highest posterior probability given the symptom profile.\"\n}",
+      "usage": {
+        "prompt_tokens": 868,
+        "completion_tokens": 111,
+        "cost_usd": 0.0001968
+      }
+    }
+  ],
+  "_meta": {
+    "prompt_tokens": 5209,
+    "completion_tokens": 692,
+    "total_cost_usd": 0.00119655,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "9a80bb50",
+    "timestamp_utc": "2026-05-03T10:27:11.216775+00:00",
+    "script": "baselines/run_structured_direct_baseline.py",
+    "n_total": 6
+  }
+}

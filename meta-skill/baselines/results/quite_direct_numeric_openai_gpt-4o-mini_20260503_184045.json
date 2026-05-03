@@ -1,0 +1,762 @@
+{
+  "experiment": "QUITE direct natural-language probability baseline",
+  "model": "openai/gpt-4o-mini",
+  "config": {
+    "model": "openai/gpt-4o-mini",
+    "modes": [
+      "numeric"
+    ],
+    "limit_per_mode": 1,
+    "sema": 10
+  },
+  "elapsed_sec": 8.141638040542603,
+  "summary": {
+    "overall": {
+      "n": 30,
+      "valid": 30,
+      "parse_errors": 0,
+      "within_0_01": 6,
+      "within_0_01_rate": 0.2,
+      "within_0_05": 10,
+      "within_0_05_rate": 0.3333333333333333,
+      "mae": 0.25258481390000004,
+      "rmse": 0.3784850349898412
+    },
+    "numeric": {
+      "n": 30,
+      "valid": 30,
+      "parse_errors": 0,
+      "within_0_01": 6,
+      "within_0_01_rate": 0.2,
+      "within_0_05": 10,
+      "within_0_05_rate": 0.3333333333333333,
+      "mae": 0.25258481390000004,
+      "rmse": 0.3784850349898412
+    }
+  },
+  "results": [
+    {
+      "network": "alarm0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15780446,
+      "reasoning_types": [
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.15780446,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The pressure at zero contradicts normal intubation."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The pressure at zero contradicts normal intubation.\"}",
+      "usage": {
+        "prompt_tokens": 2352,
+        "completion_tokens": 27,
+        "cost_usd": 0.000369
+      }
+    },
+    {
+      "network": "alarm1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.04,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.04,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "With high left ventricular end-diastolic volume, normal PCWP is highly unlikely."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"With high left ventricular end-diastolic volume, normal PCWP is highly unlikely.\"}",
+      "usage": {
+        "prompt_tokens": 1056,
+        "completion_tokens": 33,
+        "cost_usd": 0.0001782
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.9,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.9,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "An error in low cardiac output detection implies a high likelihood of cauterization error."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"An error in low cardiac output detection implies a high likelihood of cauterization error.\"}",
+      "usage": {
+        "prompt_tokens": 2211,
+        "completion_tokens": 33,
+        "cost_usd": 0.00035145
+      }
+    },
+    {
+      "network": "asia0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.9,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.9,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9,
+        "brief_reason": "With lung cancer and bronchitis, the likelihood of having dyspnoea is 90%."
+      },
+      "raw_response": "{\"probability\": 0.9, \"brief_reason\": \"With lung cancer and bronchitis, the likelihood of having dyspnoea is 90%.\"}",
+      "usage": {
+        "prompt_tokens": 469,
+        "completion_tokens": 35,
+        "cost_usd": 9.135e-05
+      }
+    },
+    {
+      "network": "cancer0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.19148936,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.05,
+      "abs_error": 0.14148936,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.05,
+        "brief_reason": "With high pollution and being a smoker, the cancer probability is 5%."
+      },
+      "raw_response": "{\"probability\": 0.05, \"brief_reason\": \"With high pollution and being a smoker, the cancer probability is 5%.\"}",
+      "usage": {
+        "prompt_tokens": 301,
+        "completion_tokens": 31,
+        "cost_usd": 6.375e-05
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15343266,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.15343266,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Ground glass opacity is more likely to be reported as ground glass than asymmetry/patchy."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Ground glass opacity is more likely to be reported as ground glass than asymmetry/patchy.\"}",
+      "usage": {
+        "prompt_tokens": 2060,
+        "completion_tokens": 34,
+        "cost_usd": 0.0003294
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.23171645,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.23171645,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Grunting is unlikely given the age of the child."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Grunting is unlikely given the age of the child.\"}",
+      "usage": {
+        "prompt_tokens": 1381,
+        "completion_tokens": 27,
+        "cost_usd": 0.00022335
+      }
+    },
+    {
+      "network": "child2",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.042016807,
+      "reasoning_types": [
+        "causal",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.042016807,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "With right-to-left flow and no mixing, oxygen distribution is likely unequal."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"With right-to-left flow and no mixing, oxygen distribution is likely unequal.\"}",
+      "usage": {
+        "prompt_tokens": 2671,
+        "completion_tokens": 31,
+        "cost_usd": 0.00041925
+      }
+    },
+    {
+      "network": "child3",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15981116,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.15981116,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The medical report indicating LVH is highly unlikely if the child has TGA."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The medical report indicating LVH is highly unlikely if the child has TGA.\"}",
+      "usage": {
+        "prompt_tokens": 604,
+        "completion_tokens": 32,
+        "cost_usd": 0.0001098
+      }
+    },
+    {
+      "network": "diabetes0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.951,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.951,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "At 10 mmol/l, the utility of insulin administration strategies is 0.0 mmol/kg/h."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"At 10 mmol/l, the utility of insulin administration strategies is 0.0 mmol/kg/h.\"}",
+      "usage": {
+        "prompt_tokens": 2292,
+        "completion_tokens": 37,
+        "cost_usd": 0.000366
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.02,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.02,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The combined vertical motion cannot be downward when the 10.7mu vertical motion is strongly upward."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The combined vertical motion cannot be downward when the 10.7mu vertical motion is strongly upward.\"}",
+      "usage": {
+        "prompt_tokens": 5864,
+        "completion_tokens": 35,
+        "cost_usd": 0.0009006
+      }
+    },
+    {
+      "network": "hailfinder1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.97188547,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.1,
+      "abs_error": 0.87188547,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1,
+        "brief_reason": "In scenario B, the likelihood of marked upper movement features is 10%."
+      },
+      "raw_response": "{\"probability\": 0.1, \"brief_reason\": \"In scenario B, the likelihood of marked upper movement features is 10%.\"}",
+      "usage": {
+        "prompt_tokens": 1873,
+        "completion_tokens": 32,
+        "cost_usd": 0.00030015
+      }
+    },
+    {
+      "network": "hailfinder2",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.7,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.7,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Strong instability with DCVZ favorable wind conditions guarantees marked cloud shading."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Strong instability with DCVZ favorable wind conditions guarantees marked cloud shading.\"}",
+      "usage": {
+        "prompt_tokens": 2001,
+        "completion_tokens": 29,
+        "cost_usd": 0.00031755
+      }
+    },
+    {
+      "network": "hailfinder3",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.32,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.32,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "With stifling CIN, LLIW cannot be weak."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"With stifling CIN, LLIW cannot be weak.\"}",
+      "usage": {
+        "prompt_tokens": 1157,
+        "completion_tokens": 28,
+        "cost_usd": 0.00019035
+      }
+    },
+    {
+      "network": "hailfinder4",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.2475,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.2475,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The conditions indicate that instability scaling cannot be average when instability change is increasing."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The conditions indicate that instability scaling cannot be average when instability change is increasing.\"}",
+      "usage": {
+        "prompt_tokens": 2194,
+        "completion_tokens": 30,
+        "cost_usd": 0.0003471
+      }
+    },
+    {
+      "network": "hepar2_0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.02171901,
+      "reasoning_types": [],
+      "pred": 0.0169,
+      "abs_error": 0.004819010000000002,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0169,
+        "brief_reason": "The absence of flatulence increases the likelihood of gallstones being absent, leading to a low chance of elevated amylase levels."
+      },
+      "raw_response": "{\"probability\": 0.0169, \"brief_reason\": \"The absence of flatulence increases the likelihood of gallstones being absent, leading to a low chance of elevated amylase levels.\"}",
+      "usage": {
+        "prompt_tokens": 374,
+        "completion_tokens": 42,
+        "cost_usd": 8.13e-05
+      }
+    },
+    {
+      "network": "hepar2_1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.21415504,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.21415504,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The presence of choledocholithotomy strongly indicates gallstones."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The presence of choledocholithotomy strongly indicates gallstones.\"}",
+      "usage": {
+        "prompt_tokens": 486,
+        "completion_tokens": 28,
+        "cost_usd": 8.97e-05
+      }
+    },
+    {
+      "network": "hepar2_2",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.1359,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.1359,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The patient is obese and does not have diabetes, leading to a very low likelihood of alcoholism."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The patient is obese and does not have diabetes, leading to a very low likelihood of alcoholism.\"}",
+      "usage": {
+        "prompt_tokens": 431,
+        "completion_tokens": 35,
+        "cost_usd": 8.565e-05
+      }
+    },
+    {
+      "network": "insurance0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 1.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 1.0,
+        "brief_reason": "Seniors from a low socioeconomic background are certainly not good students."
+      },
+      "raw_response": "{\"probability\": 1.0, \"brief_reason\": \"Seniors from a low socioeconomic background are certainly not good students.\"}",
+      "usage": {
+        "prompt_tokens": 2376,
+        "completion_tokens": 30,
+        "cost_usd": 0.0003744
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15302481,
+      "reasoning_types": [
+        "causal",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.15302481,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A car in a suburb with twenty thousand miles and no anti-theft devices has no chance of being valued at fifty thousand dollars."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A car in a suburb with twenty thousand miles and no anti-theft devices has no chance of being valued at fifty thousand dollars.\"}",
+      "usage": {
+        "prompt_tokens": 7472,
+        "completion_tokens": 42,
+        "cost_usd": 0.001146
+      }
+    },
+    {
+      "network": "insurance2",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.05,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.05,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The probability of ten thousand dollars in this scenario is zero due to the specified conditions."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The probability of ten thousand dollars in this scenario is zero due to the specified conditions.\"}",
+      "usage": {
+        "prompt_tokens": 6826,
+        "completion_tokens": 33,
+        "cost_usd": 0.0010437
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.69559087,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.69559087,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The evidence contradicts the conditions for that temperature range."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The evidence contradicts the conditions for that temperature range.\"}",
+      "usage": {
+        "prompt_tokens": 9608,
+        "completion_tokens": 27,
+        "cost_usd": 0.0014574
+      }
+    },
+    {
+      "network": "munin0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A severe diagnosis guarantees no sensory neuron involvement, ruling out mixed type."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A severe diagnosis guarantees no sensory neuron involvement, ruling out mixed type.\"}",
+      "usage": {
+        "prompt_tokens": 619,
+        "completion_tokens": 29,
+        "cost_usd": 0.00011025
+      }
+    },
+    {
+      "network": "phytophthora0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.3123691,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.3123691,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "With an optimal temperature of exactly 25 degrees, the species is 100% associated with horticultural environments, indicating no presence of both structures."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"With an optimal temperature of exactly 25 degrees, the species is 100% associated with horticultural environments, indicating no presence of both structures.\"}",
+      "usage": {
+        "prompt_tokens": 3518,
+        "completion_tokens": 45,
+        "cost_usd": 0.0005547
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.20030947,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.20030947,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The species is fully invasive and found in natural ecosystems."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The species is fully invasive and found in natural ecosystems.\"}",
+      "usage": {
+        "prompt_tokens": 5219,
+        "completion_tokens": 27,
+        "cost_usd": 0.00079905
+      }
+    },
+    {
+      "network": "sachs0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.46793373,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.46793373,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "PIP2 being high is highly unlikely when PIP3 is average."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"PIP2 being high is highly unlikely when PIP3 is average.\"}",
+      "usage": {
+        "prompt_tokens": 724,
+        "completion_tokens": 31,
+        "cost_usd": 0.0001272
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15703602,
+      "reasoning_types": [],
+      "pred": 0.0002,
+      "abs_error": 0.15683602,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0002,
+        "brief_reason": "Given low ERK and average PKA, JNK activation is highly unlikely to be high."
+      },
+      "raw_response": "{\"probability\": 0.0002, \"brief_reason\": \"Given low ERK and average PKA, JNK activation is highly unlikely to be high.\"}",
+      "usage": {
+        "prompt_tokens": 5140,
+        "completion_tokens": 36,
+        "cost_usd": 0.0007926
+      }
+    },
+    {
+      "network": "water0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.2499,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.2499,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Given the evidence, the nitrification rate cannot be 0.5 mg/L."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Given the evidence, the nitrification rate cannot be 0.5 mg/L.\"}",
+      "usage": {
+        "prompt_tokens": 4462,
+        "completion_tokens": 33,
+        "cost_usd": 0.0006891
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.0,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "CBODN is certainly 10 mg/L at 12:00."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"CBODN is certainly 10 mg/L at 12:00.\"}",
+      "usage": {
+        "prompt_tokens": 8468,
+        "completion_tokens": 30,
+        "cost_usd": 0.0012882
+      }
+    },
+    {
+      "network": "win95pts0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.99995,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 1.0,
+      "abs_error": 4.999999999999449e-05,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 1.0,
+        "brief_reason": "With less than 2MB of space, the EMF cannot be generated for printing."
+      },
+      "raw_response": "{\"probability\": 1.0, \"brief_reason\": \"With less than 2MB of space, the EMF cannot be generated for printing.\"}",
+      "usage": {
+        "prompt_tokens": 980,
+        "completion_tokens": 34,
+        "cost_usd": 0.0001674
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T10:40:45Z",
+  "_meta": {
+    "prompt_tokens": 85189,
+    "completion_tokens": 976,
+    "total_cost_usd": 0.013363949999999998,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "9a80bb50",
+    "timestamp_utc": "2026-05-03T10:40:45.196677+00:00",
+    "script": "baselines/run_quite_direct_baseline.py",
+    "n_total": 30,
+    "modes": [
+      "numeric"
+    ]
+  }
+}

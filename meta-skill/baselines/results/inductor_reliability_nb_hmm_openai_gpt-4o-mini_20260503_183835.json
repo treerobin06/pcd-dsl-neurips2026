@@ -1,0 +1,3742 @@
+{
+  "experiment": "NB/HMM adversarial TaskSpec induction reliability",
+  "model": "openai/gpt-4o-mini",
+  "config": {
+    "model": "openai/gpt-4o-mini",
+    "n_nb": 50,
+    "n_hmm": 50,
+    "nb_base_seed": 7000,
+    "hmm_base_seed": 8000,
+    "max_rounds": 2,
+    "temperature": 0.7,
+    "sema": 10
+  },
+  "elapsed_sec": 85.74761509895325,
+  "summary": {
+    "overall": {
+      "n": 100,
+      "first_pass_correct": 95,
+      "first_pass_rate": 0.95,
+      "first_pass_wilson_95ci": [
+        0.8882480347279118,
+        0.9784566385436864
+      ],
+      "final_correct": 96,
+      "final_rate": 0.96,
+      "final_wilson_95ci": [
+        0.9016278276739262,
+        0.984336949448152
+      ],
+      "failure_counts": {
+        "wrong_answer": 4
+      }
+    },
+    "nb": {
+      "n": 50,
+      "first_pass_correct": 46,
+      "first_pass_rate": 0.92,
+      "first_pass_wilson_95ci": [
+        0.8116149745493629,
+        0.9684509967442093
+      ],
+      "final_correct": 47,
+      "final_rate": 0.94,
+      "final_wilson_95ci": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "failure_counts": {
+        "wrong_answer": 3
+      }
+    },
+    "hmm": {
+      "n": 50,
+      "first_pass_correct": 49,
+      "first_pass_rate": 0.98,
+      "first_pass_wilson_95ci": [
+        0.8950431352816304,
+        0.9964608319110235
+      ],
+      "final_correct": 49,
+      "final_rate": 0.98,
+      "final_wilson_95ci": [
+        0.8950431352816304,
+        0.9964608319110235
+      ],
+      "failure_counts": {
+        "wrong_answer": 1
+      }
+    }
+  },
+  "results": [
+    {
+      "family": "nb",
+      "i": 0,
+      "seed": 7000,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Pneumonia",
+        "gold": "Pneumonia"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Pneumonia",
+            "gold": "Pneumonia"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2640,
+        "completion_tokens": 930,
+        "cost_usd": 0.000762
+      }
+    },
+    {
+      "family": "nb",
+      "i": 1,
+      "seed": 7001,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Asthma Exacerbation",
+            "gold": "Asthma Exacerbation"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2651,
+        "completion_tokens": 952,
+        "cost_usd": 0.00082485
+      }
+    },
+    {
+      "family": "nb",
+      "i": 2,
+      "seed": 7002,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Asthma Exacerbation",
+            "gold": "Asthma Exacerbation"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2648,
+        "completion_tokens": 954,
+        "cost_usd": 0.0008256
+      }
+    },
+    {
+      "family": "nb",
+      "i": 3,
+      "seed": 7003,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Influenza",
+        "gold": "Influenza"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Influenza",
+            "gold": "Influenza"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2643,
+        "completion_tokens": 912,
+        "cost_usd": 0.00079965
+      }
+    },
+    {
+      "family": "nb",
+      "i": 4,
+      "seed": 7004,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Influenza",
+        "gold": "Influenza"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Influenza",
+            "gold": "Influenza"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2643,
+        "completion_tokens": 923,
+        "cost_usd": 0.00080625
+      }
+    },
+    {
+      "family": "nb",
+      "i": 5,
+      "seed": 7005,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Bronchitis",
+        "gold": "Bronchitis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Bronchitis",
+            "gold": "Bronchitis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2634,
+        "completion_tokens": 963,
+        "cost_usd": 0.0008289
+      }
+    },
+    {
+      "family": "nb",
+      "i": 6,
+      "seed": 7006,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Strep Throat",
+        "gold": "Strep Throat"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Strep Throat",
+            "gold": "Strep Throat"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2643,
+        "completion_tokens": 968,
+        "cost_usd": 0.00083325
+      }
+    },
+    {
+      "family": "nb",
+      "i": 7,
+      "seed": 7007,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Asthma Exacerbation",
+            "gold": "Asthma Exacerbation"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2651,
+        "completion_tokens": 894,
+        "cost_usd": 0.00074205
+      }
+    },
+    {
+      "family": "nb",
+      "i": 8,
+      "seed": 7008,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Pneumonia",
+        "gold": "Pneumonia"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Pneumonia",
+            "gold": "Pneumonia"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2646,
+        "completion_tokens": 896,
+        "cost_usd": 0.0007425
+      }
+    },
+    {
+      "family": "nb",
+      "i": 9,
+      "seed": 7009,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Strep Throat",
+        "gold": "Strep Throat"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Strep Throat",
+            "gold": "Strep Throat"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2654,
+        "completion_tokens": 980,
+        "cost_usd": 0.0008421
+      }
+    },
+    {
+      "family": "nb",
+      "i": 10,
+      "seed": 7010,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Influenza",
+        "gold": "Influenza"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Influenza",
+            "gold": "Influenza"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2644,
+        "completion_tokens": 910,
+        "cost_usd": 0.0007986
+      }
+    },
+    {
+      "family": "nb",
+      "i": 11,
+      "seed": 7011,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Influenza",
+        "gold": "Influenza"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Influenza",
+            "gold": "Influenza"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2638,
+        "completion_tokens": 922,
+        "cost_usd": 0.0008049
+      }
+    },
+    {
+      "family": "nb",
+      "i": 12,
+      "seed": 7012,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Sinusitis",
+        "gold": "Sinusitis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Sinusitis",
+            "gold": "Sinusitis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2670,
+        "completion_tokens": 935,
+        "cost_usd": 0.0007695
+      }
+    },
+    {
+      "family": "nb",
+      "i": 13,
+      "seed": 7013,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Influenza",
+        "gold": "Influenza"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Influenza",
+            "gold": "Influenza"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2640,
+        "completion_tokens": 895,
+        "cost_usd": 0.000789
+      }
+    },
+    {
+      "family": "nb",
+      "i": 14,
+      "seed": 7014,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Gastroenteritis",
+            "gold": "Gastroenteritis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2649,
+        "completion_tokens": 924,
+        "cost_usd": 0.00080775
+      }
+    },
+    {
+      "family": "nb",
+      "i": 15,
+      "seed": 7015,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "COVID-19",
+        "gold": "COVID-19"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "COVID-19",
+            "gold": "COVID-19"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2642,
+        "completion_tokens": 966,
+        "cost_usd": 0.0007839
+      }
+    },
+    {
+      "family": "nb",
+      "i": 16,
+      "seed": 7016,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Allergic Rhinitis",
+        "gold": "Allergic Rhinitis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Allergic Rhinitis",
+            "gold": "Allergic Rhinitis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2636,
+        "completion_tokens": 930,
+        "cost_usd": 0.0008094
+      }
+    },
+    {
+      "family": "nb",
+      "i": 17,
+      "seed": 7017,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Sinusitis",
+        "gold": "Sinusitis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Sinusitis",
+            "gold": "Sinusitis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2633,
+        "completion_tokens": 839,
+        "cost_usd": 0.00075435
+      }
+    },
+    {
+      "family": "nb",
+      "i": 18,
+      "seed": 7018,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "COVID-19",
+        "gold": "COVID-19"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "COVID-19",
+            "gold": "COVID-19"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2650,
+        "completion_tokens": 859,
+        "cost_usd": 0.0007689
+      }
+    },
+    {
+      "family": "nb",
+      "i": 19,
+      "seed": 7019,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Influenza",
+        "gold": "Influenza"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Influenza",
+            "gold": "Influenza"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2658,
+        "completion_tokens": 954,
+        "cost_usd": 0.0008271
+      }
+    },
+    {
+      "family": "nb",
+      "i": 20,
+      "seed": 7020,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Influenza",
+        "gold": "Influenza"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Influenza",
+            "gold": "Influenza"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2644,
+        "completion_tokens": 894,
+        "cost_usd": 0.000789
+      }
+    },
+    {
+      "family": "nb",
+      "i": 21,
+      "seed": 7021,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Sinusitis",
+        "gold": "Sinusitis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Sinusitis",
+            "gold": "Sinusitis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2632,
+        "completion_tokens": 959,
+        "cost_usd": 0.0008262
+      }
+    },
+    {
+      "family": "nb",
+      "i": 22,
+      "seed": 7022,
+      "first_pass": false,
+      "final_ok": false,
+      "rounds_used": 2,
+      "final_status": "wrong_answer",
+      "final_details": {
+        "pred": "Sinusitis",
+        "gold": "Common Cold"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": false,
+          "status": "wrong_answer",
+          "details": {
+            "pred": "Sinusitis",
+            "gold": "Common Cold"
+          },
+          "family": "naive_bayes"
+        },
+        {
+          "round": 2,
+          "ok": false,
+          "status": "wrong_answer",
+          "details": {
+            "pred": "Sinusitis",
+            "gold": "Common Cold"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 5344,
+        "completion_tokens": 1831,
+        "cost_usd": 0.0016121999999999998
+      }
+    },
+    {
+      "family": "nb",
+      "i": 23,
+      "seed": 7023,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Asthma Exacerbation",
+            "gold": "Asthma Exacerbation"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2643,
+        "completion_tokens": 980,
+        "cost_usd": 0.00084045
+      }
+    },
+    {
+      "family": "nb",
+      "i": 24,
+      "seed": 7024,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Pneumonia",
+        "gold": "Pneumonia"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Pneumonia",
+            "gold": "Pneumonia"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2648,
+        "completion_tokens": 977,
+        "cost_usd": 0.0008394
+      }
+    },
+    {
+      "family": "nb",
+      "i": 25,
+      "seed": 7025,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Gastroenteritis",
+            "gold": "Gastroenteritis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2644,
+        "completion_tokens": 981,
+        "cost_usd": 0.0008412
+      }
+    },
+    {
+      "family": "nb",
+      "i": 26,
+      "seed": 7026,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Pneumonia",
+        "gold": "Pneumonia"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Pneumonia",
+            "gold": "Pneumonia"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2660,
+        "completion_tokens": 982,
+        "cost_usd": 0.0008442
+      }
+    },
+    {
+      "family": "nb",
+      "i": 27,
+      "seed": 7027,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Strep Throat",
+        "gold": "Strep Throat"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Strep Throat",
+            "gold": "Strep Throat"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2654,
+        "completion_tokens": 963,
+        "cost_usd": 0.0008319
+      }
+    },
+    {
+      "family": "nb",
+      "i": 28,
+      "seed": 7028,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Pneumonia",
+        "gold": "Pneumonia"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Pneumonia",
+            "gold": "Pneumonia"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2641,
+        "completion_tokens": 924,
+        "cost_usd": 0.00080655
+      }
+    },
+    {
+      "family": "nb",
+      "i": 29,
+      "seed": 7029,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Strep Throat",
+        "gold": "Strep Throat"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Strep Throat",
+            "gold": "Strep Throat"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2647,
+        "completion_tokens": 895,
+        "cost_usd": 0.00079005
+      }
+    },
+    {
+      "family": "nb",
+      "i": 30,
+      "seed": 7030,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Allergic Rhinitis",
+        "gold": "Allergic Rhinitis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Allergic Rhinitis",
+            "gold": "Allergic Rhinitis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2651,
+        "completion_tokens": 968,
+        "cost_usd": 0.00083445
+      }
+    },
+    {
+      "family": "nb",
+      "i": 31,
+      "seed": 7031,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Common Cold",
+        "gold": "Common Cold"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Common Cold",
+            "gold": "Common Cold"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2641,
+        "completion_tokens": 851,
+        "cost_usd": 0.00076275
+      }
+    },
+    {
+      "family": "nb",
+      "i": 32,
+      "seed": 7032,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "COVID-19",
+        "gold": "COVID-19"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "COVID-19",
+            "gold": "COVID-19"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2649,
+        "completion_tokens": 965,
+        "cost_usd": 0.00083235
+      }
+    },
+    {
+      "family": "nb",
+      "i": 33,
+      "seed": 7033,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Common Cold",
+        "gold": "Common Cold"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Common Cold",
+            "gold": "Common Cold"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2647,
+        "completion_tokens": 851,
+        "cost_usd": 0.00076365
+      }
+    },
+    {
+      "family": "nb",
+      "i": 34,
+      "seed": 7034,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Pneumonia",
+        "gold": "Pneumonia"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Pneumonia",
+            "gold": "Pneumonia"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2649,
+        "completion_tokens": 996,
+        "cost_usd": 0.00085095
+      }
+    },
+    {
+      "family": "nb",
+      "i": 35,
+      "seed": 7035,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Gastroenteritis",
+            "gold": "Gastroenteritis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2641,
+        "completion_tokens": 871,
+        "cost_usd": 0.00077475
+      }
+    },
+    {
+      "family": "nb",
+      "i": 36,
+      "seed": 7036,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Gastroenteritis",
+            "gold": "Gastroenteritis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2658,
+        "completion_tokens": 987,
+        "cost_usd": 0.0008469
+      }
+    },
+    {
+      "family": "nb",
+      "i": 37,
+      "seed": 7037,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Common Cold",
+        "gold": "Common Cold"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Common Cold",
+            "gold": "Common Cold"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2644,
+        "completion_tokens": 959,
+        "cost_usd": 0.00078
+      }
+    },
+    {
+      "family": "nb",
+      "i": 38,
+      "seed": 7038,
+      "first_pass": false,
+      "final_ok": false,
+      "rounds_used": 2,
+      "final_status": "wrong_answer",
+      "final_details": {
+        "pred": "Sinusitis",
+        "gold": "Bronchitis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": false,
+          "status": "wrong_answer",
+          "details": {
+            "pred": "Sinusitis",
+            "gold": "Bronchitis"
+          },
+          "family": "naive_bayes"
+        },
+        {
+          "round": 2,
+          "ok": false,
+          "status": "wrong_answer",
+          "details": {
+            "pred": "Sinusitis",
+            "gold": "Bronchitis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 5355,
+        "completion_tokens": 1822,
+        "cost_usd": 0.00160845
+      }
+    },
+    {
+      "family": "nb",
+      "i": 39,
+      "seed": 7039,
+      "first_pass": false,
+      "final_ok": false,
+      "rounds_used": 2,
+      "final_status": "wrong_answer",
+      "final_details": {
+        "pred": "Bronchitis",
+        "gold": "Gastroenteritis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": false,
+          "status": "wrong_answer",
+          "details": {
+            "pred": "Bronchitis",
+            "gold": "Gastroenteritis"
+          },
+          "family": "naive_bayes"
+        },
+        {
+          "round": 2,
+          "ok": false,
+          "status": "wrong_answer",
+          "details": {
+            "pred": "Bronchitis",
+            "gold": "Gastroenteritis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 5332,
+        "completion_tokens": 1844,
+        "cost_usd": 0.0016182000000000002
+      }
+    },
+    {
+      "family": "nb",
+      "i": 40,
+      "seed": 7040,
+      "first_pass": false,
+      "final_ok": true,
+      "rounds_used": 2,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": false,
+          "status": "compile_or_solve_failed",
+          "details": {
+            "exception": "float() argument must be a string or a number, not 'NoneType'"
+          },
+          "family": "naive_bayes"
+        },
+        {
+          "round": 2,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Gastroenteritis",
+            "gold": "Gastroenteritis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 5353,
+        "completion_tokens": 1907,
+        "cost_usd": 0.0016591499999999999
+      }
+    },
+    {
+      "family": "nb",
+      "i": 41,
+      "seed": 7041,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Sinusitis",
+        "gold": "Sinusitis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Sinusitis",
+            "gold": "Sinusitis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2646,
+        "completion_tokens": 856,
+        "cost_usd": 0.0007665
+      }
+    },
+    {
+      "family": "nb",
+      "i": 42,
+      "seed": 7042,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Gastroenteritis",
+        "gold": "Gastroenteritis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Gastroenteritis",
+            "gold": "Gastroenteritis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2635,
+        "completion_tokens": 943,
+        "cost_usd": 0.00081705
+      }
+    },
+    {
+      "family": "nb",
+      "i": 43,
+      "seed": 7043,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Common Cold",
+        "gold": "Common Cold"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Common Cold",
+            "gold": "Common Cold"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2660,
+        "completion_tokens": 898,
+        "cost_usd": 0.0007938
+      }
+    },
+    {
+      "family": "nb",
+      "i": 44,
+      "seed": 7044,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Strep Throat",
+        "gold": "Strep Throat"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Strep Throat",
+            "gold": "Strep Throat"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2654,
+        "completion_tokens": 951,
+        "cost_usd": 0.0008247
+      }
+    },
+    {
+      "family": "nb",
+      "i": 45,
+      "seed": 7045,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Asthma Exacerbation",
+        "gold": "Asthma Exacerbation"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Asthma Exacerbation",
+            "gold": "Asthma Exacerbation"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2658,
+        "completion_tokens": 849,
+        "cost_usd": 0.0007641
+      }
+    },
+    {
+      "family": "nb",
+      "i": 46,
+      "seed": 7046,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Allergic Rhinitis",
+        "gold": "Allergic Rhinitis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Allergic Rhinitis",
+            "gold": "Allergic Rhinitis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2637,
+        "completion_tokens": 901,
+        "cost_usd": 0.00079215
+      }
+    },
+    {
+      "family": "nb",
+      "i": 47,
+      "seed": 7047,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "COVID-19",
+        "gold": "COVID-19"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "COVID-19",
+            "gold": "COVID-19"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2646,
+        "completion_tokens": 937,
+        "cost_usd": 0.0008151
+      }
+    },
+    {
+      "family": "nb",
+      "i": 48,
+      "seed": 7048,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Allergic Rhinitis",
+        "gold": "Allergic Rhinitis"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Allergic Rhinitis",
+            "gold": "Allergic Rhinitis"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2652,
+        "completion_tokens": 970,
+        "cost_usd": 0.0008358
+      }
+    },
+    {
+      "family": "nb",
+      "i": 49,
+      "seed": 7049,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Influenza",
+        "gold": "Influenza"
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Influenza",
+            "gold": "Influenza"
+          },
+          "family": "naive_bayes"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2655,
+        "completion_tokens": 894,
+        "cost_usd": 0.00079065
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 0,
+      "seed": 8000,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S0",
+        "gold": "S0",
+        "scores": {
+          "S2": 0.1261804619740085,
+          "S1": 0.19316376229569343,
+          "S3": 0.22836059200041772,
+          "S0": 0.4522951837298804
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S0",
+            "gold": "S0",
+            "scores": {
+              "S2": 0.1261804619740085,
+              "S1": 0.19316376229569343,
+              "S3": 0.22836059200041772,
+              "S0": 0.4522951837298804
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2669,
+        "completion_tokens": 724,
+        "cost_usd": 0.00069075
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 1,
+      "seed": 8001,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S0",
+        "gold": "S0",
+        "scores": {
+          "S1": 0.09408758902671349,
+          "S0": 0.5021301942274451,
+          "S3": 0.23569774341655417,
+          "S2": 0.16808447332928725
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S0",
+            "gold": "S0",
+            "scores": {
+              "S1": 0.09408758902671349,
+              "S0": 0.5021301942274451,
+              "S3": 0.23569774341655417,
+              "S2": 0.16808447332928725
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2666,
+        "completion_tokens": 715,
+        "cost_usd": 0.0006369
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 2,
+      "seed": 8002,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S3",
+        "gold": "S3",
+        "scores": {
+          "S3": 0.5619127465956704,
+          "S1": 0.06121281581498259,
+          "S2": 0.17645944647441134,
+          "S0": 0.2004149911149357
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S3",
+            "gold": "S3",
+            "scores": {
+              "S3": 0.5619127465956704,
+              "S1": 0.06121281581498259,
+              "S2": 0.17645944647441134,
+              "S0": 0.2004149911149357
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2692,
+        "completion_tokens": 730,
+        "cost_usd": 0.0006978
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 3,
+      "seed": 8003,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S3",
+        "gold": "S3",
+        "scores": {
+          "S3": 0.4432378071423731,
+          "S0": 0.12409998713912196,
+          "S2": 0.30589493586658256,
+          "S1": 0.12676726985192252
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S3",
+            "gold": "S3",
+            "scores": {
+              "S3": 0.4432378071423731,
+              "S0": 0.12409998713912196,
+              "S2": 0.30589493586658256,
+              "S1": 0.12676726985192252
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2679,
+        "completion_tokens": 715,
+        "cost_usd": 0.00068685
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 4,
+      "seed": 8004,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Happy",
+        "gold": "Happy",
+        "scores": {
+          "Anxious": 0.20842740126170942,
+          "Sad": 0.23780088353854106,
+          "Neutral": 0.25486585546277135,
+          "Happy": 0.29890585973697825
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Happy",
+            "gold": "Happy",
+            "scores": {
+              "Anxious": 0.20842740126170942,
+              "Sad": 0.23780088353854106,
+              "Neutral": 0.25486585546277135,
+              "Happy": 0.29890585973697825
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2669,
+        "completion_tokens": 693,
+        "cost_usd": 0.00067215
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 5,
+      "seed": 8005,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S3",
+        "gold": "S3",
+        "scores": {
+          "S3": 0.3406815699879308,
+          "S0": 0.16524293060568312,
+          "S2": 0.23163536948877675,
+          "S1": 0.2624401299176094
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S3",
+            "gold": "S3",
+            "scores": {
+              "S3": 0.3406815699879308,
+              "S0": 0.16524293060568312,
+              "S2": 0.23163536948877675,
+              "S1": 0.2624401299176094
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2669,
+        "completion_tokens": 720,
+        "cost_usd": 0.00068835
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 6,
+      "seed": 8006,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S2",
+        "gold": "S2",
+        "scores": {
+          "S3": 0.21945913125590236,
+          "S0": 0.18121476459566305,
+          "S2": 0.5323210293427384,
+          "S1": 0.06700507480569616
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S2",
+            "gold": "S2",
+            "scores": {
+              "S3": 0.21945913125590236,
+              "S0": 0.18121476459566305,
+              "S2": 0.5323210293427384,
+              "S1": 0.06700507480569616
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2685,
+        "completion_tokens": 735,
+        "cost_usd": 0.00069975
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 7,
+      "seed": 8007,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Anxious",
+        "gold": "Anxious",
+        "scores": {
+          "Neutral": 0.2627474020801114,
+          "Anxious": 0.3512932422945068,
+          "Sad": 0.21625117042592576,
+          "Happy": 0.169708185199456
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Anxious",
+            "gold": "Anxious",
+            "scores": {
+              "Neutral": 0.2627474020801114,
+              "Anxious": 0.3512932422945068,
+              "Sad": 0.21625117042592576,
+              "Happy": 0.169708185199456
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2673,
+        "completion_tokens": 686,
+        "cost_usd": 0.00066855
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 8,
+      "seed": 8008,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S3",
+        "gold": "S3",
+        "scores": {
+          "S2": 0.1777250391540769,
+          "S0": 0.2845215407804453,
+          "S1": 0.16258265468847222,
+          "S3": 0.3751707653770056
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S3",
+            "gold": "S3",
+            "scores": {
+              "S2": 0.1777250391540769,
+              "S0": 0.2845215407804453,
+              "S1": 0.16258265468847222,
+              "S3": 0.3751707653770056
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2678,
+        "completion_tokens": 714,
+        "cost_usd": 0.0006861
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 9,
+      "seed": 8009,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S2",
+        "gold": "S2",
+        "scores": {
+          "S2": 0.35269637325785563,
+          "S0": 0.15280501952901837,
+          "S1": 0.28636008001613916,
+          "S3": 0.20813852719698686
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S2",
+            "gold": "S2",
+            "scores": {
+              "S2": 0.35269637325785563,
+              "S0": 0.15280501952901837,
+              "S1": 0.28636008001613916,
+              "S3": 0.20813852719698686
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2683,
+        "completion_tokens": 729,
+        "cost_usd": 0.00069585
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 10,
+      "seed": 8010,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S3",
+        "gold": "S3",
+        "scores": {
+          "S0": 0.20866762047334037,
+          "S1": 0.2804615974291446,
+          "S2": 0.16164481219242477,
+          "S3": 0.34922596990509025
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S3",
+            "gold": "S3",
+            "scores": {
+              "S0": 0.20866762047334037,
+              "S1": 0.2804615974291446,
+              "S2": 0.16164481219242477,
+              "S3": 0.34922596990509025
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2674,
+        "completion_tokens": 721,
+        "cost_usd": 0.0006897
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 11,
+      "seed": 8011,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Sad",
+        "gold": "Sad",
+        "scores": {
+          "Neutral": 0.2886759016716562,
+          "Sad": 0.33216171205415146,
+          "Anxious": 0.17078956776221024,
+          "Happy": 0.20837281851198217
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Sad",
+            "gold": "Sad",
+            "scores": {
+              "Neutral": 0.2886759016716562,
+              "Sad": 0.33216171205415146,
+              "Anxious": 0.17078956776221024,
+              "Happy": 0.20837281851198217
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2658,
+        "completion_tokens": 701,
+        "cost_usd": 0.0006753
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 12,
+      "seed": 8012,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S1",
+        "gold": "S1",
+        "scores": {
+          "S0": 0.17281942282880394,
+          "S1": 0.37285243046987865,
+          "S2": 0.2725948394999156,
+          "S3": 0.18173330720140193
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S1",
+            "gold": "S1",
+            "scores": {
+              "S0": 0.17281942282880394,
+              "S1": 0.37285243046987865,
+              "S2": 0.2725948394999156,
+              "S3": 0.18173330720140193
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2680,
+        "completion_tokens": 715,
+        "cost_usd": 0.000687
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 13,
+      "seed": 8013,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S2",
+        "gold": "S2",
+        "scores": {
+          "S2": 0.33176715273603813,
+          "S1": 0.22397065133417798,
+          "S3": 0.2870220875805032,
+          "S0": 0.15724010834928062
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S2",
+            "gold": "S2",
+            "scores": {
+              "S2": 0.33176715273603813,
+              "S1": 0.22397065133417798,
+              "S3": 0.2870220875805032,
+              "S0": 0.15724010834928062
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2689,
+        "completion_tokens": 725,
+        "cost_usd": 0.00069435
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 14,
+      "seed": 8014,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Anxious",
+        "gold": "Anxious",
+        "scores": {
+          "Anxious": 0.36355648331131235,
+          "Happy": 0.04117013859141507,
+          "Sad": 0.3441201333920977,
+          "Neutral": 0.2511532447051751
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Anxious",
+            "gold": "Anxious",
+            "scores": {
+              "Anxious": 0.36355648331131235,
+              "Happy": 0.04117013859141507,
+              "Sad": 0.3441201333920977,
+              "Neutral": 0.2511532447051751
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2683,
+        "completion_tokens": 683,
+        "cost_usd": 0.00066825
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 15,
+      "seed": 8015,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S3",
+        "gold": "S3",
+        "scores": {
+          "S0": 0.19369364650093093,
+          "S1": 0.2730276952038682,
+          "S2": 0.2474817376269519,
+          "S3": 0.2857969206682491
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S3",
+            "gold": "S3",
+            "scores": {
+              "S0": 0.19369364650093093,
+              "S1": 0.2730276952038682,
+              "S2": 0.2474817376269519,
+              "S3": 0.2857969206682491
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2680,
+        "completion_tokens": 715,
+        "cost_usd": 0.000687
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 16,
+      "seed": 8016,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S3",
+        "gold": "S3",
+        "scores": {
+          "S2": 0.06558219156206367,
+          "S1": 0.1938457819062506,
+          "S0": 0.33580043968180273,
+          "S3": 0.404771586849883
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S3",
+            "gold": "S3",
+            "scores": {
+              "S2": 0.06558219156206367,
+              "S1": 0.1938457819062506,
+              "S0": 0.33580043968180273,
+              "S3": 0.404771586849883
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2679,
+        "completion_tokens": 729,
+        "cost_usd": 0.00064725
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 17,
+      "seed": 8017,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S0",
+        "gold": "S0",
+        "scores": {
+          "S2": 0.23431396238655003,
+          "S1": 0.272658999381287,
+          "S0": 0.42814650207265864,
+          "S3": 0.06488053615950433
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S0",
+            "gold": "S0",
+            "scores": {
+              "S2": 0.23431396238655003,
+              "S1": 0.272658999381287,
+              "S0": 0.42814650207265864,
+              "S3": 0.06488053615950433
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2682,
+        "completion_tokens": 722,
+        "cost_usd": 0.0006915
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 18,
+      "seed": 8018,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S2",
+        "gold": "S2",
+        "scores": {
+          "S2": 0.31719708687734344,
+          "S0": 0.1725491520728663,
+          "S3": 0.2709353125263221,
+          "S1": 0.23931844852346812
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S2",
+            "gold": "S2",
+            "scores": {
+              "S2": 0.31719708687734344,
+              "S0": 0.1725491520728663,
+              "S3": 0.2709353125263221,
+              "S1": 0.23931844852346812
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2674,
+        "completion_tokens": 725,
+        "cost_usd": 0.0006921
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 19,
+      "seed": 8019,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Anxious",
+        "gold": "Anxious",
+        "scores": {
+          "Happy": 0.25301074335493967,
+          "Neutral": 0.21098971027743932,
+          "Sad": 0.13523957256432825,
+          "Anxious": 0.4007599738032927
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Anxious",
+            "gold": "Anxious",
+            "scores": {
+              "Happy": 0.25301074335493967,
+              "Neutral": 0.21098971027743932,
+              "Sad": 0.13523957256432825,
+              "Anxious": 0.4007599738032927
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2659,
+        "completion_tokens": 688,
+        "cost_usd": 0.00061965
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 20,
+      "seed": 8020,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S0",
+        "gold": "S0",
+        "scores": {
+          "S3": 0.3226949471696027,
+          "S1": 0.02975832959739975,
+          "S0": 0.4584501557365336,
+          "S2": 0.18909656749646403
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S0",
+            "gold": "S0",
+            "scores": {
+              "S3": 0.3226949471696027,
+              "S1": 0.02975832959739975,
+              "S0": 0.4584501557365336,
+              "S2": 0.18909656749646403
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2677,
+        "completion_tokens": 735,
+        "cost_usd": 0.00069855
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 21,
+      "seed": 8021,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Sad",
+        "gold": "Sad",
+        "scores": {
+          "Sad": 0.36197488528261035,
+          "Anxious": 0.15110633474019147,
+          "Happy": 0.23050716517858302,
+          "Neutral": 0.2564116147986152
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Sad",
+            "gold": "Sad",
+            "scores": {
+              "Sad": 0.36197488528261035,
+              "Anxious": 0.15110633474019147,
+              "Happy": 0.23050716517858302,
+              "Neutral": 0.2564116147986152
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2669,
+        "completion_tokens": 683,
+        "cost_usd": 0.00066615
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 22,
+      "seed": 8022,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S0",
+        "gold": "S0",
+        "scores": {
+          "S3": 0.18297168621766793,
+          "S0": 0.4582271627215639,
+          "S1": 0.3331468743309181,
+          "S2": 0.02565427672985002
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S0",
+            "gold": "S0",
+            "scores": {
+              "S3": 0.18297168621766793,
+              "S0": 0.4582271627215639,
+              "S1": 0.3331468743309181,
+              "S2": 0.02565427672985002
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2683,
+        "completion_tokens": 726,
+        "cost_usd": 0.00069405
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 23,
+      "seed": 8023,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S2",
+        "gold": "S2",
+        "scores": {
+          "S3": 0.2333138135327493,
+          "S0": 0.288841542607528,
+          "S1": 0.10789953265769416,
+          "S2": 0.36994511120202855
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S2",
+            "gold": "S2",
+            "scores": {
+              "S3": 0.2333138135327493,
+              "S0": 0.288841542607528,
+              "S1": 0.10789953265769416,
+              "S2": 0.36994511120202855
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2687,
+        "completion_tokens": 726,
+        "cost_usd": 0.00069465
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 24,
+      "seed": 8024,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Anxious",
+        "gold": "Anxious",
+        "scores": {
+          "Anxious": 0.38147315347747796,
+          "Neutral": 0.08642254930604604,
+          "Sad": 0.34443682233301676,
+          "Happy": 0.18766747488345933
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Anxious",
+            "gold": "Anxious",
+            "scores": {
+              "Anxious": 0.38147315347747796,
+              "Neutral": 0.08642254930604604,
+              "Sad": 0.34443682233301676,
+              "Happy": 0.18766747488345933
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2662,
+        "completion_tokens": 685,
+        "cost_usd": 0.0006663
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 25,
+      "seed": 8025,
+      "first_pass": false,
+      "final_ok": false,
+      "rounds_used": 2,
+      "final_status": "wrong_answer",
+      "final_details": {
+        "pred": "S2",
+        "gold": "S0",
+        "scores": {
+          "S3": 0.25869629934472826,
+          "S1": 0.22062479740260862,
+          "S0": 0.2600428786043311,
+          "S2": 0.26063602464833197
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": false,
+          "status": "wrong_answer",
+          "details": {
+            "pred": "S2",
+            "gold": "S0",
+            "scores": {
+              "S3": 0.2551455292258588,
+              "S1": 0.21946413767658904,
+              "S0": 0.254193477162674,
+              "S2": 0.27119685593487824
+            }
+          },
+          "family": "hmm_forward"
+        },
+        {
+          "round": 2,
+          "ok": false,
+          "status": "wrong_answer",
+          "details": {
+            "pred": "S2",
+            "gold": "S0",
+            "scores": {
+              "S3": 0.25869629934472826,
+              "S1": 0.22062479740260862,
+              "S0": 0.2600428786043311,
+              "S2": 0.26063602464833197
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 5465,
+        "completion_tokens": 1430,
+        "cost_usd": 0.00138975
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 26,
+      "seed": 8026,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S0",
+        "gold": "S0",
+        "scores": {
+          "S3": 0.09515326335068333,
+          "S1": 0.1609841673371208,
+          "S2": 0.1860730519762775,
+          "S0": 0.5577895173359184
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S0",
+            "gold": "S0",
+            "scores": {
+              "S3": 0.09515326335068333,
+              "S1": 0.1609841673371208,
+              "S2": 0.1860730519762775,
+              "S0": 0.5577895173359184
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2688,
+        "completion_tokens": 714,
+        "cost_usd": 0.0006876
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 27,
+      "seed": 8027,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S1",
+        "gold": "S1",
+        "scores": {
+          "S0": 0.12257938303909446,
+          "S1": 0.5369662055057695,
+          "S2": 0.06379016465608905,
+          "S3": 0.276664246799047
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S1",
+            "gold": "S1",
+            "scores": {
+              "S0": 0.12257938303909446,
+              "S1": 0.5369662055057695,
+              "S2": 0.06379016465608905,
+              "S3": 0.276664246799047
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2685,
+        "completion_tokens": 717,
+        "cost_usd": 0.00068895
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 28,
+      "seed": 8028,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S1",
+        "gold": "S1",
+        "scores": {
+          "S3": 0.24813898427815395,
+          "S1": 0.3965775885063084,
+          "S2": 0.09469519297912005,
+          "S0": 0.26058823423641764
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S1",
+            "gold": "S1",
+            "scores": {
+              "S3": 0.24813898427815395,
+              "S1": 0.3965775885063084,
+              "S2": 0.09469519297912005,
+              "S0": 0.26058823423641764
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2675,
+        "completion_tokens": 710,
+        "cost_usd": 0.00068325
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 29,
+      "seed": 8029,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S2",
+        "gold": "S2",
+        "scores": {
+          "S0": 0.29348138215256325,
+          "S1": 0.28514486308429887,
+          "S2": 0.3226001108729901,
+          "S3": 0.09877364389014777
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S2",
+            "gold": "S2",
+            "scores": {
+              "S0": 0.29348138215256325,
+              "S1": 0.28514486308429887,
+              "S2": 0.3226001108729901,
+              "S3": 0.09877364389014777
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2673,
+        "completion_tokens": 713,
+        "cost_usd": 0.00068475
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 30,
+      "seed": 8030,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Neutral",
+        "gold": "Neutral",
+        "scores": {
+          "Anxious": 0.21665439161409003,
+          "Sad": 0.14858136599958655,
+          "Neutral": 0.5685995271401911,
+          "Happy": 0.06616471524613225
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Neutral",
+            "gold": "Neutral",
+            "scores": {
+              "Anxious": 0.21665439161409003,
+              "Sad": 0.14858136599958655,
+              "Neutral": 0.5685995271401911,
+              "Happy": 0.06616471524613225
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2653,
+        "completion_tokens": 688,
+        "cost_usd": 0.00066675
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 31,
+      "seed": 8031,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S0",
+        "gold": "S0",
+        "scores": {
+          "S3": 0.1961703465397211,
+          "S0": 0.5006029435825016,
+          "S2": 0.05335877490663859,
+          "S1": 0.2498679349711388
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S0",
+            "gold": "S0",
+            "scores": {
+              "S3": 0.1961703465397211,
+              "S0": 0.5006029435825016,
+              "S2": 0.05335877490663859,
+              "S1": 0.2498679349711388
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2691,
+        "completion_tokens": 726,
+        "cost_usd": 0.00069525
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 32,
+      "seed": 8032,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S3",
+        "gold": "S3",
+        "scores": {
+          "S2": 0.16305227986752585,
+          "S0": 0.2896902280780603,
+          "S1": 0.18576323474640397,
+          "S3": 0.36149425730800994
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S3",
+            "gold": "S3",
+            "scores": {
+              "S2": 0.16305227986752585,
+              "S0": 0.2896902280780603,
+              "S1": 0.18576323474640397,
+              "S3": 0.36149425730800994
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2678,
+        "completion_tokens": 730,
+        "cost_usd": 0.0006477
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 33,
+      "seed": 8033,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S3",
+        "gold": "S3",
+        "scores": {
+          "S2": 0.16669837380973976,
+          "S1": 0.2991371549479704,
+          "S3": 0.37836942724348555,
+          "S0": 0.15579504399880428
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S3",
+            "gold": "S3",
+            "scores": {
+              "S2": 0.16669837380973976,
+              "S1": 0.2991371549479704,
+              "S3": 0.37836942724348555,
+              "S0": 0.15579504399880428
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2673,
+        "completion_tokens": 716,
+        "cost_usd": 0.00068655
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 34,
+      "seed": 8034,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Anxious",
+        "gold": "Anxious",
+        "scores": {
+          "Anxious": 0.36600309350346366,
+          "Happy": 0.14787834303736505,
+          "Neutral": 0.3433630303175093,
+          "Sad": 0.14275553314166198
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Anxious",
+            "gold": "Anxious",
+            "scores": {
+              "Anxious": 0.36600309350346366,
+              "Happy": 0.14787834303736505,
+              "Neutral": 0.3433630303175093,
+              "Sad": 0.14275553314166198
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2660,
+        "completion_tokens": 691,
+        "cost_usd": 0.0006696
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 35,
+      "seed": 8035,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S0",
+        "gold": "S0",
+        "scores": {
+          "S3": 0.09685060749379004,
+          "S0": 0.3936144589984374,
+          "S1": 0.18930564236219435,
+          "S2": 0.32022929114557824
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S0",
+            "gold": "S0",
+            "scores": {
+              "S3": 0.09685060749379004,
+              "S0": 0.3936144589984374,
+              "S1": 0.18930564236219435,
+              "S2": 0.32022929114557824
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2677,
+        "completion_tokens": 721,
+        "cost_usd": 0.00069015
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 36,
+      "seed": 8036,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S3",
+        "gold": "S3",
+        "scores": {
+          "S3": 0.35133288430341875,
+          "S2": 0.25800920580884973,
+          "S0": 0.30442718770937,
+          "S1": 0.08623072217836163
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S3",
+            "gold": "S3",
+            "scores": {
+              "S3": 0.35133288430341875,
+              "S2": 0.25800920580884973,
+              "S0": 0.30442718770937,
+              "S1": 0.08623072217836163
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2681,
+        "completion_tokens": 725,
+        "cost_usd": 0.00064515
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 37,
+      "seed": 8037,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Happy",
+        "gold": "Happy",
+        "scores": {
+          "Anxious": 0.29484166947338525,
+          "Happy": 0.35269373313760516,
+          "Neutral": 0.2614158183619864,
+          "Sad": 0.09104877902702328
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Happy",
+            "gold": "Happy",
+            "scores": {
+              "Anxious": 0.29484166947338525,
+              "Happy": 0.35269373313760516,
+              "Neutral": 0.2614158183619864,
+              "Sad": 0.09104877902702328
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2659,
+        "completion_tokens": 692,
+        "cost_usd": 0.00067005
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 38,
+      "seed": 8038,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S0",
+        "gold": "S0",
+        "scores": {
+          "S1": 0.2255388893005072,
+          "S2": 0.20250420494875152,
+          "S0": 0.3558071506253423,
+          "S3": 0.21614975512539902
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S0",
+            "gold": "S0",
+            "scores": {
+              "S1": 0.2255388893005072,
+              "S2": 0.20250420494875152,
+              "S0": 0.3558071506253423,
+              "S3": 0.21614975512539902
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2670,
+        "completion_tokens": 720,
+        "cost_usd": 0.0006885
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 39,
+      "seed": 8039,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S1",
+        "gold": "S1",
+        "scores": {
+          "S0": 0.28898487504051484,
+          "S3": 0.11785842096569077,
+          "S2": 0.23718234621445555,
+          "S1": 0.35597435777933883
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S1",
+            "gold": "S1",
+            "scores": {
+              "S0": 0.28898487504051484,
+              "S3": 0.11785842096569077,
+              "S2": 0.23718234621445555,
+              "S1": 0.35597435777933883
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2665,
+        "completion_tokens": 735,
+        "cost_usd": 0.00069675
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 40,
+      "seed": 8040,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Anxious",
+        "gold": "Anxious",
+        "scores": {
+          "Happy": 0.1895230588643713,
+          "Neutral": 0.29947336506265093,
+          "Sad": 0.20349843071576498,
+          "Anxious": 0.3075051453572129
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Anxious",
+            "gold": "Anxious",
+            "scores": {
+              "Happy": 0.1895230588643713,
+              "Neutral": 0.29947336506265093,
+              "Sad": 0.20349843071576498,
+              "Anxious": 0.3075051453572129
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2670,
+        "completion_tokens": 694,
+        "cost_usd": 0.0006729
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 41,
+      "seed": 8041,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S1",
+        "gold": "S1",
+        "scores": {
+          "S2": 0.24668459648944743,
+          "S0": 0.18979058961530618,
+          "S1": 0.29979778566469556,
+          "S3": 0.26372702823055083
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S1",
+            "gold": "S1",
+            "scores": {
+              "S2": 0.24668459648944743,
+              "S0": 0.18979058961530618,
+              "S1": 0.29979778566469556,
+              "S3": 0.26372702823055083
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2675,
+        "completion_tokens": 709,
+        "cost_usd": 0.00068265
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 42,
+      "seed": 8042,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S1",
+        "gold": "S1",
+        "scores": {
+          "S0": 0.03682361194326772,
+          "S1": 0.4132780085059379,
+          "S2": 0.2682494921127814,
+          "S3": 0.28164888743801303
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S1",
+            "gold": "S1",
+            "scores": {
+              "S0": 0.03682361194326772,
+              "S1": 0.4132780085059379,
+              "S2": 0.2682494921127814,
+              "S3": 0.28164888743801303
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2675,
+        "completion_tokens": 711,
+        "cost_usd": 0.00068385
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 43,
+      "seed": 8043,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S3",
+        "gold": "S3",
+        "scores": {
+          "S2": 0.1825305530336384,
+          "S0": 0.21056303975506038,
+          "S1": 0.29768422240458,
+          "S3": 0.3092221848067212
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S3",
+            "gold": "S3",
+            "scores": {
+              "S2": 0.1825305530336384,
+              "S0": 0.21056303975506038,
+              "S1": 0.29768422240458,
+              "S3": 0.3092221848067212
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2694,
+        "completion_tokens": 695,
+        "cost_usd": 0.0006771
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 44,
+      "seed": 8044,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Sad",
+        "gold": "Sad",
+        "scores": {
+          "Anxious": 0.07594243794876654,
+          "Neutral": 0.19663417179174228,
+          "Happy": 0.26338830252869344,
+          "Sad": 0.4640350877307979
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Sad",
+            "gold": "Sad",
+            "scores": {
+              "Anxious": 0.07594243794876654,
+              "Neutral": 0.19663417179174228,
+              "Happy": 0.26338830252869344,
+              "Sad": 0.4640350877307979
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2663,
+        "completion_tokens": 694,
+        "cost_usd": 0.00067185
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 45,
+      "seed": 8045,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S1",
+        "gold": "S1",
+        "scores": {
+          "S1": 0.28375004968301937,
+          "S2": 0.1878934281682058,
+          "S0": 0.2652863511263329,
+          "S3": 0.2630701710224419
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S1",
+            "gold": "S1",
+            "scores": {
+              "S1": 0.28375004968301937,
+              "S2": 0.1878934281682058,
+              "S0": 0.2652863511263329,
+              "S3": 0.2630701710224419
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2679,
+        "completion_tokens": 726,
+        "cost_usd": 0.00064545
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 46,
+      "seed": 8046,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S0",
+        "gold": "S0",
+        "scores": {
+          "S0": 0.3675159472952856,
+          "S1": 0.19986748821288658,
+          "S2": 0.21752095571525074,
+          "S3": 0.21509560877657702
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S0",
+            "gold": "S0",
+            "scores": {
+              "S0": 0.3675159472952856,
+              "S1": 0.19986748821288658,
+              "S2": 0.21752095571525074,
+              "S3": 0.21509560877657702
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2683,
+        "completion_tokens": 721,
+        "cost_usd": 0.00069105
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 47,
+      "seed": 8047,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Neutral",
+        "gold": "Neutral",
+        "scores": {
+          "Happy": 0.20309923413207445,
+          "Sad": 0.028985311781588335,
+          "Anxious": 0.21423307214790704,
+          "Neutral": 0.5536823819384302
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Neutral",
+            "gold": "Neutral",
+            "scores": {
+              "Happy": 0.20309923413207445,
+              "Sad": 0.028985311781588335,
+              "Anxious": 0.21423307214790704,
+              "Neutral": 0.5536823819384302
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2672,
+        "completion_tokens": 698,
+        "cost_usd": 0.0006756
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 48,
+      "seed": 8048,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "S0",
+        "gold": "S0",
+        "scores": {
+          "S1": 0.23124199828078432,
+          "S3": 0.10604914654220539,
+          "S2": 0.21121384436875223,
+          "S0": 0.451495010808258
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "S0",
+            "gold": "S0",
+            "scores": {
+              "S1": 0.23124199828078432,
+              "S3": 0.10604914654220539,
+              "S2": 0.21121384436875223,
+              "S0": 0.451495010808258
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2695,
+        "completion_tokens": 721,
+        "cost_usd": 0.00069285
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 49,
+      "seed": 8049,
+      "first_pass": true,
+      "final_ok": true,
+      "rounds_used": 1,
+      "final_status": "ok",
+      "final_details": {
+        "pred": "Anxious",
+        "gold": "Anxious",
+        "scores": {
+          "Happy": 0.31756954445506047,
+          "Anxious": 0.3938110682809897,
+          "Neutral": 0.09037315763671644,
+          "Sad": 0.19824622962723343
+        }
+      },
+      "attempts": [
+        {
+          "round": 1,
+          "ok": true,
+          "status": "ok",
+          "details": {
+            "pred": "Anxious",
+            "gold": "Anxious",
+            "scores": {
+              "Happy": 0.31756954445506047,
+              "Anxious": 0.3938110682809897,
+              "Neutral": 0.09037315763671644,
+              "Sad": 0.19824622962723343
+            }
+          },
+          "family": "hmm_forward"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 2678,
+        "completion_tokens": 699,
+        "cost_usd": 0.0006771
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T10:38:35Z",
+  "_meta": {
+    "prompt_tokens": 279709,
+    "completion_tokens": 86448,
+    "total_cost_usd": 0.07812914999999997,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "9a80bb50",
+    "timestamp_utc": "2026-05-03T10:38:35.472863+00:00",
+    "script": "baselines/run_inductor_reliability_nb_hmm.py",
+    "n_nb": 50,
+    "n_hmm": 50,
+    "max_rounds": 2,
+    "temperature": 0.7
+  }
+}
