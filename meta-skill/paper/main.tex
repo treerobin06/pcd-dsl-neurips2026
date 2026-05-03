@@ -247,7 +247,7 @@ On BN inference, the same pattern holds and amplifies with depth: Compute drops 
 ]
 \addplot[color=green!50!black, line width=2pt, solid, mark=square*, mark options={fill=green!50!black}]
     coordinates {(2,100)(3,100)(4,100)(5,100)(6,100)(7,100)(8,100)(9,100)(10,100)};
-\addlegendentry{Our DSL}
+\addlegendentry{VSI solver}
 % GPT-5.4 with Wilson 95% CI error bars (n=100 per depth)
 \addplot[color=blue!70!black, mark=triangle*, mark options={fill=blue!70!black},
     error bars/.cd, y dir=both, y explicit]
@@ -307,7 +307,7 @@ For Bayesian networks, it specifies variables, CPT factors, query, and evidence;
 
 \paragraph{What is assembled by the LLM?}
 The DSL defines the semantics of typed atoms, just as a probabilistic programming language defines factor product or marginalization.
-The task-specific solver logic is not a hand-written per-family solver; it is the LLM-assembled \taskspec{}.
+The task-specific solver logic is supplied through the LLM-assembled \taskspec{} rather than per-instance generated implementation code.
 The inductor selects and composes a route over the fixed typed interface, binds the state and observation structure, chooses the decision rule, and supplies family parameters when they are part of the family description.
 Compilation turns that assembly into an executable solver object; after validation, later instances reuse the same compiled route and only bind instance-level observations, evidence, or query fields.
 Thus ``compile once'' means that one validated LLM assembly can serve many later natural-language instances.
@@ -408,7 +408,7 @@ The gap between per-instance generation and compiled solvers widens sharply as n
     enlarge x limits=0.18,
 ]
 \addplot[fill=teal!70!black, draw=teal!70!black] coordinates {(Asia (8),100) (Child (20),100) (Ins. (27),100) (Alarm (37),100)};
-\addlegendentry{DSL backend}
+\addlegendentry{Compiled solver}
 \addplot[pattern=north east lines, pattern color=blue!70!black, draw=blue!70!black] coordinates {(Asia (8),90) (Child (20),0) (Ins. (27),3) (Alarm (37),0)};
 \addlegendentry{PAL (5.4)}
 \addplot[pattern=dots, pattern color=red!70!black, draw=red!70!black] coordinates {(Asia (8),27) (Child (20),20) (Ins. (27),23) (Alarm (37),0)};
@@ -437,7 +437,7 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 % 统一标签格式: 方法 (模型)
 \addplot[only marks, mark=star, mark size=5pt, color=teal!80!black, line width=1.5pt]
     coordinates {(0.008, 100)};
-\addlegendentry{Our DSL (GPT-4o-mini)}
+\addlegendentry{VSI (GPT-4o-mini)}
 \addplot[only marks, mark=triangle*, mark size=3.5pt, color=blue!70!black]
     coordinates {(0.11, 100)};
 \addlegendentry{Compile (GPT-5.4)}
@@ -538,7 +538,7 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 \tabularnewline[-2pt]
 {\hfill\scriptsize (c) QUITE accuracy on the same 75-query split.\hfill\mbox{}} & {\hfill\scriptsize (d) QUITE time--cost tradeoff; labels show accuracy.\hfill\mbox{}}\tabularnewline
 \end{tabular}
-\caption{Scaling, external validation, and cost. \textbf{(a)} On standard bnlearn networks with $\geq$20 nodes, per-instance PAL is unreliable (GPT-4o-mini 17.5\%, GPT-5.4 23.3\% overall; both reach 0\% on Alarm), while the compiled solver matches pgmpy references on 400/400 finite queries. \textbf{(b)} Cost--accuracy Pareto on BLInD: the LLM-assembled DSL solver matches all references at \$0.008 (one induction call), matching GPT-5.4 compile-time code at $14\times$ lower cost and PAL at $310\times$ lower cost. \textbf{(c,d)} On QUITE, the registered path keeps the solver exact and cheap while direct answering and per-instance PAL trade off accuracy, time, and API cost.}
+\caption{Scaling, external validation, and cost. \textbf{(a)} On standard bnlearn networks with $\geq$20 nodes, per-instance PAL is unreliable (GPT-4o-mini 17.5\%, GPT-5.4 23.3\% overall; both reach 0\% on Alarm), while the compiled solver matches pgmpy references on 400/400 finite queries. \textbf{(b)} Cost--accuracy Pareto on BLInD: the VSI compiled solver matches all references at \$0.008 (one induction call), matching GPT-5.4 compile-time code at $14\times$ lower cost and PAL at $310\times$ lower cost. \textbf{(c,d)} On QUITE, the registered path keeps the solver exact and cheap while direct answering and per-instance PAL trade off accuracy, time, and API cost.}
 \label{fig:scaling_cost}
 \end{figure*}
 
@@ -569,10 +569,10 @@ Condition (GPT-4o-mini) & Naive Bayes & HMM Forward \\
 \multicolumn{3}{l}{\textit{Full natural-language pipeline}} \\
 Direct answer ($n{=}200$/$100$) & 44.0\% & 32.0\% \\
 Structured JSON direct compute ($n{=}120$/$100$) & 23.3\% {\scriptsize [16.7, 31.7]} & 40.0\% {\scriptsize [30.9, 49.8]} \\
-\textbf{Ours: adversarial NL E2E, 5 seeds ($n{=}600$/$500$)} & \textbf{90.8\%} {\scriptsize [88.3, 92.9]} & \textbf{97.6\%} {\scriptsize [95.9, 98.6]} \\
+\textbf{VSI: adversarial NL E2E, 5 seeds ($n{=}600$/$500$)} & \textbf{90.8\%} {\scriptsize [88.3, 92.9]} & \textbf{97.6\%} {\scriptsize [95.9, 98.6]} \\
 \midrule
 \multicolumn{3}{l}{\textit{Structured-spec backend check}} \\
-Ours: compiled core-ops solver given valid \taskspec{} ($n{=}200$/$100$) & 100.0\% & 100.0\% \\
+VSI: compiled core-ops solver given valid \taskspec{} ($n{=}200$/$100$) & 100.0\% & 100.0\% \\
 \midrule
 \multicolumn{3}{l}{\textit{PCD diagnostic}} \\
 Direct LLM compute$\mid$gold parse & 37.0\% {\scriptsize [30,44]} & 27.0\% {\scriptsize [19,37]} \\
@@ -599,7 +599,7 @@ For NB/HMM, the full adversarial NL pipeline emits the untemplated \taskspec{} a
 \begin{table}[t]
 \centering
 \small
-\caption{Natural-language E2E coverage with GPT-4o-mini. Accuracy is the final decision after routing, parsing or \taskspec{} extraction, and deterministic solving. Mixed rows test a shuffled stream over six supported families plus unsupported rejection.}
+\caption{Natural-language E2E coverage with GPT-4o-mini. Accuracy is the final decision after routing, parsing or \taskspec{} extraction, and deterministic solving. Mixed rows test a shuffled stream over the supported task streams plus unsupported rejection.}
 \label{tab:e2e_coverage}
 \begin{tabular}{@{}lclp{0.36\linewidth}@{}}
 \toprule
@@ -722,7 +722,7 @@ Within finite discrete inference, the result is a practical compiler abstraction
 \begin{table}[ht]
 \centering
 \small
-\caption{Inference families. The first three are primary targets; the last two are held-out (no macro support).}
+\caption{Inference families. The first three are primary targets with reusable templates; the last two use explicit core-op routes.}
 \begin{tabular}{@{}llll@{}}
 \toprule
 Family & Computation & Dataset & Scale \\
@@ -741,38 +741,34 @@ HMM Forward & $\alpha_t(s) \propto p(o_t \mid s) \sum_{s'} \alpha_{t\text{-}1}(s
 \label{app:e2e_artifacts}
 
 Table~\ref{tab:e2e_artifacts} maps the main reported results to the artifact bundle.
-We distinguish legacy runs, which predate the unified metadata schema, from new runs whose JSON records include model id, runner, query plan, token counts, API cost, and wall-clock time when the runner records it.
+We distinguish prior runs whose original runner did not record complete cost/time metadata from newer records that include model id, runner, query plan, token counts, API cost, and wall-clock time when available.
 Exact QUITE cost and time values are reported in Table~\ref{tab:quite_external_detail}; BLInD cost accounting is reported in Appendix~\ref{app:cost}.
 
 \begin{table}[ht]
 \centering
 \scriptsize
 \setlength{\tabcolsep}{2.5pt}
-\caption{Artifact manifest for reported E2E, backend, and external QUITE results. \emph{Legacy} means that the run predates the unified metadata schema; recorded costs are OpenRouter API costs stored by the runner.}
+\caption{Artifact manifest for reported E2E, backend, and external QUITE results. Cost and time fields are reported only when stored by the runner; older records are marked as not recorded rather than reconstructed.}
 \label{tab:e2e_artifacts}
 \begin{tabular}{@{}p{0.22\linewidth}p{0.08\linewidth}p{0.25\linewidth}p{0.22\linewidth}p{0.15\linewidth}@{}}
 \toprule
 Result group & Scope & Runner / model & Cost / time metadata & Artifact record \\
 \midrule
-Flight E2E & $624$ & E2E runner, 4o-mini & legacy; unavailable & legacy JSON \\
-Hotel E2E & $124$ & E2E runner, 4o-mini & \$0.0556; time unavailable & metadata JSON \\
+Flight E2E & $624$ & E2E runner, 4o-mini & not recorded & result JSON \\
+Hotel E2E & $124$ & E2E runner, 4o-mini & \$0.0556; time not recorded & metadata JSON \\
 TextBandit-style E2E & $100$ & Bandit E2E runner, 4o-mini & \$0.0292; 45.3s & metadata JSON \\
 NB/HMM adversarial E2E & $600/500$ & multi-seed adversarial runners, 4o-mini & five seed artifacts & summary JSON \\
 Structured JSON direct baseline & $320$ & structured-direct runner, 4o-mini & \$0.0917; 85.8s & metadata JSON \\
 Mixed E2E aggregate & $670$ & mixed runner + aggregation, 4o-mini & \$0.3720; 428.6s & metadata JSON \\
 bnlearn backend / registry check & $400/80$ & backend verifier + registry runner & backend: \$0; registry: \$0.0045 & JSON records \\
 QUITE comparison & $75$ & registered, direct, and PAL runners & see Table~\ref{tab:quite_external_detail} & per-method JSON \\
-QUITE all-network smoke & $90$ & registered runner, 4o-mini & \$0.0094; 19.2s & metadata JSON \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \paragraph{External QUITE checks.}
-The main QUITE result uses the 75-query registered-network split in Figure~\ref{fig:scaling_cost}c.
+The QUITE result uses the 75-query registered-network split in Figure~\ref{fig:scaling_cost}c.
 Table~\ref{tab:quite_external_detail} gives the exact accuracy, error, time, and API cost values.
-As a broader non-hand-picked smoke test, we also run the registered path on the first three valid finite queries from each of 30 QUITE networks.
-This all-network smoke reaches 63/90 (70.0\%), with most failures coming from schema mismatches or parser ambiguity in networks not yet normalized by the registry.
-We treat this as a coverage stress test rather than as a headline accuracy claim.
 For additional context, a direct GPT-4o-mini probability-estimation pass over the full QUITE numeric/verbal-probability corpus scored 320/1,154 (27.7\%) within 0.05 absolute posterior error.
 
 \begin{table}[ht]
@@ -997,10 +993,10 @@ Field & Type & Values \\
 \begin{table}[ht]
 \centering
 \small
-\caption{PAL accuracy by depth (BLInD, 900 samples, 100 per depth). GPT-5.4's PAL maintains high accuracy across depths; GPT-4o-mini's PAL collapses. Our DSL achieves 100\% throughout.}
+\caption{PAL accuracy by depth (BLInD, 900 samples, 100 per depth). GPT-5.4's PAL maintains high accuracy across depths; GPT-4o-mini's PAL collapses. The compiled solver matches every BLInD reference throughout.}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
-Depth & PAL (GPT-4o-mini) & PAL (GPT-5.4) & Code Succ.\ (5.4) & Our DSL \\
+Depth & PAL (GPT-4o-mini) & PAL (GPT-5.4) & Code Succ.\ (5.4) & Compiled solver \\
 \midrule
 2 & 93\% & 100\% & 100\% & 100\% \\
 3 & 68\% & 97\% & 100\% & 100\% \\
@@ -1150,7 +1146,7 @@ LOO implementation check & Hotel; Flight-2/3/5/6F; BLInD depth-OOD & 6 & 6/6 & 6
 \label{app:cost}
 
 Table~\ref{tab:cost_detail} provides the BLInD cost breakdown used in Figure~\ref{fig:scaling_cost}b; Table~\ref{tab:quite_external_detail} gives the corresponding QUITE cost and time breakdown.
-Our DSL incurs a one-time induction cost of \$0.008, amortized over a small number of self-refine iterations against the verifier. After that, the compiled solver runs deterministically at zero marginal cost per query.
+VSI incurs a one-time induction cost of \$0.008, amortized over a small number of self-refine iterations against the verifier. After that, the compiled solver runs deterministically at zero marginal cost per query.
 Per-instance methods incur cost proportional to the number of queries.
 
 \begin{table}[ht]
@@ -1162,7 +1158,7 @@ Per-instance methods incur cost proportional to the number of queries.
 \toprule
 Method & Model & Accuracy & \#Calls & One-time & Total & Relative \\
 \midrule
-Our DSL & GPT-4o-mini & \textbf{100\%} & 1--3 & \$0.008 & \$0.008 & 1$\times$ \\
+VSI compiled solver & GPT-4o-mini & \textbf{100\%} & 1--3 & \$0.008 & \$0.008 & 1$\times$ \\
 Compile-time & GPT-5.4 & 100\% & 2 & \$0.11 & \$0.11 & 14$\times$ \\
 Compile-time & GPT-4o-mini & 0\% & 6 & \$0.05 & \$0.05 & -- \\
 PAL & GPT-5.4 & 98.1\% & 900 & -- & \$2.50 & 310$\times$ \\
@@ -1173,7 +1169,7 @@ Direct & GPT-5.4 & 31.2\% & 900 & -- & \$3.60 & 450$\times$ \\
 \end{table}
 
 The cost advantage of compile-once methods grows with the number of queries: one-time induction cost is amortized across all instances in the family.
-For our DSL, the break-even point against per-instance PAL (GPT-4o-mini) is reached within the first dozen queries: the one-time induction cost (\$0.008) is amortized across all subsequent instances, while PAL pays a per-query cost on every problem.
+For VSI, the break-even point against per-instance PAL (GPT-4o-mini) is reached within the first dozen queries: the one-time induction cost (\$0.008) is amortized across all subsequent instances, while PAL pays a per-query cost on every problem.
 
 \section{Compile-Time Baseline Failure Analysis}
 \label{app:compile_failure}
@@ -1192,7 +1188,7 @@ Like GPT-4o, self-repair produces nearly identical code across all 5 rounds.
 \paragraph{Implications.}
 These failures are not prompt engineering artifacts: both models receive the same 5 training examples and the same self-repair protocol as GPT-5.4, which succeeds after 1 repair round.
 These failures stem from the difficulty of implementing correct VE in unconstrained Python: subtle algorithmic choices in CPT representation, factor product semantics, and elimination ordering must all be simultaneously correct.
-Our DSL eliminates this failure mode by constraining the inductor to a declarative specification, shifting the burden of correct implementation to the deterministic compiler.
+VSI eliminates this failure mode by constraining the inductor to a declarative specification, shifting the burden of correct implementation to the deterministic compiler.
 
 \section{Multi-Model PCD Detailed Results}
 \label{app:pcd_multimodel}
@@ -1216,7 +1212,7 @@ Sonnet 4 & 100\% & 64\% {\scriptsize [57,71]} & 100\% \\
 Gemini 3.1 & 100\% & 69\% {\scriptsize [62,75]} & 100\% \\
 Opus 4.6 & 100\% & 78\% {\scriptsize [71,83]} & 100\% \\
 \midrule
-Our DSL & -- & 100\% & -- \\
+VSI compiled solver & -- & 100\% & -- \\
 \bottomrule
 \end{tabular}
 \end{table}

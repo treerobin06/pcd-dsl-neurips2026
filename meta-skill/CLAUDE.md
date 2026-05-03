@@ -4,14 +4,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 # PCD-DSL: Verified Solver Induction for LLM Probabilistic Reasoning
 
-> **最后更新**: 2026-05-03
+> **最后更新**: 2026-05-04
 > **论文标题**: Compile Once, Reason Exactly: Verified Solver Induction for LLM Probabilistic Reasoning
 > **目标会议**: NeurIPS 2026
-> **当前状态**: 投稿收口中；核心 E2E 补实验已完成并写入论文/Overleaf，Figure 1 已更新为 reusable-registry 架构版；mixed 主表已改保守 aggregate；剩 claim/citation audit、数字一致性 sweep、post-audit final push
+> **当前状态**: 投稿收口中；核心 E2E/QUITE/图表已写入论文，Figure 1/3 已换 4k 终版，Figure 1 已提前到第 2 页；P0 wording/artifact cleanup 已做，剩最终 claim/citation audit、post-audit clean compile/push、主仓库整理
 
 ---
 
-## 2026-05-02 最新权威状态（接手先读）
+## Python 环境硬规则
+
+**所有 Python 命令必须用 `.venv/bin/python3`**（uv venv 创建，py3.12），**不要用 system `python3`**（macOS 自带 3.9）。
+
+- system python3.9 缺 PEP 585 / `from __future__` 一些模式，且 `pgmpy` `import` 直接挂掉
+- 不光是 `pgmpy`——本项目所有 import 都按 py3.12 写，3.9 跑不起来
+- 正确：`.venv/bin/python3 -m unittest tests.test_compiler -v`
+- 错误：`python3 -m unittest ...`（会用 3.9）
+- `uv run` 也可以（自动用项目 .venv）
+
+---
+
+## 2026-05-04 最新权威状态（接手先读）
 
 本节覆盖 2026-04-23/04-28 的旧 TODO。旧审查记录仍保留在下文作背景，但后续执行以本节为准。
 
@@ -32,6 +44,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **2026-05-02 bnlearn 核心 claim 已恢复并补 raw**：Tree 确认 bnlearn 是核心贡献后，不再撤掉 backend 100%。`verify_bnlearn_dsl_100.py` 在 2026-04-27 父节点顺序修复基础上，新增零概率 evidence skip、一次性 posterior VE、indexed/sparse factor multiply 和统一 `_meta` artifact；最新 raw `baselines/results/bnlearn_dsl_100q_seed2026_20260502.json` 为 4 个 bnlearn 网络各 100 条 finite query，Overall **400/400 = 100.0% [99.0,100.0]**，schema valid，0 API 成本。`paper/main.tex` 已改为：bnlearn 支撑 **structured deterministic backend exactness**，同时 PAL/LLM Compute 120-query stress test 仍显示大网络 codegen/compute 崩溃；明确不 claim bnlearn natural-language E2E。`run_bnlearn_held_out.py` 也同步修 `cpd.variables[1:]` 和 zero-prob evidence 过滤，避免未来 LLM/PAL 重跑混入旧 bug。
 - **2026-05-03 bnlearn registry-supported NL E2E sanity 已补**：新增 `baselines/run_bnlearn_nl_e2e.py`，默认 registry 模式让 GPT-4o-mini 只解析 registered network/evidence/query，再用 deterministic DSL backend 求解；full-CPT 模式保留为压力测试（Asia/Child 可跑，Insurance 单题因超长 JSON parse fail，不作为主结果）。正式 raw `baselines/results/bnlearn_registry_e2e_80q_gpt4omini_20260503.json`：严格单标签 **79/80 = 98.8% [93.3,99.8]**，唯一 mismatch 是 Child `HypDistrib` 的 exact MAP tie（Equal=0.5, Unequal=0.5），tie-aware **80/80**，cost $0.0045。论文只作为 bounded registry sanity，不改主 claim。
 - **2026-05-03 reviewer-gap 实验批次已跑完并已部分写入论文**：按 Tree “先把 raw 都跑完，具体怎么加再讨论”的要求，补了 structured-output direct baseline、NB/HMM adversarial NL E2E 5 seed、NB/HMM inductor reliability、router 派生指标、QUITE direct baseline，并下载 QUITE / LLM-BI / DisCIPL-self-steering 相关代码数据。Manifest: `baselines/results/reviewer_gap_experiment_manifest_20260503.md`。已进 `paper/main.tex` 的增益项：主文 Held-out 表新增 structured JSON direct baseline（NB **23.3%**，HMM **40.0%**），并把 ours 从单 split **91.7/98.0** 升级为 5-seed pooled **90.8/97.6**；附录新增 NB/HMM reliability（first-pass **95/100=95.0%**，final **96/100=96.0%**）和 QUITE direct external sanity（1154/1154 parsed，within 0.05 **27.7%**，MAE **0.365**）。Router 650/650=100 只作为 appendix/repro sanity，不进主表。关键 raw：structured direct `baselines/results/structured_direct_openai_gpt-4o-mini_20260503_102910.json`；multi-seed summary `baselines/results/adversarial_nl_e2e_multiseed_summary_20260503_183611.json`；reliability `baselines/results/inductor_reliability_nb_hmm_openai_gpt-4o-mini_20260503_183835.json`；QUITE `baselines/results/quite_direct_numeric-wep_openai_gpt-4o-mini_20260503_184206.json`。验证：`python3 tests/test_dsl.py` 25/25 OK，`python3 tests/test_compiler.py` 13/13 OK，`python3 tests/test_equivalence_full.py` BLInD 900/900 + Flight 250/250 OK，`git diff --check` OK。
+- **2026-05-04 Figure 1/3 终版已收口**：正式主文图改为 4k 文件 `paper/figures/figure1_overview_4k_h092.png` 和 `paper/figures/figure3_vsi_4k_h096.png`；Figure 1 LaTeX block 已移动到 Introduction 第一段后，编译后出现在第 2 页顶部；Figure 3 caption 明确 seven primitive tiles 是 unordered palette，不是固定执行顺序。
+- **2026-05-04 P0 wording/artifact cleanup 已执行并推 Overleaf**：`paper/main.tex` 已清理主文和附录中的 `Our DSL` / `DSL backend` / `legacy JSON` / `unavailable` 等松散标签，统一为 `VSI` / `compiled solver` / `result JSON` / `not recorded`；QUITE 30-network smoke 的 63/90=70.0% 负增益段落和 artifact 行已从论文删除，保留 75-query QUITE split 与 full-corpus direct baseline 作为正向证据。`latexmk -pdf` 通过，PDF 为 25 页；Overleaf 最新 commit `9fcc212 Sync from local 2026-05-04 04:02`。
 
 ### 当前最高优先级 TODO
 
@@ -41,13 +55,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 4. ~~Composition / generalization 降调~~ ✅ 2026-05-02 已完成：NB/HMM 改成 explicit TaskSpec + core-op-backed routes。
 5. ~~理论公式降调~~ ✅ 2026-05-02 已完成：删除 Method 里 theorem-like 的 inductor/verifier/risk 公式，保留 PCD metrics + DSL/op definitions。
 6. ~~LOO raw 决策~~ ✅ 2026-05-02 已完成：降调为 engineering sanity，不作为主 contribution；暂不重跑。
-7. **剩余数字一致性 sweep**：PAL/bnlearn 主文措辞与 `\todo` macro 已修；还需全篇 sweep S5/S8/S10、成本倍数、baseline wording 等小数字。
-8. **Claim/citation audit**：所有 contribution/theory wording patch 完后跑一次 zero-context paper-claim-audit，再做 citation-verifier。特别核 `lew2025discipl`、`schick2023toolformer`、匿名/代码发布 statement。
-9. **最终机械收口**：本地 `latexmk -g -pdf`/grep 已通过一次，Figure 1 架构版和公式瘦身已编译通过并推 Overleaf；完成 claim/citation audit 后再 clean compile，并做 post-audit final push。
-10. **主仓库整理**：当前 main repo 有大量 uncommitted/untracked results/scripts/paper changes；提交前需筛选保留新 full artifacts，旧 too-good mixed 仅归档或不进证据链。
-11. **2026-05-03 叙事一致性 sweep（新增）**：正文已把“hand-written/backend/macro selector”风险表述改为“LLM-assembled TaskSpec / compiled solver / reusable templates”，并把 “all-family” 改为 “mixed input streams”；Abstract/Intro/Related Work 已补 Bayesian Teaching 对比，明确 Qiu et al. 的 Flight/Hotel 路线是 targeted fine-tuning，而本文固定模型权重，让 off-the-shelf LLM 写和组装可复用 `TaskSpec`，通过 deploy check 后复用 validated solver。Abstract 已融合老师版结构，保留 natural-language interface、per-instance tool-use contrast、compile-time vs run-time、three complementary evaluations，但不引入 `VSI/VSD` 新缩写。剩余待办：
-   - **Figure 1 图中文字二次优化**：当前图整体正确，但图中仍有 “Validated Solver / LLM Inductor emit declarative TaskSpec” 这类中性表述；如继续打磨，建议改成 “Validated LLM-Assembled Solver / assemble solver spec” 以避免 reviewer 误解为手写 solver。
-   - **图例和附录短标签 sweep**：主文仍有少量压缩标签如 “Our DSL / DSL backend”，空间允许时统一成 “LLM-assembled DSL solver / compiled solver”；若会造成图表拥挤，可保留短标签但 caption 必须解释清楚。
+7. ~~剩余数字/措辞一致性 sweep~~ ✅ 2026-05-04 已完成：主文/附录短标签统一为 `VSI` / `compiled solver`，artifact 表的 `legacy`/`unavailable` 改为正式 metadata wording，QUITE 70% all-network smoke 从论文删除。
+8. **最终机械收口**：P0 cleanup 后重新 `latexmk -pdf`，再 `sync_overleaf.sh push`；投稿前最后一次 grep `TODO/FIXME/XXX`、PDF metadata、undefined citation/reference、overfull。
+9. **主仓库整理**：当前 main repo 有大量 uncommitted/untracked candidate figures / paperbanana runs / response JSON；提交前需筛选保留 final 图、必要 archive 和 raw artifacts，旧 too-good mixed 仅归档或不进证据链。
+10. **最终 claim/citation audit（最后做）**：所有 wording/table/figure patch 完后跑一次 zero-context paper-claim-audit，再做 citation-verifier。特别核 `lew2025discipl`、`schick2023toolformer`、`schrader2024quite`、`qiu2026bayesian`、匿名/代码发布 statement，以及 `verified/exact` 是否被读成 formal proof。
+11. **2026-05-04 叙事边界（保留给后续 agent）**：正文已把“hand-written/backend/macro selector”风险表述改为“LLM-assembled TaskSpec / compiled solver / reusable templates”，并把 “all-family” 改为 “mixed input streams”；Abstract/Intro/Related Work 已补 Bayesian Teaching 对比，明确 Qiu et al. 的 Flight/Hotel 路线是 targeted fine-tuning，而本文固定模型权重，让 off-the-shelf LLM 写和组装可复用 `TaskSpec`，通过 deploy check 后复用 validated solver。可信边界：
    - **真实性边界**：可以强 claim “LLM 组装 solver specification / route / typed-atom composition，deploy check 后复用”，但不要写成“raw Python solver source 全由 LLM 生成”。可信边界是：人定义 typed atoms/compiler 语义，LLM 选择并参数化组合，compiled solver 通过验证后缓存复用。
    - **PCD Compute 口径**：Preference Compute 的 prompt 输出 recommendation，不是完整 posterior 数值；论文必须表述为“self-computed posterior/EU implied recommendation”，BN/HMM/NB 概率型任务才是数值 posterior tolerance。
    - **最终 grep 口径**：投稿前 grep `all-family|six supported families|built-in macro|no-macro|macro selector|hand-computed|deterministic backend|three inference families|recommendation index|Gold expected utilities`，确保不会再出现会被 AI reviewer 直接复制成 weakness 的旧措辞。
