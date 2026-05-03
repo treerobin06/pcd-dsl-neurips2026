@@ -129,7 +129,7 @@ When the LLM must process natural language, the pipeline remains effective: it m
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/figure1_overview_no_title_no_footer.png}
+\includegraphics[width=\textwidth]{figures/figure1_overview_4k_h092.png}
 \caption{Compile-once architecture with router-mediated reuse. Mixed natural-language inputs first pass through a scope/family router, which either rejects unsupported tasks or routes supported families to induction and reuse. When no solver is available, an LLM inductor assembles a declarative \taskspec{} from typed probabilistic building blocks; a deterministic compiler lowers it to typed operations or core-op-backed routes, and a two-gate deploy check validates primary-family solvers when held-out labels are available. Validated LLM-assembled solvers are stored in a reusable registry so later same-family instances can bypass LLM induction and execute deterministically. Backend exactness is conditional on a valid \taskspec{}; natural-language E2E and router metrics are reported separately.}
 \label{fig:overview}
 \end{figure*}
@@ -340,7 +340,7 @@ The mixed E2E router composes the registered supported routes with an unsupporte
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/figure3_vsi_unordered_palette_y90.png}
+\includegraphics[width=\textwidth]{figures/figure3_vsi_4k_h096.png}
 \caption{VSI method zoom-in. Figure~\ref{fig:overview} shows the full routed system; this panel focuses on how a solver route is induced, checked, and reused. A few family examples are used once to have the LLM assemble a typed \taskspec{} and choose a route graph over the typed primitive interface. The seven primitive tiles form an unordered palette, not a fixed execution order; the route above them is one compiled composition selected for a task family. The deterministic compiler lowers that assembly, validation gates check execution and reference matches when available, and successful registry misses become cached routes for later same-family instances.}
 \label{fig:vsi_zoom}
 \end{figure}
