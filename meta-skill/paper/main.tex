@@ -764,29 +764,32 @@ HMM Forward & $\alpha_t(s) \propto p(o_t \mid s) \sum_{s'} \alpha_{t\text{-}1}(s
 \end{tabular}
 \end{table}
 
-\section{Reproducibility Summary}
+\section{Artifact Manifest and External Cost Checks}
 \label{app:e2e_artifacts}
 
-Table~\ref{tab:e2e_artifacts} maps the main reported results to the released artifact bundle.
-The release includes JSON outputs, scripts, query plans, token metadata, and cost/time metadata when recorded by the runner.
+Table~\ref{tab:e2e_artifacts} maps the main reported results to the artifact bundle.
+We distinguish legacy runs, which predate the unified metadata schema, from new runs whose JSON records include model id, runner, query plan, token counts, API cost, and wall-clock time when the runner records it.
+Exact QUITE cost and time values are reported in Table~\ref{tab:quite_external_detail}; BLInD cost accounting is reported in Appendix~\ref{app:cost}.
 
 \begin{table}[ht]
 \centering
 \scriptsize
-\caption{Reproducibility summary for reported E2E, backend, and external QUITE results. Legacy runs predate the unified artifact schema; new QUITE runs include prompt/completion tokens, cost, time, model id, and query plan.}
+\setlength{\tabcolsep}{2.5pt}
+\caption{Artifact manifest for reported E2E, backend, and external QUITE results. \emph{Legacy} means that the run predates the unified metadata schema; recorded costs are OpenRouter API costs stored by the runner.}
 \label{tab:e2e_artifacts}
-\begin{tabular}{@{}p{0.26\linewidth}p{0.25\linewidth}p{0.20\linewidth}p{0.18\linewidth}@{}}
+\begin{tabular}{@{}p{0.22\linewidth}p{0.08\linewidth}p{0.25\linewidth}p{0.22\linewidth}p{0.15\linewidth}@{}}
 \toprule
-Result group & Main result & Script / source & Artifact entry \\
+Result group & Scope & Runner / model & Cost / time metadata & Artifact record \\
 \midrule
-Flight/Hotel E2E & 74.3\% / 77.4\% & E2E runners & legacy JSON outputs \\
-TextBandit-style E2E & 96.0\% ($n{=}100$) & Bandit E2E runner & JSON output \\
-NB/HMM adversarial E2E & 90.8\% / 97.6\% over 5 seeds & Multi-seed adversarial runners & summary JSON \\
-Structured JSON direct baseline & 23.3\% / 40.0\% on NB/HMM & structured-direct runner & JSON output \\
-Mixed E2E aggregate & 90.4\% overall ($n{=}670$) & mixed runner + aggregation & JSON + aggregation \\
-bnlearn backend / registered E2E & 400/400 finite; 79/80 strict & bnlearn backend and registered runners & JSON outputs \\
-QUITE comparison & 96.0\% VSI vs.\ 36.0--60.0\% direct and 24.0--88.0\% PAL & QUITE registered/direct/PAL runners & summary file + raw JSON \\
-QUITE all-network smoke & 63/90 (70.0\%) over 30 networks & QUITE registered runner & same summary + raw JSON \\
+Flight E2E & $624$ & E2E runner, 4o-mini & legacy; unavailable & legacy JSON \\
+Hotel E2E & $124$ & E2E runner, 4o-mini & \$0.0556; time unavailable & metadata JSON \\
+TextBandit-style E2E & $100$ & Bandit E2E runner, 4o-mini & \$0.0292; 45.3s & metadata JSON \\
+NB/HMM adversarial E2E & $600/500$ & multi-seed adversarial runners, 4o-mini & five seed artifacts & summary JSON \\
+Structured JSON direct baseline & $320$ & structured-direct runner, 4o-mini & \$0.0917; 85.8s & metadata JSON \\
+Mixed E2E aggregate & $670$ & mixed runner + aggregation, 4o-mini & \$0.3720; 428.6s & metadata JSON \\
+bnlearn backend / registry check & $400/80$ & backend verifier + registry runner & backend: \$0; registry: \$0.0045 & JSON records \\
+QUITE comparison & $75$ & registered, direct, and PAL runners & see Table~\ref{tab:quite_external_detail} & per-method JSON \\
+QUITE all-network smoke & $90$ & registered runner, 4o-mini & \$0.0094; 19.2s & metadata JSON \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1170,17 +1173,17 @@ LOO implementation check & Hotel; Flight-2/3/5/6F; BLInD depth-OOD & 6 & 6/6 & 6
 \end{tabular}
 \end{table}
 
-\section{Cost Accounting}
+\section{BLInD Cost Accounting}
 \label{app:cost}
 
-Table~\ref{tab:cost_detail} provides a detailed cost breakdown for each method on BN inference (BLInD, 900 problems).
+Table~\ref{tab:cost_detail} provides the BLInD cost breakdown used in Figure~\ref{fig:scaling_cost}b; Table~\ref{tab:quite_external_detail} gives the corresponding QUITE cost and time breakdown.
 Our DSL incurs a one-time induction cost of \$0.008, amortized over a small number of self-refine iterations against the verifier. After that, the compiled solver runs deterministically at zero marginal cost per query.
 Per-instance methods incur cost proportional to the number of queries.
 
 \begin{table}[ht]
 \centering
 \small
-\caption{Cost breakdown on BN inference (900 queries). Prices from OpenRouter, March 2026.}
+\caption{BLInD cost breakdown on 900 BN inference queries. Prices are OpenRouter runner metadata from March 2026.}
 \label{tab:cost_detail}
 \begin{tabular}{@{}llccccc@{}}
 \toprule
