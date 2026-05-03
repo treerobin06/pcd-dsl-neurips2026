@@ -82,7 +82,7 @@ The specification selects probabilistic atoms and an inference route; a determin
 Thus the LLM supplies probabilistic structure at compile time, while the validated solver performs exact inference at run time.
 We evaluate VSI across preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering.
 VSI-assembled solvers match references on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks; on larger multi-valued bnlearn networks, the compiled solver remains exact while per-instance PAL frequently fails.
-On a compute-hard QUITE split, the registered VSI path reaches 96.0\% while direct answering reaches 36.0\%--60.0\% and per-instance PAL reaches 24.0\%--88.0\%, at substantially higher cost.
+On QUITE, the registered VSI path reaches 96.0\% while direct answering reaches 36.0\%--60.0\% and per-instance PAL reaches 24.0\%--88.0\%, at substantially higher cost.
 On natural-language inputs, GPT-4o-mini improves from 44\% / 32\% direct accuracy to \textbf{90.8\% / 97.6\%} on adversarial Naive Bayes and HMM tasks across five independently generated task sets.
 Together, PCD localizes the bottleneck and VSI provides a reusable compiler abstraction for reliable LLM probabilistic interfaces without fine-tuning.
 \end{abstract}
@@ -117,14 +117,14 @@ Later instances from the same family can be parsed and solved without asking the
 
 This design gives a clean separation between backend correctness, language-interface robustness, and routing composition.
 Given LLM-assembled specifications that pass the deploy check, the compiled solvers match references on Flight/BLInD and finite-query bnlearn checks, including standard multi-valued bnlearn networks where per-instance generated code is unreliable.
-On QUITE, a separate external Bayesian-inference corpus, the registered path reaches 96.0\% on a 75-query compute-hard split, compared with 60.0\% for direct GPT-5.4 and 88.0\% for PAL with GPT-5.4.
+On QUITE, a separate external Bayesian-inference corpus, the registered path reaches 96.0\% on the same 75-query split, compared with 60.0\% for direct GPT-5.4 and 88.0\% for PAL with GPT-5.4.
 When the LLM must process natural language, the pipeline remains effective: it matches the preference-learning gold-feature oracle on Flight and reaches 90.8\% / 97.6\% on adversarial Naive Bayes / HMM inputs across five task-set seeds, two untemplated families.
 
 \textbf{Contributions.}
 \begin{itemize}
     \item \textbf{Diagnostic}: PCD shows that LLM probabilistic reasoning fails primarily in computation, not in parsing or final decision-making.
     \item \textbf{System}: a typed \taskspec{} interface, deterministic compiler, deploy check, and registry turn LLM-assembled family specifications into reusable exact solvers.
-    \item \textbf{Evidence}: the system spans preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering, with exact backend checks, natural-language E2E gains on untemplated families, and an external QUITE compute-hard comparison.
+    \item \textbf{Evidence}: the system spans preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering, with exact backend checks, natural-language E2E gains on untemplated families, and an external QUITE comparison.
 \end{itemize}
 
 \begin{figure*}[t]
@@ -407,7 +407,7 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 
 \begin{figure*}[t]
 \centering
-% 两个子图，用 tabular 强制对齐
+% Three evidence panels: structured scaling, amortized cost, and external QUITE.
 \begin{tabular}{@{}p{0.51\textwidth}@{\hspace{0.02\textwidth}}p{0.47\textwidth}@{}}
 % ---- 子图 (a) ----
 \begin{tikzpicture}
@@ -493,36 +493,88 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 % ---- 外部 legend 行 ----
 {\hfill\scalebox{0.83}{\ref{legA}}\hfill\mbox{}} & {\hfill\scalebox{0.83}{\ref{legB}}\hfill\mbox{}}\tabularnewline[2pt]
 % ---- subcaption 行 ----
-{\hfill\scriptsize (a) bnlearn real-world networks (PAL 30q/net; DSL 100q/net).\hfill\mbox{}} & {\hfill\scriptsize (b) Cost--accuracy on BLInD (small networks).\hfill\mbox{}}\tabularnewline
+{\hfill\scriptsize (a) bnlearn real-world networks (PAL 30q/net; DSL 100q/net).\hfill\mbox{}} & {\hfill\scriptsize (b) Cost--accuracy on BLInD (small networks).\hfill\mbox{}}\tabularnewline[3pt]
+% ---- 子图 (c) ----
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.95\linewidth,
+    height=4.05cm,
+    xbar,
+    bar width=8pt,
+    xlabel={Accuracy (\%)},
+    xmin=0, xmax=118,
+    symbolic y coords={PAL 5.4,PAL 4o-mini,Direct 5.4,Direct 4o-mini,VSI},
+    ytick={PAL 5.4,PAL 4o-mini,Direct 5.4,Direct 4o-mini,VSI},
+    y tick label style={font=\tiny},
+    xtick={0,20,40,60,80,100},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize},
+    xmajorgrids=true,
+    grid style={gray!15},
+    nodes near coords={\pgfmathprintnumber{\pgfplotspointmeta}\%},
+    point meta=x,
+    nodes near coords align={horizontal},
+    every node near coord/.append style={font=\tiny, anchor=west},
+    enlarge y limits=0.18,
+]
+\addplot[fill=teal!70!black, draw=teal!70!black, bar shift=0pt] coordinates {(96.0,VSI)};
+\addplot[fill=gray!45, draw=gray!60!black, bar shift=0pt] coordinates {(36.0,Direct 4o-mini)};
+\addplot[fill=gray!65, draw=gray!70!black, bar shift=0pt] coordinates {(60.0,Direct 5.4)};
+\addplot[pattern=dots, pattern color=red!70!black, draw=red!70!black, bar shift=0pt] coordinates {(24.0,PAL 4o-mini)};
+\addplot[pattern=north east lines, pattern color=red!40!blue, draw=red!40!blue, bar shift=0pt] coordinates {(88.0,PAL 5.4)};
+\end{axis}
+\end{tikzpicture}
+&
+% ---- 子图 (d) ----
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.95\linewidth,
+    height=4.05cm,
+    xlabel={Time (s, log)},
+    ylabel={Cost (\$, log)},
+    xmode=log,
+    ymode=log,
+    xmin=8, xmax=900,
+    ymin=0.005, ymax=5,
+    xtick={10,30,100,300},
+    xticklabels={10,30,100,300},
+    ytick={0.01,0.1,1},
+    yticklabels={0.01,0.1,1},
+    grid=major,
+    grid style={gray!15},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize},
+]
+\addplot[only marks, mark=star, mark size=4.6pt, color=teal!75!black, line width=1.2pt]
+    coordinates {(16.9,0.0083)};
+\addplot[only marks, mark=square*, mark size=2.8pt, color=gray!55!black]
+    coordinates {(12.8,0.0477)};
+\addplot[only marks, mark=square*, mark size=2.8pt, color=gray!75!black]
+    coordinates {(33.4,0.2353)};
+\addplot[only marks, mark=diamond*, mark size=3pt, color=red!70!black]
+    coordinates {(319.3,0.1151)};
+\addplot[only marks, mark=diamond, mark size=3.3pt, color=red!40!blue, line width=1pt]
+    coordinates {(402.9,2.4897)};
+\node[font=\tiny, anchor=south west, text=teal!70!black] at (axis cs:16.9,0.0083) {VSI 96\%};
+\node[font=\tiny, anchor=south west, text=gray!55!black] at (axis cs:12.8,0.0477) {Direct 36\%};
+\node[font=\tiny, anchor=south west, text=gray!70!black] at (axis cs:33.4,0.2353) {Direct 60\%};
+\node[font=\tiny, anchor=south east, text=red!70!black] at (axis cs:319.3,0.1151) {PAL 24\%};
+\node[font=\tiny, anchor=south west, text=red!40!blue] at (axis cs:402.9,2.4897) {PAL 88\%};
+\end{axis}
+\end{tikzpicture}
+\tabularnewline[-2pt]
+{\hfill\scriptsize (c) QUITE accuracy on the same 75-query split.\hfill\mbox{}} & {\hfill\scriptsize (d) QUITE time--cost tradeoff; labels show accuracy.\hfill\mbox{}}\tabularnewline
 \end{tabular}
-\caption{Scaling and cost. \textbf{(a)} On standard bnlearn networks with $\geq$20 nodes, per-instance PAL is unreliable (GPT-4o-mini 17.5\%, GPT-5.4 23.3\% overall; both reach 0\% on Alarm), while the compiled solver matches pgmpy references on 400/400 finite queries. \textbf{(b)} Cost--accuracy Pareto on BLInD: the LLM-assembled DSL solver matches all references at \$0.008 (one induction call), matching GPT-5.4 compile-time code at $14\times$ lower cost and PAL at $310\times$ lower cost.}
+\caption{Scaling, external validation, and cost. \textbf{(a)} On standard bnlearn networks with $\geq$20 nodes, per-instance PAL is unreliable (GPT-4o-mini 17.5\%, GPT-5.4 23.3\% overall; both reach 0\% on Alarm), while the compiled solver matches pgmpy references on 400/400 finite queries. \textbf{(b)} Cost--accuracy Pareto on BLInD: the LLM-assembled DSL solver matches all references at \$0.008 (one induction call), matching GPT-5.4 compile-time code at $14\times$ lower cost and PAL at $310\times$ lower cost. \textbf{(c,d)} On QUITE, the registered path keeps the solver exact and cheap while direct answering and per-instance PAL trade off accuracy, time, and API cost.}
 \label{fig:scaling_cost}
 \end{figure*}
 
-\paragraph{External compute-hard check on QUITE.}
+\paragraph{External check on QUITE.}
 The bnlearn experiments use structured network definitions.
-To test the same parse-simple / compute-hard pattern on a separate natural-language Bayesian-inference corpus, we build a registered-network QUITE split~\citep{schrader2024quite}.
+To test the same registered-solver pattern on a separate natural-language Bayesian-inference corpus, we build a QUITE split~\citep{schrader2024quite}.
 The network is loaded once from QUITE's structured Problog artifact, and the LLM only maps short natural-language evidence/query text to variable and state names; exact posterior inference is then run by the compiled backend.
-Table~\ref{tab:quite_hard_compute} uses the same 75 numeric queries for all methods.
+Figure~\ref{fig:scaling_cost}c,d use the same 75 numeric queries for all methods.
 VSI with GPT-4o-mini reaches 96.0\%, while direct GPT-5.4 reaches 60.0\% and PAL with GPT-5.4 reaches 88.0\% at roughly $300\times$ the API cost and $24\times$ the wall-clock time.
-
-\begin{table}[t]
-\centering
-\small
-\caption{External QUITE hard-compute comparison on the same 75-query registered-network split. Accuracy counts predictions within 0.05 absolute posterior error. Costs are OpenRouter runner metadata.}
-\label{tab:quite_hard_compute}
-\begin{tabular}{@{}llcccc@{}}
-\toprule
-Method & Model & Accuracy & MAE & Time & Cost \\
-\midrule
-\textbf{VSI registered solver} & GPT-4o-mini & \textbf{72/75 (96.0\%)} & 0.0059 & 16.9s & \$0.0083 \\
-Direct answer & GPT-4o-mini & 27/75 (36.0\%) & 0.2478 & 12.8s & \$0.0477 \\
-Direct answer & GPT-5.4 & 45/75 (60.0\%) & 0.0876 & 33.4s & \$0.2353 \\
-PAL code generation & GPT-4o-mini & 18/75 (24.0\%) & 0.2816 & 319.3s & \$0.1151 \\
-PAL code generation & GPT-5.4 & 66/75 (88.0\%) & 0.0054 & 402.9s & \$2.4897 \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 \subsection{Does the interface extend beyond reusable templates?}
 \label{sec:held_out}
@@ -610,7 +662,7 @@ In short, the more math the LLM must do, the worse it performs.
 Pure CoT is ineffective, confirming that self-reflection alone does not improve probabilistic computation.
 
 Stronger models raise Compute accuracy, from 22\% to 78\% across six models, but none eliminate errors. Opus still fails on 22\% of preference instances, and GPT-5.4 reaches only 11\% at BN depth 10.
-PAL with GPT-5.4 bridges part of the gap (98.1\% on BLInD and 88.0\% on the QUITE hard-compute split) but still trails the compiled path while paying per query.
+PAL with GPT-5.4 bridges part of the gap (98.1\% on BLInD and 88.0\% on QUITE) but still trails the compiled path while paying per query.
 No model--tool combination tested guarantees correctness.
 The approach is strongest when distributions are given or derivable; tasks that require estimating distributions from sparse context, as in DeLLMa~\citep{liu2025dellma}, call for complementary modeling components.
 
@@ -650,7 +702,7 @@ DisCIPL~\citep{lew2025discipl} and LLM-guided POMDP induction~\citep{curtis2025p
 \paragraph{Scope.}
 \method{} targets exact inference over finite discrete distributions, a broad and auditable setting that covers Bayesian networks, preference learning, bandits, Naive Bayes, and HMM forward filtering.
 The same interface can incorporate additional typed atoms for continuous variables, approximate inference, or distribution learning from sparse unstructured context.
-The evidence spans five inference families across eight datasets, plus an external QUITE compute-hard split that reuses the same registered-solver interface.
+The evidence spans five inference families across eight datasets, plus an external QUITE benchmark that reuses the same registered-solver interface.
 It includes five adversarial task-set seeds for held-out NB ($n{=}600$) and HMM ($n{=}500$) families with no reusable-template support.
 The mixed E2E benchmark stress-tests route-and-solve composition over supported input streams plus unsupported examples; enlarging that stream is a data and validation-suite question rather than a change to the compiler interface.
 
@@ -677,7 +729,7 @@ PCD makes this failure mode visible: models often recover structure and act corr
 \method{} uses that diagnosis to change the role of the LLM.
 The model induces a typed family specification; the compiled solver performs inference and can be reused across instances.
 
-The evidence supports this division of labor across five inference families and an external QUITE compute-hard benchmark.
+The evidence supports this division of labor across five inference families and an external QUITE benchmark.
 Backend exactness, natural-language robustness, and mixed routing composition are measured separately, making the claim precise rather than anecdotal.
 Within finite discrete inference, the result is a practical compiler abstraction for LLM probabilistic reasoning: language models identify reusable structure; verified solvers do the math.
 
@@ -733,18 +785,37 @@ NB/HMM adversarial E2E & 90.8\% / 97.6\% over 5 seeds & Multi-seed adversarial r
 Structured JSON direct baseline & 23.3\% / 40.0\% on NB/HMM & structured-direct runner & JSON output \\
 Mixed E2E aggregate & 90.4\% overall ($n{=}670$) & mixed runner + aggregation & JSON + aggregation \\
 bnlearn backend / registered E2E & 400/400 finite; 79/80 strict & bnlearn backend and registered runners & JSON outputs \\
-QUITE hard-compute expanded & 96.0\% VSI vs.\ 36.0--60.0\% direct and 24.0--88.0\% PAL & QUITE registered/direct/PAL runners & summary file + raw JSON \\
+QUITE comparison & 96.0\% VSI vs.\ 36.0--60.0\% direct and 24.0--88.0\% PAL & QUITE registered/direct/PAL runners & summary file + raw JSON \\
 QUITE all-network smoke & 63/90 (70.0\%) over 30 networks & QUITE registered runner & same summary + raw JSON \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \paragraph{External QUITE checks.}
-The main QUITE result uses the registered-network hard-compute split in Table~\ref{tab:quite_hard_compute}.
+The main QUITE result uses the 75-query registered-network split in Figure~\ref{fig:scaling_cost}c.
+Table~\ref{tab:quite_external_detail} gives the exact accuracy, error, time, and API cost values.
 As a broader non-hand-picked smoke test, we also run the registered path on the first three valid finite queries from each of 30 QUITE networks.
 This all-network smoke reaches 63/90 (70.0\%), with most failures coming from schema mismatches or parser ambiguity in networks not yet normalized by the registry.
 We treat this as a coverage stress test rather than as a headline accuracy claim.
 For additional context, a direct GPT-4o-mini probability-estimation pass over the full QUITE numeric/verbal-probability corpus scored 320/1,154 (27.7\%) within 0.05 absolute posterior error.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{External QUITE comparison on the same 75-query registered-network split. Accuracy counts predictions within 0.05 absolute posterior error. Costs are OpenRouter runner metadata.}
+\label{tab:quite_external_detail}
+\begin{tabular}{@{}llcccc@{}}
+\toprule
+Method & Model & Accuracy & MAE & Time & Cost \\
+\midrule
+\textbf{VSI registered solver} & GPT-4o-mini & \textbf{72/75 (96.0\%)} & 0.0059 & 16.9s & \$0.0083 \\
+Direct answer & GPT-4o-mini & 27/75 (36.0\%) & 0.2478 & 12.8s & \$0.0477 \\
+Direct answer & GPT-5.4 & 45/75 (60.0\%) & 0.0876 & 33.4s & \$0.2353 \\
+PAL code generation & GPT-4o-mini & 18/75 (24.0\%) & 0.2816 & 319.3s & \$0.1151 \\
+PAL code generation & GPT-5.4 & 66/75 (88.0\%) & 0.0054 & 402.9s & \$2.4897 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{DSL Equivalence}
 \label{app:equivalence}
