@@ -84,7 +84,7 @@ Thus the LLM specifies probabilistic structure at compile time, while a determin
 We validate this compile-once interface through three complementary evaluations.
 First, LLM-assembled solvers match references on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks.
 Second, on larger multi-valued bnlearn networks, the compiled solver remains exact while per-instance PAL frequently fails.
-Third, on natural-language inputs, GPT-4o-mini improves from 44\% / 32\% direct accuracy to \textbf{91.7\% / 98.0\%} on adversarial Naive Bayes and HMM tasks, two untemplated families.
+Third, on natural-language inputs, GPT-4o-mini improves from 44\% / 32\% direct accuracy to \textbf{90.8\% / 97.6\%} on adversarial Naive Bayes and HMM tasks across five independently generated task sets.
 Together, PCD and the compile-once interface turn LLMs into compile-time specifiers of task-family structure while reusable solvers perform exact instance-level inference at run time.
 \end{abstract}
 
@@ -117,7 +117,7 @@ Later instances from the same family can be parsed and solved without asking the
 
 This design gives a clean separation between backend correctness, language-interface robustness, and routing composition.
 Given LLM-assembled specifications that pass the deploy check, the compiled solvers match references on Flight/BLInD and finite-query bnlearn checks, including standard multi-valued bnlearn networks where per-instance generated code is unreliable.
-When the LLM must process natural language, the pipeline remains effective: it matches the preference-learning gold-feature oracle on Flight and reaches 91.7\% / 98.0\% on adversarial Naive Bayes / HMM inputs, two untemplated families.
+When the LLM must process natural language, the pipeline remains effective: it matches the preference-learning gold-feature oracle on Flight and reaches 90.8\% / 97.6\% on adversarial Naive Bayes / HMM inputs across five task-set seeds, two untemplated families.
 
 \textbf{Contributions.}
 \begin{itemize}
@@ -473,7 +473,7 @@ HMM is the stronger test: it requires \emph{sequential temporal reasoning} via i
 \begin{table}[t]
 \centering
 \small
-\caption{Untemplated families (GPT-4o-mini). Direct answering is weak, but NL $\rightarrow$ \taskspec{} $\rightarrow$ compile $\rightarrow$ solve reaches 91.7\% / 98.0\%. Structured-spec rows are backend reference checks.}
+\caption{Untemplated families (GPT-4o-mini). Structured JSON output alone does not solve the computation problem; NL $\rightarrow$ \taskspec{} $\rightarrow$ compile $\rightarrow$ solve is stable across five adversarial task sets. Structured-spec rows are backend reference checks.}
 \label{tab:held_out}
 \begin{tabular}{@{}lcc@{}}
 \toprule
@@ -481,7 +481,8 @@ Condition (GPT-4o-mini) & Naive Bayes & HMM Forward \\
 \midrule
 \multicolumn{3}{l}{\textit{Full natural-language pipeline}} \\
 Direct answer ($n{=}200$/$100$) & 44.0\% & 32.0\% \\
-\textbf{Ours: adversarial NL E2E ($n{=}120$/$100$)} & \textbf{91.7\%} {\scriptsize [85.3, 95.4]} & \textbf{98.0\%} {\scriptsize [93.0, 99.4]} \\
+Structured JSON direct compute ($n{=}120$/$100$) & 23.3\% {\scriptsize [16.7, 31.7]} & 40.0\% {\scriptsize [30.9, 49.8]} \\
+\textbf{Ours: adversarial NL E2E, 5 seeds ($n{=}600$/$500$)} & \textbf{90.8\%} {\scriptsize [88.3, 92.9]} & \textbf{97.6\%} {\scriptsize [95.9, 98.6]} \\
 \midrule
 \multicolumn{3}{l}{\textit{Structured-spec backend check}} \\
 Ours: compiled core-ops solver given valid \taskspec{} ($n{=}200$/$100$) & 100.0\% & 100.0\% \\
@@ -494,7 +495,8 @@ Direct LLM compute$\mid$gold parse & 37.0\% {\scriptsize [30,44]} & 27.0\% {\scr
 
 These results test whether the interface is more than a template selector.
 Naive Bayes and HMM have no family template, and HMM requires a repeated forward update that is absent from the three template-backed routes.
-The same GPT-4o-mini model that answers only 44\% / 32\% of the tasks directly reaches 91.7\% / 98.0\% when it emits a \taskspec{} and lets the compiled solver compute.
+The same GPT-4o-mini model that answers only 44\% / 32\% of the tasks directly reaches 90.8\% / 97.6\% when it emits a \taskspec{} and lets the compiled solver compute, pooled across five independently generated adversarial task sets.
+Constraining the baseline to valid JSON is not enough: the same model, asked to compute directly while returning structured JSON, reaches only 23.3\% / 40.0\%.
 Given a valid \taskspec{}, the core-op solvers match independent reference posteriors with maximum absolute error below $10^{-9}$.
 The remaining NB errors come from specification extraction on adversarial wording: hedged probabilities, shuffled symptom order, and distractor clinical text.
 
@@ -536,7 +538,7 @@ We also test whether the components compose when the front end is not told the f
 We shuffle six supported input streams---Flight, Hotel, TextBandit-style, BLInD, Naive Bayes, and HMM---and add unsupported inputs that exercise the scope gate.
 Each supported input must be routed to the correct branch, parsed or converted to a \taskspec{}, compiled when appropriate, and solved by the validated compiled solver.
 The router preserves accuracy in this run, so the benchmark tests whether routing, parsing, compilation, and deterministic solving compose under one natural-language interface.
-For NB/HMM, the table uses the harder adversarial-NL rates from Table~\ref{tab:held_out}.
+For NB/HMM, the table uses the representative 120/100 adversarial split used for the mixed aggregation; Table~\ref{tab:held_out} reports the five-seed stability check.
 
 \begin{table}[t]
 \centering
@@ -587,7 +589,7 @@ HMM forward & 100 & 98.0\% {\scriptsize [93.0, 99.4]} \\
 ]
 \addplot[fill=gray!35, draw=gray!70] coordinates {(NB,44.0) (HMM,32.0)};
 \addlegendentry{Direct answer}
-\addplot[fill=teal!70!black, draw=teal!70!black] coordinates {(NB,91.7) (HMM,98.0)};
+\addplot[fill=teal!70!black, draw=teal!70!black] coordinates {(NB,90.8) (HMM,97.6)};
 \addlegendentry{Ours E2E}
 \end{axis}
 \end{tikzpicture}
@@ -615,14 +617,14 @@ HMM forward & 100 & 98.0\% {\scriptsize [93.0, 99.4]} \\
     every node near coord/.append style={font=\tiny, anchor=west},
 ]
 \addplot[fill=blue!55!black, draw=blue!55!black] coordinates
-    {(74.3,Flight) (77.4,Hotel) (96.0,TextBandit) (91.7,NB) (98.0,HMM) (89.7,Mixed)};
+    {(74.3,Flight) (77.4,Hotel) (96.0,TextBandit) (90.8,NB) (97.6,HMM) (89.7,Mixed)};
 \end{axis}
 \end{tikzpicture}
 \tabularnewline[-4pt]
 {\centering\scriptsize (a) Untemplated families.\par} &
 {\centering\scriptsize (b) Single-stream and mixed full-pipeline runs.\par}
 \end{tabular}
-\caption{Natural-language end-to-end composition with GPT-4o-mini. \textbf{(a)} Direct answering vs.\ the compile-once path on two untemplated families. \textbf{(b)} Full-pipeline accuracy across supported input streams; the mixed supported aggregate is 556/620 (89.7\%).}
+\caption{Natural-language end-to-end composition with GPT-4o-mini. \textbf{(a)} Direct answering vs.\ the compile-once path on two untemplated families, using five adversarial task-set seeds for our path. \textbf{(b)} Full-pipeline accuracy across supported input streams; the mixed supported aggregate is 556/620 (89.7\%).}
 \label{fig:e2e_composition}
 \end{figure*}
 
@@ -683,7 +685,7 @@ DisCIPL~\citep{lew2025discipl} and LLM-guided POMDP induction~\citep{curtis2025p
 \paragraph{Scope.}
 \method{} targets exact inference over finite discrete distributions, a broad and auditable setting that covers Bayesian networks, preference learning, bandits, Naive Bayes, and HMM forward filtering.
 The same interface can incorporate additional typed atoms for continuous variables, approximate inference, or distribution learning from sparse unstructured context.
-The evidence spans five inference families across eight datasets, including held-out NB ($n{=}200$) and HMM ($n{=}100$) families with no reusable-template support; broader benchmark coverage, including QUITE~\citep{schrader2024quite}, can be added within the same interface.
+The evidence spans five inference families across eight datasets, including five adversarial task-set seeds for held-out NB ($n{=}600$) and HMM ($n{=}500$) families with no reusable-template support; broader full-system benchmark coverage, including QUITE~\citep{schrader2024quite}, can be added within the same interface.
 The mixed E2E benchmark stress-tests route-and-solve composition over supported input streams plus unsupported examples; enlarging that stream is a data and validation-suite question rather than a change to the compiler interface.
 
 \paragraph{Diagnostics and Induction.}
@@ -760,15 +762,22 @@ The release includes the corresponding JSON outputs, scripts, and run metadata.
 Result group & Main result & Reproduction entry \\
 \midrule
 Flight E2E & 74.3\% ($n{=}624$) & E2E runner output \\
-NB/HMM adversarial E2E & 91.7\% / 98.0\% & Adversarial E2E output \\
+NB/HMM adversarial E2E & 90.8\% / 97.6\% over 5 seeds & Multi-seed adversarial E2E summary \\
+Structured JSON direct baseline & 23.3\% / 40.0\% on NB/HMM & Structured-direct output \\
 Hotel E2E & 77.4\% ($n{=}124$) & E2E runner output \\
 TextBandit-style E2E & 96.0\% ($n{=}100$) & Bandit E2E output \\
 Mixed E2E aggregate & 90.4\% overall ($n{=}670$) & Mixed-run output + aggregation \\
 bnlearn backend check & 400/400 finite queries & Backend-check output \\
 bnlearn registered-network E2E & 98.8\% strict ($n{=}80$) & Registered-E2E output \\
+QUITE direct baseline & 27.7\% within 0.05 error & External direct-baseline output \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\paragraph{External direct-answer sanity check.}
+To test whether the compute bottleneck is specific to our synthetic held-out tasks, we also ran GPT-4o-mini as a direct probability estimator on the QUITE Bayesian-inference corpus~\citep{schrader2024quite}.
+The model parsed all 1,154 numeric and verbal-probability queries into valid JSON, but only 320/1,154 predictions fell within 0.05 absolute probability error (27.7\%; mean absolute error 0.365).
+We use this result only as external motivation: it confirms that natural-language probability calculation remains fragile, but it is not a full compile-once system evaluation on QUITE.
 
 \section{DSL Equivalence}
 \label{app:equivalence}
@@ -1118,6 +1127,28 @@ Flight (hypothesis enum.) & 20 & 20/20 (100\%) & 1.0 & 5.6 & All correct \\
 BN (variable elim.) & 20 & 20/20 (100\%) & 1.0 & 4.8 & All correct \\
 \midrule
 \textbf{Total} & \textbf{40} & \textbf{40/40 (100\%)} & \textbf{1.0} & \textbf{5.2} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Reliability on untemplated families.}
+We also repeat the adversarial Naive Bayes and HMM inductions at temperature~0.7.
+Across 100 trials, first-pass induction succeeds on 95/100 tasks, and a two-round diagnostic refinement loop reaches 96/100.
+The remaining failures are specification-extraction errors, not backend arithmetic failures: once the \taskspec{} validates, the compiled core-op solver executes deterministically.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Inductor reliability on adversarial untemplated families: GPT-4o-mini, temperature~0.7, at most two refinement rounds.}
+\label{tab:reliability_nb_hmm}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Family & Trials & First pass & Final after refinement \\
+\midrule
+Naive Bayes & 50 & 46/50 (92.0\%) & 47/50 (94.0\%) \\
+HMM forward & 50 & 49/50 (98.0\%) & 49/50 (98.0\%) \\
+\midrule
+\textbf{Total} & \textbf{100} & \textbf{95/100 (95.0\%)} & \textbf{96/100 (96.0\%)} \\
 \bottomrule
 \end{tabular}
 \end{table}
