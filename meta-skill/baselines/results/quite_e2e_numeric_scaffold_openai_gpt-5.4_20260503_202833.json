@@ -1,0 +1,6485 @@
+{
+  "experiment": "QUITE numeric compile-once E2E",
+  "model": "openai/gpt-5.4",
+  "config": {
+    "model": "openai/gpt-5.4",
+    "mode": "numeric",
+    "networks": [
+      "mildew0",
+      "insurance1",
+      "hailfinder0",
+      "water1",
+      "sachs1",
+      "phytophthora1"
+    ],
+    "limit_networks": null,
+    "query_limit_per_network": 3,
+    "no_scaffold": false,
+    "compile_sema": 2,
+    "query_sema": 8,
+    "compile_max_tokens": 12000,
+    "query_max_tokens": 512,
+    "include_invalid_gold": false,
+    "include_malformed_scaffold": false
+  },
+  "elapsed_sec": 228.0407931804657,
+  "compile_summary": {
+    "n": 6,
+    "ok": 4,
+    "failed": [
+      "mildew0",
+      "sachs1"
+    ],
+    "skipped_malformed": [],
+    "skipped_invalid_pairs": 6
+  },
+  "summary": {
+    "within_0_01": {
+      "n": 18,
+      "correct": 9,
+      "rate": 0.5,
+      "wilson_95ci": [
+        0.2903070395897999,
+        0.7096929604102
+      ],
+      "valid_numeric": 12,
+      "mae": 0.01481101049589441,
+      "by_network": {
+        "hailfinder0": {
+          "n": 3,
+          "correct": 3,
+          "failures": {},
+          "rate": 1.0,
+          "wilson_95ci": [
+            0.43849391955098227,
+            1.0
+          ]
+        },
+        "insurance1": {
+          "n": 3,
+          "correct": 3,
+          "failures": {},
+          "rate": 1.0,
+          "wilson_95ci": [
+            0.43849391955098227,
+            1.0
+          ]
+        },
+        "mildew0": {
+          "n": 3,
+          "correct": 0,
+          "failures": {
+            "compile_failed": 3
+          },
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.5615060804490177
+          ]
+        },
+        "phytophthora1": {
+          "n": 3,
+          "correct": 0,
+          "failures": {
+            "wrong_probability": 2,
+            "unknown": 1
+          },
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.5615060804490177
+          ]
+        },
+        "sachs1": {
+          "n": 3,
+          "correct": 0,
+          "failures": {
+            "compile_failed": 3
+          },
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.5615060804490177
+          ]
+        },
+        "water1": {
+          "n": 3,
+          "correct": 3,
+          "failures": {},
+          "rate": 1.0,
+          "wilson_95ci": [
+            0.43849391955098227,
+            1.0
+          ]
+        }
+      }
+    },
+    "within_0_05": {
+      "n": 18,
+      "correct": 10,
+      "rate": 0.5555555555555556,
+      "wilson_95ci": [
+        0.3371606942825164,
+        0.7544076889861088
+      ],
+      "valid_numeric": 12,
+      "mae": 0.01481101049589441,
+      "by_network": {
+        "hailfinder0": {
+          "n": 3,
+          "correct": 3,
+          "failures": {},
+          "rate": 1.0,
+          "wilson_95ci": [
+            0.43849391955098227,
+            1.0
+          ]
+        },
+        "insurance1": {
+          "n": 3,
+          "correct": 3,
+          "failures": {},
+          "rate": 1.0,
+          "wilson_95ci": [
+            0.43849391955098227,
+            1.0
+          ]
+        },
+        "mildew0": {
+          "n": 3,
+          "correct": 0,
+          "failures": {
+            "compile_failed": 3
+          },
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.5615060804490177
+          ]
+        },
+        "phytophthora1": {
+          "n": 3,
+          "correct": 1,
+          "failures": {
+            "wrong_probability": 2
+          },
+          "rate": 0.3333333333333333,
+          "wilson_95ci": [
+            0.0614903152761605,
+            0.7923450448735121
+          ]
+        },
+        "sachs1": {
+          "n": 3,
+          "correct": 0,
+          "failures": {
+            "compile_failed": 3
+          },
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.5615060804490177
+          ]
+        },
+        "water1": {
+          "n": 3,
+          "correct": 3,
+          "failures": {},
+          "rate": 1.0,
+          "wilson_95ci": [
+            0.43849391955098227,
+            1.0
+          ]
+        }
+      }
+    }
+  },
+  "compile_results": [
+    {
+      "network": "hailfinder0",
+      "ok": true,
+      "usage": {
+        "prompt_tokens": 7154,
+        "completion_tokens": 6661,
+        "cost_usd": 0.1178
+      },
+      "raw_response": "{\n  \"nodes\": [\n    \"N0_7muVerMo\",\n    \"SubjVertMo\",\n    \"QGVertMotion\",\n    \"CombVerMo\",\n    \"AreaMeso_ALS\"\n  ],\n  \"states\": {\n    \"N0_7muVerMo\": [\n      \"StrongUp\",\n      \"WeakUp\",\n      \"Neutral\",\n      \"Down\"\n    ],\n    \"SubjVertMo\": [\n      \"StronUp\",\n      \"WeakUp\",\n      \"Neutral\",\n      \"Down\"\n    ],\n    \"QGVertMotion\": [\n      \"StrongUp\",\n      \"WeakUp\",\n      \"Neutral\",\n      \"Down\"\n    ],\n    \"CombVerMo\": [\n      \"StrongUp\",\n      \"WeakUp\",\n      \"Neutral\",\n      \"Down\"\n    ],\n    \"AreaMeso_ALS\": [\n      \"StrongUp\",\n      \"WeakUp\",\n      \"Neutral\",\n      \"Down\"\n    ]\n  },\n  \"cpts\": {\n    \"N0_7muVerMo\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"StrongUp\": 0.25,\n            \"WeakUp\": 0.25,\n            \"Neutral\": 0.25,\n            \"Down\": 0.25\n          }\n        }\n      ]\n    },\n    \"SubjVertMo\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"StronUp\": 0.15,\n            \"WeakUp\": 0.15,\n            \"Neutral\": 0.5,\n            \"Down\": 0.2\n          }\n        }\n      ]\n    },\n    \"QGVertMotion\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"StrongUp\": 0.15,\n            \"WeakUp\": 0.15,\n            \"Neutral\": 0.5,\n            \"Down\": 0.2\n          }\n        }\n      ]\n    },\n    \"CombVerMo\": {\n      \"parents\": [\n        \"N0_7muVerMo\",\n        \"SubjVertMo\",\n        \"QGVertMotion\"\n      ],\n      \"rows\": [\n        {\n          \"when\": {\n            \"N0_7muVerMo\": \"StrongUp\",\n            \"SubjVertMo\": \"StronUp\",\n            \"QGVertMotion\": \"StrongUp\"\n          },\n          \"probs\": {\n            \"StrongUp\": 1.0,\n            \"WeakUp\": 0.0,\n            \"Neutral\": 0.0,\n            \"Down\": 0.0\n          }\n        },\n        {\n          \"when\": {\n            \"N0_7muVerMo\": \"StrongUp\",\n            \"SubjVertMo\": \"StronUp\",\n            \"QGVertMotion\": \"WeakUp\"\n          },\n          \"probs\": {\n      ",
+      "parse_error": null,
+      "compiled_json": {
+        "nodes": [
+          "N0_7muVerMo",
+          "SubjVertMo",
+          "QGVertMotion",
+          "CombVerMo",
+          "AreaMeso_ALS"
+        ],
+        "states": {
+          "N0_7muVerMo": [
+            "StrongUp",
+            "WeakUp",
+            "Neutral",
+            "Down"
+          ],
+          "SubjVertMo": [
+            "StronUp",
+            "WeakUp",
+            "Neutral",
+            "Down"
+          ],
+          "QGVertMotion": [
+            "StrongUp",
+            "WeakUp",
+            "Neutral",
+            "Down"
+          ],
+          "CombVerMo": [
+            "StrongUp",
+            "WeakUp",
+            "Neutral",
+            "Down"
+          ],
+          "AreaMeso_ALS": [
+            "StrongUp",
+            "WeakUp",
+            "Neutral",
+            "Down"
+          ]
+        },
+        "cpts": {
+          "N0_7muVerMo": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "StrongUp": 0.25,
+                  "WeakUp": 0.25,
+                  "Neutral": 0.25,
+                  "Down": 0.25
+                }
+              }
+            ]
+          },
+          "SubjVertMo": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "StronUp": 0.15,
+                  "WeakUp": 0.15,
+                  "Neutral": 0.5,
+                  "Down": 0.2
+                }
+              }
+            ]
+          },
+          "QGVertMotion": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "StrongUp": 0.15,
+                  "WeakUp": 0.15,
+                  "Neutral": 0.5,
+                  "Down": 0.2
+                }
+              }
+            ]
+          },
+          "CombVerMo": {
+            "parents": [
+              "N0_7muVerMo",
+              "SubjVertMo",
+              "QGVertMotion"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 1.0,
+                  "WeakUp": 0.0,
+                  "Neutral": 0.0,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.9,
+                  "WeakUp": 0.1,
+                  "Neutral": 0.0,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.7,
+                  "WeakUp": 0.2,
+                  "Neutral": 0.1,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.2,
+                  "WeakUp": 0.5,
+                  "Neutral": 0.2,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.9,
+                  "WeakUp": 0.1,
+                  "Neutral": 0.0,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.7,
+                  "WeakUp": 0.3,
+                  "Neutral": 0.0,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.15,
+                  "WeakUp": 0.7,
+                  "Neutral": 0.15,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.35,
+                  "Neutral": 0.45,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.7,
+                  "WeakUp": 0.2,
+                  "Neutral": 0.1,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.15,
+                  "WeakUp": 0.7,
+                  "Neutral": 0.15,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.2,
+                  "WeakUp": 0.6,
+                  "Neutral": 0.2,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.2,
+                  "Neutral": 0.6,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.2,
+                  "WeakUp": 0.5,
+                  "Neutral": 0.2,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.35,
+                  "Neutral": 0.45,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.2,
+                  "Neutral": 0.6,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "StrongUp",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.1,
+                  "Neutral": 0.2,
+                  "Down": 0.6
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.9,
+                  "WeakUp": 0.1,
+                  "Neutral": 0.0,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.7,
+                  "WeakUp": 0.3,
+                  "Neutral": 0.0,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.15,
+                  "WeakUp": 0.7,
+                  "Neutral": 0.15,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.35,
+                  "Neutral": 0.45,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.7,
+                  "WeakUp": 0.3,
+                  "Neutral": 0.0,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 1.0,
+                  "Neutral": 0.0,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.7,
+                  "Neutral": 0.3,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.2,
+                  "Neutral": 0.7,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.15,
+                  "WeakUp": 0.7,
+                  "Neutral": 0.15,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.7,
+                  "Neutral": 0.3,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.3,
+                  "Neutral": 0.7,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.15,
+                  "Neutral": 0.35,
+                  "Down": 0.5
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.35,
+                  "Neutral": 0.45,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.2,
+                  "Neutral": 0.7,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.15,
+                  "Neutral": 0.5,
+                  "Down": 0.35
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "WeakUp",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.1,
+                  "Neutral": 0.2,
+                  "Down": 0.7
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.7,
+                  "WeakUp": 0.2,
+                  "Neutral": 0.1,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.15,
+                  "WeakUp": 0.7,
+                  "Neutral": 0.15,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.2,
+                  "WeakUp": 0.6,
+                  "Neutral": 0.2,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.2,
+                  "Neutral": 0.6,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.15,
+                  "WeakUp": 0.7,
+                  "Neutral": 0.15,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.7,
+                  "Neutral": 0.3,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.3,
+                  "Neutral": 0.7,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.15,
+                  "Neutral": 0.5,
+                  "Down": 0.35
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.2,
+                  "WeakUp": 0.6,
+                  "Neutral": 0.2,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.3,
+                  "Neutral": 0.7,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.0,
+                  "Neutral": 1.0,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.0,
+                  "Neutral": 0.7,
+                  "Down": 0.3
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.2,
+                  "Neutral": 0.6,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.15,
+                  "Neutral": 0.5,
+                  "Down": 0.35
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.0,
+                  "Neutral": 0.7,
+                  "Down": 0.3
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Neutral",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.0,
+                  "Neutral": 0.3,
+                  "Down": 0.7
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.2,
+                  "WeakUp": 0.5,
+                  "Neutral": 0.2,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.35,
+                  "Neutral": 0.45,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.2,
+                  "Neutral": 0.6,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "StronUp",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.1,
+                  "Neutral": 0.2,
+                  "Down": 0.6
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.35,
+                  "Neutral": 0.45,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.2,
+                  "Neutral": 0.7,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.15,
+                  "Neutral": 0.5,
+                  "Down": 0.35
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "WeakUp",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.1,
+                  "Neutral": 0.2,
+                  "Down": 0.7
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.2,
+                  "WeakUp": 0.1,
+                  "Neutral": 0.6,
+                  "Down": 0.1
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.15,
+                  "Neutral": 0.5,
+                  "Down": 0.35
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.0,
+                  "Neutral": 0.7,
+                  "Down": 0.3
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "Neutral",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.0,
+                  "Neutral": 0.3,
+                  "Down": 0.7
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 0.1,
+                  "WeakUp": 0.1,
+                  "Neutral": 0.2,
+                  "Down": 0.6
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.1,
+                  "Neutral": 0.2,
+                  "Down": 0.7
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.0,
+                  "Neutral": 0.3,
+                  "Down": 0.7
+                }
+              },
+              {
+                "when": {
+                  "N0_7muVerMo": "Down",
+                  "SubjVertMo": "Down",
+                  "QGVertMotion": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.0,
+                  "Neutral": 0.0,
+                  "Down": 1.0
+                }
+              }
+            ]
+          },
+          "AreaMeso_ALS": {
+            "parents": [
+              "CombVerMo"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "CombVerMo": "StrongUp"
+                },
+                "probs": {
+                  "StrongUp": 1.0,
+                  "WeakUp": 0.0,
+                  "Neutral": 0.0,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CombVerMo": "WeakUp"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 1.0,
+                  "Neutral": 0.0,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CombVerMo": "Neutral"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.0,
+                  "Neutral": 1.0,
+                  "Down": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CombVerMo": "Down"
+                },
+                "probs": {
+                  "StrongUp": 0.0,
+                  "WeakUp": 0.0,
+                  "Neutral": 0.0,
+                  "Down": 1.0
+                }
+              }
+            ]
+          }
+        }
+      },
+      "states": {
+        "N0_7muVerMo": [
+          "StrongUp",
+          "WeakUp",
+          "Neutral",
+          "Down"
+        ],
+        "SubjVertMo": [
+          "StronUp",
+          "WeakUp",
+          "Neutral",
+          "Down"
+        ],
+        "QGVertMotion": [
+          "StrongUp",
+          "WeakUp",
+          "Neutral",
+          "Down"
+        ],
+        "CombVerMo": [
+          "StrongUp",
+          "WeakUp",
+          "Neutral",
+          "Down"
+        ],
+        "AreaMeso_ALS": [
+          "StrongUp",
+          "WeakUp",
+          "Neutral",
+          "Down"
+        ]
+      },
+      "parents": {
+        "N0_7muVerMo": [],
+        "SubjVertMo": [],
+        "QGVertMotion": [],
+        "CombVerMo": [
+          "N0_7muVerMo",
+          "SubjVertMo",
+          "QGVertMotion"
+        ],
+        "AreaMeso_ALS": [
+          "CombVerMo"
+        ]
+      },
+      "n_factors": 5,
+      "n_entries": 284
+    },
+    {
+      "network": "insurance1",
+      "ok": true,
+      "usage": {
+        "prompt_tokens": 9004,
+        "completion_tokens": 9437,
+        "cost_usd": 0.164065
+      },
+      "raw_response": "{\n  \"nodes\": [\n    \"RiskAversion\",\n    \"SocioEcon\",\n    \"VehicleYear\",\n    \"MakeModel\",\n    \"Mileage\",\n    \"Theft\",\n    \"CarValue\",\n    \"HomeBase\",\n    \"AntiTheft\"\n  ],\n  \"states\": {\n    \"RiskAversion\": [\n      \"Psychopath\",\n      \"Adventurous\",\n      \"Normal\",\n      \"Cautious\"\n    ],\n    \"SocioEcon\": [\n      \"Prole\",\n      \"Middle\",\n      \"UpperMiddle\",\n      \"Wealthy\"\n    ],\n    \"VehicleYear\": [\n      \"Current\",\n      \"Older\"\n    ],\n    \"MakeModel\": [\n      \"SportsCar\",\n      \"Economy\",\n      \"FamilySedan\",\n      \"Luxury\",\n      \"SuperLuxury\"\n    ],\n    \"Mileage\": [\n      \"FiveThou\",\n      \"TwentyThou\",\n      \"FiftyThou\",\n      \"Million\"\n    ],\n    \"Theft\": [\n      \"True\",\n      \"False\"\n    ],\n    \"CarValue\": [\n      \"FiveThou\",\n      \"TenThou\",\n      \"TwentyThou\",\n      \"FiftyThou\",\n      \"Million\"\n    ],\n    \"HomeBase\": [\n      \"Secure\",\n      \"City\",\n      \"Suburb\",\n      \"Rural\"\n    ],\n    \"AntiTheft\": [\n      \"True\",\n      \"False\"\n    ]\n  },\n  \"cpts\": {\n    \"RiskAversion\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"Psychopath\": 0.02,\n            \"Adventurous\": 0.58,\n            \"Normal\": 0.3,\n            \"Cautious\": 0.1\n          }\n        }\n      ]\n    },\n    \"SocioEcon\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"Prole\": 0.42,\n            \"Middle\": 0.36,\n            \"UpperMiddle\": 0.21,\n            \"Wealthy\": 0.01\n          }\n        }\n      ]\n    },\n    \"VehicleYear\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"Current\": 0.348,\n            \"Older\": 0.652\n          }\n        }\n      ]\n    },\n    \"MakeModel\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"SportsCar\": 0.14,\n            \"Economy\": 0.38,\n            \"FamilySedan\": 0.38,\n            \"Luxury\": 0.098,\n            \"SuperLuxury\": 0.002\n          }\n        }\n   ",
+      "parse_error": null,
+      "compiled_json": {
+        "nodes": [
+          "RiskAversion",
+          "SocioEcon",
+          "VehicleYear",
+          "MakeModel",
+          "Mileage",
+          "Theft",
+          "CarValue",
+          "HomeBase",
+          "AntiTheft"
+        ],
+        "states": {
+          "RiskAversion": [
+            "Psychopath",
+            "Adventurous",
+            "Normal",
+            "Cautious"
+          ],
+          "SocioEcon": [
+            "Prole",
+            "Middle",
+            "UpperMiddle",
+            "Wealthy"
+          ],
+          "VehicleYear": [
+            "Current",
+            "Older"
+          ],
+          "MakeModel": [
+            "SportsCar",
+            "Economy",
+            "FamilySedan",
+            "Luxury",
+            "SuperLuxury"
+          ],
+          "Mileage": [
+            "FiveThou",
+            "TwentyThou",
+            "FiftyThou",
+            "Million"
+          ],
+          "Theft": [
+            "True",
+            "False"
+          ],
+          "CarValue": [
+            "FiveThou",
+            "TenThou",
+            "TwentyThou",
+            "FiftyThou",
+            "Million"
+          ],
+          "HomeBase": [
+            "Secure",
+            "City",
+            "Suburb",
+            "Rural"
+          ],
+          "AntiTheft": [
+            "True",
+            "False"
+          ]
+        },
+        "cpts": {
+          "RiskAversion": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "Psychopath": 0.02,
+                  "Adventurous": 0.58,
+                  "Normal": 0.3,
+                  "Cautious": 0.1
+                }
+              }
+            ]
+          },
+          "SocioEcon": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "Prole": 0.42,
+                  "Middle": 0.36,
+                  "UpperMiddle": 0.21,
+                  "Wealthy": 0.01
+                }
+              }
+            ]
+          },
+          "VehicleYear": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "Current": 0.348,
+                  "Older": 0.652
+                }
+              }
+            ]
+          },
+          "MakeModel": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "SportsCar": 0.14,
+                  "Economy": 0.38,
+                  "FamilySedan": 0.38,
+                  "Luxury": 0.098,
+                  "SuperLuxury": 0.002
+                }
+              }
+            ]
+          },
+          "Mileage": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "FiveThou": 0.1,
+                  "TwentyThou": 0.4,
+                  "FiftyThou": 0.4,
+                  "Million": 0.1
+                }
+              }
+            ]
+          },
+          "HomeBase": {
+            "parents": [
+              "RiskAversion",
+              "SocioEcon"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "RiskAversion": "Psychopath",
+                  "SocioEcon": "Prole"
+                },
+                "probs": {
+                  "Secure": 0,
+                  "City": 0.8,
+                  "Suburb": 0.05,
+                  "Rural": 0.15
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Psychopath",
+                  "SocioEcon": "Middle"
+                },
+                "probs": {
+                  "Secure": 0.15,
+                  "City": 0.8,
+                  "Suburb": 0.04,
+                  "Rural": 0.01
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Psychopath",
+                  "SocioEcon": "UpperMiddle"
+                },
+                "probs": {
+                  "Secure": 0.35,
+                  "City": 0.6,
+                  "Suburb": 0.04,
+                  "Rural": 0.01
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Psychopath",
+                  "SocioEcon": "Wealthy"
+                },
+                "probs": {
+                  "Secure": 0.49,
+                  "City": 0.5,
+                  "Suburb": 0,
+                  "Rural": 0.01
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Adventurous",
+                  "SocioEcon": "Prole"
+                },
+                "probs": {
+                  "Secure": 0,
+                  "City": 0.8,
+                  "Suburb": 0.05,
+                  "Rural": 0.15
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Adventurous",
+                  "SocioEcon": "Middle"
+                },
+                "probs": {
+                  "Secure": 0.01,
+                  "City": 0.25,
+                  "Suburb": 0.6,
+                  "Rural": 0.14
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Adventurous",
+                  "SocioEcon": "UpperMiddle"
+                },
+                "probs": {
+                  "Secure": 0.2,
+                  "City": 0.4,
+                  "Suburb": 0.3,
+                  "Rural": 0.1
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Adventurous",
+                  "SocioEcon": "Wealthy"
+                },
+                "probs": {
+                  "Secure": 0.95,
+                  "City": 0,
+                  "Suburb": 0,
+                  "Rural": 0.05
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Normal",
+                  "SocioEcon": "Prole"
+                },
+                "probs": {
+                  "Secure": 0,
+                  "City": 0.8,
+                  "Suburb": 0.05,
+                  "Rural": 0.15
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Normal",
+                  "SocioEcon": "Middle"
+                },
+                "probs": {
+                  "Secure": 0.3,
+                  "City": 0,
+                  "Suburb": 0.6,
+                  "Rural": 0.1
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Normal",
+                  "SocioEcon": "UpperMiddle"
+                },
+                "probs": {
+                  "Secure": 0.5,
+                  "City": 0,
+                  "Suburb": 0.4,
+                  "Rural": 0.1
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Normal",
+                  "SocioEcon": "Wealthy"
+                },
+                "probs": {
+                  "Secure": 0.85,
+                  "City": 0,
+                  "Suburb": 0,
+                  "Rural": 0.15
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Cautious",
+                  "SocioEcon": "Prole"
+                },
+                "probs": {
+                  "Secure": 0,
+                  "City": 0.8,
+                  "Suburb": 0.05,
+                  "Rural": 0.15
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Cautious",
+                  "SocioEcon": "Middle"
+                },
+                "probs": {
+                  "Secure": 0.95,
+                  "City": 0,
+                  "Suburb": 0.025,
+                  "Rural": 0.025
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Cautious",
+                  "SocioEcon": "UpperMiddle"
+                },
+                "probs": {
+                  "Secure": 0.999997,
+                  "City": 1e-06,
+                  "Suburb": 1e-06,
+                  "Rural": 1e-06
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Cautious",
+                  "SocioEcon": "Wealthy"
+                },
+                "probs": {
+                  "Secure": 0.999997,
+                  "City": 1e-06,
+                  "Suburb": 1e-06,
+                  "Rural": 1e-06
+                }
+              }
+            ]
+          },
+          "AntiTheft": {
+            "parents": [
+              "RiskAversion",
+              "SocioEcon"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "RiskAversion": "Psychopath",
+                  "SocioEcon": "Prole"
+                },
+                "probs": {
+                  "True": 1e-06,
+                  "False": 0.999999
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Psychopath",
+                  "SocioEcon": "Middle"
+                },
+                "probs": {
+                  "True": 1e-06,
+                  "False": 0.999999
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Psychopath",
+                  "SocioEcon": "UpperMiddle"
+                },
+                "probs": {
+                  "True": 0.05,
+                  "False": 0.95
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Psychopath",
+                  "SocioEcon": "Wealthy"
+                },
+                "probs": {
+                  "True": 0.5,
+                  "False": 0.5
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Adventurous",
+                  "SocioEcon": "Prole"
+                },
+                "probs": {
+                  "True": 1e-06,
+                  "False": 0.999999
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Adventurous",
+                  "SocioEcon": "Middle"
+                },
+                "probs": {
+                  "True": 1e-06,
+                  "False": 0.999999
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Adventurous",
+                  "SocioEcon": "UpperMiddle"
+                },
+                "probs": {
+                  "True": 0.2,
+                  "False": 0.8
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Adventurous",
+                  "SocioEcon": "Wealthy"
+                },
+                "probs": {
+                  "True": 0.5,
+                  "False": 0.5
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Normal",
+                  "SocioEcon": "Prole"
+                },
+                "probs": {
+                  "True": 0.1,
+                  "False": 0.9
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Normal",
+                  "SocioEcon": "Middle"
+                },
+                "probs": {
+                  "True": 0.3,
+                  "False": 0.7
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Normal",
+                  "SocioEcon": "UpperMiddle"
+                },
+                "probs": {
+                  "True": 0.9,
+                  "False": 0.1
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Normal",
+                  "SocioEcon": "Wealthy"
+                },
+                "probs": {
+                  "True": 0.8,
+                  "False": 0.2
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Cautious",
+                  "SocioEcon": "Prole"
+                },
+                "probs": {
+                  "True": 0.95,
+                  "False": 0.05
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Cautious",
+                  "SocioEcon": "Middle"
+                },
+                "probs": {
+                  "True": 0.999999,
+                  "False": 1e-06
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Cautious",
+                  "SocioEcon": "UpperMiddle"
+                },
+                "probs": {
+                  "True": 0.999999,
+                  "False": 1e-06
+                }
+              },
+              {
+                "when": {
+                  "RiskAversion": "Cautious",
+                  "SocioEcon": "Wealthy"
+                },
+                "probs": {
+                  "True": 0.999999,
+                  "False": 1e-06
+                }
+              }
+            ]
+          },
+          "CarValue": {
+            "parents": [
+              "MakeModel",
+              "VehicleYear",
+              "Mileage"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "MakeModel": "SportsCar",
+                  "VehicleYear": "Current",
+                  "Mileage": "FiveThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0.1,
+                  "TwentyThou": 0.8,
+                  "FiftyThou": 0.09,
+                  "Million": 0.01
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SportsCar",
+                  "VehicleYear": "Current",
+                  "Mileage": "TwentyThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0.1,
+                  "TwentyThou": 0.8,
+                  "FiftyThou": 0.09,
+                  "Million": 0.01
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SportsCar",
+                  "VehicleYear": "Current",
+                  "Mileage": "FiftyThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0.1,
+                  "TwentyThou": 0.8,
+                  "FiftyThou": 0.09,
+                  "Million": 0.01
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SportsCar",
+                  "VehicleYear": "Current",
+                  "Mileage": "Million"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0.1,
+                  "TwentyThou": 0.8,
+                  "FiftyThou": 0.09,
+                  "Million": 0.01
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SportsCar",
+                  "VehicleYear": "Older",
+                  "Mileage": "FiveThou"
+                },
+                "probs": {
+                  "FiveThou": 0.03,
+                  "TenThou": 0.3,
+                  "TwentyThou": 0.6,
+                  "FiftyThou": 0.06,
+                  "Million": 0.01
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SportsCar",
+                  "VehicleYear": "Older",
+                  "Mileage": "TwentyThou"
+                },
+                "probs": {
+                  "FiveThou": 0.16,
+                  "TenThou": 0.5,
+                  "TwentyThou": 0.3,
+                  "FiftyThou": 0.03,
+                  "Million": 0.01
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SportsCar",
+                  "VehicleYear": "Older",
+                  "Mileage": "FiftyThou"
+                },
+                "probs": {
+                  "FiveThou": 0.4,
+                  "TenThou": 0.47,
+                  "TwentyThou": 0.1,
+                  "FiftyThou": 0.02,
+                  "Million": 0.01
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SportsCar",
+                  "VehicleYear": "Older",
+                  "Mileage": "Million"
+                },
+                "probs": {
+                  "FiveThou": 0.9,
+                  "TenThou": 0.06,
+                  "TwentyThou": 0.02,
+                  "FiftyThou": 0.01,
+                  "Million": 0.01
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Economy",
+                  "VehicleYear": "Current",
+                  "Mileage": "FiveThou"
+                },
+                "probs": {
+                  "FiveThou": 0.1,
+                  "TenThou": 0.8,
+                  "TwentyThou": 0.1,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Economy",
+                  "VehicleYear": "Current",
+                  "Mileage": "TwentyThou"
+                },
+                "probs": {
+                  "FiveThou": 0.1,
+                  "TenThou": 0.8,
+                  "TwentyThou": 0.1,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Economy",
+                  "VehicleYear": "Current",
+                  "Mileage": "FiftyThou"
+                },
+                "probs": {
+                  "FiveThou": 0.1,
+                  "TenThou": 0.8,
+                  "TwentyThou": 0.1,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Economy",
+                  "VehicleYear": "Current",
+                  "Mileage": "Million"
+                },
+                "probs": {
+                  "FiveThou": 0.1,
+                  "TenThou": 0.8,
+                  "TwentyThou": 0.1,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Economy",
+                  "VehicleYear": "Older",
+                  "Mileage": "FiveThou"
+                },
+                "probs": {
+                  "FiveThou": 0.25,
+                  "TenThou": 0.7,
+                  "TwentyThou": 0.05,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Economy",
+                  "VehicleYear": "Older",
+                  "Mileage": "TwentyThou"
+                },
+                "probs": {
+                  "FiveThou": 0.7,
+                  "TenThou": 0.2999,
+                  "TwentyThou": 0.0001,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Economy",
+                  "VehicleYear": "Older",
+                  "Mileage": "FiftyThou"
+                },
+                "probs": {
+                  "FiveThou": 0.99,
+                  "TenThou": 0.0001,
+                  "TwentyThou": 1e-06,
+                  "FiftyThou": 0,
+                  "Million": 0.009899
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Economy",
+                  "VehicleYear": "Older",
+                  "Mileage": "Million"
+                },
+                "probs": {
+                  "FiveThou": 0.999998,
+                  "TenThou": 1e-06,
+                  "TwentyThou": 1e-06,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "FamilySedan",
+                  "VehicleYear": "Current",
+                  "Mileage": "FiveThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0.1,
+                  "TwentyThou": 0.9,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "FamilySedan",
+                  "VehicleYear": "Current",
+                  "Mileage": "TwentyThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0.1,
+                  "TwentyThou": 0.9,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "FamilySedan",
+                  "VehicleYear": "Current",
+                  "Mileage": "FiftyThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0.1,
+                  "TwentyThou": 0.9,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "FamilySedan",
+                  "VehicleYear": "Current",
+                  "Mileage": "Million"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0.1,
+                  "TwentyThou": 0.9,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "FamilySedan",
+                  "VehicleYear": "Older",
+                  "Mileage": "FiveThou"
+                },
+                "probs": {
+                  "FiveThou": 0.2,
+                  "TenThou": 0.3,
+                  "TwentyThou": 0.5,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "FamilySedan",
+                  "VehicleYear": "Older",
+                  "Mileage": "TwentyThou"
+                },
+                "probs": {
+                  "FiveThou": 0.5,
+                  "TenThou": 0.3,
+                  "TwentyThou": 0.2,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "FamilySedan",
+                  "VehicleYear": "Older",
+                  "Mileage": "FiftyThou"
+                },
+                "probs": {
+                  "FiveThou": 0.7,
+                  "TenThou": 0.2,
+                  "TwentyThou": 0.1,
+                  "FiftyThou": 0,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "FamilySedan",
+                  "VehicleYear": "Older",
+                  "Mileage": "Million"
+                },
+                "probs": {
+                  "FiveThou": 0.99,
+                  "TenThou": 0.0001,
+                  "TwentyThou": 1e-07,
+                  "FiftyThou": 0,
+                  "Million": 0.0098999
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Luxury",
+                  "VehicleYear": "Current",
+                  "Mileage": "FiveThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0,
+                  "TwentyThou": 0,
+                  "FiftyThou": 1,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Luxury",
+                  "VehicleYear": "Current",
+                  "Mileage": "TwentyThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0,
+                  "TwentyThou": 0,
+                  "FiftyThou": 1,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Luxury",
+                  "VehicleYear": "Current",
+                  "Mileage": "FiftyThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0,
+                  "TwentyThou": 0,
+                  "FiftyThou": 1,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Luxury",
+                  "VehicleYear": "Current",
+                  "Mileage": "Million"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0,
+                  "TwentyThou": 0,
+                  "FiftyThou": 1,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Luxury",
+                  "VehicleYear": "Older",
+                  "Mileage": "FiveThou"
+                },
+                "probs": {
+                  "FiveThou": 0.01,
+                  "TenThou": 0.09,
+                  "TwentyThou": 0.2,
+                  "FiftyThou": 0.7,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Luxury",
+                  "VehicleYear": "Older",
+                  "Mileage": "TwentyThou"
+                },
+                "probs": {
+                  "FiveThou": 0.05,
+                  "TenThou": 0.15,
+                  "TwentyThou": 0.3,
+                  "FiftyThou": 0.5,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Luxury",
+                  "VehicleYear": "Older",
+                  "Mileage": "FiftyThou"
+                },
+                "probs": {
+                  "FiveThou": 0.1,
+                  "TenThou": 0.3,
+                  "TwentyThou": 0.3,
+                  "FiftyThou": 0.3,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "Luxury",
+                  "VehicleYear": "Older",
+                  "Mileage": "Million"
+                },
+                "probs": {
+                  "FiveThou": 0.2,
+                  "TenThou": 0.2,
+                  "TwentyThou": 0.3,
+                  "FiftyThou": 0.3,
+                  "Million": 0
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SuperLuxury",
+                  "VehicleYear": "Current",
+                  "Mileage": "FiveThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0,
+                  "TwentyThou": 0,
+                  "FiftyThou": 0,
+                  "Million": 1
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SuperLuxury",
+                  "VehicleYear": "Current",
+                  "Mileage": "TwentyThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0,
+                  "TwentyThou": 0,
+                  "FiftyThou": 0,
+                  "Million": 1
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SuperLuxury",
+                  "VehicleYear": "Current",
+                  "Mileage": "FiftyThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0,
+                  "TwentyThou": 0,
+                  "FiftyThou": 0,
+                  "Million": 1
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SuperLuxury",
+                  "VehicleYear": "Current",
+                  "Mileage": "Million"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0,
+                  "TwentyThou": 0,
+                  "FiftyThou": 0,
+                  "Million": 1
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SuperLuxury",
+                  "VehicleYear": "Older",
+                  "Mileage": "FiveThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0,
+                  "TwentyThou": 0,
+                  "FiftyThou": 0,
+                  "Million": 1
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SuperLuxury",
+                  "VehicleYear": "Older",
+                  "Mileage": "TwentyThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0,
+                  "TwentyThou": 0,
+                  "FiftyThou": 0,
+                  "Million": 1
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SuperLuxury",
+                  "VehicleYear": "Older",
+                  "Mileage": "FiftyThou"
+                },
+                "probs": {
+                  "FiveThou": 0,
+                  "TenThou": 0,
+                  "TwentyThou": 0,
+                  "FiftyThou": 0,
+                  "Million": 1
+                }
+              },
+              {
+                "when": {
+                  "MakeModel": "SuperLuxury",
+                  "VehicleYear": "Older",
+                  "Mileage": "Million"
+                },
+                "probs": {
+                  "FiveThou": 1e-06,
+                  "TenThou": 1e-06,
+                  "TwentyThou": 1e-06,
+                  "FiftyThou": 1e-06,
+                  "Million": 0.999996
+                }
+              }
+            ]
+          },
+          "Theft": {
+            "parents": [
+              "AntiTheft",
+              "HomeBase",
+              "CarValue"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Secure",
+                  "CarValue": "FiveThou"
+                },
+                "probs": {
+                  "True": 1e-06,
+                  "False": 0.999999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Secure",
+                  "CarValue": "TenThou"
+                },
+                "probs": {
+                  "True": 2e-07,
+                  "False": 0.9999998
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Secure",
+                  "CarValue": "TwentyThou"
+                },
+                "probs": {
+                  "True": 3e-07,
+                  "False": 0.9999997
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Secure",
+                  "CarValue": "FiftyThou"
+                },
+                "probs": {
+                  "True": 2e-07,
+                  "False": 0.9999998
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Secure",
+                  "CarValue": "Million"
+                },
+                "probs": {
+                  "True": 1e-07,
+                  "False": 0.9999999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "City",
+                  "CarValue": "FiveThou"
+                },
+                "probs": {
+                  "True": 0.0005,
+                  "False": 0.9995
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "City",
+                  "CarValue": "TenThou"
+                },
+                "probs": {
+                  "True": 0.002,
+                  "False": 0.998
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "City",
+                  "CarValue": "TwentyThou"
+                },
+                "probs": {
+                  "True": 0.005,
+                  "False": 0.995
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "City",
+                  "CarValue": "FiftyThou"
+                },
+                "probs": {
+                  "True": 0.005,
+                  "False": 0.995
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "City",
+                  "CarValue": "Million"
+                },
+                "probs": {
+                  "True": 1e-06,
+                  "False": 0.999999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Suburb",
+                  "CarValue": "FiveThou"
+                },
+                "probs": {
+                  "True": 1e-05,
+                  "False": 0.99999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Suburb",
+                  "CarValue": "TenThou"
+                },
+                "probs": {
+                  "True": 0.0001,
+                  "False": 0.9999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Suburb",
+                  "CarValue": "TwentyThou"
+                },
+                "probs": {
+                  "True": 0.0003,
+                  "False": 0.9997
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Suburb",
+                  "CarValue": "FiftyThou"
+                },
+                "probs": {
+                  "True": 0.0003,
+                  "False": 0.9997
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Suburb",
+                  "CarValue": "Million"
+                },
+                "probs": {
+                  "True": 1e-06,
+                  "False": 0.999999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Rural",
+                  "CarValue": "FiveThou"
+                },
+                "probs": {
+                  "True": 1e-05,
+                  "False": 0.9999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Rural",
+                  "CarValue": "TenThou"
+                },
+                "probs": {
+                  "True": 2e-05,
+                  "False": 0.99998
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Rural",
+                  "CarValue": "TwentyThou"
+                },
+                "probs": {
+                  "True": 5e-05,
+                  "False": 0.99995
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Rural",
+                  "CarValue": "FiftyThou"
+                },
+                "probs": {
+                  "True": 5e-05,
+                  "False": 0.99995
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "True",
+                  "HomeBase": "Rural",
+                  "CarValue": "Million"
+                },
+                "probs": {
+                  "True": 1e-06,
+                  "False": 0.999999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Secure",
+                  "CarValue": "FiveThou"
+                },
+                "probs": {
+                  "True": 1e-06,
+                  "False": 0.999999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Secure",
+                  "CarValue": "TenThou"
+                },
+                "probs": {
+                  "True": 2e-06,
+                  "False": 0.999998
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Secure",
+                  "CarValue": "TwentyThou"
+                },
+                "probs": {
+                  "True": 3e-06,
+                  "False": 0.999997
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Secure",
+                  "CarValue": "FiftyThou"
+                },
+                "probs": {
+                  "True": 2e-06,
+                  "False": 0.999998
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Secure",
+                  "CarValue": "Million"
+                },
+                "probs": {
+                  "True": 1e-06,
+                  "False": 0.999999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "City",
+                  "CarValue": "FiveThou"
+                },
+                "probs": {
+                  "True": 0.001,
+                  "False": 0.999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "City",
+                  "CarValue": "TenThou"
+                },
+                "probs": {
+                  "True": 0.005,
+                  "False": 0.995
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "City",
+                  "CarValue": "TwentyThou"
+                },
+                "probs": {
+                  "True": 0.01,
+                  "False": 0.99
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "City",
+                  "CarValue": "FiftyThou"
+                },
+                "probs": {
+                  "True": 0.01,
+                  "False": 0.99
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "City",
+                  "CarValue": "Million"
+                },
+                "probs": {
+                  "True": 1e-06,
+                  "False": 0.999999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Suburb",
+                  "CarValue": "FiveThou"
+                },
+                "probs": {
+                  "True": 1e-05,
+                  "False": 0.99999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Suburb",
+                  "CarValue": "TenThou"
+                },
+                "probs": {
+                  "True": 0.0002,
+                  "False": 0.9998
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Suburb",
+                  "CarValue": "TwentyThou"
+                },
+                "probs": {
+                  "True": 0.0005,
+                  "False": 0.9995
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Suburb",
+                  "CarValue": "FiftyThou"
+                },
+                "probs": {
+                  "True": 0.0005,
+                  "False": 0.9995
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Suburb",
+                  "CarValue": "Million"
+                },
+                "probs": {
+                  "True": 1e-06,
+                  "False": 0.999999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Rural",
+                  "CarValue": "FiveThou"
+                },
+                "probs": {
+                  "True": 0.0001,
+                  "False": 0.9999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Rural",
+                  "CarValue": "TenThou"
+                },
+                "probs": {
+                  "True": 0.0001,
+                  "False": 0.9999
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Rural",
+                  "CarValue": "TwentyThou"
+                },
+                "probs": {
+                  "True": 0.0002,
+                  "False": 0.9998
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Rural",
+                  "CarValue": "FiftyThou"
+                },
+                "probs": {
+                  "True": 0.0002,
+                  "False": 0.9998
+                }
+              },
+              {
+                "when": {
+                  "AntiTheft": "False",
+                  "HomeBase": "Rural",
+                  "CarValue": "Million"
+                },
+                "probs": {
+                  "True": 1e-06,
+                  "False": 0.999999
+                }
+              }
+            ]
+          }
+        }
+      },
+      "states": {
+        "RiskAversion": [
+          "Psychopath",
+          "Adventurous",
+          "Normal",
+          "Cautious"
+        ],
+        "SocioEcon": [
+          "Prole",
+          "Middle",
+          "UpperMiddle",
+          "Wealthy"
+        ],
+        "VehicleYear": [
+          "Current",
+          "Older"
+        ],
+        "MakeModel": [
+          "SportsCar",
+          "Economy",
+          "FamilySedan",
+          "Luxury",
+          "SuperLuxury"
+        ],
+        "Mileage": [
+          "FiveThou",
+          "TwentyThou",
+          "FiftyThou",
+          "Million"
+        ],
+        "Theft": [
+          "True",
+          "False"
+        ],
+        "CarValue": [
+          "FiveThou",
+          "TenThou",
+          "TwentyThou",
+          "FiftyThou",
+          "Million"
+        ],
+        "HomeBase": [
+          "Secure",
+          "City",
+          "Suburb",
+          "Rural"
+        ],
+        "AntiTheft": [
+          "True",
+          "False"
+        ]
+      },
+      "parents": {
+        "RiskAversion": [],
+        "SocioEcon": [],
+        "VehicleYear": [],
+        "MakeModel": [],
+        "Mileage": [],
+        "Theft": [
+          "AntiTheft",
+          "HomeBase",
+          "CarValue"
+        ],
+        "CarValue": [
+          "MakeModel",
+          "VehicleYear",
+          "Mileage"
+        ],
+        "HomeBase": [
+          "RiskAversion",
+          "SocioEcon"
+        ],
+        "AntiTheft": [
+          "RiskAversion",
+          "SocioEcon"
+        ]
+      },
+      "n_factors": 9,
+      "n_entries": 395
+    },
+    {
+      "network": "mildew0",
+      "ok": false,
+      "usage": {
+        "prompt_tokens": 11077,
+        "completion_tokens": 12000,
+        "cost_usd": 0.2076925
+      },
+      "raw_response": "{\n  \"nodes\": [\n    \"lai_1\",\n    \"foto_1\",\n    \"straaling_1\",\n    \"temp_1\"\n  ],\n  \"states\": {\n    \"lai_1\": [\n      \"0_0___0_5\",\n      \"0_5___1_5\",\n      \"1_5___2_5\",\n      \"2_5___3_5\",\n      \"3_5___4_5\",\n      \"4_5___5_5\",\n      \"5_5___6_5\",\n      \"___6_5\"\n    ],\n    \"foto_1\": [\n      \"0_00_kg_m2\",\n      \"0_05_kg_m2\",\n      \"0_10_kg_m2\",\n      \"0_15_kg_m2\",\n      \"0_20_kg_m2\",\n      \"0_25_kg_m2\",\n      \"0_30_kg_m2\",\n      \"0_35_kg_m2\",\n      \"0_40_kg_m2\",\n      \"0_45_kg_m2\",\n      \"0_50_kg_m2\",\n      \"0_55_kg_m2\",\n      \"0_60_kg_m2\",\n      \"0_65_kg_m2\",\n      \"0_70_kg_m2\",\n      \"0_75_kg_m2\",\n      \"0_80_kg_m2\",\n      \"0_85_kg_m2\",\n      \"0_90_kg_m2\",\n      \"0_95_kg_m2\"\n    ],\n    \"straaling_1\": [\n      \"___150_MJ_m2\",\n      \"150___199_MJ_m2\",\n      \"200___249_MJ_m2\",\n      \"____250_MJ_m2\"\n    ],\n    \"temp_1\": [\n      \"___13_0_C\",\n      \"13_0___14_9_C\",\n      \"15_0___16_9_C\",\n      \"____17_0_C\"\n    ]\n  },\n  \"cpts\": {\n    \"lai_1\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"0_0___0_5\": 0.0,\n            \"0_5___1_5\": 0.0,\n            \"1_5___2_5\": 0.0,\n            \"2_5___3_5\": 0.1,\n            \"3_5___4_5\": 0.2,\n            \"4_5___5_5\": 0.2,\n            \"5_5___6_5\": 0.4,\n            \"___6_5\": 0.1\n          }\n        }\n      ]\n    },\n    \"straaling_1\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"___150_MJ_m2\": 0.067,\n            \"150___199_MJ_m2\": 0.467,\n            \"200___249_MJ_m2\": 0.333,\n            \"____250_MJ_m2\": 0.133\n          }\n        }\n      ]\n    },\n    \"temp_1\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"___13_0_C\": 0.133,\n            \"13_0___14_9_C\": 0.567,\n            \"15_0___16_9_C\": 0.167,\n            \"____17_0_C\": 0.133\n          }\n        }\n      ]\n    },\n    \"foto_1\": {\n      \"parents\": [\n        \"lai_1\",\n        \"temp_1\",\n        \"straaling_1\"\n      ],\n      \"rows\": [\n  ",
+      "parse_error": "json_parse_failed"
+    },
+    {
+      "network": "phytophthora1",
+      "ok": true,
+      "usage": {
+        "prompt_tokens": 6570,
+        "completion_tokens": 6086,
+        "cost_usd": 0.107715
+      },
+      "raw_response": "{\n  \"nodes\": [\n    \"caduceus\",\n    \"aplerotic_plerotic\",\n    \"nat_eco\",\n    \"stem_cank\",\n    \"Invasiv_score_BH\",\n    \"temp_opt\"\n  ],\n  \"states\": {\n    \"caduceus\": [\n      \"Caducous\",\n      \"Non-caducious\"\n    ],\n    \"aplerotic_plerotic\": [\n      \"Aplerotic\",\n      \"Both\",\n      \"Plerotic\"\n    ],\n    \"nat_eco\": [\n      \"No\",\n      \"Yes\"\n    ],\n    \"stem_cank\": [\n      \"No\",\n      \"Yes\"\n    ],\n    \"Invasiv_score_BH\": [\n      \"Very low\",\n      \"Low\",\n      \"Moderate\",\n      \"High\",\n      \"Very high\"\n    ],\n    \"temp_opt\": [\n      \"< 20\",\n      \"20 to 25\",\n      \"25\",\n      \"25 to 28\",\n      \">= 28\"\n    ]\n  },\n  \"cpts\": {\n    \"Invasiv_score_BH\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"Very low\": 0.21,\n            \"Low\": 0.19,\n            \"Moderate\": 0.19,\n            \"High\": 0.18,\n            \"Very high\": 0.21\n          }\n        }\n      ]\n    },\n    \"temp_opt\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"< 20\": 0.185,\n            \"20 to 25\": 0.27,\n            \"25\": 0.207,\n            \"25 to 28\": 0.119,\n            \">= 28\": 0.197\n          }\n        }\n      ]\n    },\n    \"aplerotic_plerotic\": {\n      \"parents\": [\n        \"Invasiv_score_BH\",\n        \"temp_opt\"\n      ],\n      \"rows\": [\n        {\n          \"when\": {\n            \"Invasiv_score_BH\": \"Very low\",\n            \"temp_opt\": \"< 20\"\n          },\n          \"probs\": {\n            \"Aplerotic\": 0.0,\n            \"Both\": 1.0,\n            \"Plerotic\": 0.0\n          }\n        },\n        {\n          \"when\": {\n            \"Invasiv_score_BH\": \"Very low\",\n            \"temp_opt\": \"20 to 25\"\n          },\n          \"probs\": {\n            \"Aplerotic\": 0.18,\n            \"Both\": 0.36,\n            \"Plerotic\": 0.46\n          }\n        },\n        {\n          \"when\": {\n            \"Invasiv_score_BH\": \"Very low\",\n            \"temp_opt\": \"25\"\n          },\n          \"probs\": {\n            \"Aplerotic\": 0.3333,\n         ",
+      "parse_error": null,
+      "compiled_json": {
+        "nodes": [
+          "caduceus",
+          "aplerotic_plerotic",
+          "nat_eco",
+          "stem_cank",
+          "Invasiv_score_BH",
+          "temp_opt"
+        ],
+        "states": {
+          "caduceus": [
+            "Caducous",
+            "Non-caducious"
+          ],
+          "aplerotic_plerotic": [
+            "Aplerotic",
+            "Both",
+            "Plerotic"
+          ],
+          "nat_eco": [
+            "No",
+            "Yes"
+          ],
+          "stem_cank": [
+            "No",
+            "Yes"
+          ],
+          "Invasiv_score_BH": [
+            "Very low",
+            "Low",
+            "Moderate",
+            "High",
+            "Very high"
+          ],
+          "temp_opt": [
+            "< 20",
+            "20 to 25",
+            "25",
+            "25 to 28",
+            ">= 28"
+          ]
+        },
+        "cpts": {
+          "Invasiv_score_BH": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "Very low": 0.21,
+                  "Low": 0.19,
+                  "Moderate": 0.19,
+                  "High": 0.18,
+                  "Very high": 0.21
+                }
+              }
+            ]
+          },
+          "temp_opt": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "< 20": 0.185,
+                  "20 to 25": 0.27,
+                  "25": 0.207,
+                  "25 to 28": 0.119,
+                  ">= 28": 0.197
+                }
+              }
+            ]
+          },
+          "aplerotic_plerotic": {
+            "parents": [
+              "Invasiv_score_BH",
+              "temp_opt"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "Aplerotic": 0.0,
+                  "Both": 1.0,
+                  "Plerotic": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "Aplerotic": 0.18,
+                  "Both": 0.36,
+                  "Plerotic": 0.46
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "Aplerotic": 0.3333,
+                  "Both": 0.3333,
+                  "Plerotic": 0.3334
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "Aplerotic": 0.5,
+                  "Both": 0.5,
+                  "Plerotic": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "Aplerotic": 0.67,
+                  "Both": 0.0,
+                  "Plerotic": 0.33
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "Aplerotic": 0.57,
+                  "Both": 0.29,
+                  "Plerotic": 0.14
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "Aplerotic": 0.0,
+                  "Both": 0.5,
+                  "Plerotic": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "Aplerotic": 0.67,
+                  "Both": 0.33,
+                  "Plerotic": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "Aplerotic": 0.0,
+                  "Both": 0.0,
+                  "Plerotic": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "Aplerotic": 0.34,
+                  "Both": 0.33,
+                  "Plerotic": 0.33
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "Aplerotic": 0.2,
+                  "Both": 0.0,
+                  "Plerotic": 0.8
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "Aplerotic": 0.33,
+                  "Both": 0.67,
+                  "Plerotic": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "Aplerotic": 0.4,
+                  "Both": 0.2,
+                  "Plerotic": 0.4
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "Aplerotic": 0.0,
+                  "Both": 1.0,
+                  "Plerotic": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "Aplerotic": 0.75,
+                  "Both": 0.25,
+                  "Plerotic": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "Aplerotic": 0.0,
+                  "Both": 1.0,
+                  "Plerotic": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "Aplerotic": 0.2,
+                  "Both": 0.2,
+                  "Plerotic": 0.6
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "Aplerotic": 0.29,
+                  "Both": 0.28,
+                  "Plerotic": 0.43
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "Aplerotic": 0.5,
+                  "Both": 0.5,
+                  "Plerotic": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "Aplerotic": 0.0,
+                  "Both": 0.5,
+                  "Plerotic": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "Aplerotic": 0.0,
+                  "Both": 0.5,
+                  "Plerotic": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "Aplerotic": 0.0,
+                  "Both": 0.25,
+                  "Plerotic": 0.75
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "Aplerotic": 0.17,
+                  "Both": 0.33,
+                  "Plerotic": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "Aplerotic": 0.0,
+                  "Both": 0.33,
+                  "Plerotic": 0.67
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "Aplerotic": 0.0,
+                  "Both": 0.4,
+                  "Plerotic": 0.6
+                }
+              }
+            ]
+          },
+          "caduceus": {
+            "parents": [
+              "Invasiv_score_BH",
+              "temp_opt"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "Caducous": 0.5,
+                  "Non-caducious": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "Caducous": 0.18,
+                  "Non-caducious": 0.82
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "Caducous": 0.0,
+                  "Non-caducious": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "Caducous": 0.0,
+                  "Non-caducious": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "Caducous": 0.0,
+                  "Non-caducious": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "Caducous": 0.43,
+                  "Non-caducious": 0.57
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "Caducous": 0.25,
+                  "Non-caducious": 0.75
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "Caducous": 0.0,
+                  "Non-caducious": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "Caducous": 0.33,
+                  "Non-caducious": 0.67
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "Caducous": 0.0,
+                  "Non-caducious": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "Caducous": 0.6,
+                  "Non-caducious": 0.4
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "Caducous": 0.67,
+                  "Non-caducious": 0.33
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "Caducous": 0.0,
+                  "Non-caducious": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "Caducous": 0.0,
+                  "Non-caducious": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "Caducous": 0.0,
+                  "Non-caducious": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "Caducous": 0.0,
+                  "Non-caducious": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "Caducous": 0.0,
+                  "Non-caducious": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "Caducous": 0.14,
+                  "Non-caducious": 0.86
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "Caducous": 1.0,
+                  "Non-caducious": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "Caducous": 0.0,
+                  "Non-caducious": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "Caducous": 1.0,
+                  "Non-caducious": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "Caducous": 0.75,
+                  "Non-caducious": 0.25
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "Caducous": 0.0,
+                  "Non-caducious": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "Caducous": 0.25,
+                  "Non-caducious": 0.75
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "Caducous": 0.33,
+                  "Non-caducious": 0.67
+                }
+              }
+            ]
+          },
+          "nat_eco": {
+            "parents": [
+              "Invasiv_score_BH",
+              "temp_opt"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "No": 0.25,
+                  "Yes": 0.75
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "No": 0.36,
+                  "Yes": 0.64
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "No": 1.0,
+                  "Yes": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "No": 1.0,
+                  "Yes": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "No": 0.75,
+                  "Yes": 0.25
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "No": 0.57,
+                  "Yes": 0.43
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "No": 0.5,
+                  "Yes": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "No": 0.3333,
+                  "Yes": 0.6667
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "No": 0.6667,
+                  "Yes": 0.3333
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "No": 1.0,
+                  "Yes": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "No": 0.4,
+                  "Yes": 0.6
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "No": 0.6667,
+                  "Yes": 0.3333
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "No": 0.6,
+                  "Yes": 0.4
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "No": 0.5,
+                  "Yes": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "No": 0.4,
+                  "Yes": 0.6
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "No": 1.0,
+                  "Yes": 0.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "No": 0.0,
+                  "Yes": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "No": 0.43,
+                  "Yes": 0.57
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "No": 0.5,
+                  "Yes": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "No": 0.67,
+                  "Yes": 0.33
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "No": 0.5,
+                  "Yes": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "No": 0.25,
+                  "Yes": 0.75
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "No": 0.0,
+                  "Yes": 1.0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "No": 0.25,
+                  "Yes": 0.75
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "No": 0.5,
+                  "Yes": 0.5
+                }
+              }
+            ]
+          },
+          "stem_cank": {
+            "parents": [
+              "Invasiv_score_BH",
+              "nat_eco"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "nat_eco": "No"
+                },
+                "probs": {
+                  "No": 0.73,
+                  "Yes": 0.27
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "nat_eco": "Yes"
+                },
+                "probs": {
+                  "No": 0.91,
+                  "Yes": 0.09
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "nat_eco": "No"
+                },
+                "probs": {
+                  "No": 0.83,
+                  "Yes": 0.17
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "nat_eco": "Yes"
+                },
+                "probs": {
+                  "No": 0.5,
+                  "Yes": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "nat_eco": "No"
+                },
+                "probs": {
+                  "No": 0.9,
+                  "Yes": 0.1
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Moderate",
+                  "nat_eco": "Yes"
+                },
+                "probs": {
+                  "No": 0.6,
+                  "Yes": 0.4
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "nat_eco": "No"
+                },
+                "probs": {
+                  "No": 0.86,
+                  "Yes": 0.14
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "High",
+                  "nat_eco": "Yes"
+                },
+                "probs": {
+                  "No": 0.5,
+                  "Yes": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "nat_eco": "No"
+                },
+                "probs": {
+                  "No": 0.67,
+                  "Yes": 0.33
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very high",
+                  "nat_eco": "Yes"
+                },
+                "probs": {
+                  "No": 0.44,
+                  "Yes": 0.56
+                }
+              }
+            ]
+          }
+        }
+      },
+      "states": {
+        "caduceus": [
+          "Caducous",
+          "Non-caducious"
+        ],
+        "aplerotic_plerotic": [
+          "Aplerotic",
+          "Both",
+          "Plerotic"
+        ],
+        "nat_eco": [
+          "No",
+          "Yes"
+        ],
+        "stem_cank": [
+          "No",
+          "Yes"
+        ],
+        "Invasiv_score_BH": [
+          "Very low",
+          "Low",
+          "Moderate",
+          "High",
+          "Very high"
+        ],
+        "temp_opt": [
+          "< 20",
+          "20 to 25",
+          "25",
+          "25 to 28",
+          ">= 28"
+        ]
+      },
+      "parents": {
+        "Invasiv_score_BH": [],
+        "temp_opt": [],
+        "caduceus": [
+          "Invasiv_score_BH",
+          "temp_opt"
+        ],
+        "aplerotic_plerotic": [
+          "Invasiv_score_BH",
+          "temp_opt"
+        ],
+        "nat_eco": [
+          "Invasiv_score_BH",
+          "temp_opt"
+        ],
+        "stem_cank": [
+          "Invasiv_score_BH",
+          "nat_eco"
+        ]
+      },
+      "n_factors": 6,
+      "n_entries": 205
+    },
+    {
+      "network": "sachs1",
+      "ok": false,
+      "usage": {
+        "prompt_tokens": 6576,
+        "completion_tokens": 4195,
+        "cost_usd": 0.079365
+      },
+      "raw_response": "{\n  \"nodes\": [\n    \"Akt\",\n    \"Erk\",\n    \"Jnk\",\n    \"Mek\",\n    \"P38\",\n    \"PKA\",\n    \"PKC\",\n    \"Raf\"\n  ],\n  \"states\": {\n    \"Akt\": [\"LOW\", \"AVG\", \"HIGH\"],\n    \"Erk\": [\"LOW\", \"AVG\", \"HIGH\"],\n    \"Jnk\": [\"LOW\", \"AVG\", \"HIGH\"],\n    \"Mek\": [\"LOW\", \"AVG\", \"HIGH\"],\n    \"P38\": [\"LOW\", \"AVG\", \"HIGH\"],\n    \"PKA\": [\"LOW\", \"AVG\", \"HIGH\"],\n    \"PKC\": [\"LOW\", \"AVG\", \"HIGH\"],\n    \"Raf\": [\"LOW\", \"AVG\", \"HIGH\"]\n  },\n  \"cpts\": {\n    \"Akt\": {\n      \"parents\": [\"Erk\", \"PKA\"],\n      \"rows\": [\n        {\"when\": {\"Erk\": \"LOW\", \"PKA\": \"LOW\"}, \"probs\": {\"LOW\": 0.671, \"AVG\": 0.328, \"HIGH\": 0.0001}},\n        {\"when\": {\"Erk\": \"LOW\", \"PKA\": \"AVG\"}, \"probs\": {\"LOW\": 0.61, \"AVG\": 0.3795, \"HIGH\": 0.0001}},\n        {\"when\": {\"Erk\": \"LOW\", \"PKA\": \"HIGH\"}, \"probs\": {\"LOW\": 0.9651, \"AVG\": 0.0241, \"HIGH\": 0.0009}},\n        {\"when\": {\"Erk\": \"AVG\", \"PKA\": \"LOW\"}, \"probs\": {\"LOW\": 0.325, \"AVG\": 0.6649, \"HIGH\": 0.0002}},\n        {\"when\": {\"Erk\": \"AVG\", \"PKA\": \"AVG\"}, \"probs\": {\"LOW\": 0.8114, \"AVG\": 0.1782, \"HIGH\": 0.0004}},\n        {\"when\": {\"Erk\": \"AVG\", \"PKA\": \"HIGH\"}, \"probs\": {\"LOW\": 0.9483, \"AVG\": 0.0515, \"HIGH\": 0.000092}},\n        {\"when\": {\"Erk\": \"HIGH\", \"PKA\": \"LOW\"}, \"probs\": {\"LOW\": 0.000077, \"AVG\": 0.1183, \"HIGH\": 0.8816}},\n        {\"when\": {\"Erk\": \"HIGH\", \"PKA\": \"AVG\"}, \"probs\": {\"LOW\": 0.1837, \"AVG\": 0.8137, \"HIGH\": 0.0002}},\n        {\"when\": {\"Erk\": \"HIGH\", \"PKA\": \"HIGH\"}, \"probs\": {\"LOW\": 0.1703, \"AVG\": 0.8294, \"HIGH\": 0.0003}}\n      ]\n    },\n    \"Erk\": {\n      \"parents\": [\"Mek\", \"PKA\"],\n      \"rows\": [\n        {\"when\": {\"Mek\": \"LOW\", \"PKA\": \"LOW\"}, \"probs\": {\"LOW\": 0.8505, \"AVG\": 0.1387, \"HIGH\": 0.0108}},\n        {\"when\": {\"Mek\": \"LOW\", \"PKA\": \"AVG\"}, \"probs\": {\"LOW\": 0.1177, \"AVG\": 0.6919, \"HIGH\": 0.1904}},\n        {\"when\": {\"Mek\": \"LOW\", \"PKA\": \"HIGH\"}, \"probs\": {\"LOW\": 0.0741, \"AVG\": 0.7004, \"HIGH\": 0.2255}},\n        {\"when\": {\"Mek\": \"AVG\", \"PKA\": \"LOW\"}, \"probs\": {\"LOW\": 0.387, \"AVG\": 0.4837, \"HIGH\": 0.1293}},\n        {\"when\": {\"Mek\": \"AVG\", \"PKA\": \"AVG\"}, \"probs\": {\"LOW\": 0.0489, \"AV",
+      "parse_error": "row_sum_validation_failed",
+      "row_errors": [
+        "Erk|['Mek', 'PKA']=('HIGH', 'HIGH') sums to 0.9666"
+      ],
+      "compiled_json": {
+        "nodes": [
+          "Akt",
+          "Erk",
+          "Jnk",
+          "Mek",
+          "P38",
+          "PKA",
+          "PKC",
+          "Raf"
+        ],
+        "states": {
+          "Akt": [
+            "LOW",
+            "AVG",
+            "HIGH"
+          ],
+          "Erk": [
+            "LOW",
+            "AVG",
+            "HIGH"
+          ],
+          "Jnk": [
+            "LOW",
+            "AVG",
+            "HIGH"
+          ],
+          "Mek": [
+            "LOW",
+            "AVG",
+            "HIGH"
+          ],
+          "P38": [
+            "LOW",
+            "AVG",
+            "HIGH"
+          ],
+          "PKA": [
+            "LOW",
+            "AVG",
+            "HIGH"
+          ],
+          "PKC": [
+            "LOW",
+            "AVG",
+            "HIGH"
+          ],
+          "Raf": [
+            "LOW",
+            "AVG",
+            "HIGH"
+          ]
+        },
+        "cpts": {
+          "Akt": {
+            "parents": [
+              "Erk",
+              "PKA"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Erk": "LOW",
+                  "PKA": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.671,
+                  "AVG": 0.328,
+                  "HIGH": 0.0001
+                }
+              },
+              {
+                "when": {
+                  "Erk": "LOW",
+                  "PKA": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.61,
+                  "AVG": 0.3795,
+                  "HIGH": 0.0001
+                }
+              },
+              {
+                "when": {
+                  "Erk": "LOW",
+                  "PKA": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.9651,
+                  "AVG": 0.0241,
+                  "HIGH": 0.0009
+                }
+              },
+              {
+                "when": {
+                  "Erk": "AVG",
+                  "PKA": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.325,
+                  "AVG": 0.6649,
+                  "HIGH": 0.0002
+                }
+              },
+              {
+                "when": {
+                  "Erk": "AVG",
+                  "PKA": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.8114,
+                  "AVG": 0.1782,
+                  "HIGH": 0.0004
+                }
+              },
+              {
+                "when": {
+                  "Erk": "AVG",
+                  "PKA": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.9483,
+                  "AVG": 0.0515,
+                  "HIGH": 9.2e-05
+                }
+              },
+              {
+                "when": {
+                  "Erk": "HIGH",
+                  "PKA": "LOW"
+                },
+                "probs": {
+                  "LOW": 7.7e-05,
+                  "AVG": 0.1183,
+                  "HIGH": 0.8816
+                }
+              },
+              {
+                "when": {
+                  "Erk": "HIGH",
+                  "PKA": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.1837,
+                  "AVG": 0.8137,
+                  "HIGH": 0.0002
+                }
+              },
+              {
+                "when": {
+                  "Erk": "HIGH",
+                  "PKA": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.1703,
+                  "AVG": 0.8294,
+                  "HIGH": 0.0003
+                }
+              }
+            ]
+          },
+          "Erk": {
+            "parents": [
+              "Mek",
+              "PKA"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Mek": "LOW",
+                  "PKA": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.8505,
+                  "AVG": 0.1387,
+                  "HIGH": 0.0108
+                }
+              },
+              {
+                "when": {
+                  "Mek": "LOW",
+                  "PKA": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.1177,
+                  "AVG": 0.6919,
+                  "HIGH": 0.1904
+                }
+              },
+              {
+                "when": {
+                  "Mek": "LOW",
+                  "PKA": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.0741,
+                  "AVG": 0.7004,
+                  "HIGH": 0.2255
+                }
+              },
+              {
+                "when": {
+                  "Mek": "AVG",
+                  "PKA": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.387,
+                  "AVG": 0.4837,
+                  "HIGH": 0.1293
+                }
+              },
+              {
+                "when": {
+                  "Mek": "AVG",
+                  "PKA": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.0489,
+                  "AVG": 0.7282,
+                  "HIGH": 0.2228
+                }
+              },
+              {
+                "when": {
+                  "Mek": "AVG",
+                  "PKA": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.0037,
+                  "AVG": 0.1026,
+                  "HIGH": 0.8838
+                }
+              },
+              {
+                "when": {
+                  "Mek": "HIGH",
+                  "PKA": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.0087,
+                  "AVG": 0.188,
+                  "HIGH": 0.8024
+                }
+              },
+              {
+                "when": {
+                  "Mek": "HIGH",
+                  "PKA": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.0012,
+                  "AVG": 0.7476,
+                  "HIGH": 0.2503
+                }
+              },
+              {
+                "when": {
+                  "Mek": "HIGH",
+                  "PKA": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.01665,
+                  "AVG": 0.01665,
+                  "HIGH": 0.9333
+                }
+              }
+            ]
+          },
+          "Jnk": {
+            "parents": [
+              "PKA",
+              "PKC"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.2899,
+                  "AVG": 0.2458,
+                  "HIGH": 0.4643
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.5794,
+                  "AVG": 0.4203,
+                  "HIGH": 0.0002
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.0046,
+                  "AVG": 0.9809,
+                  "HIGH": 0.0046
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.5767,
+                  "AVG": 0.4232,
+                  "HIGH": 4.3e-05
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.6128,
+                  "AVG": 0.3871,
+                  "HIGH": 1.5e-05
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.0447,
+                  "AVG": 0.934,
+                  "HIGH": 0.0204
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.9961,
+                  "AVG": 0.0038,
+                  "HIGH": 6.9e-05
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.8623,
+                  "AVG": 0.1369,
+                  "HIGH": 0.0008
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.1554,
+                  "AVG": 0.8418,
+                  "HIGH": 0.0028
+                }
+              }
+            ]
+          },
+          "Mek": {
+            "parents": [
+              "PKA",
+              "PKC",
+              "Raf"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "LOW",
+                  "Raf": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.744,
+                  "AVG": 0.255,
+                  "HIGH": 0.0002
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "LOW",
+                  "Raf": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.385,
+                  "AVG": 0.123,
+                  "HIGH": 0.492
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "LOW",
+                  "Raf": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.262,
+                  "AVG": 0.0015,
+                  "HIGH": 0.736
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "AVG",
+                  "Raf": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.706,
+                  "AVG": 0.293,
+                  "HIGH": 0.0002
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "AVG",
+                  "Raf": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.269,
+                  "AVG": 0.73,
+                  "HIGH": 0.0002
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "AVG",
+                  "Raf": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.85,
+                  "AVG": 0.107,
+                  "HIGH": 0.043
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "HIGH",
+                  "Raf": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.854,
+                  "AVG": 0.144,
+                  "HIGH": 0.0018
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "HIGH",
+                  "Raf": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.012,
+                  "AVG": 0.976,
+                  "HIGH": 0.012
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "HIGH",
+                  "Raf": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.333,
+                  "AVG": 0.333,
+                  "HIGH": 0.333
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "LOW",
+                  "Raf": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.757,
+                  "AVG": 0.242,
+                  "HIGH": 3.2e-07
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "LOW",
+                  "Raf": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.343,
+                  "AVG": 0.649,
+                  "HIGH": 0.0074
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "LOW",
+                  "Raf": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.865,
+                  "AVG": 0.101,
+                  "HIGH": 0.034
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "AVG",
+                  "Raf": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.714,
+                  "AVG": 0.285,
+                  "HIGH": 9e-06
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "AVG",
+                  "Raf": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.274,
+                  "AVG": 0.72,
+                  "HIGH": 0.0053
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "AVG",
+                  "Raf": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.281,
+                  "AVG": 0.585,
+                  "HIGH": 0.133
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "HIGH",
+                  "Raf": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.825,
+                  "AVG": 0.174,
+                  "HIGH": 3e-05
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "HIGH",
+                  "Raf": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.105,
+                  "AVG": 0.894,
+                  "HIGH": 0.0002
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "HIGH",
+                  "Raf": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.333,
+                  "AVG": 0.333,
+                  "HIGH": 0.333
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "LOW",
+                  "Raf": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.997,
+                  "AVG": 2e-05,
+                  "HIGH": 3e-05
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "LOW",
+                  "Raf": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.9996,
+                  "AVG": 0.0002,
+                  "HIGH": 0.0002
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "LOW",
+                  "Raf": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.926,
+                  "AVG": 0.0008,
+                  "HIGH": 0.063
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "AVG",
+                  "Raf": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.959,
+                  "AVG": 0.031,
+                  "HIGH": 0.0004
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "AVG",
+                  "Raf": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.854,
+                  "AVG": 0.144,
+                  "HIGH": 0.002
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "AVG",
+                  "Raf": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.498,
+                  "AVG": 0.498,
+                  "HIGH": 0.004
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "HIGH",
+                  "Raf": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.726,
+                  "AVG": 0.273,
+                  "HIGH": 1e-05
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "HIGH",
+                  "Raf": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.006,
+                  "AVG": 0.988,
+                  "HIGH": 0.006
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "HIGH",
+                  "Raf": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.333,
+                  "AVG": 0.333,
+                  "HIGH": 0.333
+                }
+              }
+            ]
+          },
+          "P38": {
+            "parents": [
+              "PKA",
+              "PKC"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.3069,
+                  "AVG": 0.0646,
+                  "HIGH": 0.6285
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.6458,
+                  "AVG": 0.3439,
+                  "HIGH": 0.0002
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.8675,
+                  "AVG": 0.1279,
+                  "HIGH": 0.0046
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.9192,
+                  "AVG": 0.0785,
+                  "HIGH": 0.0023
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.8049,
+                  "AVG": 0.185,
+                  "HIGH": 0.0015
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.8031,
+                  "AVG": 0.1927,
+                  "HIGH": 0.0041
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.8074,
+                  "AVG": 0.0916,
+                  "HIGH": 0.101
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.3862,
+                  "AVG": 0.1595,
+                  "HIGH": 0.4542
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.7655,
+                  "AVG": 0.2316,
+                  "HIGH": 0.0028
+                }
+              }
+            ]
+          },
+          "PKA": {
+            "parents": [
+              "PKC"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "PKC": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.3864,
+                  "AVG": 0.3794,
+                  "HIGH": 0.2342
+                }
+              },
+              {
+                "when": {
+                  "PKC": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.0604,
+                  "AVG": 0.9226,
+                  "HIGH": 0.017
+                }
+              },
+              {
+                "when": {
+                  "PKC": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.0158,
+                  "AVG": 0.9587,
+                  "HIGH": 0.0255
+                }
+              }
+            ]
+          },
+          "PKC": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "LOW": 0.4231,
+                  "AVG": 0.4816,
+                  "HIGH": 0.0952
+                }
+              }
+            ]
+          },
+          "Raf": {
+            "parents": [
+              "PKA",
+              "PKC"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.0623,
+                  "AVG": 0.1472,
+                  "HIGH": 0.7904
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.3694,
+                  "AVG": 0.3312,
+                  "HIGH": 0.2994
+                }
+              },
+              {
+                "when": {
+                  "PKA": "LOW",
+                  "PKC": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.8675,
+                  "AVG": 0.1279,
+                  "HIGH": 0.0046
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.4475,
+                  "AVG": 0.3126,
+                  "HIGH": 0.2399
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.5508,
+                  "AVG": 0.3929,
+                  "HIGH": 0.0563
+                }
+              },
+              {
+                "when": {
+                  "PKA": "AVG",
+                  "PKC": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.8842,
+                  "AVG": 0.1157,
+                  "HIGH": 7.5e-07
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.8429,
+                  "AVG": 0.1271,
+                  "HIGH": 0.0299
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.7489,
+                  "AVG": 0.1595,
+                  "HIGH": 0.0915
+                }
+              },
+              {
+                "when": {
+                  "PKA": "HIGH",
+                  "PKC": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.8418,
+                  "AVG": 0.1554,
+                  "HIGH": 0.0028
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "network": "water1",
+      "ok": true,
+      "usage": {
+        "prompt_tokens": 9734,
+        "completion_tokens": 5668,
+        "cost_usd": 0.109355
+      },
+      "raw_response": "{\"nodes\":[\"CBODD_12_00\",\"CBODN_12_00\",\"CNON_12_00\",\"CBODN_12_15\"],\"states\":{\"CBODD_12_00\":[\"15_MG_L\",\"20_MG_L\",\"25_MG_L\",\"30_MG_L\"],\"CBODN_12_00\":[\"5_MG_L\",\"10_MG_L\",\"15_MG_L\",\"20_MG_L\"],\"CNON_12_00\":[\"2_MG_L\",\"4_MG_L\",\"6_MG_L\",\"10_MG_L\"],\"CBODN_12_15\":[\"5_MG_L\",\"10_MG_L\",\"15_MG_L\",\"20_MG_L\"]},\"cpts\":{\"CBODD_12_00\":{\"parents\":[],\"rows\":[{\"when\":{},\"probs\":{\"15_MG_L\":0.0,\"20_MG_L\":1.0,\"25_MG_L\":0.0,\"30_MG_L\":0.0}}]},\"CBODN_12_00\":{\"parents\":[],\"rows\":[{\"when\":{},\"probs\":{\"5_MG_L\":0.0,\"10_MG_L\":1.0,\"15_MG_L\":0.0,\"20_MG_L\":0.0}}]},\"CNON_12_00\":{\"parents\":[],\"rows\":[{\"when\":{},\"probs\":{\"2_MG_L\":0.0,\"4_MG_L\":1.0,\"6_MG_L\":0.0,\"10_MG_L\":0.0}}]},\"CBODN_12_15\":{\"parents\":[\"CBODD_12_00\",\"CBODN_12_00\",\"CNON_12_00\"],\"rows\":[{\"when\":{\"CBODD_12_00\":\"15_MG_L\",\"CBODN_12_00\":\"5_MG_L\",\"CNON_12_00\":\"2_MG_L\"},\"probs\":{\"5_MG_L\":0.9557,\"10_MG_L\":0.0443,\"15_MG_L\":0.0,\"20_MG_L\":0.0}},{\"when\":{\"CBODD_12_00\":\"15_MG_L\",\"CBODN_12_00\":\"5_MG_L\",\"CNON_12_00\":\"4_MG_L\"},\"probs\":{\"5_MG_L\":0.9561,\"10_MG_L\":0.0439,\"15_MG_L\":0.0,\"20_MG_L\":0.0}},{\"when\":{\"CBODD_12_00\":\"15_MG_L\",\"CBODN_12_00\":\"5_MG_L\",\"CNON_12_00\":\"6_MG_L\"},\"probs\":{\"5_MG_L\":0.9562,\"10_MG_L\":0.0438,\"15_MG_L\":0.0,\"20_MG_L\":0.0}},{\"when\":{\"CBODD_12_00\":\"15_MG_L\",\"CBODN_12_00\":\"5_MG_L\",\"CNON_12_00\":\"10_MG_L\"},\"probs\":{\"5_MG_L\":0.9564,\"10_MG_L\":0.0436,\"15_MG_L\":0.0,\"20_MG_L\":0.0}},{\"when\":{\"CBODD_12_00\":\"15_MG_L\",\"CBODN_12_00\":\"10_MG_L\",\"CNON_12_00\":\"2_MG_L\"},\"probs\":{\"5_MG_L\":0.0406,\"10_MG_L\":0.9594,\"15_MG_L\":0.0,\"20_MG_L\":0.0}},{\"when\":{\"CBODD_12_00\":\"15_MG_L\",\"CBODN_12_00\":\"10_MG_L\",\"CNON_12_00\":\"4_MG_L\"},\"probs\":{\"5_MG_L\":0.0412,\"10_MG_L\":0.9588,\"15_MG_L\":0.0,\"20_MG_L\":0.0}},{\"when\":{\"CBODD_12_00\":\"15_MG_L\",\"CBODN_12_00\":\"10_MG_L\",\"CNON_12_00\":\"6_MG_L\"},\"probs\":{\"5_MG_L\":0.0414,\"10_MG_L\":0.9586,\"15_MG_L\":0.0,\"20_MG_L\":0.0}},{\"when\":{\"CBODD_12_00\":\"15_MG_L\",\"CBODN_12_00\":\"10_MG_L\",\"CNON_12_00\":\"10_MG_L\"},\"probs\":{\"5_MG_L\":0.0416,\"10_MG_L\":0.9584,\"15_MG_L\":0.0,\"20_MG_L\":0.0}},{\"when\":{\"CBODD_12_00\":\"15_MG_L\",\"CBODN_12_00\":\"15_MG_L\",\"CNON_1",
+      "parse_error": null,
+      "compiled_json": {
+        "nodes": [
+          "CBODD_12_00",
+          "CBODN_12_00",
+          "CNON_12_00",
+          "CBODN_12_15"
+        ],
+        "states": {
+          "CBODD_12_00": [
+            "15_MG_L",
+            "20_MG_L",
+            "25_MG_L",
+            "30_MG_L"
+          ],
+          "CBODN_12_00": [
+            "5_MG_L",
+            "10_MG_L",
+            "15_MG_L",
+            "20_MG_L"
+          ],
+          "CNON_12_00": [
+            "2_MG_L",
+            "4_MG_L",
+            "6_MG_L",
+            "10_MG_L"
+          ],
+          "CBODN_12_15": [
+            "5_MG_L",
+            "10_MG_L",
+            "15_MG_L",
+            "20_MG_L"
+          ]
+        },
+        "cpts": {
+          "CBODD_12_00": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 1.0,
+                  "25_MG_L": 0.0,
+                  "30_MG_L": 0.0
+                }
+              }
+            ]
+          },
+          "CBODN_12_00": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 1.0,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              }
+            ]
+          },
+          "CNON_12_00": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "2_MG_L": 0.0,
+                  "4_MG_L": 1.0,
+                  "6_MG_L": 0.0,
+                  "10_MG_L": 0.0
+                }
+              }
+            ]
+          },
+          "CBODN_12_15": {
+            "parents": [
+              "CBODD_12_00",
+              "CBODN_12_00",
+              "CNON_12_00"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.9557,
+                  "10_MG_L": 0.0443,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.9561,
+                  "10_MG_L": 0.0439,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.9562,
+                  "10_MG_L": 0.0438,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.9564,
+                  "10_MG_L": 0.0436,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0406,
+                  "10_MG_L": 0.9594,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0412,
+                  "10_MG_L": 0.9588,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0414,
+                  "10_MG_L": 0.9586,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0416,
+                  "10_MG_L": 0.9584,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.1152,
+                  "15_MG_L": 0.8848,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.116,
+                  "15_MG_L": 0.884,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.1163,
+                  "15_MG_L": 0.8837,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.1166,
+                  "15_MG_L": 0.8834,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.1835,
+                  "20_MG_L": 0.8165
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.1844,
+                  "20_MG_L": 0.8156
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.1847,
+                  "20_MG_L": 0.8153
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "15_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.185,
+                  "20_MG_L": 0.815
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.9067,
+                  "10_MG_L": 0.0933,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.9071,
+                  "10_MG_L": 0.0929,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.9072,
+                  "10_MG_L": 0.0928,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.9073,
+                  "10_MG_L": 0.0927,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.9916,
+                  "15_MG_L": 0.0084,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.9922,
+                  "15_MG_L": 0.0078,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.9924,
+                  "15_MG_L": 0.0076,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.9926,
+                  "15_MG_L": 0.0074,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0662,
+                  "15_MG_L": 0.9338,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.067,
+                  "15_MG_L": 0.933,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0673,
+                  "15_MG_L": 0.9327,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0676,
+                  "15_MG_L": 0.9324,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.1344,
+                  "20_MG_L": 0.8656
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.1354,
+                  "20_MG_L": 0.8646
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.1357,
+                  "20_MG_L": 0.8643
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "20_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.136,
+                  "20_MG_L": 0.864
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.8577,
+                  "10_MG_L": 0.1423,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.8581,
+                  "10_MG_L": 0.1419,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.8582,
+                  "10_MG_L": 0.1418,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.8583,
+                  "10_MG_L": 0.1417,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.9426,
+                  "15_MG_L": 0.0574,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.9432,
+                  "15_MG_L": 0.0568,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.9434,
+                  "15_MG_L": 0.0566,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.9436,
+                  "15_MG_L": 0.0564,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0172,
+                  "15_MG_L": 0.9828,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.018,
+                  "15_MG_L": 0.982,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0183,
+                  "15_MG_L": 0.9817,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0185,
+                  "15_MG_L": 0.9815,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.0854,
+                  "20_MG_L": 0.9146
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.0863,
+                  "20_MG_L": 0.9137
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.0867,
+                  "20_MG_L": 0.9133
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "25_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.087,
+                  "20_MG_L": 0.913
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.8087,
+                  "10_MG_L": 0.1913,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.809,
+                  "10_MG_L": 0.191,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.8092,
+                  "10_MG_L": 0.1908,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "5_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.8093,
+                  "10_MG_L": 0.1907,
+                  "15_MG_L": 0.0,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.8936,
+                  "15_MG_L": 0.1064,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.8942,
+                  "15_MG_L": 0.1058,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.8944,
+                  "15_MG_L": 0.1056,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "10_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.8946,
+                  "15_MG_L": 0.1054,
+                  "20_MG_L": 0.0
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.9682,
+                  "20_MG_L": 0.0318
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.969,
+                  "20_MG_L": 0.031
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.9693,
+                  "20_MG_L": 0.0307
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "15_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.9695,
+                  "20_MG_L": 0.0305
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "2_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.0364,
+                  "20_MG_L": 0.9636
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "4_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.0373,
+                  "20_MG_L": 0.9627
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "6_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.0377,
+                  "20_MG_L": 0.9623
+                }
+              },
+              {
+                "when": {
+                  "CBODD_12_00": "30_MG_L",
+                  "CBODN_12_00": "20_MG_L",
+                  "CNON_12_00": "10_MG_L"
+                },
+                "probs": {
+                  "5_MG_L": 0.0,
+                  "10_MG_L": 0.0,
+                  "15_MG_L": 0.038,
+                  "20_MG_L": 0.962
+                }
+              }
+            ]
+          }
+        }
+      },
+      "states": {
+        "CBODD_12_00": [
+          "15_MG_L",
+          "20_MG_L",
+          "25_MG_L",
+          "30_MG_L"
+        ],
+        "CBODN_12_00": [
+          "5_MG_L",
+          "10_MG_L",
+          "15_MG_L",
+          "20_MG_L"
+        ],
+        "CNON_12_00": [
+          "2_MG_L",
+          "4_MG_L",
+          "6_MG_L",
+          "10_MG_L"
+        ],
+        "CBODN_12_15": [
+          "5_MG_L",
+          "10_MG_L",
+          "15_MG_L",
+          "20_MG_L"
+        ]
+      },
+      "parents": {
+        "CBODD_12_00": [],
+        "CBODN_12_00": [],
+        "CNON_12_00": [],
+        "CBODN_12_15": [
+          "CBODD_12_00",
+          "CBODN_12_00",
+          "CNON_12_00"
+        ]
+      },
+      "n_factors": 4,
+      "n_entries": 268
+    }
+  ],
+  "query_results": [
+    {
+      "network": "hailfinder0",
+      "pair_id": 0,
+      "gold": 0.02,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.020000000000000004,
+      "abs_error": 3.469446951953614e-18,
+      "query_var": "AreaMeso_ALS",
+      "query_state": "Down",
+      "evidence": {
+        "SubjVertMo": "Neutral",
+        "N0_7muVerMo": "StrongUp"
+      },
+      "posterior": {
+        "StrongUp": 0.2475,
+        "WeakUp": 0.475,
+        "Neutral": 0.2575,
+        "Down": 0.020000000000000004
+      },
+      "evidence_prob": 0.125,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "SubjVertMo": "Neutral",
+          "N0_7muVerMo": "StrongUp"
+        },
+        "query": {
+          "variable": "AreaMeso_ALS",
+          "state": "Down"
+        }
+      },
+      "raw_response": "{\"evidence\":{\"SubjVertMo\":\"Neutral\",\"N0_7muVerMo\":\"StrongUp\"},\"query\":{\"variable\":\"AreaMeso_ALS\",\"state\":\"Down\"}}",
+      "usage": {
+        "prompt_tokens": 434,
+        "completion_tokens": 41,
+        "cost_usd": 0.0017
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 1,
+      "gold": 0.21,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.21,
+      "abs_error": 0.0,
+      "query_var": "CombVerMo",
+      "query_state": "Neutral",
+      "evidence": {
+        "N0_7muVerMo": "Down",
+        "SubjVertMo": "Down"
+      },
+      "posterior": {
+        "StrongUp": 0.015,
+        "WeakUp": 0.03,
+        "Neutral": 0.21,
+        "Down": 0.7449999999999999
+      },
+      "evidence_prob": 0.05,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "N0_7muVerMo": "Down",
+          "SubjVertMo": "Down"
+        },
+        "query": {
+          "variable": "CombVerMo",
+          "state": "Neutral"
+        }
+      },
+      "raw_response": "{\"evidence\":{\"N0_7muVerMo\":\"Down\",\"SubjVertMo\":\"Down\"},\"query\":{\"variable\":\"CombVerMo\",\"state\":\"Neutral\"}}",
+      "usage": {
+        "prompt_tokens": 433,
+        "completion_tokens": 38,
+        "cost_usd": 0.0016525
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 2,
+      "gold": 0.60606061,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.6060606060606061,
+      "abs_error": 3.9393939221810115e-09,
+      "query_var": "SubjVertMo",
+      "query_state": "Neutral",
+      "evidence": {
+        "QGVertMotion": "StrongUp",
+        "CombVerMo": "StrongUp",
+        "N0_7muVerMo": "Down"
+      },
+      "posterior": {
+        "StronUp": 0.18181818181818182,
+        "WeakUp": 0.09090909090909091,
+        "Neutral": 0.6060606060606061,
+        "Down": 0.12121212121212123
+      },
+      "evidence_prob": 0.006187499999999999,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "QGVertMotion": "StrongUp",
+          "CombVerMo": "StrongUp",
+          "N0_7muVerMo": "Down"
+        },
+        "query": {
+          "variable": "SubjVertMo",
+          "state": "Neutral"
+        }
+      },
+      "raw_response": "{\"evidence\":{\"QGVertMotion\":\"StrongUp\",\"CombVerMo\":\"StrongUp\",\"N0_7muVerMo\":\"Down\"},\"query\":{\"variable\":\"SubjVertMo\",\"state\":\"Neutral\"}}",
+      "usage": {
+        "prompt_tokens": 444,
+        "completion_tokens": 47,
+        "cost_usd": 0.001815
+      }
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 0,
+      "gold": 0.15302481,
+      "reasoning_types": [
+        "causal",
+        "explaining_away"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.15302481043955202,
+      "abs_error": 4.3955200590417576e-10,
+      "query_var": "CarValue",
+      "query_state": "FiftyThou",
+      "evidence": {
+        "HomeBase": "Suburb",
+        "Mileage": "TwentyThou",
+        "Theft": "True",
+        "AntiTheft": "False"
+      },
+      "posterior": {
+        "FiveThou": 0.013732382815641524,
+        "TenThou": 0.2741524775354044,
+        "TwentyThou": 0.5590761089720677,
+        "FiftyThou": 0.15302481043955202,
+        "Million": 1.4220237334355815e-05
+      },
+      "evidence_prob": 2.1156585663215206e-05,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "HomeBase": "Suburb",
+          "Mileage": "TwentyThou",
+          "Theft": "True",
+          "AntiTheft": "False"
+        },
+        "query": {
+          "variable": "CarValue",
+          "state": "FiftyThou"
+        }
+      },
+      "raw_response": "{\"evidence\":{\"HomeBase\":\"Suburb\",\"Mileage\":\"TwentyThou\",\"Theft\":\"True\",\"AntiTheft\":\"False\"},\"query\":{\"variable\":\"CarValue\",\"state\":\"FiftyThou\"}}",
+      "usage": {
+        "prompt_tokens": 598,
+        "completion_tokens": 46,
+        "cost_usd": 0.002185
+      }
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 1,
+      "gold": 0.27861336,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.2786132471398204,
+      "abs_error": 1.128601795907791e-07,
+      "query_var": "CarValue",
+      "query_state": "TenThou",
+      "evidence": {
+        "Theft": "True",
+        "AntiTheft": "False"
+      },
+      "posterior": {
+        "FiveThou": 0.07875924436686944,
+        "TenThou": 0.2786132471398204,
+        "TwentyThou": 0.5069865156231768,
+        "FiftyThou": 0.13563923848580636,
+        "Million": 1.7543843269577694e-06
+      },
+      "evidence_prob": 0.002031622137884251,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "Theft": "True",
+          "AntiTheft": "False"
+        },
+        "query": {
+          "variable": "CarValue",
+          "state": "TenThou"
+        }
+      },
+      "raw_response": "{\"evidence\":{\"Theft\":\"True\",\"AntiTheft\":\"False\"},\"query\":{\"variable\":\"CarValue\",\"state\":\"TenThou\"}}",
+      "usage": {
+        "prompt_tokens": 568,
+        "completion_tokens": 33,
+        "cost_usd": 0.001915
+      }
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 2,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 3e-06,
+      "abs_error": 3e-06,
+      "query_var": "Theft",
+      "query_state": "True",
+      "evidence": {
+        "CarValue": "TwentyThou",
+        "HomeBase": "Secure",
+        "AntiTheft": "False"
+      },
+      "posterior": {
+        "True": 3e-06,
+        "False": 0.999997
+      },
+      "evidence_prob": 0.013478838176439828,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "CarValue": "TwentyThou",
+          "HomeBase": "Secure",
+          "AntiTheft": "False"
+        },
+        "query": {
+          "variable": "Theft",
+          "state": "True"
+        }
+      },
+      "raw_response": "{\"evidence\":{\"CarValue\":\"TwentyThou\",\"HomeBase\":\"Secure\",\"AntiTheft\":\"False\"},\"query\":{\"variable\":\"Theft\",\"state\":\"True\"}}",
+      "usage": {
+        "prompt_tokens": 578,
+        "completion_tokens": 38,
+        "cost_usd": 0.002015
+      }
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 0,
+      "gold": 0.69559087,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 1,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 4,
+      "gold": 0.079972639,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "pair_id": 0,
+      "gold": 0.20030947,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": 0.2686041656808882,
+      "abs_error": 0.0682946956808882,
+      "query_var": "nat_eco",
+      "query_state": "No",
+      "evidence": {
+        "caduceus": "Non-caducious",
+        "aplerotic_plerotic": "Plerotic",
+        "stem_cank": "Yes"
+      },
+      "posterior": {
+        "No": 0.2686041656808882,
+        "Yes": 0.7313958343191117
+      },
+      "evidence_prob": 0.08571631614140002,
+      "failure_mode": "wrong_probability",
+      "response_json": {
+        "evidence": {
+          "caduceus": "Non-caducious",
+          "aplerotic_plerotic": "Plerotic",
+          "stem_cank": "Yes"
+        },
+        "query": {
+          "variable": "nat_eco",
+          "state": "No"
+        }
+      },
+      "raw_response": "{\"evidence\":{\"caduceus\":\"Non-caducious\",\"aplerotic_plerotic\":\"Plerotic\",\"stem_cank\":\"Yes\"},\"query\":{\"variable\":\"nat_eco\",\"state\":\"No\"}}",
+      "usage": {
+        "prompt_tokens": 489,
+        "completion_tokens": 49,
+        "cost_usd": 0.0019575
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "pair_id": 1,
+      "gold": 0.23864077,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": true,
+      "pred": 0.2650125246712609,
+      "abs_error": 0.026371754671260905,
+      "query_var": "nat_eco",
+      "query_state": "No",
+      "evidence": {
+        "Invasiv_score_BH": "Very high",
+        "stem_cank": "Yes",
+        "caduceus": "Caducous"
+      },
+      "posterior": {
+        "No": 0.2650125246712609,
+        "Yes": 0.7349874753287391
+      },
+      "evidence_prob": 0.047871615750000006,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "Invasiv_score_BH": "Very high",
+          "stem_cank": "Yes",
+          "caduceus": "Caducous"
+        },
+        "query": {
+          "variable": "nat_eco",
+          "state": "No"
+        }
+      },
+      "raw_response": "{\"evidence\":{\"Invasiv_score_BH\":\"Very high\",\"stem_cank\":\"Yes\",\"caduceus\":\"Caducous\"},\"query\":{\"variable\":\"nat_eco\",\"state\":\"No\"}}",
+      "usage": {
+        "prompt_tokens": 473,
+        "completion_tokens": 46,
+        "cost_usd": 0.0018725
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "pair_id": 2,
+      "gold": 0.67387424,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": 0.5908116816405417,
+      "abs_error": 0.0830625583594583,
+      "query_var": "nat_eco",
+      "query_state": "No",
+      "evidence": {
+        "stem_cank": "No"
+      },
+      "posterior": {
+        "No": 0.5908116816405417,
+        "Yes": 0.40918831835945835
+      },
+      "evidence_prob": 0.65661115908,
+      "failure_mode": "wrong_probability",
+      "response_json": {
+        "evidence": {
+          "stem_cank": "No"
+        },
+        "query": {
+          "variable": "nat_eco",
+          "state": "No"
+        }
+      },
+      "raw_response": "{\"evidence\":{\"stem_cank\":\"No\"},\"query\":{\"variable\":\"nat_eco\",\"state\":\"No\"}}",
+      "usage": {
+        "prompt_tokens": 453,
+        "completion_tokens": 27,
+        "cost_usd": 0.0015375
+      }
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 0,
+      "gold": 0.15703602,
+      "reasoning_types": [],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 1,
+      "gold": 0.056300659,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 2,
+      "gold": 0.6271779,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "water1",
+      "pair_id": 0,
+      "gold": 0.0,
+      "reasoning_types": [],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "query_var": "CBODN_12_00",
+      "query_state": "15_MG_L",
+      "evidence": {
+        "CNON_12_00": "4_MG_L"
+      },
+      "posterior": {
+        "5_MG_L": 0.0,
+        "10_MG_L": 1.0,
+        "15_MG_L": 0.0,
+        "20_MG_L": 0.0
+      },
+      "evidence_prob": 1.0,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "CNON_12_00": "4_MG_L"
+        },
+        "query": {
+          "variable": "CBODN_12_00",
+          "state": "15_MG_L"
+        }
+      },
+      "raw_response": "{\"evidence\":{\"CNON_12_00\":\"4_MG_L\"},\"query\":{\"variable\":\"CBODN_12_00\",\"state\":\"15_MG_L\"}}",
+      "usage": {
+        "prompt_tokens": 455,
+        "completion_tokens": 40,
+        "cost_usd": 0.0017375
+      }
+    },
+    {
+      "network": "water1",
+      "pair_id": 1,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "query_var": "CBODN_12_00",
+      "query_state": "20_MG_L",
+      "evidence": {
+        "CBODN_12_15": "10_MG_L"
+      },
+      "posterior": {
+        "5_MG_L": 0.0,
+        "10_MG_L": 1.0,
+        "15_MG_L": 0.0,
+        "20_MG_L": 0.0
+      },
+      "evidence_prob": 0.9922,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "CBODN_12_15": "10_MG_L"
+        },
+        "query": {
+          "variable": "CBODN_12_00",
+          "state": "20_MG_L"
+        }
+      },
+      "raw_response": "{\"evidence\":{\"CBODN_12_15\":\"10_MG_L\"},\"query\":{\"variable\":\"CBODN_12_00\",\"state\":\"20_MG_L\"}}",
+      "usage": {
+        "prompt_tokens": 456,
+        "completion_tokens": 41,
+        "cost_usd": 0.001755
+      }
+    },
+    {
+      "network": "water1",
+      "pair_id": 2,
+      "gold": 0.0,
+      "reasoning_types": [],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "query_var": "CBODD_12_00",
+      "query_state": "25_MG_L",
+      "evidence": {
+        "CNON_12_00": "4_MG_L"
+      },
+      "posterior": {
+        "15_MG_L": 0.0,
+        "20_MG_L": 1.0,
+        "25_MG_L": 0.0,
+        "30_MG_L": 0.0
+      },
+      "evidence_prob": 1.0,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "CNON_12_00": "4_MG_L"
+        },
+        "query": {
+          "variable": "CBODD_12_00",
+          "state": "25_MG_L"
+        }
+      },
+      "raw_response": "{\"evidence\":{\"CNON_12_00\":\"4_MG_L\"},\"query\":{\"variable\":\"CBODD_12_00\",\"state\":\"25_MG_L\"}}",
+      "usage": {
+        "prompt_tokens": 450,
+        "completion_tokens": 40,
+        "cost_usd": 0.001725
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T12:28:33Z",
+  "_meta": {
+    "prompt_tokens": 55946,
+    "completion_tokens": 44533,
+    "total_cost_usd": 0.8078599999999998,
+    "model_id": "openai/gpt-5.4",
+    "git_commit": "8f5d854c",
+    "timestamp_utc": "2026-05-03T12:28:33.299504+00:00",
+    "script": "baselines/run_quite_e2e.py",
+    "n_networks": 6,
+    "n_queries": 18,
+    "scaffold": true,
+    "mode": "numeric"
+  }
+}

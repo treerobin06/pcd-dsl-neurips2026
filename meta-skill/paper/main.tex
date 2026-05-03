@@ -44,7 +44,7 @@
 \setlist[enumerate]{itemsep=1pt, parsep=0pt, topsep=2pt}
 
 % 自定义命令
-\newcommand{\method}{PCD}
+\newcommand{\method}{VSI}
 \newcommand{\taskspec}{TaskSpec}
 \newcommand{\eg}{e.g.,\xspace}
 \newcommand{\ie}{i.e.,\xspace}
@@ -73,19 +73,17 @@
 % ============================================================
 \begin{abstract}
 % ============================================================
-Large language models (LLMs) increasingly serve as natural-language interfaces to probabilistic tasks: they can often identify variables, observations, and queries from problem descriptions.
-They remain unreliable probabilistic calculators.
-We make this failure mode explicit with Parse--Compute--Decide (PCD), a gold-injection diagnostic that separately tests structure extraction, probabilistic inference given gold structure, and decision-making given a gold posterior.
-Across six LLMs and several probabilistic reasoning tasks, models usually parse inputs and act correctly from a posterior, but the computation stage fails: Compute accuracy ranges from 22\% to 78\% on preference learning and falls to 3--11\% on depth-10 Bayesian networks.
-This motivates a different division of labor.
-Instead of per-instance tool use or code generation, we ask an off-the-shelf LLM, with no weight updates, to write and assemble a reusable typed solver specification for a task family.
-The LLM chooses and parameterizes a composition of typed probabilistic atoms; a compiler materializes that assembly as an executable solver, caches it after validation, and reuses it on future same-family instances.
-Thus the LLM specifies probabilistic structure at compile time, while a deterministic solver performs exact inference at run time.
-We validate this compile-once interface through three complementary evaluations.
-First, LLM-assembled solvers match references on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks.
-Second, on larger multi-valued bnlearn networks, the compiled solver remains exact while per-instance PAL frequently fails.
-Third, on natural-language inputs, GPT-4o-mini improves from 44\% / 32\% direct accuracy to \textbf{90.8\% / 97.6\%} on adversarial Naive Bayes and HMM tasks across five independently generated task sets.
-Together, PCD and the compile-once interface turn LLMs into compile-time specifiers of task-family structure while reusable solvers perform exact instance-level inference at run time.
+Large language models (LLMs) are attractive natural-language front ends for probabilistic reasoning: they can often recover variables, observations, and queries from text, yet remain brittle probabilistic calculators.
+We first make this failure mode explicit with Parse--Compute--Decide (PCD), a gold-injection diagnostic that separates structure extraction, probabilistic inference given gold structure, and decision-making given a gold posterior.
+Across six LLMs and several probabilistic tasks, models usually parse inputs and act correctly from a posterior, but fail at computation: Compute accuracy ranges from 22\% to 78\% on preference learning and falls to 3--11\% on depth-10 Bayesian networks.
+Motivated by this diagnosis, we propose Verified Solver Induction (VSI), a compile-once design that changes the LLM's role.
+Instead of solving each instance or generating fresh code, an off-the-shelf LLM, with no weight updates, writes and assembles a reusable typed solver specification for a task family.
+The specification selects probabilistic atoms and an inference route; a deterministic compiler lowers it into an executable solver, validates it when checks are available, caches it, and reuses it on future same-family instances.
+Thus the LLM supplies probabilistic structure at compile time, while the validated solver performs exact inference at run time.
+We evaluate VSI across preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering.
+VSI-assembled solvers match references on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks; on larger multi-valued bnlearn networks, the compiled solver remains exact while per-instance PAL frequently fails.
+On natural-language inputs, GPT-4o-mini improves from 44\% / 32\% direct accuracy to \textbf{90.8\% / 97.6\%} on adversarial Naive Bayes and HMM tasks across five independently generated task sets.
+Together, PCD localizes the bottleneck and VSI provides a reusable compiler abstraction for reliable LLM probabilistic interfaces without fine-tuning.
 \end{abstract}
 
 % ============================================================
@@ -111,6 +109,7 @@ Across six models, Parse is usually high and Decide is essentially solved, but C
 The problem is not simply that the model cannot read the task; it is that probabilistic inference is the wrong thing to leave inside the language model.
 
 We therefore build the LLM-facing interface as a compiler target rather than a prompt.
+We call this approach Verified Solver Induction (VSI).
 The LLM writes a declarative \taskspec{} for a task family, effectively assembling a solver from typed probabilistic building blocks.
 A deterministic compiler lowers that specification to a small typed probabilistic DSL, validates the resulting solver against held-out labels when available, and stores it for reuse (Figure~\ref{fig:overview}).
 Later instances from the same family can be parsed and solved without asking the LLM to perform inference.

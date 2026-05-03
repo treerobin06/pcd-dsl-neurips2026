@@ -1,0 +1,541 @@
+{
+  "experiment": "QUITE numeric compile-once E2E",
+  "model": "openai/gpt-4o-mini",
+  "config": {
+    "model": "openai/gpt-4o-mini",
+    "mode": "numeric",
+    "networks": [
+      "asia0"
+    ],
+    "limit_networks": null,
+    "query_limit_per_network": 3,
+    "no_scaffold": false,
+    "compile_sema": 1,
+    "query_sema": 3,
+    "compile_max_tokens": 12000,
+    "query_max_tokens": 512
+  },
+  "elapsed_sec": 23.36400318145752,
+  "compile_summary": {
+    "n": 1,
+    "ok": 1,
+    "failed": []
+  },
+  "summary": {
+    "within_0_01": {
+      "n": 3,
+      "correct": 2,
+      "rate": 0.6666666666666666,
+      "wilson_95ci": [
+        0.2076549551264879,
+        0.9385096847238394
+      ],
+      "valid_numeric": 2,
+      "mae": 5.551115123125783e-17,
+      "by_network": {
+        "asia0": {
+          "n": 3,
+          "correct": 2,
+          "failures": {
+            "query_or_solve_failed": 1
+          },
+          "rate": 0.6666666666666666,
+          "wilson_95ci": [
+            0.2076549551264879,
+            0.9385096847238394
+          ]
+        }
+      }
+    },
+    "within_0_05": {
+      "n": 3,
+      "correct": 2,
+      "rate": 0.6666666666666666,
+      "wilson_95ci": [
+        0.2076549551264879,
+        0.9385096847238394
+      ],
+      "valid_numeric": 2,
+      "mae": 5.551115123125783e-17,
+      "by_network": {
+        "asia0": {
+          "n": 3,
+          "correct": 2,
+          "failures": {
+            "query_or_solve_failed": 1
+          },
+          "rate": 0.6666666666666666,
+          "wilson_95ci": [
+            0.2076549551264879,
+            0.9385096847238394
+          ]
+        }
+      }
+    }
+  },
+  "compile_results": [
+    {
+      "network": "asia0",
+      "ok": true,
+      "usage": {
+        "prompt_tokens": 1077,
+        "completion_tokens": 915,
+        "cost_usd": 0.00071055
+      },
+      "raw_response": "{\n  \"nodes\": [\n    \"asia\",\n    \"smoke\",\n    \"tub\",\n    \"lung\",\n    \"either\",\n    \"bronc\",\n    \"dysp\",\n    \"xray\"\n  ],\n  \"states\": {\n    \"asia\": [\"yes\", \"no\"],\n    \"smoke\": [\"yes\", \"no\"],\n    \"tub\": [\"yes\", \"no\"],\n    \"lung\": [\"yes\", \"no\"],\n    \"either\": [\"yes\", \"no\"],\n    \"bronc\": [\"yes\", \"no\"],\n    \"dysp\": [\"yes\", \"no\"],\n    \"xray\": [\"yes\", \"no\"]\n  },\n  \"cpts\": {\n    \"asia\": {\n      \"parents\": [],\n      \"rows\": [\n        {\"when\": {}, \"probs\": {\"yes\": 0.01, \"no\": 0.99}}\n      ]\n    },\n    \"smoke\": {\n      \"parents\": [],\n      \"rows\": [\n        {\"when\": {}, \"probs\": {\"yes\": 0.5, \"no\": 0.5}}\n      ]\n    },\n    \"tub\": {\n      \"parents\": [\"asia\"],\n      \"rows\": [\n        {\"when\": {\"asia\": \"yes\"}, \"probs\": {\"yes\": 0.05, \"no\": 0.95}},\n        {\"when\": {\"asia\": \"no\"}, \"probs\": {\"yes\": 0.01, \"no\": 0.99}}\n      ]\n    },\n    \"lung\": {\n      \"parents\": [\"smoke\"],\n      \"rows\": [\n        {\"when\": {\"smoke\": \"yes\"}, \"probs\": {\"yes\": 0.1, \"no\": 0.9}},\n        {\"when\": {\"smoke\": \"no\"}, \"probs\": {\"yes\": 0.01, \"no\": 0.99}}\n      ]\n    },\n    \"either\": {\n      \"parents\": [\"tub\", \"lung\"],\n      \"rows\": [\n        {\"when\": {\"tub\": \"yes\", \"lung\": \"yes\"}, \"probs\": {\"yes\": 1.0, \"no\": 0.0}},\n        {\"when\": {\"tub\": \"yes\", \"lung\": \"no\"}, \"probs\": {\"yes\": 1.0, \"no\": 0.0}},\n        {\"when\": {\"tub\": \"no\", \"lung\": \"yes\"}, \"probs\": {\"yes\": 1.0, \"no\": 0.0}},\n        {\"when\": {\"tub\": \"no\", \"lung\": \"no\"}, \"probs\": {\"yes\": 0.0, \"no\": 1.0}}\n      ]\n    },\n    \"bronc\": {\n      \"parents\": [\"smoke\"],\n      \"rows\": [\n        {\"when\": {\"smoke\": \"yes\"}, \"probs\": {\"yes\": 0.6, \"no\": 0.4}},\n        {\"when\": {\"smoke\": \"no\"}, \"probs\": {\"yes\": 0.3, \"no\": 0.7}}\n      ]\n    },\n    \"dysp\": {\n      \"parents\": [\"either\", \"bronc\"],\n      \"rows\": [\n        {\"when\": {\"either\": \"yes\", \"bronc\": \"yes\"}, \"probs\": {\"yes\": 0.9, \"no\": 0.1}},\n        {\"when\": {\"either\": \"yes\", \"bronc\": \"no\"}, \"probs\": {\"yes\": 0.7, \"no\": 0.3}},\n        {\"when\": {\"either\": \"no\", \"bronc\": \"yes\"}, \"probs\": {\"yes\": 0.8, \"no\": 0.2}},\n        {\"when\": ",
+      "parse_error": null,
+      "compiled_json": {
+        "nodes": [
+          "asia",
+          "smoke",
+          "tub",
+          "lung",
+          "either",
+          "bronc",
+          "dysp",
+          "xray"
+        ],
+        "states": {
+          "asia": [
+            "yes",
+            "no"
+          ],
+          "smoke": [
+            "yes",
+            "no"
+          ],
+          "tub": [
+            "yes",
+            "no"
+          ],
+          "lung": [
+            "yes",
+            "no"
+          ],
+          "either": [
+            "yes",
+            "no"
+          ],
+          "bronc": [
+            "yes",
+            "no"
+          ],
+          "dysp": [
+            "yes",
+            "no"
+          ],
+          "xray": [
+            "yes",
+            "no"
+          ]
+        },
+        "cpts": {
+          "asia": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "yes": 0.01,
+                  "no": 0.99
+                }
+              }
+            ]
+          },
+          "smoke": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "yes": 0.5,
+                  "no": 0.5
+                }
+              }
+            ]
+          },
+          "tub": {
+            "parents": [
+              "asia"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "asia": "yes"
+                },
+                "probs": {
+                  "yes": 0.05,
+                  "no": 0.95
+                }
+              },
+              {
+                "when": {
+                  "asia": "no"
+                },
+                "probs": {
+                  "yes": 0.01,
+                  "no": 0.99
+                }
+              }
+            ]
+          },
+          "lung": {
+            "parents": [
+              "smoke"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "smoke": "yes"
+                },
+                "probs": {
+                  "yes": 0.1,
+                  "no": 0.9
+                }
+              },
+              {
+                "when": {
+                  "smoke": "no"
+                },
+                "probs": {
+                  "yes": 0.01,
+                  "no": 0.99
+                }
+              }
+            ]
+          },
+          "either": {
+            "parents": [
+              "tub",
+              "lung"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "tub": "yes",
+                  "lung": "yes"
+                },
+                "probs": {
+                  "yes": 1.0,
+                  "no": 0.0
+                }
+              },
+              {
+                "when": {
+                  "tub": "yes",
+                  "lung": "no"
+                },
+                "probs": {
+                  "yes": 1.0,
+                  "no": 0.0
+                }
+              },
+              {
+                "when": {
+                  "tub": "no",
+                  "lung": "yes"
+                },
+                "probs": {
+                  "yes": 1.0,
+                  "no": 0.0
+                }
+              },
+              {
+                "when": {
+                  "tub": "no",
+                  "lung": "no"
+                },
+                "probs": {
+                  "yes": 0.0,
+                  "no": 1.0
+                }
+              }
+            ]
+          },
+          "bronc": {
+            "parents": [
+              "smoke"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "smoke": "yes"
+                },
+                "probs": {
+                  "yes": 0.6,
+                  "no": 0.4
+                }
+              },
+              {
+                "when": {
+                  "smoke": "no"
+                },
+                "probs": {
+                  "yes": 0.3,
+                  "no": 0.7
+                }
+              }
+            ]
+          },
+          "dysp": {
+            "parents": [
+              "either",
+              "bronc"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "either": "yes",
+                  "bronc": "yes"
+                },
+                "probs": {
+                  "yes": 0.9,
+                  "no": 0.1
+                }
+              },
+              {
+                "when": {
+                  "either": "yes",
+                  "bronc": "no"
+                },
+                "probs": {
+                  "yes": 0.7,
+                  "no": 0.3
+                }
+              },
+              {
+                "when": {
+                  "either": "no",
+                  "bronc": "yes"
+                },
+                "probs": {
+                  "yes": 0.8,
+                  "no": 0.2
+                }
+              },
+              {
+                "when": {
+                  "either": "no",
+                  "bronc": "no"
+                },
+                "probs": {
+                  "yes": 0.1,
+                  "no": 0.9
+                }
+              }
+            ]
+          },
+          "xray": {
+            "parents": [
+              "either"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "either": "yes"
+                },
+                "probs": {
+                  "yes": 0.9,
+                  "no": 0.1
+                }
+              },
+              {
+                "when": {
+                  "either": "no"
+                },
+                "probs": {
+                  "yes": 0.05,
+                  "no": 0.95
+                }
+              }
+            ]
+          }
+        }
+      },
+      "states": {
+        "asia": [
+          "yes",
+          "no"
+        ],
+        "smoke": [
+          "yes",
+          "no"
+        ],
+        "tub": [
+          "yes",
+          "no"
+        ],
+        "lung": [
+          "yes",
+          "no"
+        ],
+        "either": [
+          "yes",
+          "no"
+        ],
+        "bronc": [
+          "yes",
+          "no"
+        ],
+        "dysp": [
+          "yes",
+          "no"
+        ],
+        "xray": [
+          "yes",
+          "no"
+        ]
+      },
+      "parents": {
+        "asia": [],
+        "smoke": [],
+        "tub": [
+          "asia"
+        ],
+        "lung": [
+          "smoke"
+        ],
+        "either": [
+          "tub",
+          "lung"
+        ],
+        "bronc": [
+          "smoke"
+        ],
+        "xray": [
+          "either"
+        ],
+        "dysp": [
+          "either",
+          "bronc"
+        ]
+      },
+      "n_factors": 8,
+      "n_entries": 36
+    }
+  ],
+  "query_results": [
+    {
+      "network": "asia0",
+      "pair_id": 0,
+      "gold": 0.9,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.9000000000000001,
+      "abs_error": 1.1102230246251565e-16,
+      "query_var": "dysp",
+      "query_state": "yes",
+      "evidence": {
+        "lung": "yes",
+        "bronc": "yes"
+      },
+      "posterior": {
+        "yes": 0.9000000000000001,
+        "no": 0.1
+      },
+      "evidence_prob": 0.03149999999999999,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "lung": "yes",
+          "bronc": "yes"
+        },
+        "query": {
+          "variable": "dysp",
+          "state": "yes"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"lung\": \"yes\",\n    \"bronc\": \"yes\"\n  },\n  \"query\": {\n    \"variable\": \"dysp\",\n    \"state\": \"yes\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 342,
+        "completion_tokens": 48,
+        "cost_usd": 8.01e-05
+      }
+    },
+    {
+      "network": "asia0",
+      "pair_id": 1,
+      "gold": 0.95238095,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "query_or_solve_failed",
+      "query_parse_error": "unknown query state state for smoke",
+      "response_json": {
+        "evidence": {
+          "lung": "yes",
+          "bronc": "yes"
+        },
+        "query": {
+          "variable": "smoke",
+          "state": "state"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"lung\": \"yes\",\n    \"bronc\": \"yes\"\n  },\n  \"query\": {\n    \"variable\": \"smoke\",\n    \"state\": \"state\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 340,
+        "completion_tokens": 48,
+        "cost_usd": 7.98e-05
+      }
+    },
+    {
+      "network": "asia0",
+      "pair_id": 2,
+      "gold": 0.05,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.05,
+      "abs_error": 0.0,
+      "query_var": "tub",
+      "query_state": "yes",
+      "evidence": {
+        "asia": "yes"
+      },
+      "posterior": {
+        "yes": 0.05,
+        "no": 0.95
+      },
+      "evidence_prob": 0.01,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "asia": "yes"
+        },
+        "query": {
+          "variable": "tub",
+          "state": "yes"
+        }
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"asia\": \"yes\"\n  },\n  \"query\": {\n    \"variable\": \"tub\",\n    \"state\": \"yes\"\n  }\n}\n```",
+      "usage": {
+        "prompt_tokens": 330,
+        "completion_tokens": 43,
+        "cost_usd": 7.53e-05
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T11:40:21Z",
+  "_meta": {
+    "prompt_tokens": 2089,
+    "completion_tokens": 1054,
+    "total_cost_usd": 0.00094575,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "8f5d854c",
+    "timestamp_utc": "2026-05-03T11:40:21.376231+00:00",
+    "script": "baselines/run_quite_e2e.py",
+    "n_networks": 1,
+    "n_queries": 3,
+    "scaffold": true,
+    "mode": "numeric"
+  }
+}

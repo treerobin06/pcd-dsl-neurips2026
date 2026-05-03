@@ -1,0 +1,1141 @@
+{
+  "experiment": "QUITE direct natural-language probability baseline",
+  "model": "openai/gpt-4o-mini",
+  "config": {
+    "model": "openai/gpt-4o-mini",
+    "modes": [
+      "numeric"
+    ],
+    "limit_per_mode": null,
+    "networks": [
+      "alarm0",
+      "alarm1",
+      "alarm2",
+      "asia0",
+      "cancer0",
+      "child0",
+      "child1",
+      "child3",
+      "diabetes0"
+    ],
+    "query_limit_per_network": 5,
+    "include_invalid_gold": false,
+    "sema": 10
+  },
+  "elapsed_sec": 7.5589470863342285,
+  "summary": {
+    "overall": {
+      "n": 45,
+      "valid": 45,
+      "parse_errors": 0,
+      "within_0_01": 13,
+      "within_0_01_rate": 0.28888888888888886,
+      "within_0_05": 19,
+      "within_0_05_rate": 0.4222222222222222,
+      "mae": 0.3024351039311112,
+      "rmse": 0.47173955338137913
+    },
+    "numeric": {
+      "n": 45,
+      "valid": 45,
+      "parse_errors": 0,
+      "within_0_01": 13,
+      "within_0_01_rate": 0.28888888888888886,
+      "within_0_05": 19,
+      "within_0_05_rate": 0.4222222222222222,
+      "mae": 0.3024351039311112,
+      "rmse": 0.47173955338137913
+    }
+  },
+  "results": [
+    {
+      "network": "alarm0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15780446,
+      "reasoning_types": [
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.15780446,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The pressure at zero contradicts normal intubation."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The pressure at zero contradicts normal intubation.\"}",
+      "usage": {
+        "prompt_tokens": 2352,
+        "completion_tokens": 27,
+        "cost_usd": 0.000369
+      }
+    },
+    {
+      "network": "alarm0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.04,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.04,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The ventilator tube cannot be kinked if it is delivering air at normal levels."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The ventilator tube cannot be kinked if it is delivering air at normal levels.\"}",
+      "usage": {
+        "prompt_tokens": 2355,
+        "completion_tokens": 32,
+        "cost_usd": 0.00020925
+      }
+    },
+    {
+      "network": "alarm0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.2486338,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.2486338,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "In normal mode, the pressure is highly likely to be high."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"In normal mode, the pressure is highly likely to be high.\"}",
+      "usage": {
+        "prompt_tokens": 2328,
+        "completion_tokens": 29,
+        "cost_usd": 0.0003666
+      }
+    },
+    {
+      "network": "alarm0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.04,
+      "reasoning_types": [
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.04,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The evidence indicates normal intubation and pressure, making kinking unlikely."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The evidence indicates normal intubation and pressure, making kinking unlikely.\"}",
+      "usage": {
+        "prompt_tokens": 2356,
+        "completion_tokens": 31,
+        "cost_usd": 0.000372
+      }
+    },
+    {
+      "network": "alarm0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.99719961,
+      "reasoning_types": [
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.99719961,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The conditions indicate a high pressure with zero volume, which is unlikely if the tube is not kinked."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The conditions indicate a high pressure with zero volume, which is unlikely if the tube is not kinked.\"}",
+      "usage": {
+        "prompt_tokens": 2336,
+        "completion_tokens": 36,
+        "cost_usd": 0.000372
+      }
+    },
+    {
+      "network": "alarm1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.04,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.04,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "With high left ventricular end-diastolic volume, PCWP cannot be normal."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"With high left ventricular end-diastolic volume, PCWP cannot be normal.\"}",
+      "usage": {
+        "prompt_tokens": 1056,
+        "completion_tokens": 31,
+        "cost_usd": 0.000177
+      }
+    },
+    {
+      "network": "alarm1",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.05,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.05,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "High stroke volume and high left ventricular end-diastolic volume contradict left ventricular failure."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"High stroke volume and high left ventricular end-diastolic volume contradict left ventricular failure.\"}",
+      "usage": {
+        "prompt_tokens": 1063,
+        "completion_tokens": 33,
+        "cost_usd": 0.00017925
+      }
+    },
+    {
+      "network": "alarm1",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.95,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.95,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "With a normal left ventricular end-diastolic volume and low stroke volume, the central venous pressure cannot be normal."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"With a normal left ventricular end-diastolic volume and low stroke volume, the central venous pressure cannot be normal.\"}",
+      "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 40,
+        "cost_usd": 0.00018255
+      }
+    },
+    {
+      "network": "alarm1",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.8,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.8,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The presence of a medical history strongly indicates left ventricular failure, which is associated with low blood volume."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The presence of a medical history strongly indicates left ventricular failure, which is associated with low blood volume.\"}",
+      "usage": {
+        "prompt_tokens": 1032,
+        "completion_tokens": 36,
+        "cost_usd": 0.0001764
+      }
+    },
+    {
+      "network": "alarm1",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.1,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.1,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The patient has left ventricular failure, which implies a 90% chance of having a relevant medical history."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The patient has left ventricular failure, which implies a 90% chance of having a relevant medical history.\"}",
+      "usage": {
+        "prompt_tokens": 1099,
+        "completion_tokens": 37,
+        "cost_usd": 0.00018705
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.9,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.9,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "An error in low cardiac output detection implies a high likelihood of cauterization error."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"An error in low cardiac output detection implies a high likelihood of cauterization error.\"}",
+      "usage": {
+        "prompt_tokens": 2211,
+        "completion_tokens": 33,
+        "cost_usd": 0.00035145
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.01,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.01,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A high heart rate is highly likely to be inferred from blood pressure readings when there is no error in the procedure."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A high heart rate is highly likely to be inferred from blood pressure readings when there is no error in the procedure.\"}",
+      "usage": {
+        "prompt_tokens": 2251,
+        "completion_tokens": 38,
+        "cost_usd": 0.00036045
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.99974754,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.99,
+      "abs_error": 0.009747539999999999,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.99,
+        "brief_reason": "The chance of not having an anaphylaxis is 99 out of 100."
+      },
+      "raw_response": "{\"probability\": 0.99, \"brief_reason\": \"The chance of not having an anaphylaxis is 99 out of 100.\"}",
+      "usage": {
+        "prompt_tokens": 2244,
+        "completion_tokens": 33,
+        "cost_usd": 0.0003564
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.0002524615,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0002524615,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "High oxygen saturation and normal total peripheral resistance make anaphylaxis highly unlikely."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"High oxygen saturation and normal total peripheral resistance make anaphylaxis highly unlikely.\"}",
+      "usage": {
+        "prompt_tokens": 2224,
+        "completion_tokens": 30,
+        "cost_usd": 0.000198
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.0029668744,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0029668744,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Anaphylaxis is extremely unlikely given the normal oxygen saturation and high blood pressure."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Anaphylaxis is extremely unlikely given the normal oxygen saturation and high blood pressure.\"}",
+      "usage": {
+        "prompt_tokens": 2237,
+        "completion_tokens": 32,
+        "cost_usd": 0.00035475
+      }
+    },
+    {
+      "network": "asia0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.9,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.9,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9,
+        "brief_reason": "With lung cancer and bronchitis, the likelihood of having dyspnoea is 90%."
+      },
+      "raw_response": "{\"probability\": 0.9, \"brief_reason\": \"With lung cancer and bronchitis, the likelihood of having dyspnoea is 90%.\"}",
+      "usage": {
+        "prompt_tokens": 469,
+        "completion_tokens": 35,
+        "cost_usd": 9.135e-05
+      }
+    },
+    {
+      "network": "asia0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.95238095,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.95238095,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Non-smokers can have bronchitis, but lung cancer is more likely in smokers."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Non-smokers can have bronchitis, but lung cancer is more likely in smokers.\"}",
+      "usage": {
+        "prompt_tokens": 467,
+        "completion_tokens": 34,
+        "cost_usd": 9.045e-05
+      }
+    },
+    {
+      "network": "asia0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.05,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.05,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.05,
+        "brief_reason": "The person has a 5% chance of getting tuberculosis after visiting Asia."
+      },
+      "raw_response": "{\"probability\": 0.05, \"brief_reason\": \"The person has a 5% chance of getting tuberculosis after visiting Asia.\"}",
+      "usage": {
+        "prompt_tokens": 458,
+        "completion_tokens": 30,
+        "cost_usd": 8.67e-05
+      }
+    },
+    {
+      "network": "asia0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.01,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.01,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The person has never visited Asia, where tuberculosis is contracted."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The person has never visited Asia, where tuberculosis is contracted.\"}",
+      "usage": {
+        "prompt_tokens": 459,
+        "completion_tokens": 28,
+        "cost_usd": 8.565e-05
+      }
+    },
+    {
+      "network": "asia0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.048076923,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.048076923,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "If the person has tuberculosis, they must have traveled to Asia."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"If the person has tuberculosis, they must have traveled to Asia.\"}",
+      "usage": {
+        "prompt_tokens": 475,
+        "completion_tokens": 29,
+        "cost_usd": 8.865e-05
+      }
+    },
+    {
+      "network": "cancer0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.19148936,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.5,
+      "abs_error": 0.30851064,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.5,
+        "brief_reason": "With high pollution and being a smoker, the cancer probability is 5%."
+      },
+      "raw_response": "{\"probability\": 0.5, \"brief_reason\": \"With high pollution and being a smoker, the cancer probability is 5%.\"}",
+      "usage": {
+        "prompt_tokens": 301,
+        "completion_tokens": 32,
+        "cost_usd": 6.435e-05
+      }
+    },
+    {
+      "network": "cancer0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.020781489,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.03,
+      "abs_error": 0.009218510999999999,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.03,
+        "brief_reason": "Low air pollution leads to only a 3% chance of cancer."
+      },
+      "raw_response": "{\"probability\": 0.03, \"brief_reason\": \"Low air pollution leads to only a 3% chance of cancer.\"}",
+      "usage": {
+        "prompt_tokens": 311,
+        "completion_tokens": 30,
+        "cost_usd": 6.465e-05
+      }
+    },
+    {
+      "network": "cancer0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.2007,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.2007,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "With low air pollution and being a non-smoker, the chance of cancer is only 0.1%."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"With low air pollution and being a non-smoker, the chance of cancer is only 0.1%.\"}",
+      "usage": {
+        "prompt_tokens": 299,
+        "completion_tokens": 39,
+        "cost_usd": 6.825e-05
+      }
+    },
+    {
+      "network": "cancer0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.235,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.9,
+      "abs_error": 0.665,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9,
+        "brief_reason": "With high air pollution and being a smoker, the chance of cancer is 5%, leading to a 90% positive X-ray result."
+      },
+      "raw_response": "{\"probability\": 0.9, \"brief_reason\": \"With high air pollution and being a smoker, the chance of cancer is 5%, leading to a 90% positive X-ray result.\"}",
+      "usage": {
+        "prompt_tokens": 298,
+        "completion_tokens": 43,
+        "cost_usd": 7.05e-05
+      }
+    },
+    {
+      "network": "cancer0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.35,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.35,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.35,
+        "brief_reason": "The patient has cancer, which increases the likelihood of dyspnoea."
+      },
+      "raw_response": "{\"probability\": 0.35, \"brief_reason\": \"The patient has cancer, which increases the likelihood of dyspnoea.\"}",
+      "usage": {
+        "prompt_tokens": 315,
+        "completion_tokens": 30,
+        "cost_usd": 6.525e-05
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15343266,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.15343266,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Ground glass opacity is more likely to be reported as ground glass, not asymmetry/patchiness."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Ground glass opacity is more likely to be reported as ground glass, not asymmetry/patchiness.\"}",
+      "usage": {
+        "prompt_tokens": 2060,
+        "completion_tokens": 35,
+        "cost_usd": 0.00033
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.019557052,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.1,
+      "abs_error": 0.08044294800000001,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1,
+        "brief_reason": "An oligaemic X-ray has a 10% chance of indicating normal lung blood flow."
+      },
+      "raw_response": "{\"probability\": 0.1, \"brief_reason\": \"An oligaemic X-ray has a 10% chance of indicating normal lung blood flow.\"}",
+      "usage": {
+        "prompt_tokens": 2054,
+        "completion_tokens": 35,
+        "cost_usd": 0.0003291
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.91525424,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.91525424,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Fallot's disease is highly associated with birth asphyxia."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Fallot's disease is highly associated with birth asphyxia.\"}",
+      "usage": {
+        "prompt_tokens": 2081,
+        "completion_tokens": 28,
+        "cost_usd": 0.00018495
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.8,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.8,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.8,
+        "brief_reason": "A plethoric chest X-ray most likely results in a plethoric X-ray report with an 80% probability."
+      },
+      "raw_response": "{\"probability\": 0.8, \"brief_reason\": \"A plethoric chest X-ray most likely results in a plethoric X-ray report with an 80% probability.\"}",
+      "usage": {
+        "prompt_tokens": 2087,
+        "completion_tokens": 41,
+        "cost_usd": 0.00033765
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.053994681,
+      "reasoning_types": [
+        "causal",
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.053994681,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Ground glass opacity and low lung flow indicate abnormal lung parenchyma."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Ground glass opacity and low lung flow indicate abnormal lung parenchyma.\"}",
+      "usage": {
+        "prompt_tokens": 2088,
+        "completion_tokens": 31,
+        "cost_usd": 0.0003318
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.23171645,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.23171645,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Grunting is unlikely given the age of the child and the probabilities associated with symptoms."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Grunting is unlikely given the age of the child and the probabilities associated with symptoms.\"}",
+      "usage": {
+        "prompt_tokens": 1381,
+        "completion_tokens": 33,
+        "cost_usd": 0.00022695
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.14194861,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.14194861,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A sick child not grunting has a very low probability of being aged 4-10 days."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A sick child not grunting has a very low probability of being aged 4-10 days.\"}",
+      "usage": {
+        "prompt_tokens": 1369,
+        "completion_tokens": 35,
+        "cost_usd": 0.00022635
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.16790675,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.16790675,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Grunting without documentation indicates a low likelihood of being sick."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Grunting without documentation indicates a low likelihood of being sick.\"}",
+      "usage": {
+        "prompt_tokens": 1384,
+        "completion_tokens": 28,
+        "cost_usd": 0.0002244
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.9,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.1,
+      "abs_error": 0.8,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1,
+        "brief_reason": "The child is unwell and not grunting, leading to a 10% chance of documentation."
+      },
+      "raw_response": "{\"probability\": 0.1, \"brief_reason\": \"The child is unwell and not grunting, leading to a 10% chance of documentation.\"}",
+      "usage": {
+        "prompt_tokens": 1372,
+        "completion_tokens": 36,
+        "cost_usd": 0.0001314
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.59263263,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.59263263,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Grunting is reported, but the child is not grunting, making age likelihood of 0-3 days impossible."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Grunting is reported, but the child is not grunting, making age likelihood of 0-3 days impossible.\"}",
+      "usage": {
+        "prompt_tokens": 1374,
+        "completion_tokens": 40,
+        "cost_usd": 0.0002301
+      }
+    },
+    {
+      "network": "child3",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15981116,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.15981116,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The medical report indicating LVH is highly unlikely if the child has TGA."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The medical report indicating LVH is highly unlikely if the child has TGA.\"}",
+      "usage": {
+        "prompt_tokens": 604,
+        "completion_tokens": 32,
+        "cost_usd": 0.0001098
+      }
+    },
+    {
+      "network": "child3",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.35630755,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.35630755,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The absence of a medical report for LVH strongly indicates the child does not have Fallot's disease."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The absence of a medical report for LVH strongly indicates the child does not have Fallot's disease.\"}",
+      "usage": {
+        "prompt_tokens": 602,
+        "completion_tokens": 37,
+        "cost_usd": 0.0001125
+      }
+    },
+    {
+      "network": "child3",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.72628135,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.72628135,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "PAIVS has a 90% chance of LVH being present, making it incompatible with the evidence."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"PAIVS has a 90% chance of LVH being present, making it incompatible with the evidence.\"}",
+      "usage": {
+        "prompt_tokens": 593,
+        "completion_tokens": 38,
+        "cost_usd": 0.00011175
+      }
+    },
+    {
+      "network": "child3",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.062077528,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.05,
+      "abs_error": 0.012077527999999997,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.05,
+        "brief_reason": "The absence of LVH suggests a low likelihood of lung disease."
+      },
+      "raw_response": "{\"probability\": 0.05, \"brief_reason\": \"The absence of LVH suggests a low likelihood of lung disease.\"}",
+      "usage": {
+        "prompt_tokens": 594,
+        "completion_tokens": 28,
+        "cost_usd": 0.0001059
+      }
+    },
+    {
+      "network": "child3",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.72628135,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.72628135,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "PAIVS is associated with a high likelihood of LVH, making the evidence inconsistent."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"PAIVS is associated with a high likelihood of LVH, making the evidence inconsistent.\"}",
+      "usage": {
+        "prompt_tokens": 610,
+        "completion_tokens": 34,
+        "cost_usd": 0.0001119
+      }
+    },
+    {
+      "network": "diabetes0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.951,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.951,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "At 10 mmol/l, the utility of insulin administration strategies is 0.0 mmol/kg/h."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"At 10 mmol/l, the utility of insulin administration strategies is 0.0 mmol/kg/h.\"}",
+      "usage": {
+        "prompt_tokens": 2292,
+        "completion_tokens": 37,
+        "cost_usd": 0.000366
+      }
+    },
+    {
+      "network": "diabetes0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The kidneys cannot clear substances at 0.8 mmol/kg/h when the insulin administration rate is 0.4 mmol/kg/h."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The kidneys cannot clear substances at 0.8 mmol/kg/h when the insulin administration rate is 0.4 mmol/kg/h.\"}",
+      "usage": {
+        "prompt_tokens": 2298,
+        "completion_tokens": 42,
+        "cost_usd": 0.0003699
+      }
+    },
+    {
+      "network": "diabetes0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 1.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 1.0,
+        "brief_reason": "At a blood glucose level of 8 mmol/l, the kidneys' ability to clear substances is 100% probability of being 0.0 mmol/kg/h."
+      },
+      "raw_response": "{\"probability\": 1.0, \"brief_reason\": \"At a blood glucose level of 8 mmol/l, the kidneys' ability to clear substances is 100% probability of being 0.0 mmol/kg/h.\"}",
+      "usage": {
+        "prompt_tokens": 2263,
+        "completion_tokens": 49,
+        "cost_usd": 0.00036885
+      }
+    },
+    {
+      "network": "diabetes0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 1.0,
+      "abs_error": 1.0,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 1.0,
+        "brief_reason": "At a blood glucose level of 6 mmol/l, the kidneys' ability to clear substances is 100% at 0.0 mmol/kg/h."
+      },
+      "raw_response": "{\"probability\": 1.0, \"brief_reason\": \"At a blood glucose level of 6 mmol/l, the kidneys' ability to clear substances is 100% at 0.0 mmol/kg/h.\"}",
+      "usage": {
+        "prompt_tokens": 2322,
+        "completion_tokens": 47,
+        "cost_usd": 0.0003765
+      }
+    },
+    {
+      "network": "diabetes0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 1.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 1.0,
+        "brief_reason": "At a blood glucose level of 2 mmol/l, the kidneys' ability to clear substances is 100% probability of being 0.0 mmol/kg/h."
+      },
+      "raw_response": "{\"probability\": 1.0, \"brief_reason\": \"At a blood glucose level of 2 mmol/l, the kidneys' ability to clear substances is 100% probability of being 0.0 mmol/kg/h.\"}",
+      "usage": {
+        "prompt_tokens": 2290,
+        "completion_tokens": 49,
+        "cost_usd": 0.0003729
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T12:07:35Z",
+  "_meta": {
+    "prompt_tokens": 63771,
+    "completion_tokens": 1563,
+    "total_cost_usd": 0.009946650000000001,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "8f5d854c",
+    "timestamp_utc": "2026-05-03T12:07:35.369394+00:00",
+    "script": "baselines/run_quite_direct_baseline.py",
+    "n_total": 45,
+    "modes": [
+      "numeric"
+    ]
+  }
+}

@@ -33,6 +33,24 @@ REPO_ROOT = SCRIPT_DIR.parents[1]
 QUITE_DIR = REPO_ROOT / "data" / "external" / "QUITE" / "data" / "quite-corpus" / "data"
 RESULTS_DIR = SCRIPT_DIR / "results"
 
+HARD_COMPUTE_PRESETS = {
+    "hard-compute": {
+        "mildew0": [4, 18, 5],
+        "insurance1": [16, 18, 7],
+        "hailfinder0": [5, 15, 7],
+        "water1": [1, 7, 2],
+        "sachs1": [9, 4, 2],
+        "phytophthora1": [16, 5, 2],
+    },
+    "hard-compute-clean": {
+        "mildew0": [4, 18, 5, 10, 19],
+        "insurance1": [16, 18, 7, 9, 12],
+        "hailfinder0": [5, 15, 7, 14, 8],
+        "water1": [1, 7, 2, 3, 4],
+        "sachs1": [9, 4, 2, 0, 6],
+    },
+}
+
 
 def load_dotenv(path: Path) -> None:
     if not path.exists():
@@ -75,16 +93,46 @@ def extract_json(text: str) -> Dict[str, Any] | None:
             return None
 
 
-def load_items(modes: List[str], limit_per_mode: int | None = None) -> List[Dict[str, Any]]:
+def has_valid_gold(pair: Dict[str, Any]) -> bool:
+    try:
+        answer = float(pair["answer"])
+    except (KeyError, TypeError, ValueError):
+        return False
+    return 0.0 <= answer <= 1.0 and math.isfinite(answer)
+
+
+def load_items(
+    modes: List[str],
+    limit_per_mode: int | None = None,
+    networks: List[str] | None = None,
+    query_limit_per_network: int | None = None,
+    query_plan: Dict[str, List[int]] | None = None,
+    include_invalid_gold: bool = False,
+) -> List[Dict[str, Any]]:
     if not QUITE_DIR.exists():
         raise FileNotFoundError(f"QUITE data not found: {QUITE_DIR}")
     items: List[Dict[str, Any]] = []
+    wanted = None
+    if query_plan:
+        wanted = {f"{name}.json" for name in query_plan}
+    elif networks:
+        wanted = {n if n.endswith(".json") else f"{n}.json" for n in networks}
     for path in sorted(QUITE_DIR.glob("*.json")):
+        if wanted is not None and path.name not in wanted:
+            continue
         data = json.loads(path.read_text())
         for mode in modes:
             premise_key = "numeric_premises" if mode == "numeric" else "wep_based_premises"
             premises = [p["content"] for p in data[premise_key]]
             pairs = data["evidence_query_pairs"]
+            if not include_invalid_gold:
+                pairs = [pair for pair in pairs if has_valid_gold(pair)]
+            if query_plan is not None:
+                qids = query_plan[path.stem]
+                by_id = {int(pair["id"]): pair for pair in pairs}
+                pairs = [by_id[qid] for qid in qids if qid in by_id]
+            if query_limit_per_network is not None:
+                pairs = pairs[:query_limit_per_network]
             if limit_per_mode is not None:
                 pairs = pairs[:limit_per_mode]
             for pair in pairs:
@@ -194,10 +242,22 @@ async def main() -> None:
     parser.add_argument("--model", default=os.environ.get("MODEL", "openai/gpt-4o-mini"))
     parser.add_argument("--modes", nargs="+", default=["numeric"], choices=["numeric", "wep"])
     parser.add_argument("--limit-per-mode", type=int, default=None)
+    parser.add_argument("--networks", nargs="*", default=None)
+    parser.add_argument("--query-limit-per-network", type=int, default=None)
+    parser.add_argument("--preset", choices=sorted(HARD_COMPUTE_PRESETS), default=None)
+    parser.add_argument("--include-invalid-gold", action="store_true")
     parser.add_argument("--sema", type=int, default=int(os.environ.get("SEMA", "20")))
     args = parser.parse_args()
 
-    items = load_items(args.modes, args.limit_per_mode)
+    query_plan = HARD_COMPUTE_PRESETS[args.preset] if args.preset else None
+    items = load_items(
+        args.modes,
+        args.limit_per_mode,
+        networks=args.networks,
+        query_limit_per_network=args.query_limit_per_network,
+        query_plan=query_plan,
+        include_invalid_gold=args.include_invalid_gold,
+    )
     client = make_client()
     sema = asyncio.Semaphore(args.sema)
     t0 = time.time()
@@ -223,6 +283,7 @@ async def main() -> None:
         "experiment": "QUITE direct natural-language probability baseline",
         "model": args.model,
         "config": vars(args),
+        "query_plan": query_plan,
         "elapsed_sec": elapsed,
         "summary": summary,
         "results": rows,
@@ -242,6 +303,7 @@ async def main() -> None:
             "script": "baselines/run_quite_direct_baseline.py",
             "n_total": len(items),
             "modes": args.modes,
+            "preset": args.preset,
         },
     )
     print(f"Saved: {out_path}")

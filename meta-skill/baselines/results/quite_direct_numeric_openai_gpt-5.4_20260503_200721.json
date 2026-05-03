@@ -1,0 +1,1141 @@
+{
+  "experiment": "QUITE direct natural-language probability baseline",
+  "model": "openai/gpt-5.4",
+  "config": {
+    "model": "openai/gpt-5.4",
+    "modes": [
+      "numeric"
+    ],
+    "limit_per_mode": null,
+    "networks": [
+      "alarm0",
+      "alarm1",
+      "alarm2",
+      "asia0",
+      "cancer0",
+      "child0",
+      "child1",
+      "child3",
+      "diabetes0"
+    ],
+    "query_limit_per_network": 5,
+    "include_invalid_gold": false,
+    "sema": 10
+  },
+  "elapsed_sec": 9.307824850082397,
+  "summary": {
+    "overall": {
+      "n": 45,
+      "valid": 45,
+      "parse_errors": 0,
+      "within_0_01": 27,
+      "within_0_01_rate": 0.6,
+      "within_0_05": 35,
+      "within_0_05_rate": 0.7777777777777778,
+      "mae": 0.04247934712750849,
+      "rmse": 0.11691946693890609
+    },
+    "numeric": {
+      "n": 45,
+      "valid": 45,
+      "parse_errors": 0,
+      "within_0_01": 27,
+      "within_0_01_rate": 0.6,
+      "within_0_05": 35,
+      "within_0_05_rate": 0.7777777777777778,
+      "mae": 0.04247934712750849,
+      "rmse": 0.11691946693890609
+    }
+  },
+  "results": [
+    {
+      "network": "alarm0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15780446,
+      "reasoning_types": [
+        "explaining_away"
+      ],
+      "pred": 0.8507,
+      "abs_error": 0.69289554,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.8507,
+        "brief_reason": "Given tube normal, not kinked, and zero pressure, normal intubation is most likely, though esophageal and one-sided cases also explain the evidence."
+      },
+      "raw_response": "{\"probability\": 0.8507, \"brief_reason\": \"Given tube normal, not kinked, and zero pressure, normal intubation is most likely, though esophageal and one-sided cases also explain the evidence.\"}",
+      "usage": {
+        "prompt_tokens": 2351,
+        "completion_tokens": 52,
+        "cost_usd": 0.0020495
+      }
+    },
+    {
+      "network": "alarm0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.04,
+      "reasoning_types": [],
+      "pred": 0.04,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.04,
+        "brief_reason": "Given the Bayesian network, tube kink has prior 0.04 and is independent of the observed minimum-volume setting, intubation status, tube flow, and connection state."
+      },
+      "raw_response": "{\"probability\": 0.04, \"brief_reason\": \"Given the Bayesian network, tube kink has prior 0.04 and is independent of the observed minimum-volume setting, intubation status, tube flow, and connection state.\"}",
+      "usage": {
+        "prompt_tokens": 2354,
+        "completion_tokens": 54,
+        "cost_usd": 0.002087
+      }
+    },
+    {
+      "network": "alarm0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.2486338,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.06027499999999999,
+      "abs_error": 0.1883588,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.06027499999999999,
+        "brief_reason": "Marginalizing over disconnect, tube state, kink, and intubation with machine state fixed to normal gives a low-pressure probability of about 0.0603."
+      },
+      "raw_response": "{\"probability\": 0.06027499999999999, \"brief_reason\": \"Marginalizing over disconnect, tube state, kink, and intubation with machine state fixed to normal gives a low-pressure probability of about 0.0603.\"}",
+      "usage": {
+        "prompt_tokens": 2327,
+        "completion_tokens": 58,
+        "cost_usd": 0.0066875
+      }
+    },
+    {
+      "network": "alarm0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.04,
+      "reasoning_types": [
+        "explaining_away"
+      ],
+      "pred": 0.0166,
+      "abs_error": 0.0234,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0166,
+        "brief_reason": "Given normal intubation, tube volume zero, machine set high, and normal pressure, the pressure evidence is much more likely when the tube is not kinked than when it is kinked."
+      },
+      "raw_response": "{\"probability\": 0.0166, \"brief_reason\": \"Given normal intubation, tube volume zero, machine set high, and normal pressure, the pressure evidence is much more likely when the tube is not kinked than when it is kinked.\"}",
+      "usage": {
+        "prompt_tokens": 2355,
+        "completion_tokens": 59,
+        "cost_usd": 0.0021645
+      }
+    },
+    {
+      "network": "alarm0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.99719961,
+      "reasoning_types": [
+        "explaining_away"
+      ],
+      "pred": 0.9117,
+      "abs_error": 0.08549961000000006,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9117,
+        "brief_reason": "Given connected ventilator, tube volume zero, and high pressure, the no-kink cases dominate the posterior over kinked cases."
+      },
+      "raw_response": "{\"probability\": 0.9117, \"brief_reason\": \"Given connected ventilator, tube volume zero, and high pressure, the no-kink cases dominate the posterior over kinked cases.\"}",
+      "usage": {
+        "prompt_tokens": 2335,
+        "completion_tokens": 46,
+        "cost_usd": 0.0019195
+      }
+    },
+    {
+      "network": "alarm1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.04,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.04,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.04,
+        "brief_reason": "PCWP depends only on left ventricular end-diastolic volume, and with high end-diastolic volume the probability of normal PCWP is 0.04."
+      },
+      "raw_response": "{\"probability\": 0.04, \"brief_reason\": \"PCWP depends only on left ventricular end-diastolic volume, and with high end-diastolic volume the probability of normal PCWP is 0.04.\"}",
+      "usage": {
+        "prompt_tokens": 1055,
+        "completion_tokens": 52,
+        "cost_usd": 0.0034175
+      }
+    },
+    {
+      "network": "alarm1",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.05,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.1834862385,
+      "abs_error": 0.13348623850000002,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1834862385,
+        "brief_reason": "Given history, hypovolemia, high stroke volume, and high LVEDV, Bayes favors no failure, leaving about an 18.3% chance of left ventricular failure."
+      },
+      "raw_response": "{\"probability\": 0.1834862385, \"brief_reason\": \"Given history, hypovolemia, high stroke volume, and high LVEDV, Bayes favors no failure, leaving about an 18.3% chance of left ventricular failure.\"}",
+      "usage": {
+        "prompt_tokens": 1062,
+        "completion_tokens": 60,
+        "cost_usd": 0.003555
+      }
+    },
+    {
+      "network": "alarm1",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.95,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.8482444881476235,
+      "abs_error": 0.10175551185237641,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.8482444881476235,
+        "brief_reason": "Conditioning on normal LVEDV, low stroke volume, and history makes normal CVP most likely because CVP depends directly on LVEDV and normal LVEDV strongly favors normal CVP."
+      },
+      "raw_response": "{\"probability\": 0.8482444881476235, \"brief_reason\": \"Conditioning on normal LVEDV, low stroke volume, and history makes normal CVP most likely because CVP depends directly on LVEDV and normal LVEDV strongly favors normal CVP.\"}",
+      "usage": {
+        "prompt_tokens": 1056,
+        "completion_tokens": 64,
+        "cost_usd": 0.0036
+      }
+    },
+    {
+      "network": "alarm1",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.8,
+      "reasoning_types": [],
+      "pred": 0.8,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.8,
+        "brief_reason": "Blood volume is given an independent prior of 0.8 for not being low, and the medical history evidence only updates left ventricular failure, not blood volume."
+      },
+      "raw_response": "{\"probability\": 0.8, \"brief_reason\": \"Blood volume is given an independent prior of 0.8 for not being low, and the medical history evidence only updates left ventricular failure, not blood volume.\"}",
+      "usage": {
+        "prompt_tokens": 1031,
+        "completion_tokens": 51,
+        "cost_usd": 0.0033425
+      }
+    },
+    {
+      "network": "alarm1",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.1,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.1,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1,
+        "brief_reason": "Medical history depends only on left ventricular failure, and given failure is present, no history has probability 1-0.9 = 0.1."
+      },
+      "raw_response": "{\"probability\": 0.1, \"brief_reason\": \"Medical history depends only on left ventricular failure, and given failure is present, no history has probability 1-0.9 = 0.1.\"}",
+      "usage": {
+        "prompt_tokens": 1098,
+        "completion_tokens": 50,
+        "cost_usd": 0.003495
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.9,
+      "reasoning_types": [],
+      "pred": 0.9,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9,
+        "brief_reason": "Cauterization error is independent of the given evidence here, so its posterior stays at the 90% prior for no error."
+      },
+      "raw_response": "{\"probability\": 0.9, \"brief_reason\": \"Cauterization error is independent of the given evidence here, so its posterior stays at the 90% prior for no error.\"}",
+      "usage": {
+        "prompt_tokens": 2210,
+        "completion_tokens": 46,
+        "cost_usd": 0.001607
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.01,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.01,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.01,
+        "brief_reason": "Given true high heart rate and no low-output-detection error, low BP-inferred heart rate occurs with probability 1%, and the other evidence does not affect it once heart rate is known."
+      },
+      "raw_response": "{\"probability\": 0.01, \"brief_reason\": \"Given true high heart rate and no low-output-detection error, low BP-inferred heart rate occurs with probability 1%, and the other evidence does not affect it once heart rate is known.\"}",
+      "usage": {
+        "prompt_tokens": 2250,
+        "completion_tokens": 58,
+        "cost_usd": 0.001887
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.99974754,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.9954103438,
+      "abs_error": 0.004337196199999949,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9954103438,
+        "brief_reason": "Normal peripheral resistance strongly favors no anaphylaxis, and the heart-rate evidence only slightly adjusts that prior."
+      },
+      "raw_response": "{\"probability\": 0.9954103438, \"brief_reason\": \"Normal peripheral resistance strongly favors no anaphylaxis, and the heart-rate evidence only slightly adjusts that prior.\"}",
+      "usage": {
+        "prompt_tokens": 2243,
+        "completion_tokens": 43,
+        "cost_usd": 0.0016445
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.0002524615,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.002177,
+      "abs_error": 0.0019245385000000001,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.002177,
+        "brief_reason": "Normal total peripheral resistance strongly favors no anaphylaxis, and the other evidence does not outweigh that prior."
+      },
+      "raw_response": "{\"probability\": 0.002177, \"brief_reason\": \"Normal total peripheral resistance strongly favors no anaphylaxis, and the other evidence does not outweigh that prior.\"}",
+      "usage": {
+        "prompt_tokens": 2223,
+        "completion_tokens": 41,
+        "cost_usd": 0.0015645
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.0029668744,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.002402,
+      "abs_error": 0.0005648744000000001,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.002402,
+        "brief_reason": "Given low cardiac output with high blood pressure, high peripheral resistance is favored, which is much less likely under anaphylaxis than under no anaphylaxis."
+      },
+      "raw_response": "{\"probability\": 0.002402, \"brief_reason\": \"Given low cardiac output with high blood pressure, high peripheral resistance is favored, which is much less likely under anaphylaxis than under no anaphylaxis.\"}",
+      "usage": {
+        "prompt_tokens": 2236,
+        "completion_tokens": 51,
+        "cost_usd": 0.001747
+      }
+    },
+    {
+      "network": "asia0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.9,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.9,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9,
+        "brief_reason": "With lung cancer present, the person has either lung cancer or tuberculosis; combined with bronchitis, dyspnoea occurs with probability 0.9."
+      },
+      "raw_response": "{\"probability\": 0.9, \"brief_reason\": \"With lung cancer present, the person has either lung cancer or tuberculosis; combined with bronchitis, dyspnoea occurs with probability 0.9.\"}",
+      "usage": {
+        "prompt_tokens": 468,
+        "completion_tokens": 50,
+        "cost_usd": 0.00192
+      }
+    },
+    {
+      "network": "asia0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.95238095,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.8695652174,
+      "abs_error": 0.08281573259999997,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.8695652174,
+        "brief_reason": "Using Bayes with S\u2192L and S\u2192B, P(S|L,B) \u221d P(S)P(L|S)P(B|S), giving 0.5\u00b70.1\u00b70.6 over both smoking states."
+      },
+      "raw_response": "{\"probability\": 0.8695652174, \"brief_reason\": \"Using Bayes with S\u2192L and S\u2192B, P(S|L,B) \u221d P(S)P(L|S)P(B|S), giving 0.5\u00b70.1\u00b70.6 over both smoking states.\"}",
+      "usage": {
+        "prompt_tokens": 466,
+        "completion_tokens": 73,
+        "cost_usd": 0.00226
+      }
+    },
+    {
+      "network": "asia0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.05,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.05,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.05,
+        "brief_reason": "Given the premises, visiting Asia directly sets the tuberculosis probability to 5%."
+      },
+      "raw_response": "{\"probability\":0.05,\"brief_reason\":\"Given the premises, visiting Asia directly sets the tuberculosis probability to 5%.\"}",
+      "usage": {
+        "prompt_tokens": 457,
+        "completion_tokens": 32,
+        "cost_usd": 0.0016225
+      }
+    },
+    {
+      "network": "asia0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.01,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.010000000000000009,
+      "abs_error": 8.673617379884035e-18,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.010000000000000009,
+        "brief_reason": "Without Asia travel, the model says there is a 99% chance of not having tuberculosis, so the tuberculosis probability is 1%."
+      },
+      "raw_response": "{\"probability\": 0.010000000000000009, \"brief_reason\": \"Without Asia travel, the model says there is a 99% chance of not having tuberculosis, so the tuberculosis probability is 1%.\"}",
+      "usage": {
+        "prompt_tokens": 458,
+        "completion_tokens": 52,
+        "cost_usd": 0.001925
+      }
+    },
+    {
+      "network": "asia0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.048076923,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.04784688995215312,
+      "abs_error": 0.00023003304784688372,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.04784688995215312,
+        "brief_reason": "With tuberculosis present, no lung cancer, and non-smoker observed, Bayes gives P(Asia|TB)=0.05*0.01/(0.05*0.01+0.01*0.99)."
+      },
+      "raw_response": "{\"probability\":0.04784688995215312,\"brief_reason\":\"With tuberculosis present, no lung cancer, and non-smoker observed, Bayes gives P(Asia|TB)=0.05*0.01/(0.05*0.01+0.01*0.99).\"}",
+      "usage": {
+        "prompt_tokens": 474,
+        "completion_tokens": 68,
+        "cost_usd": 0.002205
+      }
+    },
+    {
+      "network": "cancer0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.19148936,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.1914893617,
+      "abs_error": 1.7000000018807526e-09,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1914893617,
+        "brief_reason": "With high pollution and smoking, prior cancer risk is 0.05; updating by a positive X-ray using 0.9 sensitivity and 0.2 false-positive rate gives 0.05*0.9/(0.05*0.9+0.95*0.2)=0.1915."
+      },
+      "raw_response": "{\"probability\":0.1914893617,\"brief_reason\":\"With high pollution and smoking, prior cancer risk is 0.05; updating by a positive X-ray using 0.9 sensitivity and 0.2 false-positive rate gives 0.05*0.9/(0.05*0.9+0.95*0.2)=0.1915.\"}",
+      "usage": {
+        "prompt_tokens": 300,
+        "completion_tokens": 85,
+        "cost_usd": 0.002025
+      }
+    },
+    {
+      "network": "cancer0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.020781489,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.006504337231968811,
+      "abs_error": 0.014277151768031189,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.006504337231968811,
+        "brief_reason": "With low pollution, cancer prior is 0.0097 from smoking mix, and updating on dyspnoea via Bayes gives about 0.65%."
+      },
+      "raw_response": "{\"probability\": 0.006504337231968811, \"brief_reason\": \"With low pollution, cancer prior is 0.0097 from smoking mix, and updating on dyspnoea via Bayes gives about 0.65%.\"}",
+      "usage": {
+        "prompt_tokens": 310,
+        "completion_tokens": 58,
+        "cost_usd": 0.001645
+      }
+    },
+    {
+      "network": "cancer0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.2007,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.2007,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.2007,
+        "brief_reason": "With low pollution and non-smoker, cancer risk is 0.001, so P(Xray+)=0.9*0.001+0.2*0.999=0.2007."
+      },
+      "raw_response": "{\"probability\":0.2007,\"brief_reason\":\"With low pollution and non-smoker, cancer risk is 0.001, so P(Xray+)=0.9*0.001+0.2*0.999=0.2007.\"}",
+      "usage": {
+        "prompt_tokens": 298,
+        "completion_tokens": 60,
+        "cost_usd": 0.001645
+      }
+    },
+    {
+      "network": "cancer0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.235,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.23500000000000001,
+      "abs_error": 2.7755575615628914e-17,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.23500000000000001,
+        "brief_reason": "Given smoker and high pollution, cancer risk is 5%, so X-ray positive probability is 0.9*0.05 + 0.2*0.95 = 0.235."
+      },
+      "raw_response": "{\"probability\":0.23500000000000001,\"brief_reason\":\"Given smoker and high pollution, cancer risk is 5%, so X-ray positive probability is 0.9*0.05 + 0.2*0.95 = 0.235.\"}",
+      "usage": {
+        "prompt_tokens": 297,
+        "completion_tokens": 62,
+        "cost_usd": 0.0016725
+      }
+    },
+    {
+      "network": "cancer0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.35,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.35,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.35,
+        "brief_reason": "Given cancer, dyspnoea depends only on cancer status, so P(no dyspnoea | cancer) = 1 - 0.65 = 0.35."
+      },
+      "raw_response": "{\"probability\": 0.35, \"brief_reason\": \"Given cancer, dyspnoea depends only on cancer status, so P(no dyspnoea | cancer) = 1 - 0.65 = 0.35.\"}",
+      "usage": {
+        "prompt_tokens": 314,
+        "completion_tokens": 56,
+        "cost_usd": 0.001625
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15343266,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.15048626331239667,
+      "abs_error": 0.0029463966876033254,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.15048626331239667,
+        "brief_reason": "Using Bayes over the report-noise model and the upstream priors, an asymmetry/patchy chest X-ray has about a 15.0% posterior chance given a ground-glass report."
+      },
+      "raw_response": "{\"probability\": 0.15048626331239667, \"brief_reason\": \"Using Bayes over the report-noise model and the upstream priors, an asymmetry/patchy chest X-ray has about a 15.0% posterior chance given a ground-glass report.\"}",
+      "usage": {
+        "prompt_tokens": 2059,
+        "completion_tokens": 65,
+        "cost_usd": 0.0018025
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.019557052,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0569,
+      "abs_error": 0.037342948,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0569,
+        "brief_reason": "Conditioning on an oligaemic chest X-ray strongly favors low lung flow over normal flow."
+      },
+      "raw_response": "{\"probability\": 0.0569, \"brief_reason\": \"Conditioning on an oligaemic chest X-ray strongly favors low lung flow over normal flow.\"}",
+      "usage": {
+        "prompt_tokens": 2053,
+        "completion_tokens": 39,
+        "cost_usd": 0.0013975
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.91525424,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.9,
+      "abs_error": 0.015254239999999974,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9,
+        "brief_reason": "Given Fallot is observed and its probability is 0.25 with asphyxia versus 0.30 without, the evidence slightly favors no birth asphyxia, yielding posterior 0.9."
+      },
+      "raw_response": "{\"probability\": 0.9, \"brief_reason\": \"Given Fallot is observed and its probability is 0.25 with asphyxia versus 0.30 without, the evidence slightly favors no birth asphyxia, yielding posterior 0.9.\"}",
+      "usage": {
+        "prompt_tokens": 2080,
+        "completion_tokens": 60,
+        "cost_usd": 0.00178
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.8,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.8,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.8,
+        "brief_reason": "Given the chest X-ray itself is plethoric, the report is plethoric with probability 0.8 regardless of the other evidence."
+      },
+      "raw_response": "{\"probability\": 0.8, \"brief_reason\": \"Given the chest X-ray itself is plethoric, the report is plethoric with probability 0.8 regardless of the other evidence.\"}",
+      "usage": {
+        "prompt_tokens": 2086,
+        "completion_tokens": 48,
+        "cost_usd": 0.001615
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.053994681,
+      "reasoning_types": [
+        "causal",
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0204,
+      "abs_error": 0.033594681,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0204,
+        "brief_reason": "Given no birth asphyxia, low lung flow, ground-glass chest X-ray, and an asymmetric/patchy report, abnormal or congested parenchyma explains the evidence far better than normal parenchyma."
+      },
+      "raw_response": "{\"probability\": 0.0204, \"brief_reason\": \"Given no birth asphyxia, low lung flow, ground-glass chest X-ray, and an asymmetric/patchy report, abnormal or congested parenchyma explains the evidence far better than normal parenchyma.\"}",
+      "usage": {
+        "prompt_tokens": 2087,
+        "completion_tokens": 66,
+        "cost_usd": 0.0018875
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.23171645,
+      "reasoning_types": [],
+      "pred": 0.2794,
+      "abs_error": 0.04768354999999999,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.2794,
+        "brief_reason": "Conditioning on age 11-30 days shifts disease/sickness mix, yielding about a 24.9% grunting chance and thus a 27.94% chance the report documents grunting."
+      },
+      "raw_response": "{\"probability\":0.2794,\"brief_reason\":\"Conditioning on age 11-30 days shifts disease/sickness mix, yielding about a 24.9% grunting chance and thus a 27.94% chance the report documents grunting.\"}",
+      "usage": {
+        "prompt_tokens": 1380,
+        "completion_tokens": 58,
+        "cost_usd": 0.00144
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.14194861,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.13294117647058823,
+      "abs_error": 0.009007433529411774,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.13294117647058823,
+        "brief_reason": "Given sick status, age 4-10 days is the disease-mixture weighted average of the sick-age probabilities, and not grunting provides no additional information once sickness is known."
+      },
+      "raw_response": "{\"probability\": 0.13294117647058823, \"brief_reason\": \"Given sick status, age 4-10 days is the disease-mixture weighted average of the sick-age probabilities, and not grunting provides no additional information once sickness is known.\"}",
+      "usage": {
+        "prompt_tokens": 1368,
+        "completion_tokens": 60,
+        "cost_usd": 0.001728
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.16790675,
+      "reasoning_types": [],
+      "pred": 0.178883,
+      "abs_error": 0.010976249999999993,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.178883,
+        "brief_reason": "Using Bayes with evidence grunting=true and report=false, the posterior probability of age 4-10 days is about 0.179."
+      },
+      "raw_response": "{\"probability\": 0.178883, \"brief_reason\": \"Using Bayes with evidence grunting=true and report=false, the posterior probability of age 4-10 days is about 0.179.\"}",
+      "usage": {
+        "prompt_tokens": 1383,
+        "completion_tokens": 49,
+        "cost_usd": 0.0013125
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.9,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.9,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9,
+        "brief_reason": "Given the child is not grunting, the report omits grunting with probability 0.9 regardless of other factors."
+      },
+      "raw_response": "{\"probability\": 0.9, \"brief_reason\": \"Given the child is not grunting, the report omits grunting with probability 0.9 regardless of other factors.\"}",
+      "usage": {
+        "prompt_tokens": 1371,
+        "completion_tokens": 44,
+        "cost_usd": 0.0014955
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.59263263,
+      "reasoning_types": [],
+      "pred": 0.771866,
+      "abs_error": 0.17923337000000006,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.771866,
+        "brief_reason": "Conditioning on a grunting report despite no actual grunting only updates through the no-grunting report rate and leaves the age mainly determined by the disease/sickness mix, giving about 0.772 for age 0-3 days."
+      },
+      "raw_response": "{\"probability\": 0.771866, \"brief_reason\": \"Conditioning on a grunting report despite no actual grunting only updates through the no-grunting report rate and leaves the age mainly determined by the disease/sickness mix, giving about 0.772 for age 0-3 days.\"}",
+      "usage": {
+        "prompt_tokens": 1373,
+        "completion_tokens": 68,
+        "cost_usd": 0.0018605
+      }
+    },
+    {
+      "network": "child3",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15981116,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.06156575126165215,
+      "abs_error": 0.09824540873834786,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.06156575126165215,
+        "brief_reason": "Using Bayes\u2019 rule, TGA\u2019s prior times the LVH-report likelihood is small because TGA rarely has LVH while PAIVS strongly explains a positive LVH report."
+      },
+      "raw_response": "{\"probability\": 0.061565751261652154, \"brief_reason\": \"Using Bayes\u2019 rule, TGA\u2019s prior times the LVH-report likelihood is small because TGA rarely has LVH while PAIVS strongly explains a positive LVH report.\"}",
+      "usage": {
+        "prompt_tokens": 603,
+        "completion_tokens": 61,
+        "cost_usd": 0.0024225
+      }
+    },
+    {
+      "network": "child3",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.35630755,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.4348823101158413,
+      "abs_error": 0.0785747601158413,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.4348823101158413,
+        "brief_reason": "Using Bayes\u2019 rule with the absent LVH report favors diseases where LVH is usually absent, increasing Fallot\u2019s posterior probability."
+      },
+      "raw_response": "{\"probability\":0.4348823101158413,\"brief_reason\":\"Using Bayes\u2019 rule with the absent LVH report favors diseases where LVH is usually absent, increasing Fallot\u2019s posterior probability.\"}",
+      "usage": {
+        "prompt_tokens": 601,
+        "completion_tokens": 48,
+        "cost_usd": 0.0022225
+      }
+    },
+    {
+      "network": "child3",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.72628135,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.7161290322580645,
+      "abs_error": 0.01015231774193559,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.7161290322580645,
+        "brief_reason": "Conditioning on LVH strongly favors PAIVS because PAIVS has 90% LVH prevalence while most other conditions have only 5\u201310%."
+      },
+      "raw_response": "{\"probability\": 0.7161290322580645, \"brief_reason\": \"Conditioning on LVH strongly favors PAIVS because PAIVS has 90% LVH prevalence while most other conditions have only 5\u201310%.\"}",
+      "usage": {
+        "prompt_tokens": 592,
+        "completion_tokens": 57,
+        "cost_usd": 0.002335
+      }
+    },
+    {
+      "network": "child3",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.062077528,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.05938775510204081,
+      "abs_error": 0.002689772897959193,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.05938775510204081,
+        "brief_reason": "Conditioning on no LVH slightly raises lung disease because lung disease usually also has no LVH."
+      },
+      "raw_response": "{\"probability\":0.05938775510204081,\"brief_reason\":\"Conditioning on no LVH slightly raises lung disease because lung disease usually also has no LVH.\"}",
+      "usage": {
+        "prompt_tokens": 593,
+        "completion_tokens": 41,
+        "cost_usd": 0.0020975
+      }
+    },
+    {
+      "network": "child3",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.72628135,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.7824726134585291,
+      "abs_error": 0.056191263458529095,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.7824726134585291,
+        "brief_reason": "Given LVH is present, PAIVS is strongly favored because it makes LVH much more likely than the other diagnoses; the report adds no extra information once LVH is known."
+      },
+      "raw_response": "{\"probability\": 0.7824726134585291, \"brief_reason\": \"Given LVH is present, PAIVS is strongly favored because it makes LVH much more likely than the other diagnoses; the report adds no extra information once LVH is known.\"}",
+      "usage": {
+        "prompt_tokens": 609,
+        "completion_tokens": 61,
+        "cost_usd": 0.0024375
+      }
+    },
+    {
+      "network": "diabetes0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.951,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.951,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.951,
+        "brief_reason": "Given blood glucose is 10 mmol/l, the utility is 0.8 mmol/kg/h with probability 95.1%, and the kidney evidence is fully consistent with that glucose level."
+      },
+      "raw_response": "{\"probability\": 0.951, \"brief_reason\": \"Given blood glucose is 10 mmol/l, the utility is 0.8 mmol/kg/h with probability 95.1%, and the kidney evidence is fully consistent with that glucose level.\"}",
+      "usage": {
+        "prompt_tokens": 2291,
+        "completion_tokens": 57,
+        "cost_usd": 0.0065825
+      }
+    },
+    {
+      "network": "diabetes0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.000133,
+      "abs_error": 0.000133,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.000133,
+        "brief_reason": "Given utility=0.8 and actual insulin rate=0.4, kidney clearance 0.8 is only weakly supported and is far less likely than 0.4 or 0.0 under the stated CPTs."
+      },
+      "raw_response": "{\"probability\": 0.000133, \"brief_reason\": \"Given utility=0.8 and actual insulin rate=0.4, kidney clearance 0.8 is only weakly supported and is far less likely than 0.4 or 0.0 under the stated CPTs.\"}",
+      "usage": {
+        "prompt_tokens": 2297,
+        "completion_tokens": 67,
+        "cost_usd": 0.0021395
+      }
+    },
+    {
+      "network": "diabetes0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 1.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 1.0,
+        "brief_reason": "Given blood glucose of 8 mmol/l, the kidneys' clearance is specified as 0.0 mmol/kg/h with 100% probability."
+      },
+      "raw_response": "{\"probability\": 1.0, \"brief_reason\": \"Given blood glucose of 8 mmol/l, the kidneys' clearance is specified as 0.0 mmol/kg/h with 100% probability.\"}",
+      "usage": {
+        "prompt_tokens": 2262,
+        "completion_tokens": 48,
+        "cost_usd": 0.001767
+      }
+    },
+    {
+      "network": "diabetes0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Given blood glucose is 6 mmol/l, the kidneys' clearance rate is deterministically 0.0 mmol/kg/h, so 0.4 mmol/kg/h is impossible."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Given blood glucose is 6 mmol/l, the kidneys' clearance rate is deterministically 0.0 mmol/kg/h, so 0.4 mmol/kg/h is impossible.\"}",
+      "usage": {
+        "prompt_tokens": 2321,
+        "completion_tokens": 55,
+        "cost_usd": 0.0020195
+      }
+    },
+    {
+      "network": "diabetes0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 1.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 1.0,
+        "brief_reason": "Given blood glucose of 2 mmol/l, the model assigns kidneys' clearance = 0.0 mmol/kg/h with probability 1."
+      },
+      "raw_response": "{\"probability\": 1.0, \"brief_reason\": \"Given blood glucose of 2 mmol/l, the model assigns kidneys' clearance = 0.0 mmol/kg/h with probability 1.\"}",
+      "usage": {
+        "prompt_tokens": 2289,
+        "completion_tokens": 47,
+        "cost_usd": 0.0018195
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T12:07:21Z",
+  "_meta": {
+    "prompt_tokens": 63726,
+    "completion_tokens": 2480,
+    "total_cost_usd": 0.10147499999999998,
+    "model_id": "openai/gpt-5.4",
+    "git_commit": "8f5d854c",
+    "timestamp_utc": "2026-05-03T12:07:21.648156+00:00",
+    "script": "baselines/run_quite_direct_baseline.py",
+    "n_total": 45,
+    "modes": [
+      "numeric"
+    ]
+  }
+}

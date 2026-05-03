@@ -1,0 +1,1873 @@
+{
+  "experiment": "QUITE numeric compile-once E2E",
+  "model": "openai/gpt-4o-mini",
+  "config": {
+    "model": "openai/gpt-4o-mini",
+    "mode": "numeric",
+    "networks": [
+      "asia0",
+      "alarm0",
+      "child0"
+    ],
+    "limit_networks": null,
+    "query_limit_per_network": 5,
+    "no_scaffold": false,
+    "compile_sema": 2,
+    "query_sema": 10,
+    "compile_max_tokens": 12000,
+    "query_max_tokens": 512
+  },
+  "elapsed_sec": 40.4690580368042,
+  "compile_summary": {
+    "n": 3,
+    "ok": 1,
+    "failed": [
+      "alarm0",
+      "child0"
+    ]
+  },
+  "summary": {
+    "within_0_01": {
+      "n": 15,
+      "correct": 5,
+      "rate": 0.3333333333333333,
+      "wilson_95ci": [
+        0.15176100694691236,
+        0.5828687484878701
+      ],
+      "valid_numeric": 5,
+      "mae": 4.91575123662269e-10,
+      "by_network": {
+        "alarm0": {
+          "n": 5,
+          "correct": 0,
+          "failures": {
+            "compile_failed": 5
+          },
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.43449149475208104
+          ]
+        },
+        "asia0": {
+          "n": 5,
+          "correct": 5,
+          "failures": {},
+          "rate": 1.0,
+          "wilson_95ci": [
+            0.5655085052479191,
+            1.0
+          ]
+        },
+        "child0": {
+          "n": 5,
+          "correct": 0,
+          "failures": {
+            "compile_failed": 5
+          },
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.43449149475208104
+          ]
+        }
+      }
+    },
+    "within_0_05": {
+      "n": 15,
+      "correct": 5,
+      "rate": 0.3333333333333333,
+      "wilson_95ci": [
+        0.15176100694691236,
+        0.5828687484878701
+      ],
+      "valid_numeric": 5,
+      "mae": 4.91575123662269e-10,
+      "by_network": {
+        "alarm0": {
+          "n": 5,
+          "correct": 0,
+          "failures": {
+            "compile_failed": 5
+          },
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.43449149475208104
+          ]
+        },
+        "asia0": {
+          "n": 5,
+          "correct": 5,
+          "failures": {},
+          "rate": 1.0,
+          "wilson_95ci": [
+            0.5655085052479191,
+            1.0
+          ]
+        },
+        "child0": {
+          "n": 5,
+          "correct": 0,
+          "failures": {
+            "compile_failed": 5
+          },
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.43449149475208104
+          ]
+        }
+      }
+    }
+  },
+  "compile_results": [
+    {
+      "network": "alarm0",
+      "ok": false,
+      "usage": {
+        "prompt_tokens": 2949,
+        "completion_tokens": 3147,
+        "cost_usd": 0.00233055
+      },
+      "raw_response": "```json\n{\n  \"nodes\": [\n    \"MINVOLSET\",\n    \"VENTMACH\",\n    \"DISCONNECT\",\n    \"INTUBATION\",\n    \"VENTTUBE\",\n    \"KINKEDTUBE\",\n    \"PRESS\"\n  ],\n  \"states\": {\n    \"MINVOLSET\": [\"LOW\", \"NORMAL\", \"HIGH\"],\n    \"VENTMACH\": [\"ZERO\", \"LOW\", \"NORMAL\", \"HIGH\"],\n    \"DISCONNECT\": [\"TRUE\", \"FALSE\"],\n    \"INTUBATION\": [\"NORMAL\", \"ESOPHAGEAL\", \"one-sided\"],\n    \"VENTTUBE\": [\"ZERO\", \"LOW\", \"NORMAL\", \"HIGH\"],\n    \"KINKEDTUBE\": [\"TRUE\", \"FALSE\"],\n    \"PRESS\": [\"ZERO\", \"LOW\", \"NORMAL\", \"HIGH\"]\n  },\n  \"cpts\": {\n    \"MINVOLSET\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"LOW\": 0.025,\n            \"NORMAL\": 0.95,\n            \"HIGH\": 0.025\n          }\n        }\n      ]\n    },\n    \"VENTMACH\": {\n      \"parents\": [\"MINVOLSET\"],\n      \"rows\": [\n        {\n          \"when\": {\"MINVOLSET\": \"LOW\"},\n          \"probs\": {\n            \"ZERO\": 0.05,\n            \"LOW\": 0.93,\n            \"NORMAL\": 0.01,\n            \"HIGH\": 0.01\n          }\n        },\n        {\n          \"when\": {\"MINVOLSET\": \"NORMAL\"},\n          \"probs\": {\n            \"ZERO\": 0.05,\n            \"LOW\": 0.01,\n            \"NORMAL\": 0.93,\n            \"HIGH\": 0.01\n          }\n        },\n        {\n          \"when\": {\"MINVOLSET\": \"HIGH\"},\n          \"probs\": {\n            \"ZERO\": 0.05,\n            \"LOW\": 0.01,\n            \"NORMAL\": 0.01,\n            \"HIGH\": 0.93\n          }\n        }\n      ]\n    },\n    \"DISCONNECT\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"TRUE\": 0.1,\n            \"FALSE\": 0.9\n          }\n        }\n      ]\n    },\n    \"INTUBATION\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"NORMAL\": 0.92,\n            \"ESOPHAGEAL\": 0.03,\n            \"one-sided\": 0.05\n          }\n        }\n      ]\n    },\n    \"VENTTUBE\": {\n      \"parents\": [\"VENTMACH\", \"DISCONNECT\"],\n      \"rows\": [\n        {\n          \"when\": {\"VENTMACH\": \"ZERO\", \"DISCONNECT\": \"TRUE\"},\n          \"pr",
+      "parse_error": "row for PRESS missing parent PRESS",
+      "compiled_json": {
+        "nodes": [
+          "MINVOLSET",
+          "VENTMACH",
+          "DISCONNECT",
+          "INTUBATION",
+          "VENTTUBE",
+          "KINKEDTUBE",
+          "PRESS"
+        ],
+        "states": {
+          "MINVOLSET": [
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ],
+          "VENTMACH": [
+            "ZERO",
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ],
+          "DISCONNECT": [
+            "TRUE",
+            "FALSE"
+          ],
+          "INTUBATION": [
+            "NORMAL",
+            "ESOPHAGEAL",
+            "one-sided"
+          ],
+          "VENTTUBE": [
+            "ZERO",
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ],
+          "KINKEDTUBE": [
+            "TRUE",
+            "FALSE"
+          ],
+          "PRESS": [
+            "ZERO",
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ]
+        },
+        "cpts": {
+          "MINVOLSET": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "LOW": 0.025,
+                  "NORMAL": 0.95,
+                  "HIGH": 0.025
+                }
+              }
+            ]
+          },
+          "VENTMACH": {
+            "parents": [
+              "MINVOLSET"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "MINVOLSET": "LOW"
+                },
+                "probs": {
+                  "ZERO": 0.05,
+                  "LOW": 0.93,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "MINVOLSET": "NORMAL"
+                },
+                "probs": {
+                  "ZERO": 0.05,
+                  "LOW": 0.01,
+                  "NORMAL": 0.93,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "MINVOLSET": "HIGH"
+                },
+                "probs": {
+                  "ZERO": 0.05,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.93
+                }
+              }
+            ]
+          },
+          "DISCONNECT": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "TRUE": 0.1,
+                  "FALSE": 0.9
+                }
+              }
+            ]
+          },
+          "INTUBATION": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "NORMAL": 0.92,
+                  "ESOPHAGEAL": 0.03,
+                  "one-sided": 0.05
+                }
+              }
+            ]
+          },
+          "VENTTUBE": {
+            "parents": [
+              "VENTMACH",
+              "DISCONNECT"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "VENTMACH": "ZERO",
+                  "DISCONNECT": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.97,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "VENTMACH": "LOW",
+                  "DISCONNECT": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.97,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "VENTMACH": "NORMAL",
+                  "DISCONNECT": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.97,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "VENTMACH": "HIGH",
+                  "DISCONNECT": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.01,
+                  "NORMAL": 0.97,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "VENTMACH": "ZERO",
+                  "DISCONNECT": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.97,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "VENTMACH": "LOW",
+                  "DISCONNECT": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.97,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "VENTMACH": "NORMAL",
+                  "DISCONNECT": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.97,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "VENTMACH": "HIGH",
+                  "DISCONNECT": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.01,
+                  "NORMAL": 0.97,
+                  "HIGH": 0.01
+                }
+              }
+            ]
+          },
+          "KINKEDTUBE": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "TRUE": 0.04,
+                  "FALSE": 0.96
+                }
+              }
+            ]
+          },
+          "PRESS": {
+            "parents": [
+              "INTUBATION",
+              "VENTTUBE",
+              "KINKEDTUBE"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "INTUBATION": "NORMAL",
+                  "VENTTUBE": "ZERO",
+                  "KINKEDTUBE": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.97,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "NORMAL",
+                  "VENTTUBE": "NORMAL",
+                  "KINKEDTUBE": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.97,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "NORMAL",
+                  "VENTTUBE": "LOW",
+                  "KINKEDTUBE": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.05,
+                  "LOW": 0.25,
+                  "NORMAL": 0.25,
+                  "HIGH": 0.45
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "NORMAL",
+                  "VENTTUBE": "HIGH",
+                  "KINKEDTUBE": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.2,
+                  "LOW": 0.75,
+                  "NORMAL": 0.04,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "NORMAL",
+                  "VENTTUBE": "ZERO",
+                  "KINKEDTUBE": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.33,
+                  "NORMAL": 0.33,
+                  "HIGH": 0.33
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "NORMAL",
+                  "VENTTUBE": "NORMAL",
+                  "KINKEDTUBE": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.33,
+                  "NORMAL": 0.33,
+                  "HIGH": 0.33
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "NORMAL",
+                  "VENTTUBE": "LOW",
+                  "KINKEDTUBE": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.33,
+                  "NORMAL": 0.33,
+                  "HIGH": 0.33
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "NORMAL",
+                  "VENTTUBE": "HIGH",
+                  "KINKEDTUBE": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.33,
+                  "NORMAL": 0.33,
+                  "HIGH": 0.33
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "ESOPHAGEAL",
+                  "VENTTUBE": "ZERO",
+                  "KINKEDTUBE": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.3,
+                  "NORMAL": 0.49,
+                  "HIGH": 0.2
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "ESOPHAGEAL",
+                  "VENTTUBE": "LOW",
+                  "KINKEDTUBE": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.15,
+                  "NORMAL": 0.25,
+                  "HIGH": 0.59
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "ESOPHAGEAL",
+                  "VENTTUBE": "NORMAL",
+                  "KINKEDTUBE": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.97,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "ESOPHAGEAL",
+                  "VENTTUBE": "HIGH",
+                  "KINKEDTUBE": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.2,
+                  "LOW": 0.7,
+                  "NORMAL": 0.09,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "ESOPHAGEAL",
+                  "VENTTUBE": "ZERO",
+                  "KINKEDTUBE": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.97,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "ESOPHAGEAL",
+                  "VENTTUBE": "LOW",
+                  "KINKEDTUBE": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "ESOPHAGEAL",
+                  "VENTTUBE": "NORMAL",
+                  "KINKEDTUBE": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "ESOPHAGEAL",
+                  "VENTTUBE": "HIGH",
+                  "KINKEDTUBE": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "one-sided",
+                  "VENTTUBE": "ZERO",
+                  "KINKEDTUBE": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.3,
+                  "NORMAL": 0.49,
+                  "HIGH": 0.2
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "one-sided",
+                  "VENTTUBE": "LOW",
+                  "KINKEDTUBE": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.15,
+                  "NORMAL": 0.25,
+                  "HIGH": 0.59
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "one-sided",
+                  "VENTTUBE": "NORMAL",
+                  "KINKEDTUBE": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.97,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "one-sided",
+                  "VENTTUBE": "HIGH",
+                  "KINKEDTUBE": "TRUE"
+                },
+                "probs": {
+                  "ZERO": 0.2,
+                  "LOW": 0.7,
+                  "NORMAL": 0.09,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "one-sided",
+                  "VENTTUBE": "ZERO",
+                  "KINKEDTUBE": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.97,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "one-sided",
+                  "VENTTUBE": "LOW",
+                  "KINKEDTUBE": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "one-sided",
+                  "VENTTUBE": "NORMAL",
+                  "KINKEDTUBE": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "INTUBATION": "one-sided",
+                  "VENTTUBE": "HIGH",
+                  "KINKEDTUBE": "FALSE"
+                },
+                "probs": {
+                  "ZERO": 0.01,
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "network": "asia0",
+      "ok": true,
+      "usage": {
+        "prompt_tokens": 1077,
+        "completion_tokens": 915,
+        "cost_usd": 0.00063375
+      },
+      "raw_response": "{\n  \"nodes\": [\n    \"asia\",\n    \"smoke\",\n    \"tub\",\n    \"lung\",\n    \"either\",\n    \"bronc\",\n    \"dysp\",\n    \"xray\"\n  ],\n  \"states\": {\n    \"asia\": [\"yes\", \"no\"],\n    \"smoke\": [\"yes\", \"no\"],\n    \"tub\": [\"yes\", \"no\"],\n    \"lung\": [\"yes\", \"no\"],\n    \"either\": [\"yes\", \"no\"],\n    \"bronc\": [\"yes\", \"no\"],\n    \"dysp\": [\"yes\", \"no\"],\n    \"xray\": [\"yes\", \"no\"]\n  },\n  \"cpts\": {\n    \"asia\": {\n      \"parents\": [],\n      \"rows\": [\n        {\"when\": {}, \"probs\": {\"yes\": 0.01, \"no\": 0.99}}\n      ]\n    },\n    \"smoke\": {\n      \"parents\": [],\n      \"rows\": [\n        {\"when\": {}, \"probs\": {\"yes\": 0.5, \"no\": 0.5}}\n      ]\n    },\n    \"tub\": {\n      \"parents\": [\"asia\"],\n      \"rows\": [\n        {\"when\": {\"asia\": \"yes\"}, \"probs\": {\"yes\": 0.05, \"no\": 0.95}},\n        {\"when\": {\"asia\": \"no\"}, \"probs\": {\"yes\": 0.01, \"no\": 0.99}}\n      ]\n    },\n    \"lung\": {\n      \"parents\": [\"smoke\"],\n      \"rows\": [\n        {\"when\": {\"smoke\": \"yes\"}, \"probs\": {\"yes\": 0.1, \"no\": 0.9}},\n        {\"when\": {\"smoke\": \"no\"}, \"probs\": {\"yes\": 0.01, \"no\": 0.99}}\n      ]\n    },\n    \"either\": {\n      \"parents\": [\"tub\", \"lung\"],\n      \"rows\": [\n        {\"when\": {\"tub\": \"yes\", \"lung\": \"yes\"}, \"probs\": {\"yes\": 1.0, \"no\": 0.0}},\n        {\"when\": {\"tub\": \"yes\", \"lung\": \"no\"}, \"probs\": {\"yes\": 1.0, \"no\": 0.0}},\n        {\"when\": {\"tub\": \"no\", \"lung\": \"yes\"}, \"probs\": {\"yes\": 1.0, \"no\": 0.0}},\n        {\"when\": {\"tub\": \"no\", \"lung\": \"no\"}, \"probs\": {\"yes\": 0.0, \"no\": 1.0}}\n      ]\n    },\n    \"bronc\": {\n      \"parents\": [\"smoke\"],\n      \"rows\": [\n        {\"when\": {\"smoke\": \"yes\"}, \"probs\": {\"yes\": 0.6, \"no\": 0.4}},\n        {\"when\": {\"smoke\": \"no\"}, \"probs\": {\"yes\": 0.3, \"no\": 0.7}}\n      ]\n    },\n    \"dysp\": {\n      \"parents\": [\"either\", \"bronc\"],\n      \"rows\": [\n        {\"when\": {\"either\": \"yes\", \"bronc\": \"yes\"}, \"probs\": {\"yes\": 0.9, \"no\": 0.1}},\n        {\"when\": {\"either\": \"yes\", \"bronc\": \"no\"}, \"probs\": {\"yes\": 0.7, \"no\": 0.3}},\n        {\"when\": {\"either\": \"no\", \"bronc\": \"yes\"}, \"probs\": {\"yes\": 0.8, \"no\": 0.2}},\n        {\"when\": ",
+      "parse_error": null,
+      "compiled_json": {
+        "nodes": [
+          "asia",
+          "smoke",
+          "tub",
+          "lung",
+          "either",
+          "bronc",
+          "dysp",
+          "xray"
+        ],
+        "states": {
+          "asia": [
+            "yes",
+            "no"
+          ],
+          "smoke": [
+            "yes",
+            "no"
+          ],
+          "tub": [
+            "yes",
+            "no"
+          ],
+          "lung": [
+            "yes",
+            "no"
+          ],
+          "either": [
+            "yes",
+            "no"
+          ],
+          "bronc": [
+            "yes",
+            "no"
+          ],
+          "dysp": [
+            "yes",
+            "no"
+          ],
+          "xray": [
+            "yes",
+            "no"
+          ]
+        },
+        "cpts": {
+          "asia": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "yes": 0.01,
+                  "no": 0.99
+                }
+              }
+            ]
+          },
+          "smoke": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "yes": 0.5,
+                  "no": 0.5
+                }
+              }
+            ]
+          },
+          "tub": {
+            "parents": [
+              "asia"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "asia": "yes"
+                },
+                "probs": {
+                  "yes": 0.05,
+                  "no": 0.95
+                }
+              },
+              {
+                "when": {
+                  "asia": "no"
+                },
+                "probs": {
+                  "yes": 0.01,
+                  "no": 0.99
+                }
+              }
+            ]
+          },
+          "lung": {
+            "parents": [
+              "smoke"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "smoke": "yes"
+                },
+                "probs": {
+                  "yes": 0.1,
+                  "no": 0.9
+                }
+              },
+              {
+                "when": {
+                  "smoke": "no"
+                },
+                "probs": {
+                  "yes": 0.01,
+                  "no": 0.99
+                }
+              }
+            ]
+          },
+          "either": {
+            "parents": [
+              "tub",
+              "lung"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "tub": "yes",
+                  "lung": "yes"
+                },
+                "probs": {
+                  "yes": 1.0,
+                  "no": 0.0
+                }
+              },
+              {
+                "when": {
+                  "tub": "yes",
+                  "lung": "no"
+                },
+                "probs": {
+                  "yes": 1.0,
+                  "no": 0.0
+                }
+              },
+              {
+                "when": {
+                  "tub": "no",
+                  "lung": "yes"
+                },
+                "probs": {
+                  "yes": 1.0,
+                  "no": 0.0
+                }
+              },
+              {
+                "when": {
+                  "tub": "no",
+                  "lung": "no"
+                },
+                "probs": {
+                  "yes": 0.0,
+                  "no": 1.0
+                }
+              }
+            ]
+          },
+          "bronc": {
+            "parents": [
+              "smoke"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "smoke": "yes"
+                },
+                "probs": {
+                  "yes": 0.6,
+                  "no": 0.4
+                }
+              },
+              {
+                "when": {
+                  "smoke": "no"
+                },
+                "probs": {
+                  "yes": 0.3,
+                  "no": 0.7
+                }
+              }
+            ]
+          },
+          "dysp": {
+            "parents": [
+              "either",
+              "bronc"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "either": "yes",
+                  "bronc": "yes"
+                },
+                "probs": {
+                  "yes": 0.9,
+                  "no": 0.1
+                }
+              },
+              {
+                "when": {
+                  "either": "yes",
+                  "bronc": "no"
+                },
+                "probs": {
+                  "yes": 0.7,
+                  "no": 0.3
+                }
+              },
+              {
+                "when": {
+                  "either": "no",
+                  "bronc": "yes"
+                },
+                "probs": {
+                  "yes": 0.8,
+                  "no": 0.2
+                }
+              },
+              {
+                "when": {
+                  "either": "no",
+                  "bronc": "no"
+                },
+                "probs": {
+                  "yes": 0.1,
+                  "no": 0.9
+                }
+              }
+            ]
+          },
+          "xray": {
+            "parents": [
+              "either"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "either": "yes"
+                },
+                "probs": {
+                  "yes": 0.9,
+                  "no": 0.1
+                }
+              },
+              {
+                "when": {
+                  "either": "no"
+                },
+                "probs": {
+                  "yes": 0.05,
+                  "no": 0.95
+                }
+              }
+            ]
+          }
+        }
+      },
+      "states": {
+        "asia": [
+          "yes",
+          "no"
+        ],
+        "smoke": [
+          "yes",
+          "no"
+        ],
+        "tub": [
+          "yes",
+          "no"
+        ],
+        "lung": [
+          "yes",
+          "no"
+        ],
+        "either": [
+          "yes",
+          "no"
+        ],
+        "bronc": [
+          "yes",
+          "no"
+        ],
+        "dysp": [
+          "yes",
+          "no"
+        ],
+        "xray": [
+          "yes",
+          "no"
+        ]
+      },
+      "parents": {
+        "asia": [],
+        "smoke": [],
+        "tub": [
+          "asia"
+        ],
+        "lung": [
+          "smoke"
+        ],
+        "either": [
+          "tub",
+          "lung"
+        ],
+        "bronc": [
+          "smoke"
+        ],
+        "xray": [
+          "either"
+        ],
+        "dysp": [
+          "either",
+          "bronc"
+        ]
+      },
+      "n_factors": 8,
+      "n_entries": 36
+    },
+    {
+      "network": "child0",
+      "ok": false,
+      "usage": {
+        "prompt_tokens": 2669,
+        "completion_tokens": 2386,
+        "cost_usd": 0.00183195
+      },
+      "raw_response": "```json\n{\n  \"nodes\": [\n    \"BirthAsphyxia\",\n    \"Disease\",\n    \"LungParench\",\n    \"LungFlow\",\n    \"ChestXray\",\n    \"XrayReport\"\n  ],\n  \"states\": {\n    \"BirthAsphyxia\": [\"yes\", \"no\"],\n    \"Disease\": [\"PFC\", \"TGA\", \"Fallot\", \"PAIVS\", \"TAPVD\", \"Lung\"],\n    \"LungParench\": [\"Normal\", \"Congested\", \"Abnormal\"],\n    \"LungFlow\": [\"Normal\", \"Low\", \"High\"],\n    \"ChestXray\": [\"Normal\", \"Oligaemic\", \"Plethoric\", \"Grd_Glass\", \"Asy/Patch\"],\n    \"XrayReport\": [\"Normal\", \"Oligaemic\", \"Plethoric\", \"Grd_Glass\", \"Asy/Patchy\"]\n  },\n  \"cpts\": {\n    \"BirthAsphyxia\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"yes\": 0.1,\n            \"no\": 0.9\n          }\n        }\n      ]\n    },\n    \"Disease\": {\n      \"parents\": [\"BirthAsphyxia\"],\n      \"rows\": [\n        {\n          \"when\": {\"BirthAsphyxia\": \"yes\"},\n          \"probs\": {\n            \"PFC\": 0.2,\n            \"TGA\": 0.3,\n            \"Fallot\": 0.25,\n            \"PAIVS\": 0.15,\n            \"TAPVD\": 0.05,\n            \"Lung\": 0.05\n          }\n        },\n        {\n          \"when\": {\"BirthAsphyxia\": \"no\"},\n          \"probs\": {\n            \"PFC\": 0.03,\n            \"TGA\": 0.34,\n            \"Fallot\": 0.3,\n            \"PAIVS\": 0.23,\n            \"TAPVD\": 0.05,\n            \"Lung\": 0.95\n          }\n        }\n      ]\n    },\n    \"LungParench\": {\n      \"parents\": [\"Disease\"],\n      \"rows\": [\n        {\n          \"when\": {\"Disease\": \"PFC\"},\n          \"probs\": {\n            \"Normal\": 0.6,\n            \"Congested\": 0.1,\n            \"Abnormal\": 0.3\n          }\n        },\n        {\n          \"when\": {\"Disease\": \"TGA\"},\n          \"probs\": {\n            \"Normal\": 0.8,\n            \"Congested\": 0.05,\n            \"Abnormal\": 0.15\n          }\n        },\n        {\n          \"when\": {\"Disease\": \"Fallot\"},\n          \"probs\": {\n            \"Normal\": 0.8,\n            \"Congested\": 0.05,\n            \"Abnormal\": 0.15\n          }\n        },\n        {\n          \"when\": {\"Disease\": \"PAIVS\"},\n          \"probs\": {\n          ",
+      "parse_error": "row_sum_validation_failed",
+      "row_errors": [
+        "Disease|['BirthAsphyxia']=('no',) sums to 1.9000",
+        "XrayReport|['ChestXray']=('Asy/Patch',) sums to 1.1800"
+      ],
+      "compiled_json": {
+        "nodes": [
+          "BirthAsphyxia",
+          "Disease",
+          "LungParench",
+          "LungFlow",
+          "ChestXray",
+          "XrayReport"
+        ],
+        "states": {
+          "BirthAsphyxia": [
+            "yes",
+            "no"
+          ],
+          "Disease": [
+            "PFC",
+            "TGA",
+            "Fallot",
+            "PAIVS",
+            "TAPVD",
+            "Lung"
+          ],
+          "LungParench": [
+            "Normal",
+            "Congested",
+            "Abnormal"
+          ],
+          "LungFlow": [
+            "Normal",
+            "Low",
+            "High"
+          ],
+          "ChestXray": [
+            "Normal",
+            "Oligaemic",
+            "Plethoric",
+            "Grd_Glass",
+            "Asy/Patch"
+          ],
+          "XrayReport": [
+            "Normal",
+            "Oligaemic",
+            "Plethoric",
+            "Grd_Glass",
+            "Asy/Patchy"
+          ]
+        },
+        "cpts": {
+          "BirthAsphyxia": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "yes": 0.1,
+                  "no": 0.9
+                }
+              }
+            ]
+          },
+          "Disease": {
+            "parents": [
+              "BirthAsphyxia"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "BirthAsphyxia": "yes"
+                },
+                "probs": {
+                  "PFC": 0.2,
+                  "TGA": 0.3,
+                  "Fallot": 0.25,
+                  "PAIVS": 0.15,
+                  "TAPVD": 0.05,
+                  "Lung": 0.05
+                }
+              },
+              {
+                "when": {
+                  "BirthAsphyxia": "no"
+                },
+                "probs": {
+                  "PFC": 0.03,
+                  "TGA": 0.34,
+                  "Fallot": 0.3,
+                  "PAIVS": 0.23,
+                  "TAPVD": 0.05,
+                  "Lung": 0.95
+                }
+              }
+            ]
+          },
+          "LungParench": {
+            "parents": [
+              "Disease"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Disease": "PFC"
+                },
+                "probs": {
+                  "Normal": 0.6,
+                  "Congested": 0.1,
+                  "Abnormal": 0.3
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TGA"
+                },
+                "probs": {
+                  "Normal": 0.8,
+                  "Congested": 0.05,
+                  "Abnormal": 0.15
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Fallot"
+                },
+                "probs": {
+                  "Normal": 0.8,
+                  "Congested": 0.05,
+                  "Abnormal": 0.15
+                }
+              },
+              {
+                "when": {
+                  "Disease": "PAIVS"
+                },
+                "probs": {
+                  "Normal": 0.8,
+                  "Congested": 0.05,
+                  "Abnormal": 0.15
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TAPVD"
+                },
+                "probs": {
+                  "Normal": 0.1,
+                  "Congested": 0.6,
+                  "Abnormal": 0.3
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Lung"
+                },
+                "probs": {
+                  "Normal": 0.03,
+                  "Congested": 0.25,
+                  "Abnormal": 0.72
+                }
+              }
+            ]
+          },
+          "LungFlow": {
+            "parents": [
+              "Disease"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Disease": "PFC"
+                },
+                "probs": {
+                  "Normal": 0.3,
+                  "Low": 0.65,
+                  "High": 0.05
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TGA"
+                },
+                "probs": {
+                  "Normal": 0.2,
+                  "Low": 0.05,
+                  "High": 0.75
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Fallot"
+                },
+                "probs": {
+                  "Normal": 0.15,
+                  "Low": 0.8,
+                  "High": 0.05
+                }
+              },
+              {
+                "when": {
+                  "Disease": "PAIVS"
+                },
+                "probs": {
+                  "Normal": 0.1,
+                  "Low": 0.85,
+                  "High": 0.05
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TAPVD"
+                },
+                "probs": {
+                  "Normal": 0.3,
+                  "Low": 0.1,
+                  "High": 0.6
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Lung"
+                },
+                "probs": {
+                  "Normal": 0.7,
+                  "Low": 0.1,
+                  "High": 0.2
+                }
+              }
+            ]
+          },
+          "ChestXray": {
+            "parents": [
+              "LungParench",
+              "LungFlow"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "LungParench": "Normal",
+                  "LungFlow": "Normal"
+                },
+                "probs": {
+                  "Normal": 0.9,
+                  "Oligaemic": 0.03,
+                  "Plethoric": 0.01,
+                  "Grd_Glass": 0.03,
+                  "Asy/Patch": 0.03
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Normal",
+                  "LungFlow": "Low"
+                },
+                "probs": {
+                  "Normal": 0.14,
+                  "Oligaemic": 0.8,
+                  "Plethoric": 0.02,
+                  "Grd_Glass": 0.02,
+                  "Asy/Patch": 0.02
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Normal",
+                  "LungFlow": "High"
+                },
+                "probs": {
+                  "Normal": 0.15,
+                  "Oligaemic": 0.01,
+                  "Plethoric": 0.79,
+                  "Grd_Glass": 0.04,
+                  "Asy/Patch": 0.01
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Congested",
+                  "LungFlow": "Normal"
+                },
+                "probs": {
+                  "Normal": 0.05,
+                  "Oligaemic": 0.02,
+                  "Plethoric": 0.15,
+                  "Grd_Glass": 0.7,
+                  "Asy/Patch": 0.08
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Congested",
+                  "LungFlow": "Low"
+                },
+                "probs": {
+                  "Normal": 0.05,
+                  "Oligaemic": 0.22,
+                  "Plethoric": 0.08,
+                  "Grd_Glass": 0.5,
+                  "Asy/Patch": 0.15
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Congested",
+                  "LungFlow": "High"
+                },
+                "probs": {
+                  "Normal": 0.05,
+                  "Oligaemic": 0.02,
+                  "Plethoric": 0.4,
+                  "Grd_Glass": 0.4,
+                  "Asy/Patch": 0.13
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Abnormal",
+                  "LungFlow": "Normal"
+                },
+                "probs": {
+                  "Normal": 0.05,
+                  "Oligaemic": 0.05,
+                  "Plethoric": 0.05,
+                  "Grd_Glass": 0.05,
+                  "Asy/Patch": 0.8
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Abnormal",
+                  "LungFlow": "Low"
+                },
+                "probs": {
+                  "Normal": 0.05,
+                  "Oligaemic": 0.15,
+                  "Plethoric": 0.05,
+                  "Grd_Glass": 0.05,
+                  "Asy/Patch": 0.7
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Abnormal",
+                  "LungFlow": "High"
+                },
+                "probs": {
+                  "Normal": 0.24,
+                  "Oligaemic": 0.33,
+                  "Plethoric": 0.03,
+                  "Grd_Glass": 0.34,
+                  "Asy/Patch": 0.06
+                }
+              }
+            ]
+          },
+          "XrayReport": {
+            "parents": [
+              "ChestXray"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "ChestXray": "Normal"
+                },
+                "probs": {
+                  "Normal": 0.8,
+                  "Oligaemic": 0.06,
+                  "Plethoric": 0.06,
+                  "Grd_Glass": 0.02,
+                  "Asy/Patchy": 0.06
+                }
+              },
+              {
+                "when": {
+                  "ChestXray": "Oligaemic"
+                },
+                "probs": {
+                  "Normal": 0.1,
+                  "Oligaemic": 0.8,
+                  "Plethoric": 0.02,
+                  "Grd_Glass": 0.02,
+                  "Asy/Patchy": 0.06
+                }
+              },
+              {
+                "when": {
+                  "ChestXray": "Plethoric"
+                },
+                "probs": {
+                  "Normal": 0.1,
+                  "Oligaemic": 0.02,
+                  "Plethoric": 0.8,
+                  "Grd_Glass": 0.02,
+                  "Asy/Patchy": 0.06
+                }
+              },
+              {
+                "when": {
+                  "ChestXray": "Grd_Glass"
+                },
+                "probs": {
+                  "Normal": 0.08,
+                  "Oligaemic": 0.02,
+                  "Plethoric": 0.1,
+                  "Grd_Glass": 0.6,
+                  "Asy/Patchy": 0.2
+                }
+              },
+              {
+                "when": {
+                  "ChestXray": "Asy/Patch"
+                },
+                "probs": {
+                  "Normal": 0.08,
+                  "Oligaemic": 0.1,
+                  "Plethoric": 0.1,
+                  "Grd_Glass": 0.2,
+                  "Asy/Patchy": 0.7
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "query_results": [
+    {
+      "network": "alarm0",
+      "pair_id": 0,
+      "gold": 0.15780446,
+      "reasoning_types": [
+        "explaining_away"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "alarm0",
+      "pair_id": 1,
+      "gold": 0.04,
+      "reasoning_types": [],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "alarm0",
+      "pair_id": 2,
+      "gold": 0.2486338,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "alarm0",
+      "pair_id": 3,
+      "gold": 0.04,
+      "reasoning_types": [
+        "explaining_away"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "alarm0",
+      "pair_id": 4,
+      "gold": 0.99719961,
+      "reasoning_types": [
+        "explaining_away"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "asia0",
+      "pair_id": 0,
+      "gold": 0.9,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.9000000000000001,
+      "abs_error": 1.1102230246251565e-16,
+      "query_var": "dysp",
+      "query_state": "yes",
+      "evidence": {
+        "lung": "yes",
+        "bronc": "yes"
+      },
+      "posterior": {
+        "yes": 0.9000000000000001,
+        "no": 0.1
+      },
+      "evidence_prob": 0.03149999999999999,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "lung": "yes",
+          "bronc": "yes"
+        },
+        "query": {
+          "variable": "dysp",
+          "state": "yes"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"lung\": \"yes\",\n    \"bronc\": \"yes\"\n  },\n  \"query\": {\n    \"variable\": \"dysp\",\n    \"state\": \"yes\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 440,
+        "completion_tokens": 48,
+        "cost_usd": 9.48e-05
+      }
+    },
+    {
+      "network": "asia0",
+      "pair_id": 1,
+      "gold": 0.95238095,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.9523809523809524,
+      "abs_error": 2.380952435210304e-09,
+      "query_var": "smoke",
+      "query_state": "yes",
+      "evidence": {
+        "lung": "yes",
+        "bronc": "yes"
+      },
+      "posterior": {
+        "yes": 0.9523809523809524,
+        "no": 0.04761904761904762
+      },
+      "evidence_prob": 0.03149999999999999,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "lung": "yes",
+          "bronc": "yes"
+        },
+        "query": {
+          "variable": "smoke",
+          "state": "yes"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"lung\": \"yes\",\n    \"bronc\": \"yes\"\n  },\n  \"query\": {\n    \"variable\": \"smoke\",\n    \"state\": \"yes\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 438,
+        "completion_tokens": 47,
+        "cost_usd": 9.39e-05
+      }
+    },
+    {
+      "network": "asia0",
+      "pair_id": 2,
+      "gold": 0.05,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.05,
+      "abs_error": 0.0,
+      "query_var": "tub",
+      "query_state": "yes",
+      "evidence": {
+        "asia": "yes"
+      },
+      "posterior": {
+        "yes": 0.05,
+        "no": 0.95
+      },
+      "evidence_prob": 0.01,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "asia": "yes"
+        },
+        "query": {
+          "variable": "tub",
+          "state": "yes"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"asia\": \"yes\"\n  },\n  \"query\": {\n    \"variable\": \"tub\",\n    \"state\": \"yes\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 428,
+        "completion_tokens": 40,
+        "cost_usd": 8.82e-05
+      }
+    },
+    {
+      "network": "asia0",
+      "pair_id": 3,
+      "gold": 0.01,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.01,
+      "abs_error": 0.0,
+      "query_var": "tub",
+      "query_state": "yes",
+      "evidence": {
+        "asia": "no"
+      },
+      "posterior": {
+        "yes": 0.01,
+        "no": 0.99
+      },
+      "evidence_prob": 0.99,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "asia": "no"
+        },
+        "query": {
+          "variable": "tub",
+          "state": "yes"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"asia\": \"no\"\n  },\n  \"query\": {\n    \"variable\": \"tub\",\n    \"state\": \"yes\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 429,
+        "completion_tokens": 40,
+        "cost_usd": 8.835e-05
+      }
+    },
+    {
+      "network": "asia0",
+      "pair_id": 4,
+      "gold": 0.048076923,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.04807692307692307,
+      "abs_error": 7.692307207873839e-11,
+      "query_var": "asia",
+      "query_state": "yes",
+      "evidence": {
+        "lung": "no",
+        "smoke": "no",
+        "tub": "yes"
+      },
+      "posterior": {
+        "yes": 0.04807692307692307,
+        "no": 0.9519230769230769
+      },
+      "evidence_prob": 0.005148000000000001,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "lung": "no",
+          "smoke": "no",
+          "tub": "yes"
+        },
+        "query": {
+          "variable": "asia",
+          "state": "yes"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"lung\": \"no\",\n    \"smoke\": \"no\",\n    \"tub\": \"yes\"\n  },\n  \"query\": {\n    \"variable\": \"asia\",\n    \"state\": \"yes\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 447,
+        "completion_tokens": 54,
+        "cost_usd": 9.945e-05
+      }
+    },
+    {
+      "network": "child0",
+      "pair_id": 0,
+      "gold": 0.15343266,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "child0",
+      "pair_id": 1,
+      "gold": 0.019557052,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "child0",
+      "pair_id": 2,
+      "gold": 0.91525424,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "child0",
+      "pair_id": 3,
+      "gold": 0.8,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "child0",
+      "pair_id": 4,
+      "gold": 0.053994681,
+      "reasoning_types": [
+        "causal",
+        "evidential",
+        "explaining_away"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T11:42:22Z",
+  "_meta": {
+    "prompt_tokens": 8877,
+    "completion_tokens": 6677,
+    "total_cost_usd": 0.0052609499999999995,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "8f5d854c",
+    "timestamp_utc": "2026-05-03T11:42:22.660537+00:00",
+    "script": "baselines/run_quite_e2e.py",
+    "n_networks": 3,
+    "n_queries": 15,
+    "scaffold": true,
+    "mode": "numeric"
+  }
+}

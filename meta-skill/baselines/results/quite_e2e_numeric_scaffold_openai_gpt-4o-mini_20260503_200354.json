@@ -1,0 +1,3182 @@
+{
+  "experiment": "QUITE numeric compile-once E2E",
+  "model": "openai/gpt-4o-mini",
+  "config": {
+    "model": "openai/gpt-4o-mini",
+    "mode": "numeric",
+    "networks": [
+      "alarm2",
+      "child0",
+      "child1",
+      "phytophthora1",
+      "sachs0"
+    ],
+    "limit_networks": null,
+    "query_limit_per_network": 5,
+    "no_scaffold": false,
+    "compile_sema": 2,
+    "query_sema": 10,
+    "compile_max_tokens": 12000,
+    "query_max_tokens": 512,
+    "include_invalid_gold": false,
+    "include_malformed_scaffold": false
+  },
+  "elapsed_sec": 59.609614849090576,
+  "compile_summary": {
+    "n": 5,
+    "ok": 3,
+    "failed": [
+      "child0",
+      "sachs0"
+    ],
+    "skipped_malformed": [],
+    "skipped_invalid_pairs": 0
+  },
+  "summary": {
+    "within_0_01": {
+      "n": 25,
+      "correct": 9,
+      "rate": 0.36,
+      "wilson_95ci": [
+        0.20247656431735636,
+        0.5548184539895337
+      ],
+      "valid_numeric": 14,
+      "mae": 0.18293520321777032,
+      "by_network": {
+        "alarm2": {
+          "n": 5,
+          "correct": 5,
+          "failures": {},
+          "rate": 1.0,
+          "wilson_95ci": [
+            0.5655085052479191,
+            1.0
+          ]
+        },
+        "child0": {
+          "n": 5,
+          "correct": 0,
+          "failures": {
+            "compile_failed": 5
+          },
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.43449149475208104
+          ]
+        },
+        "child1": {
+          "n": 5,
+          "correct": 3,
+          "failures": {
+            "wrong_probability": 1,
+            "unknown": 1
+          },
+          "rate": 0.6,
+          "wilson_95ci": [
+            0.23071993220883708,
+            0.8823817688407467
+          ]
+        },
+        "phytophthora1": {
+          "n": 5,
+          "correct": 1,
+          "failures": {
+            "wrong_probability": 3,
+            "query_or_solve_failed": 1
+          },
+          "rate": 0.2,
+          "wilson_95ci": [
+            0.03622316096978745,
+            0.6244717358814613
+          ]
+        },
+        "sachs0": {
+          "n": 5,
+          "correct": 0,
+          "failures": {
+            "compile_failed": 5
+          },
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.43449149475208104
+          ]
+        }
+      }
+    },
+    "within_0_05": {
+      "n": 25,
+      "correct": 10,
+      "rate": 0.4,
+      "wilson_95ci": [
+        0.23403057664190918,
+        0.5926087221487266
+      ],
+      "valid_numeric": 14,
+      "mae": 0.18293520321777032,
+      "by_network": {
+        "alarm2": {
+          "n": 5,
+          "correct": 5,
+          "failures": {},
+          "rate": 1.0,
+          "wilson_95ci": [
+            0.5655085052479191,
+            1.0
+          ]
+        },
+        "child0": {
+          "n": 5,
+          "correct": 0,
+          "failures": {
+            "compile_failed": 5
+          },
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.43449149475208104
+          ]
+        },
+        "child1": {
+          "n": 5,
+          "correct": 4,
+          "failures": {
+            "wrong_probability": 1
+          },
+          "rate": 0.8,
+          "wilson_95ci": [
+            0.3755282641185388,
+            0.9637768390302125
+          ]
+        },
+        "phytophthora1": {
+          "n": 5,
+          "correct": 1,
+          "failures": {
+            "wrong_probability": 3,
+            "query_or_solve_failed": 1
+          },
+          "rate": 0.2,
+          "wilson_95ci": [
+            0.03622316096978745,
+            0.6244717358814613
+          ]
+        },
+        "sachs0": {
+          "n": 5,
+          "correct": 0,
+          "failures": {
+            "compile_failed": 5
+          },
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.43449149475208104
+          ]
+        }
+      }
+    }
+  },
+  "compile_results": [
+    {
+      "network": "alarm2",
+      "ok": true,
+      "usage": {
+        "prompt_tokens": 3806,
+        "completion_tokens": 2525,
+        "cost_usd": 0.0020859
+      },
+      "raw_response": "```json\n{\n  \"nodes\": [\"CATECHOL\", \"STROKEVOLUME\", \"ERRLOWOUTPUT\", \"HRBP\", \"HREKG\", \"ERRCAUTER\", \"HRSAT\", \"ANAPHYLAXIS\", \"TPR\", \"HR\", \"CO\", \"BP\"],\n  \"states\": {\n    \"CATECHOL\": [\"NORMAL\", \"HIGH\"],\n    \"STROKEVOLUME\": [\"LOW\", \"NORMAL\", \"HIGH\"],\n    \"ERRLOWOUTPUT\": [\"TRUE\", \"FALSE\"],\n    \"HRBP\": [\"LOW\", \"NORMAL\", \"HIGH\"],\n    \"HREKG\": [\"LOW\", \"NORMAL\", \"HIGH\"],\n    \"ERRCAUTER\": [\"TRUE\", \"FALSE\"],\n    \"HRSAT\": [\"LOW\", \"NORMAL\", \"HIGH\"],\n    \"ANAPHYLAXIS\": [\"TRUE\", \"FALSE\"],\n    \"TPR\": [\"LOW\", \"NORMAL\", \"HIGH\"],\n    \"HR\": [\"LOW\", \"NORMAL\", \"HIGH\"],\n    \"CO\": [\"LOW\", \"NORMAL\", \"HIGH\"],\n    \"BP\": [\"LOW\", \"NORMAL\", \"HIGH\"]\n  },\n  \"cpts\": {\n    \"CATECHOL\": {\n      \"parents\": [],\n      \"rows\": [\n        {\"when\": {}, \"probs\": {\"NORMAL\": 0.10, \"HIGH\": 0.90}}\n      ]\n    },\n    \"STROKEVOLUME\": {\n      \"parents\": [],\n      \"rows\": [\n        {\"when\": {}, \"probs\": {\"LOW\": 0.18, \"NORMAL\": 0.78, \"HIGH\": 0.04}}\n      ]\n    },\n    \"ERRLOWOUTPUT\": {\n      \"parents\": [],\n      \"rows\": [\n        {\"when\": {}, \"probs\": {\"TRUE\": 0.05, \"FALSE\": 0.95}}\n      ]\n    },\n    \"HRBP\": {\n      \"parents\": [\"ERRLOWOUTPUT\", \"HR\"],\n      \"rows\": [\n        {\"when\": {\"ERRLOWOUTPUT\": \"TRUE\", \"HR\": \"LOW\"}, \"probs\": {\"LOW\": 0.98, \"NORMAL\": 0.01, \"HIGH\": 0.01}},\n        {\"when\": {\"ERRLOWOUTPUT\": \"TRUE\", \"HR\": \"NORMAL\"}, \"probs\": {\"LOW\": 0.30, \"NORMAL\": 0.69, \"HIGH\": 0.01}},\n        {\"when\": {\"ERRLOWOUTPUT\": \"TRUE\", \"HR\": \"HIGH\"}, \"probs\": {\"LOW\": 0.80, \"NORMAL\": 0.19, \"HIGH\": 0.01}},\n        {\"when\": {\"ERRLOWOUTPUT\": \"FALSE\", \"HR\": \"LOW\"}, \"probs\": {\"LOW\": 0.40, \"NORMAL\": 0.59, \"HIGH\": 0.01}},\n        {\"when\": {\"ERRLOWOUTPUT\": \"FALSE\", \"HR\": \"NORMAL\"}, \"probs\": {\"LOW\": 0.98, \"NORMAL\": 0.01, \"HIGH\": 0.01}},\n        {\"when\": {\"ERRLOWOUTPUT\": \"FALSE\", \"HR\": \"HIGH\"}, \"probs\": {\"LOW\": 0.01, \"NORMAL\": 0.01, \"HIGH\": 0.98}}\n      ]\n    },\n    \"HREKG\": {\n      \"parents\": [\"ERRCAUTER\", \"HR\"],\n      \"rows\": [\n        {\"when\": {\"ERRCAUTER\": \"TRUE\", \"HR\": \"LOW\"}, \"probs\": {\"LOW\": 0.33, \"NORMAL\": 0.33, \"HIGH\": 0.33}},\n     ",
+      "parse_error": null,
+      "compiled_json": {
+        "nodes": [
+          "CATECHOL",
+          "STROKEVOLUME",
+          "ERRLOWOUTPUT",
+          "HRBP",
+          "HREKG",
+          "ERRCAUTER",
+          "HRSAT",
+          "ANAPHYLAXIS",
+          "TPR",
+          "HR",
+          "CO",
+          "BP"
+        ],
+        "states": {
+          "CATECHOL": [
+            "NORMAL",
+            "HIGH"
+          ],
+          "STROKEVOLUME": [
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ],
+          "ERRLOWOUTPUT": [
+            "TRUE",
+            "FALSE"
+          ],
+          "HRBP": [
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ],
+          "HREKG": [
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ],
+          "ERRCAUTER": [
+            "TRUE",
+            "FALSE"
+          ],
+          "HRSAT": [
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ],
+          "ANAPHYLAXIS": [
+            "TRUE",
+            "FALSE"
+          ],
+          "TPR": [
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ],
+          "HR": [
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ],
+          "CO": [
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ],
+          "BP": [
+            "LOW",
+            "NORMAL",
+            "HIGH"
+          ]
+        },
+        "cpts": {
+          "CATECHOL": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "NORMAL": 0.1,
+                  "HIGH": 0.9
+                }
+              }
+            ]
+          },
+          "STROKEVOLUME": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "LOW": 0.18,
+                  "NORMAL": 0.78,
+                  "HIGH": 0.04
+                }
+              }
+            ]
+          },
+          "ERRLOWOUTPUT": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "TRUE": 0.05,
+                  "FALSE": 0.95
+                }
+              }
+            ]
+          },
+          "HRBP": {
+            "parents": [
+              "ERRLOWOUTPUT",
+              "HR"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "ERRLOWOUTPUT": "TRUE",
+                  "HR": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.98,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "ERRLOWOUTPUT": "TRUE",
+                  "HR": "NORMAL"
+                },
+                "probs": {
+                  "LOW": 0.3,
+                  "NORMAL": 0.69,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "ERRLOWOUTPUT": "TRUE",
+                  "HR": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.8,
+                  "NORMAL": 0.19,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "ERRLOWOUTPUT": "FALSE",
+                  "HR": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.4,
+                  "NORMAL": 0.59,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "ERRLOWOUTPUT": "FALSE",
+                  "HR": "NORMAL"
+                },
+                "probs": {
+                  "LOW": 0.98,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "ERRLOWOUTPUT": "FALSE",
+                  "HR": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.98
+                }
+              }
+            ]
+          },
+          "HREKG": {
+            "parents": [
+              "ERRCAUTER",
+              "HR"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "ERRCAUTER": "TRUE",
+                  "HR": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.33,
+                  "NORMAL": 0.33,
+                  "HIGH": 0.33
+                }
+              },
+              {
+                "when": {
+                  "ERRCAUTER": "TRUE",
+                  "HR": "NORMAL"
+                },
+                "probs": {
+                  "LOW": 0.33,
+                  "NORMAL": 0.33,
+                  "HIGH": 0.33
+                }
+              },
+              {
+                "when": {
+                  "ERRCAUTER": "TRUE",
+                  "HR": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.98
+                }
+              },
+              {
+                "when": {
+                  "ERRCAUTER": "FALSE",
+                  "HR": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.33,
+                  "NORMAL": 0.33,
+                  "HIGH": 0.33
+                }
+              },
+              {
+                "when": {
+                  "ERRCAUTER": "FALSE",
+                  "HR": "NORMAL"
+                },
+                "probs": {
+                  "LOW": 0.98,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "ERRCAUTER": "FALSE",
+                  "HR": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.98
+                }
+              }
+            ]
+          },
+          "ERRCAUTER": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "TRUE": 0.1,
+                  "FALSE": 0.9
+                }
+              }
+            ]
+          },
+          "HRSAT": {
+            "parents": [
+              "ERRCAUTER",
+              "HR"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "ERRCAUTER": "TRUE",
+                  "HR": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.33,
+                  "NORMAL": 0.33,
+                  "HIGH": 0.33
+                }
+              },
+              {
+                "when": {
+                  "ERRCAUTER": "TRUE",
+                  "HR": "NORMAL"
+                },
+                "probs": {
+                  "LOW": 0.33,
+                  "NORMAL": 0.33,
+                  "HIGH": 0.33
+                }
+              },
+              {
+                "when": {
+                  "ERRCAUTER": "TRUE",
+                  "HR": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.98
+                }
+              },
+              {
+                "when": {
+                  "ERRCAUTER": "FALSE",
+                  "HR": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.33,
+                  "NORMAL": 0.33,
+                  "HIGH": 0.33
+                }
+              },
+              {
+                "when": {
+                  "ERRCAUTER": "FALSE",
+                  "HR": "NORMAL"
+                },
+                "probs": {
+                  "LOW": 0.98,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "ERRCAUTER": "FALSE",
+                  "HR": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.98
+                }
+              }
+            ]
+          },
+          "ANAPHYLAXIS": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "TRUE": 0.01,
+                  "FALSE": 0.99
+                }
+              }
+            ]
+          },
+          "TPR": {
+            "parents": [
+              "ANAPHYLAXIS"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "ANAPHYLAXIS": "TRUE"
+                },
+                "probs": {
+                  "LOW": 0.98,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "ANAPHYLAXIS": "FALSE"
+                },
+                "probs": {
+                  "LOW": 0.3,
+                  "NORMAL": 0.4,
+                  "HIGH": 0.3
+                }
+              }
+            ]
+          },
+          "HR": {
+            "parents": [
+              "CATECHOL"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "CATECHOL": "NORMAL"
+                },
+                "probs": {
+                  "LOW": 0.05,
+                  "NORMAL": 0.9,
+                  "HIGH": 0.05
+                }
+              },
+              {
+                "when": {
+                  "CATECHOL": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.01,
+                  "NORMAL": 0.09,
+                  "HIGH": 0.9
+                }
+              }
+            ]
+          },
+          "CO": {
+            "parents": [
+              "HR",
+              "STROKEVOLUME"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "HR": "LOW",
+                  "STROKEVOLUME": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.98,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "HR": "LOW",
+                  "STROKEVOLUME": "NORMAL"
+                },
+                "probs": {
+                  "LOW": 0.95,
+                  "NORMAL": 0.04,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "HR": "LOW",
+                  "STROKEVOLUME": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.3,
+                  "NORMAL": 0.69,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "HR": "NORMAL",
+                  "STROKEVOLUME": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.95,
+                  "NORMAL": 0.04,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "HR": "NORMAL",
+                  "STROKEVOLUME": "NORMAL"
+                },
+                "probs": {
+                  "LOW": 0.04,
+                  "NORMAL": 0.95,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "HR": "NORMAL",
+                  "STROKEVOLUME": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.01,
+                  "NORMAL": 0.3,
+                  "HIGH": 0.69
+                }
+              },
+              {
+                "when": {
+                  "HR": "HIGH",
+                  "STROKEVOLUME": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.8,
+                  "NORMAL": 0.19,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "HR": "HIGH",
+                  "STROKEVOLUME": "NORMAL"
+                },
+                "probs": {
+                  "LOW": 0.01,
+                  "NORMAL": 0.04,
+                  "HIGH": 0.95
+                }
+              },
+              {
+                "when": {
+                  "HR": "HIGH",
+                  "STROKEVOLUME": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.01,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.98
+                }
+              }
+            ]
+          },
+          "BP": {
+            "parents": [
+              "CO",
+              "TPR"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "CO": "LOW",
+                  "TPR": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.98,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "CO": "LOW",
+                  "TPR": "NORMAL"
+                },
+                "probs": {
+                  "LOW": 0.98,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "CO": "LOW",
+                  "TPR": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.3,
+                  "NORMAL": 0.6,
+                  "HIGH": 0.1
+                }
+              },
+              {
+                "when": {
+                  "CO": "NORMAL",
+                  "TPR": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.98,
+                  "NORMAL": 0.01,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "CO": "NORMAL",
+                  "TPR": "NORMAL"
+                },
+                "probs": {
+                  "LOW": 0.1,
+                  "NORMAL": 0.85,
+                  "HIGH": 0.05
+                }
+              },
+              {
+                "when": {
+                  "CO": "NORMAL",
+                  "TPR": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.05,
+                  "NORMAL": 0.4,
+                  "HIGH": 0.55
+                }
+              },
+              {
+                "when": {
+                  "CO": "HIGH",
+                  "TPR": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.9,
+                  "NORMAL": 0.09,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "CO": "HIGH",
+                  "TPR": "NORMAL"
+                },
+                "probs": {
+                  "LOW": 0.05,
+                  "NORMAL": 0.2,
+                  "HIGH": 0.75
+                }
+              },
+              {
+                "when": {
+                  "CO": "HIGH",
+                  "TPR": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.01,
+                  "NORMAL": 0.09,
+                  "HIGH": 0.9
+                }
+              }
+            ]
+          }
+        }
+      },
+      "states": {
+        "CATECHOL": [
+          "NORMAL",
+          "HIGH"
+        ],
+        "STROKEVOLUME": [
+          "LOW",
+          "NORMAL",
+          "HIGH"
+        ],
+        "ERRLOWOUTPUT": [
+          "TRUE",
+          "FALSE"
+        ],
+        "HRBP": [
+          "LOW",
+          "NORMAL",
+          "HIGH"
+        ],
+        "HREKG": [
+          "LOW",
+          "NORMAL",
+          "HIGH"
+        ],
+        "ERRCAUTER": [
+          "TRUE",
+          "FALSE"
+        ],
+        "HRSAT": [
+          "LOW",
+          "NORMAL",
+          "HIGH"
+        ],
+        "ANAPHYLAXIS": [
+          "TRUE",
+          "FALSE"
+        ],
+        "TPR": [
+          "LOW",
+          "NORMAL",
+          "HIGH"
+        ],
+        "HR": [
+          "LOW",
+          "NORMAL",
+          "HIGH"
+        ],
+        "CO": [
+          "LOW",
+          "NORMAL",
+          "HIGH"
+        ],
+        "BP": [
+          "LOW",
+          "NORMAL",
+          "HIGH"
+        ]
+      },
+      "parents": {
+        "CATECHOL": [],
+        "STROKEVOLUME": [],
+        "ERRLOWOUTPUT": [],
+        "HRBP": [
+          "ERRLOWOUTPUT",
+          "HR"
+        ],
+        "HREKG": [
+          "ERRCAUTER",
+          "HR"
+        ],
+        "ERRCAUTER": [],
+        "HRSAT": [
+          "ERRCAUTER",
+          "HR"
+        ],
+        "ANAPHYLAXIS": [],
+        "TPR": [
+          "ANAPHYLAXIS"
+        ],
+        "HR": [
+          "CATECHOL"
+        ],
+        "CO": [
+          "HR",
+          "STROKEVOLUME"
+        ],
+        "BP": [
+          "CO",
+          "TPR"
+        ]
+      },
+      "n_factors": 12,
+      "n_entries": 131
+    },
+    {
+      "network": "child0",
+      "ok": false,
+      "usage": {
+        "prompt_tokens": 3371,
+        "completion_tokens": 2382,
+        "cost_usd": 0.00193485
+      },
+      "raw_response": "{\n  \"nodes\": [\n    \"BirthAsphyxia\",\n    \"Disease\",\n    \"LungParench\",\n    \"LungFlow\",\n    \"ChestXray\",\n    \"XrayReport\"\n  ],\n  \"states\": {\n    \"BirthAsphyxia\": [\"yes\", \"no\"],\n    \"Disease\": [\"PFC\", \"TGA\", \"Fallot\", \"PAIVS\", \"TAPVD\", \"Lung\"],\n    \"LungParench\": [\"Normal\", \"Congested\", \"Abnormal\"],\n    \"LungFlow\": [\"Normal\", \"Low\", \"High\"],\n    \"ChestXray\": [\"Normal\", \"Oligaemic\", \"Plethoric\", \"Grd_Glass\", \"Asy/Patch\"],\n    \"XrayReport\": [\"Normal\", \"Oligaemic\", \"Plethoric\", \"Grd_Glass\", \"Asy/Patchy\"]\n  },\n  \"cpts\": {\n    \"BirthAsphyxia\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"yes\": 0.1,\n            \"no\": 0.9\n          }\n        }\n      ]\n    },\n    \"Disease\": {\n      \"parents\": [\"BirthAsphyxia\"],\n      \"rows\": [\n        {\n          \"when\": {\"BirthAsphyxia\": \"yes\"},\n          \"probs\": {\n            \"PFC\": 0.2,\n            \"TGA\": 0.3,\n            \"Fallot\": 0.25,\n            \"PAIVS\": 0.15,\n            \"TAPVD\": 0.05,\n            \"Lung\": 0.05\n          }\n        },\n        {\n          \"when\": {\"BirthAsphyxia\": \"no\"},\n          \"probs\": {\n            \"PFC\": 0.03,\n            \"TGA\": 0.34,\n            \"Fallot\": 0.30,\n            \"PAIVS\": 0.23,\n            \"TAPVD\": 0.05,\n            \"Lung\": 0.05\n          }\n        }\n      ]\n    },\n    \"LungParench\": {\n      \"parents\": [\"Disease\"],\n      \"rows\": [\n        {\n          \"when\": {\"Disease\": \"PFC\"},\n          \"probs\": {\n            \"Normal\": 0.6,\n            \"Congested\": 0.1,\n            \"Abnormal\": 0.3\n          }\n        },\n        {\n          \"when\": {\"Disease\": \"TGA\"},\n          \"probs\": {\n            \"Normal\": 0.8,\n            \"Congested\": 0.05,\n            \"Abnormal\": 0.15\n          }\n        },\n        {\n          \"when\": {\"Disease\": \"Fallot\"},\n          \"probs\": {\n            \"Normal\": 0.8,\n            \"Congested\": 0.05,\n            \"Abnormal\": 0.15\n          }\n        },\n        {\n          \"when\": {\"Disease\": \"PAIVS\"},\n          \"probs\": {\n            \"Norm",
+      "parse_error": "row_sum_validation_failed",
+      "row_errors": [
+        "XrayReport|['ChestXray']=('Asy/Patch',) sums to 1.1800"
+      ],
+      "compiled_json": {
+        "nodes": [
+          "BirthAsphyxia",
+          "Disease",
+          "LungParench",
+          "LungFlow",
+          "ChestXray",
+          "XrayReport"
+        ],
+        "states": {
+          "BirthAsphyxia": [
+            "yes",
+            "no"
+          ],
+          "Disease": [
+            "PFC",
+            "TGA",
+            "Fallot",
+            "PAIVS",
+            "TAPVD",
+            "Lung"
+          ],
+          "LungParench": [
+            "Normal",
+            "Congested",
+            "Abnormal"
+          ],
+          "LungFlow": [
+            "Normal",
+            "Low",
+            "High"
+          ],
+          "ChestXray": [
+            "Normal",
+            "Oligaemic",
+            "Plethoric",
+            "Grd_Glass",
+            "Asy/Patch"
+          ],
+          "XrayReport": [
+            "Normal",
+            "Oligaemic",
+            "Plethoric",
+            "Grd_Glass",
+            "Asy/Patchy"
+          ]
+        },
+        "cpts": {
+          "BirthAsphyxia": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "yes": 0.1,
+                  "no": 0.9
+                }
+              }
+            ]
+          },
+          "Disease": {
+            "parents": [
+              "BirthAsphyxia"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "BirthAsphyxia": "yes"
+                },
+                "probs": {
+                  "PFC": 0.2,
+                  "TGA": 0.3,
+                  "Fallot": 0.25,
+                  "PAIVS": 0.15,
+                  "TAPVD": 0.05,
+                  "Lung": 0.05
+                }
+              },
+              {
+                "when": {
+                  "BirthAsphyxia": "no"
+                },
+                "probs": {
+                  "PFC": 0.03,
+                  "TGA": 0.34,
+                  "Fallot": 0.3,
+                  "PAIVS": 0.23,
+                  "TAPVD": 0.05,
+                  "Lung": 0.05
+                }
+              }
+            ]
+          },
+          "LungParench": {
+            "parents": [
+              "Disease"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Disease": "PFC"
+                },
+                "probs": {
+                  "Normal": 0.6,
+                  "Congested": 0.1,
+                  "Abnormal": 0.3
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TGA"
+                },
+                "probs": {
+                  "Normal": 0.8,
+                  "Congested": 0.05,
+                  "Abnormal": 0.15
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Fallot"
+                },
+                "probs": {
+                  "Normal": 0.8,
+                  "Congested": 0.05,
+                  "Abnormal": 0.15
+                }
+              },
+              {
+                "when": {
+                  "Disease": "PAIVS"
+                },
+                "probs": {
+                  "Normal": 0.8,
+                  "Congested": 0.05,
+                  "Abnormal": 0.15
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TAPVD"
+                },
+                "probs": {
+                  "Normal": 0.1,
+                  "Congested": 0.6,
+                  "Abnormal": 0.3
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Lung"
+                },
+                "probs": {
+                  "Normal": 0.03,
+                  "Congested": 0.25,
+                  "Abnormal": 0.72
+                }
+              }
+            ]
+          },
+          "LungFlow": {
+            "parents": [
+              "Disease"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Disease": "PFC"
+                },
+                "probs": {
+                  "Normal": 0.3,
+                  "Low": 0.65,
+                  "High": 0.05
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TGA"
+                },
+                "probs": {
+                  "Normal": 0.2,
+                  "Low": 0.05,
+                  "High": 0.75
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Fallot"
+                },
+                "probs": {
+                  "Normal": 0.15,
+                  "Low": 0.8,
+                  "High": 0.05
+                }
+              },
+              {
+                "when": {
+                  "Disease": "PAIVS"
+                },
+                "probs": {
+                  "Normal": 0.1,
+                  "Low": 0.85,
+                  "High": 0.05
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TAPVD"
+                },
+                "probs": {
+                  "Normal": 0.3,
+                  "Low": 0.1,
+                  "High": 0.6
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Lung"
+                },
+                "probs": {
+                  "Normal": 0.7,
+                  "Low": 0.1,
+                  "High": 0.2
+                }
+              }
+            ]
+          },
+          "ChestXray": {
+            "parents": [
+              "LungParench",
+              "LungFlow"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "LungParench": "Normal",
+                  "LungFlow": "Normal"
+                },
+                "probs": {
+                  "Normal": 0.9,
+                  "Oligaemic": 0.03,
+                  "Plethoric": 0.03,
+                  "Grd_Glass": 0.01,
+                  "Asy/Patch": 0.03
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Normal",
+                  "LungFlow": "Low"
+                },
+                "probs": {
+                  "Normal": 0.14,
+                  "Oligaemic": 0.8,
+                  "Plethoric": 0.02,
+                  "Grd_Glass": 0.02,
+                  "Asy/Patch": 0.02
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Normal",
+                  "LungFlow": "High"
+                },
+                "probs": {
+                  "Normal": 0.15,
+                  "Oligaemic": 0.01,
+                  "Plethoric": 0.79,
+                  "Grd_Glass": 0.04,
+                  "Asy/Patch": 0.01
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Congested",
+                  "LungFlow": "Normal"
+                },
+                "probs": {
+                  "Normal": 0.05,
+                  "Oligaemic": 0.02,
+                  "Plethoric": 0.15,
+                  "Grd_Glass": 0.7,
+                  "Asy/Patch": 0.08
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Congested",
+                  "LungFlow": "Low"
+                },
+                "probs": {
+                  "Normal": 0.05,
+                  "Oligaemic": 0.22,
+                  "Plethoric": 0.08,
+                  "Grd_Glass": 0.5,
+                  "Asy/Patch": 0.15
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Congested",
+                  "LungFlow": "High"
+                },
+                "probs": {
+                  "Normal": 0.05,
+                  "Oligaemic": 0.02,
+                  "Plethoric": 0.4,
+                  "Grd_Glass": 0.4,
+                  "Asy/Patch": 0.13
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Abnormal",
+                  "LungFlow": "Normal"
+                },
+                "probs": {
+                  "Normal": 0.05,
+                  "Oligaemic": 0.05,
+                  "Plethoric": 0.05,
+                  "Grd_Glass": 0.05,
+                  "Asy/Patch": 0.8
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Abnormal",
+                  "LungFlow": "Low"
+                },
+                "probs": {
+                  "Normal": 0.05,
+                  "Oligaemic": 0.15,
+                  "Plethoric": 0.05,
+                  "Grd_Glass": 0.05,
+                  "Asy/Patch": 0.7
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Abnormal",
+                  "LungFlow": "High"
+                },
+                "probs": {
+                  "Normal": 0.24,
+                  "Oligaemic": 0.33,
+                  "Plethoric": 0.03,
+                  "Grd_Glass": 0.34,
+                  "Asy/Patch": 0.06
+                }
+              }
+            ]
+          },
+          "XrayReport": {
+            "parents": [
+              "ChestXray"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "ChestXray": "Normal"
+                },
+                "probs": {
+                  "Normal": 0.8,
+                  "Oligaemic": 0.06,
+                  "Plethoric": 0.06,
+                  "Grd_Glass": 0.02,
+                  "Asy/Patchy": 0.06
+                }
+              },
+              {
+                "when": {
+                  "ChestXray": "Oligaemic"
+                },
+                "probs": {
+                  "Normal": 0.1,
+                  "Oligaemic": 0.8,
+                  "Plethoric": 0.02,
+                  "Grd_Glass": 0.02,
+                  "Asy/Patchy": 0.06
+                }
+              },
+              {
+                "when": {
+                  "ChestXray": "Plethoric"
+                },
+                "probs": {
+                  "Normal": 0.1,
+                  "Oligaemic": 0.02,
+                  "Plethoric": 0.8,
+                  "Grd_Glass": 0.02,
+                  "Asy/Patchy": 0.06
+                }
+              },
+              {
+                "when": {
+                  "ChestXray": "Grd_Glass"
+                },
+                "probs": {
+                  "Normal": 0.08,
+                  "Oligaemic": 0.2,
+                  "Plethoric": 0.1,
+                  "Grd_Glass": 0.6,
+                  "Asy/Patchy": 0.02
+                }
+              },
+              {
+                "when": {
+                  "ChestXray": "Asy/Patch"
+                },
+                "probs": {
+                  "Normal": 0.08,
+                  "Oligaemic": 0.1,
+                  "Plethoric": 0.1,
+                  "Grd_Glass": 0.2,
+                  "Asy/Patchy": 0.7
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "network": "child1",
+      "ok": true,
+      "usage": {
+        "prompt_tokens": 2688,
+        "completion_tokens": 1935,
+        "cost_usd": 0.0015642
+      },
+      "raw_response": "{\n  \"nodes\": [\n    \"BirthAsphyxia\",\n    \"Disease\",\n    \"LungParench\",\n    \"Grunting\",\n    \"GruntingReport\",\n    \"Age\",\n    \"Sick\"\n  ],\n  \"states\": {\n    \"BirthAsphyxia\": [\"yes\", \"no\"],\n    \"Disease\": [\"PFC\", \"TGA\", \"Fallot\", \"PAIVS\", \"TAPVD\", \"Lung\"],\n    \"LungParench\": [\"Normal\", \"Congested\", \"Abnormal\"],\n    \"Grunting\": [\"yes\", \"no\"],\n    \"GruntingReport\": [\"yes\", \"no\"],\n    \"Age\": [\"0-3_days\", \"4-10_days\", \"11-30_days\"],\n    \"Sick\": [\"yes\", \"no\"]\n  },\n  \"cpts\": {\n    \"BirthAsphyxia\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"yes\": 0.1,\n            \"no\": 0.9\n          }\n        }\n      ]\n    },\n    \"Disease\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"PFC\": 0.047,\n            \"TGA\": 0.336,\n            \"Fallot\": 0.295,\n            \"PAIVS\": 0.222,\n            \"TAPVD\": 0.05,\n            \"Lung\": 0.05\n          }\n        }\n      ]\n    },\n    \"LungParench\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"Normal\": 0.7171,\n            \"Congested\": 0.08985,\n            \"Abnormal\": 0.19305\n          }\n        }\n      ]\n    },\n    \"Grunting\": {\n      \"parents\": [\"LungParench\", \"Sick\"],\n      \"rows\": [\n        {\n          \"when\": {\"LungParench\": \"Normal\", \"Sick\": \"yes\"},\n          \"probs\": {\n            \"yes\": 0.2,\n            \"no\": 0.8\n          }\n        },\n        {\n          \"when\": {\"LungParench\": \"Normal\", \"Sick\": \"no\"},\n          \"probs\": {\n            \"yes\": 0.05,\n            \"no\": 0.95\n          }\n        },\n        {\n          \"when\": {\"LungParench\": \"Congested\", \"Sick\": \"yes\"},\n          \"probs\": {\n            \"yes\": 0.4,\n            \"no\": 0.6\n          }\n        },\n        {\n          \"when\": {\"LungParench\": \"Congested\", \"Sick\": \"no\"},\n          \"probs\": {\n            \"yes\": 0.2,\n            \"no\": 0.8\n          }\n        },\n        {\n          \"when\": {\"LungParench\": \"Abnormal\", \"Sick\"",
+      "parse_error": null,
+      "compiled_json": {
+        "nodes": [
+          "BirthAsphyxia",
+          "Disease",
+          "LungParench",
+          "Grunting",
+          "GruntingReport",
+          "Age",
+          "Sick"
+        ],
+        "states": {
+          "BirthAsphyxia": [
+            "yes",
+            "no"
+          ],
+          "Disease": [
+            "PFC",
+            "TGA",
+            "Fallot",
+            "PAIVS",
+            "TAPVD",
+            "Lung"
+          ],
+          "LungParench": [
+            "Normal",
+            "Congested",
+            "Abnormal"
+          ],
+          "Grunting": [
+            "yes",
+            "no"
+          ],
+          "GruntingReport": [
+            "yes",
+            "no"
+          ],
+          "Age": [
+            "0-3_days",
+            "4-10_days",
+            "11-30_days"
+          ],
+          "Sick": [
+            "yes",
+            "no"
+          ]
+        },
+        "cpts": {
+          "BirthAsphyxia": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "yes": 0.1,
+                  "no": 0.9
+                }
+              }
+            ]
+          },
+          "Disease": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "PFC": 0.047,
+                  "TGA": 0.336,
+                  "Fallot": 0.295,
+                  "PAIVS": 0.222,
+                  "TAPVD": 0.05,
+                  "Lung": 0.05
+                }
+              }
+            ]
+          },
+          "LungParench": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "Normal": 0.7171,
+                  "Congested": 0.08985,
+                  "Abnormal": 0.19305
+                }
+              }
+            ]
+          },
+          "Grunting": {
+            "parents": [
+              "LungParench",
+              "Sick"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "LungParench": "Normal",
+                  "Sick": "yes"
+                },
+                "probs": {
+                  "yes": 0.2,
+                  "no": 0.8
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Normal",
+                  "Sick": "no"
+                },
+                "probs": {
+                  "yes": 0.05,
+                  "no": 0.95
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Congested",
+                  "Sick": "yes"
+                },
+                "probs": {
+                  "yes": 0.4,
+                  "no": 0.6
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Congested",
+                  "Sick": "no"
+                },
+                "probs": {
+                  "yes": 0.2,
+                  "no": 0.8
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Abnormal",
+                  "Sick": "yes"
+                },
+                "probs": {
+                  "yes": 0.8,
+                  "no": 0.2
+                }
+              },
+              {
+                "when": {
+                  "LungParench": "Abnormal",
+                  "Sick": "no"
+                },
+                "probs": {
+                  "yes": 0.6,
+                  "no": 0.4
+                }
+              }
+            ]
+          },
+          "GruntingReport": {
+            "parents": [
+              "Grunting"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Grunting": "yes"
+                },
+                "probs": {
+                  "yes": 0.8,
+                  "no": 0.2
+                }
+              },
+              {
+                "when": {
+                  "Grunting": "no"
+                },
+                "probs": {
+                  "yes": 0.1,
+                  "no": 0.9
+                }
+              }
+            ]
+          },
+          "Age": {
+            "parents": [
+              "Disease",
+              "Sick"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Disease": "PFC",
+                  "Sick": "yes"
+                },
+                "probs": {
+                  "0-3_days": 0.95,
+                  "4-10_days": 0.03,
+                  "11-30_days": 0.02
+                }
+              },
+              {
+                "when": {
+                  "Disease": "PFC",
+                  "Sick": "no"
+                },
+                "probs": {
+                  "0-3_days": 0.85,
+                  "4-10_days": 0.1,
+                  "11-30_days": 0.05
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TGA",
+                  "Sick": "yes"
+                },
+                "probs": {
+                  "0-3_days": 0.8,
+                  "4-10_days": 0.15,
+                  "11-30_days": 0.05
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TGA",
+                  "Sick": "no"
+                },
+                "probs": {
+                  "0-3_days": 0.7,
+                  "4-10_days": 0.2,
+                  "11-30_days": 0.1
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Fallot",
+                  "Sick": "yes"
+                },
+                "probs": {
+                  "0-3_days": 0.7,
+                  "4-10_days": 0.15,
+                  "11-30_days": 0.15
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Fallot",
+                  "Sick": "no"
+                },
+                "probs": {
+                  "0-3_days": 0.25,
+                  "4-10_days": 0.25,
+                  "11-30_days": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Disease": "PAIVS",
+                  "Sick": "yes"
+                },
+                "probs": {
+                  "0-3_days": 0.8,
+                  "4-10_days": 0.15,
+                  "11-30_days": 0.05
+                }
+              },
+              {
+                "when": {
+                  "Disease": "PAIVS",
+                  "Sick": "no"
+                },
+                "probs": {
+                  "0-3_days": 0.8,
+                  "4-10_days": 0.15,
+                  "11-30_days": 0.05
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TAPVD",
+                  "Sick": "yes"
+                },
+                "probs": {
+                  "0-3_days": 0.8,
+                  "4-10_days": 0.15,
+                  "11-30_days": 0.05
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TAPVD",
+                  "Sick": "no"
+                },
+                "probs": {
+                  "0-3_days": 0.7,
+                  "4-10_days": 0.2,
+                  "11-30_days": 0.1
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Lung",
+                  "Sick": "yes"
+                },
+                "probs": {
+                  "0-3_days": 0.9,
+                  "4-10_days": 0.08,
+                  "11-30_days": 0.02
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Lung",
+                  "Sick": "no"
+                },
+                "probs": {
+                  "0-3_days": 0.8,
+                  "4-10_days": 0.15,
+                  "11-30_days": 0.05
+                }
+              }
+            ]
+          },
+          "Sick": {
+            "parents": [
+              "Disease"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Disease": "PFC"
+                },
+                "probs": {
+                  "yes": 0.4,
+                  "no": 0.6
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TGA"
+                },
+                "probs": {
+                  "yes": 0.3,
+                  "no": 0.7
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Fallot"
+                },
+                "probs": {
+                  "yes": 0.2,
+                  "no": 0.8
+                }
+              },
+              {
+                "when": {
+                  "Disease": "PAIVS"
+                },
+                "probs": {
+                  "yes": 0.3,
+                  "no": 0.7
+                }
+              },
+              {
+                "when": {
+                  "Disease": "TAPVD"
+                },
+                "probs": {
+                  "yes": 0.7,
+                  "no": 0.3
+                }
+              },
+              {
+                "when": {
+                  "Disease": "Lung"
+                },
+                "probs": {
+                  "yes": 0.7,
+                  "no": 0.3
+                }
+              }
+            ]
+          }
+        }
+      },
+      "states": {
+        "BirthAsphyxia": [
+          "yes",
+          "no"
+        ],
+        "Disease": [
+          "PFC",
+          "TGA",
+          "Fallot",
+          "PAIVS",
+          "TAPVD",
+          "Lung"
+        ],
+        "LungParench": [
+          "Normal",
+          "Congested",
+          "Abnormal"
+        ],
+        "Grunting": [
+          "yes",
+          "no"
+        ],
+        "GruntingReport": [
+          "yes",
+          "no"
+        ],
+        "Age": [
+          "0-3_days",
+          "4-10_days",
+          "11-30_days"
+        ],
+        "Sick": [
+          "yes",
+          "no"
+        ]
+      },
+      "parents": {
+        "BirthAsphyxia": [],
+        "Disease": [],
+        "LungParench": [],
+        "Grunting": [
+          "LungParench",
+          "Sick"
+        ],
+        "GruntingReport": [
+          "Grunting"
+        ],
+        "Age": [
+          "Disease",
+          "Sick"
+        ],
+        "Sick": [
+          "Disease"
+        ]
+      },
+      "n_factors": 7,
+      "n_entries": 75
+    },
+    {
+      "network": "phytophthora1",
+      "ok": true,
+      "usage": {
+        "prompt_tokens": 6571,
+        "completion_tokens": 1597,
+        "cost_usd": 0.00194385
+      },
+      "raw_response": "```json\n{\n  \"nodes\": [\"Invasiv_score_BH\", \"temp_opt\", \"caduceus\", \"aplerotic_plerotic\", \"nat_eco\", \"stem_cank\"],\n  \"states\": {\n    \"Invasiv_score_BH\": [\"Very low\", \"Low\", \"Moderate\", \"High\", \"Very high\"],\n    \"temp_opt\": [\"< 20\", \"20 to 25\", \"25\", \"25 to 28\", \">= 28\"],\n    \"caduceus\": [\"Caducous\", \"Non-caducious\"],\n    \"aplerotic_plerotic\": [\"Aplerotic\", \"Both\", \"Plerotic\"],\n    \"nat_eco\": [\"No\", \"Yes\"],\n    \"stem_cank\": [\"No\", \"Yes\"]\n  },\n  \"cpts\": {\n    \"Invasiv_score_BH\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"Very low\": 0.21,\n            \"Low\": 0.19,\n            \"Moderate\": 0.19,\n            \"High\": 0.18,\n            \"Very high\": 0.21\n          }\n        }\n      ]\n    },\n    \"temp_opt\": {\n      \"parents\": [],\n      \"rows\": [\n        {\n          \"when\": {},\n          \"probs\": {\n            \"< 20\": 0.185,\n            \"20 to 25\": 0.27,\n            \"25\": 0.207,\n            \"25 to 28\": 0.119,\n            \">= 28\": 0.197\n          }\n        }\n      ]\n    },\n    \"caduceus\": {\n      \"parents\": [\"Invasiv_score_BH\", \"temp_opt\"],\n      \"rows\": [\n        {\n          \"when\": {\"Invasiv_score_BH\": \"Very low\", \"temp_opt\": \"< 20\"},\n          \"probs\": {\n            \"Caducous\": 0.5,\n            \"Non-caducious\": 0.5\n          }\n        },\n        {\n          \"when\": {\"Invasiv_score_BH\": \"Very low\", \"temp_opt\": \"20 to 25\"},\n          \"probs\": {\n            \"Caducous\": 0.18,\n            \"Non-caducious\": 0.82\n          }\n        },\n        {\n          \"when\": {\"Invasiv_score_BH\": \"Very low\", \"temp_opt\": \"25\"},\n          \"probs\": {\n            \"Caducous\": 0,\n            \"Non-caducious\": 1\n          }\n        },\n        {\n          \"when\": {\"Invasiv_score_BH\": \"Very low\", \"temp_opt\": \"25 to 28\"},\n          \"probs\": {\n            \"Caducous\": 0,\n            \"Non-caducious\": 1\n          }\n        },\n        {\n          \"when\": {\"Invasiv_score_BH\": \"Very low\", \"temp_opt\": \">= 28\"},\n          \"probs\": {\n            \"Caducous\": ",
+      "parse_error": null,
+      "compiled_json": {
+        "nodes": [
+          "Invasiv_score_BH",
+          "temp_opt",
+          "caduceus",
+          "aplerotic_plerotic",
+          "nat_eco",
+          "stem_cank"
+        ],
+        "states": {
+          "Invasiv_score_BH": [
+            "Very low",
+            "Low",
+            "Moderate",
+            "High",
+            "Very high"
+          ],
+          "temp_opt": [
+            "< 20",
+            "20 to 25",
+            "25",
+            "25 to 28",
+            ">= 28"
+          ],
+          "caduceus": [
+            "Caducous",
+            "Non-caducious"
+          ],
+          "aplerotic_plerotic": [
+            "Aplerotic",
+            "Both",
+            "Plerotic"
+          ],
+          "nat_eco": [
+            "No",
+            "Yes"
+          ],
+          "stem_cank": [
+            "No",
+            "Yes"
+          ]
+        },
+        "cpts": {
+          "Invasiv_score_BH": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "Very low": 0.21,
+                  "Low": 0.19,
+                  "Moderate": 0.19,
+                  "High": 0.18,
+                  "Very high": 0.21
+                }
+              }
+            ]
+          },
+          "temp_opt": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "< 20": 0.185,
+                  "20 to 25": 0.27,
+                  "25": 0.207,
+                  "25 to 28": 0.119,
+                  ">= 28": 0.197
+                }
+              }
+            ]
+          },
+          "caduceus": {
+            "parents": [
+              "Invasiv_score_BH",
+              "temp_opt"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "Caducous": 0.5,
+                  "Non-caducious": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "Caducous": 0.18,
+                  "Non-caducious": 0.82
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "Caducous": 0,
+                  "Non-caducious": 1
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "Caducous": 0,
+                  "Non-caducious": 1
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "Caducous": 0,
+                  "Non-caducious": 1
+                }
+              }
+            ]
+          },
+          "aplerotic_plerotic": {
+            "parents": [
+              "Invasiv_score_BH",
+              "temp_opt"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "Aplerotic": 0,
+                  "Both": 1,
+                  "Plerotic": 0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "Aplerotic": 0.18,
+                  "Both": 0.36,
+                  "Plerotic": 0.45
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "Aplerotic": 0.3333,
+                  "Both": 0.3333,
+                  "Plerotic": 0.3333
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "Aplerotic": 0.5,
+                  "Both": 0.5,
+                  "Plerotic": 0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "Aplerotic": 0.67,
+                  "Both": 0,
+                  "Plerotic": 0.33
+                }
+              }
+            ]
+          },
+          "nat_eco": {
+            "parents": [
+              "Invasiv_score_BH",
+              "temp_opt"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "< 20"
+                },
+                "probs": {
+                  "No": 0.25,
+                  "Yes": 0.75
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "20 to 25"
+                },
+                "probs": {
+                  "No": 0.5,
+                  "Yes": 0.5
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "25"
+                },
+                "probs": {
+                  "No": 1,
+                  "Yes": 0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": "25 to 28"
+                },
+                "probs": {
+                  "No": 1,
+                  "Yes": 0
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "temp_opt": ">= 28"
+                },
+                "probs": {
+                  "No": 1,
+                  "Yes": 0
+                }
+              }
+            ]
+          },
+          "stem_cank": {
+            "parents": [
+              "Invasiv_score_BH",
+              "nat_eco"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "nat_eco": "No"
+                },
+                "probs": {
+                  "No": 0.73,
+                  "Yes": 0.27
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Very low",
+                  "nat_eco": "Yes"
+                },
+                "probs": {
+                  "No": 0.91,
+                  "Yes": 0.09
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "nat_eco": "No"
+                },
+                "probs": {
+                  "No": 0.83,
+                  "Yes": 0.17
+                }
+              },
+              {
+                "when": {
+                  "Invasiv_score_BH": "Low",
+                  "nat_eco": "Yes"
+                },
+                "probs": {
+                  "No": 0.5,
+                  "Yes": 0.5
+                }
+              }
+            ]
+          }
+        }
+      },
+      "states": {
+        "Invasiv_score_BH": [
+          "Very low",
+          "Low",
+          "Moderate",
+          "High",
+          "Very high"
+        ],
+        "temp_opt": [
+          "< 20",
+          "20 to 25",
+          "25",
+          "25 to 28",
+          ">= 28"
+        ],
+        "caduceus": [
+          "Caducous",
+          "Non-caducious"
+        ],
+        "aplerotic_plerotic": [
+          "Aplerotic",
+          "Both",
+          "Plerotic"
+        ],
+        "nat_eco": [
+          "No",
+          "Yes"
+        ],
+        "stem_cank": [
+          "No",
+          "Yes"
+        ]
+      },
+      "parents": {
+        "Invasiv_score_BH": [],
+        "temp_opt": [],
+        "caduceus": [
+          "Invasiv_score_BH",
+          "temp_opt"
+        ],
+        "aplerotic_plerotic": [
+          "Invasiv_score_BH",
+          "temp_opt"
+        ],
+        "nat_eco": [
+          "Invasiv_score_BH",
+          "temp_opt"
+        ],
+        "stem_cank": [
+          "Invasiv_score_BH",
+          "nat_eco"
+        ]
+      },
+      "n_factors": 6,
+      "n_entries": 53
+    },
+    {
+      "network": "sachs0",
+      "ok": false,
+      "usage": {
+        "prompt_tokens": 1773,
+        "completion_tokens": 732,
+        "cost_usd": 0.00070515
+      },
+      "raw_response": "{\n  \"nodes\": [\"Plcg\", \"PIP3\", \"PIP2\"],\n  \"states\": {\n    \"Plcg\": [\"LOW\", \"AVG\", \"HIGH\"],\n    \"PIP3\": [\"LOW\", \"AVG\", \"HIGH\"],\n    \"PIP2\": [\"LOW\", \"AVG\", \"HIGH\"]\n  },\n  \"cpts\": {\n    \"Plcg\": {\n      \"parents\": [],\n      \"rows\": [\n        {\"when\": {}, \"probs\": {\"LOW\": 0.81, \"AVG\": 0.08, \"HIGH\": 0.11}}\n      ]\n    },\n    \"PIP3\": {\n      \"parents\": [\"Plcg\"],\n      \"rows\": [\n        {\"when\": {\"Plcg\": \"LOW\"}, \"probs\": {\"LOW\": 0.22, \"AVG\": 0.45, \"HIGH\": 0.33}},\n        {\"when\": {\"Plcg\": \"AVG\"}, \"probs\": {\"LOW\": 0.08, \"AVG\": 0.21, \"HIGH\": 0.71}},\n        {\"when\": {\"Plcg\": \"HIGH\"}, \"probs\": {\"LOW\": 0.42, \"AVG\": 0.44, \"HIGH\": 0.14}}\n      ]\n    },\n    \"PIP2\": {\n      \"parents\": [\"Plcg\", \"PIP3\"],\n      \"rows\": [\n        {\"when\": {\"Plcg\": \"LOW\", \"PIP3\": \"LOW\"}, \"probs\": {\"LOW\": 0.99, \"AVG\": 0.005, \"HIGH\": 0.005}},\n        {\"when\": {\"Plcg\": \"AVG\", \"PIP3\": \"LOW\"}, \"probs\": {\"LOW\": 0.998, \"AVG\": 0.0005, \"HIGH\": 0.0005}},\n        {\"when\": {\"Plcg\": \"HIGH\", \"PIP3\": \"LOW\"}, \"probs\": {\"LOW\": 0.22, \"AVG\": 0.49, \"HIGH\": 0.29}},\n        {\"when\": {\"Plcg\": \"LOW\", \"PIP3\": \"AVG\"}, \"probs\": {\"LOW\": 0.987, \"AVG\": 0.0065, \"HIGH\": 0.0065}},\n        {\"when\": {\"Plcg\": \"AVG\", \"PIP3\": \"AVG\"}, \"probs\": {\"LOW\": 0.957, \"AVG\": 0.0065, \"HIGH\": 0.0065}},\n        {\"when\": {\"Plcg\": \"HIGH\", \"PIP3\": \"AVG\"}, \"probs\": {\"LOW\": 0.08, \"AVG\": 0.39, \"HIGH\": 0.53}},\n        {\"when\": {\"Plcg\": \"LOW\", \"PIP3\": \"HIGH\"}, \"probs\": {\"LOW\": 0.87, \"AVG\": 0.12, \"HIGH\": 0.01}},\n        {\"when\": {\"Plcg\": \"AVG\", \"PIP3\": \"HIGH\"}, \"probs\": {\"LOW\": 0.52, \"AVG\": 0.46, \"HIGH\": 0.02}},\n        {\"when\": {\"Plcg\": \"HIGH\", \"PIP3\": \"HIGH\"}, \"probs\": {\"LOW\": 0.03, \"AVG\": 0.05, \"HIGH\": 0.92}}\n      ]\n    }\n  }\n}",
+      "parse_error": "row_sum_validation_failed",
+      "row_errors": [
+        "PIP2|['Plcg', 'PIP3']=('AVG', 'AVG') sums to 0.9700"
+      ],
+      "compiled_json": {
+        "nodes": [
+          "Plcg",
+          "PIP3",
+          "PIP2"
+        ],
+        "states": {
+          "Plcg": [
+            "LOW",
+            "AVG",
+            "HIGH"
+          ],
+          "PIP3": [
+            "LOW",
+            "AVG",
+            "HIGH"
+          ],
+          "PIP2": [
+            "LOW",
+            "AVG",
+            "HIGH"
+          ]
+        },
+        "cpts": {
+          "Plcg": {
+            "parents": [],
+            "rows": [
+              {
+                "when": {},
+                "probs": {
+                  "LOW": 0.81,
+                  "AVG": 0.08,
+                  "HIGH": 0.11
+                }
+              }
+            ]
+          },
+          "PIP3": {
+            "parents": [
+              "Plcg"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Plcg": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.22,
+                  "AVG": 0.45,
+                  "HIGH": 0.33
+                }
+              },
+              {
+                "when": {
+                  "Plcg": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.08,
+                  "AVG": 0.21,
+                  "HIGH": 0.71
+                }
+              },
+              {
+                "when": {
+                  "Plcg": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.42,
+                  "AVG": 0.44,
+                  "HIGH": 0.14
+                }
+              }
+            ]
+          },
+          "PIP2": {
+            "parents": [
+              "Plcg",
+              "PIP3"
+            ],
+            "rows": [
+              {
+                "when": {
+                  "Plcg": "LOW",
+                  "PIP3": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.99,
+                  "AVG": 0.005,
+                  "HIGH": 0.005
+                }
+              },
+              {
+                "when": {
+                  "Plcg": "AVG",
+                  "PIP3": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.998,
+                  "AVG": 0.0005,
+                  "HIGH": 0.0005
+                }
+              },
+              {
+                "when": {
+                  "Plcg": "HIGH",
+                  "PIP3": "LOW"
+                },
+                "probs": {
+                  "LOW": 0.22,
+                  "AVG": 0.49,
+                  "HIGH": 0.29
+                }
+              },
+              {
+                "when": {
+                  "Plcg": "LOW",
+                  "PIP3": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.987,
+                  "AVG": 0.0065,
+                  "HIGH": 0.0065
+                }
+              },
+              {
+                "when": {
+                  "Plcg": "AVG",
+                  "PIP3": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.957,
+                  "AVG": 0.0065,
+                  "HIGH": 0.0065
+                }
+              },
+              {
+                "when": {
+                  "Plcg": "HIGH",
+                  "PIP3": "AVG"
+                },
+                "probs": {
+                  "LOW": 0.08,
+                  "AVG": 0.39,
+                  "HIGH": 0.53
+                }
+              },
+              {
+                "when": {
+                  "Plcg": "LOW",
+                  "PIP3": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.87,
+                  "AVG": 0.12,
+                  "HIGH": 0.01
+                }
+              },
+              {
+                "when": {
+                  "Plcg": "AVG",
+                  "PIP3": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.52,
+                  "AVG": 0.46,
+                  "HIGH": 0.02
+                }
+              },
+              {
+                "when": {
+                  "Plcg": "HIGH",
+                  "PIP3": "HIGH"
+                },
+                "probs": {
+                  "LOW": 0.03,
+                  "AVG": 0.05,
+                  "HIGH": 0.92
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "query_results": [
+    {
+      "network": "alarm2",
+      "pair_id": 0,
+      "gold": 0.9,
+      "reasoning_types": [],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.9003620703644027,
+      "abs_error": 0.00036207036440272233,
+      "query_var": "ERRCAUTER",
+      "query_state": "FALSE",
+      "evidence": {
+        "CO": "LOW",
+        "BP": "NORMAL"
+      },
+      "posterior": {
+        "TRUE": 0.09963792963559726,
+        "FALSE": 0.9003620703644027
+      },
+      "evidence_prob": 0.03175322169844133,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "CO": "LOW",
+          "BP": "NORMAL"
+        },
+        "query": {
+          "variable": "ERRCAUTER",
+          "state": "FALSE"
+        }
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"CO\": \"LOW\",\n    \"BP\": \"NORMAL\"\n  },\n  \"query\": {\n    \"variable\": \"ERRCAUTER\",\n    \"state\": \"FALSE\"\n  }\n}\n```",
+      "usage": {
+        "prompt_tokens": 603,
+        "completion_tokens": 53,
+        "cost_usd": 0.00012225
+      }
+    },
+    {
+      "network": "alarm2",
+      "pair_id": 1,
+      "gold": 0.01,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.0,
+      "abs_error": 0.01,
+      "query_var": "HR",
+      "query_state": "LOW",
+      "evidence": {
+        "HR": "HIGH",
+        "ERRCAUTER": "FALSE",
+        "HRSAT": "HIGH",
+        "BP": "NORMAL",
+        "TPR": "LOW"
+      },
+      "posterior": {
+        "LOW": 0.0,
+        "NORMAL": 0.0,
+        "HIGH": 1.0
+      },
+      "evidence_prob": 0.01600216791264,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "HR": "HIGH",
+          "ERRCAUTER": "FALSE",
+          "HRSAT": "HIGH",
+          "BP": "NORMAL",
+          "TPR": "LOW"
+        },
+        "query": {
+          "variable": "HR",
+          "state": "LOW"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"HR\": \"HIGH\",\n    \"ERRCAUTER\": \"FALSE\",\n    \"HRSAT\": \"HIGH\",\n    \"BP\": \"NORMAL\",\n    \"TPR\": \"LOW\"\n  },\n  \"query\": {\n    \"variable\": \"HR\",\n    \"state\": \"LOW\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 647,
+        "completion_tokens": 73,
+        "cost_usd": 0.00014085
+      }
+    },
+    {
+      "network": "alarm2",
+      "pair_id": 2,
+      "gold": 0.99974754,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.9997475385003787,
+      "abs_error": 1.4996213160145544e-09,
+      "query_var": "ANAPHYLAXIS",
+      "query_state": "FALSE",
+      "evidence": {
+        "HR": "LOW",
+        "TPR": "NORMAL",
+        "HRBP": "LOW",
+        "ERRLOWOUTPUT": "FALSE",
+        "ERRCAUTER": "FALSE"
+      },
+      "posterior": {
+        "TRUE": 0.00025246149962130775,
+        "FALSE": 0.9997475385003787
+      },
+      "evidence_prob": 0.0018587859166800005,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "HR": "LOW",
+          "TPR": "NORMAL",
+          "HRBP": "LOW",
+          "ERRLOWOUTPUT": "FALSE",
+          "ERRCAUTER": "FALSE"
+        },
+        "query": {
+          "variable": "ANAPHYLAXIS",
+          "state": "FALSE"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"HR\": \"LOW\",\n    \"TPR\": \"NORMAL\",\n    \"HRBP\": \"LOW\",\n    \"ERRLOWOUTPUT\": \"FALSE\",\n    \"ERRCAUTER\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"ANAPHYLAXIS\",\n    \"state\": \"FALSE\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 639,
+        "completion_tokens": 78,
+        "cost_usd": 0.00014265
+      }
+    },
+    {
+      "network": "alarm2",
+      "pair_id": 3,
+      "gold": 0.0002524615,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.0002524614996213078,
+      "abs_error": 3.786921947898647e-13,
+      "query_var": "ANAPHYLAXIS",
+      "query_state": "TRUE",
+      "evidence": {
+        "HRSAT": "HIGH",
+        "TPR": "NORMAL",
+        "BP": "NORMAL",
+        "ERRCAUTER": "FALSE",
+        "HR": "LOW"
+      },
+      "posterior": {
+        "TRUE": 0.0002524614996213078,
+        "FALSE": 0.9997475385003787
+      },
+      "evidence_prob": 0.00010240279886944801,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "HRSAT": "HIGH",
+          "TPR": "NORMAL",
+          "BP": "NORMAL",
+          "ERRCAUTER": "FALSE",
+          "HR": "LOW"
+        },
+        "query": {
+          "variable": "ANAPHYLAXIS",
+          "state": "TRUE"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"HRSAT\": \"HIGH\",\n    \"TPR\": \"NORMAL\",\n    \"BP\": \"NORMAL\",\n    \"ERRCAUTER\": \"FALSE\",\n    \"HR\": \"LOW\"\n  },\n  \"query\": {\n    \"variable\": \"ANAPHYLAXIS\",\n    \"state\": \"TRUE\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 619,
+        "completion_tokens": 77,
+        "cost_usd": 0.00013905
+      }
+    },
+    {
+      "network": "alarm2",
+      "pair_id": 4,
+      "gold": 0.0029668744,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.0029668744386074745,
+      "abs_error": 3.86074744222753e-11,
+      "query_var": "ANAPHYLAXIS",
+      "query_state": "TRUE",
+      "evidence": {
+        "CO": "LOW",
+        "HRSAT": "NORMAL",
+        "HR": "HIGH",
+        "ERRLOWOUTPUT": "FALSE",
+        "BP": "HIGH",
+        "ERRCAUTER": "FALSE"
+      },
+      "posterior": {
+        "TRUE": 0.0029668744386074745,
+        "FALSE": 0.9970331255613925
+      },
+      "evidence_prob": 3.896419489335e-05,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "CO": "LOW",
+          "HRSAT": "NORMAL",
+          "HR": "HIGH",
+          "ERRLOWOUTPUT": "FALSE",
+          "BP": "HIGH",
+          "ERRCAUTER": "FALSE"
+        },
+        "query": {
+          "variable": "ANAPHYLAXIS",
+          "state": "TRUE"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"CO\": \"LOW\",\n    \"HRSAT\": \"NORMAL\",\n    \"HR\": \"HIGH\",\n    \"ERRLOWOUTPUT\": \"FALSE\",\n    \"BP\": \"HIGH\",\n    \"ERRCAUTER\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"ANAPHYLAXIS\",\n    \"state\": \"TRUE\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 633,
+        "completion_tokens": 85,
+        "cost_usd": 0.00014595
+      }
+    },
+    {
+      "network": "child0",
+      "pair_id": 0,
+      "gold": 0.15343266,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "child0",
+      "pair_id": 1,
+      "gold": 0.019557052,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "child0",
+      "pair_id": 2,
+      "gold": 0.91525424,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "child0",
+      "pair_id": 3,
+      "gold": 0.8,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "child0",
+      "pair_id": 4,
+      "gold": 0.053994681,
+      "reasoning_types": [
+        "causal",
+        "evidential",
+        "explaining_away"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "child1",
+      "pair_id": 0,
+      "gold": 0.23171645,
+      "reasoning_types": [],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.23207277009295013,
+      "abs_error": 0.0003563200929501409,
+      "query_var": "GruntingReport",
+      "query_state": "yes",
+      "evidence": {
+        "Age": "11-30_days"
+      },
+      "posterior": {
+        "yes": 0.23207277009295013,
+        "no": 0.7679272299070499
+      },
+      "evidence_prob": 0.172996,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "Age": "11-30_days"
+        },
+        "query": {
+          "variable": "GruntingReport",
+          "state": "yes"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"Age\": \"11-30_days\"\n  },\n  \"query\": {\n    \"variable\": \"GruntingReport\",\n    \"state\": \"yes\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 476,
+        "completion_tokens": 44,
+        "cost_usd": 9.78e-05
+      }
+    },
+    {
+      "network": "child1",
+      "pair_id": 1,
+      "gold": 0.14194861,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.13506979695431467,
+      "abs_error": 0.006878813045685328,
+      "query_var": "Age",
+      "query_state": "4-10_days",
+      "evidence": {
+        "Grunting": "no",
+        "Sick": "yes"
+      },
+      "posterior": {
+        "0-3_days": 0.8013324873096446,
+        "4-10_days": 0.13506979695431467,
+        "11-30_days": 0.0635977157360406
+      },
+      "evidence_prob": 0.20998624000000005,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "Grunting": "no",
+          "Sick": "yes"
+        },
+        "query": {
+          "variable": "Age",
+          "state": "4-10_days"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"Grunting\": \"no\",\n    \"Sick\": \"yes\"\n  },\n  \"query\": {\n    \"variable\": \"Age\",\n    \"state\": \"4-10_days\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 465,
+        "completion_tokens": 51,
+        "cost_usd": 0.00010035
+      }
+    },
+    {
+      "network": "child1",
+      "pair_id": 2,
+      "gold": 0.16790675,
+      "reasoning_types": [],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": 1.0,
+      "abs_error": 0.83209325,
+      "query_var": "Grunting",
+      "query_state": "yes",
+      "evidence": {
+        "Grunting": "yes",
+        "GruntingReport": "no",
+        "Age": "4-10_days"
+      },
+      "posterior": {
+        "yes": 1.0,
+        "no": 0.0
+      },
+      "evidence_prob": 0.007505038259999999,
+      "failure_mode": "wrong_probability",
+      "response_json": {
+        "evidence": {
+          "Grunting": "yes",
+          "GruntingReport": "no",
+          "Age": "4-10_days"
+        },
+        "query": {
+          "variable": "Grunting",
+          "state": "yes"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"Grunting\": \"yes\",\n    \"GruntingReport\": \"no\",\n    \"Age\": \"4-10_days\"\n  },\n  \"query\": {\n    \"variable\": \"Grunting\",\n    \"state\": \"yes\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 480,
+        "completion_tokens": 60,
+        "cost_usd": 0.000108
+      }
+    },
+    {
+      "network": "child1",
+      "pair_id": 3,
+      "gold": 0.9,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.9,
+      "abs_error": 0.0,
+      "query_var": "GruntingReport",
+      "query_state": "no",
+      "evidence": {
+        "Sick": "yes",
+        "Grunting": "no"
+      },
+      "posterior": {
+        "yes": 0.1,
+        "no": 0.9
+      },
+      "evidence_prob": 0.20998623999999994,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "Sick": "yes",
+          "Grunting": "no"
+        },
+        "query": {
+          "variable": "GruntingReport",
+          "state": "no"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"Sick\": \"yes\",\n    \"Grunting\": \"no\"\n  },\n  \"query\": {\n    \"variable\": \"GruntingReport\",\n    \"state\": \"no\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 468,
+        "completion_tokens": 49,
+        "cost_usd": 9.96e-05
+      }
+    },
+    {
+      "network": "child1",
+      "pair_id": 4,
+      "gold": 0.59263263,
+      "reasoning_types": [],
+      "ok_0_01": false,
+      "ok_0_05": true,
+      "pred": 0.6367552504339753,
+      "abs_error": 0.0441226204339753,
+      "query_var": "Age",
+      "query_state": "0-3_days",
+      "evidence": {
+        "GruntingReport": "yes",
+        "Grunting": "no"
+      },
+      "posterior": {
+        "0-3_days": 0.6367552504339753,
+        "4-10_days": 0.182979219197267,
+        "11-30_days": 0.18026553036875764
+      },
+      "evidence_prob": 0.07786064960000001,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "GruntingReport": "yes",
+          "Grunting": "no"
+        },
+        "query": {
+          "variable": "Age",
+          "state": "0-3_days"
+        }
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"GruntingReport\": \"yes\",\n    \"Grunting\": \"no\"\n  },\n  \"query\": {\n    \"variable\": \"Age\",\n    \"state\": \"0-3_days\"\n  }\n}\n```",
+      "usage": {
+        "prompt_tokens": 470,
+        "completion_tokens": 55,
+        "cost_usd": 0.0001035
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "pair_id": 0,
+      "gold": 0.20030947,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": 0.9171502686067624,
+      "abs_error": 0.7168407986067624,
+      "query_var": "nat_eco",
+      "query_state": "No",
+      "evidence": {
+        "caduceus": "Non-caducious",
+        "aplerotic_plerotic": "Plerotic",
+        "stem_cank": "Yes"
+      },
+      "posterior": {
+        "No": 0.9171502686067624,
+        "Yes": 0.08284973139323759
+      },
+      "evidence_prob": 0.01136398977,
+      "failure_mode": "wrong_probability",
+      "response_json": {
+        "evidence": {
+          "caduceus": "Non-caducious",
+          "aplerotic_plerotic": "Plerotic",
+          "stem_cank": "Yes"
+        },
+        "query": {
+          "variable": "nat_eco",
+          "state": "No"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"caduceus\": \"Non-caducious\",\n    \"aplerotic_plerotic\": \"Plerotic\",\n    \"stem_cank\": \"Yes\"\n  },\n  \"query\": {\n    \"variable\": \"nat_eco\",\n    \"state\": \"No\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 490,
+        "completion_tokens": 71,
+        "cost_usd": 0.0001161
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "pair_id": 1,
+      "gold": 0.23864077,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "query_or_solve_failed",
+      "query_parse_error": "zero-probability evidence or missing query state",
+      "response_json": {
+        "evidence": {
+          "Invasiv_score_BH": "High",
+          "stem_cank": "Yes",
+          "caduceus": "Caducous"
+        },
+        "query": {
+          "variable": "nat_eco",
+          "state": "No"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"Invasiv_score_BH\": \"High\",\n    \"stem_cank\": \"Yes\",\n    \"caduceus\": \"Caducous\"\n  },\n  \"query\": {\n    \"variable\": \"nat_eco\",\n    \"state\": \"No\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 474,
+        "completion_tokens": 67,
+        "cost_usd": 0.0001113
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "pair_id": 2,
+      "gold": 0.67387424,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "pred": 0.6742594000977592,
+      "abs_error": 0.00038516009775924065,
+      "query_var": "nat_eco",
+      "query_state": "No",
+      "evidence": {
+        "stem_cank": "No"
+      },
+      "posterior": {
+        "No": 0.6742594000977592,
+        "Yes": 0.32574059990224075
+      },
+      "evidence_prob": 0.15980703669000001,
+      "failure_mode": null,
+      "response_json": {
+        "evidence": {
+          "stem_cank": "No"
+        },
+        "query": {
+          "variable": "nat_eco",
+          "state": "No"
+        }
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"stem_cank\": \"No\"\n  },\n  \"query\": {\n    \"variable\": \"nat_eco\",\n    \"state\": \"No\"\n  }\n}\n```",
+      "usage": {
+        "prompt_tokens": 454,
+        "completion_tokens": 47,
+        "cost_usd": 9.63e-05
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "pair_id": 3,
+      "gold": 0.44232003,
+      "reasoning_types": [],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": 0.6755330422618795,
+      "abs_error": 0.23321301226187952,
+      "query_var": "aplerotic_plerotic",
+      "query_state": "Both",
+      "evidence": {
+        "caduceus": "Caducous",
+        "stem_cank": "No",
+        "nat_eco": "No"
+      },
+      "posterior": {
+        "Aplerotic": 0.09270484506803442,
+        "Both": 0.6755330422618795,
+        "Plerotic": 0.23176211267008606
+      },
+      "evidence_prob": 0.0072330006,
+      "failure_mode": "wrong_probability",
+      "response_json": {
+        "evidence": {
+          "caduceus": "Caducous",
+          "stem_cank": "No",
+          "nat_eco": "No"
+        },
+        "query": {
+          "variable": "aplerotic_plerotic",
+          "state": "Both"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"caduceus\": \"Caducous\",\n    \"stem_cank\": \"No\",\n    \"nat_eco\": \"No\"\n  },\n  \"query\": {\n    \"variable\": \"aplerotic_plerotic\",\n    \"state\": \"Both\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 496,
+        "completion_tokens": 67,
+        "cost_usd": 0.0001146
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "pair_id": 4,
+      "gold": 0.79969053,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": 0.08284973139323759,
+      "abs_error": 0.7168407986067624,
+      "query_var": "nat_eco",
+      "query_state": "Yes",
+      "evidence": {
+        "stem_cank": "Yes",
+        "caduceus": "Non-caducious",
+        "aplerotic_plerotic": "Plerotic"
+      },
+      "posterior": {
+        "No": 0.9171502686067624,
+        "Yes": 0.08284973139323759
+      },
+      "evidence_prob": 0.01136398977,
+      "failure_mode": "wrong_probability",
+      "response_json": {
+        "evidence": {
+          "stem_cank": "Yes",
+          "caduceus": "Non-caducious",
+          "aplerotic_plerotic": "Plerotic"
+        },
+        "query": {
+          "variable": "nat_eco",
+          "state": "Yes"
+        }
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"stem_cank\": \"Yes\",\n    \"caduceus\": \"Non-caducious\",\n    \"aplerotic_plerotic\": \"Plerotic\"\n  },\n  \"query\": {\n    \"variable\": \"nat_eco\",\n    \"state\": \"Yes\"\n  }\n}",
+      "usage": {
+        "prompt_tokens": 489,
+        "completion_tokens": 71,
+        "cost_usd": 0.00011595
+      }
+    },
+    {
+      "network": "sachs0",
+      "pair_id": 0,
+      "gold": 0.46793373,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "sachs0",
+      "pair_id": 1,
+      "gold": 0.22,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "sachs0",
+      "pair_id": 2,
+      "gold": 0.005,
+      "reasoning_types": [
+        "causal"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "sachs0",
+      "pair_id": 3,
+      "gold": 0.045360825,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "network": "sachs0",
+      "pair_id": 4,
+      "gold": 0.15017065,
+      "reasoning_types": [
+        "causal",
+        "evidential",
+        "explaining_away"
+      ],
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "pred": null,
+      "abs_error": null,
+      "failure_mode": "compile_failed",
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T12:03:54Z",
+  "_meta": {
+    "prompt_tokens": 26112,
+    "completion_tokens": 10119,
+    "total_cost_usd": 0.009988200000000001,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "8f5d854c",
+    "timestamp_utc": "2026-05-03T12:03:54.993982+00:00",
+    "script": "baselines/run_quite_e2e.py",
+    "n_networks": 5,
+    "n_queries": 25,
+    "scaffold": true,
+    "mode": "numeric"
+  }
+}

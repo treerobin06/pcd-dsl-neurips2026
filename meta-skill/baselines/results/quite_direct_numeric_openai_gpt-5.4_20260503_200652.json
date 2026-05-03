@@ -1,0 +1,656 @@
+{
+  "experiment": "QUITE direct natural-language probability baseline",
+  "model": "openai/gpt-5.4",
+  "config": {
+    "model": "openai/gpt-5.4",
+    "modes": [
+      "numeric"
+    ],
+    "limit_per_mode": null,
+    "networks": [
+      "alarm2",
+      "child0",
+      "child1",
+      "phytophthora1",
+      "sachs0"
+    ],
+    "query_limit_per_network": 5,
+    "include_invalid_gold": false,
+    "sema": 10
+  },
+  "elapsed_sec": 6.489665746688843,
+  "summary": {
+    "overall": {
+      "n": 25,
+      "valid": 25,
+      "parse_errors": 0,
+      "within_0_01": 9,
+      "within_0_01_rate": 0.36,
+      "within_0_05": 17,
+      "within_0_05_rate": 0.68,
+      "mae": 0.06849702684174223,
+      "rmse": 0.1222805975328845
+    },
+    "numeric": {
+      "n": 25,
+      "valid": 25,
+      "parse_errors": 0,
+      "within_0_01": 9,
+      "within_0_01_rate": 0.36,
+      "within_0_05": 17,
+      "within_0_05_rate": 0.68,
+      "mae": 0.06849702684174223,
+      "rmse": 0.1222805975328845
+    }
+  },
+  "results": [
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.9,
+      "reasoning_types": [],
+      "pred": 0.9,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9,
+        "brief_reason": "Cauterization error is independent of the given evidence here, so its posterior stays at its 90% prior for no error."
+      },
+      "raw_response": "{\"probability\": 0.9, \"brief_reason\": \"Cauterization error is independent of the given evidence here, so its posterior stays at its 90% prior for no error.\"}",
+      "usage": {
+        "prompt_tokens": 2210,
+        "completion_tokens": 46,
+        "cost_usd": 0.006215
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.01,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.01,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.01,
+        "brief_reason": "Given true heart rate is high and low-output detection error is unobserved, the blood-pressure-inferred low heart rate stays at 1% after conditioning on the other evidence."
+      },
+      "raw_response": "{\"probability\": 0.01, \"brief_reason\": \"Given true heart rate is high and low-output detection error is unobserved, the blood-pressure-inferred low heart rate stays at 1% after conditioning on the other evidence.\"}",
+      "usage": {
+        "prompt_tokens": 2250,
+        "completion_tokens": 55,
+        "cost_usd": 0.00645
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.99974754,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.9971,
+      "abs_error": 0.0026475400000000038,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9971,
+        "brief_reason": "Normal total peripheral resistance strongly favors no anaphylaxis, and the heart-rate-related evidence is conditionally independent of anaphylaxis."
+      },
+      "raw_response": "{\"probability\": 0.9971, \"brief_reason\": \"Normal total peripheral resistance strongly favors no anaphylaxis, and the heart-rate-related evidence is conditionally independent of anaphylaxis.\"}",
+      "usage": {
+        "prompt_tokens": 2243,
+        "completion_tokens": 46,
+        "cost_usd": 0.0062975
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.0002524615,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0002510157618213661,
+      "abs_error": 1.4457381786339252e-06,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0002510157618213661,
+        "brief_reason": "Normal peripheral resistance strongly favors no anaphylaxis over anaphylaxis, and the other evidence does not offset that."
+      },
+      "raw_response": "{\"probability\": 0.00025101576182136606, \"brief_reason\": \"Normal peripheral resistance strongly favors no anaphylaxis over anaphylaxis, and the other evidence does not offset that.\"}",
+      "usage": {
+        "prompt_tokens": 2223,
+        "completion_tokens": 48,
+        "cost_usd": 0.0062775
+      }
+    },
+    {
+      "network": "alarm2",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.0029668744,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0004,
+      "abs_error": 0.0025668744,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0004,
+        "brief_reason": "Given low cardiac output with high blood pressure, high peripheral resistance is favored, which is very unlikely under anaphylaxis."
+      },
+      "raw_response": "{\"probability\": 0.0004, \"brief_reason\": \"Given low cardiac output with high blood pressure, high peripheral resistance is favored, which is very unlikely under anaphylaxis.\"}",
+      "usage": {
+        "prompt_tokens": 2236,
+        "completion_tokens": 44,
+        "cost_usd": 0.00625
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15343266,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.1693071462151607,
+      "abs_error": 0.015874486215160688,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1693071462151607,
+        "brief_reason": "Using Bayes on the report-noise model and the prior over true chest X-ray findings induced by the network, the posterior probability of asymmetry/patchy given a ground-glass report is about 0.169."
+      },
+      "raw_response": "{\"probability\": 0.1693071462151607, \"brief_reason\": \"Using Bayes on the report-noise model and the prior over true chest X-ray findings induced by the network, the posterior probability of asymmetry/patchy given a ground-glass report is about 0.169.\"}",
+      "usage": {
+        "prompt_tokens": 2059,
+        "completion_tokens": 69,
+        "cost_usd": 0.0021505
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.019557052,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0527,
+      "abs_error": 0.033142948,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0527,
+        "brief_reason": "Using Bayes over the latent lung parenchyma and disease causes, an oligaemic chest X-ray is much more consistent with low lung flow than normal flow."
+      },
+      "raw_response": "{\"probability\": 0.0527, \"brief_reason\": \"Using Bayes over the latent lung parenchyma and disease causes, an oligaemic chest X-ray is much more consistent with low lung flow than normal flow.\"}",
+      "usage": {
+        "prompt_tokens": 2053,
+        "completion_tokens": 54,
+        "cost_usd": 0.0019105
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.91525424,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.9,
+      "abs_error": 0.015254239999999974,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9,
+        "brief_reason": "Given Fallot is observed and its probability is 0.25 with asphyxia versus 0.30 without, the evidence slightly favors no birth asphyxia; the other observed variables are downstream of Fallot and do not depend on asphyxia once Fallot is known."
+      },
+      "raw_response": "{\"probability\": 0.9, \"brief_reason\": \"Given Fallot is observed and its probability is 0.25 with asphyxia versus 0.30 without, the evidence slightly favors no birth asphyxia; the other observed variables are downstream of Fallot and do not depend on asphyxia once Fallot is known.\"}",
+      "usage": {
+        "prompt_tokens": 2080,
+        "completion_tokens": 76,
+        "cost_usd": 0.00634
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.8,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.8,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.8,
+        "brief_reason": "Given the observed chest X-ray is plethoric, the report is plethoric with probability 0.80 regardless of other evidence."
+      },
+      "raw_response": "{\"probability\": 0.8, \"brief_reason\": \"Given the observed chest X-ray is plethoric, the report is plethoric with probability 0.80 regardless of other evidence.\"}",
+      "usage": {
+        "prompt_tokens": 2086,
+        "completion_tokens": 47,
+        "cost_usd": 0.001888
+      }
+    },
+    {
+      "network": "child0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.053994681,
+      "reasoning_types": [
+        "causal",
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0309,
+      "abs_error": 0.023094681000000002,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0309,
+        "brief_reason": "Given no birth asphyxia, low lung flow, ground-glass X-ray, and an asymmetric/patchy report, abnormal lung parenchyma is far more consistent than normal."
+      },
+      "raw_response": "{\"probability\": 0.0309, \"brief_reason\": \"Given no birth asphyxia, low lung flow, ground-glass X-ray, and an asymmetric/patchy report, abnormal lung parenchyma is far more consistent than normal.\"}",
+      "usage": {
+        "prompt_tokens": 2087,
+        "completion_tokens": 58,
+        "cost_usd": 0.0020555
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.23171645,
+      "reasoning_types": [],
+      "pred": 0.3197189934,
+      "abs_error": 0.0880025434,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.3197189934,
+        "brief_reason": "Marginalizing over disease, sickness, and lung state given age 11-30 days yields about a 31.97% chance the report documents grunting."
+      },
+      "raw_response": "{\"probability\": 0.3197189934, \"brief_reason\": \"Marginalizing over disease, sickness, and lung state given age 11-30 days yields about a 31.97% chance the report documents grunting.\"}",
+      "usage": {
+        "prompt_tokens": 1380,
+        "completion_tokens": 55,
+        "cost_usd": 0.004275
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.14194861,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.137855,
+      "abs_error": 0.0040936099999999975,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.137855,
+        "brief_reason": "Given sick and not grunting, the posterior over diseases and lung states yields about a 13.8% chance that age is 4-10 days."
+      },
+      "raw_response": "{\"probability\": 0.137855, \"brief_reason\": \"Given sick and not grunting, the posterior over diseases and lung states yields about a 13.8% chance that age is 4-10 days.\"}",
+      "usage": {
+        "prompt_tokens": 1368,
+        "completion_tokens": 52,
+        "cost_usd": 0.001608
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.16790675,
+      "reasoning_types": [],
+      "pred": 0.1472702576142532,
+      "abs_error": 0.020636492385746802,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1472702576142532,
+        "brief_reason": "Given grunting with no reported documentation, the posterior age 4-10 days is obtained by marginalizing over disease, sickness, and lung parenchyma states."
+      },
+      "raw_response": "{\"probability\": 0.1472702576142532, \"brief_reason\": \"Given grunting with no reported documentation, the posterior age 4-10 days is obtained by marginalizing over disease, sickness, and lung parenchyma states.\"}",
+      "usage": {
+        "prompt_tokens": 1383,
+        "completion_tokens": 58,
+        "cost_usd": 0.0017355
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.9,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.7285067873303168,
+      "abs_error": 0.1714932126696832,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.7285067873303168,
+        "brief_reason": "Given the child is sick and not grunting, averaging over lung status gives about a 72.85% chance the report does not document grunting."
+      },
+      "raw_response": "{\"probability\": 0.7285067873303168, \"brief_reason\": \"Given the child is sick and not grunting, averaging over lung status gives about a 72.85% chance the report does not document grunting.\"}",
+      "usage": {
+        "prompt_tokens": 1371,
+        "completion_tokens": 55,
+        "cost_usd": 0.0016605
+      }
+    },
+    {
+      "network": "child1",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.59263263,
+      "reasoning_types": [],
+      "pred": 0.7675761171594297,
+      "abs_error": 0.17494348715942976,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.7675761171594297,
+        "brief_reason": "Conditioning on reported grunting despite no actual grunting updates only through the no-grunt likelihood, and marginalizing over disease and sickness gives about a 76.8% chance of age 0-3 days."
+      },
+      "raw_response": "{\"probability\": 0.7675761171594297, \"brief_reason\": \"Conditioning on reported grunting despite no actual grunting updates only through the no-grunt likelihood, and marginalizing over disease and sickness gives about a 76.8% chance of age 0-3 days.\"}",
+      "usage": {
+        "prompt_tokens": 1373,
+        "completion_tokens": 68,
+        "cost_usd": 0.0018605
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.20030947,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.2438,
+      "abs_error": 0.04349053,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.2438,
+        "brief_reason": "Conditioning on non-caducous, plerotic, and stem cankers and marginalizing over invasive score and temperature gives about a 24.38% chance of not being found in natural ecosystems."
+      },
+      "raw_response": "{\"probability\": 0.2438, \"brief_reason\": \"Conditioning on non-caducous, plerotic, and stem cankers and marginalizing over invasive score and temperature gives about a 24.38% chance of not being found in natural ecosystems.\"}",
+      "usage": {
+        "prompt_tokens": 5218,
+        "completion_tokens": 62,
+        "cost_usd": 0.013975
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.23864077,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.212,
+      "abs_error": 0.026640770000000008,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.212,
+        "brief_reason": "Conditioning on being fully invasive, caducous, and causing stem cankers gives about a 21.2% posterior chance that the species is not found in natural ecosystems."
+      },
+      "raw_response": "{\"probability\": 0.212, \"brief_reason\": \"Conditioning on being fully invasive, caducous, and causing stem cankers gives about a 21.2% posterior chance that the species is not found in natural ecosystems.\"}",
+      "usage": {
+        "prompt_tokens": 5203,
+        "completion_tokens": 55,
+        "cost_usd": 0.0026005
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.67387424,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.6017,
+      "abs_error": 0.07217423999999995,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.6017,
+        "brief_reason": "Conditioning on no stem cankers slightly favors not being found in natural ecosystems after marginalizing over invasive score and temperature."
+      },
+      "raw_response": "{\"probability\": 0.6017, \"brief_reason\": \"Conditioning on no stem cankers slightly favors not being found in natural ecosystems after marginalizing over invasive score and temperature.\"}",
+      "usage": {
+        "prompt_tokens": 5186,
+        "completion_tokens": 44,
+        "cost_usd": 0.002393
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.44232003,
+      "reasoning_types": [],
+      "pred": 0.2863072165664344,
+      "abs_error": 0.1560128134335656,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.2863072165664344,
+        "brief_reason": "Conditioning on caducous, no stem cankers, and not in natural ecosystems gives a posterior probability of about 0.286 for the Both state."
+      },
+      "raw_response": "{\"probability\": 0.28630721656643437, \"brief_reason\": \"Conditioning on caducous, no stem cankers, and not in natural ecosystems gives a posterior probability of about 0.286 for the Both state.\"}",
+      "usage": {
+        "prompt_tokens": 5225,
+        "completion_tokens": 56,
+        "cost_usd": 0.0026705
+      }
+    },
+    {
+      "network": "phytophthora1",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.79969053,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.5153,
+      "abs_error": 0.28439053000000003,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.5153,
+        "brief_reason": "Using Bayesian updating over invasive score and temperature, the evidence slightly favors presence in natural ecosystems."
+      },
+      "raw_response": "{\"probability\": 0.5153, \"brief_reason\": \"Using Bayesian updating over invasive score and temperature, the evidence slightly favors presence in natural ecosystems.\"}",
+      "usage": {
+        "prompt_tokens": 5217,
+        "completion_tokens": 38,
+        "cost_usd": 0.0023805
+      }
+    },
+    {
+      "network": "sachs0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.46793373,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0547,
+      "abs_error": 0.41323372999999997,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0547,
+        "brief_reason": "Using Bayes\u2019 rule and summing over Plcg, the posterior mass for PIP3=average given PIP2=high is about 5.47%."
+      },
+      "raw_response": "{\"probability\":0.0547,\"brief_reason\":\"Using Bayes\u2019 rule and summing over Plcg, the posterior mass for PIP3=average given PIP2=high is about 5.47%.\"}",
+      "usage": {
+        "prompt_tokens": 723,
+        "completion_tokens": 52,
+        "cost_usd": 0.0025875
+      }
+    },
+    {
+      "network": "sachs0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.22,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.22,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.22,
+        "brief_reason": "Given the evidence that Plcg is low, the conditional probability of PIP3 being low is directly 0.22."
+      },
+      "raw_response": "{\"probability\": 0.22, \"brief_reason\": \"Given the evidence that Plcg is low, the conditional probability of PIP3 being low is directly 0.22.\"}",
+      "usage": {
+        "prompt_tokens": 695,
+        "completion_tokens": 44,
+        "cost_usd": 0.0023975
+      }
+    },
+    {
+      "network": "sachs0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.005,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.005,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.005,
+        "brief_reason": "Given Plcg=low and PIP3=low, the conditional distribution for PIP2 assigns the remaining 1% equally to average and high, so average is 0.5%."
+      },
+      "raw_response": "{\"probability\": 0.005, \"brief_reason\": \"Given Plcg=low and PIP3=low, the conditional distribution for PIP2 assigns the remaining 1% equally to average and high, so average is 0.5%.\"}",
+      "usage": {
+        "prompt_tokens": 705,
+        "completion_tokens": 59,
+        "cost_usd": 0.0026475
+      }
+    },
+    {
+      "network": "sachs0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.045360825,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.183056,
+      "abs_error": 0.137695175,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.183056,
+        "brief_reason": "Using Bayes' rule with P(Plcg=high)=0.11 and P(PIP3=high|Plcg) gives 0.11*0.14 divided by 0.81*0.33 + 0.08*0.71 + 0.11*0.14."
+      },
+      "raw_response": "{\"probability\": 0.183056, \"brief_reason\": \"Using Bayes' rule with P(Plcg=high)=0.11 and P(PIP3=high|Plcg) gives 0.11*0.14 divided by 0.81*0.33 + 0.08*0.71 + 0.11*0.14.\"}",
+      "usage": {
+        "prompt_tokens": 715,
+        "completion_tokens": 85,
+        "cost_usd": 0.0030625
+      }
+    },
+    {
+      "network": "sachs0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.15017065,
+      "reasoning_types": [
+        "causal",
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.12313432835820895,
+      "abs_error": 0.02703632164179104,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.12313432835820895,
+        "brief_reason": "With Plcg fixed low and observing PIP2 high, Bayes over PIP3 gives posterior proportional to 0.22\u00d70.005, 0.45\u00d70.0065, and 0.33\u00d70.01."
+      },
+      "raw_response": "{\"probability\": 0.12313432835820895, \"brief_reason\": \"With Plcg fixed low and observing PIP2 high, Bayes over PIP3 gives posterior proportional to 0.22\u00d70.005, 0.45\u00d70.0065, and 0.33\u00d70.01.\"}",
+      "usage": {
+        "prompt_tokens": 698,
+        "completion_tokens": 75,
+        "cost_usd": 0.00287
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T12:06:52Z",
+  "_meta": {
+    "prompt_tokens": 57987,
+    "completion_tokens": 1401,
+    "total_cost_usd": 0.0945585,
+    "model_id": "openai/gpt-5.4",
+    "git_commit": "8f5d854c",
+    "timestamp_utc": "2026-05-03T12:06:52.921590+00:00",
+    "script": "baselines/run_quite_direct_baseline.py",
+    "n_total": 25,
+    "modes": [
+      "numeric"
+    ]
+  }
+}

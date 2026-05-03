@@ -1,0 +1,662 @@
+{
+  "experiment": "QUITE registered hard-compute PAL smoke",
+  "model": "openai/gpt-5.4",
+  "query_plan": {
+    "mildew0": [
+      4,
+      18,
+      5,
+      10,
+      19
+    ],
+    "insurance1": [
+      16,
+      18,
+      7,
+      9,
+      12
+    ],
+    "hailfinder0": [
+      5,
+      15,
+      7,
+      14,
+      8
+    ],
+    "water1": [
+      1,
+      7,
+      2,
+      3,
+      4
+    ],
+    "sachs1": [
+      9,
+      4,
+      2,
+      0,
+      6
+    ]
+  },
+  "elapsed_sec": 198.19583201408386,
+  "summary": {
+    "n": 25,
+    "code_ok": 22,
+    "code_ok_rate": 0.88,
+    "within_0_01": 21,
+    "within_0_01_rate": 0.84,
+    "within_0_05": 22,
+    "within_0_05_rate": 0.88,
+    "mae": 0.0017660056888144941,
+    "by_network": {
+      "mildew0": {
+        "n": 5,
+        "correct": 3,
+        "code_ok": 3,
+        "failures": {
+          "exec_failed": 2
+        }
+      },
+      "insurance1": {
+        "n": 5,
+        "correct": 4,
+        "code_ok": 4,
+        "failures": {
+          "exec_failed": 1
+        }
+      },
+      "hailfinder0": {
+        "n": 5,
+        "correct": 5,
+        "code_ok": 5,
+        "failures": {}
+      },
+      "water1": {
+        "n": 5,
+        "correct": 5,
+        "code_ok": 5,
+        "failures": {}
+      },
+      "sachs1": {
+        "n": 5,
+        "correct": 5,
+        "code_ok": 5,
+        "failures": {}
+      }
+    }
+  },
+  "results": [
+    {
+      "network": "mildew0",
+      "pair_id": 4,
+      "gold": 0.079972639,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.07475460461380992,
+      "abs_error": 0.005218034386190076,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 9639,
+        "completion_tokens": 1649,
+        "cost_usd": 0.0488325
+      },
+      "stdout": "0.07475460461380992",
+      "stderr": "",
+      "code": "from collections import defaultdict\n\n# Bayesian network:\n# LAI, Radiation, Temperature are independent priors.\n# Biomass depends on (LAI, Temperature, Radiation).\n# We want P(Temperature=13.0C | Biomass=0.35)\n\n# State names\nT13 = \"13.0\"\nT14 = \"13.0-14.9\"\nT16 = \"15.0-16.9\"\nT17 = \"17.0\"\n\nR150 = \"<150_or_150\"\nR150_199 = \"150-199\"\nR200_249 = \"200-249\"\nR250 = \">=250_or_250\"\n\nL15_25 = \"1.5-2.5\"\nL25_35 = \"2.5-3.5\"\nL55_65 = \"5.5-6.5\"\nL65P = \">6.5\"\n\n# Priors\nlai_prior = {\n    L15_25: 0.0,   # premise says no chance for 1.5-2.5\n    L25_35: 0.10,\n    \"3.5-4.5\": 0.20,\n    \"4.5-5.5\": 0.20,\n    L55_65: 0.40,\n    L65P: 0.10,\n}\n\n# Only LAI states with CPTs given and nonzero prior matter: 2.5-3.5, 5.5-6.5, >6.5\nlai_prior = {\n    L25_35: 0.10,\n    L55_65: 0.40,\n    L65P: 0.10,\n}\n\n# Radiation prior as given; percentages sum to 0.9334, so normalize.\nrad_prior_raw = {\n    R150: 0.067,\n    R150_199: 0.467,\n    R200_249: 0.333,\n    R250: 0.067,\n}\nrad_total = sum(rad_prior_raw.values())\nrad_prior = {k: v / rad_total for k, v in rad_prior_raw.items()}\n\n# Temperature prior\ntemp_prior = {\n    T13: 0.133,\n    T14: 0.567,\n    T16: 0.167,\n    T17: 0.133,\n}\n\n# CPT: P(Biomass | LAI, Temp, Rad)\n# We only store probabilities for biomass = 0.35\np_b35 = {}\n\ndef setp(lai, temp, rad, p_percent):\n    p_b35[(lai, temp, rad)] = p_percent / 100.0\n\n# LAI 2.5-3.5\nsetp(L25_35, T13, R150, 39.87)\nsetp(L25_35, T13, R150_199, 4.63)\nsetp(L25_35, T13, R200_249, 0.0)\nsetp(L25_35, T13, R250, 0.0)\n\nsetp(L25_35, T14, R150, 36.97)\nsetp(L25_35, T14, R150_199, 14.13)\nsetp(L25_35, T14, R200_249, 0.0)\nsetp(L25_35, T14, R250, 0.0)\n\nsetp(L25_35, T16, R150, 31.33)\nsetp(L25_35, T16, R150_199, 25.47)\nsetp(L25_35, T16, R200_249, 0.1)\nsetp(L25_35, T16, R250, 0.0)\n\nsetp(L25_35, T17, R150, 24.3)\nsetp(L25_35, T17, R150_199, 35.93)\nsetp(L25_35, T17, R200_249, 2.4)\nsetp(L25_35, T17, R250, 0.0)\n\n# LAI 5.5-6.5\nsetp(L55_65, T13, R150, 20.7)\nsetp(L55_65, T13, R150_199, 0.0)\nsetp(L55_65, T13, R200_249, 0.0)\nsetp(L55_65, T13, R250, 0.0)\n\nsetp",
+      "raw_response": "```python\nfrom collections import defaultdict\n\n# Bayesian network:\n# LAI, Radiation, Temperature are independent priors.\n# Biomass depends on (LAI, Temperature, Radiation).\n# We want P(Temperature=13.0C | Biomass=0.35)\n\n# State names\nT13 = \"13.0\"\nT14 = \"13.0-14.9\"\nT16 = \"15.0-16.9\"\nT17 = \"17.0\"\n\nR150 = \"<150_or_150\"\nR150_199 = \"150-199\"\nR200_249 = \"200-249\"\nR250 = \">=250_or_250\"\n\nL15_25 = \"1.5-2.5\"\nL25_35 = \"2.5-3.5\"\nL55_65 = \"5.5-6.5\"\nL65P = \">6.5\"\n\n# Priors\nlai_prior = {\n    L15_25: 0.0,   # premise says no chance for 1.5-2.5\n    L25_35: 0.10,\n    \"3.5-4.5\": 0.20,\n    \"4.5-5.5\": 0.20,\n    L55_65: 0.40,\n    L65P: 0.10,\n}\n\n# Only LAI states with CPTs given and nonzero prior matter: 2.5-3.5, 5.5-6.5, >6.5\nlai_prior = {\n    L25_35: 0.10,\n    L55_65: 0.40,\n    L65P: 0.10,\n}\n\n# Radiation prior as given; percentages sum to 0.9334, so normalize.\nrad_prior_raw = {\n    R150: 0.067,\n    R150_199: 0.467,\n    R200_249: 0.333,\n    R250: 0.067,\n}\nrad_total = sum(rad_prior_raw.values())\nrad_prior = {k: v / rad_total for k, v in rad_prior_raw.items()}\n\n# Temperature prior\ntemp_prior = {\n    T13: 0.133,\n    T14: 0.567,\n    T16: 0.167,\n    T17: 0.133,\n}\n\n# CPT: P(Biomass | LAI, Temp, Rad)\n# We only store probabilities for biomass = 0.35\np_b35 = {}\n\ndef setp(lai, temp, rad, p_percent):\n    p_b35[(lai, temp, rad)] = p_percent / 100.0\n\n# LAI 2.5-3.5\nsetp(L25_35, T13, R150, 39.87)\nsetp(L25_35, T13, R150_199, 4.63)\nsetp(L25_35, T13, R200_249, 0.0)\nsetp(L25_35, T13, R250, 0.0)\n\nsetp(L25_35, T14, R150, 36.97)\nsetp(L25_35, T14, R150_199, 14.13)\nsetp(L25_35, T14, R200_249, 0.0)\nsetp(L25_35, T14, R250, 0.0)\n\nsetp(L25_35, T16, R150, 31.33)\nsetp(L25_35, T16, R150_199, 25.47)\nsetp(L25_35, T16, R200_249, 0.1)\nsetp(L25_35, T16, R250, 0.0)\n\nsetp(L25_35, T17, R150, 24.3)\nsetp(L25_35, T17, R150_199, 35.93)\nsetp(L25_35, T17, R200_249, 2.4)\nsetp(L25_35, T17, R250, 0.0)\n\n# LAI 5.5-6.5\nsetp(L55_65, T13, R150, 20.7)\nsetp(L55_65, T13, R150_199, 0.0)\nsetp(L55_65, T13, R200_249, 0.0)\nsetp(L55_65, T13, R250, "
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 18,
+      "gold": 0.133,
+      "reasoning_types": [],
+      "pred": 0.133,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 9636,
+        "completion_tokens": 205,
+        "cost_usd": 0.005853
+      },
+      "stdout": "0.133",
+      "stderr": "",
+      "code": "from fractions import Fraction\n\n# Bayesian network:\n# LAI -> Biomass <- Temperature\n# Radiation -> Biomass\n#\n# Evidence: Radiation = 200-249\n# Query: P(Temperature = 13.0C | Radiation = 200-249)\n#\n# Since Radiation is a root node independent of Temperature, and there is no\n# evidence on Biomass, the posterior equals the prior:\n# P(T=13.0 | R=200-249) = P(T=13.0)\n\n# Temperature prior from premises:\n# around 13.0C: 13.3%\n# 13.0-14.9C: 56.7%\n# 15.0-16.9C: 16.7%\n# around 17.0C: 13.3%\n\np_temp_13 = Fraction(133, 1000)  # 13.3%\n\nprint(float(p_temp_13))",
+      "raw_response": "```python\nfrom fractions import Fraction\n\n# Bayesian network:\n# LAI -> Biomass <- Temperature\n# Radiation -> Biomass\n#\n# Evidence: Radiation = 200-249\n# Query: P(Temperature = 13.0C | Radiation = 200-249)\n#\n# Since Radiation is a root node independent of Temperature, and there is no\n# evidence on Biomass, the posterior equals the prior:\n# P(T=13.0 | R=200-249) = P(T=13.0)\n\n# Temperature prior from premises:\n# around 13.0C: 13.3%\n# 13.0-14.9C: 56.7%\n# 15.0-16.9C: 16.7%\n# around 17.0C: 13.3%\n\np_temp_13 = Fraction(133, 1000)  # 13.3%\n\nprint(float(p_temp_13))\n```"
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 5,
+      "gold": 0.467,
+      "reasoning_types": [],
+      "pred": 0.5,
+      "abs_error": 0.032999999999999974,
+      "within_0_01": false,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 9630,
+        "completion_tokens": 311,
+        "cost_usd": 0.02874
+      },
+      "stdout": "0.5",
+      "stderr": "",
+      "code": "from collections import defaultdict\n\n# Bayesian network:\n# LAI -> PB <- Temp\n# Rad -> PB\n#\n# Evidence: Temp = 13C\n# Query: P(Rad = 150-199 | Temp=13C)\n#\n# Since LAI and Rad are specified as priors and Temp is also a prior root node,\n# and there is no evidence on PB, Rad is independent of Temp:\n#   P(Rad | Temp=13C) = P(Rad)\n#\n# We still compute this from the stated prior distribution.\n\ndef normalize(dist):\n    s = sum(dist.values())\n    return {k: v / s for k, v in dist.items()}\n\n# Radiation prior from premises\n# 6.7% below 150\n# 46.7% between 150 and 199\n# 33.3% between 200 and 249\n# 6.7% exceeds 250\n# The text likely omits one category or rounding causes totals != 100%.\n# For exact Bayesian use, normalize the provided masses.\nradiation_prior = {\n    \"lt150\": 6.7,\n    \"150_199\": 46.7,\n    \"200_249\": 33.3,\n    \"ge250\": 6.7,\n}\n\nradiation_prior = normalize(radiation_prior)\n\n# Evidence on temperature does not affect radiation in this BN structure.\nanswer = radiation_prior[\"150_199\"]\n\nprint(answer)",
+      "raw_response": "```python\nfrom collections import defaultdict\n\n# Bayesian network:\n# LAI -> PB <- Temp\n# Rad -> PB\n#\n# Evidence: Temp = 13C\n# Query: P(Rad = 150-199 | Temp=13C)\n#\n# Since LAI and Rad are specified as priors and Temp is also a prior root node,\n# and there is no evidence on PB, Rad is independent of Temp:\n#   P(Rad | Temp=13C) = P(Rad)\n#\n# We still compute this from the stated prior distribution.\n\ndef normalize(dist):\n    s = sum(dist.values())\n    return {k: v / s for k, v in dist.items()}\n\n# Radiation prior from premises\n# 6.7% below 150\n# 46.7% between 150 and 199\n# 33.3% between 200 and 249\n# 6.7% exceeds 250\n# The text likely omits one category or rounding causes totals != 100%.\n# For exact Bayesian use, normalize the provided masses.\nradiation_prior = {\n    \"lt150\": 6.7,\n    \"150_199\": 46.7,\n    \"200_249\": 33.3,\n    \"ge250\": 6.7,\n}\n\nradiation_prior = normalize(radiation_prior)\n\n# Evidence on temperature does not affect radiation in this BN structure.\nanswer = radiation_prior[\"150_199\"]\n\nprint(answer)\n```"
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 10,
+      "gold": 0.61192722,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "within_0_01": false,
+      "within_0_05": false,
+      "code_ok": false,
+      "error": "exec_failed:File \"/var/folders/pd/4rdrsbxs49dglv2__vnygtz80000gn/T/tmpklk86ilv.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax",
+      "usage": {
+        "prompt_tokens": 9644,
+        "completion_tokens": 4096,
+        "cost_usd": 0.064238
+      },
+      "stdout": "",
+      "stderr": "File \"/var/folders/pd/4rdrsbxs49dglv2__vnygtz80000gn/T/tmpklk86ilv.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax",
+      "code": "```python\nfrom fractions import Fraction\n\n# Bayesian network:\n# LAI -> Biomass <- Radiation\n# Temp -> Biomass\n#\n# We need P(Temp = 13.0-14.9 | Biomass = 0.80)\n\n# Priors\nlai_priors = {\n    \"0.0-0.5\": 0.0,\n    \"0.5-1.5\": 0.0,\n    \"1.5-2.5\": 0.0,\n    \"2.5-3.5\": 0.10,\n    \"3.5-4.5\": 0.20,\n    \"4.5-5.5\": 0.20,\n    \"5.5-6.5\": 0.40,\n    \">6.5\": 0.10,\n}\n\n# Radiation probabilities as stated; they sum to 0.9334, so normalize.\nrad_priors_raw = {\n    \"<150\": 0.067,\n    \"150-199\": 0.467,\n    \"200-249\": 0.333,\n    \">=250\": 0.067,\n}\nrad_total = sum(rad_priors_raw.values())\nrad_priors = {k: v / rad_total for k, v in rad_priors_raw.items()}\n\n# Temperature priors\ntemp_priors = {\n    \"13.0\": 0.133,\n    \"13.0-14.9\": 0.567,\n    \"15.0-16.9\": 0.167,\n    \"17.0\": 0.133,\n}\n\n# CPT for P(Biomass | LAI, Temp, Radiation)\n# Only entries relevant to LAI states with nonzero priors and provided CPTs.\n# Mapping keys:\n# LAI: \"2.5-3.5\", \"5.5-6.5\", \">6.5\"\n# Temp: \"13.0\", \"13.0-14.9\", \"15.0-16.9\", \"17.0\"\n# Radiation: \"<150\", \"150-199\", \"200-249\", \">=250\"\ncpt = {}\n\ndef set_cpt(lai, temp, rad, probs):\n    cpt[(lai, temp, rad)] = probs\n\n# LAI 2.5-3.5\nset_cpt(\"2.5-3.5\", \"13.0\", \"<150\", {\n    0.25: 0.0389, 0.30: 0.2749, 0.35: 0.3987, 0.40: 0.2287, 0.45: 0.0587\n})\nset_cpt(\"2.5-3.5\", \"13.0\", \"150-199\", {\n    0.35: 0.0463, 0.40: 0.2507, 0.45: 0.3583, 0.50: 0.2470, 0.60: 0.0920, 0.65: 0.0057\n})\nset_cpt(\"2.5-3.5\", \"13.0\", \"200-249\", {\n    0.40: 0.0017, 0.45: 0.0937, 0.50: 0.2663, 0.55: 0.3007, 0.60: 0.2333, 0.65: 0.0940, 0.70: 0.0103\n})\nset_cpt(\"2.5-3.5\", \"13.0\", \">=250\", {\n    0.50: 0.0257, 0.55: 0.1687, 0.60: 0.2603, 0.65: 0.2573, 0.70: 0.1983, 0.75: 0.0797, 0.80: 0.0100\n})\n\nset_cpt(\"2.5-3.5\", \"13.0-14.9\", \"<150\", {\n    0.25: 0.0923, 0.30: 0.3723, 0.35: 0.3697, 0.40: 0.1533, 0.45: 0.0123\n})\nset_cpt(\"2.5-3.5\", \"13.0-14.9\", \"150-199\", {\n    0.30: 0.0017, 0.35: 0.1413, 0.40: 0.3573, 0.45: 0.3303, 0.50: 0.1510, 0.55: 0.0183\n})\nset_cpt(\"2.5-3.5\", \"13.0-14.9\", \"200-249\", {\n    0.40: 0.0360, 0.45: 0.2327, 0.50: 0.3283,",
+      "raw_response": "```python\nfrom fractions import Fraction\n\n# Bayesian network:\n# LAI -> Biomass <- Radiation\n# Temp -> Biomass\n#\n# We need P(Temp = 13.0-14.9 | Biomass = 0.80)\n\n# Priors\nlai_priors = {\n    \"0.0-0.5\": 0.0,\n    \"0.5-1.5\": 0.0,\n    \"1.5-2.5\": 0.0,\n    \"2.5-3.5\": 0.10,\n    \"3.5-4.5\": 0.20,\n    \"4.5-5.5\": 0.20,\n    \"5.5-6.5\": 0.40,\n    \">6.5\": 0.10,\n}\n\n# Radiation probabilities as stated; they sum to 0.9334, so normalize.\nrad_priors_raw = {\n    \"<150\": 0.067,\n    \"150-199\": 0.467,\n    \"200-249\": 0.333,\n    \">=250\": 0.067,\n}\nrad_total = sum(rad_priors_raw.values())\nrad_priors = {k: v / rad_total for k, v in rad_priors_raw.items()}\n\n# Temperature priors\ntemp_priors = {\n    \"13.0\": 0.133,\n    \"13.0-14.9\": 0.567,\n    \"15.0-16.9\": 0.167,\n    \"17.0\": 0.133,\n}\n\n# CPT for P(Biomass | LAI, Temp, Radiation)\n# Only entries relevant to LAI states with nonzero priors and provided CPTs.\n# Mapping keys:\n# LAI: \"2.5-3.5\", \"5.5-6.5\", \">6.5\"\n# Temp: \"13.0\", \"13.0-14.9\", \"15.0-16.9\", \"17.0\"\n# Radiation: \"<150\", \"150-199\", \"200-249\", \">=250\"\ncpt = {}\n\ndef set_cpt(lai, temp, rad, probs):\n    cpt[(lai, temp, rad)] = probs\n\n# LAI 2.5-3.5\nset_cpt(\"2.5-3.5\", \"13.0\", \"<150\", {\n    0.25: 0.0389, 0.30: 0.2749, 0.35: 0.3987, 0.40: 0.2287, 0.45: 0.0587\n})\nset_cpt(\"2.5-3.5\", \"13.0\", \"150-199\", {\n    0.35: 0.0463, 0.40: 0.2507, 0.45: 0.3583, 0.50: 0.2470, 0.60: 0.0920, 0.65: 0.0057\n})\nset_cpt(\"2.5-3.5\", \"13.0\", \"200-249\", {\n    0.40: 0.0017, 0.45: 0.0937, 0.50: 0.2663, 0.55: 0.3007, 0.60: 0.2333, 0.65: 0.0940, 0.70: 0.0103\n})\nset_cpt(\"2.5-3.5\", \"13.0\", \">=250\", {\n    0.50: 0.0257, 0.55: 0.1687, 0.60: 0.2603, 0.65: 0.2573, 0.70: 0.1983, 0.75: 0.0797, 0.80: 0.0100\n})\n\nset_cpt(\"2.5-3.5\", \"13.0-14.9\", \"<150\", {\n    0.25: 0.0923, 0.30: 0.3723, 0.35: 0.3697, 0.40: 0.1533, 0.45: 0.0123\n})\nset_cpt(\"2.5-3.5\", \"13.0-14.9\", \"150-199\", {\n    0.30: 0.0017, 0.35: 0.1413, 0.40: 0.3573, 0.45: 0.3303, 0.50: 0.1510, 0.55: 0.0183\n})\nset_cpt(\"2.5-3.5\", \"13.0-14.9\", \"200-249\", {\n    0.40: 0.0360, 0.45: 0.2327, 0.50: 0.3283,"
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 19,
+      "gold": 0.70098579,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "within_0_01": false,
+      "within_0_05": false,
+      "code_ok": false,
+      "error": "exec_failed:File \"/var/folders/pd/4rdrsbxs49dglv2__vnygtz80000gn/T/tmpi0gtn4_v.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax",
+      "usage": {
+        "prompt_tokens": 9644,
+        "completion_tokens": 4096,
+        "cost_usd": 0.064238
+      },
+      "stdout": "",
+      "stderr": "File \"/var/folders/pd/4rdrsbxs49dglv2__vnygtz80000gn/T/tmpi0gtn4_v.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax",
+      "code": "```python\nfrom fractions import Fraction\n\n# Bayesian network:\n# LAI, Temp, Radiation are independent priors.\n# Biomass depends on (LAI, Temp, Radiation).\n# Query: P(Radiation = 150-199 | Biomass = 0.40)\n\n# State names\nLAI = [\"2.5-3.5\", \"3.5-4.5\", \"4.5-5.5\", \"5.5-6.5\", \">6.5\"]\nTEMP = [\"13.0\", \"13.0-14.9\", \"15.0-16.9\", \"17.0\"]\nRAD = [\"<150\", \"150-199\", \"200-249\", \">=250\"]\n\n# Priors\nlai_prior = {\n    \"2.5-3.5\": 0.10,\n    \"3.5-4.5\": 0.20,\n    \"4.5-5.5\": 0.20,\n    \"5.5-6.5\": 0.40,\n    \">6.5\": 0.10,\n}\n\n# Radiation statement sums to 93.4%; interpret remaining mass as the omitted 200-249 category.\nrad_prior = {\n    \"<150\": 0.067,\n    \"150-199\": 0.467,\n    \"200-249\": 0.333,\n    \">=250\": 0.067,\n}\n\ntemp_prior = {\n    \"13.0\": 0.133,\n    \"13.0-14.9\": 0.567,\n    \"15.0-16.9\": 0.167,\n    \"17.0\": 0.133,\n}\n\n# CPT for P(Biomass | LAI, Temp, Radiation)\n# Only entries relevant to LAI states with nonzero prior and provided in premises.\n# We need probability of biomass = 0.40.\ncpt = {}\n\ndef add(lai, temp, rad, dist):\n    cpt[(lai, temp, rad)] = dist\n\n# LAI 2.5-3.5\nadd(\"2.5-3.5\", \"13.0\", \"<150\",    {0.25: 0.0389, 0.30: 0.2749, 0.35: 0.3987, 0.40: 0.2287, 0.45: 0.0587})\nadd(\"2.5-3.5\", \"13.0\", \"150-199\", {0.35: 0.0463, 0.40: 0.2507, 0.45: 0.3583, 0.50: 0.2470, 0.60: 0.0920, 0.65: 0.0057})\nadd(\"2.5-3.5\", \"13.0\", \"200-249\", {0.40: 0.0017, 0.45: 0.0937, 0.50: 0.2663, 0.55: 0.3007, 0.60: 0.2333, 0.65: 0.0940, 0.70: 0.0103})\nadd(\"2.5-3.5\", \"13.0\", \">=250\",   {0.50: 0.0257, 0.55: 0.1687, 0.60: 0.2603, 0.65: 0.2573, 0.70: 0.1983, 0.75: 0.0797, 0.80: 0.0100})\n\nadd(\"2.5-3.5\", \"13.0-14.9\", \"<150\",    {0.25: 0.0923, 0.30: 0.3723, 0.35: 0.3697, 0.40: 0.1533, 0.45: 0.0123})\nadd(\"2.5-3.5\", \"13.0-14.9\", \"150-199\", {0.30: 0.0017, 0.35: 0.1413, 0.40: 0.3573, 0.45: 0.3303, 0.50: 0.1510, 0.55: 0.0183})\nadd(\"2.5-3.5\", \"13.0-14.9\", \"200-249\", {0.40: 0.0360, 0.45: 0.2327, 0.50: 0.3283, 0.55: 0.2723, 0.60: 0.1173, 0.65: 0.0133})\nadd(\"2.5-3.5\", \"13.0-14.9\", \">=250\",   {0.45: 0.0080, 0.50: 0.1427, 0.55: 0.2757, 0.60",
+      "raw_response": "```python\nfrom fractions import Fraction\n\n# Bayesian network:\n# LAI, Temp, Radiation are independent priors.\n# Biomass depends on (LAI, Temp, Radiation).\n# Query: P(Radiation = 150-199 | Biomass = 0.40)\n\n# State names\nLAI = [\"2.5-3.5\", \"3.5-4.5\", \"4.5-5.5\", \"5.5-6.5\", \">6.5\"]\nTEMP = [\"13.0\", \"13.0-14.9\", \"15.0-16.9\", \"17.0\"]\nRAD = [\"<150\", \"150-199\", \"200-249\", \">=250\"]\n\n# Priors\nlai_prior = {\n    \"2.5-3.5\": 0.10,\n    \"3.5-4.5\": 0.20,\n    \"4.5-5.5\": 0.20,\n    \"5.5-6.5\": 0.40,\n    \">6.5\": 0.10,\n}\n\n# Radiation statement sums to 93.4%; interpret remaining mass as the omitted 200-249 category.\nrad_prior = {\n    \"<150\": 0.067,\n    \"150-199\": 0.467,\n    \"200-249\": 0.333,\n    \">=250\": 0.067,\n}\n\ntemp_prior = {\n    \"13.0\": 0.133,\n    \"13.0-14.9\": 0.567,\n    \"15.0-16.9\": 0.167,\n    \"17.0\": 0.133,\n}\n\n# CPT for P(Biomass | LAI, Temp, Radiation)\n# Only entries relevant to LAI states with nonzero prior and provided in premises.\n# We need probability of biomass = 0.40.\ncpt = {}\n\ndef add(lai, temp, rad, dist):\n    cpt[(lai, temp, rad)] = dist\n\n# LAI 2.5-3.5\nadd(\"2.5-3.5\", \"13.0\", \"<150\",    {0.25: 0.0389, 0.30: 0.2749, 0.35: 0.3987, 0.40: 0.2287, 0.45: 0.0587})\nadd(\"2.5-3.5\", \"13.0\", \"150-199\", {0.35: 0.0463, 0.40: 0.2507, 0.45: 0.3583, 0.50: 0.2470, 0.60: 0.0920, 0.65: 0.0057})\nadd(\"2.5-3.5\", \"13.0\", \"200-249\", {0.40: 0.0017, 0.45: 0.0937, 0.50: 0.2663, 0.55: 0.3007, 0.60: 0.2333, 0.65: 0.0940, 0.70: 0.0103})\nadd(\"2.5-3.5\", \"13.0\", \">=250\",   {0.50: 0.0257, 0.55: 0.1687, 0.60: 0.2603, 0.65: 0.2573, 0.70: 0.1983, 0.75: 0.0797, 0.80: 0.0100})\n\nadd(\"2.5-3.5\", \"13.0-14.9\", \"<150\",    {0.25: 0.0923, 0.30: 0.3723, 0.35: 0.3697, 0.40: 0.1533, 0.45: 0.0123})\nadd(\"2.5-3.5\", \"13.0-14.9\", \"150-199\", {0.30: 0.0017, 0.35: 0.1413, 0.40: 0.3573, 0.45: 0.3303, 0.50: 0.1510, 0.55: 0.0183})\nadd(\"2.5-3.5\", \"13.0-14.9\", \"200-249\", {0.40: 0.0360, 0.45: 0.2327, 0.50: 0.3283, 0.55: 0.2723, 0.60: 0.1173, 0.65: 0.0133})\nadd(\"2.5-3.5\", \"13.0-14.9\", \">=250\",   {0.45: 0.0080, 0.50: 0.1427, 0.55: 0.2757, 0.60"
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 16,
+      "gold": 0.002636998,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "within_0_01": false,
+      "within_0_05": false,
+      "code_ok": false,
+      "error": "exec_failed:File \"/var/folders/pd/4rdrsbxs49dglv2__vnygtz80000gn/T/tmp6u96rio7.py\", line 185\n    * P_mileage[next_m for next_m in MILEAGE if True]  # placeholder removed below\n                       ^\nSyntaxError",
+      "usage": {
+        "prompt_tokens": 7477,
+        "completion_tokens": 3639,
+        "cost_usd": 0.0732775
+      },
+      "stdout": "",
+      "stderr": "File \"/var/folders/pd/4rdrsbxs49dglv2__vnygtz80000gn/T/tmp6u96rio7.py\", line 185\n    * P_mileage[next_m for next_m in MILEAGE if True]  # placeholder removed below\n                       ^\nSyntaxError: invalid syntax",
+      "code": "from itertools import product\n\n# States\nSOCIO = [\"prole\", \"middle\", \"upper_middle\", \"wealthy\"]\nAGE = [\"current\", \"older\"]\nMODEL = [\"sport\", \"economy\", \"family\", \"luxury\", \"super_luxury\"]\nRISK = [\"psychopathic\", \"adventurous\", \"normal\", \"cautious\"]\nHOME = [\"city\", \"suburbs\", \"rural\", \"secure\"]\nMILEAGE = [\"5000\", \"20000\", \"50000\", \"1000000\"]\nVALUE = [\"5000\", \"10000\", \"20000\", \"50000\", \"1000000\"]\n\n# Priors\nP_socio = {\n    \"prole\": 0.42,\n    \"middle\": 0.36,\n    \"upper_middle\": 0.21,\n    \"wealthy\": 0.01,\n}\n\nP_age = {\n    \"current\": 0.348,\n    \"older\": 0.652,\n}\n\nP_model = {\n    \"sport\": 0.14,\n    \"economy\": 0.38,\n    \"family\": 0.38,\n    \"luxury\": 0.098,\n    \"super_luxury\": 0.002,\n}\n\nP_risk = {\n    \"psychopathic\": 0.02,\n    \"adventurous\": 0.58,\n    \"normal\": 0.30,\n    \"cautious\": 0.10,\n}\n\nP_mileage = {\n    \"5000\": 0.10,\n    \"20000\": 0.40,\n    \"50000\": 0.40,\n    \"1000000\": 0.10,\n}\n\n# P(home | risk, socio)\nP_home = {\n    (\"psychopathic\", \"prole\"): {\"city\": 0.8, \"suburbs\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"psychopathic\", \"middle\"): {\"city\": 0.8, \"suburbs\": 0.04, \"rural\": 0.01, \"secure\": 0.15},\n    (\"psychopathic\", \"upper_middle\"): {\"city\": 0.6, \"suburbs\": 0.04, \"rural\": 0.01, \"secure\": 0.35},\n    (\"psychopathic\", \"wealthy\"): {\"city\": 0.5, \"suburbs\": 0.0, \"rural\": 0.01, \"secure\": 0.49},\n\n    (\"adventurous\", \"prole\"): {\"city\": 0.8, \"suburbs\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"adventurous\", \"middle\"): {\"city\": 0.25, \"suburbs\": 0.6, \"rural\": 0.14, \"secure\": 0.01},\n    (\"adventurous\", \"upper_middle\"): {\"city\": 0.4, \"suburbs\": 0.3, \"rural\": 0.1, \"secure\": 0.2},\n    (\"adventurous\", \"wealthy\"): {\"city\": 0.0, \"suburbs\": 0.0, \"rural\": 0.05, \"secure\": 0.95},\n\n    (\"normal\", \"prole\"): {\"city\": 0.8, \"suburbs\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"normal\", \"middle\"): {\"city\": 0.0, \"suburbs\": 0.6, \"rural\": 0.1, \"secure\": 0.3},\n    (\"normal\", \"upper_middle\"): {\"city\": 0.0, \"suburbs\": 0.4, \"rural\": 0.1, \"secure\": 0.5},\n    (\"normal\", \"wealthy\"): {\"city\": 0.0, \"suburbs\"",
+      "raw_response": "```python\nfrom itertools import product\n\n# States\nSOCIO = [\"prole\", \"middle\", \"upper_middle\", \"wealthy\"]\nAGE = [\"current\", \"older\"]\nMODEL = [\"sport\", \"economy\", \"family\", \"luxury\", \"super_luxury\"]\nRISK = [\"psychopathic\", \"adventurous\", \"normal\", \"cautious\"]\nHOME = [\"city\", \"suburbs\", \"rural\", \"secure\"]\nMILEAGE = [\"5000\", \"20000\", \"50000\", \"1000000\"]\nVALUE = [\"5000\", \"10000\", \"20000\", \"50000\", \"1000000\"]\n\n# Priors\nP_socio = {\n    \"prole\": 0.42,\n    \"middle\": 0.36,\n    \"upper_middle\": 0.21,\n    \"wealthy\": 0.01,\n}\n\nP_age = {\n    \"current\": 0.348,\n    \"older\": 0.652,\n}\n\nP_model = {\n    \"sport\": 0.14,\n    \"economy\": 0.38,\n    \"family\": 0.38,\n    \"luxury\": 0.098,\n    \"super_luxury\": 0.002,\n}\n\nP_risk = {\n    \"psychopathic\": 0.02,\n    \"adventurous\": 0.58,\n    \"normal\": 0.30,\n    \"cautious\": 0.10,\n}\n\nP_mileage = {\n    \"5000\": 0.10,\n    \"20000\": 0.40,\n    \"50000\": 0.40,\n    \"1000000\": 0.10,\n}\n\n# P(home | risk, socio)\nP_home = {\n    (\"psychopathic\", \"prole\"): {\"city\": 0.8, \"suburbs\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"psychopathic\", \"middle\"): {\"city\": 0.8, \"suburbs\": 0.04, \"rural\": 0.01, \"secure\": 0.15},\n    (\"psychopathic\", \"upper_middle\"): {\"city\": 0.6, \"suburbs\": 0.04, \"rural\": 0.01, \"secure\": 0.35},\n    (\"psychopathic\", \"wealthy\"): {\"city\": 0.5, \"suburbs\": 0.0, \"rural\": 0.01, \"secure\": 0.49},\n\n    (\"adventurous\", \"prole\"): {\"city\": 0.8, \"suburbs\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"adventurous\", \"middle\"): {\"city\": 0.25, \"suburbs\": 0.6, \"rural\": 0.14, \"secure\": 0.01},\n    (\"adventurous\", \"upper_middle\"): {\"city\": 0.4, \"suburbs\": 0.3, \"rural\": 0.1, \"secure\": 0.2},\n    (\"adventurous\", \"wealthy\"): {\"city\": 0.0, \"suburbs\": 0.0, \"rural\": 0.05, \"secure\": 0.95},\n\n    (\"normal\", \"prole\"): {\"city\": 0.8, \"suburbs\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"normal\", \"middle\"): {\"city\": 0.0, \"suburbs\": 0.6, \"rural\": 0.1, \"secure\": 0.3},\n    (\"normal\", \"upper_middle\"): {\"city\": 0.0, \"suburbs\": 0.4, \"rural\": 0.1, \"secure\": 0.5},\n    (\"normal\", \"wealthy\"): {\"city\": 0.0,"
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 18,
+      "gold": 0.77042959,
+      "reasoning_types": [],
+      "pred": 0.7704295900000017,
+      "abs_error": 1.6653345369377348e-15,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 7481,
+        "completion_tokens": 2995,
+        "cost_usd": 0.0472115
+      },
+      "stdout": "0.7704295900000017",
+      "stderr": "",
+      "code": "from itertools import product\n\n# States\nSOCIO = [\"prole\", \"middle\", \"upper_middle\", \"wealthy\"]\nRISK = [\"psychopathic\", \"adventurous\", \"normal\", \"cautious\"]\nHOME = [\"city\", \"suburb\", \"rural\", \"secure\"]\nYEAR = [\"current\", \"older\"]\nMAKE = [\"sport\", \"economy\", \"family\", \"luxury\", \"super_luxury\"]\nMILEAGE = [\"5k\", \"20k\", \"50k\", \"1M\"]\nVALUE = [\"5k\", \"10k\", \"20k\", \"50k\", \"1M\"]\nANTI = [False, True]  # False = no anti-theft, True = anti-theft installed\n\n# Priors\nP_socio = {\n    \"prole\": 0.42,\n    \"middle\": 0.36,\n    \"upper_middle\": 0.21,\n    \"wealthy\": 0.01,\n}\n\nP_risk = {\n    \"psychopathic\": 0.02,\n    \"adventurous\": 0.58,\n    \"normal\": 0.30,\n    \"cautious\": 0.10,\n}\n\nP_year = {\n    \"current\": 0.348,\n    \"older\": 0.652,\n}\n\nP_make = {\n    \"sport\": 0.14,\n    \"economy\": 0.38,\n    \"family\": 0.38,\n    \"luxury\": 0.098,\n    \"super_luxury\": 0.002,\n}\n\nP_mileage = {\n    \"5k\": 0.10,\n    \"20k\": 0.40,\n    \"50k\": 0.40,\n    \"1M\": 0.10,\n}\n\n# P(home | risk, socio)\nP_home = {\n    (\"psychopathic\", \"prole\"): {\"city\": 0.8, \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"psychopathic\", \"middle\"): {\"city\": 0.8, \"suburb\": 0.04, \"rural\": 0.01, \"secure\": 0.15},\n    (\"psychopathic\", \"upper_middle\"): {\"city\": 0.6, \"suburb\": 0.04, \"rural\": 0.01, \"secure\": 0.35},\n    (\"psychopathic\", \"wealthy\"): {\"city\": 0.5, \"suburb\": 0.0, \"rural\": 0.01, \"secure\": 0.49},\n\n    (\"adventurous\", \"prole\"): {\"city\": 0.8, \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"adventurous\", \"middle\"): {\"city\": 0.25, \"suburb\": 0.6, \"rural\": 0.14, \"secure\": 0.01},\n    (\"adventurous\", \"upper_middle\"): {\"city\": 0.4, \"suburb\": 0.3, \"rural\": 0.1, \"secure\": 0.2},\n    (\"adventurous\", \"wealthy\"): {\"city\": 0.0, \"suburb\": 0.0, \"rural\": 0.05, \"secure\": 0.95},\n\n    (\"normal\", \"prole\"): {\"city\": 0.8, \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"normal\", \"middle\"): {\"city\": 0.0, \"suburb\": 0.6, \"rural\": 0.1, \"secure\": 0.3},\n    (\"normal\", \"upper_middle\"): {\"city\": 0.0, \"suburb\": 0.4, \"rural\": 0.1, \"secure\": 0.5},\n    (\"normal\", \"wealth",
+      "raw_response": "```python\nfrom itertools import product\n\n# States\nSOCIO = [\"prole\", \"middle\", \"upper_middle\", \"wealthy\"]\nRISK = [\"psychopathic\", \"adventurous\", \"normal\", \"cautious\"]\nHOME = [\"city\", \"suburb\", \"rural\", \"secure\"]\nYEAR = [\"current\", \"older\"]\nMAKE = [\"sport\", \"economy\", \"family\", \"luxury\", \"super_luxury\"]\nMILEAGE = [\"5k\", \"20k\", \"50k\", \"1M\"]\nVALUE = [\"5k\", \"10k\", \"20k\", \"50k\", \"1M\"]\nANTI = [False, True]  # False = no anti-theft, True = anti-theft installed\n\n# Priors\nP_socio = {\n    \"prole\": 0.42,\n    \"middle\": 0.36,\n    \"upper_middle\": 0.21,\n    \"wealthy\": 0.01,\n}\n\nP_risk = {\n    \"psychopathic\": 0.02,\n    \"adventurous\": 0.58,\n    \"normal\": 0.30,\n    \"cautious\": 0.10,\n}\n\nP_year = {\n    \"current\": 0.348,\n    \"older\": 0.652,\n}\n\nP_make = {\n    \"sport\": 0.14,\n    \"economy\": 0.38,\n    \"family\": 0.38,\n    \"luxury\": 0.098,\n    \"super_luxury\": 0.002,\n}\n\nP_mileage = {\n    \"5k\": 0.10,\n    \"20k\": 0.40,\n    \"50k\": 0.40,\n    \"1M\": 0.10,\n}\n\n# P(home | risk, socio)\nP_home = {\n    (\"psychopathic\", \"prole\"): {\"city\": 0.8, \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"psychopathic\", \"middle\"): {\"city\": 0.8, \"suburb\": 0.04, \"rural\": 0.01, \"secure\": 0.15},\n    (\"psychopathic\", \"upper_middle\"): {\"city\": 0.6, \"suburb\": 0.04, \"rural\": 0.01, \"secure\": 0.35},\n    (\"psychopathic\", \"wealthy\"): {\"city\": 0.5, \"suburb\": 0.0, \"rural\": 0.01, \"secure\": 0.49},\n\n    (\"adventurous\", \"prole\"): {\"city\": 0.8, \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"adventurous\", \"middle\"): {\"city\": 0.25, \"suburb\": 0.6, \"rural\": 0.14, \"secure\": 0.01},\n    (\"adventurous\", \"upper_middle\"): {\"city\": 0.4, \"suburb\": 0.3, \"rural\": 0.1, \"secure\": 0.2},\n    (\"adventurous\", \"wealthy\"): {\"city\": 0.0, \"suburb\": 0.0, \"rural\": 0.05, \"secure\": 0.95},\n\n    (\"normal\", \"prole\"): {\"city\": 0.8, \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"normal\", \"middle\"): {\"city\": 0.0, \"suburb\": 0.6, \"rural\": 0.1, \"secure\": 0.3},\n    (\"normal\", \"upper_middle\"): {\"city\": 0.0, \"suburb\": 0.4, \"rural\": 0.1, \"secure\": 0.5},\n    (\"normal"
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 7,
+      "gold": 0.1,
+      "reasoning_types": [],
+      "pred": 0.1,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 7482,
+        "completion_tokens": 2985,
+        "cost_usd": 0.047064
+      },
+      "stdout": "0.1",
+      "stderr": "",
+      "code": "from itertools import product\n\n# States\nSOCIO = [\"prole\", \"middle\", \"upper_middle\", \"wealthy\"]\nAGE = [\"current\", \"older\"]\nMODEL = [\"sport\", \"economy\", \"family\", \"luxury\", \"super_luxury\"]\nRISK = [\"psychopathic\", \"adventurous\", \"normal\", \"cautious\"]\nHOME = [\"city\", \"suburb\", \"rural\", \"secure\"]\nANTI = [True, False]\nMILEAGE = [\"5000\", \"20000\", \"50000\", \"1000000\"]\n\n# Priors\nP_socio = {\n    \"prole\": 0.42,\n    \"middle\": 0.36,\n    \"upper_middle\": 0.21,\n    \"wealthy\": 0.01,\n}\n\nP_age = {\n    \"current\": 0.348,\n    \"older\": 0.652,\n}\n\nP_model = {\n    \"sport\": 0.14,\n    \"economy\": 0.38,\n    \"family\": 0.38,\n    \"luxury\": 0.098,\n    \"super_luxury\": 0.002,\n}\n\nP_risk = {\n    \"psychopathic\": 0.02,\n    \"adventurous\": 0.58,\n    \"normal\": 0.30,\n    \"cautious\": 0.10,\n}\n\nP_mileage = {\n    \"5000\": 0.10,\n    \"20000\": 0.40,\n    \"50000\": 0.40,\n    \"1000000\": 0.10,\n}\n\n# Home base CPT: P(home | risk, socio)\nP_home = {\n    (\"psychopathic\", \"prole\"): {\"city\": 0.8, \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"psychopathic\", \"middle\"): {\"city\": 0.8, \"suburb\": 0.04, \"rural\": 0.01, \"secure\": 0.15},\n    (\"psychopathic\", \"upper_middle\"): {\"city\": 0.6, \"suburb\": 0.04, \"rural\": 0.01, \"secure\": 0.35},\n    (\"psychopathic\", \"wealthy\"): {\"city\": 0.5, \"suburb\": 0.0, \"rural\": 0.01, \"secure\": 0.49},\n\n    (\"adventurous\", \"prole\"): {\"city\": 0.8, \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"adventurous\", \"middle\"): {\"city\": 0.25, \"suburb\": 0.6, \"rural\": 0.14, \"secure\": 0.01},\n    (\"adventurous\", \"upper_middle\"): {\"city\": 0.4, \"suburb\": 0.3, \"rural\": 0.1, \"secure\": 0.2},\n    (\"adventurous\", \"wealthy\"): {\"city\": 0.0, \"suburb\": 0.0, \"rural\": 0.05, \"secure\": 0.95},\n\n    (\"normal\", \"prole\"): {\"city\": 0.8, \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"normal\", \"middle\"): {\"city\": 0.0, \"suburb\": 0.6, \"rural\": 0.1, \"secure\": 0.3},\n    (\"normal\", \"upper_middle\"): {\"city\": 0.0, \"suburb\": 0.4, \"rural\": 0.1, \"secure\": 0.5},\n    (\"normal\", \"wealthy\"): {\"city\": 0.0, \"suburb\": 0.0, \"rural\": 0.15, \"secure\": ",
+      "raw_response": "```python\nfrom itertools import product\n\n# States\nSOCIO = [\"prole\", \"middle\", \"upper_middle\", \"wealthy\"]\nAGE = [\"current\", \"older\"]\nMODEL = [\"sport\", \"economy\", \"family\", \"luxury\", \"super_luxury\"]\nRISK = [\"psychopathic\", \"adventurous\", \"normal\", \"cautious\"]\nHOME = [\"city\", \"suburb\", \"rural\", \"secure\"]\nANTI = [True, False]\nMILEAGE = [\"5000\", \"20000\", \"50000\", \"1000000\"]\n\n# Priors\nP_socio = {\n    \"prole\": 0.42,\n    \"middle\": 0.36,\n    \"upper_middle\": 0.21,\n    \"wealthy\": 0.01,\n}\n\nP_age = {\n    \"current\": 0.348,\n    \"older\": 0.652,\n}\n\nP_model = {\n    \"sport\": 0.14,\n    \"economy\": 0.38,\n    \"family\": 0.38,\n    \"luxury\": 0.098,\n    \"super_luxury\": 0.002,\n}\n\nP_risk = {\n    \"psychopathic\": 0.02,\n    \"adventurous\": 0.58,\n    \"normal\": 0.30,\n    \"cautious\": 0.10,\n}\n\nP_mileage = {\n    \"5000\": 0.10,\n    \"20000\": 0.40,\n    \"50000\": 0.40,\n    \"1000000\": 0.10,\n}\n\n# Home base CPT: P(home | risk, socio)\nP_home = {\n    (\"psychopathic\", \"prole\"): {\"city\": 0.8, \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"psychopathic\", \"middle\"): {\"city\": 0.8, \"suburb\": 0.04, \"rural\": 0.01, \"secure\": 0.15},\n    (\"psychopathic\", \"upper_middle\"): {\"city\": 0.6, \"suburb\": 0.04, \"rural\": 0.01, \"secure\": 0.35},\n    (\"psychopathic\", \"wealthy\"): {\"city\": 0.5, \"suburb\": 0.0, \"rural\": 0.01, \"secure\": 0.49},\n\n    (\"adventurous\", \"prole\"): {\"city\": 0.8, \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"adventurous\", \"middle\"): {\"city\": 0.25, \"suburb\": 0.6, \"rural\": 0.14, \"secure\": 0.01},\n    (\"adventurous\", \"upper_middle\"): {\"city\": 0.4, \"suburb\": 0.3, \"rural\": 0.1, \"secure\": 0.2},\n    (\"adventurous\", \"wealthy\"): {\"city\": 0.0, \"suburb\": 0.0, \"rural\": 0.05, \"secure\": 0.95},\n\n    (\"normal\", \"prole\"): {\"city\": 0.8, \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"normal\", \"middle\"): {\"city\": 0.0, \"suburb\": 0.6, \"rural\": 0.1, \"secure\": 0.3},\n    (\"normal\", \"upper_middle\"): {\"city\": 0.0, \"suburb\": 0.4, \"rural\": 0.1, \"secure\": 0.5},\n    (\"normal\", \"wealthy\"): {\"city\": 0.0, \"suburb\": 0.0, \"rural\": 0.15, "
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 9,
+      "gold": 0.997987,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.9979820496639474,
+      "abs_error": 4.950336052522708e-06,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 7490,
+        "completion_tokens": 3676,
+        "cost_usd": 0.057449
+      },
+      "stdout": "0.9979820496639474",
+      "stderr": "",
+      "code": "from itertools import product\n\n# States\nSOCIO = [\"prole\", \"middle\", \"upper_middle\", \"wealthy\"]\nAGE = [\"current\", \"older\"]\nMAKE = [\"sport\", \"economy\", \"family\", \"luxury\", \"super_luxury\"]\nRISK = [\"psychopathic\", \"adventurous\", \"normal\", \"cautious\"]\nHOME = [\"city\", \"suburbs\", \"rural\", \"secure\"]\nMILEAGE = [\"5000\", \"20000\", \"50000\", \"1000000\"]\nVALUE = [\"5000\", \"10000\", \"20000\", \"50000\", \"1000000\"]\n\n# Priors\nP_socio = {\n    \"prole\": 0.42,\n    \"middle\": 0.36,\n    \"upper_middle\": 0.21,\n    \"wealthy\": 0.01,\n}\n\nP_age = {\n    \"current\": 0.348,\n    \"older\": 0.652,\n}\n\nP_make = {\n    \"sport\": 0.14,\n    \"economy\": 0.38,\n    \"family\": 0.38,\n    \"luxury\": 0.098,\n    \"super_luxury\": 0.002,\n}\n\nP_risk = {\n    \"psychopathic\": 0.02,\n    \"adventurous\": 0.58,\n    \"normal\": 0.30,\n    \"cautious\": 0.10,\n}\n\nP_mileage = {\n    \"5000\": 0.10,\n    \"20000\": 0.40,\n    \"50000\": 0.40,\n    \"1000000\": 0.10,\n}\n\n# P(home | risk, socio)\nP_home = {\n    (\"psychopathic\", \"prole\"): {\"city\": 0.8, \"suburbs\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"psychopathic\", \"middle\"): {\"city\": 0.8, \"suburbs\": 0.04, \"rural\": 0.01, \"secure\": 0.15},\n    (\"psychopathic\", \"upper_middle\"): {\"city\": 0.6, \"suburbs\": 0.04, \"rural\": 0.01, \"secure\": 0.35},\n    (\"psychopathic\", \"wealthy\"): {\"city\": 0.5, \"suburbs\": 0.0, \"rural\": 0.01, \"secure\": 0.49},\n\n    (\"adventurous\", \"prole\"): {\"city\": 0.8, \"suburbs\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"adventurous\", \"middle\"): {\"city\": 0.25, \"suburbs\": 0.6, \"rural\": 0.14, \"secure\": 0.01},\n    (\"adventurous\", \"upper_middle\"): {\"city\": 0.4, \"suburbs\": 0.3, \"rural\": 0.1, \"secure\": 0.2},\n    (\"adventurous\", \"wealthy\"): {\"city\": 0.0, \"suburbs\": 0.0, \"rural\": 0.05, \"secure\": 0.95},\n\n    (\"normal\", \"prole\"): {\"city\": 0.8, \"suburbs\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"normal\", \"middle\"): {\"city\": 0.0, \"suburbs\": 0.6, \"rural\": 0.1, \"secure\": 0.3},\n    (\"normal\", \"upper_middle\"): {\"city\": 0.0, \"suburbs\": 0.4, \"rural\": 0.1, \"secure\": 0.5},\n    (\"normal\", \"wealthy\"): {\"city\": 0.0, \"suburbs\": ",
+      "raw_response": "```python\nfrom itertools import product\n\n# States\nSOCIO = [\"prole\", \"middle\", \"upper_middle\", \"wealthy\"]\nAGE = [\"current\", \"older\"]\nMAKE = [\"sport\", \"economy\", \"family\", \"luxury\", \"super_luxury\"]\nRISK = [\"psychopathic\", \"adventurous\", \"normal\", \"cautious\"]\nHOME = [\"city\", \"suburbs\", \"rural\", \"secure\"]\nMILEAGE = [\"5000\", \"20000\", \"50000\", \"1000000\"]\nVALUE = [\"5000\", \"10000\", \"20000\", \"50000\", \"1000000\"]\n\n# Priors\nP_socio = {\n    \"prole\": 0.42,\n    \"middle\": 0.36,\n    \"upper_middle\": 0.21,\n    \"wealthy\": 0.01,\n}\n\nP_age = {\n    \"current\": 0.348,\n    \"older\": 0.652,\n}\n\nP_make = {\n    \"sport\": 0.14,\n    \"economy\": 0.38,\n    \"family\": 0.38,\n    \"luxury\": 0.098,\n    \"super_luxury\": 0.002,\n}\n\nP_risk = {\n    \"psychopathic\": 0.02,\n    \"adventurous\": 0.58,\n    \"normal\": 0.30,\n    \"cautious\": 0.10,\n}\n\nP_mileage = {\n    \"5000\": 0.10,\n    \"20000\": 0.40,\n    \"50000\": 0.40,\n    \"1000000\": 0.10,\n}\n\n# P(home | risk, socio)\nP_home = {\n    (\"psychopathic\", \"prole\"): {\"city\": 0.8, \"suburbs\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"psychopathic\", \"middle\"): {\"city\": 0.8, \"suburbs\": 0.04, \"rural\": 0.01, \"secure\": 0.15},\n    (\"psychopathic\", \"upper_middle\"): {\"city\": 0.6, \"suburbs\": 0.04, \"rural\": 0.01, \"secure\": 0.35},\n    (\"psychopathic\", \"wealthy\"): {\"city\": 0.5, \"suburbs\": 0.0, \"rural\": 0.01, \"secure\": 0.49},\n\n    (\"adventurous\", \"prole\"): {\"city\": 0.8, \"suburbs\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"adventurous\", \"middle\"): {\"city\": 0.25, \"suburbs\": 0.6, \"rural\": 0.14, \"secure\": 0.01},\n    (\"adventurous\", \"upper_middle\"): {\"city\": 0.4, \"suburbs\": 0.3, \"rural\": 0.1, \"secure\": 0.2},\n    (\"adventurous\", \"wealthy\"): {\"city\": 0.0, \"suburbs\": 0.0, \"rural\": 0.05, \"secure\": 0.95},\n\n    (\"normal\", \"prole\"): {\"city\": 0.8, \"suburbs\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"normal\", \"middle\"): {\"city\": 0.0, \"suburbs\": 0.6, \"rural\": 0.1, \"secure\": 0.3},\n    (\"normal\", \"upper_middle\"): {\"city\": 0.0, \"suburbs\": 0.4, \"rural\": 0.1, \"secure\": 0.5},\n    (\"normal\", \"wealthy\"): {\"city\": 0.0, \""
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 12,
+      "gold": 0.99999776,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.9999990163106987,
+      "abs_error": 1.2563106986940298e-06,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 7488,
+        "completion_tokens": 3604,
+        "cost_usd": 0.056364
+      },
+      "stdout": "0.9999990163106987",
+      "stderr": "",
+      "code": "from itertools import product\n\n# Bayesian network variables:\n# Socioeconomic class S\n# Year Y\n# Make/model M\n# Risk aversion R\n# Home base H depends on R,S\n# Anti-theft A depends on R,S\n# Mileage L\n# Value V depends on Y,M,L\n# Stolen T depends on A,H,V\n#\n# Evidence: L=5000, H=secure\n# Query: P(T=not_stolen | L=5000, H=secure)\n\nS_prior = {\n    \"prole\": 0.42,\n    \"middle\": 0.36,\n    \"upper_middle\": 0.21,\n    \"wealthy\": 0.01,\n}\n\nY_prior = {\n    \"current\": 0.348,\n    \"older\": 0.652,\n}\n\nM_prior = {\n    \"sport\": 0.14,\n    \"economy\": 0.38,\n    \"family\": 0.38,\n    \"luxury\": 0.098,\n    \"super_luxury\": 0.002,\n}\n\nR_prior = {\n    \"psychopathic\": 0.02,\n    \"adventurous\": 0.58,\n    \"normal\": 0.30,\n    \"cautious\": 0.10,\n}\n\nL_prior = {\n    5000: 0.10,\n    20000: 0.40,\n    50000: 0.40,\n    1000000: 0.10,\n}\n\n# Home base CPT: P(H | R,S)\nH_cpt = {\n    (\"psychopathic\", \"prole\"):        {\"city\": 0.8,  \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"psychopathic\", \"middle\"):       {\"city\": 0.8,  \"suburb\": 0.04, \"rural\": 0.01, \"secure\": 0.15},\n    (\"psychopathic\", \"upper_middle\"): {\"city\": 0.6,  \"suburb\": 0.04, \"rural\": 0.01, \"secure\": 0.35},\n    (\"psychopathic\", \"wealthy\"):      {\"city\": 0.5,  \"suburb\": 0.0,  \"rural\": 0.01, \"secure\": 0.49},\n\n    (\"adventurous\", \"prole\"):         {\"city\": 0.8,  \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"adventurous\", \"middle\"):        {\"city\": 0.25, \"suburb\": 0.6,  \"rural\": 0.14, \"secure\": 0.01},\n    (\"adventurous\", \"upper_middle\"):  {\"city\": 0.4,  \"suburb\": 0.3,  \"rural\": 0.1,  \"secure\": 0.2},\n    (\"adventurous\", \"wealthy\"):       {\"city\": 0.0,  \"suburb\": 0.0,  \"rural\": 0.05, \"secure\": 0.95},\n\n    (\"normal\", \"prole\"):              {\"city\": 0.8,  \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"normal\", \"middle\"):             {\"city\": 0.0,  \"suburb\": 0.6,  \"rural\": 0.1,  \"secure\": 0.3},\n    (\"normal\", \"upper_middle\"):       {\"city\": 0.0,  \"suburb\": 0.4,  \"rural\": 0.1,  \"secure\": 0.5},\n    (\"normal\", \"wealthy\"):            {\"city\": 0.0,  ",
+      "raw_response": "```python\nfrom itertools import product\n\n# Bayesian network variables:\n# Socioeconomic class S\n# Year Y\n# Make/model M\n# Risk aversion R\n# Home base H depends on R,S\n# Anti-theft A depends on R,S\n# Mileage L\n# Value V depends on Y,M,L\n# Stolen T depends on A,H,V\n#\n# Evidence: L=5000, H=secure\n# Query: P(T=not_stolen | L=5000, H=secure)\n\nS_prior = {\n    \"prole\": 0.42,\n    \"middle\": 0.36,\n    \"upper_middle\": 0.21,\n    \"wealthy\": 0.01,\n}\n\nY_prior = {\n    \"current\": 0.348,\n    \"older\": 0.652,\n}\n\nM_prior = {\n    \"sport\": 0.14,\n    \"economy\": 0.38,\n    \"family\": 0.38,\n    \"luxury\": 0.098,\n    \"super_luxury\": 0.002,\n}\n\nR_prior = {\n    \"psychopathic\": 0.02,\n    \"adventurous\": 0.58,\n    \"normal\": 0.30,\n    \"cautious\": 0.10,\n}\n\nL_prior = {\n    5000: 0.10,\n    20000: 0.40,\n    50000: 0.40,\n    1000000: 0.10,\n}\n\n# Home base CPT: P(H | R,S)\nH_cpt = {\n    (\"psychopathic\", \"prole\"):        {\"city\": 0.8,  \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"psychopathic\", \"middle\"):       {\"city\": 0.8,  \"suburb\": 0.04, \"rural\": 0.01, \"secure\": 0.15},\n    (\"psychopathic\", \"upper_middle\"): {\"city\": 0.6,  \"suburb\": 0.04, \"rural\": 0.01, \"secure\": 0.35},\n    (\"psychopathic\", \"wealthy\"):      {\"city\": 0.5,  \"suburb\": 0.0,  \"rural\": 0.01, \"secure\": 0.49},\n\n    (\"adventurous\", \"prole\"):         {\"city\": 0.8,  \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"adventurous\", \"middle\"):        {\"city\": 0.25, \"suburb\": 0.6,  \"rural\": 0.14, \"secure\": 0.01},\n    (\"adventurous\", \"upper_middle\"):  {\"city\": 0.4,  \"suburb\": 0.3,  \"rural\": 0.1,  \"secure\": 0.2},\n    (\"adventurous\", \"wealthy\"):       {\"city\": 0.0,  \"suburb\": 0.0,  \"rural\": 0.05, \"secure\": 0.95},\n\n    (\"normal\", \"prole\"):              {\"city\": 0.8,  \"suburb\": 0.05, \"rural\": 0.15, \"secure\": 0.0},\n    (\"normal\", \"middle\"):             {\"city\": 0.0,  \"suburb\": 0.6,  \"rural\": 0.1,  \"secure\": 0.3},\n    (\"normal\", \"upper_middle\"):       {\"city\": 0.0,  \"suburb\": 0.4,  \"rural\": 0.1,  \"secure\": 0.5},\n    (\"normal\", \"wealthy\"):            {\"cit"
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 5,
+      "gold": 0.35967399,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.35967399007795886,
+      "abs_error": 7.795886158845633e-11,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 5903,
+        "completion_tokens": 2344,
+        "cost_usd": 0.0499175
+      },
+      "stdout": "0.35967399007795886",
+      "stderr": "",
+      "code": "from itertools import product\n\n# States\nSU = \"strong_up\"\nWU = \"weak_up\"\nN = \"neutral\"\nD = \"down\"\n\nstates = [SU, WU, N, D]\n\n# Priors\np_v107 = {\n    SU: 0.25,\n    WU: 0.25,\n    N: 0.25,\n    D: 0.25,\n}\n\np_subjective = {\n    SU: 0.15,\n    WU: 0.15,\n    N: 0.50,\n    D: 0.20,\n}\n\np_qg = {\n    SU: 0.15,\n    WU: 0.15,\n    N: 0.50,\n    D: 0.20,\n}\n\n# CPT for Combined Vertical Motion: P(C | V107, S, QG)\ncpt_c = {}\n\ndef set_c(v107, subj, qg, su, wu, ne, down):\n    cpt_c[(v107, subj, qg)] = {\n        SU: su,\n        WU: wu,\n        N: ne,\n        D: down,\n    }\n\n# V107 = strong up\nset_c(SU, SU, SU, 1.00, 0.00, 0.00, 0.00)\nset_c(SU, SU, WU, 0.90, 0.10, 0.00, 0.00)\nset_c(SU, SU, N, 0.70, 0.20, 0.10, 0.00)\nset_c(SU, SU, D, 0.20, 0.50, 0.20, 0.10)\n\nset_c(SU, WU, SU, 0.90, 0.10, 0.00, 0.00)\nset_c(SU, WU, WU, 0.70, 0.30, 0.00, 0.00)\nset_c(SU, WU, N, 0.15, 0.70, 0.15, 0.00)\nset_c(SU, WU, D, 0.10, 0.35, 0.45, 0.10)\n\nset_c(SU, N, SU, 0.70, 0.20, 0.10, 0.00)\nset_c(SU, N, WU, 0.15, 0.70, 0.15, 0.00)\nset_c(SU, N, N, 0.20, 0.60, 0.20, 0.00)\nset_c(SU, N, D, 0.10, 0.20, 0.60, 0.10)\n\nset_c(SU, D, SU, 0.20, 0.50, 0.20, 0.10)\nset_c(SU, D, WU, 0.10, 0.35, 0.45, 0.10)\nset_c(SU, D, N, 0.10, 0.20, 0.60, 0.10)\nset_c(SU, D, D, 0.10, 0.10, 0.20, 0.60)\n\n# V107 = weak up\nset_c(WU, SU, SU, 0.90, 0.10, 0.00, 0.00)\nset_c(WU, SU, WU, 0.70, 0.30, 0.00, 0.00)\nset_c(WU, SU, N, 0.15, 0.70, 0.15, 0.00)\nset_c(WU, SU, D, 0.10, 0.35, 0.45, 0.10)\n\nset_c(WU, WU, SU, 0.70, 0.30, 0.00, 0.00)\nset_c(WU, WU, WU, 0.00, 1.00, 0.00, 0.00)\nset_c(WU, WU, N, 0.00, 0.70, 0.30, 0.00)\nset_c(WU, WU, D, 0.00, 0.20, 0.70, 0.10)\n\nset_c(WU, N, SU, 0.15, 0.70, 0.15, 0.00)\nset_c(WU, N, WU, 0.00, 0.70, 0.30, 0.00)\nset_c(WU, N, N, 0.00, 0.30, 0.70, 0.00)\n# Premise text appears inconsistent (>1 total). Use the values as intended by pattern:\n# strongly_up=0, weak_up=0.15, neutral=0.35, down=0.50\nset_c(WU, N, D, 0.00, 0.15, 0.35, 0.50)\n\nset_c(WU, D, SU, 0.10, 0.35, 0.45, 0.10)\nset_c(WU, D, WU, 0.00, 0.20, 0.70, 0.10)\nset_c(WU, D, N, 0.00, 0.15, ",
+      "raw_response": "```python\nfrom itertools import product\n\n# States\nSU = \"strong_up\"\nWU = \"weak_up\"\nN = \"neutral\"\nD = \"down\"\n\nstates = [SU, WU, N, D]\n\n# Priors\np_v107 = {\n    SU: 0.25,\n    WU: 0.25,\n    N: 0.25,\n    D: 0.25,\n}\n\np_subjective = {\n    SU: 0.15,\n    WU: 0.15,\n    N: 0.50,\n    D: 0.20,\n}\n\np_qg = {\n    SU: 0.15,\n    WU: 0.15,\n    N: 0.50,\n    D: 0.20,\n}\n\n# CPT for Combined Vertical Motion: P(C | V107, S, QG)\ncpt_c = {}\n\ndef set_c(v107, subj, qg, su, wu, ne, down):\n    cpt_c[(v107, subj, qg)] = {\n        SU: su,\n        WU: wu,\n        N: ne,\n        D: down,\n    }\n\n# V107 = strong up\nset_c(SU, SU, SU, 1.00, 0.00, 0.00, 0.00)\nset_c(SU, SU, WU, 0.90, 0.10, 0.00, 0.00)\nset_c(SU, SU, N, 0.70, 0.20, 0.10, 0.00)\nset_c(SU, SU, D, 0.20, 0.50, 0.20, 0.10)\n\nset_c(SU, WU, SU, 0.90, 0.10, 0.00, 0.00)\nset_c(SU, WU, WU, 0.70, 0.30, 0.00, 0.00)\nset_c(SU, WU, N, 0.15, 0.70, 0.15, 0.00)\nset_c(SU, WU, D, 0.10, 0.35, 0.45, 0.10)\n\nset_c(SU, N, SU, 0.70, 0.20, 0.10, 0.00)\nset_c(SU, N, WU, 0.15, 0.70, 0.15, 0.00)\nset_c(SU, N, N, 0.20, 0.60, 0.20, 0.00)\nset_c(SU, N, D, 0.10, 0.20, 0.60, 0.10)\n\nset_c(SU, D, SU, 0.20, 0.50, 0.20, 0.10)\nset_c(SU, D, WU, 0.10, 0.35, 0.45, 0.10)\nset_c(SU, D, N, 0.10, 0.20, 0.60, 0.10)\nset_c(SU, D, D, 0.10, 0.10, 0.20, 0.60)\n\n# V107 = weak up\nset_c(WU, SU, SU, 0.90, 0.10, 0.00, 0.00)\nset_c(WU, SU, WU, 0.70, 0.30, 0.00, 0.00)\nset_c(WU, SU, N, 0.15, 0.70, 0.15, 0.00)\nset_c(WU, SU, D, 0.10, 0.35, 0.45, 0.10)\n\nset_c(WU, WU, SU, 0.70, 0.30, 0.00, 0.00)\nset_c(WU, WU, WU, 0.00, 1.00, 0.00, 0.00)\nset_c(WU, WU, N, 0.00, 0.70, 0.30, 0.00)\nset_c(WU, WU, D, 0.00, 0.20, 0.70, 0.10)\n\nset_c(WU, N, SU, 0.15, 0.70, 0.15, 0.00)\nset_c(WU, N, WU, 0.00, 0.70, 0.30, 0.00)\nset_c(WU, N, N, 0.00, 0.30, 0.70, 0.00)\n# Premise text appears inconsistent (>1 total). Use the values as intended by pattern:\n# strongly_up=0, weak_up=0.15, neutral=0.35, down=0.50\nset_c(WU, N, D, 0.00, 0.15, 0.35, 0.50)\n\nset_c(WU, D, SU, 0.10, 0.35, 0.45, 0.10)\nset_c(WU, D, WU, 0.00, 0.20, 0.70, 0.10)\nset_c(WU, D, N, 0."
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 15,
+      "gold": 0.15,
+      "reasoning_types": [],
+      "pred": 0.14999999999999994,
+      "abs_error": 5.551115123125783e-17,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 5902,
+        "completion_tokens": 2628,
+        "cost_usd": 0.041215
+      },
+      "stdout": "0.14999999999999994",
+      "stderr": "",
+      "code": "from itertools import product\n\n# States\nSU = \"strong_up\"\nWU = \"weak_up\"\nN = \"neutral\"\nD = \"down\"\n\nstates = [SU, WU, N, D]\n\n# Priors\np_v107 = {\n    SU: 0.25,\n    WU: 0.25,\n    N: 0.25,\n    D: 0.25,\n}\n\np_subj = {\n    SU: 0.15,\n    WU: 0.15,\n    N: 0.50,\n    D: 0.20,\n}\n\np_qg = {\n    SU: 0.15,\n    WU: 0.15,\n    N: 0.50,\n    D: 0.20,\n}\n\n# CPT for Combined Vertical Motion C given (V107, Subjective, QG)\ncpt_c = {}\n\ndef set_c(v107, subj, qg, su, wu, n, d):\n    cpt_c[(v107, subj, qg)] = {\n        SU: su,\n        WU: wu,\n        N: n,\n        D: d,\n    }\n\n# V107 = strong up\nset_c(SU, SU, SU, 1.00, 0.00, 0.00, 0.00)\nset_c(SU, SU, WU, 0.90, 0.10, 0.00, 0.00)\nset_c(SU, SU, N,  0.70, 0.20, 0.10, 0.00)\nset_c(SU, SU, D,  0.20, 0.50, 0.20, 0.10)\n\nset_c(SU, WU, SU, 0.90, 0.10, 0.00, 0.00)\nset_c(SU, WU, WU, 0.70, 0.30, 0.00, 0.00)\nset_c(SU, WU, N,  0.15, 0.70, 0.15, 0.00)\nset_c(SU, WU, D,  0.10, 0.35, 0.45, 0.10)\n\nset_c(SU, N, SU,  0.70, 0.20, 0.10, 0.00)\nset_c(SU, N, WU,  0.15, 0.70, 0.15, 0.00)\nset_c(SU, N, N,   0.20, 0.60, 0.20, 0.00)\nset_c(SU, N, D,   0.10, 0.20, 0.60, 0.10)\n\nset_c(SU, D, SU,  0.20, 0.50, 0.20, 0.10)\nset_c(SU, D, WU,  0.10, 0.35, 0.45, 0.10)\nset_c(SU, D, N,   0.10, 0.20, 0.60, 0.10)\nset_c(SU, D, D,   0.10, 0.10, 0.20, 0.60)\n\n# V107 = weak up\nset_c(WU, SU, SU, 0.90, 0.10, 0.00, 0.00)\nset_c(WU, SU, WU, 0.70, 0.30, 0.00, 0.00)\nset_c(WU, SU, N,  0.15, 0.70, 0.15, 0.00)\nset_c(WU, SU, D,  0.10, 0.35, 0.45, 0.10)\n\nset_c(WU, WU, SU, 0.70, 0.30, 0.00, 0.00)\nset_c(WU, WU, WU, 0.00, 1.00, 0.00, 0.00)\nset_c(WU, WU, N,  0.00, 0.70, 0.30, 0.00)\nset_c(WU, WU, D,  0.00, 0.20, 0.70, 0.10)\n\nset_c(WU, N, SU,  0.15, 0.70, 0.15, 0.00)\nset_c(WU, N, WU,  0.00, 0.70, 0.30, 0.00)\nset_c(WU, N, N,   0.00, 0.30, 0.70, 0.00)\n# Text says neutral/downward 50% each plus weak-up 15%, which is inconsistent (>1).\n# Use the explicit listed state probabilities that sum to 1 except the likely typo:\n# strongly up 0, weak up 0.15, neutral 0.35, down 0.50\nset_c(WU, N, D,   0.00, 0.15, 0.35, 0.50)\n\nset_c(",
+      "raw_response": "```python\nfrom itertools import product\n\n# States\nSU = \"strong_up\"\nWU = \"weak_up\"\nN = \"neutral\"\nD = \"down\"\n\nstates = [SU, WU, N, D]\n\n# Priors\np_v107 = {\n    SU: 0.25,\n    WU: 0.25,\n    N: 0.25,\n    D: 0.25,\n}\n\np_subj = {\n    SU: 0.15,\n    WU: 0.15,\n    N: 0.50,\n    D: 0.20,\n}\n\np_qg = {\n    SU: 0.15,\n    WU: 0.15,\n    N: 0.50,\n    D: 0.20,\n}\n\n# CPT for Combined Vertical Motion C given (V107, Subjective, QG)\ncpt_c = {}\n\ndef set_c(v107, subj, qg, su, wu, n, d):\n    cpt_c[(v107, subj, qg)] = {\n        SU: su,\n        WU: wu,\n        N: n,\n        D: d,\n    }\n\n# V107 = strong up\nset_c(SU, SU, SU, 1.00, 0.00, 0.00, 0.00)\nset_c(SU, SU, WU, 0.90, 0.10, 0.00, 0.00)\nset_c(SU, SU, N,  0.70, 0.20, 0.10, 0.00)\nset_c(SU, SU, D,  0.20, 0.50, 0.20, 0.10)\n\nset_c(SU, WU, SU, 0.90, 0.10, 0.00, 0.00)\nset_c(SU, WU, WU, 0.70, 0.30, 0.00, 0.00)\nset_c(SU, WU, N,  0.15, 0.70, 0.15, 0.00)\nset_c(SU, WU, D,  0.10, 0.35, 0.45, 0.10)\n\nset_c(SU, N, SU,  0.70, 0.20, 0.10, 0.00)\nset_c(SU, N, WU,  0.15, 0.70, 0.15, 0.00)\nset_c(SU, N, N,   0.20, 0.60, 0.20, 0.00)\nset_c(SU, N, D,   0.10, 0.20, 0.60, 0.10)\n\nset_c(SU, D, SU,  0.20, 0.50, 0.20, 0.10)\nset_c(SU, D, WU,  0.10, 0.35, 0.45, 0.10)\nset_c(SU, D, N,   0.10, 0.20, 0.60, 0.10)\nset_c(SU, D, D,   0.10, 0.10, 0.20, 0.60)\n\n# V107 = weak up\nset_c(WU, SU, SU, 0.90, 0.10, 0.00, 0.00)\nset_c(WU, SU, WU, 0.70, 0.30, 0.00, 0.00)\nset_c(WU, SU, N,  0.15, 0.70, 0.15, 0.00)\nset_c(WU, SU, D,  0.10, 0.35, 0.45, 0.10)\n\nset_c(WU, WU, SU, 0.70, 0.30, 0.00, 0.00)\nset_c(WU, WU, WU, 0.00, 1.00, 0.00, 0.00)\nset_c(WU, WU, N,  0.00, 0.70, 0.30, 0.00)\nset_c(WU, WU, D,  0.00, 0.20, 0.70, 0.10)\n\nset_c(WU, N, SU,  0.15, 0.70, 0.15, 0.00)\nset_c(WU, N, WU,  0.00, 0.70, 0.30, 0.00)\nset_c(WU, N, N,   0.00, 0.30, 0.70, 0.00)\n# Text says neutral/downward 50% each plus weak-up 15%, which is inconsistent (>1).\n# Use the explicit listed state probabilities that sum to 1 except the likely typo:\n# strongly up 0, weak up 0.15, neutral 0.35, down 0.50\nset_c(WU, N, D,   0.00, 0.15, 0.35, 0.5"
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 7,
+      "gold": 0.15,
+      "reasoning_types": [],
+      "pred": 0.15,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 5900,
+        "completion_tokens": 2635,
+        "cost_usd": 0.041315
+      },
+      "stdout": "0.15",
+      "stderr": "",
+      "code": "# Bayesian-network inference by exact enumeration\n# Query: P(SJ = strong_up | V107 = neutral)\n\nstates = [\"strong_up\", \"weak_up\", \"neutral\", \"down\"]\n\n# Priors\nP_V107 = {\n    \"strong_up\": 0.25,\n    \"weak_up\": 0.25,\n    \"neutral\": 0.25,\n    \"down\": 0.25,\n}\n\nP_SJ = {\n    \"strong_up\": 0.15,\n    \"weak_up\": 0.15,\n    \"neutral\": 0.50,\n    \"down\": 0.20,\n}\n\nP_QG = {\n    \"strong_up\": 0.15,\n    \"weak_up\": 0.15,\n    \"neutral\": 0.50,\n    \"down\": 0.20,\n}\n\n# Combined vertical motion CPT: P(C | V107, SJ, QG)\nCPT_C = {}\n\ndef add(v107, sj, qg, su, wu, ne, dn):\n    CPT_C[(v107, sj, qg)] = {\n        \"strong_up\": su,\n        \"weak_up\": wu,\n        \"neutral\": ne,\n        \"down\": dn,\n    }\n\n# V107 = strong_up\nadd(\"strong_up\", \"strong_up\", \"strong_up\", 1.00, 0.00, 0.00, 0.00)\nadd(\"strong_up\", \"strong_up\", \"weak_up\",   0.90, 0.10, 0.00, 0.00)\nadd(\"strong_up\", \"strong_up\", \"neutral\",   0.70, 0.20, 0.10, 0.00)\nadd(\"strong_up\", \"strong_up\", \"down\",      0.20, 0.50, 0.20, 0.10)\n\nadd(\"strong_up\", \"weak_up\", \"strong_up\",   0.90, 0.10, 0.00, 0.00)\nadd(\"strong_up\", \"weak_up\", \"weak_up\",     0.70, 0.30, 0.00, 0.00)\nadd(\"strong_up\", \"weak_up\", \"neutral\",     0.15, 0.70, 0.15, 0.00)\nadd(\"strong_up\", \"weak_up\", \"down\",        0.10, 0.35, 0.45, 0.10)\n\nadd(\"strong_up\", \"neutral\", \"strong_up\",   0.70, 0.20, 0.10, 0.00)\nadd(\"strong_up\", \"neutral\", \"weak_up\",     0.15, 0.70, 0.15, 0.00)\nadd(\"strong_up\", \"neutral\", \"neutral\",     0.20, 0.60, 0.20, 0.00)\nadd(\"strong_up\", \"neutral\", \"down\",        0.10, 0.20, 0.60, 0.10)\n\nadd(\"strong_up\", \"down\", \"strong_up\",      0.20, 0.50, 0.20, 0.10)\nadd(\"strong_up\", \"down\", \"weak_up\",        0.10, 0.35, 0.45, 0.10)\nadd(\"strong_up\", \"down\", \"neutral\",        0.10, 0.20, 0.60, 0.10)\nadd(\"strong_up\", \"down\", \"down\",           0.10, 0.10, 0.20, 0.60)\n\n# V107 = weak_up\nadd(\"weak_up\", \"strong_up\", \"strong_up\",   0.90, 0.10, 0.00, 0.00)\nadd(\"weak_up\", \"strong_up\", \"weak_up\",     0.70, 0.30, 0.00, 0.00)\nadd(\"weak_up\", \"strong_up\", \"neutral\",     0.15, 0.70, 0.15, 0.00)\nadd(\"weak_u",
+      "raw_response": "```python\n# Bayesian-network inference by exact enumeration\n# Query: P(SJ = strong_up | V107 = neutral)\n\nstates = [\"strong_up\", \"weak_up\", \"neutral\", \"down\"]\n\n# Priors\nP_V107 = {\n    \"strong_up\": 0.25,\n    \"weak_up\": 0.25,\n    \"neutral\": 0.25,\n    \"down\": 0.25,\n}\n\nP_SJ = {\n    \"strong_up\": 0.15,\n    \"weak_up\": 0.15,\n    \"neutral\": 0.50,\n    \"down\": 0.20,\n}\n\nP_QG = {\n    \"strong_up\": 0.15,\n    \"weak_up\": 0.15,\n    \"neutral\": 0.50,\n    \"down\": 0.20,\n}\n\n# Combined vertical motion CPT: P(C | V107, SJ, QG)\nCPT_C = {}\n\ndef add(v107, sj, qg, su, wu, ne, dn):\n    CPT_C[(v107, sj, qg)] = {\n        \"strong_up\": su,\n        \"weak_up\": wu,\n        \"neutral\": ne,\n        \"down\": dn,\n    }\n\n# V107 = strong_up\nadd(\"strong_up\", \"strong_up\", \"strong_up\", 1.00, 0.00, 0.00, 0.00)\nadd(\"strong_up\", \"strong_up\", \"weak_up\",   0.90, 0.10, 0.00, 0.00)\nadd(\"strong_up\", \"strong_up\", \"neutral\",   0.70, 0.20, 0.10, 0.00)\nadd(\"strong_up\", \"strong_up\", \"down\",      0.20, 0.50, 0.20, 0.10)\n\nadd(\"strong_up\", \"weak_up\", \"strong_up\",   0.90, 0.10, 0.00, 0.00)\nadd(\"strong_up\", \"weak_up\", \"weak_up\",     0.70, 0.30, 0.00, 0.00)\nadd(\"strong_up\", \"weak_up\", \"neutral\",     0.15, 0.70, 0.15, 0.00)\nadd(\"strong_up\", \"weak_up\", \"down\",        0.10, 0.35, 0.45, 0.10)\n\nadd(\"strong_up\", \"neutral\", \"strong_up\",   0.70, 0.20, 0.10, 0.00)\nadd(\"strong_up\", \"neutral\", \"weak_up\",     0.15, 0.70, 0.15, 0.00)\nadd(\"strong_up\", \"neutral\", \"neutral\",     0.20, 0.60, 0.20, 0.00)\nadd(\"strong_up\", \"neutral\", \"down\",        0.10, 0.20, 0.60, 0.10)\n\nadd(\"strong_up\", \"down\", \"strong_up\",      0.20, 0.50, 0.20, 0.10)\nadd(\"strong_up\", \"down\", \"weak_up\",        0.10, 0.35, 0.45, 0.10)\nadd(\"strong_up\", \"down\", \"neutral\",        0.10, 0.20, 0.60, 0.10)\nadd(\"strong_up\", \"down\", \"down\",           0.10, 0.10, 0.20, 0.60)\n\n# V107 = weak_up\nadd(\"weak_up\", \"strong_up\", \"strong_up\",   0.90, 0.10, 0.00, 0.00)\nadd(\"weak_up\", \"strong_up\", \"weak_up\",     0.70, 0.30, 0.00, 0.00)\nadd(\"weak_up\", \"strong_up\", \"neutral\",     0.15, 0.70, 0.15, 0.00)\na"
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 14,
+      "gold": 0.055279943,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.05587392550143267,
+      "abs_error": 0.000593982501432673,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 5897,
+        "completion_tokens": 2670,
+        "cost_usd": 0.0418325
+      },
+      "stdout": "0.05587392550143267",
+      "stderr": "",
+      "code": "# Bayesian-network inference by exact enumeration\n# Query: P(SJ = strong_up | CVM = down)\n\nfrom itertools import product\n\nstates = [\"strong_up\", \"weak_up\", \"neutral\", \"down\"]\n\n# Priors\np_v107 = {\n    \"strong_up\": 0.25,\n    \"weak_up\": 0.25,\n    \"neutral\": 0.25,\n    \"down\": 0.25,\n}\n\np_sj = {\n    \"strong_up\": 0.15,\n    \"weak_up\": 0.15,\n    \"neutral\": 0.50,\n    \"down\": 0.20,\n}\n\np_qg = {\n    \"strong_up\": 0.15,\n    \"weak_up\": 0.15,\n    \"neutral\": 0.50,\n    \"down\": 0.20,\n}\n\n# CPT for Combined Vertical Motion: P(CVM | V107, SJ, QG)\ncpt = {}\n\ndef add(v107, sj, qg, su, wu, ne, dn):\n    cpt[(v107, sj, qg)] = {\n        \"strong_up\": su,\n        \"weak_up\": wu,\n        \"neutral\": ne,\n        \"down\": dn,\n    }\n\n# V107 = strong_up\nadd(\"strong_up\", \"strong_up\", \"strong_up\", 1.00, 0.10*0, 0.0, 0.0)  # clarified below\ncpt[(\"strong_up\", \"strong_up\", \"strong_up\")] = {\"strong_up\":1.0,\"weak_up\":0.0,\"neutral\":0.0,\"down\":0.0}\nadd(\"strong_up\", \"strong_up\", \"weak_up\",   0.90, 0.10, 0.00, 0.00)\nadd(\"strong_up\", \"strong_up\", \"neutral\",   0.70, 0.20, 0.10, 0.00)\nadd(\"strong_up\", \"strong_up\", \"down\",      0.20, 0.50, 0.20, 0.10)\n\nadd(\"strong_up\", \"weak_up\",   \"strong_up\", 0.90, 0.10, 0.00, 0.00)\nadd(\"strong_up\", \"weak_up\",   \"weak_up\",   0.70, 0.30, 0.00, 0.00)\nadd(\"strong_up\", \"weak_up\",   \"neutral\",   0.15, 0.70, 0.15, 0.00)\nadd(\"strong_up\", \"weak_up\",   \"down\",      0.10, 0.35, 0.45, 0.10)\n\nadd(\"strong_up\", \"neutral\",   \"strong_up\", 0.70, 0.20, 0.10, 0.00)\nadd(\"strong_up\", \"neutral\",   \"weak_up\",   0.15, 0.70, 0.15, 0.00)\nadd(\"strong_up\", \"neutral\",   \"neutral\",   0.20, 0.60, 0.20, 0.00)\nadd(\"strong_up\", \"neutral\",   \"down\",      0.10, 0.20, 0.60, 0.10)\n\nadd(\"strong_up\", \"down\",      \"strong_up\", 0.20, 0.50, 0.20, 0.10)\nadd(\"strong_up\", \"down\",      \"weak_up\",   0.10, 0.35, 0.45, 0.10)\nadd(\"strong_up\", \"down\",      \"neutral\",   0.10, 0.20, 0.60, 0.10)\nadd(\"strong_up\", \"down\",      \"down\",      0.10, 0.10, 0.20, 0.60)\n\n# V107 = weak_up\nadd(\"weak_up\", \"strong_up\", \"strong_up\", 0.90, 0.10, 0.00, 0",
+      "raw_response": "```python\n# Bayesian-network inference by exact enumeration\n# Query: P(SJ = strong_up | CVM = down)\n\nfrom itertools import product\n\nstates = [\"strong_up\", \"weak_up\", \"neutral\", \"down\"]\n\n# Priors\np_v107 = {\n    \"strong_up\": 0.25,\n    \"weak_up\": 0.25,\n    \"neutral\": 0.25,\n    \"down\": 0.25,\n}\n\np_sj = {\n    \"strong_up\": 0.15,\n    \"weak_up\": 0.15,\n    \"neutral\": 0.50,\n    \"down\": 0.20,\n}\n\np_qg = {\n    \"strong_up\": 0.15,\n    \"weak_up\": 0.15,\n    \"neutral\": 0.50,\n    \"down\": 0.20,\n}\n\n# CPT for Combined Vertical Motion: P(CVM | V107, SJ, QG)\ncpt = {}\n\ndef add(v107, sj, qg, su, wu, ne, dn):\n    cpt[(v107, sj, qg)] = {\n        \"strong_up\": su,\n        \"weak_up\": wu,\n        \"neutral\": ne,\n        \"down\": dn,\n    }\n\n# V107 = strong_up\nadd(\"strong_up\", \"strong_up\", \"strong_up\", 1.00, 0.10*0, 0.0, 0.0)  # clarified below\ncpt[(\"strong_up\", \"strong_up\", \"strong_up\")] = {\"strong_up\":1.0,\"weak_up\":0.0,\"neutral\":0.0,\"down\":0.0}\nadd(\"strong_up\", \"strong_up\", \"weak_up\",   0.90, 0.10, 0.00, 0.00)\nadd(\"strong_up\", \"strong_up\", \"neutral\",   0.70, 0.20, 0.10, 0.00)\nadd(\"strong_up\", \"strong_up\", \"down\",      0.20, 0.50, 0.20, 0.10)\n\nadd(\"strong_up\", \"weak_up\",   \"strong_up\", 0.90, 0.10, 0.00, 0.00)\nadd(\"strong_up\", \"weak_up\",   \"weak_up\",   0.70, 0.30, 0.00, 0.00)\nadd(\"strong_up\", \"weak_up\",   \"neutral\",   0.15, 0.70, 0.15, 0.00)\nadd(\"strong_up\", \"weak_up\",   \"down\",      0.10, 0.35, 0.45, 0.10)\n\nadd(\"strong_up\", \"neutral\",   \"strong_up\", 0.70, 0.20, 0.10, 0.00)\nadd(\"strong_up\", \"neutral\",   \"weak_up\",   0.15, 0.70, 0.15, 0.00)\nadd(\"strong_up\", \"neutral\",   \"neutral\",   0.20, 0.60, 0.20, 0.00)\nadd(\"strong_up\", \"neutral\",   \"down\",      0.10, 0.20, 0.60, 0.10)\n\nadd(\"strong_up\", \"down\",      \"strong_up\", 0.20, 0.50, 0.20, 0.10)\nadd(\"strong_up\", \"down\",      \"weak_up\",   0.10, 0.35, 0.45, 0.10)\nadd(\"strong_up\", \"down\",      \"neutral\",   0.10, 0.20, 0.60, 0.10)\nadd(\"strong_up\", \"down\",      \"down\",      0.10, 0.10, 0.20, 0.60)\n\n# V107 = weak_up\nadd(\"weak_up\", \"strong_up\", \"strong_up\", 0.90, 0.1"
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 8,
+      "gold": 0.10872894,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.10872894333843798,
+      "abs_error": 3.3384379843903744e-09,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 5914,
+        "completion_tokens": 2455,
+        "cost_usd": 0.03865
+      },
+      "stdout": "0.10872894333843798",
+      "stderr": "",
+      "code": "from itertools import product\n\n# States\nSU = \"strong_up\"\nWU = \"weak_up\"\nN = \"neutral\"\nD = \"down\"\n\nstates = [SU, WU, N, D]\n\n# Priors\nprior_v107 = {\n    SU: 0.25,\n    WU: 0.25,\n    N: 0.25,\n    D: 0.25,\n}\n\nprior_subjective = {\n    SU: 0.15,\n    WU: 0.15,\n    N: 0.50,\n    D: 0.20,\n}\n\nprior_qg = {\n    SU: 0.15,\n    WU: 0.15,\n    N: 0.50,\n    D: 0.20,\n}\n\n# CPT for Combined Vertical Motion C given (V107, Subjective, QG)\ncpt = {}\n\ndef set_cpt(v, s, q, su, wu, n, d):\n    cpt[(v, s, q)] = {SU: su, WU: wu, N: n, D: d}\n\n# V107 = strongly upward\nset_cpt(SU, SU, SU, 1.00, 0.00, 0.00, 0.00)\nset_cpt(SU, SU, WU, 0.90, 0.10, 0.00, 0.00)\nset_cpt(SU, SU, N,  0.70, 0.20, 0.10, 0.00)\nset_cpt(SU, SU, D,  0.20, 0.50, 0.20, 0.10)\n\nset_cpt(SU, WU, SU, 0.90, 0.10, 0.00, 0.00)\nset_cpt(SU, WU, WU, 0.70, 0.30, 0.00, 0.00)\nset_cpt(SU, WU, N,  0.15, 0.70, 0.15, 0.00)\nset_cpt(SU, WU, D,  0.10, 0.35, 0.45, 0.10)\n\nset_cpt(SU, N, SU,  0.70, 0.20, 0.10, 0.00)\nset_cpt(SU, N, WU,  0.15, 0.70, 0.15, 0.00)\nset_cpt(SU, N, N,   0.20, 0.60, 0.20, 0.00)\nset_cpt(SU, N, D,   0.10, 0.20, 0.60, 0.10)\n\nset_cpt(SU, D, SU,  0.20, 0.50, 0.20, 0.10)\nset_cpt(SU, D, WU,  0.10, 0.35, 0.45, 0.10)\nset_cpt(SU, D, N,   0.10, 0.20, 0.60, 0.10)\nset_cpt(SU, D, D,   0.10, 0.10, 0.20, 0.60)\n\n# V107 = weakly upward\nset_cpt(WU, SU, SU, 0.90, 0.10, 0.00, 0.00)\nset_cpt(WU, SU, WU, 0.70, 0.30, 0.00, 0.00)\nset_cpt(WU, SU, N,  0.15, 0.70, 0.15, 0.00)\nset_cpt(WU, SU, D,  0.10, 0.35, 0.45, 0.10)\n\nset_cpt(WU, WU, SU, 0.70, 0.30, 0.00, 0.00)\nset_cpt(WU, WU, WU, 0.00, 1.00, 0.00, 0.00)\nset_cpt(WU, WU, N,  0.00, 0.70, 0.30, 0.00)\nset_cpt(WU, WU, D,  0.00, 0.20, 0.70, 0.10)\n\nset_cpt(WU, N, SU,  0.15, 0.70, 0.15, 0.00)\n# Premise text says neutral/downward \"50% probability for each\" while also weakly up 15%, impossible sum 115%.\n# Use the explicit listed weakly-up 15% and assign remaining 85% proportionally as 42.5/42.5.\nset_cpt(WU, N, WU,  0.00, 0.70, 0.30, 0.00)\nset_cpt(WU, N, N,   0.00, 0.30, 0.70, 0.00)\nset_cpt(WU, N, D,   0.00, 0.15, 0.425,",
+      "raw_response": "```python\nfrom itertools import product\n\n# States\nSU = \"strong_up\"\nWU = \"weak_up\"\nN = \"neutral\"\nD = \"down\"\n\nstates = [SU, WU, N, D]\n\n# Priors\nprior_v107 = {\n    SU: 0.25,\n    WU: 0.25,\n    N: 0.25,\n    D: 0.25,\n}\n\nprior_subjective = {\n    SU: 0.15,\n    WU: 0.15,\n    N: 0.50,\n    D: 0.20,\n}\n\nprior_qg = {\n    SU: 0.15,\n    WU: 0.15,\n    N: 0.50,\n    D: 0.20,\n}\n\n# CPT for Combined Vertical Motion C given (V107, Subjective, QG)\ncpt = {}\n\ndef set_cpt(v, s, q, su, wu, n, d):\n    cpt[(v, s, q)] = {SU: su, WU: wu, N: n, D: d}\n\n# V107 = strongly upward\nset_cpt(SU, SU, SU, 1.00, 0.00, 0.00, 0.00)\nset_cpt(SU, SU, WU, 0.90, 0.10, 0.00, 0.00)\nset_cpt(SU, SU, N,  0.70, 0.20, 0.10, 0.00)\nset_cpt(SU, SU, D,  0.20, 0.50, 0.20, 0.10)\n\nset_cpt(SU, WU, SU, 0.90, 0.10, 0.00, 0.00)\nset_cpt(SU, WU, WU, 0.70, 0.30, 0.00, 0.00)\nset_cpt(SU, WU, N,  0.15, 0.70, 0.15, 0.00)\nset_cpt(SU, WU, D,  0.10, 0.35, 0.45, 0.10)\n\nset_cpt(SU, N, SU,  0.70, 0.20, 0.10, 0.00)\nset_cpt(SU, N, WU,  0.15, 0.70, 0.15, 0.00)\nset_cpt(SU, N, N,   0.20, 0.60, 0.20, 0.00)\nset_cpt(SU, N, D,   0.10, 0.20, 0.60, 0.10)\n\nset_cpt(SU, D, SU,  0.20, 0.50, 0.20, 0.10)\nset_cpt(SU, D, WU,  0.10, 0.35, 0.45, 0.10)\nset_cpt(SU, D, N,   0.10, 0.20, 0.60, 0.10)\nset_cpt(SU, D, D,   0.10, 0.10, 0.20, 0.60)\n\n# V107 = weakly upward\nset_cpt(WU, SU, SU, 0.90, 0.10, 0.00, 0.00)\nset_cpt(WU, SU, WU, 0.70, 0.30, 0.00, 0.00)\nset_cpt(WU, SU, N,  0.15, 0.70, 0.15, 0.00)\nset_cpt(WU, SU, D,  0.10, 0.35, 0.45, 0.10)\n\nset_cpt(WU, WU, SU, 0.70, 0.30, 0.00, 0.00)\nset_cpt(WU, WU, WU, 0.00, 1.00, 0.00, 0.00)\nset_cpt(WU, WU, N,  0.00, 0.70, 0.30, 0.00)\nset_cpt(WU, WU, D,  0.00, 0.20, 0.70, 0.10)\n\nset_cpt(WU, N, SU,  0.15, 0.70, 0.15, 0.00)\n# Premise text says neutral/downward \"50% probability for each\" while also weakly up 15%, impossible sum 115%.\n# Use the explicit listed weakly-up 15% and assign remaining 85% proportionally as 42.5/42.5.\nset_cpt(WU, N, WU,  0.00, 0.70, 0.30, 0.00)\nset_cpt(WU, N, N,   0.00, 0.30, 0.70, 0.00)\nset_cpt(WU, N, D,   0.00, 0."
+    },
+    {
+      "network": "water1",
+      "pair_id": 1,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 8516,
+        "completion_tokens": 2674,
+        "cost_usd": 0.04268
+      },
+      "stdout": "0.0",
+      "stderr": "",
+      "code": "from fractions import Fraction\n\n# States\nCBODN_1200_states = [5, 10, 15, 20]\nCNON_1200_states = [2, 4, 6, 10]\nCBODD_1200_states = [15, 20, 25, 30]\nCBODN_1215_states = [5, 10, 15, 20]\n\n# Priors from premises\n# At 12:00, CBODN is certainly 10 mg/L\nprior_cbodn_1200 = {\n    5: 0.0,\n    10: 1.0,\n    15: 0.0,\n    20: 0.0,\n}\n\n# At 12:00, CNON is certainly 4 mg/L\nprior_cnon_1200 = {\n    2: 0.0,\n    4: 1.0,\n    6: 0.0,\n    10: 0.0,\n}\n\n# At 12:00, CBODD is certainly 20 mg/L\nprior_cbodd_1200 = {\n    15: 0.0,\n    20: 1.0,\n    25: 0.0,\n    30: 0.0,\n}\n\n# CPT for P(CBODN_1215 | CBODN_1200, CNON_1200, CBODD_1200)\n# Only entries needed by the evidence are necessary, but we include all stated ones.\ncpt = {}\n\ndef add(n0, cnon, cbodd, p5, p10, p15, p20):\n    cpt[(n0, cnon, cbodd)] = {5: p5, 10: p10, 15: p15, 20: p20}\n\n# CBODD = 15\nadd(5, 2, 15, 0.9557, 0.0443, 0.0, 0.0)\nadd(5, 4, 15, 0.9561, 0.0439, 0.0, 0.0)\nadd(5, 6, 15, 0.9562, 0.0438, 0.0, 0.0)\nadd(5,10, 15, 0.9564, 0.0436, 0.0, 0.0)\n\nadd(10, 2, 15, 0.0406, 0.9594, 0.0, 0.0)\nadd(10, 4, 15, 0.0412, 0.9588, 0.0, 0.0)\nadd(10, 6, 15, 0.0414, 0.9586, 0.0, 0.0)\nadd(10,10, 15, 0.0416, 0.9584, 0.0, 0.0)\n\nadd(15, 2, 15, 0.0, 0.1152, 0.8848, 0.0)\nadd(15, 4, 15, 0.0, 0.1160, 0.8840, 0.0)\nadd(15, 6, 15, 0.0, 0.1163, 0.8837, 0.0)\nadd(15,10, 15, 0.0, 0.1166, 0.8834, 0.0)\n\nadd(20, 2, 15, 0.0, 0.0, 0.1835, 0.8165)\nadd(20, 4, 15, 0.0, 0.0, 0.1844, 0.8156)\nadd(20, 6, 15, 0.0, 0.0, 0.1847, 0.8153)\n# Premise has typo \"18%.5%\"; interpret as 18.5% so rows sum to 1\nadd(20,10, 15, 0.0, 0.0, 0.1850, 0.8150)\n\n# CBODD = 20\nadd(5, 2, 20, 0.9067, 0.0933, 0.0, 0.0)\nadd(5, 4, 20, 0.9071, 0.0929, 0.0, 0.0)\nadd(5, 6, 20, 0.9072, 0.0928, 0.0, 0.0)\nadd(5,10, 20, 0.9073, 0.0927, 0.0, 0.0)\n\nadd(10, 2, 20, 0.0, 0.9916, 0.0084, 0.0)\nadd(10, 4, 20, 0.0, 0.9922, 0.0078, 0.0)\nadd(10, 6, 20, 0.0, 0.9924, 0.0076, 0.0)\nadd(10,10, 20, 0.0, 0.9926, 0.0074, 0.0)\n\nadd(15, 2, 20, 0.0, 0.0662, 0.9338, 0.0)\nadd(15, 4, 20, 0.0, 0.0670, 0.9330, 0.0)\nadd(15, 6, 20, 0.0, 0.0673, 0.9327,",
+      "raw_response": "```python\nfrom fractions import Fraction\n\n# States\nCBODN_1200_states = [5, 10, 15, 20]\nCNON_1200_states = [2, 4, 6, 10]\nCBODD_1200_states = [15, 20, 25, 30]\nCBODN_1215_states = [5, 10, 15, 20]\n\n# Priors from premises\n# At 12:00, CBODN is certainly 10 mg/L\nprior_cbodn_1200 = {\n    5: 0.0,\n    10: 1.0,\n    15: 0.0,\n    20: 0.0,\n}\n\n# At 12:00, CNON is certainly 4 mg/L\nprior_cnon_1200 = {\n    2: 0.0,\n    4: 1.0,\n    6: 0.0,\n    10: 0.0,\n}\n\n# At 12:00, CBODD is certainly 20 mg/L\nprior_cbodd_1200 = {\n    15: 0.0,\n    20: 1.0,\n    25: 0.0,\n    30: 0.0,\n}\n\n# CPT for P(CBODN_1215 | CBODN_1200, CNON_1200, CBODD_1200)\n# Only entries needed by the evidence are necessary, but we include all stated ones.\ncpt = {}\n\ndef add(n0, cnon, cbodd, p5, p10, p15, p20):\n    cpt[(n0, cnon, cbodd)] = {5: p5, 10: p10, 15: p15, 20: p20}\n\n# CBODD = 15\nadd(5, 2, 15, 0.9557, 0.0443, 0.0, 0.0)\nadd(5, 4, 15, 0.9561, 0.0439, 0.0, 0.0)\nadd(5, 6, 15, 0.9562, 0.0438, 0.0, 0.0)\nadd(5,10, 15, 0.9564, 0.0436, 0.0, 0.0)\n\nadd(10, 2, 15, 0.0406, 0.9594, 0.0, 0.0)\nadd(10, 4, 15, 0.0412, 0.9588, 0.0, 0.0)\nadd(10, 6, 15, 0.0414, 0.9586, 0.0, 0.0)\nadd(10,10, 15, 0.0416, 0.9584, 0.0, 0.0)\n\nadd(15, 2, 15, 0.0, 0.1152, 0.8848, 0.0)\nadd(15, 4, 15, 0.0, 0.1160, 0.8840, 0.0)\nadd(15, 6, 15, 0.0, 0.1163, 0.8837, 0.0)\nadd(15,10, 15, 0.0, 0.1166, 0.8834, 0.0)\n\nadd(20, 2, 15, 0.0, 0.0, 0.1835, 0.8165)\nadd(20, 4, 15, 0.0, 0.0, 0.1844, 0.8156)\nadd(20, 6, 15, 0.0, 0.0, 0.1847, 0.8153)\n# Premise has typo \"18%.5%\"; interpret as 18.5% so rows sum to 1\nadd(20,10, 15, 0.0, 0.0, 0.1850, 0.8150)\n\n# CBODD = 20\nadd(5, 2, 20, 0.9067, 0.0933, 0.0, 0.0)\nadd(5, 4, 20, 0.9071, 0.0929, 0.0, 0.0)\nadd(5, 6, 20, 0.9072, 0.0928, 0.0, 0.0)\nadd(5,10, 20, 0.9073, 0.0927, 0.0, 0.0)\n\nadd(10, 2, 20, 0.0, 0.9916, 0.0084, 0.0)\nadd(10, 4, 20, 0.0, 0.9922, 0.0078, 0.0)\nadd(10, 6, 20, 0.0, 0.9924, 0.0076, 0.0)\nadd(10,10, 20, 0.0, 0.9926, 0.0074, 0.0)\n\nadd(15, 2, 20, 0.0, 0.0662, 0.9338, 0.0)\nadd(15, 4, 20, 0.0, 0.0670, 0.9330, 0.0)\nadd(15, 6, 20, 0.0, 0.067"
+    },
+    {
+      "network": "water1",
+      "pair_id": 7,
+      "gold": 0.0078,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0078,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 8516,
+        "completion_tokens": 3332,
+        "cost_usd": 0.05255
+      },
+      "stdout": "0.0078",
+      "stderr": "",
+      "code": "from itertools import product\n\n# States\nCBODN_0_states = [5, 10, 15, 20]\nCNON_0_states = [2, 4, 6, 10]\nCBODD_0_states = [15, 20, 25, 30]\nCBODN_15_states = [5, 10, 15, 20]\n\n# Priors at 12:00 from premises\nP_CBODN_0 = {5: 0.0, 10: 1.0, 15: 0.0, 20: 0.0}\nP_CNON_0 = {2: 0.0, 4: 1.0, 6: 0.0, 10: 0.0}\nP_CBODD_0 = {15: 0.0, 20: 1.0, 25: 0.0, 30: 0.0}\n\n# CPT: P(CBODN_15 | CBODN_0, CNON_0, CBODD_0)\ncpt = {}\n\n# CBODD = 15\nfor cnon, probs in {\n    2: {5: 0.9557, 10: 0.0443, 15: 0.0, 20: 0.0},\n    4: {5: 0.9561, 10: 0.0439, 15: 0.0, 20: 0.0},\n    6: {5: 0.9562, 10: 0.0438, 15: 0.0, 20: 0.0},\n    10: {5: 0.9564, 10: 0.0436, 15: 0.0, 20: 0.0},\n}.items():\n    cpt[(5, cnon, 15)] = probs\n\nfor cnon, probs in {\n    2: {5: 0.0406, 10: 0.9594, 15: 0.0, 20: 0.0},\n    4: {5: 0.0412, 10: 0.9588, 15: 0.0, 20: 0.0},\n    6: {5: 0.0414, 10: 0.9586, 15: 0.0, 20: 0.0},\n    10: {5: 0.0416, 10: 0.9584, 15: 0.0, 20: 0.0},\n}.items():\n    cpt[(10, cnon, 15)] = probs\n\nfor cnon, probs in {\n    2: {5: 0.0, 10: 0.1152, 15: 0.8848, 20: 0.0},\n    4: {5: 0.0, 10: 0.1160, 15: 0.8840, 20: 0.0},\n    6: {5: 0.0, 10: 0.1163, 15: 0.8837, 20: 0.0},\n    10: {5: 0.0, 10: 0.1166, 15: 0.8834, 20: 0.0},\n}.items():\n    cpt[(15, cnon, 15)] = probs\n\nfor cnon, probs in {\n    2: {5: 0.0, 10: 0.0, 15: 0.1835, 20: 0.8165},\n    4: {5: 0.0, 10: 0.0, 15: 0.1844, 20: 0.8156},\n    6: {5: 0.0, 10: 0.0, 15: 0.1847, 20: 0.8153},\n    10: {5: 0.0, 10: 0.0, 15: 0.1850, 20: 0.8150},  # interpreted from malformed \"18%.5%\"\n}.items():\n    cpt[(20, cnon, 15)] = probs\n\n# CBODD = 20\nfor cnon, probs in {\n    2: {5: 0.9067, 10: 0.0933, 15: 0.0, 20: 0.0},\n    4: {5: 0.9071, 10: 0.0929, 15: 0.0, 20: 0.0},\n    6: {5: 0.9072, 10: 0.0928, 15: 0.0, 20: 0.0},\n    10: {5: 0.9073, 10: 0.0927, 15: 0.0, 20: 0.0},\n}.items():\n    cpt[(5, cnon, 20)] = probs\n\nfor cnon, probs in {\n    2: {5: 0.0, 10: 0.9916, 15: 0.0084, 20: 0.0},\n    4: {5: 0.0, 10: 0.9922, 15: 0.0078, 20: 0.0},\n    6: {5: 0.0, 10: 0.9924, 15: 0.0076, 20: 0.0},\n    10: {5: 0.0, 10: 0.9926, 15: ",
+      "raw_response": "```python\nfrom itertools import product\n\n# States\nCBODN_0_states = [5, 10, 15, 20]\nCNON_0_states = [2, 4, 6, 10]\nCBODD_0_states = [15, 20, 25, 30]\nCBODN_15_states = [5, 10, 15, 20]\n\n# Priors at 12:00 from premises\nP_CBODN_0 = {5: 0.0, 10: 1.0, 15: 0.0, 20: 0.0}\nP_CNON_0 = {2: 0.0, 4: 1.0, 6: 0.0, 10: 0.0}\nP_CBODD_0 = {15: 0.0, 20: 1.0, 25: 0.0, 30: 0.0}\n\n# CPT: P(CBODN_15 | CBODN_0, CNON_0, CBODD_0)\ncpt = {}\n\n# CBODD = 15\nfor cnon, probs in {\n    2: {5: 0.9557, 10: 0.0443, 15: 0.0, 20: 0.0},\n    4: {5: 0.9561, 10: 0.0439, 15: 0.0, 20: 0.0},\n    6: {5: 0.9562, 10: 0.0438, 15: 0.0, 20: 0.0},\n    10: {5: 0.9564, 10: 0.0436, 15: 0.0, 20: 0.0},\n}.items():\n    cpt[(5, cnon, 15)] = probs\n\nfor cnon, probs in {\n    2: {5: 0.0406, 10: 0.9594, 15: 0.0, 20: 0.0},\n    4: {5: 0.0412, 10: 0.9588, 15: 0.0, 20: 0.0},\n    6: {5: 0.0414, 10: 0.9586, 15: 0.0, 20: 0.0},\n    10: {5: 0.0416, 10: 0.9584, 15: 0.0, 20: 0.0},\n}.items():\n    cpt[(10, cnon, 15)] = probs\n\nfor cnon, probs in {\n    2: {5: 0.0, 10: 0.1152, 15: 0.8848, 20: 0.0},\n    4: {5: 0.0, 10: 0.1160, 15: 0.8840, 20: 0.0},\n    6: {5: 0.0, 10: 0.1163, 15: 0.8837, 20: 0.0},\n    10: {5: 0.0, 10: 0.1166, 15: 0.8834, 20: 0.0},\n}.items():\n    cpt[(15, cnon, 15)] = probs\n\nfor cnon, probs in {\n    2: {5: 0.0, 10: 0.0, 15: 0.1835, 20: 0.8165},\n    4: {5: 0.0, 10: 0.0, 15: 0.1844, 20: 0.8156},\n    6: {5: 0.0, 10: 0.0, 15: 0.1847, 20: 0.8153},\n    10: {5: 0.0, 10: 0.0, 15: 0.1850, 20: 0.8150},  # interpreted from malformed \"18%.5%\"\n}.items():\n    cpt[(20, cnon, 15)] = probs\n\n# CBODD = 20\nfor cnon, probs in {\n    2: {5: 0.9067, 10: 0.0933, 15: 0.0, 20: 0.0},\n    4: {5: 0.9071, 10: 0.0929, 15: 0.0, 20: 0.0},\n    6: {5: 0.9072, 10: 0.0928, 15: 0.0, 20: 0.0},\n    10: {5: 0.9073, 10: 0.0927, 15: 0.0, 20: 0.0},\n}.items():\n    cpt[(5, cnon, 20)] = probs\n\nfor cnon, probs in {\n    2: {5: 0.0, 10: 0.9916, 15: 0.0084, 20: 0.0},\n    4: {5: 0.0, 10: 0.9922, 15: 0.0078, 20: 0.0},\n    6: {5: 0.0, 10: 0.9924, 15: 0.0076, 20: 0.0},\n    10: {5: 0.0, 10: 0."
+    },
+    {
+      "network": "water1",
+      "pair_id": 2,
+      "gold": 0.0,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 8510,
+        "completion_tokens": 384,
+        "cost_usd": 0.008315
+      },
+      "stdout": "0.0",
+      "stderr": "",
+      "code": "# Bayesian-network inference for:\n# P(CBODD_12:00 = 25 | CNON_12:00 = 4)\n#\n# From the premises:\n# - CNON at 12:00 is certainly 4 mg/L.\n# - CBODD at 12:00 is certainly 20 mg/L (15, 25, 30 all have probability 0).\n#\n# Therefore, regardless of the evidence CNON=4, the posterior probability that\n# CBODD=25 at 12:00 is 0.\n\ndef main():\n    # Domains\n    cbodd_states = [15, 20, 25, 30]\n    cnon_states = [2, 4, 6, 10]\n\n    # Priors from premises\n    P_CBODD = {15: 0.0, 20: 1.0, 25: 0.0, 30: 0.0}\n    P_CNON = {2: 0.0, 4: 1.0, 6: 0.0, 10: 0.0}\n\n    evidence_cnon = 4\n    query_cbodd = 25\n\n    # Since CBODD and CNON are root variables with given priors, and both are deterministic:\n    # P(query | evidence) = P(query, evidence) / P(evidence)\n    numerator = P_CBODD[query_cbodd] * P_CNON[evidence_cnon]\n    denominator = sum(P_CBODD[d] * P_CNON[evidence_cnon] for d in cbodd_states)\n\n    posterior = 0.0 if denominator == 0 else numerator / denominator\n    print(float(posterior))\n\nif __name__ == \"__main__\":\n    main()",
+      "raw_response": "```python\n# Bayesian-network inference for:\n# P(CBODD_12:00 = 25 | CNON_12:00 = 4)\n#\n# From the premises:\n# - CNON at 12:00 is certainly 4 mg/L.\n# - CBODD at 12:00 is certainly 20 mg/L (15, 25, 30 all have probability 0).\n#\n# Therefore, regardless of the evidence CNON=4, the posterior probability that\n# CBODD=25 at 12:00 is 0.\n\ndef main():\n    # Domains\n    cbodd_states = [15, 20, 25, 30]\n    cnon_states = [2, 4, 6, 10]\n\n    # Priors from premises\n    P_CBODD = {15: 0.0, 20: 1.0, 25: 0.0, 30: 0.0}\n    P_CNON = {2: 0.0, 4: 1.0, 6: 0.0, 10: 0.0}\n\n    evidence_cnon = 4\n    query_cbodd = 25\n\n    # Since CBODD and CNON are root variables with given priors, and both are deterministic:\n    # P(query | evidence) = P(query, evidence) / P(evidence)\n    numerator = P_CBODD[query_cbodd] * P_CNON[evidence_cnon]\n    denominator = sum(P_CBODD[d] * P_CNON[evidence_cnon] for d in cbodd_states)\n\n    posterior = 0.0 if denominator == 0 else numerator / denominator\n    print(float(posterior))\n\nif __name__ == \"__main__\":\n    main()\n```"
+    },
+    {
+      "network": "water1",
+      "pair_id": 3,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 8514,
+        "completion_tokens": 3486,
+        "cost_usd": 0.054855
+      },
+      "stdout": "0.0",
+      "stderr": "",
+      "code": "from itertools import product\n\n# States\nCBODN0_states = [5, 10, 15, 20]\nCNON0_states = [2, 4, 6, 10]\nCBODD0_states = [15, 20, 25, 30]\nCBODN1_states = [5, 10, 15, 20]\n\n# Priors at 12:00 from premises\nP_CBODN0 = {5: 0.0, 10: 1.0, 15: 0.0, 20: 0.0}\nP_CNON0 = {2: 0.0, 4: 1.0, 6: 0.0, 10: 0.0}\nP_CBODD0 = {15: 0.0, 20: 1.0, 25: 0.0, 30: 0.0}\n\n# CPT: P(CBODN1 | CBODN0, CNON0, CBODD0)\nCPT = {}\n\ndef set_cpt(cbodn0, cnon0, cbodd0, probs):\n    CPT[(cbodn0, cnon0, cbodd0)] = probs\n\n# CBODD0 = 15\nset_cpt(5, 2, 15, {5: 0.9557, 10: 0.0443, 15: 0.0, 20: 0.0})\nset_cpt(5, 4, 15, {5: 0.9561, 10: 0.0439, 15: 0.0, 20: 0.0})\nset_cpt(5, 6, 15, {5: 0.9562, 10: 0.0438, 15: 0.0, 20: 0.0})\nset_cpt(5, 10, 15, {5: 0.9564, 10: 0.0436, 15: 0.0, 20: 0.0})\n\nset_cpt(10, 2, 15, {5: 0.0406, 10: 0.9594, 15: 0.0, 20: 0.0})\nset_cpt(10, 4, 15, {5: 0.0412, 10: 0.9588, 15: 0.0, 20: 0.0})\nset_cpt(10, 6, 15, {5: 0.0414, 10: 0.9586, 15: 0.0, 20: 0.0})\nset_cpt(10, 10, 15, {5: 0.0416, 10: 0.9584, 15: 0.0, 20: 0.0})\n\nset_cpt(15, 2, 15, {5: 0.0, 10: 0.1152, 15: 0.8848, 20: 0.0})\nset_cpt(15, 4, 15, {5: 0.0, 10: 0.1160, 15: 0.8840, 20: 0.0})\nset_cpt(15, 6, 15, {5: 0.0, 10: 0.1163, 15: 0.8837, 20: 0.0})\nset_cpt(15, 10, 15, {5: 0.0, 10: 0.1166, 15: 0.8834, 20: 0.0})\n\nset_cpt(20, 2, 15, {5: 0.0, 10: 0.0, 15: 0.1835, 20: 0.8165})\nset_cpt(20, 4, 15, {5: 0.0, 10: 0.0, 15: 0.1844, 20: 0.8156})\nset_cpt(20, 6, 15, {5: 0.0, 10: 0.0, 15: 0.1847, 20: 0.8153})\n# Premise has typo \"18%.5%\"; use complement of 81.5%\nset_cpt(20, 10, 15, {5: 0.0, 10: 0.0, 15: 0.1850, 20: 0.8150})\n\n# CBODD0 = 20\nset_cpt(5, 2, 20, {5: 0.9067, 10: 0.0933, 15: 0.0, 20: 0.0})\nset_cpt(5, 4, 20, {5: 0.9071, 10: 0.0929, 15: 0.0, 20: 0.0})\nset_cpt(5, 6, 20, {5: 0.9072, 10: 0.0928, 15: 0.0, 20: 0.0})\nset_cpt(5, 10, 20, {5: 0.9073, 10: 0.0927, 15: 0.0, 20: 0.0})\n\nset_cpt(10, 2, 20, {5: 0.0, 10: 0.9916, 15: 0.0084, 20: 0.0})\nset_cpt(10, 4, 20, {5: 0.0, 10: 0.9922, 15: 0.0078, 20: 0.0})\nset_cpt(10, 6, 20, {5: 0.0, 10: 0.9924, 15: 0.0076, 20: 0.0})\nset_cpt(10, 10, ",
+      "raw_response": "```python\nfrom itertools import product\n\n# States\nCBODN0_states = [5, 10, 15, 20]\nCNON0_states = [2, 4, 6, 10]\nCBODD0_states = [15, 20, 25, 30]\nCBODN1_states = [5, 10, 15, 20]\n\n# Priors at 12:00 from premises\nP_CBODN0 = {5: 0.0, 10: 1.0, 15: 0.0, 20: 0.0}\nP_CNON0 = {2: 0.0, 4: 1.0, 6: 0.0, 10: 0.0}\nP_CBODD0 = {15: 0.0, 20: 1.0, 25: 0.0, 30: 0.0}\n\n# CPT: P(CBODN1 | CBODN0, CNON0, CBODD0)\nCPT = {}\n\ndef set_cpt(cbodn0, cnon0, cbodd0, probs):\n    CPT[(cbodn0, cnon0, cbodd0)] = probs\n\n# CBODD0 = 15\nset_cpt(5, 2, 15, {5: 0.9557, 10: 0.0443, 15: 0.0, 20: 0.0})\nset_cpt(5, 4, 15, {5: 0.9561, 10: 0.0439, 15: 0.0, 20: 0.0})\nset_cpt(5, 6, 15, {5: 0.9562, 10: 0.0438, 15: 0.0, 20: 0.0})\nset_cpt(5, 10, 15, {5: 0.9564, 10: 0.0436, 15: 0.0, 20: 0.0})\n\nset_cpt(10, 2, 15, {5: 0.0406, 10: 0.9594, 15: 0.0, 20: 0.0})\nset_cpt(10, 4, 15, {5: 0.0412, 10: 0.9588, 15: 0.0, 20: 0.0})\nset_cpt(10, 6, 15, {5: 0.0414, 10: 0.9586, 15: 0.0, 20: 0.0})\nset_cpt(10, 10, 15, {5: 0.0416, 10: 0.9584, 15: 0.0, 20: 0.0})\n\nset_cpt(15, 2, 15, {5: 0.0, 10: 0.1152, 15: 0.8848, 20: 0.0})\nset_cpt(15, 4, 15, {5: 0.0, 10: 0.1160, 15: 0.8840, 20: 0.0})\nset_cpt(15, 6, 15, {5: 0.0, 10: 0.1163, 15: 0.8837, 20: 0.0})\nset_cpt(15, 10, 15, {5: 0.0, 10: 0.1166, 15: 0.8834, 20: 0.0})\n\nset_cpt(20, 2, 15, {5: 0.0, 10: 0.0, 15: 0.1835, 20: 0.8165})\nset_cpt(20, 4, 15, {5: 0.0, 10: 0.0, 15: 0.1844, 20: 0.8156})\nset_cpt(20, 6, 15, {5: 0.0, 10: 0.0, 15: 0.1847, 20: 0.8153})\n# Premise has typo \"18%.5%\"; use complement of 81.5%\nset_cpt(20, 10, 15, {5: 0.0, 10: 0.0, 15: 0.1850, 20: 0.8150})\n\n# CBODD0 = 20\nset_cpt(5, 2, 20, {5: 0.9067, 10: 0.0933, 15: 0.0, 20: 0.0})\nset_cpt(5, 4, 20, {5: 0.9071, 10: 0.0929, 15: 0.0, 20: 0.0})\nset_cpt(5, 6, 20, {5: 0.9072, 10: 0.0928, 15: 0.0, 20: 0.0})\nset_cpt(5, 10, 20, {5: 0.9073, 10: 0.0927, 15: 0.0, 20: 0.0})\n\nset_cpt(10, 2, 20, {5: 0.0, 10: 0.9916, 15: 0.0084, 20: 0.0})\nset_cpt(10, 4, 20, {5: 0.0, 10: 0.9922, 15: 0.0078, 20: 0.0})\nset_cpt(10, 6, 20, {5: 0.0, 10: 0.9924, 15: 0.0076, 20: 0.0})\nset_cp"
+    },
+    {
+      "network": "water1",
+      "pair_id": 4,
+      "gold": 1.0,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 8535,
+        "completion_tokens": 3136,
+        "cost_usd": 0.0496575
+      },
+      "stdout": "1.0",
+      "stderr": "",
+      "code": "from itertools import product\n\n# States\nCBODN0_states = [5, 10, 15, 20]\nCNON0_states = [2, 4, 6, 10]\nCBODD0_states = [15, 20, 25, 30]\nCBODN1_states = [5, 10, 15, 20]\n\n# Priors from premises\nP_CBODN0 = {5: 0.0, 10: 1.0, 15: 0.0, 20: 0.0}\nP_CNON0 = {2: 0.0, 4: 1.0, 6: 0.0, 10: 0.0}\nP_CBODD0 = {15: 0.0, 20: 1.0, 25: 0.0, 30: 0.0}\n\n# CPT for P(CBODN1 | CBODN0, CNON0, CBODD0)\n# Format: (CBODN0, CNON0, CBODD0) -> {CBODN1: prob, ...}\nCPT = {}\n\n# CBODD0 = 15\nCPT[(5,2,15)] = {5:0.9557, 10:0.0443, 15:0.0, 20:0.0}\nCPT[(5,4,15)] = {5:0.9561, 10:0.0439, 15:0.0, 20:0.0}\nCPT[(5,6,15)] = {5:0.9562, 10:0.0438, 15:0.0, 20:0.0}\nCPT[(5,10,15)] = {5:0.9564, 10:0.0436, 15:0.0, 20:0.0}\nCPT[(10,2,15)] = {5:0.0406, 10:0.9594, 15:0.0, 20:0.0}\nCPT[(10,4,15)] = {5:0.0412, 10:0.9588, 15:0.0, 20:0.0}\nCPT[(10,6,15)] = {5:0.0414, 10:0.9586, 15:0.0, 20:0.0}\nCPT[(10,10,15)] = {5:0.0416, 10:0.9584, 15:0.0, 20:0.0}\nCPT[(15,2,15)] = {5:0.0, 10:0.1152, 15:0.8848, 20:0.0}\nCPT[(15,4,15)] = {5:0.0, 10:0.1160, 15:0.8840, 20:0.0}\nCPT[(15,6,15)] = {5:0.0, 10:0.1163, 15:0.8837, 20:0.0}\nCPT[(15,10,15)] = {5:0.0, 10:0.1166, 15:0.8834, 20:0.0}\nCPT[(20,2,15)] = {5:0.0, 10:0.0, 15:0.1835, 20:0.8165}\nCPT[(20,4,15)] = {5:0.0, 10:0.0, 15:0.1844, 20:0.8156}\nCPT[(20,6,15)] = {5:0.0, 10:0.0, 15:0.1847, 20:0.8153}\n# Premise has typo \"18%.5%\"; use complement to 81.5%\nCPT[(20,10,15)] = {5:0.0, 10:0.0, 15:0.1850, 20:0.8150}\n\n# CBODD0 = 20\nCPT[(5,2,20)] = {5:0.9067, 10:0.0933, 15:0.0, 20:0.0}\nCPT[(5,4,20)] = {5:0.9071, 10:0.0929, 15:0.0, 20:0.0}\nCPT[(5,6,20)] = {5:0.9072, 10:0.0928, 15:0.0, 20:0.0}\nCPT[(5,10,20)] = {5:0.9073, 10:0.0927, 15:0.0, 20:0.0}\nCPT[(10,2,20)] = {5:0.0, 10:0.9916, 15:0.0084, 20:0.0}\nCPT[(10,4,20)] = {5:0.0, 10:0.9922, 15:0.0078, 20:0.0}\nCPT[(10,6,20)] = {5:0.0, 10:0.9924, 15:0.0076, 20:0.0}\nCPT[(10,10,20)] = {5:0.0, 10:0.9926, 15:0.0074, 20:0.0}\nCPT[(15,2,20)] = {5:0.0, 10:0.0662, 15:0.9338, 20:0.0}\nCPT[(15,4,20)] = {5:0.0, 10:0.0670, 15:0.9330, 20:0.0}\nCPT[(15,6,20)] = {5:0.0, 10:0.0673, 15:0.9327, 20",
+      "raw_response": "```python\nfrom itertools import product\n\n# States\nCBODN0_states = [5, 10, 15, 20]\nCNON0_states = [2, 4, 6, 10]\nCBODD0_states = [15, 20, 25, 30]\nCBODN1_states = [5, 10, 15, 20]\n\n# Priors from premises\nP_CBODN0 = {5: 0.0, 10: 1.0, 15: 0.0, 20: 0.0}\nP_CNON0 = {2: 0.0, 4: 1.0, 6: 0.0, 10: 0.0}\nP_CBODD0 = {15: 0.0, 20: 1.0, 25: 0.0, 30: 0.0}\n\n# CPT for P(CBODN1 | CBODN0, CNON0, CBODD0)\n# Format: (CBODN0, CNON0, CBODD0) -> {CBODN1: prob, ...}\nCPT = {}\n\n# CBODD0 = 15\nCPT[(5,2,15)] = {5:0.9557, 10:0.0443, 15:0.0, 20:0.0}\nCPT[(5,4,15)] = {5:0.9561, 10:0.0439, 15:0.0, 20:0.0}\nCPT[(5,6,15)] = {5:0.9562, 10:0.0438, 15:0.0, 20:0.0}\nCPT[(5,10,15)] = {5:0.9564, 10:0.0436, 15:0.0, 20:0.0}\nCPT[(10,2,15)] = {5:0.0406, 10:0.9594, 15:0.0, 20:0.0}\nCPT[(10,4,15)] = {5:0.0412, 10:0.9588, 15:0.0, 20:0.0}\nCPT[(10,6,15)] = {5:0.0414, 10:0.9586, 15:0.0, 20:0.0}\nCPT[(10,10,15)] = {5:0.0416, 10:0.9584, 15:0.0, 20:0.0}\nCPT[(15,2,15)] = {5:0.0, 10:0.1152, 15:0.8848, 20:0.0}\nCPT[(15,4,15)] = {5:0.0, 10:0.1160, 15:0.8840, 20:0.0}\nCPT[(15,6,15)] = {5:0.0, 10:0.1163, 15:0.8837, 20:0.0}\nCPT[(15,10,15)] = {5:0.0, 10:0.1166, 15:0.8834, 20:0.0}\nCPT[(20,2,15)] = {5:0.0, 10:0.0, 15:0.1835, 20:0.8165}\nCPT[(20,4,15)] = {5:0.0, 10:0.0, 15:0.1844, 20:0.8156}\nCPT[(20,6,15)] = {5:0.0, 10:0.0, 15:0.1847, 20:0.8153}\n# Premise has typo \"18%.5%\"; use complement to 81.5%\nCPT[(20,10,15)] = {5:0.0, 10:0.0, 15:0.1850, 20:0.8150}\n\n# CBODD0 = 20\nCPT[(5,2,20)] = {5:0.9067, 10:0.0933, 15:0.0, 20:0.0}\nCPT[(5,4,20)] = {5:0.9071, 10:0.0929, 15:0.0, 20:0.0}\nCPT[(5,6,20)] = {5:0.9072, 10:0.0928, 15:0.0, 20:0.0}\nCPT[(5,10,20)] = {5:0.9073, 10:0.0927, 15:0.0, 20:0.0}\nCPT[(10,2,20)] = {5:0.0, 10:0.9916, 15:0.0084, 20:0.0}\nCPT[(10,4,20)] = {5:0.0, 10:0.9922, 15:0.0078, 20:0.0}\nCPT[(10,6,20)] = {5:0.0, 10:0.9924, 15:0.0076, 20:0.0}\nCPT[(10,10,20)] = {5:0.0, 10:0.9926, 15:0.0074, 20:0.0}\nCPT[(15,2,20)] = {5:0.0, 10:0.0662, 15:0.9338, 20:0.0}\nCPT[(15,4,20)] = {5:0.0, 10:0.0670, 15:0.9330, 20:0.0}\nCPT[(15,6,20)] = {5:0.0, 10:0.0673, 15:"
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 9,
+      "gold": 0.88394073,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.8839742183077625,
+      "abs_error": 3.348830776250811e-05,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 5177,
+        "completion_tokens": 1769,
+        "cost_usd": 0.0394775
+      },
+      "stdout": "0.8839742183077625",
+      "stderr": "",
+      "code": "from itertools import product\n\nstates = [\"low\", \"avg\", \"high\"]\n\n# Prior for PKC\nP_PKC = {\n    \"low\": 0.4231,\n    \"avg\": 0.4816,\n    \"high\": 0.0952,\n}\n\n# CPT: P(PKA | PKC)\nP_PKA_given_PKC = {\n    \"low\":  {\"low\": 0.3864, \"avg\": 0.3794, \"high\": 0.2342},\n    \"avg\":  {\"low\": 0.0604, \"avg\": 0.9226, \"high\": 0.0170},\n    \"high\": {\"low\": 0.0158, \"avg\": 0.9587, \"high\": 0.0255},\n}\n\n# CPT: P(Raf | PKA, PKC)\nP_Raf_given_PKA_PKC = {\n    (\"low\", \"low\"):   {\"low\": 0.0623, \"avg\": 0.1472, \"high\": 0.7904},\n    (\"low\", \"avg\"):   {\"low\": 0.3694, \"avg\": 0.3312, \"high\": 0.2994},\n    (\"low\", \"high\"):  {\"low\": 0.8675, \"avg\": 0.1279, \"high\": 0.0046},\n    (\"avg\", \"low\"):   {\"low\": 0.4475, \"avg\": 0.3126, \"high\": 0.2399},\n    (\"avg\", \"avg\"):   {\"low\": 0.5508, \"avg\": 0.3929, \"high\": 0.0563},\n    (\"avg\", \"high\"):  {\"low\": 0.8842, \"avg\": 0.1157, \"high\": 0.000075},\n    (\"high\", \"low\"):  {\"low\": 0.8429, \"avg\": 0.1271, \"high\": 0.0299},\n    (\"high\", \"avg\"):  {\"low\": 0.7489, \"avg\": 0.1595, \"high\": 0.0915},\n    (\"high\", \"high\"): {\"low\": 0.8418, \"avg\": 0.1554, \"high\": 0.0028},\n}\n\n# CPT: P(MEK | PKC, PKA, Raf)\nP_MEK_given_PKC_PKA_Raf = {\n    (\"low\",  \"low\",  \"low\"):  {\"low\": 0.7440, \"avg\": 0.2550, \"high\": 0.0002},\n    (\"low\",  \"low\",  \"avg\"):  {\"low\": 0.3850, \"avg\": 0.1230, \"high\": 0.4920},\n    (\"low\",  \"low\",  \"high\"): {\"low\": 0.2620, \"avg\": 0.0015, \"high\": 0.7360},\n\n    (\"avg\",  \"low\",  \"low\"):  {\"low\": 0.7060, \"avg\": 0.2930, \"high\": 0.0002},\n    (\"avg\",  \"low\",  \"avg\"):  {\"low\": 0.2690, \"avg\": 0.7300, \"high\": 0.0002},\n    (\"avg\",  \"low\",  \"high\"): {\"low\": 0.8500, \"avg\": 0.1070, \"high\": 0.0430},\n\n    (\"high\", \"low\",  \"low\"):  {\"low\": 0.8540, \"avg\": 0.1440, \"high\": 0.0018},\n    (\"high\", \"low\",  \"avg\"):  {\"low\": 0.0120, \"avg\": 0.9760, \"high\": 0.0120},\n    (\"high\", \"low\",  \"high\"): {\"low\": 0.3330, \"avg\": 0.3330, \"high\": 0.3330},\n\n    (\"low\",  \"avg\",  \"low\"):  {\"low\": 0.7570, \"avg\": 0.2420, \"high\": 0.00000032},\n    (\"low\",  \"avg\",  \"avg\"):  {\"low\": 0.3430, \"avg\": 0.6490, \"high\": 0.0074},\n    (\"low\",  \"avg\",",
+      "raw_response": "```python\nfrom itertools import product\n\nstates = [\"low\", \"avg\", \"high\"]\n\n# Prior for PKC\nP_PKC = {\n    \"low\": 0.4231,\n    \"avg\": 0.4816,\n    \"high\": 0.0952,\n}\n\n# CPT: P(PKA | PKC)\nP_PKA_given_PKC = {\n    \"low\":  {\"low\": 0.3864, \"avg\": 0.3794, \"high\": 0.2342},\n    \"avg\":  {\"low\": 0.0604, \"avg\": 0.9226, \"high\": 0.0170},\n    \"high\": {\"low\": 0.0158, \"avg\": 0.9587, \"high\": 0.0255},\n}\n\n# CPT: P(Raf | PKA, PKC)\nP_Raf_given_PKA_PKC = {\n    (\"low\", \"low\"):   {\"low\": 0.0623, \"avg\": 0.1472, \"high\": 0.7904},\n    (\"low\", \"avg\"):   {\"low\": 0.3694, \"avg\": 0.3312, \"high\": 0.2994},\n    (\"low\", \"high\"):  {\"low\": 0.8675, \"avg\": 0.1279, \"high\": 0.0046},\n    (\"avg\", \"low\"):   {\"low\": 0.4475, \"avg\": 0.3126, \"high\": 0.2399},\n    (\"avg\", \"avg\"):   {\"low\": 0.5508, \"avg\": 0.3929, \"high\": 0.0563},\n    (\"avg\", \"high\"):  {\"low\": 0.8842, \"avg\": 0.1157, \"high\": 0.000075},\n    (\"high\", \"low\"):  {\"low\": 0.8429, \"avg\": 0.1271, \"high\": 0.0299},\n    (\"high\", \"avg\"):  {\"low\": 0.7489, \"avg\": 0.1595, \"high\": 0.0915},\n    (\"high\", \"high\"): {\"low\": 0.8418, \"avg\": 0.1554, \"high\": 0.0028},\n}\n\n# CPT: P(MEK | PKC, PKA, Raf)\nP_MEK_given_PKC_PKA_Raf = {\n    (\"low\",  \"low\",  \"low\"):  {\"low\": 0.7440, \"avg\": 0.2550, \"high\": 0.0002},\n    (\"low\",  \"low\",  \"avg\"):  {\"low\": 0.3850, \"avg\": 0.1230, \"high\": 0.4920},\n    (\"low\",  \"low\",  \"high\"): {\"low\": 0.2620, \"avg\": 0.0015, \"high\": 0.7360},\n\n    (\"avg\",  \"low\",  \"low\"):  {\"low\": 0.7060, \"avg\": 0.2930, \"high\": 0.0002},\n    (\"avg\",  \"low\",  \"avg\"):  {\"low\": 0.2690, \"avg\": 0.7300, \"high\": 0.0002},\n    (\"avg\",  \"low\",  \"high\"): {\"low\": 0.8500, \"avg\": 0.1070, \"high\": 0.0430},\n\n    (\"high\", \"low\",  \"low\"):  {\"low\": 0.8540, \"avg\": 0.1440, \"high\": 0.0018},\n    (\"high\", \"low\",  \"avg\"):  {\"low\": 0.0120, \"avg\": 0.9760, \"high\": 0.0120},\n    (\"high\", \"low\",  \"high\"): {\"low\": 0.3330, \"avg\": 0.3330, \"high\": 0.3330},\n\n    (\"low\",  \"avg\",  \"low\"):  {\"low\": 0.7570, \"avg\": 0.2420, \"high\": 0.00000032},\n    (\"low\",  \"avg\",  \"avg\"):  {\"low\": 0.3430, \"avg\": 0.6490, \"high\": 0.0074},\n    (\"low"
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 4,
+      "gold": 0.24586071,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.24586072215408297,
+      "abs_error": 1.2154082962290147e-08,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 5188,
+        "completion_tokens": 2693,
+        "cost_usd": 0.042133
+      },
+      "stdout": "0.24586072215408297",
+      "stderr": "",
+      "code": "from itertools import product\n\nstates = [\"low\", \"average\", \"high\"]\n\n# Prior for PKC\nP_PKC = {\n    \"low\": 0.4231,\n    \"average\": 0.4816,\n    \"high\": 0.0952,\n}\n\n# CPT: PKA | PKC\nP_PKA_given_PKC = {\n    \"low\": {\"low\": 0.3864, \"average\": 0.3794, \"high\": 0.2342},\n    \"average\": {\"low\": 0.0604, \"average\": 0.9226, \"high\": 0.0170},\n    \"high\": {\"low\": 0.0158, \"average\": 0.9587, \"high\": 0.0255},\n}\n\n# CPT: Jnk | PKA, PKC\nP_Jnk_given_PKA_PKC = {\n    (\"low\", \"low\"): {\"low\": 0.2899, \"average\": 0.2458, \"high\": 0.4643},\n    (\"low\", \"average\"): {\"low\": 0.5794, \"average\": 0.4203, \"high\": 0.0002},\n    (\"low\", \"high\"): {\"low\": 0.0046, \"average\": 0.9809, \"high\": 0.0046},\n    (\"average\", \"low\"): {\"low\": 0.5767, \"average\": 0.4232, \"high\": 0.000043},\n    (\"average\", \"average\"): {\"low\": 0.6128, \"average\": 0.3871, \"high\": 0.000015},\n    (\"average\", \"high\"): {\"low\": 0.0447, \"average\": 0.9340, \"high\": 0.0204},\n    (\"high\", \"low\"): {\"low\": 0.9961, \"average\": 0.0038, \"high\": 0.000069},\n    (\"high\", \"average\"): {\"low\": 0.8623, \"average\": 0.1369, \"high\": 0.0008},\n    (\"high\", \"high\"): {\"low\": 0.1554, \"average\": 0.8418, \"high\": 0.0028},\n}\n\n# CPT: Raf | PKA, PKC\nP_Raf_given_PKA_PKC = {\n    (\"low\", \"low\"): {\"low\": 0.0623, \"average\": 0.1472, \"high\": 0.7904},\n    (\"low\", \"average\"): {\"low\": 0.3694, \"average\": 0.3312, \"high\": 0.2994},\n    (\"low\", \"high\"): {\"low\": 0.8675, \"average\": 0.1279, \"high\": 0.0046},\n    (\"average\", \"low\"): {\"low\": 0.4475, \"average\": 0.3126, \"high\": 0.2399},\n    (\"average\", \"average\"): {\"low\": 0.5508, \"average\": 0.3929, \"high\": 0.0563},\n    (\"average\", \"high\"): {\"low\": 0.8842, \"average\": 0.1157, \"high\": 0.00000075},\n    (\"high\", \"low\"): {\"low\": 0.8429, \"average\": 0.1271, \"high\": 0.0299},\n    (\"high\", \"average\"): {\"low\": 0.7489, \"average\": 0.1595, \"high\": 0.0915},\n    (\"high\", \"high\"): {\"low\": 0.8418, \"average\": 0.1554, \"high\": 0.0028},\n}\n\n# CPT: MEK | PKC, PKA, Raf\nP_MEK_given_PKC_PKA_Raf = {\n    (\"low\", \"low\", \"low\"): {\"low\": 0.744, \"average\": 0.255, \"high\": 0.0002},\n    (\"low\",",
+      "raw_response": "```python\nfrom itertools import product\n\nstates = [\"low\", \"average\", \"high\"]\n\n# Prior for PKC\nP_PKC = {\n    \"low\": 0.4231,\n    \"average\": 0.4816,\n    \"high\": 0.0952,\n}\n\n# CPT: PKA | PKC\nP_PKA_given_PKC = {\n    \"low\": {\"low\": 0.3864, \"average\": 0.3794, \"high\": 0.2342},\n    \"average\": {\"low\": 0.0604, \"average\": 0.9226, \"high\": 0.0170},\n    \"high\": {\"low\": 0.0158, \"average\": 0.9587, \"high\": 0.0255},\n}\n\n# CPT: Jnk | PKA, PKC\nP_Jnk_given_PKA_PKC = {\n    (\"low\", \"low\"): {\"low\": 0.2899, \"average\": 0.2458, \"high\": 0.4643},\n    (\"low\", \"average\"): {\"low\": 0.5794, \"average\": 0.4203, \"high\": 0.0002},\n    (\"low\", \"high\"): {\"low\": 0.0046, \"average\": 0.9809, \"high\": 0.0046},\n    (\"average\", \"low\"): {\"low\": 0.5767, \"average\": 0.4232, \"high\": 0.000043},\n    (\"average\", \"average\"): {\"low\": 0.6128, \"average\": 0.3871, \"high\": 0.000015},\n    (\"average\", \"high\"): {\"low\": 0.0447, \"average\": 0.9340, \"high\": 0.0204},\n    (\"high\", \"low\"): {\"low\": 0.9961, \"average\": 0.0038, \"high\": 0.000069},\n    (\"high\", \"average\"): {\"low\": 0.8623, \"average\": 0.1369, \"high\": 0.0008},\n    (\"high\", \"high\"): {\"low\": 0.1554, \"average\": 0.8418, \"high\": 0.0028},\n}\n\n# CPT: Raf | PKA, PKC\nP_Raf_given_PKA_PKC = {\n    (\"low\", \"low\"): {\"low\": 0.0623, \"average\": 0.1472, \"high\": 0.7904},\n    (\"low\", \"average\"): {\"low\": 0.3694, \"average\": 0.3312, \"high\": 0.2994},\n    (\"low\", \"high\"): {\"low\": 0.8675, \"average\": 0.1279, \"high\": 0.0046},\n    (\"average\", \"low\"): {\"low\": 0.4475, \"average\": 0.3126, \"high\": 0.2399},\n    (\"average\", \"average\"): {\"low\": 0.5508, \"average\": 0.3929, \"high\": 0.0563},\n    (\"average\", \"high\"): {\"low\": 0.8842, \"average\": 0.1157, \"high\": 0.00000075},\n    (\"high\", \"low\"): {\"low\": 0.8429, \"average\": 0.1271, \"high\": 0.0299},\n    (\"high\", \"average\"): {\"low\": 0.7489, \"average\": 0.1595, \"high\": 0.0915},\n    (\"high\", \"high\"): {\"low\": 0.8418, \"average\": 0.1554, \"high\": 0.0028},\n}\n\n# CPT: MEK | PKC, PKA, Raf\nP_MEK_given_PKC_PKA_Raf = {\n    (\"low\", \"low\", \"low\"): {\"low\": 0.744, \"average\": 0.255, \"high\": 0.0002},\n "
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 2,
+      "gold": 0.6271779,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.6271776514978347,
+      "abs_error": 2.4850216528982116e-07,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 5196,
+        "completion_tokens": 2113,
+        "cost_usd": 0.033453
+      },
+      "stdout": "0.6271776514978347",
+      "stderr": "",
+      "code": "from itertools import product\n\nstates = [\"low\", \"average\", \"high\"]\n\n# Prior for PKC\nP_PKC = {\n    \"low\": 0.4231,\n    \"average\": 0.4816,\n    \"high\": 0.0952,\n}\n\n# PKA | PKC\nP_PKA_given_PKC = {\n    \"low\":     {\"low\": 0.3864, \"average\": 0.3794, \"high\": 0.2342},\n    \"average\": {\"low\": 0.0604, \"average\": 0.9226, \"high\": 0.0170},\n    \"high\":    {\"low\": 0.0158, \"average\": 0.9587, \"high\": 0.0255},\n}\n\n# Raf | PKA, PKC\nP_Raf_given_PKA_PKC = {\n    (\"low\", \"low\"):         {\"low\": 0.0623, \"average\": 0.1472, \"high\": 0.7904},\n    (\"low\", \"average\"):     {\"low\": 0.3694, \"average\": 0.3312, \"high\": 0.2994},\n    (\"low\", \"high\"):        {\"low\": 0.8675, \"average\": 0.1279, \"high\": 0.0046},\n    (\"average\", \"low\"):     {\"low\": 0.4475, \"average\": 0.3126, \"high\": 0.2399},\n    (\"average\", \"average\"): {\"low\": 0.5508, \"average\": 0.3929, \"high\": 0.0563},\n    (\"average\", \"high\"):    {\"low\": 0.8842, \"average\": 0.1157, \"high\": 0.00000075},\n    (\"high\", \"low\"):        {\"low\": 0.8429, \"average\": 0.1271, \"high\": 0.0299},\n    (\"high\", \"average\"):    {\"low\": 0.7489, \"average\": 0.1595, \"high\": 0.0915},\n    (\"high\", \"high\"):       {\"low\": 0.8418, \"average\": 0.1554, \"high\": 0.0028},\n}\n\n# MEK | PKC, PKA, Raf\nP_MEK_given_PKC_PKA_Raf = {\n    (\"low\", \"low\", \"low\"):         {\"low\": 0.7440, \"average\": 0.2550, \"high\": 0.0002},\n    (\"low\", \"low\", \"average\"):     {\"low\": 0.3850, \"average\": 0.1230, \"high\": 0.4920},\n    (\"low\", \"low\", \"high\"):        {\"low\": 0.2620, \"average\": 0.0015, \"high\": 0.7360},\n\n    (\"average\", \"low\", \"low\"):     {\"low\": 0.7060, \"average\": 0.2930, \"high\": 0.0002},\n    (\"average\", \"low\", \"average\"): {\"low\": 0.2690, \"average\": 0.7300, \"high\": 0.0002},\n    (\"average\", \"low\", \"high\"):    {\"low\": 0.8500, \"average\": 0.1070, \"high\": 0.0430},\n\n    (\"high\", \"low\", \"low\"):        {\"low\": 0.8540, \"average\": 0.1440, \"high\": 0.0018},\n    (\"high\", \"low\", \"average\"):    {\"low\": 0.0120, \"average\": 0.9760, \"high\": 0.0120},\n    (\"high\", \"low\", \"high\"):       {\"low\": 0.3330, \"average\": 0.3330, \"high\": 0.3330},\n\n ",
+      "raw_response": "```python\nfrom itertools import product\n\nstates = [\"low\", \"average\", \"high\"]\n\n# Prior for PKC\nP_PKC = {\n    \"low\": 0.4231,\n    \"average\": 0.4816,\n    \"high\": 0.0952,\n}\n\n# PKA | PKC\nP_PKA_given_PKC = {\n    \"low\":     {\"low\": 0.3864, \"average\": 0.3794, \"high\": 0.2342},\n    \"average\": {\"low\": 0.0604, \"average\": 0.9226, \"high\": 0.0170},\n    \"high\":    {\"low\": 0.0158, \"average\": 0.9587, \"high\": 0.0255},\n}\n\n# Raf | PKA, PKC\nP_Raf_given_PKA_PKC = {\n    (\"low\", \"low\"):         {\"low\": 0.0623, \"average\": 0.1472, \"high\": 0.7904},\n    (\"low\", \"average\"):     {\"low\": 0.3694, \"average\": 0.3312, \"high\": 0.2994},\n    (\"low\", \"high\"):        {\"low\": 0.8675, \"average\": 0.1279, \"high\": 0.0046},\n    (\"average\", \"low\"):     {\"low\": 0.4475, \"average\": 0.3126, \"high\": 0.2399},\n    (\"average\", \"average\"): {\"low\": 0.5508, \"average\": 0.3929, \"high\": 0.0563},\n    (\"average\", \"high\"):    {\"low\": 0.8842, \"average\": 0.1157, \"high\": 0.00000075},\n    (\"high\", \"low\"):        {\"low\": 0.8429, \"average\": 0.1271, \"high\": 0.0299},\n    (\"high\", \"average\"):    {\"low\": 0.7489, \"average\": 0.1595, \"high\": 0.0915},\n    (\"high\", \"high\"):       {\"low\": 0.8418, \"average\": 0.1554, \"high\": 0.0028},\n}\n\n# MEK | PKC, PKA, Raf\nP_MEK_given_PKC_PKA_Raf = {\n    (\"low\", \"low\", \"low\"):         {\"low\": 0.7440, \"average\": 0.2550, \"high\": 0.0002},\n    (\"low\", \"low\", \"average\"):     {\"low\": 0.3850, \"average\": 0.1230, \"high\": 0.4920},\n    (\"low\", \"low\", \"high\"):        {\"low\": 0.2620, \"average\": 0.0015, \"high\": 0.7360},\n\n    (\"average\", \"low\", \"low\"):     {\"low\": 0.7060, \"average\": 0.2930, \"high\": 0.0002},\n    (\"average\", \"low\", \"average\"): {\"low\": 0.2690, \"average\": 0.7300, \"high\": 0.0002},\n    (\"average\", \"low\", \"high\"):    {\"low\": 0.8500, \"average\": 0.1070, \"high\": 0.0430},\n\n    (\"high\", \"low\", \"low\"):        {\"low\": 0.8540, \"average\": 0.1440, \"high\": 0.0018},\n    (\"high\", \"low\", \"average\"):    {\"low\": 0.0120, \"average\": 0.9760, \"high\": 0.0120},\n    (\"high\", \"low\", \"high\"):       {\"low\": 0.3330, \"average\": 0.3330, \"high\": 0"
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 0,
+      "gold": 0.15703602,
+      "reasoning_types": [],
+      "pred": 0.1570361692391356,
+      "abs_error": 1.4923913560505042e-07,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 5187,
+        "completion_tokens": 2866,
+        "cost_usd": 0.0447255
+      },
+      "stdout": "0.1570361692391356",
+      "stderr": "",
+      "code": "from itertools import product\n\nstates = [\"low\", \"average\", \"high\"]\n\n# Prior for PKC\nP_PKC = {\n    \"low\": 0.4231,\n    \"average\": 0.4816,\n    \"high\": 0.0952,\n}\n\n# PKA | PKC\nP_PKA_given_PKC = {\n    \"low\":     {\"low\": 0.3864, \"average\": 0.3794, \"high\": 0.2342},\n    \"average\": {\"low\": 0.0604, \"average\": 0.9226, \"high\": 0.0170},\n    \"high\":    {\"low\": 0.0158, \"average\": 0.9587, \"high\": 0.0255},\n}\n\n# Raf | PKA, PKC\nP_Raf_given_PKA_PKC = {\n    (\"low\", \"low\"):         {\"low\": 0.0623, \"average\": 0.1472, \"high\": 0.7904},\n    (\"low\", \"average\"):     {\"low\": 0.3694, \"average\": 0.3312, \"high\": 0.2994},\n    (\"low\", \"high\"):        {\"low\": 0.8675, \"average\": 0.1279, \"high\": 0.0046},\n    (\"average\", \"low\"):     {\"low\": 0.4475, \"average\": 0.3126, \"high\": 0.2399},\n    (\"average\", \"average\"): {\"low\": 0.5508, \"average\": 0.3929, \"high\": 0.0563},\n    (\"average\", \"high\"):    {\"low\": 0.8842, \"average\": 0.1157, \"high\": 0.00000075},\n    (\"high\", \"low\"):        {\"low\": 0.8429, \"average\": 0.1271, \"high\": 0.0299},\n    (\"high\", \"average\"):    {\"low\": 0.7489, \"average\": 0.1595, \"high\": 0.0915},\n    (\"high\", \"high\"):       {\"low\": 0.8418, \"average\": 0.1554, \"high\": 0.0028},\n}\n\n# MEK | PKC, PKA, Raf\nP_MEK_given_PKC_PKA_Raf = {\n    (\"low\", \"low\", \"low\"):         {\"low\": 0.744,  \"average\": 0.255, \"high\": 0.0002},\n    (\"low\", \"low\", \"average\"):     {\"low\": 0.385,  \"average\": 0.123, \"high\": 0.492},\n    (\"low\", \"low\", \"high\"):        {\"low\": 0.262,  \"average\": 0.0015, \"high\": 0.736},\n    (\"average\", \"low\", \"low\"):     {\"low\": 0.706,  \"average\": 0.293, \"high\": 0.0002},\n    (\"average\", \"low\", \"average\"): {\"low\": 0.269,  \"average\": 0.730, \"high\": 0.0002},\n    (\"average\", \"low\", \"high\"):    {\"low\": 0.85,   \"average\": 0.107, \"high\": 0.043},\n    (\"high\", \"low\", \"low\"):        {\"low\": 0.854,  \"average\": 0.144, \"high\": 0.0018},\n    (\"high\", \"low\", \"average\"):    {\"low\": 0.012,  \"average\": 0.976, \"high\": 0.012},\n    (\"high\", \"low\", \"high\"):       {\"low\": 0.333,  \"average\": 0.333, \"high\": 0.333},\n\n    (\"low\", \"ave",
+      "raw_response": "```python\nfrom itertools import product\n\nstates = [\"low\", \"average\", \"high\"]\n\n# Prior for PKC\nP_PKC = {\n    \"low\": 0.4231,\n    \"average\": 0.4816,\n    \"high\": 0.0952,\n}\n\n# PKA | PKC\nP_PKA_given_PKC = {\n    \"low\":     {\"low\": 0.3864, \"average\": 0.3794, \"high\": 0.2342},\n    \"average\": {\"low\": 0.0604, \"average\": 0.9226, \"high\": 0.0170},\n    \"high\":    {\"low\": 0.0158, \"average\": 0.9587, \"high\": 0.0255},\n}\n\n# Raf | PKA, PKC\nP_Raf_given_PKA_PKC = {\n    (\"low\", \"low\"):         {\"low\": 0.0623, \"average\": 0.1472, \"high\": 0.7904},\n    (\"low\", \"average\"):     {\"low\": 0.3694, \"average\": 0.3312, \"high\": 0.2994},\n    (\"low\", \"high\"):        {\"low\": 0.8675, \"average\": 0.1279, \"high\": 0.0046},\n    (\"average\", \"low\"):     {\"low\": 0.4475, \"average\": 0.3126, \"high\": 0.2399},\n    (\"average\", \"average\"): {\"low\": 0.5508, \"average\": 0.3929, \"high\": 0.0563},\n    (\"average\", \"high\"):    {\"low\": 0.8842, \"average\": 0.1157, \"high\": 0.00000075},\n    (\"high\", \"low\"):        {\"low\": 0.8429, \"average\": 0.1271, \"high\": 0.0299},\n    (\"high\", \"average\"):    {\"low\": 0.7489, \"average\": 0.1595, \"high\": 0.0915},\n    (\"high\", \"high\"):       {\"low\": 0.8418, \"average\": 0.1554, \"high\": 0.0028},\n}\n\n# MEK | PKC, PKA, Raf\nP_MEK_given_PKC_PKA_Raf = {\n    (\"low\", \"low\", \"low\"):         {\"low\": 0.744,  \"average\": 0.255, \"high\": 0.0002},\n    (\"low\", \"low\", \"average\"):     {\"low\": 0.385,  \"average\": 0.123, \"high\": 0.492},\n    (\"low\", \"low\", \"high\"):        {\"low\": 0.262,  \"average\": 0.0015, \"high\": 0.736},\n    (\"average\", \"low\", \"low\"):     {\"low\": 0.706,  \"average\": 0.293, \"high\": 0.0002},\n    (\"average\", \"low\", \"average\"): {\"low\": 0.269,  \"average\": 0.730, \"high\": 0.0002},\n    (\"average\", \"low\", \"high\"):    {\"low\": 0.85,   \"average\": 0.107, \"high\": 0.043},\n    (\"high\", \"low\", \"low\"):        {\"low\": 0.854,  \"average\": 0.144, \"high\": 0.0018},\n    (\"high\", \"low\", \"average\"):    {\"low\": 0.012,  \"average\": 0.976, \"high\": 0.012},\n    (\"high\", \"low\", \"high\"):       {\"low\": 0.333,  \"average\": 0.333, \"high\": 0.333},\n\n    (\""
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 6,
+      "gold": 1.0,
+      "reasoning_types": [
+        "observation"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "code_ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 5181,
+        "completion_tokens": 71,
+        "cost_usd": 0.0027855
+      },
+      "stdout": "1.0",
+      "stderr": "",
+      "code": "# Bayesian-network inference for:\n# Query: P(PKC = high | evidence: PKC = high)\n# By definition, this posterior is 1.0 whenever the evidence is exactly the query event.\n\ndef main():\n    print(1.0)\n\nif __name__ == \"__main__\":\n    main()",
+      "raw_response": "```python\n# Bayesian-network inference for:\n# Query: P(PKC = high | evidence: PKC = high)\n# By definition, this posterior is 1.0 whenever the evidence is exactly the query event.\n\ndef main():\n    print(1.0)\n\nif __name__ == \"__main__\":\n    main()\n```"
+    }
+  ],
+  "timestamp": "2026-05-03T12:43:42Z",
+  "_meta": {
+    "prompt_tokens": 183647,
+    "completion_tokens": 62512,
+    "total_cost_usd": 1.0768294999999999,
+    "model_id": "openai/gpt-5.4",
+    "git_commit": "8f5d854c",
+    "timestamp_utc": "2026-05-03T12:43:42.400110+00:00",
+    "script": "inline PAL smoke from run_quite_registered_e2e plan",
+    "n_queries": 25
+  }
+}
