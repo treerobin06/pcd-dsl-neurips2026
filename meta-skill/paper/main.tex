@@ -77,9 +77,9 @@ Large language models (LLMs) are increasingly used as natural-language interface
 We make this failure mode explicit with Parse--Compute--Decide (PCD), a gold-injection diagnostic that separates structure extraction, probabilistic inference given gold structure, and decision-making given a gold posterior.
 Across six LLMs and several probabilistic tasks, models usually parse inputs and act correctly from a posterior, but fail at computation: Compute accuracy ranges from 28\% to 78\% on preference learning and falls to 3--11\% on depth-10 Bayesian networks.
 Motivated by this diagnosis, we propose Verified Solver Induction (VSI), a compile-once design for LLM probabilistic reasoning.
-Instead of solving each instance or generating fresh code, an off-the-shelf LLM, with no weight updates, writes and assembles a reusable typed solver specification for a task family by selecting probabilistic atoms and an inference route.
-A deterministic compiler lowers the specification into an executable solver, runs deploy checks including reference matches when available, caches successful solvers, and reuses them on future same-family instances.
-Thus the LLM supplies probabilistic structure at compile time, while the deployed solver performs exact inference at run time.
+Instead of solving each instance or generating fresh code, an off-the-shelf LLM, with no weight updates, induces a reusable typed solver specification for a task family by assembling probabilistic atoms and inference routes.
+A deterministic compiler lowers this LLM-assembled specification into an executable solver, verifies it through deploy checks including reference matches when available, caches verified solvers, and reuses them on future same-family instances.
+Thus the LLM induces probabilistic solver structure at compile time, while the VSI-verified compiled solver performs exact inference at run time.
 We evaluate VSI across preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering through three complementary checks.
 VSI-assembled solvers match references on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks; on larger multi-valued bnlearn networks, the compiled solver remains exact while per-instance program-aided prompting (PAL) frequently fails.
 On external QUITE queries, the registered VSI path reaches 96.0\% while direct answering reaches 36.0\%--60.0\% and per-instance PAL reaches 24.0\%--88.0\%, at substantially higher cost.
