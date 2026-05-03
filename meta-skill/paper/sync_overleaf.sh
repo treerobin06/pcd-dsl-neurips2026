@@ -7,7 +7,7 @@
 
 PAPER_DIR="$(cd "$(dirname "$0")" && pwd)"
 SYNC_DIR="$PAPER_DIR/overleaf-sync"
-FILES_TO_SYNC="main.tex references.bib neurips_2026.sty neurips_2026.tex checklist.tex figures/figure1_overview.png"
+FILES_TO_SYNC="main.tex references.bib neurips_2026.sty neurips_2026.tex checklist.tex figures/figure1_overview_no_title_no_footer.png figures/figure3_vsi_unordered_palette_y90.png"
 
 # 颜色输出
 GREEN='\033[0;32m'
