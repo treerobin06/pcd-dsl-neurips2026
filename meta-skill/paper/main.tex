@@ -57,10 +57,12 @@
 % Camera-ready: 改 \usepackage[final]{neurips_2026} 并取消下方注释
 % \author{
 %   Bowen Jiang\quad
-%   Xuan Wei\quad
+%   Xue Wang\quad
+%   Xuan Wei\thanks{Lead corresponding author. Conceived the research idea and supervised the project.}\quad
 %   Tao Yao\thanks{Corresponding author.} \\
 %   Antai College of Economics and Management, Shanghai Jiao Tong University \\
-%   \texttt{\{tree06, weix, taoyao\}@sjtu.edu.cn}
+%   \texttt{\{tree06, weix, taoyao\}@sjtu.edu.cn}\quad
+%   \texttt{wxie91@gmail.com}
 % }
 \author{Anonymous Author(s)}
 
@@ -71,17 +73,19 @@
 % ============================================================
 \begin{abstract}
 % ============================================================
-Large language models (LLMs) are useful interfaces to probabilistic problems: they can often read the variables, observations, and query.
-They are much less reliable as probabilistic calculators.
-We introduce Parse--Compute--Decide (PCD), a gold-injection diagnostic that separates structure extraction, probabilistic computation, and final action selection.
-Across six LLMs and several Bayesian reasoning tasks, models usually parse the inputs and act correctly given a posterior, but Compute accuracy ranges from 22\% to 78\% on preference learning and falls to 3--11\% on depth-10 Bayesian networks.
+Large language models (LLMs) increasingly serve as natural-language interfaces to probabilistic tasks: they can often identify variables, observations, and queries from problem descriptions.
+They remain unreliable probabilistic calculators.
+We make this failure mode explicit with Parse--Compute--Decide (PCD), a gold-injection diagnostic that separately tests structure extraction, probabilistic inference given gold structure, and decision-making given a gold posterior.
+Across six LLMs and several probabilistic reasoning tasks, models usually parse inputs and act correctly from a posterior, but the computation stage fails: Compute accuracy ranges from 22\% to 78\% on preference learning and falls to 3--11\% on depth-10 Bayesian networks.
 This motivates a different division of labor.
-Instead of asking the LLM to solve every instance, we ask it to write and assemble a reusable typed solver specification for a task family.
-The LLM chooses and parameterizes a composition of typed probabilistic atoms; a compiler materializes that assembly as an executable solver, caches it after validation, and reuses it on later instances.
-These LLM-assembled solvers match reference solvers on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks.
-On standard bnlearn networks, the compiled solver matches 400/400 finite queries while per-instance PAL collapses on larger networks.
-On natural-language inputs, GPT-4o-mini improves from 44\% / 32\% direct accuracy to \textbf{91.7\% / 98.0\%} on adversarial Naive Bayes and HMM tasks, two untemplated families.
-The contribution is a reusable probabilistic compiler interface for LLMs: language models write solver specifications from probabilistic building blocks, and a validated assembly becomes a reusable solver.
+Instead of per-instance tool use or code generation, we ask an off-the-shelf LLM, with no weight updates, to write and assemble a reusable typed solver specification for a task family.
+The LLM chooses and parameterizes a composition of typed probabilistic atoms; a compiler materializes that assembly as an executable solver, caches it after validation, and reuses it on future same-family instances.
+Thus the LLM specifies probabilistic structure at compile time, while a deterministic solver performs exact inference at run time.
+We validate this compile-once interface through three complementary evaluations.
+First, LLM-assembled solvers match references on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks.
+Second, on larger multi-valued bnlearn networks, the compiled solver remains exact while per-instance PAL frequently fails.
+Third, on natural-language inputs, GPT-4o-mini improves from 44\% / 32\% direct accuracy to \textbf{91.7\% / 98.0\%} on adversarial Naive Bayes and HMM tasks, two untemplated families.
+Together, PCD and the compile-once interface turn LLMs into compile-time specifiers of task-family structure while reusable solvers perform exact instance-level inference at run time.
 \end{abstract}
 
 % ============================================================

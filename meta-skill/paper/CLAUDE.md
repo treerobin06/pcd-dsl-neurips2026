@@ -55,6 +55,9 @@
 - [2026-05-03 02:18] push | Contribution-forward polish: Abstract/Intro 不再前置 “fixed compiler supplies semantics”，改为 “LLM chooses and parameterizes typed probabilistic atoms; compiler materializes/caches/reuses the assembly”；Method 仍保留 DSL semantics 边界但更自然地写成 runtime 定义。Overleaf commit `ddf5f45`。
 - [2026-05-03 02:21] push | AI-reviewer weakness hardening: `Limitations and Future Work` 改为 `Scope and Future Work`，将 finite-discrete / router / PCD stage-boundary 等边界改写为 scope 与 extension path，删除 “narrower / declared scope / finer split possible” 这类容易被自动审稿器复述成 weakness 的措辞。Overleaf commit `90f54ea`。
 - [2026-05-03 02:25] push | No-finetuning contribution polish: Abstract/Intro/Related Work 进一步写清 “LLM writes and assembles reusable solver specifications”；新增 Bayesian Teaching 对比，说明 Qiu et al. 在 Flight/Hotel 上走 targeted fine-tuning 路线，而本文固定模型权重，用 off-the-shelf LLM 写可复用 TaskSpec，validated solver 后续复用并扩展到 TextBandit、BN、NB、HMM。Overleaf commit `e47c3eb`。
+- [2026-05-03 10:25] push | Authorship corresponding-author markers (camera-ready block，仍在双盲注释里): Xuan Wei 加 `\thanks{Lead corresponding author. Conceived the research idea and supervised the project.}`，Tao Yao 维持 `\thanks{Corresponding author.}`，体现魏煊主导 idea/共同指导。投稿期不显示，camera-ready 切 final 后生效。
+- [2026-05-03 10:35] push | Authorship: 加 Xue Wang 为 2nd author，新顺序 Bowen Jiang / Xue Wang / Xuan Wei (lead corresp.) / Tao Yao (corresp.)。邮箱暂用 Tree 给的 `wxie91@gmail.com`（待 Tree 确认是否替换为 PSU 时期的 `xzw118@psu.edu`）。affiliation 行仍只挂 SJTU Antai，王雪所属机构待 Tree 补。仍在双盲注释里，camera-ready 切 final 后生效。
+- [2026-05-03 18:08] push | Abstract fusion from teacher draft: 保留老师版的 natural-language interface / per-instance tool-use contrast / compile-time vs run-time / three complementary evaluations 结构，但删除 `VSI/VSD` 新缩写和过硬 verified wording；主张改为 off-the-shelf LLM writes and assembles reusable typed solver specs, deterministic solver executes exact inference at run time。Overleaf commit `3557058`。
 
 ## 论文概况
 
