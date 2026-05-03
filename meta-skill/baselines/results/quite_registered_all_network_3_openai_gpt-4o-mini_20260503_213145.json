@@ -1,0 +1,4690 @@
+{
+  "experiment": "QUITE registered hard-compute E2E",
+  "model": "openai/gpt-4o-mini",
+  "config": {
+    "model": "openai/gpt-4o-mini",
+    "preset": "all-network-3",
+    "limit_total": null,
+    "sema": 8
+  },
+  "query_plan": {
+    "alarm0": [
+      0,
+      1,
+      2
+    ],
+    "alarm1": [
+      0,
+      1,
+      2
+    ],
+    "alarm2": [
+      0,
+      1,
+      2
+    ],
+    "asia0": [
+      0,
+      1,
+      2
+    ],
+    "cancer0": [
+      0,
+      1,
+      2
+    ],
+    "child0": [
+      0,
+      1,
+      2
+    ],
+    "child1": [
+      0,
+      1,
+      2
+    ],
+    "child2": [
+      0,
+      1,
+      3
+    ],
+    "child3": [
+      0,
+      1,
+      2
+    ],
+    "diabetes0": [
+      0,
+      1,
+      2
+    ],
+    "hailfinder0": [
+      0,
+      1,
+      2
+    ],
+    "hailfinder1": [
+      0,
+      1,
+      2
+    ],
+    "hailfinder2": [
+      0,
+      1,
+      2
+    ],
+    "hailfinder3": [
+      0,
+      1,
+      2
+    ],
+    "hailfinder4": [
+      0,
+      1,
+      2
+    ],
+    "hepar2_0": [
+      0,
+      1,
+      2
+    ],
+    "hepar2_1": [
+      0,
+      1,
+      2
+    ],
+    "hepar2_2": [
+      0,
+      1,
+      2
+    ],
+    "insurance0": [
+      0,
+      1,
+      2
+    ],
+    "insurance1": [
+      0,
+      1,
+      2
+    ],
+    "insurance2": [
+      0,
+      1,
+      2
+    ],
+    "mildew0": [
+      0,
+      1,
+      4
+    ],
+    "munin0": [
+      0,
+      1,
+      2
+    ],
+    "phytophthora0": [
+      0,
+      1,
+      2
+    ],
+    "phytophthora1": [
+      0,
+      1,
+      2
+    ],
+    "sachs0": [
+      0,
+      1,
+      2
+    ],
+    "sachs1": [
+      0,
+      1,
+      2
+    ],
+    "water0": [
+      0,
+      2,
+      3
+    ],
+    "water1": [
+      0,
+      1,
+      2
+    ],
+    "win95pts0": [
+      0,
+      1,
+      2
+    ]
+  },
+  "registry_metadata": {
+    "alarm0": {
+      "n_vars": 7,
+      "n_factors": 7,
+      "n_entries": 150,
+      "max_parents": 3,
+      "max_factor_entries": 96
+    },
+    "alarm1": {
+      "n_vars": 7,
+      "n_factors": 7,
+      "n_entries": 48,
+      "max_parents": 2,
+      "max_factor_entries": 12
+    },
+    "alarm2": {
+      "n_vars": 12,
+      "n_factors": 12,
+      "n_entries": 131,
+      "max_parents": 2,
+      "max_factor_entries": 27
+    },
+    "asia0": {
+      "n_vars": 8,
+      "n_factors": 8,
+      "n_entries": 36,
+      "max_parents": 2,
+      "max_factor_entries": 8
+    },
+    "cancer0": {
+      "n_vars": 5,
+      "n_factors": 5,
+      "n_entries": 20,
+      "max_parents": 2,
+      "max_factor_entries": 8
+    },
+    "child0": {
+      "n_vars": 6,
+      "n_factors": 6,
+      "n_entries": 120,
+      "max_parents": 2,
+      "max_factor_entries": 45
+    },
+    "child1": {
+      "n_vars": 7,
+      "n_factors": 7,
+      "n_entries": 73,
+      "max_parents": 2,
+      "max_factor_entries": 36
+    },
+    "child2": {
+      "n_vars": 7,
+      "n_factors": 7,
+      "n_entries": 129,
+      "max_parents": 2,
+      "max_factor_entries": 36
+    },
+    "child3": {
+      "n_vars": 3,
+      "n_factors": 3,
+      "n_entries": 20,
+      "max_parents": 1,
+      "max_factor_entries": 12
+    },
+    "diabetes0": {
+      "n_vars": 4,
+      "n_factors": 4,
+      "n_entries": 122,
+      "max_parents": 2,
+      "max_factor_entries": 45
+    },
+    "hailfinder0": {
+      "n_vars": 5,
+      "n_factors": 5,
+      "n_entries": 284,
+      "max_parents": 3,
+      "max_factor_entries": 256
+    },
+    "hailfinder1": {
+      "n_vars": 4,
+      "n_factors": 4,
+      "n_entries": 149,
+      "max_parents": 1,
+      "max_factor_entries": 66
+    },
+    "hailfinder2": {
+      "n_vars": 6,
+      "n_factors": 6,
+      "n_entries": 109,
+      "max_parents": 2,
+      "max_factor_entries": 36
+    },
+    "hailfinder3": {
+      "n_vars": 3,
+      "n_factors": 3,
+      "n_entries": 72,
+      "max_parents": 2,
+      "max_factor_entries": 64
+    },
+    "hailfinder4": {
+      "n_vars": 8,
+      "n_factors": 8,
+      "n_entries": 112,
+      "max_parents": 2,
+      "max_factor_entries": 36
+    },
+    "hepar2_0": {
+      "n_vars": 3,
+      "n_factors": 3,
+      "n_entries": 10,
+      "max_parents": 1,
+      "max_factor_entries": 6
+    },
+    "hepar2_1": {
+      "n_vars": 6,
+      "n_factors": 6,
+      "n_entries": 10,
+      "max_parents": 1,
+      "max_factor_entries": 2
+    },
+    "hepar2_2": {
+      "n_vars": 4,
+      "n_factors": 4,
+      "n_entries": 12,
+      "max_parents": 2,
+      "max_factor_entries": 4
+    },
+    "insurance0": {
+      "n_vars": 7,
+      "n_factors": 7,
+      "n_entries": 121,
+      "max_parents": 2,
+      "max_factor_entries": 48
+    },
+    "insurance1": {
+      "n_vars": 9,
+      "n_factors": 9,
+      "n_entries": 395,
+      "max_parents": 3,
+      "max_factor_entries": 200
+    },
+    "insurance2": {
+      "n_vars": 13,
+      "n_factors": 13,
+      "n_entries": 432,
+      "max_parents": 3,
+      "max_factor_entries": 192
+    },
+    "mildew0": {
+      "n_vars": 4,
+      "n_factors": 4,
+      "n_entries": 1106,
+      "max_parents": 3,
+      "max_factor_entries": 1088
+    },
+    "munin0": {
+      "n_vars": 3,
+      "n_factors": 3,
+      "n_entries": 55,
+      "max_parents": 2,
+      "max_factor_entries": 48
+    },
+    "phytophthora0": {
+      "n_vars": 6,
+      "n_factors": 6,
+      "n_entries": 142,
+      "max_parents": 2,
+      "max_factor_entries": 50
+    },
+    "phytophthora1": {
+      "n_vars": 6,
+      "n_factors": 6,
+      "n_entries": 206,
+      "max_parents": 2,
+      "max_factor_entries": 75
+    },
+    "sachs0": {
+      "n_vars": 3,
+      "n_factors": 3,
+      "n_entries": 39,
+      "max_parents": 2,
+      "max_factor_entries": 27
+    },
+    "sachs1": {
+      "n_vars": 8,
+      "n_factors": 8,
+      "n_entries": 228,
+      "max_parents": 3,
+      "max_factor_entries": 81
+    },
+    "water0": {
+      "n_vars": 5,
+      "n_factors": 5,
+      "n_entries": 117,
+      "max_parents": 3,
+      "max_factor_entries": 81
+    },
+    "water1": {
+      "n_vars": 4,
+      "n_factors": 4,
+      "n_entries": 268,
+      "max_parents": 3,
+      "max_factor_entries": 256
+    },
+    "win95pts0": {
+      "n_vars": 6,
+      "n_factors": 6,
+      "n_entries": 32,
+      "max_parents": 3,
+      "max_factor_entries": 16
+    }
+  },
+  "elapsed_sec": 19.203534841537476,
+  "summary": {
+    "n": 90,
+    "within_0_01": 60,
+    "within_0_01_rate": 0.6666666666666666,
+    "within_0_05": 63,
+    "within_0_05_rate": 0.7,
+    "within_0_05_wilson": [
+      0.598732953143893,
+      0.7848922194874346
+    ],
+    "valid_numeric": 75,
+    "mae": 0.10046536463228704,
+    "by_network": {
+      "alarm0": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "alarm1": {
+        "n": 3,
+        "correct_0_05": 2,
+        "failures": {
+          "wrong_probability": 1
+        },
+        "rate_0_05": 0.6666666666666666
+      },
+      "alarm2": {
+        "n": 3,
+        "correct_0_05": 0,
+        "failures": {
+          "wrong_probability": 1,
+          "zero evidence probability or missing query state": 2
+        },
+        "rate_0_05": 0.0
+      },
+      "asia0": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "cancer0": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "child0": {
+        "n": 3,
+        "correct_0_05": 1,
+        "failures": {
+          "wrong_probability": 2
+        },
+        "rate_0_05": 0.3333333333333333
+      },
+      "child1": {
+        "n": 3,
+        "correct_0_05": 1,
+        "failures": {
+          "wrong_probability": 1,
+          "zero evidence probability or missing query state": 1
+        },
+        "rate_0_05": 0.3333333333333333
+      },
+      "child2": {
+        "n": 3,
+        "correct_0_05": 2,
+        "failures": {
+          "wrong_probability": 1
+        },
+        "rate_0_05": 0.6666666666666666
+      },
+      "child3": {
+        "n": 3,
+        "correct_0_05": 2,
+        "failures": {
+          "zero evidence probability or missing query state": 1
+        },
+        "rate_0_05": 0.6666666666666666
+      },
+      "diabetes0": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "hailfinder0": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "hailfinder1": {
+        "n": 3,
+        "correct_0_05": 2,
+        "failures": {
+          "wrong_probability": 1
+        },
+        "rate_0_05": 0.6666666666666666
+      },
+      "hailfinder2": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "hailfinder3": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "hailfinder4": {
+        "n": 3,
+        "correct_0_05": 2,
+        "failures": {
+          "unknown evidence state little_change for capping": 1
+        },
+        "rate_0_05": 0.6666666666666666
+      },
+      "hepar2_0": {
+        "n": 3,
+        "correct_0_05": 0,
+        "failures": {
+          "unknown evidence state FALSE for flatulence": 1,
+          "zero evidence probability or missing query state": 2
+        },
+        "rate_0_05": 0.0
+      },
+      "hepar2_1": {
+        "n": 3,
+        "correct_0_05": 0,
+        "failures": {
+          "wrong_probability": 3
+        },
+        "rate_0_05": 0.0
+      },
+      "hepar2_2": {
+        "n": 3,
+        "correct_0_05": 0,
+        "failures": {
+          "zero evidence probability or missing query state": 3
+        },
+        "rate_0_05": 0.0
+      },
+      "insurance0": {
+        "n": 3,
+        "correct_0_05": 0,
+        "failures": {
+          "zero evidence probability or missing query state": 3
+        },
+        "rate_0_05": 0.0
+      },
+      "insurance1": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "insurance2": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "mildew0": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "munin0": {
+        "n": 3,
+        "correct_0_05": 2,
+        "failures": {
+          "wrong_probability": 1
+        },
+        "rate_0_05": 0.6666666666666666
+      },
+      "phytophthora0": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "phytophthora1": {
+        "n": 3,
+        "correct_0_05": 2,
+        "failures": {
+          "wrong_probability": 1
+        },
+        "rate_0_05": 0.6666666666666666
+      },
+      "sachs0": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "sachs1": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "water0": {
+        "n": 3,
+        "correct_0_05": 2,
+        "failures": {
+          "unknown evidence state 1 for ckni_12_00": 1
+        },
+        "rate_0_05": 0.6666666666666666
+      },
+      "water1": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "win95pts0": {
+        "n": 3,
+        "correct_0_05": 3,
+        "failures": {},
+        "rate_0_05": 1.0
+      }
+    }
+  },
+  "results": [
+    {
+      "network": "alarm0",
+      "pair_id": 0,
+      "evidences": [
+        "The minimum volume set on the ventilator is set to normal.",
+        "The ventilator tube is not kinked.",
+        "The pressure within the ventilator system is at zero.",
+        "The ventilator tube is delivering air at a normal level."
+      ],
+      "query": "What is the likelihood of the airway intubation being normal?",
+      "gold": 0.15780446,
+      "reasoning_types": [
+        "explaining_away"
+      ],
+      "pred": 0.15780445969125215,
+      "abs_error": 3.0874786061119153e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 488,
+        "completion_tokens": 69,
+        "cost_usd": 0.0001146
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"minvolset\": \"normal\",\n    \"kinkedtube\": \"FALSE\",\n    \"pressure\": \"zero\",\n    \"ventilatortube\": \"normal\"\n  },\n  \"query\": {\n    \"variable\": \"intubation\",\n    \"state\": \"normal\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "minvolset": "normal",
+          "kinkedtube": "FALSE",
+          "pressure": "zero",
+          "ventilatortube": "normal"
+        },
+        "query": {
+          "variable": "intubation",
+          "state": "normal"
+        }
+      },
+      "query_var": "intubation",
+      "query_state": "normal",
+      "evidence": {
+        "minvolset": "normal",
+        "kinkedtube": "FALSE",
+        "pressure": "zero",
+        "ventilatortube": "normal"
+      },
+      "posterior": {
+        "esophagus": 0.4991423670668953,
+        "normal": 0.15780445969125215,
+        "onesided": 0.3430531732418525
+      },
+      "evidence_prob": 0.0005827388160000002
+    },
+    {
+      "network": "alarm0",
+      "pair_id": 1,
+      "evidences": [
+        "The minimum volume of air delivered by the ventilator has been set to low.",
+        "The airway intubation is incorrectly placed in the esophagus.",
+        "The ventilator tubing is currently delivering air at normal levels.",
+        "The ventilator is not disconnected."
+      ],
+      "query": "What is the likelihood of the ventilator tube being kinked?",
+      "gold": 0.04,
+      "reasoning_types": [],
+      "pred": 0.04,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 491,
+        "completion_tokens": 74,
+        "cost_usd": 0.00011805
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"minvolset\": \"low\",\n    \"intubation\": \"esophagus\",\n    \"ventilatortube\": \"normal\",\n    \"ventilatordisconnected\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"kinkedtube\",\n    \"state\": \"TRUE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "minvolset": "low",
+          "intubation": "esophagus",
+          "ventilatortube": "normal",
+          "ventilatordisconnected": "FALSE"
+        },
+        "query": {
+          "variable": "kinkedtube",
+          "state": "TRUE"
+        }
+      },
+      "query_var": "kinkedtube",
+      "query_state": "TRUE",
+      "evidence": {
+        "minvolset": "low",
+        "intubation": "esophagus",
+        "ventilatortube": "normal",
+        "ventilatordisconnected": "FALSE"
+      },
+      "posterior": {
+        "FALSE": 0.96,
+        "TRUE": 0.04
+      },
+      "evidence_prob": 6.750000000000001e-06
+    },
+    {
+      "network": "alarm0",
+      "pair_id": 2,
+      "evidences": [
+        "The ventilator machine is currently set to normal mode."
+      ],
+      "query": "What is the likelihood of the pressure within the ventilator system being low, given that the ventilator machine is in normal mode?",
+      "gold": 0.2486338,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.24316933521689835,
+      "abs_error": 0.005464464783101641,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 464,
+        "completion_tokens": 41,
+        "cost_usd": 9.42e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"ventilatormachine\": \"normal\"\n  },\n  \"query\": {\n    \"variable\": \"pressure\",\n    \"state\": \"low\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "ventilatormachine": "normal"
+        },
+        "query": {
+          "variable": "pressure",
+          "state": "low"
+        }
+      },
+      "query_var": "pressure",
+      "query_state": "low",
+      "evidence": {
+        "ventilatormachine": "normal"
+      },
+      "posterior": {
+        "high": 0.48072295712345114,
+        "low": 0.24316933521689835,
+        "normal": 0.2411341118994698,
+        "zero": 0.03497359576018076
+      },
+      "evidence_prob": 0.89679452096
+    },
+    {
+      "network": "alarm1",
+      "pair_id": 0,
+      "evidences": [
+        "The patient has low blood volume.",
+        "The central venous pressure is normal.",
+        "The left ventricular end-diastolic volume is high."
+      ],
+      "query": "What is the likelihood of this patient having a normal pulmonary capillary wedge pressure?",
+      "gold": 0.04,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.04,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 463,
+        "completion_tokens": 74,
+        "cost_usd": 0.00011385
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"hypovolemia\": \"patient\",\n    \"central_venous_pressure\": \"normal\",\n    \"left_ventricular_end_diastolic_volume\": \"high\"\n  },\n  \"query\": {\n    \"variable\": \"pulmonary_capillary_wedge_pressure\",\n    \"state\": \"normal\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "hypovolemia": "patient",
+          "central_venous_pressure": "normal",
+          "left_ventricular_end_diastolic_volume": "high"
+        },
+        "query": {
+          "variable": "pulmonary_capillary_wedge_pressure",
+          "state": "normal"
+        }
+      },
+      "query_var": "pulmonary_capillary_wedge_pressure",
+      "query_state": "normal",
+      "evidence": {
+        "hypovolemia": "patient",
+        "central_venous_pressure": "normal",
+        "left_ventricular_end_diastolic_volume": "high"
+      },
+      "posterior": {
+        "high": 0.9500000000000001,
+        "low": 0.01,
+        "normal": 0.04
+      },
+      "evidence_prob": 2.6099999999999997e-05
+    },
+    {
+      "network": "alarm1",
+      "pair_id": 1,
+      "evidences": [
+        "The patient has a medical history.",
+        "The stroke volume is high.",
+        "The patient has hypovolemia (low blood volume).",
+        "The left ventricular end-diastolic volume is high."
+      ],
+      "query": "What is the likelihood of the patient experiencing left ventricular failure?",
+      "gold": 0.05,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.95,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 470,
+        "completion_tokens": 80,
+        "cost_usd": 0.0001185
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"has_medical_history\": \"patient\",\n    \"stroke_volume\": \"high\",\n    \"hypovolemia\": \"patient\",\n    \"left_ventricular_end_diastolic_volume\": \"high\"\n  },\n  \"query\": {\n    \"variable\": \"left_ventricular_failure\",\n    \"state\": \"patient\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "has_medical_history": "patient",
+          "stroke_volume": "high",
+          "hypovolemia": "patient",
+          "left_ventricular_end_diastolic_volume": "high"
+        },
+        "query": {
+          "variable": "left_ventricular_failure",
+          "state": "patient"
+        }
+      },
+      "query_var": "left_ventricular_failure",
+      "query_state": "patient",
+      "evidence": {
+        "has_medical_history": "patient",
+        "stroke_volume": "high",
+        "hypovolemia": "patient",
+        "left_ventricular_end_diastolic_volume": "high"
+      },
+      "posterior": {
+        "FALSE": 0.0,
+        "patient": 1.0
+      },
+      "evidence_prob": 9.000000000000001e-07
+    },
+    {
+      "network": "alarm1",
+      "pair_id": 2,
+      "evidences": [
+        "The left ventricular end-diastolic volume is normal.",
+        "The stroke volume is low.",
+        "The patient has a medical history."
+      ],
+      "query": "What is the likelihood of the central venous pressure being normal, given the patient's current conditions?",
+      "gold": 0.95,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.95,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 464,
+        "completion_tokens": 70,
+        "cost_usd": 0.0001116
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"left_ventricular_end_diastolic_volume\": \"normal\",\n    \"stroke_volume\": \"low\",\n    \"has_medical_history\": \"patient\"\n  },\n  \"query\": {\n    \"variable\": \"central_venous_pressure\",\n    \"state\": \"normal\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "left_ventricular_end_diastolic_volume": "normal",
+          "stroke_volume": "low",
+          "has_medical_history": "patient"
+        },
+        "query": {
+          "variable": "central_venous_pressure",
+          "state": "normal"
+        }
+      },
+      "query_var": "central_venous_pressure",
+      "query_state": "normal",
+      "evidence": {
+        "left_ventricular_end_diastolic_volume": "normal",
+        "stroke_volume": "low",
+        "has_medical_history": "patient"
+      },
+      "posterior": {
+        "high": 0.01,
+        "low": 0.04,
+        "normal": 0.95
+      },
+      "evidence_prob": 0.0003528
+    },
+    {
+      "network": "alarm2",
+      "pair_id": 0,
+      "evidences": [
+        "There is an error signal in the low cardiac output detection.",
+        "The blood pressure is within normal range."
+      ],
+      "query": "What is the likelihood of there being no error in the cauterization procedure?",
+      "gold": 0.9,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.9,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 616,
+        "completion_tokens": 64,
+        "cost_usd": 0.0001308
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"error_low_cardiac_output_detection\": \"patient\",\n    \"blood_pressure_reading\": \"normal\"\n  },\n  \"query\": {\n    \"variable\": \"error_cauterization_procedure\",\n    \"state\": \"FALSE\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "error_low_cardiac_output_detection": "patient",
+          "blood_pressure_reading": "normal"
+        },
+        "query": {
+          "variable": "error_cauterization_procedure",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "error_cauterization_procedure",
+      "query_state": "FALSE",
+      "evidence": {
+        "error_low_cardiac_output_detection": "patient",
+        "blood_pressure_reading": "normal"
+      },
+      "posterior": {
+        "FALSE": 0.0,
+        "patient": 1.0
+      },
+      "evidence_prob": 3.2748355413221745e-06
+    },
+    {
+      "network": "alarm2",
+      "pair_id": 1,
+      "evidences": [
+        "The heart rate as measured by an electrocardiogram is high.",
+        "There is no error in the cauterization procedure.",
+        "The oxygen saturation level is high.",
+        "The patient's heart rate is high.",
+        "The total peripheral resistance is low.",
+        "The blood pressure is normal."
+      ],
+      "query": "What is the likelihood of this patient's heart rate, as inferred from blood pressure readings, being low?",
+      "gold": 0.01,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "zero evidence probability or missing query state",
+      "usage": {
+        "prompt_tokens": 656,
+        "completion_tokens": 91,
+        "cost_usd": 0.000153
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"heart_rate\": \"high\",\n    \"error_cauterization_procedure\": \"FALSE\",\n    \"oxygen_saturation\": \"high\",\n    \"blood_pressure_reading\": \"normal\",\n    \"total_peripheral_resistance\": \"low\"\n  },\n  \"query\": {\n    \"variable\": \"heart_rate_inferred_from_blood_pressure_readings\",\n    \"state\": \"low\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "heart_rate": "high",
+          "error_cauterization_procedure": "FALSE",
+          "oxygen_saturation": "high",
+          "blood_pressure_reading": "normal",
+          "total_peripheral_resistance": "low"
+        },
+        "query": {
+          "variable": "heart_rate_inferred_from_blood_pressure_readings",
+          "state": "low"
+        }
+      }
+    },
+    {
+      "network": "alarm2",
+      "pair_id": 2,
+      "evidences": [
+        "The heart rate as measured by an electrocardiogram is low.",
+        "Total peripheral resistance is normal.",
+        "The heart rate as inferred from blood pressure readings is low.",
+        "There are no errors in low cardiac output detection.",
+        "There are no errors in cauterization procedure detection."
+      ],
+      "query": "What is the likelihood of this patient not experiencing anaphylaxis?",
+      "gold": 0.99974754,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "zero evidence probability or missing query state",
+      "usage": {
+        "prompt_tokens": 649,
+        "completion_tokens": 95,
+        "cost_usd": 0.00015435
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"heart_rate\": \"low\",\n    \"total_peripheral_resistance\": \"normal\",\n    \"heart_rate_inferred_from_blood_pressure_readings\": \"low\",\n    \"error_low_cardiac_output_detection\": \"FALSE\",\n    \"error_cauterization_procedure\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"anaphylaxis\",\n    \"state\": \"FALSE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "heart_rate": "low",
+          "total_peripheral_resistance": "normal",
+          "heart_rate_inferred_from_blood_pressure_readings": "low",
+          "error_low_cardiac_output_detection": "FALSE",
+          "error_cauterization_procedure": "FALSE"
+        },
+        "query": {
+          "variable": "anaphylaxis",
+          "state": "FALSE"
+        }
+      }
+    },
+    {
+      "network": "asia0",
+      "pair_id": 0,
+      "evidences": [
+        "A person has lung cancer.",
+        "The person also has bronchitis."
+      ],
+      "query": "What is the likelihood of this person having dyspnoea?",
+      "gold": 0.9,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.9000000000000001,
+      "abs_error": 1.1102230246251565e-16,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 443,
+        "completion_tokens": 52,
+        "cost_usd": 9.765e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"lungcancer\": \"TRUE\",\n    \"bronchitis\": \"TRUE\"\n  },\n  \"query\": {\n    \"variable\": \"dyspnoea\",\n    \"state\": \"TRUE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "lungcancer": "TRUE",
+          "bronchitis": "TRUE"
+        },
+        "query": {
+          "variable": "dyspnoea",
+          "state": "TRUE"
+        }
+      },
+      "query_var": "dyspnoea",
+      "query_state": "TRUE",
+      "evidence": {
+        "lungcancer": "TRUE",
+        "bronchitis": "TRUE"
+      },
+      "posterior": {
+        "FALSE": 0.09999999999999998,
+        "TRUE": 0.9000000000000001
+      },
+      "evidence_prob": 0.03149999999999999
+    },
+    {
+      "network": "asia0",
+      "pair_id": 1,
+      "evidences": [
+        "A person has lung cancer.",
+        "The person also has bronchitis."
+      ],
+      "query": "What is the likelihood of this person being a smoker?",
+      "gold": 0.95238095,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.9523809523809524,
+      "abs_error": 2.380952435210304e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 441,
+        "completion_tokens": 51,
+        "cost_usd": 9.675e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"lungcancer\": \"TRUE\",\n    \"bronchitis\": \"TRUE\"\n  },\n  \"query\": {\n    \"variable\": \"smokes\",\n    \"state\": \"TRUE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "lungcancer": "TRUE",
+          "bronchitis": "TRUE"
+        },
+        "query": {
+          "variable": "smokes",
+          "state": "TRUE"
+        }
+      },
+      "query_var": "smokes",
+      "query_state": "TRUE",
+      "evidence": {
+        "lungcancer": "TRUE",
+        "bronchitis": "TRUE"
+      },
+      "posterior": {
+        "FALSE": 0.04761904761904762,
+        "TRUE": 0.9523809523809524
+      },
+      "evidence_prob": 0.03149999999999999
+    },
+    {
+      "network": "asia0",
+      "pair_id": 2,
+      "evidences": [
+        "A person visited asia before."
+      ],
+      "query": "What is the likelihood of this person having tuberculosis?",
+      "gold": 0.05,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.05,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 432,
+        "completion_tokens": 44,
+        "cost_usd": 9.12e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"visits_asia\": \"TRUE\"\n  },\n  \"query\": {\n    \"variable\": \"tuberculosis\",\n    \"state\": \"TRUE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "visits_asia": "TRUE"
+        },
+        "query": {
+          "variable": "tuberculosis",
+          "state": "TRUE"
+        }
+      },
+      "query_var": "tuberculosis",
+      "query_state": "TRUE",
+      "evidence": {
+        "visits_asia": "TRUE"
+      },
+      "posterior": {
+        "FALSE": 0.95,
+        "TRUE": 0.05
+      },
+      "evidence_prob": 0.01
+    },
+    {
+      "network": "cancer0",
+      "pair_id": 0,
+      "evidences": [
+        "The pollution level is high.",
+        "The patient is a smoker.",
+        "The x-ray result is positive."
+      ],
+      "query": "What is the likelihood of the patient having cancer?",
+      "gold": 0.19148936,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.19148936170212766,
+      "abs_error": 1.7021276610407199e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 363,
+        "completion_tokens": 56,
+        "cost_usd": 8.805e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"pollution\": \"high\",\n    \"smoker\": \"TRUE\",\n    \"xray\": \"positive\"\n  },\n  \"query\": {\n    \"variable\": \"cancer\",\n    \"state\": \"TRUE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "pollution": "high",
+          "smoker": "TRUE",
+          "xray": "positive"
+        },
+        "query": {
+          "variable": "cancer",
+          "state": "TRUE"
+        }
+      },
+      "query_var": "cancer",
+      "query_state": "TRUE",
+      "evidence": {
+        "pollution": "high",
+        "smoker": "TRUE",
+        "xray": "positive"
+      },
+      "posterior": {
+        "FALSE": 0.8085106382978723,
+        "TRUE": 0.19148936170212766
+      },
+      "evidence_prob": 0.007050000000000001
+    },
+    {
+      "network": "cancer0",
+      "pair_id": 1,
+      "evidences": [
+        "The air pollution level is low.",
+        "The patient is experiencing dyspnoea."
+      ],
+      "query": "What is the likelihood of this person having cancer, given the air pollution is low and they have dyspnoea?",
+      "gold": 0.020781489,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.02078148947741393,
+      "abs_error": 4.774139313046266e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 373,
+        "completion_tokens": 51,
+        "cost_usd": 8.655e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"pollution\": \"low\",\n    \"dyspnoea\": \"TRUE\"\n  },\n  \"query\": {\n    \"variable\": \"cancer\",\n    \"state\": \"TRUE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "pollution": "low",
+          "dyspnoea": "TRUE"
+        },
+        "query": {
+          "variable": "cancer",
+          "state": "TRUE"
+        }
+      },
+      "query_var": "cancer",
+      "query_state": "TRUE",
+      "evidence": {
+        "pollution": "low",
+        "dyspnoea": "TRUE"
+      },
+      "posterior": {
+        "FALSE": 0.979218510522586,
+        "TRUE": 0.02078148947741393
+      },
+      "evidence_prob": 0.2730555
+    },
+    {
+      "network": "cancer0",
+      "pair_id": 2,
+      "evidences": [
+        "The patient does not smoke.",
+        "The air pollution level is low."
+      ],
+      "query": "What is the likelihood of this person's X-ray test being positive for cancer?",
+      "gold": 0.2007,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.20070000000000005,
+      "abs_error": 5.551115123125783e-17,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 361,
+        "completion_tokens": 49,
+        "cost_usd": 8.355e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"smoker\": \"FALSE\",\n    \"pollution\": \"low\"\n  },\n  \"query\": {\n    \"variable\": \"xray\",\n    \"state\": \"positive\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "smoker": "FALSE",
+          "pollution": "low"
+        },
+        "query": {
+          "variable": "xray",
+          "state": "positive"
+        }
+      },
+      "query_var": "xray",
+      "query_state": "positive",
+      "evidence": {
+        "smoker": "FALSE",
+        "pollution": "low"
+      },
+      "posterior": {
+        "negative": 0.7993,
+        "positive": 0.20070000000000005
+      },
+      "evidence_prob": 0.63
+    },
+    {
+      "network": "child0",
+      "pair_id": 0,
+      "evidences": [
+        "The chest X-ray report indicates ground glass opacity."
+      ],
+      "query": "Given that the chest X-ray report shows ground glass opacity, what is the likelihood of the chest X-ray having been taken with asymmetrical or patchy findings?",
+      "gold": 0.15343266,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.15343266,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 486,
+        "completion_tokens": 49,
+        "cost_usd": 0.0001023
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"xray_report\": \"ground_glass_opacity\"\n  },\n  \"query\": {\n    \"variable\": \"xray_report\",\n    \"state\": \"asymmetric_patchiness\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "xray_report": "ground_glass_opacity"
+        },
+        "query": {
+          "variable": "xray_report",
+          "state": "asymmetric_patchiness"
+        }
+      },
+      "query_var": "xray_report",
+      "query_state": "asymmetric_patchiness",
+      "evidence": {
+        "xray_report": "ground_glass_opacity"
+      },
+      "posterior": {
+        "asymmetric_patchiness": 0.0,
+        "ground_glass_opacity": 1.0,
+        "normal": 0.0,
+        "oligaemic": 0.0,
+        "plethoric": 0.0
+      },
+      "evidence_prob": 0.008673554000000002
+    },
+    {
+      "network": "child0",
+      "pair_id": 1,
+      "evidences": [
+        "A chest X-ray shows an oligaemic pattern."
+      ],
+      "query": "Given that the chest X-ray shows an oligaemic pattern, what is the likelihood of the lung blood flow being normal?",
+      "gold": 0.019557052,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.023050428398043662,
+      "abs_error": 0.0034933763980436634,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 480,
+        "completion_tokens": 45,
+        "cost_usd": 9.9e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"chest_xray\": \"oligaemic\"\n  },\n  \"query\": {\n    \"variable\": \"lung_flow\",\n    \"state\": \"normal\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "chest_xray": "oligaemic"
+        },
+        "query": {
+          "variable": "lung_flow",
+          "state": "normal"
+        }
+      },
+      "query_var": "lung_flow",
+      "query_state": "normal",
+      "evidence": {
+        "chest_xray": "oligaemic"
+      },
+      "posterior": {
+        "high": 0.06366337407020198,
+        "low": 0.9132861975317543,
+        "normal": 0.023050428398043662
+      },
+      "evidence_prob": 0.03328680000000001
+    },
+    {
+      "network": "child0",
+      "pair_id": 2,
+      "evidences": [
+        "The chest X-ray report indicates a plethoric pattern.",
+        "The lung parenchyma is normal.",
+        "The child has Fallot's disease.",
+        "The blood flow through the lungs is high.",
+        "The chest X-ray is normal."
+      ],
+      "query": "What is the likelihood of this child not having birth asphyxia?",
+      "gold": 0.91525424,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.91525424,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 507,
+        "completion_tokens": 83,
+        "cost_usd": 0.00012585
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"chest_xray\": \"plethoric\",\n    \"lung_parenchyma\": \"normal\",\n    \"disease\": \"fallot\",\n    \"lung_flow\": \"high\",\n    \"xray_report\": \"normal\"\n  },\n  \"query\": {\n    \"variable\": \"birth_asphyxia\",\n    \"state\": \"FALSE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "chest_xray": "plethoric",
+          "lung_parenchyma": "normal",
+          "disease": "fallot",
+          "lung_flow": "high",
+          "xray_report": "normal"
+        },
+        "query": {
+          "variable": "birth_asphyxia",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "birth_asphyxia",
+      "query_state": "FALSE",
+      "evidence": {
+        "chest_xray": "plethoric",
+        "lung_parenchyma": "normal",
+        "disease": "fallot",
+        "lung_flow": "high",
+        "xray_report": "normal"
+      },
+      "posterior": {
+        "FALSE": 0.0,
+        "child": 1.0
+      },
+      "evidence_prob": 7.900000000000002e-05
+    },
+    {
+      "network": "child1",
+      "pair_id": 0,
+      "evidences": [
+        "The child is between 11-30 days old."
+      ],
+      "query": "What is the likelihood of a report indicating that the child is grunting, given that the child is within the age range of 11-30 days?",
+      "gold": 0.23171645,
+      "reasoning_types": [],
+      "pred": 1.0,
+      "abs_error": 0.76828355,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 474,
+        "completion_tokens": 43,
+        "cost_usd": 9.69e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"age\": \"11-30-days\"\n  },\n  \"query\": {\n    \"variable\": \"grunting\",\n    \"state\": \"child\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "age": "11-30-days"
+        },
+        "query": {
+          "variable": "grunting",
+          "state": "child"
+        }
+      },
+      "query_var": "grunting",
+      "query_state": "child",
+      "evidence": {
+        "age": "11-30-days"
+      },
+      "posterior": {
+        "FALSE": 0.0,
+        "child": 1.0
+      },
+      "evidence_prob": 0.000516615584
+    },
+    {
+      "network": "child1",
+      "pair_id": 1,
+      "evidences": [
+        "The child is not grunting.",
+        "The child is currently sick."
+      ],
+      "query": "What is the likelihood of a sick child aged between 4-10 days?",
+      "gold": 0.14194861,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "zero evidence probability or missing query state",
+      "usage": {
+        "prompt_tokens": 462,
+        "completion_tokens": 51,
+        "cost_usd": 9.99e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"grunting\": \"FALSE\",\n    \"sick\": \"child\"\n  },\n  \"query\": {\n    \"variable\": \"age\",\n    \"state\": \"4-10-days\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "grunting": "FALSE",
+          "sick": "child"
+        },
+        "query": {
+          "variable": "age",
+          "state": "4-10-days"
+        }
+      }
+    },
+    {
+      "network": "child1",
+      "pair_id": 2,
+      "evidences": [
+        "The child has been observed to be grunting.",
+        "There is no documented report or assessment of the grunting symptom."
+      ],
+      "query": "What is the likelihood of the child aged between 4-10 days having grunting as a symptom?",
+      "gold": 0.16790675,
+      "reasoning_types": [],
+      "pred": 0.14194860813704496,
+      "abs_error": 0.02595814186295503,
+      "ok_0_01": false,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 477,
+        "completion_tokens": 55,
+        "cost_usd": 0.00010455
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"grunting\": \"child\",\n    \"grunting_symptoms_reported\": \"child\"\n  },\n  \"query\": {\n    \"variable\": \"age\",\n    \"state\": \"4-10-days\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "grunting": "child",
+          "grunting_symptoms_reported": "child"
+        },
+        "query": {
+          "variable": "age",
+          "state": "4-10-days"
+        }
+      },
+      "query_var": "age",
+      "query_state": "4-10-days",
+      "evidence": {
+        "grunting": "child",
+        "grunting_symptoms_reported": "child"
+      },
+      "posterior": {
+        "0-3-days": 0.7890078515346182,
+        "11-30-days": 0.0690435403283369,
+        "4-10-days": 0.14194860813704496
+      },
+      "evidence_prob": 0.007482460800000001
+    },
+    {
+      "network": "child2",
+      "pair_id": 0,
+      "evidences": [
+        "The oxygen level in the lower part of the body is less than 5.",
+        "The flow of blood through the ductus arteriosus is from the right side to the left side.",
+        "There is no mixing of oxygenated and deoxygenated blood in the heart.",
+        "The hypoxia in the oxygen level in the blood is severe."
+      ],
+      "query": "What is the likelihood of the distribution of oxygen being equal in the body?",
+      "gold": 0.042016807,
+      "reasoning_types": [
+        "causal",
+        "explaining_away"
+      ],
+      "pred": 0.04201680672268908,
+      "abs_error": 2.7731092422378367e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 536,
+        "completion_tokens": 72,
+        "cost_usd": 0.0001236
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"lower_body_o2\": \"<5\",\n    \"duct_flow\": \"right_to_left\",\n    \"cardiac_mixing\": \"none\",\n    \"hypoxia\": \"severe\"\n  },\n  \"query\": {\n    \"variable\": \"oxygen_distribution\",\n    \"state\": \"equal\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "lower_body_o2": "<5",
+          "duct_flow": "right_to_left",
+          "cardiac_mixing": "none",
+          "hypoxia": "severe"
+        },
+        "query": {
+          "variable": "oxygen_distribution",
+          "state": "equal"
+        }
+      },
+      "query_var": "oxygen_distribution",
+      "query_state": "equal",
+      "evidence": {
+        "lower_body_o2": "<5",
+        "duct_flow": "right_to_left",
+        "cardiac_mixing": "none",
+        "hypoxia": "severe"
+      },
+      "posterior": {
+        "equal": 0.04201680672268908,
+        "unequal": 0.9579831932773109
+      },
+      "evidence_prob": 0.0005418408206925
+    },
+    {
+      "network": "child2",
+      "pair_id": 1,
+      "evidences": [
+        "A child has severe hypoxia in their oxygen distribution."
+      ],
+      "query": "What is the likelihood of this child having no blood flow through the ductus arteriosus?",
+      "gold": 0.53284889,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.31801719068131146,
+      "abs_error": 0.21483169931868856,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 482,
+        "completion_tokens": 55,
+        "cost_usd": 0.0001053
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"hypoxia\": \"severe\",\n    \"oxygen_distribution\": \"unequal\"\n  },\n  \"query\": {\n    \"variable\": \"duct_flow\",\n    \"state\": \"none\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "hypoxia": "severe",
+          "oxygen_distribution": "unequal"
+        },
+        "query": {
+          "variable": "duct_flow",
+          "state": "none"
+        }
+      },
+      "query_var": "duct_flow",
+      "query_state": "none",
+      "evidence": {
+        "hypoxia": "severe",
+        "oxygen_distribution": "unequal"
+      },
+      "posterior": {
+        "left_to_right": 0.22540290121329354,
+        "none": 0.31801719068131146,
+        "right_to_left": 0.456579908105395
+      },
+      "evidence_prob": 0.031155914358350006
+    },
+    {
+      "network": "child2",
+      "pair_id": 3,
+      "evidences": [
+        "A child has severe hypoxia in the blood."
+      ],
+      "query": "What is the likelihood of this child having lower oxygen levels in the range of less than 5.",
+      "gold": 0.50837767,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.5083776743416175,
+      "abs_error": 4.341617509950879e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 482,
+        "completion_tokens": 44,
+        "cost_usd": 9.87e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"hypoxia\": \"severe\"\n  },\n  \"query\": {\n    \"variable\": \"lower_body_o2\",\n    \"state\": \"<5\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "hypoxia": "severe"
+        },
+        "query": {
+          "variable": "lower_body_o2",
+          "state": "<5"
+        }
+      },
+      "query_var": "lower_body_o2",
+      "query_state": "<5",
+      "evidence": {
+        "hypoxia": "severe"
+      },
+      "posterior": {
+        "5-12": 0.39581116282919127,
+        "<5": 0.5083776743416175,
+        ">12": 0.09581116282919126
+      },
+      "evidence_prob": 0.37189216348
+    },
+    {
+      "network": "child3",
+      "pair_id": 0,
+      "evidences": [
+        "The child has a medical report indicating Left Ventricular Hypertrophy."
+      ],
+      "query": "What is the likelihood that the child has Transposition of the Great Arteries (TGA)?",
+      "gold": 0.15981116,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.12213740458015268,
+      "abs_error": 0.03767375541984733,
+      "ok_0_01": false,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 331,
+        "completion_tokens": 42,
+        "cost_usd": 7.485e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"lvh_report\": \"child\"\n  },\n  \"query\": {\n    \"variable\": \"disease\",\n    \"state\": \"tga\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "lvh_report": "child"
+        },
+        "query": {
+          "variable": "disease",
+          "state": "tga"
+        }
+      },
+      "query_var": "disease",
+      "query_state": "tga",
+      "evidence": {
+        "lvh_report": "child"
+      },
+      "posterior": {
+        "fallots_tetralogy": 0.10723373318793165,
+        "lung": 0.01817520901490367,
+        "paivs": 0.7262813522355507,
+        "pfc": 0.01708469647400945,
+        "tapvd": 0.009087604507451835,
+        "tga": 0.12213740458015268
+      },
+      "evidence_prob": 0.24759000000000003
+    },
+    {
+      "network": "child3",
+      "pair_id": 1,
+      "evidences": [
+        "The child does not have a medical report or diagnosis confirming Left Ventricular Hypertrophy."
+      ],
+      "query": "What is the likelihood of this child having Fallot's disease?",
+      "gold": 0.35630755,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "zero evidence probability or missing query state",
+      "usage": {
+        "prompt_tokens": 329,
+        "completion_tokens": 55,
+        "cost_usd": 8.235e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"lvh_report\": \"child\",\n    \"lvh\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"disease\",\n    \"state\": \"fallots_tetralogy\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "lvh_report": "child",
+          "lvh": "FALSE"
+        },
+        "query": {
+          "variable": "disease",
+          "state": "fallots_tetralogy"
+        }
+      }
+    },
+    {
+      "network": "child3",
+      "pair_id": 2,
+      "evidences": [
+        "The child has Left Ventricular Hypertrophy."
+      ],
+      "query": "What is the likelihood that the child has PAIVS?",
+      "gold": 0.72628135,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.7262813522355507,
+      "abs_error": 2.2355506335003383e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 320,
+        "completion_tokens": 42,
+        "cost_usd": 7.32e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"lvh\": \"child\"\n  },\n  \"query\": {\n    \"variable\": \"disease\",\n    \"state\": \"paivs\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "lvh": "child"
+        },
+        "query": {
+          "variable": "disease",
+          "state": "paivs"
+        }
+      },
+      "query_var": "disease",
+      "query_state": "paivs",
+      "evidence": {
+        "lvh": "child"
+      },
+      "posterior": {
+        "fallots_tetralogy": 0.10723373318793165,
+        "lung": 0.018175209014903673,
+        "paivs": 0.7262813522355507,
+        "pfc": 0.01708469647400945,
+        "tapvd": 0.009087604507451837,
+        "tga": 0.12213740458015268
+      },
+      "evidence_prob": 0.24759000000000003
+    },
+    {
+      "network": "diabetes0",
+      "pair_id": 0,
+      "evidences": [
+        "The patient's current blood glucose concentration is 10 mmol/l.",
+        "The kidneys' ability to clear substances from the blood is at its normal level (0.0mmol/kg/h)."
+      ],
+      "query": "What is the likelihood of insulin administration strategies being effective at a rate of 0.8 mmol/kg/h?",
+      "gold": 0.951,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.9510000000000001,
+      "abs_error": 1.1102230246251565e-16,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 454,
+        "completion_tokens": 64,
+        "cost_usd": 0.0001065
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"bg_0\": \"10\",\n    \"kidney_clear_substances\": \"0.0\"\n  },\n  \"query\": {\n    \"variable\": \"utility_of_insulin_administration_strategies\",\n    \"state\": \"0.8\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "bg_0": "10",
+          "kidney_clear_substances": "0.0"
+        },
+        "query": {
+          "variable": "utility_of_insulin_administration_strategies",
+          "state": "0.8"
+        }
+      },
+      "query_var": "utility_of_insulin_administration_strategies",
+      "query_state": "0.8",
+      "evidence": {
+        "bg_0": "10",
+        "kidney_clear_substances": "0.0"
+      },
+      "posterior": {
+        "0.0": 0.0,
+        "0.4": 0.049,
+        "0.8": 0.9510000000000001
+      },
+      "evidence_prob": 0.29999999999999993
+    },
+    {
+      "network": "diabetes0",
+      "pair_id": 1,
+      "evidences": [
+        "The utility or effectiveness of insulin administration strategies, given the current blood glucose levels, is 0.8 mmol/kg/h.",
+        "The actual rate at which insulin is administered independently is 0.4 mmol/kg/h."
+      ],
+      "query": "What is the likelihood of the kidneys' ability to clear substances being 0.8 mmol/kg/h?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 460,
+        "completion_tokens": 68,
+        "cost_usd": 0.0001098
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"utility_of_insulin_administration_strategies\": \"0.8\",\n    \"insulin_administration_rate\": \"0.4\"\n  },\n  \"query\": {\n    \"variable\": \"kidney_clear_substances\",\n    \"state\": \"0.8\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "utility_of_insulin_administration_strategies": "0.8",
+          "insulin_administration_rate": "0.4"
+        },
+        "query": {
+          "variable": "kidney_clear_substances",
+          "state": "0.8"
+        }
+      },
+      "query_var": "kidney_clear_substances",
+      "query_state": "0.8",
+      "evidence": {
+        "utility_of_insulin_administration_strategies": "0.8",
+        "insulin_administration_rate": "0.4"
+      },
+      "posterior": {
+        "0.0": 0.9357262452236567,
+        "0.4": 0.06427375477634342,
+        "0.8": 0.0
+      },
+      "evidence_prob": 6.223379999999999e-05
+    },
+    {
+      "network": "diabetes0",
+      "pair_id": 2,
+      "evidences": [
+        "The patient's current blood glucose concentration is 8 mmol/l."
+      ],
+      "query": "What is the likelihood of the patient's kidneys having no ability to clear substances from the blood?",
+      "gold": 1.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 425,
+        "completion_tokens": 51,
+        "cost_usd": 9.435e-05
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"bg_0\": \"8\"\n  },\n  \"query\": {\n    \"variable\": \"kidney_clear_substances\",\n    \"state\": \"0.0\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "bg_0": "8"
+        },
+        "query": {
+          "variable": "kidney_clear_substances",
+          "state": "0.0"
+        }
+      },
+      "query_var": "kidney_clear_substances",
+      "query_state": "0.0",
+      "evidence": {
+        "bg_0": "8"
+      },
+      "posterior": {
+        "0.0": 1.0,
+        "0.4": 0.0,
+        "0.8": 0.0
+      },
+      "evidence_prob": 0.14999999999999997
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 0,
+      "evidences": [
+        "The subjective judgment of vertical motion is neutral.",
+        "The 10.7mu vertical motion is strong up."
+      ],
+      "query": "What is the likelihood of the area of meso-alpha being down?",
+      "gold": 0.02,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.020000000000000004,
+      "abs_error": 3.469446951953614e-18,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 431,
+        "completion_tokens": 58,
+        "cost_usd": 9.945e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"subjective_vertical_motion\": \"neutral\",\n    \"n0_7mu_vertical_motion\": \"strong_up\"\n  },\n  \"query\": {\n    \"variable\": \"area_meso_alpha\",\n    \"state\": \"down\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "subjective_vertical_motion": "neutral",
+          "n0_7mu_vertical_motion": "strong_up"
+        },
+        "query": {
+          "variable": "area_meso_alpha",
+          "state": "down"
+        }
+      },
+      "query_var": "area_meso_alpha",
+      "query_state": "down",
+      "evidence": {
+        "subjective_vertical_motion": "neutral",
+        "n0_7mu_vertical_motion": "strong_up"
+      },
+      "posterior": {
+        "down": 0.020000000000000004,
+        "neutral": 0.2575,
+        "strong_up": 0.2475,
+        "weak_up": 0.475
+      },
+      "evidence_prob": 0.125
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 1,
+      "evidences": [
+        "The 10.7mu vertical motion is moving downward.",
+        "A subjective judgment of vertical motion is moving downward."
+      ],
+      "query": "What is the likelihood of the combined vertical motion being neutral?",
+      "gold": 0.21,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.21,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 430,
+        "completion_tokens": 57,
+        "cost_usd": 9.87e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"n0_7mu_vertical_motion\": \"down\",\n    \"subjective_vertical_motion\": \"down\"\n  },\n  \"query\": {\n    \"variable\": \"combined_vertical_motion\",\n    \"state\": \"neutral\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "n0_7mu_vertical_motion": "down",
+          "subjective_vertical_motion": "down"
+        },
+        "query": {
+          "variable": "combined_vertical_motion",
+          "state": "neutral"
+        }
+      },
+      "query_var": "combined_vertical_motion",
+      "query_state": "neutral",
+      "evidence": {
+        "n0_7mu_vertical_motion": "down",
+        "subjective_vertical_motion": "down"
+      },
+      "posterior": {
+        "down": 0.7449999999999999,
+        "neutral": 0.21,
+        "strong_up": 0.015,
+        "weak_up": 0.03
+      },
+      "evidence_prob": 0.05
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 2,
+      "evidences": [
+        "The quasigeostrophic vertical motion is strongly upward.",
+        "The combined vertical motion is strongly upward.",
+        "The 10.7mu vertical motion is downward."
+      ],
+      "query": "What is the likelihood of a neutral subjective judgment of vertical motion?",
+      "gold": 0.60606061,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.6060606060606061,
+      "abs_error": 3.9393939221810115e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 440,
+        "completion_tokens": 71,
+        "cost_usd": 0.0001086
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"quasigeostrophic_vertical_motion\": \"strong_up\",\n    \"combined_vertical_motion\": \"strong_up\",\n    \"n0_7mu_vertical_motion\": \"down\"\n  },\n  \"query\": {\n    \"variable\": \"subjective_vertical_motion\",\n    \"state\": \"neutral\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "quasigeostrophic_vertical_motion": "strong_up",
+          "combined_vertical_motion": "strong_up",
+          "n0_7mu_vertical_motion": "down"
+        },
+        "query": {
+          "variable": "subjective_vertical_motion",
+          "state": "neutral"
+        }
+      },
+      "query_var": "subjective_vertical_motion",
+      "query_state": "neutral",
+      "evidence": {
+        "quasigeostrophic_vertical_motion": "strong_up",
+        "combined_vertical_motion": "strong_up",
+        "n0_7mu_vertical_motion": "down"
+      },
+      "posterior": {
+        "down": 0.12121212121212123,
+        "neutral": 0.6060606060606061,
+        "strong_up": 0.18181818181818182,
+        "weak_up": 0.09090909090909091
+      },
+      "evidence_prob": 0.006187499999999999
+    },
+    {
+      "network": "hailfinder1",
+      "pair_id": 0,
+      "evidences": [
+        "The scenario is B.",
+        "The date is from Aug 20 to Sep 15.",
+        "The relative humidity ratio is Moist-to-Dry L."
+      ],
+      "query": "What is the likelihood of marked upper movement of features under these conditions?",
+      "gold": 0.97188547,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.1,
+      "abs_error": 0.87188547,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 467,
+        "completion_tokens": 71,
+        "cost_usd": 0.00011265
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"scenario\": \"b\",\n    \"severe_weather_period\": \"august_20_september_15\",\n    \"relative_humidity_ratio\": \"moistmdryl\"\n  },\n  \"query\": {\n    \"variable\": \"movement_features\",\n    \"state\": \"marked_upper\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "scenario": "b",
+          "severe_weather_period": "august_20_september_15",
+          "relative_humidity_ratio": "moistmdryl"
+        },
+        "query": {
+          "variable": "movement_features",
+          "state": "marked_upper"
+        }
+      },
+      "query_var": "movement_features",
+      "query_state": "marked_upper",
+      "evidence": {
+        "scenario": "b",
+        "severe_weather_period": "august_20_september_15",
+        "relative_humidity_ratio": "moistmdryl"
+      },
+      "posterior": {
+        "marked_upper": 0.1,
+        "no_major": 0.75,
+        "other_rapid": 0.1,
+        "strong_front": 0.05
+      },
+      "evidence_prob": 0.0024344320000000003
+    },
+    {
+      "network": "hailfinder1",
+      "pair_id": 1,
+      "evidences": [
+        "The date is between June 15th and July 1st.",
+        "The relative humidity ratio is other than the predefined values.",
+        "The movement of features is strong in the front."
+      ],
+      "query": "What is the likelihood of the scenario being scenario A?",
+      "gold": 0.065693431,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.11530183458030131,
+      "abs_error": 0.049608403580301316,
+      "ok_0_01": false,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 471,
+        "completion_tokens": 72,
+        "cost_usd": 0.00011385
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"severe_weather_period\": \"june_15_july_1\",\n    \"relative_humidity_ratio\": \"other\",\n    \"movement_features\": \"strong_front\"\n  },\n  \"query\": {\n    \"variable\": \"scenario\",\n    \"state\": \"a\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "severe_weather_period": "june_15_july_1",
+          "relative_humidity_ratio": "other",
+          "movement_features": "strong_front"
+        },
+        "query": {
+          "variable": "scenario",
+          "state": "a"
+        }
+      },
+      "query_var": "scenario",
+      "query_state": "a",
+      "evidence": {
+        "severe_weather_period": "june_15_july_1",
+        "relative_humidity_ratio": "other",
+        "movement_features": "strong_front"
+      },
+      "posterior": {
+        "a": 0.11530183458030131,
+        "b": 0.06559393256123808,
+        "c": 0.08301732089781697,
+        "d": 0.1162242492569437,
+        "e": 0.007379317413139282,
+        "f": 0.0204981039253869,
+        "g": 0.1065901404120119,
+        "h": 0.0,
+        "i": 0.05739469099108334,
+        "j": 0.018038331454340473,
+        "k": 0.4099620785077381
+      },
+      "evidence_prob": 0.00639805518
+    },
+    {
+      "network": "hailfinder1",
+      "pair_id": 2,
+      "evidences": [
+        "The relative humidity ratio is at the Moist-to-Dry Line.",
+        "The date range is from June 15th to July 1st."
+      ],
+      "query": "What is the likelihood of this scenario being F?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 462,
+        "completion_tokens": 66,
+        "cost_usd": 0.0001089
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"relative_humidity_ratio\": \"moistmdryl\",\n    \"severe_weather_period\": \"june_15_july_1\"\n  },\n  \"query\": {\n    \"variable\": \"scenario\",\n    \"state\": \"f\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "relative_humidity_ratio": "moistmdryl",
+          "severe_weather_period": "june_15_july_1"
+        },
+        "query": {
+          "variable": "scenario",
+          "state": "f"
+        }
+      },
+      "query_var": "scenario",
+      "query_state": "f",
+      "evidence": {
+        "relative_humidity_ratio": "moistmdryl",
+        "severe_weather_period": "june_15_july_1"
+      },
+      "posterior": {
+        "a": 0.008000000000000002,
+        "b": 0.0512,
+        "c": 0.11520000000000001,
+        "d": 0.05760000000000001,
+        "e": 0.30720000000000003,
+        "f": 0.0,
+        "g": 0.24960000000000004,
+        "h": 0.0,
+        "i": 0.022400000000000007,
+        "j": 0.1408,
+        "k": 0.04800000000000001
+      },
+      "evidence_prob": 0.04098374999999999
+    },
+    {
+      "network": "hailfinder2",
+      "pair_id": 0,
+      "evidences": [
+        "The outflow from the mountains is strong.",
+        "The wind hodograph is DCVZ favorable.",
+        "The instability in the mountains is strong.",
+        "There is no AM instability in the mountains."
+      ],
+      "query": "What is the likelihood of marked cloud shading and convection in the mountains?",
+      "gold": 0.7,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.7,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 464,
+        "completion_tokens": 78,
+        "cost_usd": 0.0001164
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"mountain_outflow\": \"strong\",\n    \"wind_hodograph\": \"dcvz_favorable_conditions\",\n    \"instability\": \"strong\",\n    \"atmospheric_instability\": \"none\"\n  },\n  \"query\": {\n    \"variable\": \"cloud_shading_convection\",\n    \"state\": \"marked\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "mountain_outflow": "strong",
+          "wind_hodograph": "dcvz_favorable_conditions",
+          "instability": "strong",
+          "atmospheric_instability": "none"
+        },
+        "query": {
+          "variable": "cloud_shading_convection",
+          "state": "marked"
+        }
+      },
+      "query_var": "cloud_shading_convection",
+      "query_state": "marked",
+      "evidence": {
+        "mountain_outflow": "strong",
+        "wind_hodograph": "dcvz_favorable_conditions",
+        "instability": "strong",
+        "atmospheric_instability": "none"
+      },
+      "posterior": {
+        "marked": 0.7,
+        "none": 0.0,
+        "some": 0.30000000000000004
+      },
+      "evidence_prob": 0.0030519449999999995
+    },
+    {
+      "network": "hailfinder2",
+      "pair_id": 1,
+      "evidences": [
+        "The wind hodograph is classified as other.",
+        "The instability in the mountains is classified as weak.",
+        "The AM instability in the mountains is classified as none.",
+        "The outflow from the mountains is classified as weak."
+      ],
+      "query": "What is the likelihood of marked cloud shading and convection occurring in the mountains?",
+      "gold": 0.01,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.009999999999999998,
+      "abs_error": 1.734723475976807e-18,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 470,
+        "completion_tokens": 64,
+        "cost_usd": 0.0001089
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"wind_hodograph\": \"other\",\n    \"instability\": \"weak\",\n    \"mountain_outflow\": \"weak\"\n  },\n  \"query\": {\n    \"variable\": \"cloud_shading_convection\",\n    \"state\": \"marked\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "wind_hodograph": "other",
+          "instability": "weak",
+          "mountain_outflow": "weak"
+        },
+        "query": {
+          "variable": "cloud_shading_convection",
+          "state": "marked"
+        }
+      },
+      "query_var": "cloud_shading_convection",
+      "query_state": "marked",
+      "evidence": {
+        "wind_hodograph": "other",
+        "instability": "weak",
+        "mountain_outflow": "weak"
+      },
+      "posterior": {
+        "marked": 0.009999999999999998,
+        "none": 0.7999999999999999,
+        "some": 0.18999999999999997
+      },
+      "evidence_prob": 0.007968064200000003
+    },
+    {
+      "network": "hailfinder2",
+      "pair_id": 2,
+      "evidences": [
+        "The instability in the mountains is weak.",
+        "The outflow from the mountains is strong."
+      ],
+      "query": "What is the likelihood of there being no cloud shading or convection in the mountains?",
+      "gold": 0.25063694,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.25063694267515924,
+      "abs_error": 2.67515926077877e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 445,
+        "completion_tokens": 58,
+        "cost_usd": 0.00010155
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"instability\": \"weak\",\n    \"mountain_outflow\": \"strong\"\n  },\n  \"query\": {\n    \"variable\": \"cloud_shading_convection\",\n    \"state\": \"none\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "instability": "weak",
+          "mountain_outflow": "strong"
+        },
+        "query": {
+          "variable": "cloud_shading_convection",
+          "state": "none"
+        }
+      },
+      "query_var": "cloud_shading_convection",
+      "query_state": "none",
+      "evidence": {
+        "instability": "weak",
+        "mountain_outflow": "strong"
+      },
+      "posterior": {
+        "marked": 0.09407643312101911,
+        "none": 0.25063694267515924,
+        "some": 0.6552866242038217
+      },
+      "evidence_prob": 0.0329206863
+    },
+    {
+      "network": "hailfinder3",
+      "pair_id": 0,
+      "evidences": [
+        "The latest convective inhibition (CIN) is stifling."
+      ],
+      "query": "What is the likelihood of the LLIW (LLIW severe weather index) being weak?",
+      "gold": 0.32,
+      "reasoning_types": [],
+      "pred": 0.32,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 351,
+        "completion_tokens": 47,
+        "cost_usd": 8.085e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"latest_cin\": \"stifling\"\n  },\n  \"query\": {\n    \"variable\": \"lliw_severe_weather_index\",\n    \"state\": \"weak\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "latest_cin": "stifling"
+        },
+        "query": {
+          "variable": "lliw_severe_weather_index",
+          "state": "weak"
+        }
+      },
+      "query_var": "lliw_severe_weather_index",
+      "query_state": "weak",
+      "evidence": {
+        "latest_cin": "stifling"
+      },
+      "posterior": {
+        "moderate": 0.38,
+        "strong": 0.18,
+        "unfavorable": 0.12,
+        "weak": 0.32
+      },
+      "evidence_prob": 0.15
+    },
+    {
+      "network": "hailfinder3",
+      "pair_id": 1,
+      "evidences": [
+        "The latest convective inhibition is None.",
+        "The current propensity to convection is moderate."
+      ],
+      "query": "What is the likelihood of the LLIW severe weather index being strong?",
+      "gold": 0.12282032,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.12282031842304775,
+      "abs_error": 1.5769522493380705e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 350,
+        "completion_tokens": 58,
+        "cost_usd": 8.73e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"latest_cin\": \"none\",\n    \"current_propensity_to_convection\": \"moderate\"\n  },\n  \"query\": {\n    \"variable\": \"lliw_severe_weather_index\",\n    \"state\": \"strong\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "latest_cin": "none",
+          "current_propensity_to_convection": "moderate"
+        },
+        "query": {
+          "variable": "lliw_severe_weather_index",
+          "state": "strong"
+        }
+      },
+      "query_var": "lliw_severe_weather_index",
+      "query_state": "strong",
+      "evidence": {
+        "latest_cin": "none",
+        "current_propensity_to_convection": "moderate"
+      },
+      "posterior": {
+        "moderate": 0.5041698256254739,
+        "strong": 0.12282031842304775,
+        "unfavorable": 0.009097801364670205,
+        "weak": 0.36391205458680814
+      },
+      "evidence_prob": 0.10552
+    },
+    {
+      "network": "hailfinder3",
+      "pair_id": 2,
+      "evidences": [
+        "The latest convective inhibition is None."
+      ],
+      "query": "What is the likelihood of there being no current propensity to convection?",
+      "gold": 0.1198,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.11979999999999999,
+      "abs_error": 1.3877787807814457e-17,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 339,
+        "completion_tokens": 46,
+        "cost_usd": 7.845e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"latest_cin\": \"none\"\n  },\n  \"query\": {\n    \"variable\": \"current_propensity_to_convection\",\n    \"state\": \"none\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "latest_cin": "none"
+        },
+        "query": {
+          "variable": "current_propensity_to_convection",
+          "state": "none"
+        }
+      },
+      "query_var": "current_propensity_to_convection",
+      "query_state": "none",
+      "evidence": {
+        "latest_cin": "none"
+      },
+      "posterior": {
+        "moderate": 0.26380000000000003,
+        "none": 0.11979999999999999,
+        "slight": 0.2504,
+        "strong": 0.366
+      },
+      "evidence_prob": 0.4
+    },
+    {
+      "network": "hailfinder4",
+      "pair_id": 0,
+      "evidences": [
+        "The instability change is increasing.",
+        "The capping within the scenario is average.",
+        "The capping change is increasing."
+      ],
+      "query": "What is the likelihood of the instability scaling within the scenario being average?",
+      "gold": 0.2475,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.2475,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 539,
+        "completion_tokens": 61,
+        "cost_usd": 0.00011745
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"instability_change\": \"increasing\",\n    \"capping\": \"average\",\n    \"cap_change\": \"increasing\"\n  },\n  \"query\": {\n    \"variable\": \"instability_scaling\",\n    \"state\": \"average\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "instability_change": "increasing",
+          "capping": "average",
+          "cap_change": "increasing"
+        },
+        "query": {
+          "variable": "instability_scaling",
+          "state": "average"
+        }
+      },
+      "query_var": "instability_scaling",
+      "query_state": "average",
+      "evidence": {
+        "instability_change": "increasing",
+        "capping": "average",
+        "cap_change": "increasing"
+      },
+      "posterior": {
+        "average": 0.2475,
+        "less_unstable": 0.132,
+        "more_unstable": 0.6205
+      },
+      "evidence_prob": 0.042853800000000004
+    },
+    {
+      "network": "hailfinder4",
+      "pair_id": 1,
+      "evidences": [
+        "The instability change is decreasing."
+      ],
+      "query": "What is the likelihood of the instability scaling within the scenario becoming more unstable?",
+      "gold": 0.136,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.136,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 522,
+        "completion_tokens": 47,
+        "cost_usd": 0.0001065
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"instability_change\": \"decreasing\"\n  },\n  \"query\": {\n    \"variable\": \"instability_scaling\",\n    \"state\": \"more_unstable\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "instability_change": "decreasing"
+        },
+        "query": {
+          "variable": "instability_scaling",
+          "state": "more_unstable"
+        }
+      },
+      "query_var": "instability_scaling",
+      "query_state": "more_unstable",
+      "evidence": {
+        "instability_change": "decreasing"
+      },
+      "posterior": {
+        "average": 0.251,
+        "less_unstable": 0.613,
+        "more_unstable": 0.136
+      },
+      "evidence_prob": 0.30992000000000003
+    },
+    {
+      "network": "hailfinder4",
+      "pair_id": 2,
+      "evidences": [
+        "The change in instability is little.",
+        "The change in capping is also little."
+      ],
+      "query": "What is the likelihood of the instability scaling within the scenario being more unstable?",
+      "gold": 0.3555,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "unknown evidence state little_change for capping",
+      "usage": {
+        "prompt_tokens": 533,
+        "completion_tokens": 60,
+        "cost_usd": 0.00011595
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"instability_change\": \"little_change\",\n    \"capping\": \"little_change\"\n  },\n  \"query\": {\n    \"variable\": \"instability_scaling\",\n    \"state\": \"more_unstable\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "instability_change": "little_change",
+          "capping": "little_change"
+        },
+        "query": {
+          "variable": "instability_scaling",
+          "state": "more_unstable"
+        }
+      }
+    },
+    {
+      "network": "hepar2_0",
+      "pair_id": 0,
+      "evidences": [
+        "The patient does not have flatulence."
+      ],
+      "query": "What is the likelihood of this patient having an amylase level between 300 and 499?",
+      "gold": 0.02171901,
+      "reasoning_types": [],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "unknown evidence state FALSE for flatulence",
+      "usage": {
+        "prompt_tokens": 315,
+        "completion_tokens": 44,
+        "cost_usd": 7.365e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"flatulence\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"amylase\",\n    \"state\": \"300-499\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "flatulence": "FALSE"
+        },
+        "query": {
+          "variable": "amylase",
+          "state": "300-499"
+        }
+      }
+    },
+    {
+      "network": "hepar2_0",
+      "pair_id": 1,
+      "evidences": [
+        "The patient does not have gallstones."
+      ],
+      "query": "What is the likelihood of this patient having flatulence?",
+      "gold": 0.4307,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "zero evidence probability or missing query state",
+      "usage": {
+        "prompt_tokens": 306,
+        "completion_tokens": 41,
+        "cost_usd": 7.05e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"gallstones\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"flatulence\",\n    \"state\": \"patient\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "gallstones": "FALSE"
+        },
+        "query": {
+          "variable": "flatulence",
+          "state": "patient"
+        }
+      }
+    },
+    {
+      "network": "hepar2_0",
+      "pair_id": 2,
+      "evidences": [
+        "The amylase level is between 1400 and 500 U/L.",
+        "The patient does not have gallstones."
+      ],
+      "query": "What is the likelihood of this patient having flatulence?",
+      "gold": 0.4307,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "zero evidence probability or missing query state",
+      "usage": {
+        "prompt_tokens": 323,
+        "completion_tokens": 53,
+        "cost_usd": 8.025e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"amylase\": \"500-1400\",\n    \"gallstones\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"flatulence\",\n    \"state\": \"patient\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "amylase": "500-1400",
+          "gallstones": "FALSE"
+        },
+        "query": {
+          "variable": "flatulence",
+          "state": "patient"
+        }
+      }
+    },
+    {
+      "network": "hepar2_1",
+      "pair_id": 0,
+      "evidences": [
+        "A person has undergone a choledocholithotomy to remove gallstones from the common bile duct.",
+        "The person is currently experiencing pain in the upper abdomen."
+      ],
+      "query": "What is the likelihood of this person not having gallstones?",
+      "gold": 0.21415504,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.21415504,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 389,
+        "completion_tokens": 54,
+        "cost_usd": 9.075e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"choledocholithotomy\": \"patient\",\n    \"upper_pain\": \"patient\"\n  },\n  \"query\": {\n    \"variable\": \"gallstones\",\n    \"state\": \"FALSE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "choledocholithotomy": "patient",
+          "upper_pain": "patient"
+        },
+        "query": {
+          "variable": "gallstones",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "gallstones",
+      "query_state": "FALSE",
+      "evidence": {
+        "choledocholithotomy": "patient",
+        "upper_pain": "patient"
+      },
+      "posterior": {
+        "FALSE": 0.0,
+        "patient": 1.0
+      },
+      "evidence_prob": 0.001799705477431442
+    },
+    {
+      "network": "hepar2_1",
+      "pair_id": 1,
+      "evidences": [
+        "The person is experiencing pain in the upper abdomen."
+      ],
+      "query": "What is the likelihood of this person having undergone surgery?",
+      "gold": 0.4235,
+      "reasoning_types": [],
+      "pred": 1.0,
+      "abs_error": 0.5765,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 366,
+        "completion_tokens": 42,
+        "cost_usd": 8.01e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"upper_pain\": \"patient\"\n  },\n  \"query\": {\n    \"variable\": \"surgery\",\n    \"state\": \"patient\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "upper_pain": "patient"
+        },
+        "query": {
+          "variable": "surgery",
+          "state": "patient"
+        }
+      },
+      "query_var": "surgery",
+      "query_state": "patient",
+      "evidence": {
+        "upper_pain": "patient"
+      },
+      "posterior": {
+        "patient": 1.0
+      },
+      "evidence_prob": 0.001799705477431442
+    },
+    {
+      "network": "hepar2_1",
+      "pair_id": 2,
+      "evidences": [
+        "A person has had surgery."
+      ],
+      "query": "What is the likelihood of this person not having gallstones?",
+      "gold": 0.8469,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.8469,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 363,
+        "completion_tokens": 46,
+        "cost_usd": 8.205e-05
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"surgery\": \"patient\"\n  },\n  \"query\": {\n    \"variable\": \"gallstones\",\n    \"state\": \"FALSE\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "surgery": "patient"
+        },
+        "query": {
+          "variable": "gallstones",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "gallstones",
+      "query_state": "FALSE",
+      "evidence": {
+        "surgery": "patient"
+      },
+      "posterior": {
+        "FALSE": 0.0,
+        "patient": 1.0
+      },
+      "evidence_prob": 0.0017997054774314418
+    },
+    {
+      "network": "hepar2_2",
+      "pair_id": 0,
+      "evidences": [
+        "The patient does not have diabetes.",
+        "The patient is obese."
+      ],
+      "query": "What is the likelihood of this patient being an alcoholic?",
+      "gold": 0.1359,
+      "reasoning_types": [],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "zero evidence probability or missing query state",
+      "usage": {
+        "prompt_tokens": 327,
+        "completion_tokens": 50,
+        "cost_usd": 7.905e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"diabetes\": \"FALSE\",\n    \"obesity\": \"patient\"\n  },\n  \"query\": {\n    \"variable\": \"alcoholism\",\n    \"state\": \"patient\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "diabetes": "FALSE",
+          "obesity": "patient"
+        },
+        "query": {
+          "variable": "alcoholism",
+          "state": "patient"
+        }
+      }
+    },
+    {
+      "network": "hepar2_2",
+      "pair_id": 1,
+      "evidences": [
+        "The patient is not diagnosed with diabetes.",
+        "The patient is obese.",
+        "The patient does not have fatty liver disease (steatosis)."
+      ],
+      "query": "What is the likelihood of this patient not having alcoholism?",
+      "gold": 0.8901196,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "zero evidence probability or missing query state",
+      "usage": {
+        "prompt_tokens": 342,
+        "completion_tokens": 59,
+        "cost_usd": 8.67e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"diabetes\": \"FALSE\",\n    \"obesity\": \"patient\",\n    \"steatosis\": \"patient\"\n  },\n  \"query\": {\n    \"variable\": \"alcoholism\",\n    \"state\": \"FALSE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "diabetes": "FALSE",
+          "obesity": "patient",
+          "steatosis": "patient"
+        },
+        "query": {
+          "variable": "alcoholism",
+          "state": "FALSE"
+        }
+      }
+    },
+    {
+      "network": "hepar2_2",
+      "pair_id": 2,
+      "evidences": [
+        "The patient does not have alcoholism.",
+        "The patient has fatty liver disease (steatosis)."
+      ],
+      "query": "What is the likelihood of this patient being obese?",
+      "gold": 0.18010048,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "zero evidence probability or missing query state",
+      "usage": {
+        "prompt_tokens": 332,
+        "completion_tokens": 51,
+        "cost_usd": 8.04e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"alcoholism\": \"FALSE\",\n    \"steatosis\": \"patient\"\n  },\n  \"query\": {\n    \"variable\": \"obesity\",\n    \"state\": \"patient\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "alcoholism": "FALSE",
+          "steatosis": "patient"
+        },
+        "query": {
+          "variable": "obesity",
+          "state": "patient"
+        }
+      }
+    },
+    {
+      "network": "insurance0",
+      "pair_id": 0,
+      "evidences": [
+        "The driver has a normal risk aversion.",
+        "The driver has normal driving skills.",
+        "The senior driver has not taken a driver's training or safety course.",
+        "The driver owns another car.",
+        "The driver is a senior.",
+        "The driver has a lower socio-economic status."
+      ],
+      "query": "What is the likelihood of this driver not being a good student?",
+      "gold": 1.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "zero evidence probability or missing query state",
+      "usage": {
+        "prompt_tokens": 487,
+        "completion_tokens": 93,
+        "cost_usd": 0.00012885
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"risk_aversion\": \"normal\",\n    \"driving_skills\": \"normal\",\n    \"senior_driver_training\": \"FALSE\",\n    \"other_car\": \"driver\",\n    \"age\": \"senior\",\n    \"socio_economic_class\": \"prole\"\n  },\n  \"query\": {\n    \"variable\": \"good_student\",\n    \"state\": \"driver\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "risk_aversion": "normal",
+          "driving_skills": "normal",
+          "senior_driver_training": "FALSE",
+          "other_car": "driver",
+          "age": "senior",
+          "socio_economic_class": "prole"
+        },
+        "query": {
+          "variable": "good_student",
+          "state": "driver"
+        }
+      }
+    },
+    {
+      "network": "insurance0",
+      "pair_id": 1,
+      "evidences": [
+        "The driver seeking insurance is a senior.",
+        "The driver is not a good student.",
+        "The driver has expert driving skills.",
+        "The driver does not own another car.",
+        "The driver has a prole socio-economic status."
+      ],
+      "query": "What is the likelihood of this driver having normal risk aversion?",
+      "gold": 0.29906539,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "zero evidence probability or missing query state",
+      "usage": {
+        "prompt_tokens": 477,
+        "completion_tokens": 80,
+        "cost_usd": 0.00011955
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"age\": \"senior\",\n    \"good_student\": \"driver\",\n    \"driving_skills\": \"expert\",\n    \"other_car\": \"driver\",\n    \"socio_economic_class\": \"prole\"\n  },\n  \"query\": {\n    \"variable\": \"risk_aversion\",\n    \"state\": \"normal\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "age": "senior",
+          "good_student": "driver",
+          "driving_skills": "expert",
+          "other_car": "driver",
+          "socio_economic_class": "prole"
+        },
+        "query": {
+          "variable": "risk_aversion",
+          "state": "normal"
+        }
+      }
+    },
+    {
+      "network": "insurance0",
+      "pair_id": 2,
+      "evidences": [
+        "The driver has a high risk aversion, which in this case is referred to as psychopath.",
+        "The driver has not taken a senior driver's training or safety course.",
+        "The driver is a good student."
+      ],
+      "query": "What is the likelihood of this driver having substandard driving skills?",
+      "gold": 0.5,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "zero evidence probability or missing query state",
+      "usage": {
+        "prompt_tokens": 473,
+        "completion_tokens": 63,
+        "cost_usd": 0.00010875
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"risk_aversion\": \"psychopathic\",\n    \"senior_driver_training\": \"FALSE\",\n    \"good_student\": \"driver\"\n  },\n  \"query\": {\n    \"variable\": \"driving_skills\",\n    \"state\": \"substandard\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "risk_aversion": "psychopathic",
+          "senior_driver_training": "FALSE",
+          "good_student": "driver"
+        },
+        "query": {
+          "variable": "driving_skills",
+          "state": "substandard"
+        }
+      }
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 0,
+      "evidences": [
+        "The primary location of the car is a suburb.",
+        "The car has been driven for twenty thousand miles.",
+        "The car has a higher than average likelihood of being stolen.",
+        "The car does not have any anti-theft devices installed."
+      ],
+      "query": "What is the likelihood of this car having a current value of fifty thousand dollars?",
+      "gold": 0.15302481,
+      "reasoning_types": [
+        "causal",
+        "explaining_away"
+      ],
+      "pred": 0.15302481043955202,
+      "abs_error": 4.3955200590417576e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 595,
+        "completion_tokens": 73,
+        "cost_usd": 0.00013305
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"home_base_location\": \"suburb\",\n    \"car_mileage\": \"20000\",\n    \"stolen\": \"TRUE\",\n    \"car_anti_theft\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"car_value\",\n    \"state\": \"50000\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "home_base_location": "suburb",
+          "car_mileage": "20000",
+          "stolen": "TRUE",
+          "car_anti_theft": "FALSE"
+        },
+        "query": {
+          "variable": "car_value",
+          "state": "50000"
+        }
+      },
+      "query_var": "car_value",
+      "query_state": "50000",
+      "evidence": {
+        "home_base_location": "suburb",
+        "car_mileage": "20000",
+        "stolen": "TRUE",
+        "car_anti_theft": "FALSE"
+      },
+      "posterior": {
+        "10000": 0.27415247753540445,
+        "1000000": 1.4220237334355815e-05,
+        "20000": 0.5590761089720676,
+        "5000": 0.013732382815641523,
+        "50000": 0.15302481043955202
+      },
+      "evidence_prob": 2.1156585663213102e-05
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 1,
+      "evidences": [
+        "The car is at risk of being stolen.",
+        "The car does not have anti-theft devices."
+      ],
+      "query": "What is the likelihood of the car having a value of ten thousand dollars?",
+      "gold": 0.27861336,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.2786133642753023,
+      "abs_error": 4.275302334377784e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 567,
+        "completion_tokens": 57,
+        "cost_usd": 0.00011925
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"stolen\": \"TRUE\",\n    \"car_anti_theft\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"car_value\",\n    \"state\": \"10000\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "stolen": "TRUE",
+          "car_anti_theft": "FALSE"
+        },
+        "query": {
+          "variable": "car_value",
+          "state": "10000"
+        }
+      },
+      "query_var": "car_value",
+      "query_state": "10000",
+      "evidence": {
+        "stolen": "TRUE",
+        "car_anti_theft": "FALSE"
+      },
+      "posterior": {
+        "10000": 0.2786133642753023,
+        "1000000": 1.2893447342298146e-06,
+        "20000": 0.5069867733891847,
+        "5000": 0.0787592774790853,
+        "50000": 0.1356392955116934
+      },
+      "evidence_prob": 0.0020316212837433473
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 2,
+      "evidences": [
+        "The car has a value of twenty thousand dollars.",
+        "The car is usually parked in a secure location.",
+        "The car does not have any anti-theft devices installed."
+      ],
+      "query": "What is the likelihood of this car being stolen?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 3e-06,
+      "abs_error": 3e-06,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 576,
+        "completion_tokens": 65,
+        "cost_usd": 0.0001254
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"car_value\": \"20000\",\n    \"home_base_location\": \"secure\",\n    \"car_anti_theft\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"stolen\",\n    \"state\": \"TRUE\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "car_value": "20000",
+          "home_base_location": "secure",
+          "car_anti_theft": "FALSE"
+        },
+        "query": {
+          "variable": "stolen",
+          "state": "TRUE"
+        }
+      },
+      "query_var": "stolen",
+      "query_state": "TRUE",
+      "evidence": {
+        "car_value": "20000",
+        "home_base_location": "secure",
+        "car_anti_theft": "FALSE"
+      },
+      "posterior": {
+        "FALSE": 0.999997,
+        "TRUE": 3e-06
+      },
+      "evidence_prob": 0.013478839362637843
+    },
+    {
+      "network": "insurance2",
+      "pair_id": 0,
+      "evidences": [
+        "The cost of the other car involved in the accident is one million.",
+        "The car's cushioning is good.",
+        "The accident is moderate.",
+        "The medical costs in case of an accident are one thousand."
+      ],
+      "query": "What is the likelihood of the insurance liability cost being ten thousand?",
+      "gold": 0.05,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.05,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 717,
+        "completion_tokens": 74,
+        "cost_usd": 0.00015195
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"other_car_cost\": \"1000000\",\n    \"cushioning\": \"good\",\n    \"accident\": \"moderate\",\n    \"medical_cost\": \"1000\"\n  },\n  \"query\": {\n    \"variable\": \"insurance_liability_cost\",\n    \"state\": \"10000\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "other_car_cost": "1000000",
+          "cushioning": "good",
+          "accident": "moderate",
+          "medical_cost": "1000"
+        },
+        "query": {
+          "variable": "insurance_liability_cost",
+          "state": "10000"
+        }
+      },
+      "query_var": "insurance_liability_cost",
+      "query_state": "10000",
+      "evidence": {
+        "other_car_cost": "1000000",
+        "cushioning": "good",
+        "accident": "moderate",
+        "medical_cost": "1000"
+      },
+      "posterior": {
+        "1000": 0.9000000000000001,
+        "10000": 0.05,
+        "100000": 0.03,
+        "1000000": 0.02
+      },
+      "evidence_prob": 6.748600298195017e-07
+    },
+    {
+      "network": "insurance2",
+      "pair_id": 1,
+      "evidences": [
+        "The car is equipped with an antilock braking system.",
+        "The medical costs in case of an accident are equal to one hundred thousand dollars.",
+        "The accident is severe.",
+        "The insurance liability cost is equal to one million dollars.",
+        "The car has an airbag built in.",
+        "The cost of the other car involved in the accident is equal to one thousand dollars."
+      ],
+      "query": "What is the likelihood of the car's cushioning being poor given these circumstances?",
+      "gold": 0.61979862,
+      "reasoning_types": [
+        "causal",
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.6197986217932464,
+      "abs_error": 1.793246440229268e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 753,
+        "completion_tokens": 100,
+        "cost_usd": 0.00017295
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"has_anti_lock_brakes\": \"TRUE\",\n    \"medical_cost\": \"100000\",\n    \"accident\": \"severe\",\n    \"insurance_liability_cost\": \"1000000\",\n    \"has_airbag\": \"TRUE\",\n    \"other_car_cost\": \"1000\"\n  },\n  \"query\": {\n    \"variable\": \"cushioning\",\n    \"state\": \"poor\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "has_anti_lock_brakes": "TRUE",
+          "medical_cost": "100000",
+          "accident": "severe",
+          "insurance_liability_cost": "1000000",
+          "has_airbag": "TRUE",
+          "other_car_cost": "1000"
+        },
+        "query": {
+          "variable": "cushioning",
+          "state": "poor"
+        }
+      },
+      "query_var": "cushioning",
+      "query_state": "poor",
+      "evidence": {
+        "has_anti_lock_brakes": "TRUE",
+        "medical_cost": "100000",
+        "accident": "severe",
+        "insurance_liability_cost": "1000000",
+        "has_airbag": "TRUE",
+        "other_car_cost": "1000"
+      },
+      "posterior": {
+        "excellent": 0.0008282763400327929,
+        "fair": 0.34201614857136414,
+        "good": 0.0373569532953566,
+        "poor": 0.6197986217932464
+      },
+      "evidence_prob": 2.718477416232551e-06
+    },
+    {
+      "network": "insurance2",
+      "pair_id": 2,
+      "evidences": [
+        "The car does not have an airbag.",
+        "The car does not have an antilock system for the brakes.",
+        "The car has fair cushioning."
+      ],
+      "query": "What is the likelihood of this car being involved in a moderate accident?",
+      "gold": 0.074516,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.07451599999999999,
+      "abs_error": 1.3877787807814457e-17,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 708,
+        "completion_tokens": 65,
+        "cost_usd": 0.0001452
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"has_airbag\": \"FALSE\",\n    \"has_anti_lock_brakes\": \"FALSE\",\n    \"cushioning\": \"fair\"\n  },\n  \"query\": {\n    \"variable\": \"accident\",\n    \"state\": \"moderate\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "has_airbag": "FALSE",
+          "has_anti_lock_brakes": "FALSE",
+          "cushioning": "fair"
+        },
+        "query": {
+          "variable": "accident",
+          "state": "moderate"
+        }
+      },
+      "query_var": "accident",
+      "query_state": "moderate",
+      "evidence": {
+        "has_airbag": "FALSE",
+        "has_anti_lock_brakes": "FALSE",
+        "cushioning": "fair"
+      },
+      "posterior": {
+        "mild": 0.07703100000000002,
+        "moderate": 0.07451599999999999,
+        "none": 0.7328649999999999,
+        "severe": 0.115588
+      },
+      "evidence_prob": 0.1889245800000001
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 0,
+      "evidences": [
+        "The amount of radiation received is below 150 MJ/m2.",
+        "The amount of photosynthetic biomass is 0.50 kg/m2."
+      ],
+      "query": "What is the likelihood of the temperature being between 13.0 and 14.9 \u00b0C?",
+      "gold": 0.69559087,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.6955908741348372,
+      "abs_error": 4.134837250369117e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 575,
+        "completion_tokens": 63,
+        "cost_usd": 0.00012405
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"radiation_levels\": \"<150\",\n    \"photosynthetic_biomass\": \"0.50\"\n  },\n  \"query\": {\n    \"variable\": \"mildew_temperature\",\n    \"state\": \"13.0-14.9\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "radiation_levels": "<150",
+          "photosynthetic_biomass": "0.50"
+        },
+        "query": {
+          "variable": "mildew_temperature",
+          "state": "13.0-14.9"
+        }
+      },
+      "query_var": "mildew_temperature",
+      "query_state": "13.0-14.9",
+      "evidence": {
+        "radiation_levels": "<150",
+        "photosynthetic_biomass": "0.50"
+      },
+      "posterior": {
+        "13.0": 0.3044091258651628,
+        "13.0-14.9": 0.6955908741348372,
+        "15.0-16-9": 0.0,
+        "15.0-16.9": 0.0,
+        "17.0": 0.0
+      },
+      "evidence_prob": 0.0014636552000000002
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 1,
+      "evidences": [
+        "The amount of radiation received is 250 MJ/m2.",
+        "The temperature is between 15.0 and 16.9 degrees Celsius."
+      ],
+      "query": "What is the likelihood of the photosynthetic biomass being 0.20 kg/m2 under these conditions?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 575,
+        "completion_tokens": 63,
+        "cost_usd": 0.00012405
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"radiation_levels\": \">250\",\n    \"mildew_temperature\": \"15.0-16.9\"\n  },\n  \"query\": {\n    \"variable\": \"photosynthetic_biomass\",\n    \"state\": \"0.20\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "radiation_levels": ">250",
+          "mildew_temperature": "15.0-16.9"
+        },
+        "query": {
+          "variable": "photosynthetic_biomass",
+          "state": "0.20"
+        }
+      },
+      "query_var": "photosynthetic_biomass",
+      "query_state": "0.20",
+      "evidence": {
+        "radiation_levels": ">250",
+        "mildew_temperature": "15.0-16.9"
+      },
+      "posterior": {
+        "0.15": 0.0,
+        "0.20": 0.0,
+        "0.25": 0.0,
+        "0.30": 0.0,
+        "0.35": 0.0,
+        "0.40": 0.0,
+        "0.45": 0.07069293070692931,
+        "0.50": 0.26397360263973607,
+        "0.55": 0.3036696330366964,
+        "0.60": 0.2516748325167484,
+        "0.65": 0.10198980101989803,
+        "0.70": 0.007999200079992002,
+        "0.75": 0.0,
+        "0.80": 0.0,
+        "0.85": 0.0,
+        "0.90": 0.0,
+        "0.95": 0.0
+      },
+      "evidence_prob": 0.00111901189
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 4,
+      "evidences": [
+        "The amount of photosynthetic biomass per square meter is 0.35 kg per square meter."
+      ],
+      "query": "What is the likelihood of the temperature being 13.0 degrees Celsius?",
+      "gold": 0.079972639,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.07997263917201876,
+      "abs_error": 1.720187603471146e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 559,
+        "completion_tokens": 50,
+        "cost_usd": 0.00011385
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"photosynthetic_biomass\": \"0.35\"\n  },\n  \"query\": {\n    \"variable\": \"mildew_temperature\",\n    \"state\": \"13.0\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "photosynthetic_biomass": "0.35"
+        },
+        "query": {
+          "variable": "mildew_temperature",
+          "state": "13.0"
+        }
+      },
+      "query_var": "mildew_temperature",
+      "query_state": "13.0",
+      "evidence": {
+        "photosynthetic_biomass": "0.35"
+      },
+      "posterior": {
+        "13.0": 0.07997263917201876,
+        "13.0-14.9": 0.5518157230197043,
+        "15.0-16-9": 0.0,
+        "15.0-16.9": 0.13554015305431746,
+        "17.0": 0.2326714847539595
+      },
+      "evidence_prob": 0.017264483382
+    },
+    {
+      "network": "munin0",
+      "pair_id": 0,
+      "evidences": [
+        "The level of severity of the differential diagnosis is severe.",
+        "There is no sensory neuron involvement in the differential diagnosis."
+      ],
+      "query": "What is the likelihood of the differential diagnosis type being mixed?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 356,
+        "completion_tokens": 68,
+        "cost_usd": 9.42e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"differential_diagnosis_severity\": \"severe\",\n    \"sensory_neuron_involvement_severity\": \"none\"\n  },\n  \"query\": {\n    \"variable\": \"differential_diagnosis_type\",\n    \"state\": \"mixed\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "differential_diagnosis_severity": "severe",
+          "sensory_neuron_involvement_severity": "none"
+        },
+        "query": {
+          "variable": "differential_diagnosis_type",
+          "state": "mixed"
+        }
+      },
+      "query_var": "differential_diagnosis_type",
+      "query_state": "mixed",
+      "evidence": {
+        "differential_diagnosis_severity": "severe",
+        "sensory_neuron_involvement_severity": "none"
+      },
+      "posterior": {
+        "mixed": 0.0,
+        "motor": 1.0,
+        "sensory": 0.0
+      },
+      "evidence_prob": 0.0012
+    },
+    {
+      "network": "munin0",
+      "pair_id": 1,
+      "evidences": [
+        "The differential diagnosis is of sensory neuron type."
+      ],
+      "query": "What is the likelihood of the sensory neuron type of differential diagnosis having no severity?",
+      "gold": 0.9,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.8999999999999999,
+      "abs_error": 1.1102230246251565e-16,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 346,
+        "completion_tokens": 54,
+        "cost_usd": 8.43e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"differential_diagnosis_type\": \"sensory\"\n  },\n  \"query\": {\n    \"variable\": \"sensory_neuron_involvement_severity\",\n    \"state\": \"none\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "differential_diagnosis_type": "sensory"
+        },
+        "query": {
+          "variable": "sensory_neuron_involvement_severity",
+          "state": "none"
+        }
+      },
+      "query_var": "sensory_neuron_involvement_severity",
+      "query_state": "none",
+      "evidence": {
+        "differential_diagnosis_type": "sensory"
+      },
+      "posterior": {
+        "mild": 0.04999999999999999,
+        "moderate": 0.029999999999999992,
+        "none": 0.8999999999999999,
+        "severe": 0.019999999999999997
+      },
+      "evidence_prob": 0.005000000000000001
+    },
+    {
+      "network": "munin0",
+      "pair_id": 2,
+      "evidences": [
+        "The differential diagnosis is of sensory neuron type."
+      ],
+      "query": "What is the severity of the differential diagnosis for this person?",
+      "gold": 0.02,
+      "reasoning_types": [],
+      "pred": 0.8999999999999999,
+      "abs_error": 0.8799999999999999,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 342,
+        "completion_tokens": 53,
+        "cost_usd": 8.31e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"differential_diagnosis_type\": \"sensory\"\n  },\n  \"query\": {\n    \"variable\": \"differential_diagnosis_severity\",\n    \"state\": \"none\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "differential_diagnosis_type": "sensory"
+        },
+        "query": {
+          "variable": "differential_diagnosis_severity",
+          "state": "none"
+        }
+      },
+      "query_var": "differential_diagnosis_severity",
+      "query_state": "none",
+      "evidence": {
+        "differential_diagnosis_type": "sensory"
+      },
+      "posterior": {
+        "mild": 0.04999999999999999,
+        "moderate": 0.029999999999999992,
+        "none": 0.8999999999999999,
+        "severe": 0.019999999999999997
+      },
+      "evidence_prob": 0.005000000000000001
+    },
+    {
+      "network": "phytophthora0",
+      "pair_id": 0,
+      "evidences": [
+        "The optimal temperature range for the growth of the Phytophthora species is 25 degrees celsius."
+      ],
+      "query": "What is the likelihood of the Phytophthora species having both reproductive structures or processes intermixed or closely associated?",
+      "gold": 0.3123691,
+      "reasoning_types": [],
+      "pred": 0.31236909505526694,
+      "abs_error": 4.944733067446805e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 477,
+        "completion_tokens": 48,
+        "cost_usd": 0.00010035
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"optimal_growth_temperature\": \"25\u00b0C\"\n  },\n  \"query\": {\n    \"variable\": \"reproductive_structure\",\n    \"state\": \"both\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "optimal_growth_temperature": "25\u00b0C"
+        },
+        "query": {
+          "variable": "reproductive_structure",
+          "state": "both"
+        }
+      },
+      "query_var": "reproductive_structure",
+      "query_state": "both",
+      "evidence": {
+        "optimal_growth_temperature": "25\u00b0C"
+      },
+      "posterior": {
+        "amphigynous": 0.46140246825116316,
+        "both": 0.31236909505526694,
+        "paragynous": 0.22622843669356982
+      },
+      "evidence_prob": 0.20654300000000003
+    },
+    {
+      "network": "phytophthora0",
+      "pair_id": 1,
+      "evidences": [
+        "The optimal temperature range for the growth of this Phytophthora species is 25 degrees.",
+        "This Phytophthora species has a moderate invasive score based on the BH scoring system.",
+        "The reproductive structure or process of this Phytophthora species is paragynous.",
+        "This Phytophthora species is not distributed in urban areas through nurseries."
+      ],
+      "query": "What is the likelihood of this Phytophthora species not being associated with horticultural, forest, or perennial environments?",
+      "gold": 0.6,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.6,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 530,
+        "completion_tokens": 92,
+        "cost_usd": 0.0001347
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"optimal_growth_temperature\": \"25\u00b0C\",\n    \"invasive_score_bh\": \"moderate\",\n    \"reproductive_structure\": \"paragynous\",\n    \"distributed_in_urban_area_through_nurseries\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"horticultural_forest_perennial_environments\",\n    \"state\": \"FALSE\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "optimal_growth_temperature": "25\u00b0C",
+          "invasive_score_bh": "moderate",
+          "reproductive_structure": "paragynous",
+          "distributed_in_urban_area_through_nurseries": "FALSE"
+        },
+        "query": {
+          "variable": "horticultural_forest_perennial_environments",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "horticultural_forest_perennial_environments",
+      "query_state": "FALSE",
+      "evidence": {
+        "optimal_growth_temperature": "25\u00b0C",
+        "invasive_score_bh": "moderate",
+        "reproductive_structure": "paragynous",
+        "distributed_in_urban_area_through_nurseries": "FALSE"
+      },
+      "posterior": {
+        "FALSE": 0.6,
+        "TRUE": 0.4000000000000001
+      },
+      "evidence_prob": 0.0106704
+    },
+    {
+      "network": "phytophthora0",
+      "pair_id": 2,
+      "evidences": [
+        "The optimal temperature range for the growth of this Phytophthora species is below 20 degrees Celsius.",
+        "This Phytophthora species is distributed in urban areas through nurseries.",
+        "This Phytophthora species is associated with horticultural, forest, or perennial environments."
+      ],
+      "query": "What is the likelihood of this Phytophthora species having a high invasive score (Invasiv_score_BH)?",
+      "gold": 0.25640245,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.25640244633493686,
+      "abs_error": 3.6650631418666535e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 513,
+        "completion_tokens": 76,
+        "cost_usd": 0.00012255
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"optimal_growth_temperature\": \"<20\u00b0C\",\n    \"distributed_in_urban_area_through_nurseries\": \"TRUE\",\n    \"horticultural_forest_perennial_environments\": \"TRUE\"\n  },\n  \"query\": {\n    \"variable\": \"invasive_score_bh\",\n    \"state\": \"high\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "optimal_growth_temperature": "<20\u00b0C",
+          "distributed_in_urban_area_through_nurseries": "TRUE",
+          "horticultural_forest_perennial_environments": "TRUE"
+        },
+        "query": {
+          "variable": "invasive_score_bh",
+          "state": "high"
+        }
+      },
+      "query_var": "invasive_score_bh",
+      "query_state": "high",
+      "evidence": {
+        "optimal_growth_temperature": "<20\u00b0C",
+        "distributed_in_urban_area_through_nurseries": "TRUE",
+        "horticultural_forest_perennial_environments": "TRUE"
+      },
+      "posterior": {
+        "high": 0.25640244633493686,
+        "low": 0.22548172669199754,
+        "moderate": 0.204893836399893,
+        "very_high": 0.2449704901289206,
+        "very_low": 0.06825150044425207
+      },
+      "evidence_prob": 0.038576074999999994
+    },
+    {
+      "network": "phytophthora1",
+      "pair_id": 0,
+      "evidences": [
+        "The Phytophthora species is non-caducous (does not shed leaves).",
+        "The Phytophthora species is plerotic (fully invasive).",
+        "The Phytophthora species causes stem cankers."
+      ],
+      "query": "What is the likelihood of the Phytophthora species not being found in natural ecosystems?",
+      "gold": 0.20030947,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.2003094677299385,
+      "abs_error": 2.270061499887177e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 494,
+        "completion_tokens": 68,
+        "cost_usd": 0.0001149
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"caducous\": \"FALSE\",\n    \"invasiveness\": \"plerotic\",\n    \"stem_cankers\": \"TRUE\"\n  },\n  \"query\": {\n    \"variable\": \"lives_in_natural_eco_systems\",\n    \"state\": \"FALSE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "caducous": "FALSE",
+          "invasiveness": "plerotic",
+          "stem_cankers": "TRUE"
+        },
+        "query": {
+          "variable": "lives_in_natural_eco_systems",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "lives_in_natural_eco_systems",
+      "query_state": "FALSE",
+      "evidence": {
+        "caducous": "FALSE",
+        "invasiveness": "plerotic",
+        "stem_cankers": "TRUE"
+      },
+      "posterior": {
+        "FALSE": 0.2003094677299385,
+        "TRUE": 0.7996905322700616
+      },
+      "evidence_prob": 0.0684659240051
+    },
+    {
+      "network": "phytophthora1",
+      "pair_id": 1,
+      "evidences": [
+        "The Phytophthora species is fully invasive.",
+        "The species causes stem cankers.",
+        "The species is caducous (shedding leaves)."
+      ],
+      "query": "What is the likelihood of this Phytophthora species not being found in natural ecosystems?",
+      "gold": 0.23864077,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.23864077026911618,
+      "abs_error": 2.691161737899961e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 479,
+        "completion_tokens": 73,
+        "cost_usd": 0.00011565
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"invasiveness\": \"plerotic\",\n    \"stem_cankers\": \"TRUE\",\n    \"caducous\": \"TRUE\"\n  },\n  \"query\": {\n    \"variable\": \"lives_in_natural_eco_systems\",\n    \"state\": \"FALSE\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "invasiveness": "plerotic",
+          "stem_cankers": "TRUE",
+          "caducous": "TRUE"
+        },
+        "query": {
+          "variable": "lives_in_natural_eco_systems",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "lives_in_natural_eco_systems",
+      "query_state": "FALSE",
+      "evidence": {
+        "invasiveness": "plerotic",
+        "stem_cankers": "TRUE",
+        "caducous": "TRUE"
+      },
+      "posterior": {
+        "FALSE": 0.23864077026911618,
+        "TRUE": 0.7613592297308838
+      },
+      "evidence_prob": 0.03787265677490001
+    },
+    {
+      "network": "phytophthora1",
+      "pair_id": 2,
+      "evidences": [
+        "The Phytophthora species does not cause stem cankers."
+      ],
+      "query": "What is the likelihood of the Phytophthora species not being found in natural ecosystems?",
+      "gold": 0.67387424,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.5541518767384984,
+      "abs_error": 0.11972236326150154,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 462,
+        "completion_tokens": 53,
+        "cost_usd": 0.0001011
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"stem_cankers\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"lives_in_natural_eco_systems\",\n    \"state\": \"FALSE\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "stem_cankers": "FALSE"
+        },
+        "query": {
+          "variable": "lives_in_natural_eco_systems",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "lives_in_natural_eco_systems",
+      "query_state": "FALSE",
+      "evidence": {
+        "stem_cankers": "FALSE"
+      },
+      "posterior": {
+        "FALSE": 0.5541518767384984,
+        "TRUE": 0.4458481232615016
+      },
+      "evidence_prob": 0.51708376277
+    },
+    {
+      "network": "sachs0",
+      "pair_id": 0,
+      "evidences": [
+        "The level of PIP2 (phosphatidylinositol 4,5-bisphosphate) is high."
+      ],
+      "query": "What is the likelihood of the level of PIP3 (phosphatidylinositol (3,4,5)-trisphosphate) being average?",
+      "gold": 0.46793373,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.4679337266517022,
+      "abs_error": 3.3482978056831314e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 345,
+        "completion_tokens": 32,
+        "cost_usd": 7.095e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\"pip2\": \"high\"},\n  \"query\": {\"variable\": \"pip3\", \"state\": \"average\"}\n}",
+      "response_json": {
+        "evidence": {
+          "pip2": "high"
+        },
+        "query": {
+          "variable": "pip3",
+          "state": "average"
+        }
+      },
+      "query_var": "pip3",
+      "query_state": "average",
+      "evidence": {
+        "pip2": "high"
+      },
+      "posterior": {
+        "average": 0.4679337266517022,
+        "high": 0.2963819051568012,
+        "low": 0.2356843681914966
+      },
+      "evidence_prob": 0.06065485
+    },
+    {
+      "network": "sachs0",
+      "pair_id": 1,
+      "evidences": [
+        "The level of phospholipase C gamma (Plcg) is low."
+      ],
+      "query": "What is the likelihood of a low level of PIP3?",
+      "gold": 0.22,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.21999999999999997,
+      "abs_error": 2.7755575615628914e-17,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 317,
+        "completion_tokens": 41,
+        "cost_usd": 7.215e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"plcg\": \"low\"\n  },\n  \"query\": {\n    \"variable\": \"pip3\",\n    \"state\": \"low\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "plcg": "low"
+        },
+        "query": {
+          "variable": "pip3",
+          "state": "low"
+        }
+      },
+      "query_var": "pip3",
+      "query_state": "low",
+      "evidence": {
+        "plcg": "low"
+      },
+      "posterior": {
+        "average": 0.44999999999999996,
+        "high": 0.32999999999999996,
+        "low": 0.21999999999999997
+      },
+      "evidence_prob": 0.8100000000000002
+    },
+    {
+      "network": "sachs0",
+      "pair_id": 2,
+      "evidences": [
+        "The level of phospholipase C gamma (Plcg) is low.",
+        "The level of PIP3 is low."
+      ],
+      "query": "What is the likelihood of PIP2 having an average level?",
+      "gold": 0.005,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.005,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 327,
+        "completion_tokens": 49,
+        "cost_usd": 7.845e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"plcg\": \"low\",\n    \"pip3\": \"low\"\n  },\n  \"query\": {\n    \"variable\": \"pip2\",\n    \"state\": \"average\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "plcg": "low",
+          "pip3": "low"
+        },
+        "query": {
+          "variable": "pip2",
+          "state": "average"
+        }
+      },
+      "query_var": "pip2",
+      "query_state": "average",
+      "evidence": {
+        "plcg": "low",
+        "pip3": "low"
+      },
+      "posterior": {
+        "average": 0.005,
+        "high": 0.005,
+        "low": 0.99
+      },
+      "evidence_prob": 0.17820000000000003
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 0,
+      "evidences": [
+        "The AKT protein level is average.",
+        "The ERK protein level is low."
+      ],
+      "query": "What is the likelihood of the JNK protein level being HIGH?",
+      "gold": 0.15703602,
+      "reasoning_types": [],
+      "pred": 0.15771271394718048,
+      "abs_error": 0.0006766939471804789,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 469,
+        "completion_tokens": 47,
+        "cost_usd": 9.855e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"akt\": \"average\",\n    \"erk\": \"low\"\n  },\n  \"query\": {\n    \"variable\": \"jnk\",\n    \"state\": \"high\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "akt": "average",
+          "erk": "low"
+        },
+        "query": {
+          "variable": "jnk",
+          "state": "high"
+        }
+      },
+      "query_var": "jnk",
+      "query_state": "high",
+      "evidence": {
+        "akt": "average",
+        "erk": "low"
+      },
+      "posterior": {
+        "average": 0.3939095211333469,
+        "high": 0.15771271394718048,
+        "low": 0.44837776491947273
+      },
+      "evidence_prob": 0.04515291599008231
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 1,
+      "evidences": [
+        "Raf is at an average level.",
+        "Protein Kinase C (PKC) is at an average level.",
+        "Akt is at an average level.",
+        "Jnk is at an average level.",
+        "Mek is at an average level.",
+        "PKA is at an average level.",
+        "P38 is at an average level."
+      ],
+      "query": "What is the likelihood of Erk being at a low level?",
+      "gold": 0.056300659,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.05630065851038703,
+      "abs_error": 4.89612975163034e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 516,
+        "completion_tokens": 89,
+        "cost_usd": 0.0001308
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"raf\": \"average\",\n    \"pkc\": \"average\",\n    \"akt\": \"average\",\n    \"jnk\": \"average\",\n    \"mek\": \"average\",\n    \"pka\": \"average\",\n    \"p38\": \"average\"\n  },\n  \"query\": {\n    \"variable\": \"erk\",\n    \"state\": \"low\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "raf": "average",
+          "pkc": "average",
+          "akt": "average",
+          "jnk": "average",
+          "mek": "average",
+          "pka": "average",
+          "p38": "average"
+        },
+        "query": {
+          "variable": "erk",
+          "state": "low"
+        }
+      },
+      "query_var": "erk",
+      "query_state": "low",
+      "evidence": {
+        "raf": "average",
+        "pkc": "average",
+        "akt": "average",
+        "jnk": "average",
+        "mek": "average",
+        "pka": "average",
+        "p38": "average"
+      },
+      "posterior": {
+        "average": 0.3936871226944515,
+        "high": 0.5500122187951615,
+        "low": 0.05630065851038703
+      },
+      "evidence_prob": 0.0029669929769355337
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 2,
+      "evidences": [
+        "The level of MAPK/ERK kinase (Mek) is low."
+      ],
+      "query": "What is the likelihood of the level of Extracellular signal-regulated kinases (Erk) being average?",
+      "gold": 0.6271779,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.6261184583781172,
+      "abs_error": 0.0010594416218827618,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 478,
+        "completion_tokens": 39,
+        "cost_usd": 9.51e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"mek\": \"low\"\n  },\n  \"query\": {\n    \"variable\": \"erk\",\n    \"state\": \"average\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "mek": "low"
+        },
+        "query": {
+          "variable": "erk",
+          "state": "average"
+        }
+      },
+      "query_var": "erk",
+      "query_state": "average",
+      "evidence": {
+        "mek": "low"
+      },
+      "posterior": {
+        "average": 0.6261184583781172,
+        "high": 0.17619545333160286,
+        "low": 0.19768608829028003
+      },
+      "evidence_prob": 0.5731136772002465
+    },
+    {
+      "network": "water0",
+      "pair_id": 0,
+      "evidences": [
+        "The Chemical Kinetics Nitrogen Nitrification rate at 12:00 is 1 mg/L.",
+        "The Chemical Kinetics Nitrogen Decay rate at 12:15 is 6 mg/L."
+      ],
+      "query": "What is the likelihood of the Chemical Kinetics Nitrogen Nitrification rate at 12:15 being 0.5 mg/L?",
+      "gold": 0.2499,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "unknown evidence state 1 for ckni_12_00",
+      "usage": {
+        "prompt_tokens": 446,
+        "completion_tokens": 62,
+        "cost_usd": 0.0001041
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"ckni_12_00\": \"1\",\n    \"cknn_12_15\": \"6\"\n  },\n  \"query\": {\n    \"variable\": \"cknn_12_15\",\n    \"state\": \"0.5\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "ckni_12_00": "1",
+          "cknn_12_15": "6"
+        },
+        "query": {
+          "variable": "cknn_12_15",
+          "state": "0.5"
+        }
+      }
+    },
+    {
+      "network": "water0",
+      "pair_id": 2,
+      "evidences": [
+        "The Chemical Kinetics Nitrogen Indicator at 12:00 is 30 mg/L."
+      ],
+      "query": "What is the likelihood of the Chemical Kinetics Nitrogen Nitrification at 12:00 being 1 mg/L?",
+      "gold": 1.0,
+      "reasoning_types": [],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 418,
+        "completion_tokens": 49,
+        "cost_usd": 9.21e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"ckni_12_00\": \"30\"\n  },\n  \"query\": {\n    \"variable\": \"cknn_12_00\",\n    \"state\": \"1\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "ckni_12_00": "30"
+        },
+        "query": {
+          "variable": "cknn_12_00",
+          "state": "1"
+        }
+      },
+      "query_var": "cknn_12_00",
+      "query_state": "1",
+      "evidence": {
+        "ckni_12_00": "30"
+      },
+      "posterior": {
+        "0.5": 0.0,
+        "1": 1.0,
+        "2": 0.0
+      },
+      "evidence_prob": 0.333
+    },
+    {
+      "network": "water0",
+      "pair_id": 3,
+      "evidences": [
+        "The Chemical Kinetics Nitrogen Decay at 12:15 is 4 mg/L."
+      ],
+      "query": "What is the likelihood of the Chemical Kinetics Nitrogen Indicator at 12:00 being 30 mg/L?",
+      "gold": 0.33332157,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.333321568489041,
+      "abs_error": 1.510959024564329e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 417,
+        "completion_tokens": 49,
+        "cost_usd": 9.195e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cknd_12_15\": \"4\"\n  },\n  \"query\": {\n    \"variable\": \"ckni_12_00\",\n    \"state\": \"30\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cknd_12_15": "4"
+        },
+        "query": {
+          "variable": "ckni_12_00",
+          "state": "30"
+        }
+      },
+      "query_var": "ckni_12_00",
+      "query_state": "30",
+      "evidence": {
+        "cknd_12_15": "4"
+      },
+      "posterior": {
+        "20": 0.3473334980411534,
+        "30": 0.333321568489041,
+        "40": 0.31934493346980547
+      },
+      "evidence_prob": 0.9434889000000002
+    },
+    {
+      "network": "water1",
+      "pair_id": 0,
+      "evidences": [
+        "The concentration of a nitrogenous compound (CNON) at 12:00 is 4 mg/L."
+      ],
+      "query": "What is the likelihood of the Carbonaceous Biochemical Oxygen Demand (CBODN) being 15 mg/L at 12:00?",
+      "gold": 0.0,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 402,
+        "completion_tokens": 50,
+        "cost_usd": 9.03e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cnon_12_00\": \"4\"\n  },\n  \"query\": {\n    \"variable\": \"cbodn_12_00\",\n    \"state\": \"15\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cnon_12_00": "4"
+        },
+        "query": {
+          "variable": "cbodn_12_00",
+          "state": "15"
+        }
+      },
+      "query_var": "cbodn_12_00",
+      "query_state": "15",
+      "evidence": {
+        "cnon_12_00": "4"
+      },
+      "posterior": {
+        "10": 1.0,
+        "15": 0.0,
+        "20": 0.0,
+        "5": 0.0
+      },
+      "evidence_prob": 1.0
+    },
+    {
+      "network": "water1",
+      "pair_id": 1,
+      "evidences": [
+        "The Carbonaceous Biochemical Oxygen Demand for Nitrogen (CBODN) was measured at 12:15 and was equal to 10 mg/L."
+      ],
+      "query": "What is the likelihood of the CBODN being 20 mg/L at 12:00?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 403,
+        "completion_tokens": 51,
+        "cost_usd": 9.105e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cbodn_12_15\": \"10\"\n  },\n  \"query\": {\n    \"variable\": \"cbodn_12_00\",\n    \"state\": \"20\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cbodn_12_15": "10"
+        },
+        "query": {
+          "variable": "cbodn_12_00",
+          "state": "20"
+        }
+      },
+      "query_var": "cbodn_12_00",
+      "query_state": "20",
+      "evidence": {
+        "cbodn_12_15": "10"
+      },
+      "posterior": {
+        "10": 1.0,
+        "15": 0.0,
+        "20": 0.0,
+        "5": 0.0
+      },
+      "evidence_prob": 0.9922
+    },
+    {
+      "network": "water1",
+      "pair_id": 2,
+      "evidences": [
+        "The concentration of a nitrogenous compound (CNON) at 12:00 is 4 mg/L."
+      ],
+      "query": "What is the likelihood of the Carbonaceous Biochemical Oxygen Demand being 25 mg/L at 12:00?",
+      "gold": 0.0,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 397,
+        "completion_tokens": 49,
+        "cost_usd": 8.895e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cnon_12_00\": \"4\"\n  },\n  \"query\": {\n    \"variable\": \"cbodd_12_00\",\n    \"state\": \"25\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cnon_12_00": "4"
+        },
+        "query": {
+          "variable": "cbodd_12_00",
+          "state": "25"
+        }
+      },
+      "query_var": "cbodd_12_00",
+      "query_state": "25",
+      "evidence": {
+        "cnon_12_00": "4"
+      },
+      "posterior": {
+        "15": 0.0,
+        "20": 1.0,
+        "25": 0.0,
+        "30": 0.0
+      },
+      "evidence_prob": 1.0
+    },
+    {
+      "network": "win95pts0",
+      "pair_id": 0,
+      "evidences": [
+        "The application data is correct.",
+        "The local disk has less than 2 Mb of available space."
+      ],
+      "query": "What is the likelihood of the Enhanced Metafile not being okay for printing?",
+      "gold": 0.99995,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.99995,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 407,
+        "completion_tokens": 60,
+        "cost_usd": 9.705e-05
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"app_data_ok\": \"TRUE\",\n    \"local_disk_space\": \"less_than_2mb\"\n  },\n  \"query\": {\n    \"variable\": \"emf_ready\",\n    \"state\": \"FALSE\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "app_data_ok": "TRUE",
+          "local_disk_space": "less_than_2mb"
+        },
+        "query": {
+          "variable": "emf_ready",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "emf_ready",
+      "query_state": "FALSE",
+      "evidence": {
+        "app_data_ok": "TRUE",
+        "local_disk_space": "less_than_2mb"
+      },
+      "posterior": {
+        "FALSE": 0.99995,
+        "TRUE": 4.999999999999449e-05
+      },
+      "evidence_prob": 0.029698154924999998
+    },
+    {
+      "network": "win95pts0",
+      "pair_id": 1,
+      "evidences": [
+        "The application's data is correct.",
+        "The local disk has less than 2 Mb of free space.",
+        "The data file is incorrect or corrupt.",
+        "The EMF (Enhanced Metafile) is ready for printing.",
+        "The printer thread is corrupt or buggy."
+      ],
+      "query": "What is the likelihood of the application not functioning correctly due to a corruption or bug?",
+      "gold": 1.0,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 441,
+        "completion_tokens": 83,
+        "cost_usd": 0.00011595
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"app_data_ok\": \"TRUE\",\n    \"local_disk_space\": \"less_than_2mb\",\n    \"data_file_correct\": \"FALSE\",\n    \"emf_ready\": \"TRUE\",\n    \"printer_thread_ok\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"app_working\",\n    \"state\": \"FALSE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "app_data_ok": "TRUE",
+          "local_disk_space": "less_than_2mb",
+          "data_file_correct": "FALSE",
+          "emf_ready": "TRUE",
+          "printer_thread_ok": "FALSE"
+        },
+        "query": {
+          "variable": "app_working",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "app_working",
+      "query_state": "FALSE",
+      "evidence": {
+        "app_data_ok": "TRUE",
+        "local_disk_space": "less_than_2mb",
+        "data_file_correct": "FALSE",
+        "emf_ready": "TRUE",
+        "printer_thread_ok": "FALSE"
+      },
+      "posterior": {
+        "FALSE": 1.0,
+        "TRUE": 0.0
+      },
+      "evidence_prob": 1.8749999999997967e-11
+    },
+    {
+      "network": "win95pts0",
+      "pair_id": 2,
+      "evidences": [
+        "The print thread is functioning correctly.",
+        "The application is not functioning correctly or is corrupt.",
+        "The local disk has less than 2 Mb of free space.",
+        "The data file is not correct or corrupt."
+      ],
+      "query": "What is the likelihood of the Enhanced Metafile (EMF) not being ready for printing?",
+      "gold": 0.75,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.7500000000000001,
+      "abs_error": 1.1102230246251565e-16,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 433,
+        "completion_tokens": 74,
+        "cost_usd": 0.00010935
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"printer_thread_ok\": \"TRUE\",\n    \"app_working\": \"FALSE\",\n    \"local_disk_space\": \"less_than_2mb\",\n    \"data_file_correct\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"emf_ready\",\n    \"state\": \"FALSE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "printer_thread_ok": "TRUE",
+          "app_working": "FALSE",
+          "local_disk_space": "less_than_2mb",
+          "data_file_correct": "FALSE"
+        },
+        "query": {
+          "variable": "emf_ready",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "emf_ready",
+      "query_state": "FALSE",
+      "evidence": {
+        "printer_thread_ok": "TRUE",
+        "app_working": "FALSE",
+        "local_disk_space": "less_than_2mb",
+        "data_file_correct": "FALSE"
+      },
+      "posterior": {
+        "FALSE": 0.7500000000000001,
+        "TRUE": 0.25
+      },
+      "evidence_prob": 7.499250000000013e-07
+    }
+  ],
+  "timestamp": "2026-05-03T13:31:45Z",
+  "_meta": {
+    "prompt_tokens": 40933,
+    "completion_tokens": 5389,
+    "total_cost_usd": 0.009373349999999999,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "fe83209f",
+    "timestamp_utc": "2026-05-03T13:31:45.037506+00:00",
+    "script": "baselines/run_quite_registered_e2e.py",
+    "n_networks": 30,
+    "n_queries": 90,
+    "preset": "all-network-3",
+    "limit_total": null
+  }
+}

@@ -29,7 +29,7 @@ from openai import AsyncOpenAI
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from _artifact_schema import accumulate_usage, save_artifact
-from run_quite_direct_baseline import HARD_COMPUTE_PRESETS
+from run_quite_direct_baseline import PRESET_NAMES, get_query_plan
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -271,13 +271,18 @@ def summarize(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
 async def main() -> None:
     parser = argparse.ArgumentParser(description="QUITE hard-compute PAL baseline")
     parser.add_argument("--model", default=os.environ.get("MODEL", "openai/gpt-4o-mini"))
-    parser.add_argument("--preset", choices=sorted(HARD_COMPUTE_PRESETS), default="hard-compute-clean")
+    parser.add_argument("--preset", choices=PRESET_NAMES, default="hard-compute-clean")
+    parser.add_argument("--limit-total", type=int, default=None)
     parser.add_argument("--sema", type=int, default=4)
     parser.add_argument("--timeout", type=int, default=20)
     args = parser.parse_args()
 
-    query_plan = HARD_COMPUTE_PRESETS[args.preset]
+    query_plan = get_query_plan(args.preset)
+    if query_plan is None:
+        raise ValueError(f"Preset is required for QUITE PAL baseline: {args.preset}")
     items = load_items(query_plan)
+    if args.limit_total is not None:
+        items = items[: args.limit_total]
     client = make_client()
     sema = asyncio.Semaphore(args.sema)
     t0 = time.time()
@@ -307,7 +312,8 @@ async def main() -> None:
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
     model_tag = args.model.replace("/", "_")
-    out_path = RESULTS_DIR / f"quite_registered_hard_compute_pal_{model_tag}_{time.strftime('%Y%m%d_%H%M%S')}.json"
+    preset_tag = args.preset.replace("-", "_")
+    out_path = RESULTS_DIR / f"quite_registered_pal_{preset_tag}_{model_tag}_{time.strftime('%Y%m%d_%H%M%S')}.json"
     save_artifact(
         out_path,
         out,
@@ -319,6 +325,7 @@ async def main() -> None:
             "script": "baselines/run_quite_registered_pal_baseline.py",
             "n_queries": len(rows),
             "preset": args.preset,
+            "limit_total": args.limit_total,
         },
     )
     print(f"Saved: {out_path}")

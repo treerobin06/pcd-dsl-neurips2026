@@ -29,6 +29,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from _artifact_schema import accumulate_usage, save_artifact
 from dsl.types import Factor
+from run_quite_direct_baseline import PRESET_NAMES, get_query_plan
 from run_quite_e2e import dsl_posterior_distribution, wilson_ci
 
 
@@ -37,24 +38,6 @@ REPO_ROOT = SCRIPT_DIR.parents[1]
 QUITE_JSON_DIR = REPO_ROOT / "data" / "external" / "QUITE" / "data" / "quite-corpus" / "data"
 QUITE_PROBLOG_DIR = REPO_ROOT / "data" / "external" / "QUITE" / "data" / "quite-corpus" / "problog_data"
 RESULTS_DIR = SCRIPT_DIR / "results"
-
-
-HARD_COMPUTE_PRESET = {
-    "mildew0": [4, 18, 5],
-    "insurance1": [16, 18, 7],
-    "hailfinder0": [5, 15, 7],
-    "water1": [1, 7, 2],
-    "sachs1": [9, 4, 2],
-    "phytophthora1": [16, 5, 2],
-}
-
-HARD_COMPUTE_CLEAN_PRESET = {
-    "mildew0": [4, 18, 5, 10, 19],
-    "insurance1": [16, 18, 7, 9, 12],
-    "hailfinder0": [5, 15, 7, 14, 8],
-    "water1": [1, 7, 2, 3, 4],
-    "sachs1": [9, 4, 2, 0, 6],
-}
 
 
 def load_dotenv(path: Path) -> None:
@@ -154,6 +137,9 @@ def parse_atom(atom: str) -> Tuple[str, str]:
         atom = atom[4:].strip()
     match = re.match(r"\s*([A-Za-z_][A-Za-z0-9_]*)\((.*)\)\s*$", atom)
     if not match:
+        bare = atom.strip()
+        if re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", bare):
+            return bare, "FALSE" if negated else "TRUE"
         raise ValueError(f"cannot parse atom: {atom}")
     pred = match.group(1)
     args = [strip_arg(x) for x in split_top_level(match.group(2).strip(), ",")]
@@ -168,10 +154,15 @@ def parse_atom(atom: str) -> Tuple[str, str]:
     return pred, args[0] if args else "TRUE"
 
 
-def parse_weighted_atom(text: str) -> Tuple[float, str, str]:
+def parse_weighted_atom(text: str, fallback_pred: Optional[str] = None) -> Tuple[float, str, str]:
     prob_text, atom = text.split("::", 1)
     prob = float(prob_text.strip())
-    pred, state = parse_atom(atom.strip())
+    atom = atom.strip()
+    if fallback_pred is not None:
+        state_only = re.fullmatch(r"\(([^()]+)\)", atom)
+        if state_only:
+            return prob, fallback_pred, strip_arg(state_only.group(1))
+    pred, state = parse_atom(atom)
     return prob, pred, state
 
 
@@ -196,6 +187,7 @@ def parse_problog_registry(network: str) -> Tuple[List[Factor], Dict[str, List[s
             current = []
 
     for stmt in statements:
+        stmt = re.sub(r"\.\s*:-", " :-", stmt)
         if ":-" in stmt:
             lhs, rhs = stmt.split(":-", 1)
             parents = {}
@@ -209,7 +201,7 @@ def parse_problog_registry(network: str) -> Tuple[List[Factor], Dict[str, List[s
         probs: Dict[str, float] = {}
         child_pred: Optional[str] = None
         for part in split_top_level(lhs, ";"):
-            prob, pred, state = parse_weighted_atom(part)
+            prob, pred, state = parse_weighted_atom(part, child_pred)
             child_pred = child_pred or pred
             if pred != child_pred:
                 raise ValueError(f"mixed child predicates in {network}: {stmt}")
@@ -361,11 +353,14 @@ async def parse_query(
 async def main() -> None:
     parser = argparse.ArgumentParser(description="QUITE registered hard-compute E2E")
     parser.add_argument("--model", default=os.environ.get("MODEL", "openai/gpt-4o-mini"))
-    parser.add_argument("--preset", choices=["hard-compute", "hard-compute-clean"], default="hard-compute-clean")
+    parser.add_argument("--preset", choices=PRESET_NAMES, default="hard-compute-clean")
+    parser.add_argument("--limit-total", type=int, default=None)
     parser.add_argument("--sema", type=int, default=12)
     args = parser.parse_args()
 
-    query_plan = HARD_COMPUTE_CLEAN_PRESET if args.preset == "hard-compute-clean" else HARD_COMPUTE_PRESET
+    query_plan = get_query_plan(args.preset)
+    if query_plan is None:
+        raise ValueError(f"Preset is required for registered QUITE E2E: {args.preset}")
     registries = {}
     for network in query_plan:
         factors, states, parents, meta = parse_problog_registry(network)
@@ -374,6 +369,8 @@ async def main() -> None:
     pairs = []
     for network, qids in query_plan.items():
         pairs.extend(load_pairs(network, qids))
+    if args.limit_total is not None:
+        pairs = pairs[: args.limit_total]
 
     client = make_client()
     sema = asyncio.Semaphore(args.sema)
@@ -500,7 +497,8 @@ async def main() -> None:
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
     model_tag = args.model.replace("/", "_")
-    out_path = RESULTS_DIR / f"quite_registered_hard_compute_{model_tag}_{time.strftime('%Y%m%d_%H%M%S')}.json"
+    preset_tag = args.preset.replace("-", "_")
+    out_path = RESULTS_DIR / f"quite_registered_{preset_tag}_{model_tag}_{time.strftime('%Y%m%d_%H%M%S')}.json"
     save_artifact(
         out_path,
         out,
@@ -513,6 +511,7 @@ async def main() -> None:
             "n_networks": len(query_plan),
             "n_queries": len(rows),
             "preset": args.preset,
+            "limit_total": args.limit_total,
         },
     )
     print(f"Saved: {out_path}")

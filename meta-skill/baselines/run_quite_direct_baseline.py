@@ -18,7 +18,7 @@ import re
 import sys
 import time
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 import httpx
 from openai import AsyncOpenAI
@@ -33,7 +33,7 @@ REPO_ROOT = SCRIPT_DIR.parents[1]
 QUITE_DIR = REPO_ROOT / "data" / "external" / "QUITE" / "data" / "quite-corpus" / "data"
 RESULTS_DIR = SCRIPT_DIR / "results"
 
-HARD_COMPUTE_PRESETS = {
+HARD_COMPUTE_STATIC_PRESETS = {
     "hard-compute": {
         "mildew0": [4, 18, 5],
         "insurance1": [16, 18, 7],
@@ -50,6 +50,16 @@ HARD_COMPUTE_PRESETS = {
         "sachs1": [9, 4, 2, 0, 6],
     },
 }
+
+PRESET_NAMES = [
+    "hard-compute",
+    "hard-compute-clean",
+    "hard-compute-expanded-50",
+    "hard-compute-expanded-75",
+    "all-network-3",
+]
+
+HARD_COMPUTE_NETWORKS = ["mildew0", "insurance1", "hailfinder0", "water1", "sachs1"]
 
 
 def load_dotenv(path: Path) -> None:
@@ -76,7 +86,7 @@ def make_client() -> AsyncOpenAI:
     )
 
 
-def extract_json(text: str) -> Dict[str, Any] | None:
+def extract_json(text: str) -> Optional[Dict[str, Any]]:
     text = text.strip()
     match = re.search(r"```(?:json)?\s*(.*?)```", text, flags=re.S)
     if match:
@@ -101,12 +111,66 @@ def has_valid_gold(pair: Dict[str, Any]) -> bool:
     return 0.0 <= answer <= 1.0 and math.isfinite(answer)
 
 
+def valid_query_ids(network: str) -> List[int]:
+    path = QUITE_DIR / f"{network}.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    qids = []
+    for pair in data["evidence_query_pairs"]:
+        if has_valid_gold(pair):
+            qids.append(int(pair["id"]))
+    return sorted(qids)
+
+
+def all_network_query_plan(k_per_network: int = 3) -> Dict[str, List[int]]:
+    plan = {}
+    for path in sorted(QUITE_DIR.glob("*.json")):
+        qids = valid_query_ids(path.stem)
+        if qids:
+            plan[path.stem] = qids[:k_per_network]
+    return plan
+
+
+def hard_compute_expanded_plan(target_n: int) -> Dict[str, List[int]]:
+    clean = HARD_COMPUTE_STATIC_PRESETS["hard-compute-clean"]
+    plan: Dict[str, List[int]] = {network: list(clean[network]) for network in HARD_COMPUTE_NETWORKS}
+    used = sum(len(qids) for qids in plan.values())
+    while used < target_n:
+        changed = False
+        for network in HARD_COMPUTE_NETWORKS:
+            if used >= target_n:
+                break
+            for qid in valid_query_ids(network):
+                if qid in plan[network]:
+                    continue
+                plan[network].append(qid)
+                used += 1
+                changed = True
+                break
+        if not changed:
+            break
+    return plan
+
+
+def get_query_plan(preset: Optional[str]) -> Optional[Dict[str, List[int]]]:
+    if preset is None:
+        return None
+    if preset in HARD_COMPUTE_STATIC_PRESETS:
+        return HARD_COMPUTE_STATIC_PRESETS[preset]
+    if preset == "all-network-3":
+        return all_network_query_plan(k_per_network=3)
+    if preset == "hard-compute-expanded-50":
+        return hard_compute_expanded_plan(50)
+    if preset == "hard-compute-expanded-75":
+        return hard_compute_expanded_plan(75)
+    raise ValueError(f"Unknown preset: {preset}")
+
+
 def load_items(
     modes: List[str],
-    limit_per_mode: int | None = None,
-    networks: List[str] | None = None,
-    query_limit_per_network: int | None = None,
-    query_plan: Dict[str, List[int]] | None = None,
+    limit_per_mode: Optional[int] = None,
+    networks: Optional[List[str]] = None,
+    query_limit_per_network: Optional[int] = None,
+    query_plan: Optional[Dict[str, List[int]]] = None,
     include_invalid_gold: bool = False,
 ) -> List[Dict[str, Any]]:
     if not QUITE_DIR.exists():
@@ -194,6 +258,9 @@ async def run_one(client: AsyncOpenAI, sema: asyncio.Semaphore, model: str, item
                 except (TypeError, ValueError):
                     parse_error = "probability_not_numeric"
                     prob = None
+                if prob is not None and not (0.0 <= prob <= 1.0 and math.isfinite(prob)):
+                    parse_error = "probability_out_of_range"
+                    prob = None
             usage = accumulate_usage(resp.usage)
             usage["cost_usd"] = float(getattr(resp.usage, "cost", 0) or 0)
         except Exception as exc:
@@ -244,12 +311,13 @@ async def main() -> None:
     parser.add_argument("--limit-per-mode", type=int, default=None)
     parser.add_argument("--networks", nargs="*", default=None)
     parser.add_argument("--query-limit-per-network", type=int, default=None)
-    parser.add_argument("--preset", choices=sorted(HARD_COMPUTE_PRESETS), default=None)
+    parser.add_argument("--preset", choices=PRESET_NAMES, default=None)
+    parser.add_argument("--limit-total", type=int, default=None)
     parser.add_argument("--include-invalid-gold", action="store_true")
     parser.add_argument("--sema", type=int, default=int(os.environ.get("SEMA", "20")))
     args = parser.parse_args()
 
-    query_plan = HARD_COMPUTE_PRESETS[args.preset] if args.preset else None
+    query_plan = get_query_plan(args.preset)
     items = load_items(
         args.modes,
         args.limit_per_mode,
@@ -258,6 +326,8 @@ async def main() -> None:
         query_plan=query_plan,
         include_invalid_gold=args.include_invalid_gold,
     )
+    if args.limit_total is not None:
+        items = items[: args.limit_total]
     client = make_client()
     sema = asyncio.Semaphore(args.sema)
     t0 = time.time()
@@ -291,7 +361,8 @@ async def main() -> None:
     }
     model_tag = args.model.replace("/", "_")
     modes_tag = "-".join(args.modes)
-    out_path = RESULTS_DIR / f"quite_direct_{modes_tag}_{model_tag}_{time.strftime('%Y%m%d_%H%M%S')}.json"
+    preset_tag = args.preset.replace("-", "_") if args.preset else "all"
+    out_path = RESULTS_DIR / f"quite_direct_{modes_tag}_{preset_tag}_{model_tag}_{time.strftime('%Y%m%d_%H%M%S')}.json"
     save_artifact(
         out_path,
         out,
@@ -304,6 +375,7 @@ async def main() -> None:
             "n_total": len(items),
             "modes": args.modes,
             "preset": args.preset,
+            "limit_total": args.limit_total,
         },
     )
     print(f"Saved: {out_path}")
