@@ -189,27 +189,43 @@ On BN inference, the same pattern holds and amplifies with depth: Compute drops 
 
 \begin{figure*}[t]
 \centering
-\begin{minipage}[t]{0.38\textwidth}
+\begin{minipage}[t]{0.48\textwidth}
 \vspace{0pt}
 \centering
-\small
-\captionof{table}{PCD on preference learning (Flight, $n{=}200$). Parse $\geq$82\% and Decide = 100\% for all models, but Compute peaks at 78\% (Opus) and is only 28\% for GPT-4o-mini. 95\% CIs in brackets.}
-\label{tab:pcd_preference}
-\vspace{4pt}
-\begin{tabular}{@{}lcc@{}}
-\toprule
-Model & Parse & Compute$\mid$Gold \\
-\midrule
-GPT-4o-mini & 82\% & 28\% {\scriptsize [21,34]} \\
-GPT-4o & 100\% & 30\% {\scriptsize [23,36]} \\
-GPT-5.4 & 100\% & 40\% {\scriptsize [33,47]} \\
-Sonnet 4 & 100\% & 64\% {\scriptsize [57,71]} \\
-Gemini 3.1 & 100\% & 69\% {\scriptsize [62,75]} \\
-Opus 4.6 & 100\% & 78\% {\scriptsize [71,83]} \\
-\bottomrule
-\end{tabular}
+\begin{tikzpicture}
+\begin{axis}[
+    width=\textwidth,
+    height=5.1cm,
+    ybar,
+    bar width=4.1pt,
+    ymin=0, ymax=112,
+    ylabel={Accuracy (\%)},
+    symbolic x coords={4o-mini,4o,5.4,Sonnet,Gemini,Opus},
+    xtick=data,
+    x tick label style={font=\tiny, rotate=25, anchor=east},
+    ytick={0,20,40,60,80,100},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize},
+    legend style={at={(0.5,1.03)}, anchor=south, legend columns=3, font=\tiny, draw=none},
+    grid=major,
+    grid style={gray!15},
+    enlarge x limits=0.10,
+]
+\addplot[fill=blue!45, draw=blue!70!black] coordinates
+    {(4o-mini,82) (4o,100) (5.4,100) (Sonnet,100) (Gemini,100) (Opus,100)};
+\addlegendentry{Parse}
+\addplot[fill=red!55, draw=red!70!black] coordinates
+    {(4o-mini,28) (4o,30) (5.4,40) (Sonnet,64) (Gemini,69) (Opus,78)};
+\addlegendentry{Compute}
+\addplot[fill=teal!65!black, draw=teal!70!black] coordinates
+    {(4o-mini,100) (4o,100) (5.4,100) (Sonnet,100) (Gemini,100) (Opus,100)};
+\addlegendentry{Decide}
+\end{axis}
+\end{tikzpicture}
+\vspace{-2pt}
+{\centering\scriptsize (a) PCD on Flight preference learning ($n{=}200$).\par}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.59\textwidth}
+\begin{minipage}[t]{0.48\textwidth}
 \vspace{0pt}
 \centering
 \begin{tikzpicture}
@@ -261,9 +277,11 @@ Opus 4.6 & 100\% & 78\% {\scriptsize [71,83]} \\
 \addlegendentry{GPT-4o-mini}
 \end{axis}
 \end{tikzpicture}
-\captionof{figure}{Compute$\mid$GoldParse accuracy vs.\ BN depth (BLInD, $n{=}900$, 100 per depth). Error bars show 95\% Wilson CIs. All three LLMs degrade from $\sim$82\% at depth~2 to single digits by depth~10; the compiled DSL solver matches the reference at every depth.}
-\label{fig:depth}
+\vspace{-2pt}
+{\centering\scriptsize (b) Compute$\mid$GoldParse vs.\ BN depth (BLInD, $n{=}900$).\par}
 \end{minipage}
+\caption{PCD localizes the bottleneck. \textbf{(a)} On preference learning, Parse and Decide are high for all six LLMs, while Compute remains substantially lower even for stronger models. \textbf{(b)} On BLInD Bayesian networks, Compute collapses with depth, while the compiled DSL solver remains exact. Error bars in (b) show 95\% Wilson CIs; exact PCD numbers are in Appendix~\ref{app:pcd_multimodel}.}
+\label{fig:pcd_bottleneck}
 \end{figure*}
 
 The pattern is consistent across every model and task family, including two held-out families (Naive Bayes and HMM forward filtering) evaluated in \S\ref{sec:held_out}.
@@ -317,24 +335,42 @@ Once a solver passes validation, the implementation stores it in a registry keye
 Later same-family instances route to the registered solver; natural-language inputs may still require LLM parsing, but inference no longer happens inside the LLM.
 The mixed E2E router composes the registered supported routes with an unsupported-reject branch.
 
-\begin{table}[t]
+\begin{figure}[t]
 \centering
-\small
-\caption{Inductor routes. Three inference patterns instantiate reusable templates; Naive Bayes and HMM are untemplated tests represented by LLM-assembled core-operation routes.}
-\label{tab:routes}
-\begin{tabular}{@{}llll@{}}
-\toprule
-Family & Template & Induced route & Core-op path \\
-\midrule
-Flight/Hotel & \texttt{softmax\_pref} & Instantiate & --- \\
-TextBandit & \texttt{beta\_bernoulli} & Instantiate & --- \\
-BLInD/bnlearn & \texttt{ve\_query} & Instantiate & --- \\
-\midrule
-Naive Bayes & \emph{none} & Core-ops & enum $\to$ mult $\to$ norm $\to$ exp $\to$ argmax \\
-HMM Forward & \emph{none} & Core-ops & iter(mult $\to$ marg $\to$ norm) over $t$ \\
-\bottomrule
-\end{tabular}
-\end{table}
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    font=\scriptsize,
+    >=Latex,
+    node distance=7mm and 8mm,
+    box/.style={draw=blue!55!black, fill=blue!4, rounded corners=2pt, align=center, minimum height=9mm, inner sep=4pt},
+    spec/.style={draw=teal!60!black, fill=teal!5, rounded corners=2pt, align=center, minimum height=12mm, inner sep=4pt},
+    op/.style={draw=violet!60!black, fill=violet!5, rounded corners=2pt, align=center, minimum height=10mm, inner sep=4pt},
+    gate/.style={draw=orange!80!black, fill=orange!6, rounded corners=2pt, align=center, minimum height=10mm, inner sep=4pt},
+    arr/.style={->, line width=0.7pt, draw=gray!80}
+]
+\node[box] (examples) {Few family\\examples};
+\node[box, right=of examples] (inductor) {LLM inductor\\assembles spec};
+\node[spec, right=of inductor] (specnode) {\textbf{\taskspec{}}\\family, state\\observations\\decision rule};
+\node[box, right=of specnode] (compiler) {Deterministic\\compiler};
+\node[op, right=of compiler] (ops) {Typed ops\\condition, multiply\\marginalize\\normalize};
+\node[gate, right=of ops] (registry) {Deploy check\\registry reuse};
+
+\draw[arr] (examples) -- (inductor);
+\draw[arr] (inductor) -- (specnode);
+\draw[arr] (specnode) -- (compiler);
+\draw[arr] (compiler) -- (ops);
+\draw[arr] (ops) -- (registry);
+
+\node[box, below=7mm of specnode, xshift=-12mm, minimum width=32mm] (templates) {Template-backed\\Flight/Hotel, Bandit\\BLInD/bnlearn};
+\node[op, below=7mm of ops, xshift=8mm, minimum width=34mm] (coreops) {Core-op routes\\NB: enum $\to$ mult $\to$ norm\\HMM: iterative filter};
+\draw[arr, dashed] (specnode.south) -- (templates.north);
+\draw[arr, dashed] (specnode.south east) -- (coreops.north west);
+\draw[arr, dashed] (templates.east) -- (compiler.south west);
+\draw[arr, dashed] (coreops.north) -- (compiler.south east);
+\end{tikzpicture}}
+\caption{VSI induction zoom-in. The LLM does not execute the probability calculation; it assembles a typed \taskspec{} that selects either a reusable template or an explicit core-op route. The deterministic compiler lowers that assembly to typed probabilistic operations, validates the solver when checks are available, and stores it for reuse on later instances.}
+\label{fig:vsi_zoom}
+\end{figure}
 
 % ============================================================
 \section{Experiments}
@@ -1039,70 +1075,26 @@ The full prompt ($\sim$2\,k tokens, dominated by the schema definition) is inclu
 \section{Inductor Reliability and LOO Generalization}
 \label{app:reliability}
 
-\paragraph{Reliability across repeated runs.}
-To quantify the inductor's variance, we run it 20 times per family (Flight, BN) with temperature~0.7 using GPT-4o-mini.
-Table~\ref{tab:reliability} shows that all 40 trials pass the deploy checks on the first attempt, with no refinement rounds needed.
-Even with a single induction example ($k{=}1$), the inductor produces a valid \taskspec{} on both families.
-We attribute the high reliability to the constrained output space: the inductor fills a declarative JSON specification rather than generating arbitrary code.
+\paragraph{Reliability checks.}
+We use three small checks to separate induction stability from primary accuracy claims.
+First, we repeat template-backed induction 20 times each for Flight and BN at temperature~0.7; all runs produce deployable \taskspec{}s on the first pass.
+Second, we repeat adversarial untemplated induction for Naive Bayes and HMM; the remaining failures are specification-extraction errors, not backend arithmetic failures.
+Third, we run a leave-one-out implementation check on six held-out datasets to ensure that the interface handles nearby schema variants.
+Table~\ref{tab:reliability_summary} summarizes these checks.
 
 \begin{table}[ht]
 \centering
-\small
-\caption{Inductor reliability: 20 repeated runs per family, temperature~0.7, GPT-4o-mini.}
-\label{tab:reliability}
-\begin{tabular}{@{}lccccc@{}}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Inductor and implementation reliability checks. These are auxiliary checks of the induction interface, reported separately from the main E2E and backend accuracy tables.}
+\label{tab:reliability_summary}
+\begin{tabular}{@{}p{0.20\linewidth}p{0.20\linewidth}ccc p{0.21\linewidth}@{}}
 \toprule
-Family & Trials & Success & Avg Rounds & Avg Time (s) & Family Detected \\
+Check & Families / datasets & Trials & First pass & Final & Notes \\
 \midrule
-Flight (hypothesis enum.) & 20 & 20/20 (100\%) & 1.0 & 5.6 & All correct \\
-BN (variable elim.) & 20 & 20/20 (100\%) & 1.0 & 4.8 & All correct \\
-\midrule
-\textbf{Total} & \textbf{40} & \textbf{40/40 (100\%)} & \textbf{1.0} & \textbf{5.2} & \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\paragraph{Reliability on untemplated families.}
-We also repeat the adversarial Naive Bayes and HMM inductions at temperature~0.7.
-Across 100 trials, first-pass induction succeeds on 95/100 tasks, and a two-round diagnostic refinement loop reaches 96/100.
-The remaining failures are specification-extraction errors, not backend arithmetic failures: once the \taskspec{} validates, the compiled core-op solver executes deterministically.
-
-\begin{table}[ht]
-\centering
-\small
-\caption{Inductor reliability on adversarial untemplated families: GPT-4o-mini, temperature~0.7, at most two refinement rounds.}
-\label{tab:reliability_nb_hmm}
-\begin{tabular}{@{}lccc@{}}
-\toprule
-Family & Trials & First pass & Final after refinement \\
-\midrule
-Naive Bayes & 50 & 46/50 (92.0\%) & 47/50 (94.0\%) \\
-HMM forward & 50 & 49/50 (98.0\%) & 49/50 (98.0\%) \\
-\midrule
-\textbf{Total} & \textbf{100} & \textbf{95/100 (95.0\%)} & \textbf{96/100 (96.0\%)} \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\paragraph{LOO generalization details.}
-Table~\ref{tab:loo_detail} shows per-dataset results for the 6 LOO held-out datasets.
-All datasets pass the implementation checks on the first attempt without self-refinement.
-
-\begin{table}[ht]
-\centering
-\small
-\caption{LOO implementation check: 6 held-out datasets, GPT-4o-mini inductor. All pass on first attempt.}
-\label{tab:loo_detail}
-\begin{tabular}{@{}lccccc@{}}
-\toprule
-Dataset & Dims & Family & Features & Values & Rounds \\
-\midrule
-Hotel (4D) & 4 & \checkmark & \checkmark & \checkmark & 1 \\
-Flight-2F & 2 & \checkmark & \checkmark & \checkmark & 1 \\
-Flight-3F & 3 & \checkmark & \checkmark & \checkmark & 1 \\
-Flight-5F & 5 & \checkmark & \checkmark & \checkmark & 1 \\
-Flight-6F & 6 & \checkmark & \checkmark & \checkmark & 1 \\
-BLInD depth-OOD & -- & \checkmark & -- & -- & 1 \\
+Template-backed induction & Flight, BN & 40 & 40/40 & 40/40 & GPT-4o-mini, temperature 0.7; no refinement needed. \\
+Untemplated induction & Naive Bayes, HMM & 100 & 95/100 & 96/100 & At most two refinement rounds; failures are parse/spec extraction errors. \\
+LOO implementation check & Hotel; Flight-2/3/5/6F; BLInD depth-OOD & 6 & 6/6 & 6/6 & Nearby schema variants pass without self-refinement. \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1159,7 +1151,7 @@ Our DSL eliminates this failure mode by constraining the inductor to a declarati
 \label{app:pcd_multimodel}
 
 \paragraph{Preference learning (Flight, 200 samples).}
-Table~\ref{tab:pcd_multimodel_pref} extends Table~\ref{tab:pcd_preference} with all six models.
+Table~\ref{tab:pcd_multimodel_pref} gives the exact preference-learning PCD values summarized in Figure~\ref{fig:pcd_bottleneck}.
 
 \begin{table}[ht]
 \centering
