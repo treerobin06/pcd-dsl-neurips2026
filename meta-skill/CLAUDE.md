@@ -64,6 +64,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    - **PCD Compute 口径**：Preference Compute 的 prompt 输出 recommendation，不是完整 posterior 数值；论文必须表述为“self-computed posterior/EU implied recommendation”，BN/HMM/NB 概率型任务才是数值 posterior tolerance。
    - **最终 grep 口径**：投稿前 grep `all-family|six supported families|built-in macro|no-macro|macro selector|hand-computed|deterministic backend|three inference families|recommendation index|Gold expected utilities`，确保不会再出现会被 AI reviewer 直接复制成 weakness 的旧措辞。
 
+### 2026-05-04 ARIS 投稿前 Skill 路由（May 6 前规划，不自动触发）
+
+Tree 当前时间分配策略：先锁 Abstract 和主 claim，不再开会改变 Abstract 的新实验；把 ARIS skill 用作投稿前风险控制，而不是启动重型 paper-writing loop。以下任务按优先级排，后续需要 Tree 明确说“开始跑 X”再执行。
+
+| 优先级 | 什么时候跑 | Skill / 路由 | 作用 | 是否可能改 Abstract |
+|---|---|---|---|---|
+| **P0-desk** | 最先，提交前必做 | `paper-compile` + 手动 submission checklist | 防 desk reject：NeurIPS 2026 样式、匿名性、9 页主文、references/appendix/checklist 顺序、无 undefined refs/cites、无 overfull、PDF 可打开 | 否 |
+| **P0-desk** | 最先，提交前必做 | 匿名 artifact 手动整理（不走重型 skill） | 因 checklist 已填 code/data Yes，必须有干净 supplementary zip：README、license、requirements、主要 scripts/results、无 token/个人路径/`.DS_Store`/`__pycache__` | 否，除非 artifact 缺少支撑某个数字 |
+| **P0-claim** | 文字和表格最终稳定后 | `paper-claim-audit` | 零上下文核对 abstract/main tables/figure captions/appendix 数字是否匹配 raw JSON；重点查 `90.8/97.6`、`96.0 QUITE`、`400/400 bnlearn`、`90.4 mixed`、cost 倍数 | **可能**，只在数字不一致时改 |
+| **P0-citation** | claim audit 后 | `citation-verifier` | 查 hallucinated/broken citations；优先验证正文实际 cite 的 24 条，而不是全 bib；特别查 `qiu2026bayesian`、`schrader2024quite`、`liu2025dellma`、`lew2025discipl`、`curtis2025pomdp` | 通常否，除非核心引用不存在 |
+| **P1-related** | 若 citation audit 通过且还有时间 | `research-lit` / `semantic-scholar` / `arxiv` | 只补强 reviewer 预期的相关工作，不为凑数量。候选方向：semantic parsing to solvers、tool-use/function calling、probabilistic programming、Bayesian network inference、Bayesian Teaching/decision under uncertainty | 一般否，只改 Related Work/Intro 背景 |
+| **P1-style** | 数字和引用稳定后 | `ml-paper-writing` + `academic-writing-refiner` | 轻量 prose sweep：去 AI 味、减少自削弱、统一 VSI/PCD/TaskSpec/compiled solver 口径；不做大重写 | 否，除非 Abstract 句子更顺 |
+| **P1-table** | Prose sweep 后 | `paper-figure` / 手动图表审查 | 图表 caption/table scope/n/CI/metric 一致性；避免 100% 堆叠或 mixed 比 single 更神奇的误读 | 否 |
+| **P2-review** | 最后半天，有余力 | `research-review` 或 `codex-review` 规则 | 模拟 AI reviewer/NeurIPS reviewer 抓最后攻击点；只采纳 P0/P1 级别问题，不再大改故事 | 可能，但原则上不因主观评分改 Abstract |
+| **P2-result** | 若 reviewer 要求解释某个数字 | `result-to-claim` / `analyze-results` | 针对单个实验判断“支撑哪个 claim”；不做全局审查 | 低 |
+| **不建议 May 6 前启动** | 除非 Tree 明确要求 | `paper-writing` / `auto-paper-improvement-loop` / `research-pipeline` / `idea-discovery` / `dse-loop` | 太重，容易把已收口论文重新打散；只适合下一轮大修或转投 | 高，不适合现在 |
+
+执行顺序建议：
+1. **May 4 先锁 Abstract**：不再因为新实验改 Abstract，只允许修数字错误或明显 overclaim。
+2. **May 5 上午**：跑 `paper-claim-audit`；只修 mismatch / unsupported / scope overclaim。
+3. **May 5 下午**：跑 `citation-verifier`；补/删引用，必要时用 `research-lit` 找替代 citation。
+4. **May 5 晚上**：轻量 `ml-paper-writing` / `academic-writing-refiner` prose sweep；不改主结构。
+5. **May 6 提交前**：`paper-compile` + 匿名 artifact zip + OpenReview 表单/PDF/supplementary 最终上传检查。
+
 ## 一、核心思想（一段话版本）
 
 LLM 能理解概率问题、能使用计算结果做决策，但无法可靠执行概率计算，且随问题复杂度增加崩溃到个位数。我们提出 PCD 诊断框架定位这一瓶颈，并用 typed DSL（7 core ops + 3 macros）+ 确定性编译器 + 2-Gate 验证器实现 "compile-once" 范式：LLM 做 family-level 的结构归纳（输出 TaskSpec JSON），之后实例由编译出的 solver 确定性求解。当前论文必须严格区分两层：backend exactness 是“给定有效 TaskSpec 后”的条件性结果；NL E2E 结果单独报告（Flight/Hotel/TextBandit/NB/HMM/all-family mixed）。
