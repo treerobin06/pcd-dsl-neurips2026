@@ -31,8 +31,6 @@ anonymous-code/solvers/preference_solver.py
 anonymous-code/solvers/nb_solver.py
 anonymous-code/solvers/hmm_solver.py
 anonymous-code/README.md
-anonymous-code/baselines 2/
-anonymous-code/inductor 2/
 anonymous-code/setup.py
 anonymous-code/ANONYMIZATION.md
 anonymous-code/verifier/
