@@ -37,16 +37,6 @@
 
 \title{Compile Once, Compute Exactly: Verified Solver Induction for LLM Probabilistic Reasoning}
 
-% Camera-ready: 改 \usepackage[final]{neurips_2026} 并取消下方注释
-% \author{
-%   Bowen Jiang\quad
-%   Xue Wang\quad
-%   Xuan Wei\thanks{Lead corresponding author. Conceived the research idea and supervised the project.}\quad
-%   Tao Yao\thanks{Corresponding author.} \\
-%   Antai College of Economics and Management, Shanghai Jiao Tong University \\
-%   \texttt{\{tree06, weix, taoyao\}@sjtu.edu.cn}\quad
-%   \texttt{wxie91@gmail.com}
-% }
 \author{Anonymous Author(s)}
 
 \begin{document}
@@ -334,7 +324,6 @@ The mixed E2E router composes the registered supported routes with an unsupporte
 \includegraphics[width=\textwidth]{figures/figure3_vsi_4k_h096.png}
 \caption{VSI method zoom-in. Figure~\ref{fig:overview} shows the full routed system; this panel focuses on how a solver route is induced, checked, and reused. A few family examples are used once to have the LLM assemble a typed \taskspec{} and choose a route graph over the typed primitive interface. The seven primitive tiles form an unordered palette, not a fixed execution order; the route above them is one compiled composition selected for a task family. The deterministic compiler lowers that assembly, validation gates check execution and reference matches when available, and successful routes discovered after a registry miss are cached for later same-family instances.}
 \label{fig:vsi_zoom}
-\vspace{-0.5em}
 \end{figure}
 
 % ============================================================
@@ -536,7 +525,6 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 \end{tabular}
 \caption{Scaling, external validation, and cost. \textbf{(a)} On standard bnlearn networks with $\geq$20 nodes, per-instance PAL is unreliable (GPT-4o-mini 17.5\%, GPT-5.4 23.3\% overall; both reach 0\% on Alarm), while the VSI compiled solver matches pgmpy references on 400/400 finite queries. \textbf{(b)} Cost--accuracy Pareto on BLInD: the VSI compiled solver matches all references at \$0.008 (one induction call), matching GPT-5.4 compile-time code at $14\times$ lower cost and PAL at $310\times$ lower cost. Costs and times are amortized over one induction call followed by deterministic reuse. \textbf{(c,d)} On QUITE, the registered-network VSI path keeps exact inference outside the LLM while direct answering and per-instance PAL trade off accuracy, time, and API cost.}
 \label{fig:scaling_cost}
-\vspace{-0.5em}
 \end{figure*}
 
 \paragraph{External check on QUITE.}
