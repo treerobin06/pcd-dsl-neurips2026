@@ -25,12 +25,6 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepgfplotslibrary{fillbetween}
-\renewcommand{\tablename}{Tab.}
-
-% 紧凑列表
-\usepackage{enumitem}
-\setlist[itemize]{itemsep=1pt, parsep=0pt, topsep=2pt}
-\setlist[enumerate]{itemsep=1pt, parsep=0pt, topsep=2pt}
 
 % 自定义命令
 \newcommand{\method}{VSI}
@@ -700,12 +694,9 @@ Induction uses a stochastic LLM only at compile time; after validation, later in
 
 LLMs are useful probabilistic interfaces, but poor probabilistic calculators.
 PCD makes this failure mode visible: models often recover structure and act correctly from a posterior, yet fail at the computation itself.
-\method{} uses that diagnosis to change the role of the LLM.
-The model induces a typed family specification; the compiled solver performs inference and can be reused across instances.
-
-The evidence supports this division of labor across five inference families and an external QUITE benchmark.
-Backend exactness, natural-language robustness, and mixed routing composition are measured separately, making the claim precise rather than anecdotal.
-Within finite discrete inference, the result is a practical compiler abstraction for LLM probabilistic reasoning: language models identify reusable structure; validated solvers do the math.
+\method{} changes the role of the LLM: the model induces a typed family specification, while the compiled solver performs reusable inference.
+Across five inference families and external QUITE queries, we measure backend exactness, natural-language robustness, and mixed routing separately.
+Within finite discrete inference, \method{} is a practical compiler abstraction for LLM probabilistic reasoning: language models identify reusable structure; validated solvers do the math.
 
 {\small
 \bibliographystyle{plainnat}
