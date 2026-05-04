@@ -152,7 +152,11 @@
 
 
                                                          3
-                                               Parse     Compute                                                          VSI solver          GPT-5.4
+112   BN inference; at depth 10, GPT-5.4 still produces the wrong answer 89% of the time. These results
+113   motivate a system that uses the LLM’s strong parsing ability while bypassing its weak computation
+114   entirely.
+
+                                               Parse     Compute                                                          VSI solver          GPT-5.4
                                               Decide                                                                         Sonnet 4        GPT-4o-mini
 
 
@@ -189,10 +193,6 @@
       Error bars in (b) show 95% Wilson CIs; exact PCD numbers are in Appendix N.
 
 
-112   BN inference; at depth 10, GPT-5.4 still produces the wrong answer 89% of the time. These results
-113   motivate a system that uses the LLM’s strong parsing ability while bypassing its weak computation
-114   entirely.
-
 115   4                  Compile-once solver induction
 116   PCD tells us what not to do: do not ask the LLM to carry out probabilistic inference token by token.
 117   Our method instead asks the LLM to induce a compact solver specification for the task family. The
@@ -224,6 +224,7 @@
 140   experiments, but the interface is extensible: a new primitive or macro must expose a typed signature
 141   and pass the same deploy checks before it can enter the registry. Appendices F–G give the operator
 142   definitions and schema.
+
 
                                                                                   4
       Figure 3: VSI method zoom-in. Figure 1 shows the full routed system; this panel focuses on how
