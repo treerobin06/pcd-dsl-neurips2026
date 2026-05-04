@@ -73,18 +73,19 @@
 % ============================================================
 \begin{abstract}
 % ============================================================
-Large language models (LLMs) are increasingly used as natural-language interfaces for probabilistic reasoning: they can often recover variables, observations, and queries from text, yet remain brittle probabilistic calculators.
-We make this failure mode explicit with Parse--Compute--Decide (PCD), a gold-injection diagnostic that separates structure extraction, probabilistic inference given gold structure, and decision-making given a gold posterior.
-Across six LLMs and several probabilistic tasks, models usually parse inputs and act correctly from a posterior, but fail at computation: Compute accuracy ranges from 28\% to 78\% on preference learning and falls to 3--11\% on depth-10 Bayesian networks.
-Motivated by this diagnosis, we propose Verified Solver Induction (VSI), a compile-once design for LLM probabilistic reasoning.
-Instead of solving each instance or generating fresh code, an off-the-shelf LLM, with no weight updates, induces a reusable typed solver specification for a task family by assembling probabilistic atoms and inference routes.
-A deterministic compiler lowers this LLM-assembled specification into an executable solver, verifies it through deploy checks including reference matches when available, caches verified solvers, and reuses them on future same-family instances.
-Thus the LLM induces probabilistic solver structure at compile time, while the VSI-verified compiled solver performs exact inference at run time.
-We evaluate VSI across preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering through three complementary checks.
-VSI-assembled solvers match references on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks; on larger multi-valued bnlearn networks, the compiled solver remains exact while per-instance program-aided prompting (PAL) frequently fails.
-On external QUITE queries, the registered VSI path reaches 96.0\% while direct answering reaches 36.0\%--60.0\% and per-instance PAL reaches 24.0\%--88.0\%, at substantially higher cost.
-On natural-language inputs, pooled over five paired adversarial task-set seeds ($n{=}600/500$), structured direct compute reaches only 18.2\% / 32.4\%, while VSI reaches \textbf{90.8\% / 97.6\%} on Naive Bayes and HMM.
-Together, PCD localizes the bottleneck and VSI provides a reusable compiler abstraction for reliable LLM probabilistic interfaces without fine-tuning.
+Large language models (LLMs) are increasingly used as natural-language interfaces for probabilistic reasoning, but end-to-end evaluations often conflate failures of parsing, probabilistic computation, and decision-making.
+We make two contributions.
+First, we introduce Parse--Compute--Decide (PCD), a gold-intervention diagnostic that isolates these stages by supplying gold structure or gold posteriors.
+Across six LLMs and several probabilistic tasks, models usually recover task structure and choose correct actions from a posterior, but remain unreliable probabilistic calculators: compute-stage accuracy ranges from 28\% to 78\% on preference learning and drops to 3--11\% on depth-10 Bayesian networks.
+Second, we propose Verified Solver Induction (VSI), a compile-once, reuse-many framework for reliable LLM-assisted probabilistic reasoning.
+Unlike direct prompting or per-instance PAL, VSI changes the role of the LLM from a per-instance calculator or code generator into a task-family-level solver inducer: an off-the-shelf LLM assembles a reusable typed solver specification from probabilistic atoms and inference routes.
+A deterministic compiler lowers the specification into an executable solver for finite discrete models, runs acceptance checks and compares against references when available, and caches accepted solvers for future same-family instances.
+At run time, exact inference is performed by the compiled solver rather than the LLM.
+We evaluate VSI on preference learning, bandits, Bayesian networks, Naive Bayes, and HMM filtering.
+VSI matches reference solvers on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks.
+On external QUITE queries, VSI reaches 96.0\%, compared with 36.0--60.0\% for direct answering and 24.0--88.0\% for per-instance PAL.
+On natural-language Naive Bayes and HMM tasks, VSI reaches 90.8\% and 97.6\%, while direct LLM computation reaches only 18.2\% and 32.4\% even from structured inputs.
+Together, PCD identifies probabilistic computation as the bottleneck, and VSI turns LLMs from brittle probabilistic calculators into compile-time inducers of solver-backed probabilistic interfaces without fine-tuning.
 \end{abstract}
 
 % ============================================================
@@ -186,27 +187,37 @@ We observe this pattern across every model and task.
 
 On preference learning, Compute ranges from 28\% for GPT-4o-mini to 78\% for Opus, while Decide = 100\% for every model.
 On BN inference, the same pattern holds and amplifies with depth: Compute drops from $\sim$82\% at depth 2 to single digits by depth 10, while Parse stays $\geq$96\% and Decide at 100\%.
+The same signature recurs across task families, including the template-registry held-out Naive Bayes and HMM families evaluated in \S\ref{sec:held_out}.
+Scaling helps, but not enough: upgrading from GPT-4o-mini to GPT-5.4 (a $67\times$ price increase) improves Compute by only 9 percentage points on BN inference; at depth 10, GPT-5.4 still produces the wrong answer 89\% of the time.
+These results motivate a system that uses the LLM's strong parsing ability while bypassing its weak computation entirely.
 
 \begin{figure*}[t]
 \centering
-\begin{minipage}[t]{0.48\textwidth}
-\vspace{0pt}
+\begin{tabular}{@{}p{0.48\textwidth}@{\hspace{0.04\textwidth}}p{0.48\textwidth}@{}}
 \centering
-\begin{tikzpicture}
+\begin{tikzpicture}[baseline=(figtwoa.south)]
 \begin{axis}[
-    width=\textwidth,
-    height=5.1cm,
+    name=figtwoa,
+    width=\linewidth,
+    height=5.2cm,
     ybar,
     bar width=4.1pt,
     ymin=0, ymax=112,
     ylabel={Accuracy (\%)},
+    xlabel={Model},
     symbolic x coords={4o-mini,4o,5.4,Sonnet,Gemini,Opus},
     xtick=data,
-    x tick label style={font=\tiny, rotate=25, anchor=east},
+    x tick label style={font=\tiny},
     ytick={0,20,40,60,80,100},
     tick label style={font=\scriptsize},
     label style={font=\scriptsize},
-    legend style={at={(0.5,1.03)}, anchor=south, legend columns=3, font=\tiny, draw=none},
+    xlabel style={font=\scriptsize},
+    ylabel style={font=\scriptsize},
+    legend style={at={(0.50,1.06)}, anchor=south, legend columns=2, font=\tiny,
+        draw=gray!40, fill=white, inner sep=1.4pt, column sep=3pt, row sep=0pt},
+    legend image code/.code={%
+        \draw[#1] (0cm,-0.06cm) rectangle (0.14cm,0.08cm);
+    },
     grid=major,
     grid style={gray!15},
     enlarge x limits=0.10,
@@ -222,15 +233,12 @@ On BN inference, the same pattern holds and amplifies with depth: Compute drops 
 \addlegendentry{Decide}
 \end{axis}
 \end{tikzpicture}
-\vspace{-2pt}
-{\centering\scriptsize (a) PCD on Flight preference learning ($n{=}200$).\par}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-\vspace{0pt}
+&
 \centering
-\begin{tikzpicture}
+\begin{tikzpicture}[baseline=(figtwob.south)]
 \begin{axis}[
-    width=\textwidth,
+    name=figtwob,
+    width=\linewidth,
     height=5.2cm,
     xlabel={BN Depth},
     ylabel={Compute$\mid$Gold (\%)},
@@ -238,11 +246,14 @@ On BN inference, the same pattern holds and amplifies with depth: Compute drops 
     ymin=0, ymax=105,
     xtick={2,4,6,8,10},
     ytick={0,20,40,60,80,100},
-    legend style={at={(0.98,0.60)}, anchor=east, font=\tiny, draw=gray!50, fill=white, fill opacity=0.9, text opacity=1, row sep=0pt},
+    legend style={at={(0.50,1.06)}, anchor=south, legend columns=2, font=\tiny,
+        draw=gray!40, fill=white, inner sep=1.4pt, column sep=3pt, row sep=0pt},
     grid=major,
     grid style={gray!20},
     tick label style={font=\scriptsize},
     label style={font=\scriptsize},
+    xlabel style={font=\scriptsize},
+    ylabel style={font=\scriptsize},
     every axis plot/.append style={thick, mark size=1.5pt},
 ]
 \addplot[color=green!50!black, line width=2pt, solid, mark=square*, mark options={fill=green!50!black}]
@@ -277,17 +288,14 @@ On BN inference, the same pattern holds and amplifies with depth: Compute drops 
 \addlegendentry{GPT-4o-mini}
 \end{axis}
 \end{tikzpicture}
-\vspace{-2pt}
-{\centering\scriptsize (b) Compute$\mid$GoldParse vs.\ BN depth (BLInD, $n{=}900$).\par}
-\end{minipage}
+\tabularnewline[-1pt]
+\noindent\makebox[\linewidth][c]{\scriptsize\textbf{(a)} PCD on Flight preference learning ($n{=}200$).}
+&
+\noindent\makebox[\linewidth][c]{\scriptsize\textbf{(b)} BLInD Compute$\mid$GoldParse by depth ($n{=}900$).}
+\end{tabular}
 \caption{PCD localizes the bottleneck. \textbf{(a)} On preference learning, Parse and Decide are high for all six LLMs, while Compute remains substantially lower even for stronger models. \textbf{(b)} On BLInD Bayesian networks, Compute collapses with depth, while the VSI compiled solver remains exact. Error bars in (b) show 95\% Wilson CIs; exact PCD numbers are in Appendix~\ref{app:pcd_multimodel}.}
 \label{fig:pcd_bottleneck}
 \end{figure*}
-
-The pattern is consistent across every model and task family, including the template-registry held-out Naive Bayes and HMM families evaluated in \S\ref{sec:held_out}.
-Scaling helps, but not enough: upgrading from GPT-4o-mini to GPT-5.4 (a $67\times$ price increase) improves Compute by only 9 percentage points on BN inference.
-At depth 10, GPT-5.4 still produces the wrong answer 89\% of the time.
-These results motivate a system that uses the LLM's strong parsing ability while bypassing its weak computation entirely.
 
 % ============================================================
 \section{Compile-once solver induction}
@@ -383,7 +391,8 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 % Three evidence panels: structured scaling, amortized cost, and external QUITE.
 \begin{tabular}{@{}p{0.51\textwidth}@{\hspace{0.02\textwidth}}p{0.47\textwidth}@{}}
 % ---- 子图 (a) ----
-\begin{tikzpicture}
+\makebox[\linewidth][c]{%
+\begin{tikzpicture}[trim axis left, trim axis right]
 \begin{axis}[
     width=0.92\linewidth,
     height=5.2cm,
@@ -414,12 +423,13 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 \addplot[pattern=dots, pattern color=red!70!black, draw=red!70!black] coordinates {(Asia (8),27) (Child (20),20) (Ins. (27),23) (Alarm (37),0)};
 \addlegendentry{PAL (GPT-4o-mini)}
 \end{axis}
-\end{tikzpicture}
+\end{tikzpicture}}%
 &
 % ---- 子图 (b) ----
-\begin{tikzpicture}
+\makebox[\linewidth][c]{%
+\begin{tikzpicture}[trim axis left, trim axis right]
 \begin{axis}[
-    width=0.88\linewidth,
+    width=0.95\linewidth,
     height=5.2cm,
     xlabel={Cost (\$, log)},
     ylabel={Accuracy (\%)},
@@ -461,16 +471,17 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 \node[pin={[pin distance=5pt, pin edge={gray!60, thin}, font=\tiny, text=red!60!black]90:{\$0.84, 26\%}}] at (axis cs:0.84,26.4) {};
 \node[pin={[pin distance=8pt, pin edge={gray!60, thin}, font=\tiny, text=violet!60!black]90:{\$3.60, 31\%}}] at (axis cs:3.60,31.2) {};
 \end{axis}
-\end{tikzpicture}
+\end{tikzpicture}}%
 \\
 % ---- 外部 legend 行 ----
 {\hfill\scalebox{0.83}{\ref{legA}}\hfill\mbox{}} & {\hfill\scalebox{0.83}{\ref{legB}}\hfill\mbox{}}\tabularnewline[2pt]
 % ---- subcaption 行 ----
 {\hfill\scriptsize (a) bnlearn real-world networks (PAL 30q/net; DSL 100q/net).\hfill\mbox{}} & {\hfill\scriptsize (b) Cost--accuracy on BLInD (small networks).\hfill\mbox{}}\tabularnewline[3pt]
 % ---- 子图 (c) ----
-\begin{tikzpicture}
+\makebox[\linewidth][c]{%
+\begin{tikzpicture}[trim axis left, trim axis right]
 \begin{axis}[
-    width=0.95\linewidth,
+    width=0.92\linewidth,
     height=4.05cm,
     xbar,
     bar width=8pt,
@@ -496,10 +507,11 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 \addplot[pattern=dots, pattern color=red!70!black, draw=red!70!black, bar shift=0pt] coordinates {(24.0,PAL 4o-mini)};
 \addplot[pattern=north east lines, pattern color=red!40!blue, draw=red!40!blue, bar shift=0pt] coordinates {(88.0,PAL 5.4)};
 \end{axis}
-\end{tikzpicture}
+\end{tikzpicture}}%
 &
 % ---- 子图 (d) ----
-\begin{tikzpicture}
+\makebox[\linewidth][c]{%
+\begin{tikzpicture}[trim axis left, trim axis right]
 \begin{axis}[
     width=0.95\linewidth,
     height=4.05cm,
@@ -532,9 +544,9 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 \node[font=\tiny, anchor=south west, text=gray!55!black] at (axis cs:12.8,0.0477) {Direct 36\%};
 \node[font=\tiny, anchor=south west, text=gray!70!black] at (axis cs:33.4,0.2353) {Direct 60\%};
 \node[font=\tiny, anchor=south east, text=red!70!black] at (axis cs:319.3,0.1151) {PAL 24\%};
-\node[font=\tiny, anchor=south west, text=red!40!blue] at (axis cs:402.9,2.4897) {PAL 88\%};
+\node[font=\tiny, anchor=east, xshift=-4pt, text=red!40!blue] at (axis cs:402.9,2.4897) {PAL 88\%};
 \end{axis}
-\end{tikzpicture}
+\end{tikzpicture}}%
 \tabularnewline[-2pt]
 {\hfill\scriptsize (c) QUITE accuracy on the same 75-query split.\hfill\mbox{}} & {\hfill\scriptsize (d) QUITE time--cost tradeoff; labels show accuracy.\hfill\mbox{}}\tabularnewline
 \end{tabular}
@@ -659,8 +671,12 @@ This also differs from schema-constrained per-instance parsing into an existing 
 \paragraph{Formal solvers for reasoning.}
 SatLM~\citep{ye2023satlm}, Logic-LM~\citep{pan2023logiclm}, LINC~\citep{olausson2023linc}, Logic.py~\citep{kesseli2025logicpy}, and constraint-programming translators~\citep{michailidis2024cp} map natural language to formal solvers for logical or combinatorial problems.
 We take the same trust-boundary lesson---make the LLM fill a constrained representation, then let a solver execute it---but the target operations are probabilistic: factor products, marginalization, normalization, posterior expectations, and decisions.
-Closest on the probabilistic side are BLInD~\citep{nafar2025blind}, ProbLog~\citep{deraedt2007problog}, pgmpy~\citep{ankan2015pgmpy}, QUITE~\citep{schrader2024quite}, LLM-BI~\citep{huang2025llmbi}, NL-to-PLoT translation~\citep{wong2023word}, and distributional-question benchmarks~\citep{paruchuri2024odds}.
-These systems either provide benchmark corpora, target a single probabilistic formalism, or automate probabilistic-program specification; \method{} focuses on reusable exact inference across several discrete families and uses PCD to locate the failure stage.
+BLInD~\citep{nafar2025blind}, QUITE~\citep{schrader2024quite}, and distributional-question benchmarks~\citep{paruchuri2024odds} expose this probabilistic setting from the evaluation side; our contribution is to turn the diagnostic into a reusable solver interface.
+
+\paragraph{Probabilistic programming and graphical-model toolkits.}
+Probabilistic programming systems and graphical-model libraries such as ProbLog~\citep{deraedt2007problog,fierens2015problog2}, Stan~\citep{carpenter2017stan}, Pyro~\citep{bingham2019pyro}, Gen~\citep{cusumanotowner2019gen}, and pgmpy~\citep{ankan2015pgmpy} provide mature inference machinery once a model is expressed in the required formal language.
+Recent natural-language-to-probabilistic-program work, including LLM-BI~\citep{huang2025llmbi} and NL-to-PLoT translation~\citep{wong2023word}, moves part of that specification burden to language models.
+\method{} targets the complementary interface problem: the LLM assembles a typed finite-discrete solver route from reusable primitives, deploy checks exercise the route and match references when available, and the resulting solver is cached for later same-family instances rather than regenerated per query.
 
 \paragraph{Library learning and program induction.}
 DreamCoder~\citep{ellis2021dreamcoder}, LILO~\citep{grand2024lilo}, FunSearch~\citep{romeraparedes2024funsearch}, PIPS~\citep{stein2025pips}, and agentic-skill systems~\citep{zhang2026evoskills} learn or search reusable computational structure.
