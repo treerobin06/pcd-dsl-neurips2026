@@ -647,30 +647,30 @@ The approach is strongest when distributions are given or derivable; tasks that 
 
 \paragraph{Bayesian teaching and preference learning.}
 Qiu et al.'s Bayesian Teaching study~\citep{qiu2026bayesian} showed that targeted training can make a language model more Bayesian on Flight/Hotel-style preference tasks.
-We use that task family as a starting point but change the intervention: the model weights stay fixed, the LLM writes the reusable \taskspec{}, and the validated solver is reused on later instances.
-The same interface then covers TextBandit-style updates, Bayesian networks, Naive Bayes, and HMM filtering.
+We use that family as a starting point but change the intervention: model weights stay fixed, the LLM writes a reusable \taskspec{}, and the validated solver is reused across later instances.
+The same interface covers TextBandit-style updates, Bayesian networks, Naive Bayes, and HMM filtering.
 
 \paragraph{Program-aided and tool-using LLMs.}
 PAL~\citep{gao2023pal}, Program of Thoughts~\citep{chen2023pot}, Toolformer~\citep{schick2023toolformer}, ReAct~\citep{yao2023react}, and large-scale tool-routing systems such as Gorilla and ToolLLM~\citep{patil2024gorilla,qin2024toolllm} all put external computation behind an LLM interface.
 Their unit of work is usually a single query: the model generates code or calls a tool for each instance.
-This is effective for deterministic arithmetic, but it is brittle for probabilistic algorithms: on BLInD, GPT-4o-mini PAL accuracy drops from 93\% at depth~2 to 2\% at depth~10, while GPT-5.4 PAL remains strong but still pays per query and fails sharply on larger bnlearn networks (Appendix~\ref{app:pal_depth}).
-Our inductor instead emits a typed family specification once; after verification, the compiled solver runs without LLM calls.
-This also differs from schema-constrained per-instance parsing into an existing library, including grammar-constrained semantic parsers like TRANX~\citep{yin2018tranx}: \method{} makes the LLM assemble and validate the reusable solver route, then amortizes that route across later inputs.
+This works for arithmetic but is brittle for probabilistic algorithms: smaller-model PAL collapses with BLInD depth, and stronger PAL remains costly and fails on larger bnlearn networks (Appendix~\ref{app:pal_depth}).
+\method{} instead emits and validates a typed family specification once, then amortizes reuse of the compiled route.
+It also differs from schema-constrained per-instance parsing and grammar-constrained semantic parsers such as TRANX~\citep{yin2018tranx}: reuse is part of the induced object.
 
 \paragraph{Formal solvers for reasoning.}
 SatLM~\citep{ye2023satlm}, Logic-LM~\citep{pan2023logiclm}, LINC~\citep{olausson2023linc}, Logic.py~\citep{kesseli2025logicpy}, and constraint-programming translators~\citep{michailidis2024cp} map natural language to formal solvers for logical or combinatorial problems.
-We take the same trust-boundary lesson---make the LLM fill a constrained representation, then let a solver execute it---but the target operations are probabilistic: factor products, marginalization, normalization, posterior expectations, and decisions.
-BLInD~\citep{nafar2025blind}, QUITE~\citep{schrader2024quite}, and distributional-question benchmarks~\citep{paruchuri2024odds} expose this probabilistic setting from the evaluation side; our contribution is to turn the diagnostic into a reusable solver interface.
+We take the same trust-boundary lesson but target probabilistic operations: factor products, marginalization, normalization, posterior expectations, and decisions.
+BLInD~\citep{nafar2025blind}, QUITE~\citep{schrader2024quite}, and distributional-question benchmarks~\citep{paruchuri2024odds} expose this setting from the evaluation side; we turn the diagnostic into a reusable solver interface.
 
 \paragraph{Probabilistic programming and graphical-model toolkits.}
 Probabilistic programming systems and graphical-model libraries such as ProbLog~\citep{deraedt2007problog,fierens2015problog2}, Stan~\citep{carpenter2017stan}, Pyro~\citep{bingham2019pyro}, Gen~\citep{cusumanotowner2019gen}, and pgmpy~\citep{ankan2015pgmpy} provide mature inference machinery once a model is expressed in the required formal language.
 Recent natural-language-to-probabilistic-program work, including LLM-BI~\citep{huang2025llmbi} and NL-to-PLoT translation~\citep{wong2023word}, moves part of that specification burden to language models.
-\method{} targets the complementary interface problem: the LLM assembles a typed finite-discrete solver route from reusable primitives, deploy checks exercise the route and match references when available, and the resulting solver is cached for later same-family instances rather than regenerated per query.
+\method{} targets the complementary interface problem: the LLM assembles a typed finite-discrete route from reusable primitives, deploy checks exercise it, and the accepted solver is cached rather than regenerated per query.
 
 \paragraph{Library learning and program induction.}
 DreamCoder~\citep{ellis2021dreamcoder}, LILO~\citep{grand2024lilo}, FunSearch~\citep{romeraparedes2024funsearch}, PIPS~\citep{stein2025pips}, and agentic-skill systems~\citep{zhang2026evoskills} learn or search reusable computational structure.
-Our setting makes this idea directly checkable for probabilistic reasoning: the induced object is a typed \taskspec{} that compiles into a deterministic solver, rather than arbitrary code.
-DisCIPL~\citep{lew2025discipl} and LLM-guided POMDP induction~\citep{curtis2025pomdp} share the idea of using LLMs as inductors, but keep different targets in view---text generation control and online planning rather than exact discrete inference.
+Here the induced object is checkable: a typed \taskspec{} compiles into a deterministic solver, rather than arbitrary code.
+DisCIPL~\citep{lew2025discipl} and LLM-guided POMDP induction~\citep{curtis2025pomdp} also use LLMs as inductors, but target text-generation control and online planning rather than exact discrete inference.
 
 % ============================================================
 \section{Scope and Future Work}
@@ -679,23 +679,19 @@ DisCIPL~\citep{lew2025discipl} and LLM-guided POMDP induction~\citep{curtis2025p
 
 \paragraph{Scope.}
 \method{} targets exact inference over finite discrete distributions, a broad and auditable setting that covers Bayesian networks, preference learning, bandits, Naive Bayes, and HMM forward filtering.
-The same interface can incorporate additional typed atoms for continuous variables, approximate inference, or distribution learning from sparse unstructured context.
-The evidence spans five inference families across eight datasets, plus an external QUITE benchmark that reuses the same registered-solver interface.
-It includes five adversarial task-set seeds for NB ($n{=}600$) and HMM ($n{=}500$), two families held out from the reusable-template registry and solved through LLM-assembled core-op routes.
-The mixed E2E benchmark stress-tests route-and-solve composition over supported input streams plus unsupported examples; enlarging that stream is a data and validation-suite question rather than a change to the compiler interface.
+The same interface can add typed atoms for continuous variables, approximate inference, or distribution learning.
+Our evidence spans five inference families across eight datasets, plus external QUITE queries and a mixed stream over supported and unsupported inputs.
 
 \paragraph{Diagnostics and Induction.}
 PCD is an interventional diagnostic: Compute$\mid$GoldParse intentionally measures whether a model can select and execute the required probabilistic calculation once structure is fixed.
-Its stage boundaries are deliberately coarse enough to be reused across task families, and the observed pattern is stable across models, tasks, and BN depths.
-Decide$\mid$GoldPosterior isolates the posterior-to-action step used by these tasks; its high score shows that final action selection is not the bottleneck.
-Family-level induction is a stronger capability than instance-level parsing, and our experiments validate it through deploy checks, template-registry held-out families, and mixed E2E composition.
+Its stage boundaries are coarse enough to reuse across task families, and the observed pattern is stable across models, tasks, and BN depths.
+Family-level induction is stronger than instance-level parsing; we validate it through deploy checks, template-registry held-out families, and mixed E2E composition.
 
 \paragraph{Extensibility and Verification.}
 The operator basis is deliberately small: seven typed operations plus three reusable templates.
-This makes the trust boundary inspectable and lets new families either reuse core operations, as NB/HMM do, or add typed primitives behind the same validation loop.
-Verification is operational: deploy gates execute the compiled solver and require agreement with published or programmatic reference solvers before the solver is stored in the registry.
-Induction uses a stochastic LLM only at compile time; once a specification passes validation, later inference is deterministic.
-The supplementary artifact includes prompts, specifications, and compiled solvers.
+This inspectable boundary lets new families either reuse core operations, as NB/HMM do, or add typed primitives behind the same validation loop.
+Verification is operational: deploy gates execute the compiled solver and require reference agreement before registry storage.
+Induction uses a stochastic LLM only at compile time; after validation, later inference is deterministic.
 
 % ============================================================
 \section{Conclusion}
