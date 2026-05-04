@@ -13,6 +13,8 @@ docs/
 compliance/
 thesis/
 .obsidian/
+.claude/
+*.bad/
 
 # Python
 __pycache__/
@@ -37,3 +39,6 @@ meta-skill/paper/*.pdf
 .DS_Store
 *.swp
 *.env
+* 2.*
+* 3.*
+* 4.*
