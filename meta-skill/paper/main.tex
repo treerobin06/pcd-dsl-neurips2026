@@ -80,7 +80,7 @@ Across six LLMs and several probabilistic tasks, models usually recover task str
 Second, we propose Verified Solver Induction (VSI), a compile-once, reuse-many framework for reliable LLM-assisted probabilistic reasoning.
 Unlike direct prompting or per-instance PAL, VSI changes the role of the LLM from a per-instance calculator or code generator into a task-family-level solver inducer: an off-the-shelf LLM assembles a reusable typed solver specification from probabilistic atoms and inference routes.
 A deterministic compiler lowers the specification into an executable solver for finite discrete models, runs acceptance checks and compares against references when available, and caches accepted solvers for future same-family instances.
-At run time, exact inference is performed by the compiled solver rather than the LLM.
+At run time, accepted compiled solvers perform exact inference rather than the LLM.
 We evaluate VSI on preference learning, bandits, Bayesian networks, Naive Bayes, and HMM filtering.
 VSI matches reference solvers on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks.
 On external QUITE queries, VSI reaches 96.0\%, compared with 36.0--60.0\% for direct answering and 24.0--88.0\% for per-instance PAL.
@@ -125,7 +125,7 @@ Later instances from the same family can be parsed and solved without asking the
 
 This design gives a clean separation between backend correctness, language-interface robustness, and routing composition.
 Given LLM-assembled specifications that pass the deploy check, the compiled solvers match references on Flight/BLInD and finite-query bnlearn checks, including standard multi-valued bnlearn networks where per-instance generated code is unreliable.
-On QUITE, a separate external Bayesian-inference corpus, the registered path reaches 96.0\% on the same 75-query split, compared with 60.0\% for direct GPT-5.4 and 88.0\% for PAL with GPT-5.4.
+On QUITE, a separate external Bayesian-inference corpus, the registered-network VSI path reaches 96.0\% on the same 75-query split, compared with 60.0\% for direct GPT-5.4 and 88.0\% for PAL with GPT-5.4.
 When the LLM must process natural language, the pipeline remains effective: it matches the preference-learning gold-feature oracle on Flight and reaches 90.8\% / 97.6\% on adversarial Naive Bayes / HMM inputs across five task-set seeds, two families held out from the reusable-template registry.
 
 \textbf{Contributions.}
@@ -550,7 +550,7 @@ The gap between per-instance generation and compiled solvers widens sharply as n
 \tabularnewline[-2pt]
 {\hfill\scriptsize (c) QUITE accuracy on the same 75-query split.\hfill\mbox{}} & {\hfill\scriptsize (d) QUITE time--cost tradeoff; labels show accuracy.\hfill\mbox{}}\tabularnewline
 \end{tabular}
-\caption{Scaling, external validation, and cost. \textbf{(a)} On standard bnlearn networks with $\geq$20 nodes, per-instance PAL is unreliable (GPT-4o-mini 17.5\%, GPT-5.4 23.3\% overall; both reach 0\% on Alarm), while the VSI compiled solver matches pgmpy references on 400/400 finite queries. \textbf{(b)} Cost--accuracy Pareto on BLInD: the VSI compiled solver matches all references at \$0.008 (one induction call), matching GPT-5.4 compile-time code at $14\times$ lower cost and PAL at $310\times$ lower cost. \textbf{(c,d)} On QUITE, the registered path keeps exact inference outside the LLM while direct answering and per-instance PAL trade off accuracy, time, and API cost.}
+\caption{Scaling, external validation, and cost. \textbf{(a)} On standard bnlearn networks with $\geq$20 nodes, per-instance PAL is unreliable (GPT-4o-mini 17.5\%, GPT-5.4 23.3\% overall; both reach 0\% on Alarm), while the VSI compiled solver matches pgmpy references on 400/400 finite queries. \textbf{(b)} Cost--accuracy Pareto on BLInD: the VSI compiled solver matches all references at \$0.008 (one induction call), matching GPT-5.4 compile-time code at $14\times$ lower cost and PAL at $310\times$ lower cost. Costs and times are amortized over one induction call followed by deterministic reuse. \textbf{(c,d)} On QUITE, the registered-network VSI path keeps exact inference outside the LLM while direct answering and per-instance PAL trade off accuracy, time, and API cost.}
 \label{fig:scaling_cost}
 \end{figure*}
 
