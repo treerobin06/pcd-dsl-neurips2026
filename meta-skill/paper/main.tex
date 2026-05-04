@@ -83,7 +83,7 @@ Thus the LLM induces probabilistic solver structure at compile time, while the V
 We evaluate VSI across preference learning, bandits, Bayesian networks, Naive Bayes, and HMM forward filtering through three complementary checks.
 VSI-assembled solvers match references on 1,150 Flight/BLInD instances and 400 finite-query bnlearn checks; on larger multi-valued bnlearn networks, the compiled solver remains exact while per-instance program-aided prompting (PAL) frequently fails.
 On external QUITE queries, the registered VSI path reaches 96.0\% while direct answering reaches 36.0\%--60.0\% and per-instance PAL reaches 24.0\%--88.0\%, at substantially higher cost.
-On natural-language inputs, GPT-4o-mini improves from 44\% / 32\% direct accuracy to \textbf{90.8\% / 97.6\%} on adversarial Naive Bayes and HMM tasks across five independently generated task sets.
+On natural-language inputs, pooled over five paired adversarial task-set seeds ($n{=}600/500$), structured direct compute reaches only 18.2\% / 32.4\%, while VSI reaches \textbf{90.8\% / 97.6\%} on Naive Bayes and HMM.
 Together, PCD localizes the bottleneck and VSI provides a reusable compiler abstraction for reliable LLM probabilistic interfaces without fine-tuning.
 \end{abstract}
 
@@ -104,7 +104,7 @@ This is the failure mode we study: the model often understands the problem but c
 \end{figure*}
 
 The usual fixes do not quite address this abstraction gap.
-Chain-of-thought leaves the model doing the math.
+Chain-of-thought~\citep{wei2022cot} leaves the model doing the math.
 Program-aided prompting asks the model to write new code for each instance.
 Bayesian Teaching, introduced on the Flight/Hotel preference tasks~\citep{qiu2026bayesian}, takes a training-side route: fine-tune a model to follow Bayesian demonstrations.
 Family-specific tools such as ProbLog for Bayesian networks~\citep{nafar2025blind,deraedt2007problog} solve one benchmark family at a time.
@@ -148,7 +148,7 @@ We therefore report backend checks separately from natural-language end-to-end r
 Backend checks ask whether the compiled solver is exact once the LLM-assembled specification is valid.
 End-to-end results include the LLM-facing steps: family recognition, parsing or \taskspec{} induction, compilation, and solving.
 
-Our evaluation covers Flight/Hotel preference learning ($n{=}748$), TextBandit-style histories ($n{=}100$), BLInD Bayesian networks ($n{=}900$), standard bnlearn networks (400 finite backend queries and 120 PAL stress-test queries), QUITE external Bayesian-inference queries, template-registry held-out Naive Bayes and HMM tasks, and a mixed E2E benchmark over six input streams.
+Our evaluation covers Flight/Hotel preference learning ($n{=}748$), TextBandit-style histories~\citep{lim2025textbandit} ($n{=}100$), BLInD Bayesian networks ($n{=}900$), standard bnlearn networks (400 finite backend queries and 120 PAL stress-test queries), QUITE external Bayesian-inference queries, template-registry held-out Naive Bayes and HMM tasks, and a mixed E2E benchmark over six input streams.
 Appendix~\ref{app:families} summarizes the families and datasets.
 
 % ============================================================
@@ -568,7 +568,7 @@ Condition (GPT-4o-mini) & Naive Bayes & HMM Forward \\
 \midrule
 \multicolumn{3}{l}{\textit{Full natural-language pipeline}} \\
 Direct answer ($n{=}200$/$100$) & 44.0\% & 32.0\% \\
-Structured JSON direct compute ($n{=}120$/$100$) & 23.3\% {\scriptsize [16.7, 31.7]} & 40.0\% {\scriptsize [30.9, 49.8]} \\
+Structured JSON direct compute, 5 seeds ($n{=}600$/$500$) & 18.2\% {\scriptsize [15.3, 21.5]} & 32.4\% {\scriptsize [28.4, 36.6]} \\
 \textbf{VSI: adversarial NL E2E, 5 seeds ($n{=}600$/$500$)} & \textbf{90.8\%} {\scriptsize [88.3, 92.9]} & \textbf{97.6\%} {\scriptsize [95.9, 98.6]} \\
 \midrule
 \multicolumn{3}{l}{\textit{Structured-spec backend check}} \\
@@ -582,8 +582,8 @@ Direct LLM compute$\mid$gold parse & 37.0\% {\scriptsize [30,44]} & 27.0\% {\scr
 
 These results test whether the interface is more than a template selector.
 Naive Bayes and HMM have no reusable family template, and HMM requires a repeated forward update that is absent from the three template-backed routes.
-The same GPT-4o-mini model that answers only 44\% / 32\% of the tasks directly reaches 90.8\% / 97.6\% when it emits a \taskspec{} and lets the compiled solver compute, pooled across five independently generated adversarial task sets.
-Constraining the baseline to valid JSON is not enough: the same model, asked to compute directly while returning structured JSON, reaches only 23.3\% / 40.0\%.
+On the same five adversarial task-set seeds, GPT-4o-mini reaches only 18.2\% / 32.4\% when asked to compute directly while returning valid JSON.
+The same model reaches 90.8\% / 97.6\% when it emits a \taskspec{} and lets the compiled solver compute.
 Given a valid \taskspec{}, the core-op solvers match independent reference posteriors with maximum absolute error below $10^{-9}$.
 The remaining NB errors come from specification extraction on adversarial wording: hedged probabilities, shuffled symptom order, and distractor clinical text.
 
@@ -608,8 +608,8 @@ Stream & $n$ & VSI E2E & What to notice \\
 Flight preference & 624 & 74.3\% {\scriptsize [70.9, 77.8]} & Matches the gold-feature oracle (74.4\%); solver agreement 99.8\%. \\
 Hotel preference & 124 & 77.4\% {\scriptsize [70.2, 85.5]} & Gold-feature oracle 75.0\%; residual noise is feature extraction, not solver arithmetic. \\
 TextBandit-style & 100 & 96.0\% {\scriptsize [90.2, 98.4]} & All failures are observation-count extraction errors. \\
-Naive Bayes adversarial & 600 & 90.8\% {\scriptsize [88.3, 92.9]} & Held-out core-op route; direct answer is 44.0\% on the base split. \\
-HMM forward adversarial & 500 & 97.6\% {\scriptsize [95.9, 98.6]} & Held-out iterated core-op route; direct answer is 32.0\% on the base split. \\
+Naive Bayes adversarial & 600 & 90.8\% {\scriptsize [88.3, 92.9]} & Held-out core-op route; paired structured direct is 18.2\%. \\
+HMM forward adversarial & 500 & 97.6\% {\scriptsize [95.9, 98.6]} & Held-out iterated core-op route; paired structured direct is 32.4\%. \\
 \midrule
 Mixed supported stream & 620 & 89.7\% {\scriptsize [87.0, 91.8]} & Six supported families, shuffled without family labels. \\
 Mixed + unsupported rejection & 670 & 90.4\% {\scriptsize [88.0, 92.4]} & Adds 50 unsupported inputs that the scope gate must reject. \\
@@ -650,16 +650,16 @@ We use that task family as a starting point but change the intervention: the mod
 The same interface then covers TextBandit-style updates, Bayesian networks, Naive Bayes, and HMM filtering.
 
 \paragraph{Program-aided and tool-using LLMs.}
-PAL~\citep{gao2023pal}, Program of Thoughts~\citep{chen2023pot}, Toolformer~\citep{schick2023toolformer}, and ReAct~\citep{yao2023react} all put external computation behind an LLM interface.
+PAL~\citep{gao2023pal}, Program of Thoughts~\citep{chen2023pot}, Toolformer~\citep{schick2023toolformer}, ReAct~\citep{yao2023react}, and large-scale tool-routing systems such as Gorilla and ToolLLM~\citep{patil2024gorilla,qin2024toolllm} all put external computation behind an LLM interface.
 Their unit of work is usually a single query: the model generates code or calls a tool for each instance.
 This is effective for deterministic arithmetic, but it is brittle for probabilistic algorithms: on BLInD, GPT-4o-mini PAL accuracy drops from 93\% at depth~2 to 2\% at depth~10, while GPT-5.4 PAL remains strong but still pays per query and fails sharply on larger bnlearn networks (Appendix~\ref{app:pal_depth}).
 Our inductor instead emits a typed family specification once; after verification, the compiled solver runs without LLM calls.
-This also differs from schema-constrained per-instance parsing into an existing library: \method{} makes the LLM assemble and validate the reusable solver route, then amortizes that route across later inputs.
+This also differs from schema-constrained per-instance parsing into an existing library, including grammar-constrained semantic parsers like TRANX~\citep{yin2018tranx}: \method{} makes the LLM assemble and validate the reusable solver route, then amortizes that route across later inputs.
 
 \paragraph{Formal solvers for reasoning.}
 SatLM~\citep{ye2023satlm}, Logic-LM~\citep{pan2023logiclm}, LINC~\citep{olausson2023linc}, Logic.py~\citep{kesseli2025logicpy}, and constraint-programming translators~\citep{michailidis2024cp} map natural language to formal solvers for logical or combinatorial problems.
 We take the same trust-boundary lesson---make the LLM fill a constrained representation, then let a solver execute it---but the target operations are probabilistic: factor products, marginalization, normalization, posterior expectations, and decisions.
-Closest on the probabilistic side are BLInD~\citep{nafar2025blind}, ProbLog~\citep{deraedt2007problog}, pgmpy~\citep{ankan2015pgmpy}, QUITE~\citep{schrader2024quite}, and LLM-BI~\citep{huang2025llmbi}.
+Closest on the probabilistic side are BLInD~\citep{nafar2025blind}, ProbLog~\citep{deraedt2007problog}, pgmpy~\citep{ankan2015pgmpy}, QUITE~\citep{schrader2024quite}, LLM-BI~\citep{huang2025llmbi}, NL-to-PLoT translation~\citep{wong2023word}, and distributional-question benchmarks~\citep{paruchuri2024odds}.
 These systems either provide benchmark corpora, target a single probabilistic formalism, or automate probabilistic-program specification; \method{} focuses on reusable exact inference across several discrete families and uses PCD to locate the failure stage.
 
 \paragraph{Library learning and program induction.}
@@ -758,7 +758,7 @@ Flight E2E & $624$ & 74.3\% final accuracy & result record & E2E JSON \\
 Hotel E2E & $124$ & 77.4\% final accuracy & cost: \$0.0556 & metadata JSON \\
 TextBandit-style E2E & $100$ & 96.0\% final accuracy & cost/time: \$0.0292; 45.3s & metadata JSON \\
 NB/HMM adversarial E2E & $600/500$ & 90.8\% NB; 97.6\% HMM & per-seed records & summary JSON \\
-Structured JSON direct baseline & $320$ & 23.3\% NB; 40.0\% HMM & cost/time: \$0.0917; 85.8s & metadata JSON \\
+Structured JSON direct baseline & $600/500$ & 18.2\% NB; 32.4\% HMM & cost/time: \$0.4079; 462.7s & multiseed summary JSON \\
 Mixed E2E aggregate & $670$ & 90.4\% overall; 89.7\% supported & cost/time: \$0.3720; 428.6s & metadata JSON \\
 bnlearn backend / registry check & $400/80$ & 400/400 backend; 79/80 registry strict & backend \$0; registry \$0.0045 & JSON records \\
 QUITE comparison & $75$ & VSI 96.0\%; direct 36.0/60.0\%; PAL 24.0/88.0\% & Table~\ref{tab:quite_external_detail} & per-method JSON \\

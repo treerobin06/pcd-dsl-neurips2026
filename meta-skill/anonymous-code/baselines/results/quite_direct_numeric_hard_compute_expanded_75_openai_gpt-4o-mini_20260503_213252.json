@@ -1,0 +1,1938 @@
+{
+  "experiment": "QUITE direct natural-language probability baseline",
+  "model": "openai/gpt-4o-mini",
+  "config": {
+    "model": "openai/gpt-4o-mini",
+    "modes": [
+      "numeric"
+    ],
+    "limit_per_mode": null,
+    "networks": null,
+    "query_limit_per_network": null,
+    "preset": "hard-compute-expanded-75",
+    "limit_total": null,
+    "include_invalid_gold": false,
+    "sema": 8
+  },
+  "query_plan": {
+    "mildew0": [
+      4,
+      18,
+      5,
+      10,
+      19,
+      0,
+      1,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      20
+    ],
+    "insurance1": [
+      16,
+      18,
+      7,
+      9,
+      12,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      11,
+      13,
+      14,
+      15,
+      17
+    ],
+    "hailfinder0": [
+      5,
+      15,
+      7,
+      14,
+      8,
+      0,
+      1,
+      2,
+      3,
+      4,
+      6,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "water1": [
+      1,
+      7,
+      2,
+      3,
+      4,
+      0,
+      5,
+      6,
+      8,
+      9,
+      10
+    ],
+    "sachs1": [
+      9,
+      4,
+      2,
+      0,
+      6,
+      1,
+      3,
+      5,
+      7,
+      8
+    ]
+  },
+  "elapsed_sec": 12.798824071884155,
+  "summary": {
+    "overall": {
+      "n": 75,
+      "valid": 74,
+      "parse_errors": 1,
+      "within_0_01": 21,
+      "within_0_01_rate": 0.28,
+      "within_0_05": 27,
+      "within_0_05_rate": 0.36,
+      "mae": 0.24778418797297297,
+      "rmse": 0.41055280977665864
+    },
+    "numeric": {
+      "n": 75,
+      "valid": 74,
+      "parse_errors": 1,
+      "within_0_01": 21,
+      "within_0_01_rate": 0.28,
+      "within_0_05": 27,
+      "within_0_05_rate": 0.36,
+      "mae": 0.24778418797297297,
+      "rmse": 0.41055280977665864
+    }
+  },
+  "results": [
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 5,
+      "gold": 0.35967399,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.35967399,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The downward trend in meso-alpha indicates the combined vertical motion is downward, making neutral quasigeostrophic motion impossible."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The downward trend in meso-alpha indicates the combined vertical motion is downward, making neutral quasigeostrophic motion impossible.\"}",
+      "usage": {
+        "prompt_tokens": 5856,
+        "completion_tokens": 40,
+        "cost_usd": 0.0004704
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 15,
+      "gold": 0.15,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.15,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The downward subjective judgment indicates no chance of weak upward quasi-geostrophic motion."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The downward subjective judgment indicates no chance of weak upward quasi-geostrophic motion.\"}",
+      "usage": {
+        "prompt_tokens": 5855,
+        "completion_tokens": 32,
+        "cost_usd": 0.00046545
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 7,
+      "gold": 0.15,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.15,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A neutral 10.7mu vertical motion results in no chance of a strong upward subjective judgment."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A neutral 10.7mu vertical motion results in no chance of a strong upward subjective judgment.\"}",
+      "usage": {
+        "prompt_tokens": 5853,
+        "completion_tokens": 36,
+        "cost_usd": 0.00046755
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 14,
+      "gold": 0.055279943,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.055279943,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The combined vertical motion is downward, making a strong upward judgment impossible."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The combined vertical motion is downward, making a strong upward judgment impossible.\"}",
+      "usage": {
+        "prompt_tokens": 5850,
+        "completion_tokens": 30,
+        "cost_usd": 0.0004635
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 8,
+      "gold": 0.10872894,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.10872894,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The combined vertical motion being weakly upward rules out the possibility of the 10.7mu vertical motion being downward."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The combined vertical motion being weakly upward rules out the possibility of the 10.7mu vertical motion being downward.\"}",
+      "usage": {
+        "prompt_tokens": 5867,
+        "completion_tokens": 40,
+        "cost_usd": 0.00047205
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.02,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.02,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The combined vertical motion cannot be downward when the 10.7mu vertical motion is strongly upward."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The combined vertical motion cannot be downward when the 10.7mu vertical motion is strongly upward.\"}",
+      "usage": {
+        "prompt_tokens": 5864,
+        "completion_tokens": 36,
+        "cost_usd": 0.0004692
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.21,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.21,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The combined vertical motion is certain to be downward."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The combined vertical motion is certain to be downward.\"}",
+      "usage": {
+        "prompt_tokens": 5863,
+        "completion_tokens": 26,
+        "cost_usd": 0.00046305
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.60606061,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.60606061,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The combined vertical motion being strongly upward eliminates the possibility of a neutral subjective judgment."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The combined vertical motion being strongly upward eliminates the possibility of a neutral subjective judgment.\"}",
+      "usage": {
+        "prompt_tokens": 5873,
+        "completion_tokens": 32,
+        "cost_usd": 0.00090015
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.15652174,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.15652174,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The combined vertical motion being neutral implies no strong upward subjective judgment."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The combined vertical motion being neutral implies no strong upward subjective judgment.\"}",
+      "usage": {
+        "prompt_tokens": 5882,
+        "completion_tokens": 29,
+        "cost_usd": 0.0004677
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.27027027,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.27027027,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The combined vertical motion being neutral with downward quasi-geostrophic motion and weak upward subjective judgment makes neutral 10.7mu vertical motion impossible."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The combined vertical motion being neutral with downward quasi-geostrophic motion and weak upward subjective judgment makes neutral 10.7mu vertical motion impossible.\"}",
+      "usage": {
+        "prompt_tokens": 5876,
+        "completion_tokens": 45,
+        "cost_usd": 0.0004764
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 6,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The combined vertical motion cannot be strongly upward when both the 10.7mu vertical motion and subjective judgment are neutral, and the quasi-geostrophic motion is downward."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The combined vertical motion cannot be strongly upward when both the 10.7mu vertical motion and subjective judgment are neutral, and the quasi-geostrophic motion is downward.\"}",
+      "usage": {
+        "prompt_tokens": 5888,
+        "completion_tokens": 50,
+        "cost_usd": 0.0004812
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 9,
+      "gold": 0.17717931,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.17717931,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The downward trend in the area of meso-alpha indicates that the combined vertical motion cannot be weakly upward."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The downward trend in the area of meso-alpha indicates that the combined vertical motion cannot be weakly upward.\"}",
+      "usage": {
+        "prompt_tokens": 5868,
+        "completion_tokens": 38,
+        "cost_usd": 0.000471
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 10,
+      "gold": 1.0,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 1.0,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The combined vertical motion cannot be down when the 10.7mu vertical motion is strongly up."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The combined vertical motion cannot be down when the 10.7mu vertical motion is strongly up.\"}",
+      "usage": {
+        "prompt_tokens": 5874,
+        "completion_tokens": 36,
+        "cost_usd": 0.0004707
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 11,
+      "gold": 0.043478261,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.043478261,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The combined vertical motion being neutral implies no strong upward motion."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The combined vertical motion being neutral implies no strong upward motion.\"}",
+      "usage": {
+        "prompt_tokens": 5873,
+        "completion_tokens": 28,
+        "cost_usd": 0.00046575
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 12,
+      "gold": 0.215,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.215,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The combined vertical motion is certain to be strongly upward."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The combined vertical motion is certain to be strongly upward.\"}",
+      "usage": {
+        "prompt_tokens": 5866,
+        "completion_tokens": 27,
+        "cost_usd": 0.0004641
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 13,
+      "gold": 0.55555556,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.55555556,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The combined vertical motion being neutral contradicts the certainty of strong upward motion from the other conditions."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The combined vertical motion being neutral contradicts the certainty of strong upward motion from the other conditions.\"}",
+      "usage": {
+        "prompt_tokens": 5884,
+        "completion_tokens": 35,
+        "cost_usd": 0.0004716
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 16,
+      "gold": 0.002636998,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0001,
+      "abs_error": 0.0025369980000000004,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0001,
+        "brief_reason": "The absence of anti-theft devices results in a very low chance of theft."
+      },
+      "raw_response": "{\"probability\": 0.0001, \"brief_reason\": \"The absence of anti-theft devices results in a very low chance of theft.\"}",
+      "usage": {
+        "prompt_tokens": 7430,
+        "completion_tokens": 32,
+        "cost_usd": 0.0005865
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 18,
+      "gold": 0.77042959,
+      "reasoning_types": [],
+      "pred": 0.8,
+      "abs_error": 0.029570410000000047,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.8,
+        "brief_reason": "Cars valued at twenty thousand dollars are likely to have anti-theft devices."
+      },
+      "raw_response": "{\"probability\": 0.8, \"brief_reason\": \"Cars valued at twenty thousand dollars are likely to have anti-theft devices.\"}",
+      "usage": {
+        "prompt_tokens": 7434,
+        "completion_tokens": 30,
+        "cost_usd": 0.0005859
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 7,
+      "gold": 0.1,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.1,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Cars with anti-theft devices are not likely to have such low mileage."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Cars with anti-theft devices are not likely to have such low mileage.\"}",
+      "usage": {
+        "prompt_tokens": 7435,
+        "completion_tokens": 30,
+        "cost_usd": 0.00058605
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 9,
+      "gold": 0.997987,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.9999,
+      "abs_error": 0.0019130000000000535,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9999,
+        "brief_reason": "The car's value and lack of anti-theft devices result in a very low theft probability."
+      },
+      "raw_response": "{\"probability\": 0.9999, \"brief_reason\": \"The car's value and lack of anti-theft devices result in a very low theft probability.\"}",
+      "usage": {
+        "prompt_tokens": 7443,
+        "completion_tokens": 35,
+        "cost_usd": 0.00059025
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 12,
+      "gold": 0.99999776,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": null,
+      "abs_error": null,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": "probability_out_of_range",
+      "response_json": {
+        "probability": 99.9999,
+        "brief_reason": "The car is parked in a secure location."
+      },
+      "raw_response": "{\"probability\": 99.9999, \"brief_reason\": \"The car is parked in a secure location.\"}",
+      "usage": {
+        "prompt_tokens": 7441,
+        "completion_tokens": 25,
+        "cost_usd": 0.00057435
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15302481,
+      "reasoning_types": [
+        "causal",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.15302481,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A car with a value of fifty thousand dollars cannot be parked in a suburb without anti-theft devices."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A car with a value of fifty thousand dollars cannot be parked in a suburb without anti-theft devices.\"}",
+      "usage": {
+        "prompt_tokens": 7472,
+        "completion_tokens": 36,
+        "cost_usd": 0.0005856
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.27861336,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0002,
+      "abs_error": 0.27841336,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0002,
+        "brief_reason": "The car's value of ten thousand dollars has a very low chance of being stolen without anti-theft devices."
+      },
+      "raw_response": "{\"probability\": 0.0002, \"brief_reason\": \"The car's value of ten thousand dollars has a very low chance of being stolen without anti-theft devices.\"}",
+      "usage": {
+        "prompt_tokens": 7444,
+        "completion_tokens": 38,
+        "cost_usd": 0.0005826
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0003,
+      "abs_error": 0.0003,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0003,
+        "brief_reason": "The car's value and secure location yield a very low theft probability."
+      },
+      "raw_response": "{\"probability\": 0.0003, \"brief_reason\": \"The car's value and secure location yield a very low theft probability.\"}",
+      "usage": {
+        "prompt_tokens": 7453,
+        "completion_tokens": 30,
+        "cost_usd": 0.00057915
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.0002,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.02,
+      "abs_error": 0.0198,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.02,
+        "brief_reason": "The car's value of $20,000 and rural parking leads to a 0.02% chance of being stolen."
+      },
+      "raw_response": "{\"probability\": 0.02, \"brief_reason\": \"The car's value of $20,000 and rural parking leads to a 0.02% chance of being stolen.\"}",
+      "usage": {
+        "prompt_tokens": 7464,
+        "completion_tokens": 40,
+        "cost_usd": 0.0005868
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.96770194,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.96770194,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The car's value and lack of anti-theft devices indicate a very low likelihood of being in the city."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The car's value and lack of anti-theft devices indicate a very low likelihood of being in the city.\"}",
+      "usage": {
+        "prompt_tokens": 7463,
+        "completion_tokens": 37,
+        "cost_usd": 0.00058485
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 5,
+      "gold": 0.1931662,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.1931662,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A car valued at one million dollars has a 50% chance of having anti-theft devices, but the high likelihood of being stolen suggests it likely does not."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A car valued at one million dollars has a 50% chance of having anti-theft devices, but the high likelihood of being stolen suggests it likely does not.\"}",
+      "usage": {
+        "prompt_tokens": 7466,
+        "completion_tokens": 48,
+        "cost_usd": 0.0006015
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 6,
+      "gold": 0.026969748,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.026969748,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A car with 5000 mileage is unlikely to be parked in a suburban area given the provided probabilities."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A car with 5000 mileage is unlikely to be parked in a suburban area given the provided probabilities.\"}",
+      "usage": {
+        "prompt_tokens": 7444,
+        "completion_tokens": 36,
+        "cost_usd": 0.0005814
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 8,
+      "gold": 0.089908557,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.089908557,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A car with anti-theft devices is highly unlikely to be in a rural area."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A car with anti-theft devices is highly unlikely to be in a rural area.\"}",
+      "usage": {
+        "prompt_tokens": 7439,
+        "completion_tokens": 32,
+        "cost_usd": 0.00058785
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 10,
+      "gold": 0.058412601,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.058412601,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A car with over a million miles cannot be valued at 50 thousand dollars."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A car with over a million miles cannot be valued at 50 thousand dollars.\"}",
+      "usage": {
+        "prompt_tokens": 7444,
+        "completion_tokens": 31,
+        "cost_usd": 0.0005784
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 11,
+      "gold": 0.15725594,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.15725594,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A car valued at one million dollars is unlikely to have a secure home base."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A car valued at one million dollars is unlikely to have a secure home base.\"}",
+      "usage": {
+        "prompt_tokens": 7451,
+        "completion_tokens": 31,
+        "cost_usd": 0.00057945
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 13,
+      "gold": 0.43177782,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.43177782,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A car valued at fifty thousand dollars cannot have a mileage of twenty thousand without anti-theft devices."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A car valued at fifty thousand dollars cannot have a mileage of twenty thousand without anti-theft devices.\"}",
+      "usage": {
+        "prompt_tokens": 7466,
+        "completion_tokens": 35,
+        "cost_usd": 0.0005841
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 14,
+      "gold": 0.999999,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0001,
+      "abs_error": 0.999899,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0001,
+        "brief_reason": "Even with anti-theft devices, a million-dollar car has a tiny chance of being stolen."
+      },
+      "raw_response": "{\"probability\": 0.0001, \"brief_reason\": \"Even with anti-theft devices, a million-dollar car has a tiny chance of being stolen.\"}",
+      "usage": {
+        "prompt_tokens": 7441,
+        "completion_tokens": 35,
+        "cost_usd": 0.00058035
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 15,
+      "gold": 0.10000002,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.10000002,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A car valued at one million cannot have a mileage of five thousand."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A car valued at one million cannot have a mileage of five thousand.\"}",
+      "usage": {
+        "prompt_tokens": 7465,
+        "completion_tokens": 29,
+        "cost_usd": 0.00058035
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 17,
+      "gold": 0.06778968,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.06778968,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A car without anti-theft devices cannot be valued at fifty thousand dollars."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A car without anti-theft devices cannot be valued at fifty thousand dollars.\"}",
+      "usage": {
+        "prompt_tokens": 7434,
+        "completion_tokens": 30,
+        "cost_usd": 0.0005859
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.079972639,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.079972639,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "0.35 kg/m2 of biomass is not possible at 13.0\u00b0C."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"0.35 kg/m2 of biomass is not possible at 13.0\u00b0C.\"}",
+      "usage": {
+        "prompt_tokens": 9592,
+        "completion_tokens": 34,
+        "cost_usd": 0.0007488
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 18,
+      "gold": 0.133,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.133,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The temperature cannot be 13.0\u00b0C with radiation between 200 and 249 MJ/m2."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The temperature cannot be 13.0\u00b0C with radiation between 200 and 249 MJ/m2.\"}",
+      "usage": {
+        "prompt_tokens": 9589,
+        "completion_tokens": 37,
+        "cost_usd": 0.00075015
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 5,
+      "gold": 0.467,
+      "reasoning_types": [],
+      "pred": 0.467,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.467,
+        "brief_reason": "The temperature of 13\u00b0C has a 46.7% chance of corresponding to radiation levels between 150 and 199 MJ/m2."
+      },
+      "raw_response": "{\"probability\": 0.467, \"brief_reason\": \"The temperature of 13\u00b0C has a 46.7% chance of corresponding to radiation levels between 150 and 199 MJ/m2.\"}",
+      "usage": {
+        "prompt_tokens": 9583,
+        "completion_tokens": 45,
+        "cost_usd": 0.00075405
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 10,
+      "gold": 0.61192722,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.61192722,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "No scenarios with 0.80 kg/m2 of biomass exist for that temperature range."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"No scenarios with 0.80 kg/m2 of biomass exist for that temperature range.\"}",
+      "usage": {
+        "prompt_tokens": 9597,
+        "completion_tokens": 34,
+        "cost_usd": 0.00074955
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 19,
+      "gold": 0.70098579,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.70098579,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "0.40 kg/m2 of biomass is not possible with the given conditions."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"0.40 kg/m2 of biomass is not possible with the given conditions.\"}",
+      "usage": {
+        "prompt_tokens": 9597,
+        "completion_tokens": 32,
+        "cost_usd": 0.00074835
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.69559087,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.69559087,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The evidence contradicts the conditions for that temperature range."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The evidence contradicts the conditions for that temperature range.\"}",
+      "usage": {
+        "prompt_tokens": 9608,
+        "completion_tokens": 27,
+        "cost_usd": 0.0013134
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "0.20 kg/m2 is not listed as a possible biomass outcome for the given conditions."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"0.20 kg/m2 is not listed as a possible biomass outcome for the given conditions.\"}",
+      "usage": {
+        "prompt_tokens": 9608,
+        "completion_tokens": 35,
+        "cost_usd": 0.0014622
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 6,
+      "gold": 0.08534845,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.08534845,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "There is no data for biomass probabilities with radiation exceeding 250 MJ/m2."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"There is no data for biomass probabilities with radiation exceeding 250 MJ/m2.\"}",
+      "usage": {
+        "prompt_tokens": 9592,
+        "completion_tokens": 32,
+        "cost_usd": 0.0007476
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 7,
+      "gold": 0.067,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.067,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The premises state that 6.7% of the time radiation falls below 150 MJ/m2, but this is not applicable at 13\u00b0C."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The premises state that 6.7% of the time radiation falls below 150 MJ/m2, but this is not applicable at 13\u00b0C.\"}",
+      "usage": {
+        "prompt_tokens": 9585,
+        "completion_tokens": 47,
+        "cost_usd": 0.00075555
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 8,
+      "gold": 0.00492324,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.00492324,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "There is no probability distribution for 0.90 kg/m2 with radiation over 250 MJ/m2."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"There is no probability distribution for 0.90 kg/m2 with radiation over 250 MJ/m2.\"}",
+      "usage": {
+        "prompt_tokens": 9592,
+        "completion_tokens": 38,
+        "cost_usd": 0.0007512
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 9,
+      "gold": 0.567,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.567,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The temperature cannot be between 13.0 and 14.9 \u00b0C with the given radiation evidence."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The temperature cannot be between 13.0 and 14.9 \u00b0C with the given radiation evidence.\"}",
+      "usage": {
+        "prompt_tokens": 9595,
+        "completion_tokens": 38,
+        "cost_usd": 0.00075165
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 11,
+      "gold": 0.06841598,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.06841598,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "No scenarios with 17\u00b0C yield a chance for 0.40 kg/m2 of biomass."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"No scenarios with 17\u00b0C yield a chance for 0.40 kg/m2 of biomass.\"}",
+      "usage": {
+        "prompt_tokens": 9586,
+        "completion_tokens": 36,
+        "cost_usd": 0.0007491
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 12,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "There are no probabilities for 0.95 kg/m2 of biomass with radiation in that range."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"There are no probabilities for 0.95 kg/m2 of biomass with radiation in that range.\"}",
+      "usage": {
+        "prompt_tokens": 9597,
+        "completion_tokens": 36,
+        "cost_usd": 0.00146115
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 13,
+      "gold": 0.030202654,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.030202654,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "There are no biomass probabilities listed for 0.35 kg/m2 at 17\u00b0C."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"There are no biomass probabilities listed for 0.35 kg/m2 at 17\u00b0C.\"}",
+      "usage": {
+        "prompt_tokens": 9589,
+        "completion_tokens": 35,
+        "cost_usd": 0.00074895
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 14,
+      "gold": 0.11023269,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.11023269,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The temperature cannot be 13.0\u00b0C given the biomass and radiation conditions."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The temperature cannot be 13.0\u00b0C given the biomass and radiation conditions.\"}",
+      "usage": {
+        "prompt_tokens": 9607,
+        "completion_tokens": 32,
+        "cost_usd": 0.00074985
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 15,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Photosynthetic biomass is always present at 17\u00b0C."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Photosynthetic biomass is always present at 17\u00b0C.\"}",
+      "usage": {
+        "prompt_tokens": 9582,
+        "completion_tokens": 27,
+        "cost_usd": 0.0014535
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 16,
+      "gold": 0.067,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.067,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "At 17 degrees Celsius, radiation levels below 150 MJ/m2 are not possible according to the premises."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"At 17 degrees Celsius, radiation levels below 150 MJ/m2 are not possible according to the premises.\"}",
+      "usage": {
+        "prompt_tokens": 9585,
+        "completion_tokens": 38,
+        "cost_usd": 0.00075015
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 17,
+      "gold": 0.467,
+      "reasoning_types": [],
+      "pred": 0.467,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.467,
+        "brief_reason": "The radiation distribution indicates a 46.7% chance for this range."
+      },
+      "raw_response": "{\"probability\": 0.467, \"brief_reason\": \"The radiation distribution indicates a 46.7% chance for this range.\"}",
+      "usage": {
+        "prompt_tokens": 9583,
+        "completion_tokens": 31,
+        "cost_usd": 0.00074565
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 20,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "There is no probability of having 0.25 kg/m2 of biomass with radiation between 200 and 249 MJ/m2."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"There is no probability of having 0.25 kg/m2 of biomass with radiation between 200 and 249 MJ/m2.\"}",
+      "usage": {
+        "prompt_tokens": 9595,
+        "completion_tokens": 43,
+        "cost_usd": 0.00075465
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 9,
+      "gold": 0.88394073,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.88394073,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Raf cannot be high if MEK is high."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Raf cannot be high if MEK is high.\"}",
+      "usage": {
+        "prompt_tokens": 5130,
+        "completion_tokens": 26,
+        "cost_usd": 0.0004683
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.24586071,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.24586071,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Akt being high is inconsistent with low PKC, leading to no probability for Jnk being average."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Akt being high is inconsistent with low PKC, leading to no probability for Jnk being average.\"}",
+      "usage": {
+        "prompt_tokens": 5141,
+        "completion_tokens": 35,
+        "cost_usd": 0.00040815
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.6271779,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.6271779,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Low Mek activity strongly suggests low Erk levels."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Low Mek activity strongly suggests low Erk levels.\"}",
+      "usage": {
+        "prompt_tokens": 5149,
+        "completion_tokens": 24,
+        "cost_usd": 0.00040275
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15703602,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.15703602,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Akt being average with low ERK levels indicates low JNK activation."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Akt being average with low ERK levels indicates low JNK activation.\"}",
+      "usage": {
+        "prompt_tokens": 5140,
+        "completion_tokens": 29,
+        "cost_usd": 0.0004044
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 6,
+      "gold": 1.0,
+      "reasoning_types": [
+        "observation"
+      ],
+      "pred": 0.0,
+      "abs_error": 1.0,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "PKC cannot be high as it is already stated to be high."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"PKC cannot be high as it is already stated to be high.\"}",
+      "usage": {
+        "prompt_tokens": 5134,
+        "completion_tokens": 29,
+        "cost_usd": 0.0004131
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.056300659,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.0489,
+      "abs_error": 0.007400659000000004,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0489,
+        "brief_reason": "Erk is most likely to be average given the average levels of PKA and PKC."
+      },
+      "raw_response": "{\"probability\": 0.0489, \"brief_reason\": \"Erk is most likely to be average given the average levels of PKA and PKC.\"}",
+      "usage": {
+        "prompt_tokens": 5187,
+        "completion_tokens": 35,
+        "cost_usd": 0.00041505
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.96901669,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.96901669,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "PKA being high and Raf being low makes PKC unlikely to be low."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"PKA being high and Raf being low makes PKC unlikely to be low.\"}",
+      "usage": {
+        "prompt_tokens": 5160,
+        "completion_tokens": 31,
+        "cost_usd": 0.0004086
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 5,
+      "gold": 0.11070896,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.11070896,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Given the low levels of PKA and PKC, Raf cannot be average."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Given the low levels of PKA and PKC, Raf cannot be average.\"}",
+      "usage": {
+        "prompt_tokens": 5181,
+        "completion_tokens": 31,
+        "cost_usd": 0.00047895
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 7,
+      "gold": 0.0,
+      "reasoning_types": [
+        "observation"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "PKA cannot be high given its low level."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"PKA cannot be high given its low level.\"}",
+      "usage": {
+        "prompt_tokens": 5179,
+        "completion_tokens": 25,
+        "cost_usd": 0.00047505
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 8,
+      "gold": 0.3493,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.3493,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The conditions indicate a high likelihood of P38 being low."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The conditions indicate a high likelihood of P38 being low.\"}",
+      "usage": {
+        "prompt_tokens": 5190,
+        "completion_tokens": 27,
+        "cost_usd": 0.0004203
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "CBODN cannot be 20 mg/L at 12:00 if it was measured as 10 mg/L at 12:15."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"CBODN cannot be 20 mg/L at 12:00 if it was measured as 10 mg/L at 12:15.\"}",
+      "usage": {
+        "prompt_tokens": 8469,
+        "completion_tokens": 45,
+        "cost_usd": 0.00067335
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 7,
+      "gold": 0.0078,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0078,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "CBODN cannot be 15 mg/L given it was 10 mg/L at 12:00."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"CBODN cannot be 15 mg/L given it was 10 mg/L at 12:00.\"}",
+      "usage": {
+        "prompt_tokens": 8469,
+        "completion_tokens": 38,
+        "cost_usd": 0.00066915
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.0,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "CBODN cannot be 25 mg/L based on the premises."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"CBODN cannot be 25 mg/L based on the premises.\"}",
+      "usage": {
+        "prompt_tokens": 8463,
+        "completion_tokens": 30,
+        "cost_usd": 0.00066345
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "CBODN being 10 mg/L at 12:15 contradicts the conditions for 6 mg/L."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"CBODN being 10 mg/L at 12:15 contradicts the conditions for 6 mg/L.\"}",
+      "usage": {
+        "prompt_tokens": 8467,
+        "completion_tokens": 39,
+        "cost_usd": 0.00066945
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 1.0,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 1.0,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "CBODN cannot be 15 mg/L at 12:15 if it was 10 mg/L at 12:00."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"CBODN cannot be 15 mg/L at 12:15 if it was 10 mg/L at 12:00.\"}",
+      "usage": {
+        "prompt_tokens": 8488,
+        "completion_tokens": 43,
+        "cost_usd": 0.000675
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.0,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "CBODN is certainly 10 mg/L at 12:00."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"CBODN is certainly 10 mg/L at 12:00.\"}",
+      "usage": {
+        "prompt_tokens": 8468,
+        "completion_tokens": 31,
+        "cost_usd": 0.0006648
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 5,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "CBODN cannot be 20 mg/L at 12:00 given the evidence."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"CBODN cannot be 20 mg/L at 12:00 given the evidence.\"}",
+      "usage": {
+        "prompt_tokens": 8498,
+        "completion_tokens": 34,
+        "cost_usd": 0.0006711
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 6,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "CBODN being 10 mg/L at 12:15 contradicts CNON being 6 mg/L at 12:00."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"CBODN being 10 mg/L at 12:15 contradicts CNON being 6 mg/L at 12:00.\"}",
+      "usage": {
+        "prompt_tokens": 8471,
+        "completion_tokens": 44,
+        "cost_usd": 0.00067305
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 8,
+      "gold": 1.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 1.0,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "CBODN being 10 mg/L at 12:15 contradicts the conditions for CNON being 4 mg/L."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"CBODN being 10 mg/L at 12:15 contradicts the conditions for CNON being 4 mg/L.\"}",
+      "usage": {
+        "prompt_tokens": 8467,
+        "completion_tokens": 42,
+        "cost_usd": 0.00067125
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 9,
+      "gold": 0.0,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "CBODN is certainly 10 mg/L at 12:00."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"CBODN is certainly 10 mg/L at 12:00.\"}",
+      "usage": {
+        "prompt_tokens": 8471,
+        "completion_tokens": 31,
+        "cost_usd": 0.00066525
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 10,
+      "gold": 1.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 1.0,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "CBODN being 15 mg/L at 12:15 eliminates the possibility of CNON being 4 mg/L at 12:00."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"CBODN being 15 mg/L at 12:15 eliminates the possibility of CNON being 4 mg/L at 12:00.\"}",
+      "usage": {
+        "prompt_tokens": 8472,
+        "completion_tokens": 46,
+        "cost_usd": 0.0006744
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T13:32:52Z",
+  "_meta": {
+    "prompt_tokens": 562477,
+    "completion_tokens": 2592,
+    "total_cost_usd": 0.047651550000000015,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "fe83209f",
+    "timestamp_utc": "2026-05-03T13:32:52.161630+00:00",
+    "script": "baselines/run_quite_direct_baseline.py",
+    "n_total": 75,
+    "modes": [
+      "numeric"
+    ],
+    "preset": "hard-compute-expanded-75",
+    "limit_total": null
+  }
+}

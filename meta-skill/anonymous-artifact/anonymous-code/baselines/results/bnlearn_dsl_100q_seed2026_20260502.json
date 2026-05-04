@@ -1,0 +1,71 @@
+{
+  "asia": {
+    "correct": 100,
+    "total": 100,
+    "accuracy": 1.0,
+    "ci_lo": 0.9630065017930143,
+    "ci_hi": 1,
+    "skipped_invalid_gold": 1,
+    "skipped_zero_evidence": 0,
+    "errors": []
+  },
+  "child": {
+    "correct": 100,
+    "total": 100,
+    "accuracy": 1.0,
+    "ci_lo": 0.9630065017930143,
+    "ci_hi": 1,
+    "skipped_invalid_gold": 0,
+    "skipped_zero_evidence": 1,
+    "errors": []
+  },
+  "insurance": {
+    "correct": 100,
+    "total": 100,
+    "accuracy": 1.0,
+    "ci_lo": 0.9630065017930143,
+    "ci_hi": 1,
+    "skipped_invalid_gold": 1,
+    "skipped_zero_evidence": 0,
+    "errors": []
+  },
+  "alarm": {
+    "correct": 100,
+    "total": 100,
+    "accuracy": 1.0,
+    "ci_lo": 0.9630065017930143,
+    "ci_hi": 1,
+    "skipped_invalid_gold": 0,
+    "skipped_zero_evidence": 0,
+    "errors": []
+  },
+  "_overall": {
+    "correct": 400,
+    "total": 400,
+    "accuracy": 1.0,
+    "ci_lo": 0.9904877056657034,
+    "ci_hi": 0.9999999999999999,
+    "skipped_invalid_gold": 2,
+    "skipped_zero_evidence": 1,
+    "queries_per_net": 100,
+    "seed": 2026,
+    "networks": [
+      "asia",
+      "child",
+      "insurance",
+      "alarm"
+    ]
+  },
+  "_meta": {
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_cost_usd": 0.0,
+    "model_id": "deterministic-dsl",
+    "git_commit": "57f6e301",
+    "timestamp_utc": "2026-05-02T15:57:43.369076+00:00",
+    "benchmark": "bnlearn",
+    "reference": "pgmpy.VariableElimination",
+    "zero_probability_evidence_policy": "skip",
+    "command": "baselines/verify_bnlearn_dsl_100.py"
+  }
+}

@@ -1,0 +1,216 @@
+{
+  "experiment": "structured_output_direct_answer",
+  "model": "openai/gpt-4o-mini",
+  "elapsed_sec": 6.560301065444946,
+  "config": {
+    "model": "openai/gpt-4o-mini",
+    "n_nb": 3,
+    "n_hmm": 3,
+    "n_blind": 0,
+    "blind_depth": 10,
+    "nb_base_seed": 7000,
+    "hmm_base_seed": 8000,
+    "blind_seed": 2026,
+    "shuffle_seed": 2026,
+    "sema": 3
+  },
+  "summary": {
+    "hmm": {
+      "n": 3,
+      "correct": 0,
+      "accuracy": 0.0,
+      "wilson_95ci": [
+        0.0,
+        0.5615060804490177
+      ],
+      "parse_failures": 0
+    },
+    "nb": {
+      "n": 3,
+      "correct": 2,
+      "accuracy": 0.6666666666666666,
+      "wilson_95ci": [
+        0.2076549551264879,
+        0.9385096847238394
+      ],
+      "parse_failures": 0
+    },
+    "overall": {
+      "n": 6,
+      "correct": 2,
+      "accuracy": 0.3333333333333333,
+      "wilson_95ci": [
+        0.09676933255921683,
+        0.7000116786584712
+      ]
+    }
+  },
+  "results": [
+    {
+      "family": "hmm",
+      "i": 1,
+      "seed": 8001,
+      "pred": "S1",
+      "gold": "S0",
+      "ok": false,
+      "parse_error": null,
+      "response_json": {
+        "family": "hmm_forward",
+        "answer": "S1",
+        "posterior": {
+          "S1": 0.25,
+          "S0": 0.2,
+          "S2": 0.15,
+          "S3": 0.4
+        },
+        "brief_reason": "After applying the forward algorithm, S1 has the highest probability at the final time step."
+      },
+      "raw_response": "{\n  \"family\": \"hmm_forward\",\n  \"answer\": \"S1\",\n  \"posterior\": {\n    \"S1\": 0.25,\n    \"S0\": 0.20,\n    \"S2\": 0.15,\n    \"S3\": 0.40\n  },\n  \"brief_reason\": \"After applying the forward algorithm, S1 has the highest probability at the final time step.\"\n}",
+      "usage": {
+        "prompt_tokens": 828,
+        "completion_tokens": 92,
+        "cost_usd": 0.0001794
+      }
+    },
+    {
+      "family": "nb",
+      "i": 1,
+      "seed": 7001,
+      "pred": "Asthma Exacerbation",
+      "gold": "Asthma Exacerbation",
+      "ok": true,
+      "parse_error": null,
+      "response_json": {
+        "family": "naive_bayes",
+        "answer": "Asthma Exacerbation",
+        "posterior": {
+          "Sinusitis": 0.005,
+          "Asthma Exacerbation": 0.086,
+          "Influenza": 0.014,
+          "Pneumonia": 0.002
+        },
+        "brief_reason": "Calculated posterior probabilities using prior probabilities and likelihoods for observed symptoms. Asthma Exacerbation had the highest posterior probability."
+      },
+      "raw_response": "{\n  \"family\": \"naive_bayes\",\n  \"answer\": \"Asthma Exacerbation\",\n  \"posterior\": {\n    \"Sinusitis\": 0.005,\n    \"Asthma Exacerbation\": 0.086,\n    \"Influenza\": 0.014,\n    \"Pneumonia\": 0.002\n  },\n  \"brief_reason\": \"Calculated posterior probabilities using prior probabilities and likelihoods for observed symptoms. Asthma Exacerbation had the highest posterior probability.\"\n}",
+      "usage": {
+        "prompt_tokens": 884,
+        "completion_tokens": 111,
+        "cost_usd": 0.0001992
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 0,
+      "seed": 8000,
+      "pred": "S1",
+      "gold": "S0",
+      "ok": false,
+      "parse_error": null,
+      "response_json": {
+        "family": "hmm_forward",
+        "answer": "S1",
+        "posterior": {
+          "S2": 0.15,
+          "S1": 0.35,
+          "S3": 0.1,
+          "S0": 0.1
+        },
+        "brief_reason": "After applying the forward algorithm, S1 has the highest probability at the final time step based on the observations and transition/emission probabilities."
+      },
+      "raw_response": "{\n  \"family\": \"hmm_forward\",\n  \"answer\": \"S1\",\n  \"posterior\": {\n    \"S2\": 0.15,\n    \"S1\": 0.35,\n    \"S3\": 0.10,\n    \"S0\": 0.10\n  },\n  \"brief_reason\": \"After applying the forward algorithm, S1 has the highest probability at the final time step based on the observations and transition/emission probabilities.\"\n}",
+      "usage": {
+        "prompt_tokens": 831,
+        "completion_tokens": 101,
+        "cost_usd": 0.00018525
+      }
+    },
+    {
+      "family": "hmm",
+      "i": 2,
+      "seed": 8002,
+      "pred": "S2",
+      "gold": "S3",
+      "ok": false,
+      "parse_error": null,
+      "response_json": {
+        "family": "hmm_forward",
+        "answer": "S2",
+        "posterior": {
+          "S0": 0.045,
+          "S1": 0.063,
+          "S2": 0.215,
+          "S3": 0.177
+        },
+        "brief_reason": "After applying the forward algorithm, S2 has the highest probability at the final time step."
+      },
+      "raw_response": "{\n  \"family\": \"hmm_forward\",\n  \"answer\": \"S2\",\n  \"posterior\": {\n    \"S0\": 0.045,\n    \"S1\": 0.063,\n    \"S2\": 0.215,\n    \"S3\": 0.177\n  },\n  \"brief_reason\": \"After applying the forward algorithm, S2 has the highest probability at the final time step.\"\n}",
+      "usage": {
+        "prompt_tokens": 854,
+        "completion_tokens": 91,
+        "cost_usd": 0.0001827
+      }
+    },
+    {
+      "family": "nb",
+      "i": 2,
+      "seed": 7002,
+      "pred": "Asthma Exacerbation",
+      "gold": "Asthma Exacerbation",
+      "ok": true,
+      "parse_error": null,
+      "response_json": {
+        "family": "naive_bayes",
+        "answer": "Asthma Exacerbation",
+        "posterior": {
+          "Gastroenteritis": 0.005,
+          "Asthma Exacerbation": 0.086,
+          "Sinusitis": 0.014,
+          "Common Cold": 0.021
+        },
+        "brief_reason": "Calculated posterior probabilities using prior probabilities and likelihoods for observed symptoms. Asthma Exacerbation had the highest posterior probability."
+      },
+      "raw_response": "{\n  \"family\": \"naive_bayes\",\n  \"answer\": \"Asthma Exacerbation\",\n  \"posterior\": {\n    \"Gastroenteritis\": 0.005,\n    \"Asthma Exacerbation\": 0.086,\n    \"Sinusitis\": 0.014,\n    \"Common Cold\": 0.021\n  },\n  \"brief_reason\": \"Calculated posterior probabilities using prior probabilities and likelihoods for observed symptoms. Asthma Exacerbation had the highest posterior probability.\"\n}",
+      "usage": {
+        "prompt_tokens": 879,
+        "completion_tokens": 111,
+        "cost_usd": 0.00019845
+      }
+    },
+    {
+      "family": "nb",
+      "i": 0,
+      "seed": 7000,
+      "pred": "Bronchitis",
+      "gold": "Pneumonia",
+      "ok": false,
+      "parse_error": null,
+      "response_json": {
+        "family": "naive_bayes",
+        "answer": "Bronchitis",
+        "posterior": {
+          "Pneumonia": 0.0001,
+          "Bronchitis": 0.0004,
+          "Gastroenteritis": 0.0001,
+          "Common Cold": 0.0001
+        },
+        "brief_reason": "Calculated posterior probabilities using prior probabilities and likelihoods for observed symptoms. Bronchitis had the highest posterior probability given the symptom profile."
+      },
+      "raw_response": "{\n  \"family\": \"naive_bayes\",\n  \"answer\": \"Bronchitis\",\n  \"posterior\": {\n    \"Pneumonia\": 0.0001,\n    \"Bronchitis\": 0.0004,\n    \"Gastroenteritis\": 0.0001,\n    \"Common Cold\": 0.0001\n  },\n  \"brief_reason\": \"Calculated posterior probabilities using prior probabilities and likelihoods for observed symptoms. Bronchitis had the highest posterior probability given the symptom profile.\"\n}",
+      "usage": {
+        "prompt_tokens": 868,
+        "completion_tokens": 110,
+        "cost_usd": 0.0001962
+      }
+    }
+  ],
+  "_meta": {
+    "prompt_tokens": 5144,
+    "completion_tokens": 616,
+    "total_cost_usd": 0.0011412,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "bc78651d",
+    "timestamp_utc": "2026-05-03T22:38:12.865685+00:00",
+    "script": "baselines/run_structured_direct_baseline.py",
+    "n_total": 6
+  }
+}

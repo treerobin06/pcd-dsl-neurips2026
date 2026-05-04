@@ -1,0 +1,231 @@
+{
+  "experiment": "paired adversarial structured direct baseline, five-seed summary",
+  "model": "openai/gpt-4o-mini",
+  "paired_against": "adversarial_nl_e2e_multiseed_summary_20260503_183611.json",
+  "artifacts": [
+    {
+      "artifact": "baselines/results/structured_direct_openai_gpt-4o-mini_20260503_224425.json",
+      "nb_base_seed": 7000,
+      "hmm_base_seed": 8000,
+      "nb": {
+        "n": 120,
+        "correct": 24,
+        "accuracy": 0.2,
+        "wilson_95ci": [
+          0.13824380919983048,
+          0.2803683534337273
+        ],
+        "parse_failures": 57
+      },
+      "hmm": {
+        "n": 100,
+        "correct": 40,
+        "accuracy": 0.4,
+        "wilson_95ci": [
+          0.3093997461136028,
+          0.4979992153815976
+        ],
+        "parse_failures": 0
+      },
+      "overall": {
+        "n": 220,
+        "correct": 64,
+        "accuracy": 0.2909090909090909,
+        "wilson_95ci": [
+          0.23488965718838217,
+          0.3541054179004305
+        ]
+      },
+      "cost_usd": 0.07177965,
+      "prompt_tokens": 188955,
+      "completion_tokens": 72394,
+      "elapsed_sec": 90.91461777687073
+    },
+    {
+      "artifact": "baselines/results/structured_direct_openai_gpt-4o-mini_20260503_224533.json",
+      "nb_base_seed": 8000,
+      "hmm_base_seed": 9000,
+      "nb": {
+        "n": 120,
+        "correct": 19,
+        "accuracy": 0.15833333333333333,
+        "wilson_95ci": [
+          0.10376896007675636,
+          0.2340948918114622
+        ],
+        "parse_failures": 63
+      },
+      "hmm": {
+        "n": 100,
+        "correct": 36,
+        "accuracy": 0.36,
+        "wilson_95ci": [
+          0.2727107459049014,
+          0.45764780018837914
+        ],
+        "parse_failures": 0
+      },
+      "overall": {
+        "n": 220,
+        "correct": 55,
+        "accuracy": 0.25,
+        "wilson_95ci": [
+          0.19740196577039384,
+          0.311179102270578
+        ]
+      },
+      "cost_usd": 0.0832044,
+      "prompt_tokens": 188916,
+      "completion_tokens": 91445,
+      "elapsed_sec": 67.61710166931152
+    },
+    {
+      "artifact": "baselines/results/structured_direct_openai_gpt-4o-mini_20260503_224725.json",
+      "nb_base_seed": 9000,
+      "hmm_base_seed": 10000,
+      "nb": {
+        "n": 120,
+        "correct": 17,
+        "accuracy": 0.14166666666666666,
+        "wilson_95ci": [
+          0.09036804031591959,
+          0.21519648727416324
+        ],
+        "parse_failures": 63
+      },
+      "hmm": {
+        "n": 100,
+        "correct": 30,
+        "accuracy": 0.3,
+        "wilson_95ci": [
+          0.21894753866228117,
+          0.39585038432811953
+        ],
+        "parse_failures": 0
+      },
+      "overall": {
+        "n": 220,
+        "correct": 47,
+        "accuracy": 0.21363636363636362,
+        "wilson_95ci": [
+          0.16463139306439356,
+          0.2724705576007196
+        ]
+      },
+      "cost_usd": 0.0909222,
+      "prompt_tokens": 188756,
+      "completion_tokens": 104348,
+      "elapsed_sec": 110.87982201576233
+    },
+    {
+      "artifact": "baselines/results/structured_direct_openai_gpt-4o-mini_20260503_224905.json",
+      "nb_base_seed": 10000,
+      "hmm_base_seed": 11000,
+      "nb": {
+        "n": 120,
+        "correct": 19,
+        "accuracy": 0.15833333333333333,
+        "wilson_95ci": [
+          0.10376896007675636,
+          0.2340948918114622
+        ],
+        "parse_failures": 60
+      },
+      "hmm": {
+        "n": 100,
+        "correct": 28,
+        "accuracy": 0.28,
+        "wilson_95ci": [
+          0.2013955916759837,
+          0.37488212361345724
+        ],
+        "parse_failures": 0
+      },
+      "overall": {
+        "n": 220,
+        "correct": 47,
+        "accuracy": 0.21363636363636362,
+        "wilson_95ci": [
+          0.16463139306439356,
+          0.2724705576007196
+        ]
+      },
+      "cost_usd": 0.08403735,
+      "prompt_tokens": 188669,
+      "completion_tokens": 92895,
+      "elapsed_sec": 99.76575684547424
+    },
+    {
+      "artifact": "baselines/results/structured_direct_openai_gpt-4o-mini_20260503_225039.json",
+      "nb_base_seed": 11000,
+      "hmm_base_seed": 12000,
+      "nb": {
+        "n": 120,
+        "correct": 30,
+        "accuracy": 0.25,
+        "wilson_95ci": [
+          0.1810971138452223,
+          0.33441302168274245
+        ],
+        "parse_failures": 51
+      },
+      "hmm": {
+        "n": 100,
+        "correct": 28,
+        "accuracy": 0.28,
+        "wilson_95ci": [
+          0.2013955916759837,
+          0.37488212361345724
+        ],
+        "parse_failures": 0
+      },
+      "overall": {
+        "n": 220,
+        "correct": 58,
+        "accuracy": 0.2636363636363636,
+        "wilson_95ci": [
+          0.20982941715193953,
+          0.3255563199049792
+        ]
+      },
+      "cost_usd": 0.07795455,
+      "prompt_tokens": 188509,
+      "completion_tokens": 82797,
+      "elapsed_sec": 93.48535919189453
+    }
+  ],
+  "pooled": {
+    "nb": {
+      "n": 600,
+      "correct": 109,
+      "rate": 0.18166666666666667,
+      "wilson_95ci": [
+        0.15287157635153198,
+        0.21451218786742882
+      ]
+    },
+    "hmm": {
+      "n": 500,
+      "correct": 162,
+      "rate": 0.324,
+      "wilson_95ci": [
+        0.2844545847826361,
+        0.3662292809402419
+      ]
+    },
+    "overall": {
+      "n": 1100,
+      "correct": 271,
+      "rate": 0.24636363636363637,
+      "wilson_95ci": [
+        0.2218112348936631,
+        0.27268145318767023
+      ]
+    }
+  },
+  "total_cost_usd": 0.40789814999999996,
+  "prompt_tokens": 943805,
+  "completion_tokens": 443879,
+  "elapsed_sec_sum": 462.66265749931335,
+  "timestamp": "2026-05-03T22:51:41.052443+00:00"
+}

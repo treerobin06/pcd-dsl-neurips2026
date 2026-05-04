@@ -1,0 +1,3813 @@
+{
+  "experiment": "QUITE registered hard-compute E2E",
+  "model": "openai/gpt-4o-mini",
+  "config": {
+    "model": "openai/gpt-4o-mini",
+    "preset": "hard-compute-expanded-75",
+    "limit_total": null,
+    "sema": 8
+  },
+  "query_plan": {
+    "mildew0": [
+      4,
+      18,
+      5,
+      10,
+      19,
+      0,
+      1,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      20
+    ],
+    "insurance1": [
+      16,
+      18,
+      7,
+      9,
+      12,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      11,
+      13,
+      14,
+      15,
+      17
+    ],
+    "hailfinder0": [
+      5,
+      15,
+      7,
+      14,
+      8,
+      0,
+      1,
+      2,
+      3,
+      4,
+      6,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "water1": [
+      1,
+      7,
+      2,
+      3,
+      4,
+      0,
+      5,
+      6,
+      8,
+      9,
+      10
+    ],
+    "sachs1": [
+      9,
+      4,
+      2,
+      0,
+      6,
+      1,
+      3,
+      5,
+      7,
+      8
+    ]
+  },
+  "registry_metadata": {
+    "mildew0": {
+      "n_vars": 4,
+      "n_factors": 4,
+      "n_entries": 1106,
+      "max_parents": 3,
+      "max_factor_entries": 1088
+    },
+    "insurance1": {
+      "n_vars": 9,
+      "n_factors": 9,
+      "n_entries": 395,
+      "max_parents": 3,
+      "max_factor_entries": 200
+    },
+    "hailfinder0": {
+      "n_vars": 5,
+      "n_factors": 5,
+      "n_entries": 284,
+      "max_parents": 3,
+      "max_factor_entries": 256
+    },
+    "water1": {
+      "n_vars": 4,
+      "n_factors": 4,
+      "n_entries": 268,
+      "max_parents": 3,
+      "max_factor_entries": 256
+    },
+    "sachs1": {
+      "n_vars": 8,
+      "n_factors": 8,
+      "n_entries": 228,
+      "max_parents": 3,
+      "max_factor_entries": 81
+    }
+  },
+  "elapsed_sec": 16.94473910331726,
+  "summary": {
+    "n": 75,
+    "within_0_01": 67,
+    "within_0_01_rate": 0.8933333333333333,
+    "within_0_05": 72,
+    "within_0_05_rate": 0.96,
+    "within_0_05_wilson": [
+      0.8888683137691623,
+      0.9863041839985135
+    ],
+    "valid_numeric": 75,
+    "mae": 0.005890265772166569,
+    "by_network": {
+      "mildew0": {
+        "n": 19,
+        "correct_0_05": 16,
+        "failures": {
+          "wrong_probability": 3
+        },
+        "rate_0_05": 0.8421052631578947
+      },
+      "insurance1": {
+        "n": 19,
+        "correct_0_05": 19,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "hailfinder0": {
+        "n": 16,
+        "correct_0_05": 16,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "water1": {
+        "n": 11,
+        "correct_0_05": 11,
+        "failures": {},
+        "rate_0_05": 1.0
+      },
+      "sachs1": {
+        "n": 10,
+        "correct_0_05": 10,
+        "failures": {},
+        "rate_0_05": 1.0
+      }
+    }
+  },
+  "results": [
+    {
+      "network": "mildew0",
+      "pair_id": 4,
+      "evidences": [
+        "The amount of photosynthetic biomass per square meter is 0.35 kg per square meter."
+      ],
+      "query": "What is the likelihood of the temperature being 13.0 degrees Celsius?",
+      "gold": 0.079972639,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.07997263917201876,
+      "abs_error": 1.720187603471146e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 559,
+        "completion_tokens": 49,
+        "cost_usd": 0.00011325
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"photosynthetic_biomass\": \"0.35\"\n  },\n  \"query\": {\n    \"variable\": \"mildew_temperature\",\n    \"state\": \"13.0\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "photosynthetic_biomass": "0.35"
+        },
+        "query": {
+          "variable": "mildew_temperature",
+          "state": "13.0"
+        }
+      },
+      "query_var": "mildew_temperature",
+      "query_state": "13.0",
+      "evidence": {
+        "photosynthetic_biomass": "0.35"
+      },
+      "posterior": {
+        "13.0": 0.07997263917201876,
+        "13.0-14.9": 0.5518157230197043,
+        "15.0-16-9": 0.0,
+        "15.0-16.9": 0.13554015305431746,
+        "17.0": 0.2326714847539595
+      },
+      "evidence_prob": 0.017264483382
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 18,
+      "evidences": [
+        "The amount of radiation received is between 200 and 249 MJ/m2."
+      ],
+      "query": "What is the likelihood of the temperature being 13.0 degrees Celsius?",
+      "gold": 0.133,
+      "reasoning_types": [],
+      "pred": 0.15349570070083365,
+      "abs_error": 0.020495700700833647,
+      "ok_0_01": false,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 556,
+        "completion_tokens": 48,
+        "cost_usd": 0.0001122
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"radiation_levels\": \"200-249\"\n  },\n  \"query\": {\n    \"variable\": \"mildew_temperature\",\n    \"state\": \"13.0\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "radiation_levels": "200-249"
+        },
+        "query": {
+          "variable": "mildew_temperature",
+          "state": "13.0"
+        }
+      },
+      "query_var": "mildew_temperature",
+      "query_state": "13.0",
+      "evidence": {
+        "radiation_levels": "200-249"
+      },
+      "posterior": {
+        "13.0": 0.15349570070083365,
+        "13.0-14.9": 0.6543633207227575,
+        "15.0-16-9": 0.0,
+        "15.0-16.9": 0.038547040627126654,
+        "17.0": 0.15359393794928222
+      },
+      "evidence_prob": 0.14426788437000002
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 5,
+      "evidences": [
+        "The temperature is 13 degrees Celsius."
+      ],
+      "query": "What is the likelihood of receiving radiation between 150 and 199 MJ/m2?",
+      "gold": 0.467,
+      "reasoning_types": [],
+      "pred": 0.4992022024320066,
+      "abs_error": 0.032202202432006555,
+      "ok_0_01": false,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 550,
+        "completion_tokens": 47,
+        "cost_usd": 0.0001107
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"mildew_temperature\": \"13.0\"\n  },\n  \"query\": {\n    \"variable\": \"radiation_levels\",\n    \"state\": \"150-199\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "mildew_temperature": "13.0"
+        },
+        "query": {
+          "variable": "radiation_levels",
+          "state": "150-199"
+        }
+      },
+      "query_var": "radiation_levels",
+      "query_state": "150-199",
+      "evidence": {
+        "mildew_temperature": "13.0"
+      },
+      "posterior": {
+        "150-199": 0.4992022024320066,
+        "200-249": 0.3573486829323002,
+        "<150": 0.0718975462739609,
+        ">250": 0.07155156836173238
+      },
+      "evidence_prob": 0.061968886574
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 10,
+      "evidences": [
+        "The amount of photosynthetic biomass per square meter is 0.80 kg/m2."
+      ],
+      "query": "What is the likelihood of the temperature being between 13.0\u00b0C and 14.9\u00b0C?",
+      "gold": 0.61192722,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.6119272203202871,
+      "abs_error": 3.202871301510868e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 564,
+        "completion_tokens": 53,
+        "cost_usd": 0.0001164
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"photosynthetic_biomass\": \"0.80\"\n  },\n  \"query\": {\n    \"variable\": \"mildew_temperature\",\n    \"state\": \"13.0-14.9\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "photosynthetic_biomass": "0.80"
+        },
+        "query": {
+          "variable": "mildew_temperature",
+          "state": "13.0-14.9"
+        }
+      },
+      "query_var": "mildew_temperature",
+      "query_state": "13.0-14.9",
+      "evidence": {
+        "photosynthetic_biomass": "0.80"
+      },
+      "posterior": {
+        "13.0": 0.36733022422034395,
+        "13.0-14.9": 0.6119272203202871,
+        "15.0-16-9": 0.0,
+        "15.0-16.9": 0.0,
+        "17.0": 0.02074255545936891
+      },
+      "evidence_prob": 0.0042959991199999995
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 19,
+      "evidences": [
+        "The amount of photosynthetic biomass per square meter is 0.40 kg/m2."
+      ],
+      "query": "What is the likelihood of the amount of radiation received being between 150 and 199 MJ/m2?",
+      "gold": 0.70098579,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.7009857914931618,
+      "abs_error": 1.4931617053903778e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 564,
+        "completion_tokens": 49,
+        "cost_usd": 0.000114
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"photosynthetic_biomass\": \"0.40\"\n  },\n  \"query\": {\n    \"variable\": \"radiation_levels\",\n    \"state\": \"150-199\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "photosynthetic_biomass": "0.40"
+        },
+        "query": {
+          "variable": "radiation_levels",
+          "state": "150-199"
+        }
+      },
+      "query_var": "radiation_levels",
+      "query_state": "150-199",
+      "evidence": {
+        "photosynthetic_biomass": "0.40"
+      },
+      "posterior": {
+        "150-199": 0.7009857914931618,
+        "200-249": 0.06780348120212545,
+        "<150": 0.2309408545225477,
+        ">250": 0.0002698727821650105
+      },
+      "evidence_prob": 0.037311765637200005
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 0,
+      "evidences": [
+        "The amount of radiation received is below 150 MJ/m2.",
+        "The amount of photosynthetic biomass is 0.50 kg/m2."
+      ],
+      "query": "What is the likelihood of the temperature being between 13.0 and 14.9 \u00b0C?",
+      "gold": 0.69559087,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.6955908741348372,
+      "abs_error": 4.134837250369117e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 575,
+        "completion_tokens": 63,
+        "cost_usd": 0.00012405
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"radiation_levels\": \"<150\",\n    \"photosynthetic_biomass\": \"0.50\"\n  },\n  \"query\": {\n    \"variable\": \"mildew_temperature\",\n    \"state\": \"13.0-14.9\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "radiation_levels": "<150",
+          "photosynthetic_biomass": "0.50"
+        },
+        "query": {
+          "variable": "mildew_temperature",
+          "state": "13.0-14.9"
+        }
+      },
+      "query_var": "mildew_temperature",
+      "query_state": "13.0-14.9",
+      "evidence": {
+        "radiation_levels": "<150",
+        "photosynthetic_biomass": "0.50"
+      },
+      "posterior": {
+        "13.0": 0.3044091258651628,
+        "13.0-14.9": 0.6955908741348372,
+        "15.0-16-9": 0.0,
+        "15.0-16.9": 0.0,
+        "17.0": 0.0
+      },
+      "evidence_prob": 0.0014636552000000002
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 1,
+      "evidences": [
+        "The amount of radiation received is 250 MJ/m2.",
+        "The temperature is between 15.0 and 16.9 degrees Celsius."
+      ],
+      "query": "What is the likelihood of the photosynthetic biomass being 0.20 kg/m2 under these conditions?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 575,
+        "completion_tokens": 63,
+        "cost_usd": 0.00012405
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"radiation_levels\": \">250\",\n    \"mildew_temperature\": \"15.0-16.9\"\n  },\n  \"query\": {\n    \"variable\": \"photosynthetic_biomass\",\n    \"state\": \"0.20\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "radiation_levels": ">250",
+          "mildew_temperature": "15.0-16.9"
+        },
+        "query": {
+          "variable": "photosynthetic_biomass",
+          "state": "0.20"
+        }
+      },
+      "query_var": "photosynthetic_biomass",
+      "query_state": "0.20",
+      "evidence": {
+        "radiation_levels": ">250",
+        "mildew_temperature": "15.0-16.9"
+      },
+      "posterior": {
+        "0.15": 0.0,
+        "0.20": 0.0,
+        "0.25": 0.0,
+        "0.30": 0.0,
+        "0.35": 0.0,
+        "0.40": 0.0,
+        "0.45": 0.07069293070692931,
+        "0.50": 0.26397360263973607,
+        "0.55": 0.3036696330366964,
+        "0.60": 0.2516748325167484,
+        "0.65": 0.10198980101989803,
+        "0.70": 0.007999200079992002,
+        "0.75": 0.0,
+        "0.80": 0.0,
+        "0.85": 0.0,
+        "0.90": 0.0,
+        "0.95": 0.0
+      },
+      "evidence_prob": 0.00111901189
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 6,
+      "evidences": [
+        "The amount of radiation received is more than 250 MJ/m2."
+      ],
+      "query": "What is the likelihood of there being 0.70 kg of photosynthetic biomass per square meter?",
+      "gold": 0.08534845,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.19679590525745186,
+      "abs_error": 0.11144745525745185,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 559,
+        "completion_tokens": 47,
+        "cost_usd": 0.00011205
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"radiation_levels\": \">250\"\n  },\n  \"query\": {\n    \"variable\": \"photosynthetic_biomass\",\n    \"state\": \"0.70\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "radiation_levels": ">250"
+        },
+        "query": {
+          "variable": "photosynthetic_biomass",
+          "state": "0.70"
+        }
+      },
+      "query_var": "photosynthetic_biomass",
+      "query_state": "0.70",
+      "evidence": {
+        "radiation_levels": ">250"
+      },
+      "posterior": {
+        "0.15": 0.0,
+        "0.20": 0.0,
+        "0.25": 0.0,
+        "0.30": 0.0,
+        "0.35": 0.0,
+        "0.40": 0.00034653771218039035,
+        "0.45": 0.009420273420445413,
+        "0.50": 0.03936243222039165,
+        "0.55": 0.07175140690068485,
+        "0.60": 0.12017058020858262,
+        "0.65": 0.18600170169408403,
+        "0.70": 0.19679590525745186,
+        "0.75": 0.17800788439356194,
+        "0.80": 0.1218127672950818,
+        "0.85": 0.06497154378679348,
+        "0.90": 0.011351975022389944,
+        "0.95": 6.992088351958319e-06
+      },
+      "evidence_prob": 0.029057241524000004
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 7,
+      "evidences": [
+        "The temperature is 13 degrees Celsius."
+      ],
+      "query": "What is the likelihood of receiving less than 150 MJ/m2 of radiation at this temperature?",
+      "gold": 0.067,
+      "reasoning_types": [],
+      "pred": 0.0718975462739609,
+      "abs_error": 0.004897546273960898,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 552,
+        "completion_tokens": 45,
+        "cost_usd": 0.0001098
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"mildew_temperature\": \"13.0\"\n  },\n  \"query\": {\n    \"variable\": \"radiation_levels\",\n    \"state\": \"<150\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "mildew_temperature": "13.0"
+        },
+        "query": {
+          "variable": "radiation_levels",
+          "state": "<150"
+        }
+      },
+      "query_var": "radiation_levels",
+      "query_state": "<150",
+      "evidence": {
+        "mildew_temperature": "13.0"
+      },
+      "posterior": {
+        "150-199": 0.4992022024320066,
+        "200-249": 0.3573486829323002,
+        "<150": 0.0718975462739609,
+        ">250": 0.07155156836173238
+      },
+      "evidence_prob": 0.061968886574
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 8,
+      "evidences": [
+        "The amount of radiation received is more than 250 MJ/m2."
+      ],
+      "query": "What is the likelihood of there being 0.90 kg of photosynthetic biomass per square meter?",
+      "gold": 0.00492324,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.011351975022389944,
+      "abs_error": 0.006428735022389945,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 559,
+        "completion_tokens": 47,
+        "cost_usd": 0.00011205
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"radiation_levels\": \">250\"\n  },\n  \"query\": {\n    \"variable\": \"photosynthetic_biomass\",\n    \"state\": \"0.90\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "radiation_levels": ">250"
+        },
+        "query": {
+          "variable": "photosynthetic_biomass",
+          "state": "0.90"
+        }
+      },
+      "query_var": "photosynthetic_biomass",
+      "query_state": "0.90",
+      "evidence": {
+        "radiation_levels": ">250"
+      },
+      "posterior": {
+        "0.15": 0.0,
+        "0.20": 0.0,
+        "0.25": 0.0,
+        "0.30": 0.0,
+        "0.35": 0.0,
+        "0.40": 0.00034653771218039035,
+        "0.45": 0.009420273420445413,
+        "0.50": 0.03936243222039165,
+        "0.55": 0.07175140690068485,
+        "0.60": 0.12017058020858262,
+        "0.65": 0.18600170169408403,
+        "0.70": 0.19679590525745186,
+        "0.75": 0.17800788439356194,
+        "0.80": 0.1218127672950818,
+        "0.85": 0.06497154378679348,
+        "0.90": 0.011351975022389944,
+        "0.95": 6.992088351958319e-06
+      },
+      "evidence_prob": 0.029057241524000004
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 9,
+      "evidences": [
+        "The amount of radiation received is between 150 and 199 MJ/m2."
+      ],
+      "query": "What is the likelihood of the temperature being between 13.0 and 14.9 \u00b0C?",
+      "gold": 0.567,
+      "reasoning_types": [],
+      "pred": 0.6553817809475551,
+      "abs_error": 0.08838178094755511,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 562,
+        "completion_tokens": 51,
+        "cost_usd": 0.0001149
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"radiation_levels\": \"150-199\"\n  },\n  \"query\": {\n    \"variable\": \"mildew_temperature\",\n    \"state\": \"13.0-14.9\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "radiation_levels": "150-199"
+        },
+        "query": {
+          "variable": "mildew_temperature",
+          "state": "13.0-14.9"
+        }
+      },
+      "query_var": "mildew_temperature",
+      "query_state": "13.0-14.9",
+      "evidence": {
+        "radiation_levels": "150-199"
+      },
+      "posterior": {
+        "13.0": 0.15291790710416012,
+        "13.0-14.9": 0.6553817809475551,
+        "15.0-16-9": 0.0,
+        "15.0-16.9": 0.0385515204805091,
+        "17.0": 0.1531487914677756
+      },
+      "evidence_prob": 0.20229811698200006
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 11,
+      "evidences": [
+        "The temperature is 17 degrees Celsius."
+      ],
+      "query": "What is the likelihood of there being 0.40 kg of photosynthetic biomass per square meter?",
+      "gold": 0.06841598,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.14664261992206593,
+      "abs_error": 0.07822663992206592,
+      "ok_0_01": false,
+      "ok_0_05": false,
+      "failure_mode": "wrong_probability",
+      "usage": {
+        "prompt_tokens": 553,
+        "completion_tokens": 50,
+        "cost_usd": 0.00011295
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"mildew_temperature\": \"17.0\"\n  },\n  \"query\": {\n    \"variable\": \"photosynthetic_biomass\",\n    \"state\": \"0.40\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "mildew_temperature": "17.0"
+        },
+        "query": {
+          "variable": "photosynthetic_biomass",
+          "state": "0.40"
+        }
+      },
+      "query_var": "photosynthetic_biomass",
+      "query_state": "0.40",
+      "evidence": {
+        "mildew_temperature": "17.0"
+      },
+      "posterior": {
+        "0.15": 0.0,
+        "0.20": 7.180380617787259e-05,
+        "0.25": 0.0035858820805229575,
+        "0.30": 0.025771543471726114,
+        "0.35": 0.06473628399621935,
+        "0.40": 0.14664261992206593,
+        "0.45": 0.20191999776812333,
+        "0.50": 0.20514636783640108,
+        "0.55": 0.1581828419150856,
+        "0.60": 0.10349959233871307,
+        "0.65": 0.05883824648126412,
+        "0.70": 0.02107551024577727,
+        "0.75": 0.009093234014365785,
+        "0.80": 0.001436076123557452,
+        "0.85": 0.0,
+        "0.90": 0.0,
+        "0.95": 0.0
+      },
+      "evidence_prob": 0.06205102817200001
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 12,
+      "evidences": [
+        "The amount of photosynthetic biomass per square meter is 0.95 kg/m2."
+      ],
+      "query": "What is the likelihood of the amount of radiation received being between 200 and 249 MJ/m2?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 564,
+        "completion_tokens": 52,
+        "cost_usd": 0.0001158
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"photosynthetic_biomass\": \"0.95\"\n  },\n  \"query\": {\n    \"variable\": \"radiation_levels\",\n    \"state\": \"200-249\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "photosynthetic_biomass": "0.95"
+        },
+        "query": {
+          "variable": "radiation_levels",
+          "state": "200-249"
+        }
+      },
+      "query_var": "radiation_levels",
+      "query_state": "200-249",
+      "evidence": {
+        "photosynthetic_biomass": "0.95"
+      },
+      "posterior": {
+        "150-199": 0.0,
+        "200-249": 0.0,
+        "<150": 0.0,
+        ">250": 1.0
+      },
+      "evidence_prob": 2.0317080000000003e-07
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 13,
+      "evidences": [
+        "The temperature is 17 degrees Celsius."
+      ],
+      "query": "What is the likelihood of there being 0.35 kg of photosynthetic biomass per square meter at this temperature?",
+      "gold": 0.030202654,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.06473628399621935,
+      "abs_error": 0.03453362999621935,
+      "ok_0_01": false,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 556,
+        "completion_tokens": 50,
+        "cost_usd": 0.0001134
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"mildew_temperature\": \"17.0\"\n  },\n  \"query\": {\n    \"variable\": \"photosynthetic_biomass\",\n    \"state\": \"0.35\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "mildew_temperature": "17.0"
+        },
+        "query": {
+          "variable": "photosynthetic_biomass",
+          "state": "0.35"
+        }
+      },
+      "query_var": "photosynthetic_biomass",
+      "query_state": "0.35",
+      "evidence": {
+        "mildew_temperature": "17.0"
+      },
+      "posterior": {
+        "0.15": 0.0,
+        "0.20": 7.180380617787259e-05,
+        "0.25": 0.0035858820805229575,
+        "0.30": 0.025771543471726114,
+        "0.35": 0.06473628399621935,
+        "0.40": 0.14664261992206593,
+        "0.45": 0.20191999776812333,
+        "0.50": 0.20514636783640108,
+        "0.55": 0.1581828419150856,
+        "0.60": 0.10349959233871307,
+        "0.65": 0.05883824648126412,
+        "0.70": 0.02107551024577727,
+        "0.75": 0.009093234014365785,
+        "0.80": 0.001436076123557452,
+        "0.85": 0.0,
+        "0.90": 0.0,
+        "0.95": 0.0
+      },
+      "evidence_prob": 0.06205102817200001
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 14,
+      "evidences": [
+        "The amount of photosynthetic biomass is 0.45 kg per square meter.",
+        "The amount of radiation received is between 150 and 199 MJ per square meter."
+      ],
+      "query": "What is the likelihood of the temperature being 13.0 degrees Celsius?",
+      "gold": 0.11023269,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.11023268772264104,
+      "abs_error": 2.277358954194675e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 574,
+        "completion_tokens": 60,
+        "cost_usd": 0.0001221
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"photosynthetic_biomass\": \"0.45\",\n    \"radiation_levels\": \"150-199\"\n  },\n  \"query\": {\n    \"variable\": \"mildew_temperature\",\n    \"state\": \"13.0\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "photosynthetic_biomass": "0.45",
+          "radiation_levels": "150-199"
+        },
+        "query": {
+          "variable": "mildew_temperature",
+          "state": "13.0"
+        }
+      },
+      "query_var": "mildew_temperature",
+      "query_state": "13.0",
+      "evidence": {
+        "photosynthetic_biomass": "0.45",
+        "radiation_levels": "150-199"
+      },
+      "posterior": {
+        "13.0": 0.11023268772264104,
+        "13.0-14.9": 0.6437696533913484,
+        "15.0-16-9": 0.0,
+        "15.0-16.9": 0.04116695085902481,
+        "17.0": 0.20483070802698589
+      },
+      "evidence_prob": 0.04874436722
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 15,
+      "evidences": [
+        "The temperature is 17 degrees Celsius."
+      ],
+      "query": "What is the likelihood of there being no photosynthetic biomass under these temperature conditions?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 549,
+        "completion_tokens": 54,
+        "cost_usd": 0.00011475
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"mildew_temperature\": \"17.0\"\n  },\n  \"query\": {\n    \"variable\": \"photosynthetic_biomass\",\n    \"state\": \"0.15\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "mildew_temperature": "17.0"
+        },
+        "query": {
+          "variable": "photosynthetic_biomass",
+          "state": "0.15"
+        }
+      },
+      "query_var": "photosynthetic_biomass",
+      "query_state": "0.15",
+      "evidence": {
+        "mildew_temperature": "17.0"
+      },
+      "posterior": {
+        "0.15": 0.0,
+        "0.20": 7.180380617787259e-05,
+        "0.25": 0.0035858820805229575,
+        "0.30": 0.025771543471726114,
+        "0.35": 0.06473628399621935,
+        "0.40": 0.14664261992206593,
+        "0.45": 0.20191999776812333,
+        "0.50": 0.20514636783640108,
+        "0.55": 0.1581828419150856,
+        "0.60": 0.10349959233871307,
+        "0.65": 0.05883824648126412,
+        "0.70": 0.02107551024577727,
+        "0.75": 0.009093234014365785,
+        "0.80": 0.001436076123557452,
+        "0.85": 0.0,
+        "0.90": 0.0,
+        "0.95": 0.0
+      },
+      "evidence_prob": 0.06205102817200001
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 16,
+      "evidences": [
+        "The temperature is 17 degrees Celsius."
+      ],
+      "query": "What is the likelihood of receiving less than 150 MJ/m2 of radiation at this temperature?",
+      "gold": 0.067,
+      "reasoning_types": [],
+      "pred": 0.07180524225399616,
+      "abs_error": 0.004805242253996159,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 552,
+        "completion_tokens": 50,
+        "cost_usd": 0.0001128
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"mildew_temperature\": \"17.0\"\n  },\n  \"query\": {\n    \"variable\": \"radiation_levels\",\n    \"state\": \"<150\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "mildew_temperature": "17.0"
+        },
+        "query": {
+          "variable": "radiation_levels",
+          "state": "<150"
+        }
+      },
+      "query_var": "radiation_levels",
+      "query_state": "<150",
+      "evidence": {
+        "mildew_temperature": "17.0"
+      },
+      "posterior": {
+        "150-199": 0.4992940978531639,
+        "200-249": 0.35710403409558517,
+        "<150": 0.07180524225399616,
+        ">250": 0.07179662579725479
+      },
+      "evidence_prob": 0.062051028172000006
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 17,
+      "evidences": [
+        "The temperature is 13 degrees Celsius."
+      ],
+      "query": "What is the likelihood of receiving radiation between 150 and 199 MJ/m2?",
+      "gold": 0.467,
+      "reasoning_types": [],
+      "pred": 0.4992022024320066,
+      "abs_error": 0.032202202432006555,
+      "ok_0_01": false,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 550,
+        "completion_tokens": 48,
+        "cost_usd": 0.0001113
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"mildew_temperature\": \"13.0\"\n  },\n  \"query\": {\n    \"variable\": \"radiation_levels\",\n    \"state\": \"150-199\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "mildew_temperature": "13.0"
+        },
+        "query": {
+          "variable": "radiation_levels",
+          "state": "150-199"
+        }
+      },
+      "query_var": "radiation_levels",
+      "query_state": "150-199",
+      "evidence": {
+        "mildew_temperature": "13.0"
+      },
+      "posterior": {
+        "150-199": 0.4992022024320066,
+        "200-249": 0.3573486829323002,
+        "<150": 0.0718975462739609,
+        ">250": 0.07155156836173238
+      },
+      "evidence_prob": 0.061968886574
+    },
+    {
+      "network": "mildew0",
+      "pair_id": 20,
+      "evidences": [
+        "The amount of radiation received is between 200 and 249 MJ/m2."
+      ],
+      "query": "What is the likelihood of this area having a photosynthetic biomass of 0.25 kg/m2?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 562,
+        "completion_tokens": 49,
+        "cost_usd": 0.0001137
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"radiation_levels\": \"200-249\"\n  },\n  \"query\": {\n    \"variable\": \"photosynthetic_biomass\",\n    \"state\": \"0.25\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "radiation_levels": "200-249"
+        },
+        "query": {
+          "variable": "photosynthetic_biomass",
+          "state": "0.25"
+        }
+      },
+      "query_var": "photosynthetic_biomass",
+      "query_state": "0.25",
+      "evidence": {
+        "radiation_levels": "200-249"
+      },
+      "posterior": {
+        "0.15": 0.0,
+        "0.20": 0.0,
+        "0.25": 0.0,
+        "0.30": 0.0,
+        "0.35": 0.0007753264039911284,
+        "0.40": 0.017535902817509382,
+        "0.45": 0.06004373265628418,
+        "0.50": 0.1192468859242342,
+        "0.55": 0.20488248357613315,
+        "0.60": 0.23244504871226454,
+        "0.65": 0.1965916383528651,
+        "0.70": 0.11726376763529991,
+        "0.75": 0.0459718007854779,
+        "0.80": 0.005243413135940478,
+        "0.85": 0.0,
+        "0.90": 0.0,
+        "0.95": 0.0
+      },
+      "evidence_prob": 0.14426788437000002
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 16,
+      "evidences": [
+        "The anti-theft devices in the car are absent."
+      ],
+      "query": "What is the likelihood of this car being stolen?",
+      "gold": 0.002636998,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0026402356841665566,
+      "abs_error": 3.237684166556426e-06,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 553,
+        "completion_tokens": 47,
+        "cost_usd": 0.00011115
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"car_anti_theft\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"stolen\",\n    \"state\": \"TRUE\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "car_anti_theft": "FALSE"
+        },
+        "query": {
+          "variable": "stolen",
+          "state": "TRUE"
+        }
+      },
+      "query_var": "stolen",
+      "query_state": "TRUE",
+      "evidence": {
+        "car_anti_theft": "FALSE"
+      },
+      "posterior": {
+        "FALSE": 0.9973597643158334,
+        "TRUE": 0.0026402356841665566
+      },
+      "evidence_prob": 0.7694848213464206
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 18,
+      "evidences": [
+        "The current value of the car is twenty thousand dollars."
+      ],
+      "query": "What is the likelihood of the car not having anti-theft devices?",
+      "gold": 0.77042959,
+      "reasoning_types": [],
+      "pred": 0.7704296408482904,
+      "abs_error": 5.084829035606475e-08,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 557,
+        "completion_tokens": 48,
+        "cost_usd": 0.00011235
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"car_value\": \"20000\"\n  },\n  \"query\": {\n    \"variable\": \"car_anti_theft\",\n    \"state\": \"FALSE\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "car_value": "20000"
+        },
+        "query": {
+          "variable": "car_anti_theft",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "car_anti_theft",
+      "query_state": "FALSE",
+      "evidence": {
+        "car_value": "20000"
+      },
+      "posterior": {
+        "FALSE": 0.7704296408482904,
+        "TRUE": 0.2295703591517097
+      },
+      "evidence_prob": 0.2533780424634481
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 7,
+      "evidences": [
+        "The car is equipped with anti-theft devices."
+      ],
+      "query": "What is the likelihood of this car having a mileage of 5,000?",
+      "gold": 0.1,
+      "reasoning_types": [],
+      "pred": 0.10012277937488878,
+      "abs_error": 0.00012277937488877622,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 558,
+        "completion_tokens": 50,
+        "cost_usd": 0.0001137
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"car_anti_theft\": \"TRUE\"\n  },\n  \"query\": {\n    \"variable\": \"car_mileage\",\n    \"state\": \"5000\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "car_anti_theft": "TRUE"
+        },
+        "query": {
+          "variable": "car_mileage",
+          "state": "5000"
+        }
+      },
+      "query_var": "car_mileage",
+      "query_state": "5000",
+      "evidence": {
+        "car_anti_theft": "TRUE"
+      },
+      "posterior": {
+        "1000000": 0.0998772206251112,
+        "20000": 0.40049111749955524,
+        "5000": 0.10012277937488878,
+        "50000": 0.3995088825004448
+      },
+      "evidence_prob": 0.22928882461451444
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 9,
+      "evidences": [
+        "The anti-theft devices in the car are not present.",
+        "The car has been driven for a million miles."
+      ],
+      "query": "What is the likelihood of the car not being stolen?",
+      "gold": 0.997987,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.9979820489355802,
+      "abs_error": 4.951064419778106e-06,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 566,
+        "completion_tokens": 58,
+        "cost_usd": 0.0001197
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"car_anti_theft\": \"FALSE\",\n    \"car_mileage\": \"1000000\"\n  },\n  \"query\": {\n    \"variable\": \"stolen\",\n    \"state\": \"FALSE\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "car_anti_theft": "FALSE",
+          "car_mileage": "1000000"
+        },
+        "query": {
+          "variable": "stolen",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "stolen",
+      "query_state": "FALSE",
+      "evidence": {
+        "car_anti_theft": "FALSE",
+        "car_mileage": "1000000"
+      },
+      "posterior": {
+        "FALSE": 0.9979820489355802,
+        "TRUE": 0.002017951064419874
+      },
+      "evidence_prob": 0.07685400526929073
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 12,
+      "evidences": [
+        "The car has a mileage of 5000.",
+        "The car is usually parked in a secure location."
+      ],
+      "query": "What is the likelihood of this car not being stolen?",
+      "gold": 0.99999776,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.99999775646216,
+      "abs_error": 3.5378399099172952e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 564,
+        "completion_tokens": 56,
+        "cost_usd": 0.0001182
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"car_mileage\": \"5000\",\n    \"home_base_location\": \"secure\"\n  },\n  \"query\": {\n    \"variable\": \"stolen\",\n    \"state\": \"FALSE\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "car_mileage": "5000",
+          "home_base_location": "secure"
+        },
+        "query": {
+          "variable": "stolen",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "stolen",
+      "query_state": "FALSE",
+      "evidence": {
+        "car_mileage": "5000",
+        "home_base_location": "secure"
+      },
+      "posterior": {
+        "FALSE": 0.99999775646216,
+        "TRUE": 2.2435378400000002e-06
+      },
+      "evidence_prob": 0.015725593399999998
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 0,
+      "evidences": [
+        "The primary location of the car is a suburb.",
+        "The car has been driven for twenty thousand miles.",
+        "The car has a higher than average likelihood of being stolen.",
+        "The car does not have any anti-theft devices installed."
+      ],
+      "query": "What is the likelihood of this car having a current value of fifty thousand dollars?",
+      "gold": 0.15302481,
+      "reasoning_types": [
+        "causal",
+        "explaining_away"
+      ],
+      "pred": 0.15302481043955202,
+      "abs_error": 4.3955200590417576e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 595,
+        "completion_tokens": 72,
+        "cost_usd": 0.00013245
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"home_base_location\": \"suburb\",\n    \"car_mileage\": \"20000\",\n    \"stolen\": \"TRUE\",\n    \"car_anti_theft\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"car_value\",\n    \"state\": \"50000\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "home_base_location": "suburb",
+          "car_mileage": "20000",
+          "stolen": "TRUE",
+          "car_anti_theft": "FALSE"
+        },
+        "query": {
+          "variable": "car_value",
+          "state": "50000"
+        }
+      },
+      "query_var": "car_value",
+      "query_state": "50000",
+      "evidence": {
+        "home_base_location": "suburb",
+        "car_mileage": "20000",
+        "stolen": "TRUE",
+        "car_anti_theft": "FALSE"
+      },
+      "posterior": {
+        "10000": 0.27415247753540445,
+        "1000000": 1.4220237334355815e-05,
+        "20000": 0.5590761089720676,
+        "5000": 0.013732382815641523,
+        "50000": 0.15302481043955202
+      },
+      "evidence_prob": 2.1156585663213102e-05
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 1,
+      "evidences": [
+        "The car is at risk of being stolen.",
+        "The car does not have anti-theft devices."
+      ],
+      "query": "What is the likelihood of the car having a value of ten thousand dollars?",
+      "gold": 0.27861336,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.2786133642753023,
+      "abs_error": 4.275302334377784e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 567,
+        "completion_tokens": 56,
+        "cost_usd": 0.00011865
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"stolen\": \"TRUE\",\n    \"car_anti_theft\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"car_value\",\n    \"state\": \"10000\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "stolen": "TRUE",
+          "car_anti_theft": "FALSE"
+        },
+        "query": {
+          "variable": "car_value",
+          "state": "10000"
+        }
+      },
+      "query_var": "car_value",
+      "query_state": "10000",
+      "evidence": {
+        "stolen": "TRUE",
+        "car_anti_theft": "FALSE"
+      },
+      "posterior": {
+        "10000": 0.2786133642753023,
+        "1000000": 1.2893447342298146e-06,
+        "20000": 0.5069867733891847,
+        "5000": 0.0787592774790853,
+        "50000": 0.1356392955116934
+      },
+      "evidence_prob": 0.0020316212837433473
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 2,
+      "evidences": [
+        "The car has a value of twenty thousand dollars.",
+        "The car is usually parked in a secure location.",
+        "The car does not have any anti-theft devices installed."
+      ],
+      "query": "What is the likelihood of this car being stolen?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 3e-06,
+      "abs_error": 3e-06,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 576,
+        "completion_tokens": 66,
+        "cost_usd": 0.000126
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"car_value\": \"20000\",\n    \"home_base_location\": \"secure\",\n    \"car_anti_theft\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"stolen\",\n    \"state\": \"TRUE\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "car_value": "20000",
+          "home_base_location": "secure",
+          "car_anti_theft": "FALSE"
+        },
+        "query": {
+          "variable": "stolen",
+          "state": "TRUE"
+        }
+      },
+      "query_var": "stolen",
+      "query_state": "TRUE",
+      "evidence": {
+        "car_value": "20000",
+        "home_base_location": "secure",
+        "car_anti_theft": "FALSE"
+      },
+      "posterior": {
+        "FALSE": 0.999997,
+        "TRUE": 3e-06
+      },
+      "evidence_prob": 0.013478839362637843
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 3,
+      "evidences": [
+        "The car has a value of twenty thousand dollars.",
+        "The car has been driven for one million miles.",
+        "The car does not have any anti-theft devices installed.",
+        "The car is usually parked in a rural area."
+      ],
+      "query": "What is the likelihood of this car being stolen?",
+      "gold": 0.0002,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.00019999999999999998,
+      "abs_error": 2.710505431213761e-20,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 587,
+        "completion_tokens": 74,
+        "cost_usd": 0.00013245
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"car_value\": \"20000\",\n    \"car_mileage\": \"1000000\",\n    \"car_anti_theft\": \"FALSE\",\n    \"home_base_location\": \"rural\"\n  },\n  \"query\": {\n    \"variable\": \"stolen\",\n    \"state\": \"TRUE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "car_value": "20000",
+          "car_mileage": "1000000",
+          "car_anti_theft": "FALSE",
+          "home_base_location": "rural"
+        },
+        "query": {
+          "variable": "stolen",
+          "state": "TRUE"
+        }
+      },
+      "query_var": "stolen",
+      "query_state": "TRUE",
+      "evidence": {
+        "car_value": "20000",
+        "car_mileage": "1000000",
+        "car_anti_theft": "FALSE",
+        "home_base_location": "rural"
+      },
+      "posterior": {
+        "FALSE": 0.9997999999999999,
+        "TRUE": 0.00019999999999999998
+      },
+      "evidence_prob": 0.001972830229289864
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 4,
+      "evidences": [
+        "The car has a value of twenty thousand dollars.",
+        "The car has been driven for five thousand miles.",
+        "The car is likely to be stolen.",
+        "The car does not have anti-theft devices."
+      ],
+      "query": "What is the likelihood of this car being based in the city?",
+      "gold": 0.96770194,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.9677019393320673,
+      "abs_error": 6.679327091418941e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 586,
+        "completion_tokens": 75,
+        "cost_usd": 0.0001329
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"car_value\": \"20000\",\n    \"car_mileage\": \"5000\",\n    \"stolen\": \"TRUE\",\n    \"car_anti_theft\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"home_base_location\",\n    \"state\": \"city\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "car_value": "20000",
+          "car_mileage": "5000",
+          "stolen": "TRUE",
+          "car_anti_theft": "FALSE"
+        },
+        "query": {
+          "variable": "home_base_location",
+          "state": "city"
+        }
+      },
+      "query_var": "home_base_location",
+      "query_state": "city",
+      "evidence": {
+        "car_value": "20000",
+        "car_mileage": "5000",
+        "stolen": "TRUE",
+        "car_anti_theft": "FALSE"
+      },
+      "posterior": {
+        "city": 0.9677019393320673,
+        "rural": 0.005049766843817431,
+        "secure": 3.9258560298914594e-05,
+        "suburb": 0.027209035263816357
+      },
+      "evidence_prob": 0.0001524536327939267
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 5,
+      "evidences": [
+        "The car has a value of one million dollars.",
+        "The car has been driven for twenty thousand miles.",
+        "The car is usually parked in a suburban area.",
+        "The car has a high likelihood of being stolen."
+      ],
+      "query": "What is the likelihood of this car having anti-theft devices installed?",
+      "gold": 0.1931662,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.19316620443802524,
+      "abs_error": 4.438025225095288e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 589,
+        "completion_tokens": 73,
+        "cost_usd": 0.00013215
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"car_value\": \"1000000\",\n    \"car_mileage\": \"20000\",\n    \"home_base_location\": \"suburb\",\n    \"stolen\": \"TRUE\"\n  },\n  \"query\": {\n    \"variable\": \"car_anti_theft\",\n    \"state\": \"TRUE\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "car_value": "1000000",
+          "car_mileage": "20000",
+          "home_base_location": "suburb",
+          "stolen": "TRUE"
+        },
+        "query": {
+          "variable": "car_anti_theft",
+          "state": "TRUE"
+        }
+      },
+      "query_var": "car_anti_theft",
+      "query_state": "TRUE",
+      "evidence": {
+        "car_value": "1000000",
+        "car_mileage": "20000",
+        "home_base_location": "suburb",
+        "stolen": "TRUE"
+      },
+      "posterior": {
+        "FALSE": 0.8068337955619748,
+        "TRUE": 0.19316620443802524
+      },
+      "evidence_prob": 3.7287936e-10
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 6,
+      "evidences": [
+        "The car has a mileage of 5000.",
+        "The car is likely to be stolen."
+      ],
+      "query": "What is the likelihood of the car being parked or housed in a suburban area?",
+      "gold": 0.026969748,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.026969747575980894,
+      "abs_error": 4.2401910801959097e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 567,
+        "completion_tokens": 56,
+        "cost_usd": 0.00011865
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"car_mileage\": \"5000\",\n    \"stolen\": \"TRUE\"\n  },\n  \"query\": {\n    \"variable\": \"home_base_location\",\n    \"state\": \"suburb\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "car_mileage": "5000",
+          "stolen": "TRUE"
+        },
+        "query": {
+          "variable": "home_base_location",
+          "state": "suburb"
+        }
+      },
+      "query_var": "home_base_location",
+      "query_state": "suburb",
+      "evidence": {
+        "car_mileage": "5000",
+        "stolen": "TRUE"
+      },
+      "posterior": {
+        "city": 0.967567802628392,
+        "rural": 0.005342101535688279,
+        "secure": 0.00012034825993884305,
+        "suburb": 0.026969747575980894
+      },
+      "evidence_prob": 0.0002931572410542774
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 8,
+      "evidences": [
+        "The car is not stolen.",
+        "The car is equipped with anti-theft devices."
+      ],
+      "query": "What is the likelihood of the car's primary location being rural?",
+      "gold": 0.089908557,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0899086423001427,
+      "abs_error": 8.530014269925168e-08,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 562,
+        "completion_tokens": 57,
+        "cost_usd": 0.0001185
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"stolen\": \"FALSE\",\n    \"car_anti_theft\": \"TRUE\"\n  },\n  \"query\": {\n    \"variable\": \"home_base_location\",\n    \"state\": \"rural\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "stolen": "FALSE",
+          "car_anti_theft": "TRUE"
+        },
+        "query": {
+          "variable": "home_base_location",
+          "state": "rural"
+        }
+      },
+      "query_var": "home_base_location",
+      "query_state": "rural",
+      "evidence": {
+        "stolen": "FALSE",
+        "car_anti_theft": "TRUE"
+      },
+      "posterior": {
+        "city": 0.2257558730159755,
+        "rural": 0.0899086423001427,
+        "secure": 0.45353554545433505,
+        "suburb": 0.23079993922954675
+      },
+      "evidence_prob": 0.2291586235546736
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 10,
+      "evidences": [
+        "The car has been driven for over a million miles.",
+        "The car has not been stolen."
+      ],
+      "query": "What is the likelihood of the car being currently valued at 50 thousand dollars?",
+      "gold": 0.058412601,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.05855645230441948,
+      "abs_error": 0.00014385130441947613,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 567,
+        "completion_tokens": 56,
+        "cost_usd": 0.00011865
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"car_mileage\": \"1000000\",\n    \"stolen\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"car_value\",\n    \"state\": \"50000\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "car_mileage": "1000000",
+          "stolen": "FALSE"
+        },
+        "query": {
+          "variable": "car_value",
+          "state": "50000"
+        }
+      },
+      "query_var": "car_value",
+      "query_state": "50000",
+      "evidence": {
+        "car_mileage": "1000000",
+        "stolen": "FALSE"
+      },
+      "posterior": {
+        "10000": 0.14245072613267423,
+        "1000000": 0.003414004466211902,
+        "20000": 0.19216508994334194,
+        "5000": 0.6034137271533524,
+        "50000": 0.05855645230441948
+      },
+      "evidence_prob": 0.09958953461412234
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 11,
+      "evidences": [
+        "The car has a mileage of twenty thousand.",
+        "The car is likely to be stolen.",
+        "The car has a value of one million dollars."
+      ],
+      "query": "What is the likelihood of the car's home base being secure?",
+      "gold": 0.15725594,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.15725594437889234,
+      "abs_error": 4.3788923320686735e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 574,
+        "completion_tokens": 66,
+        "cost_usd": 0.0001257
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"car_mileage\": \"20000\",\n    \"stolen\": \"TRUE\",\n    \"car_value\": \"1000000\"\n  },\n  \"query\": {\n    \"variable\": \"home_base_location\",\n    \"state\": \"secure\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "car_mileage": "20000",
+          "stolen": "TRUE",
+          "car_value": "1000000"
+        },
+        "query": {
+          "variable": "home_base_location",
+          "state": "secure"
+        }
+      },
+      "query_var": "home_base_location",
+      "query_state": "secure",
+      "evidence": {
+        "car_mileage": "20000",
+        "stolen": "TRUE",
+        "car_value": "1000000"
+      },
+      "posterior": {
+        "city": 0.445300029389802,
+        "rural": 0.12326800813568851,
+        "secure": 0.15725594437889234,
+        "suburb": 0.2741760180956172
+      },
+      "evidence_prob": 1.35999991024e-09
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 13,
+      "evidences": [
+        "The theft likelihood of the car is low.",
+        "The car is parked in a secure location.",
+        "The car does not have anti-theft devices installed.",
+        "The current value of the car is fifty thousand dollars."
+      ],
+      "query": "What is the likelihood of the car having a mileage of twenty thousand?",
+      "gold": 0.43177782,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.43177781549781874,
+      "abs_error": 4.502181238930092e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 589,
+        "completion_tokens": 76,
+        "cost_usd": 0.00013395
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"stolen\": \"FALSE\",\n    \"home_base_location\": \"secure\",\n    \"car_anti_theft\": \"FALSE\",\n    \"car_value\": \"50000\"\n  },\n  \"query\": {\n    \"variable\": \"car_mileage\",\n    \"state\": \"20000\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "stolen": "FALSE",
+          "home_base_location": "secure",
+          "car_anti_theft": "FALSE",
+          "car_value": "50000"
+        },
+        "query": {
+          "variable": "car_mileage",
+          "state": "20000"
+        }
+      },
+      "query_var": "car_mileage",
+      "query_state": "20000",
+      "evidence": {
+        "stolen": "FALSE",
+        "home_base_location": "secure",
+        "car_anti_theft": "FALSE",
+        "car_value": "50000"
+      },
+      "posterior": {
+        "1000000": 0.08640017358296155,
+        "20000": 0.43177781549781874,
+        "5000": 0.13083525372798754,
+        "50000": 0.35098675719123223
+      },
+      "evidence_prob": 0.0036061701017200388
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 14,
+      "evidences": [
+        "The car has a value of one million dollars.",
+        "The car is equipped with anti-theft devices."
+      ],
+      "query": "What is the likelihood of the car not being stolen?",
+      "gold": 0.999999,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.999999,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 564,
+        "completion_tokens": 58,
+        "cost_usd": 0.0001194
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"car_value\": \"1000000\",\n    \"car_anti_theft\": \"TRUE\"\n  },\n  \"query\": {\n    \"variable\": \"stolen\",\n    \"state\": \"FALSE\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "car_value": "1000000",
+          "car_anti_theft": "TRUE"
+        },
+        "query": {
+          "variable": "stolen",
+          "state": "FALSE"
+        }
+      },
+      "query_var": "stolen",
+      "query_state": "FALSE",
+      "evidence": {
+        "car_value": "1000000",
+        "car_anti_theft": "TRUE"
+      },
+      "posterior": {
+        "FALSE": 0.999999,
+        "TRUE": 1e-06
+      },
+      "evidence_prob": 0.000780539049856333
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 15,
+      "evidences": [
+        "The primary location where the car is parked or housed is in a suburb.",
+        "The car does not have any anti-theft devices installed.",
+        "The current value of the car is estimated to be one million."
+      ],
+      "query": "What is the likelihood of this car having a mileage of five thousand?",
+      "gold": 0.10000002,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.10000001534117882,
+      "abs_error": 4.658821176062311e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 588,
+        "completion_tokens": 65,
+        "cost_usd": 0.0001272
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"home_base_location\": \"suburb\",\n    \"car_anti_theft\": \"FALSE\",\n    \"car_value\": \"1000000\"\n  },\n  \"query\": {\n    \"variable\": \"car_mileage\",\n    \"state\": \"5000\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "home_base_location": "suburb",
+          "car_anti_theft": "FALSE",
+          "car_value": "1000000"
+        },
+        "query": {
+          "variable": "car_mileage",
+          "state": "5000"
+        }
+      },
+      "query_var": "car_mileage",
+      "query_state": "5000",
+      "evidence": {
+        "home_base_location": "suburb",
+        "car_anti_theft": "FALSE",
+        "car_value": "1000000"
+      },
+      "posterior": {
+        "1000000": 0.09999986192939059,
+        "20000": 0.4000000613647153,
+        "5000": 0.10000001534117882,
+        "50000": 0.4000000613647153
+      },
+      "evidence_prob": 0.0007521290579033362
+    },
+    {
+      "network": "insurance1",
+      "pair_id": 17,
+      "evidences": [
+        "The car does not have anti-theft devices."
+      ],
+      "query": "What is the likelihood of this car having a value of fifty thousand dollars?",
+      "gold": 0.06778968,
+      "reasoning_types": [],
+      "pred": 0.06787291187590322,
+      "abs_error": 8.323187590321413e-05,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 557,
+        "completion_tokens": 49,
+        "cost_usd": 0.00011295
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"car_anti_theft\": \"FALSE\"\n  },\n  \"query\": {\n    \"variable\": \"car_value\",\n    \"state\": \"50000\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "car_anti_theft": "FALSE"
+        },
+        "query": {
+          "variable": "car_value",
+          "state": "50000"
+        }
+      },
+      "query_var": "car_value",
+      "query_state": "50000",
+      "evidence": {
+        "car_anti_theft": "FALSE"
+      },
+      "posterior": {
+        "10000": 0.28035047696573945,
+        "1000000": 0.003404173976505802,
+        "20000": 0.2536891551835745,
+        "5000": 0.39468328199827707,
+        "50000": 0.06787291187590322
+      },
+      "evidence_prob": 0.7694848213464206
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 5,
+      "evidences": [
+        "The area of meso-alpha is currently in a downward trend."
+      ],
+      "query": "What is the likelihood of the quasigeostrophic vertical motion being neutral?",
+      "gold": 0.35967399,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.35967399007795886,
+      "abs_error": 7.795886158845633e-11,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 423,
+        "completion_tokens": 48,
+        "cost_usd": 9.225e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"area_meso_alpha\": \"down\"\n  },\n  \"query\": {\n    \"variable\": \"quasigeostrophic_vertical_motion\",\n    \"state\": \"neutral\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "area_meso_alpha": "down"
+        },
+        "query": {
+          "variable": "quasigeostrophic_vertical_motion",
+          "state": "neutral"
+        }
+      },
+      "query_var": "quasigeostrophic_vertical_motion",
+      "query_state": "neutral",
+      "evidence": {
+        "area_meso_alpha": "down"
+      },
+      "posterior": {
+        "down": 0.4883061658398299,
+        "neutral": 0.35967399007795886,
+        "strong_up": 0.055279943302622245,
+        "weak_up": 0.09673990077958894
+      },
+      "evidence_prob": 0.17637500000000003
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 15,
+      "evidences": [
+        "The subjective judgment of vertical motion is downwards."
+      ],
+      "query": "What is the likelihood of the quasigeostrophic vertical motion being weakly up?",
+      "gold": 0.15,
+      "reasoning_types": [],
+      "pred": 0.15,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 422,
+        "completion_tokens": 48,
+        "cost_usd": 9.21e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"subjective_vertical_motion\": \"down\"\n  },\n  \"query\": {\n    \"variable\": \"quasigeostrophic_vertical_motion\",\n    \"state\": \"weak_up\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "subjective_vertical_motion": "down"
+        },
+        "query": {
+          "variable": "quasigeostrophic_vertical_motion",
+          "state": "weak_up"
+        }
+      },
+      "query_var": "quasigeostrophic_vertical_motion",
+      "query_state": "weak_up",
+      "evidence": {
+        "subjective_vertical_motion": "down"
+      },
+      "posterior": {
+        "down": 0.20000000000000004,
+        "neutral": 0.5,
+        "strong_up": 0.15,
+        "weak_up": 0.15
+      },
+      "evidence_prob": 0.2
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 7,
+      "evidences": [
+        "The 10.7mu vertical motion is neutral."
+      ],
+      "query": "What is the likelihood of a strong upward subjective judgment of vertical motion?",
+      "gold": 0.15,
+      "reasoning_types": [],
+      "pred": 0.15,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 420,
+        "completion_tokens": 49,
+        "cost_usd": 9.24e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"n0_7mu_vertical_motion\": \"neutral\"\n  },\n  \"query\": {\n    \"variable\": \"subjective_vertical_motion\",\n    \"state\": \"strong_up\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "n0_7mu_vertical_motion": "neutral"
+        },
+        "query": {
+          "variable": "subjective_vertical_motion",
+          "state": "strong_up"
+        }
+      },
+      "query_var": "subjective_vertical_motion",
+      "query_state": "strong_up",
+      "evidence": {
+        "n0_7mu_vertical_motion": "neutral"
+      },
+      "posterior": {
+        "down": 0.2,
+        "neutral": 0.5,
+        "strong_up": 0.15,
+        "weak_up": 0.15
+      },
+      "evidence_prob": 0.25
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 14,
+      "evidences": [
+        "The combined vertical motion is moving down."
+      ],
+      "query": "What is the likelihood of a strong upward judgment for the vertical motion?",
+      "gold": 0.055279943,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.07937632884479094,
+      "abs_error": 0.024096385844790943,
+      "ok_0_01": false,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 417,
+        "completion_tokens": 48,
+        "cost_usd": 9.135e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"combined_vertical_motion\": \"down\"\n  },\n  \"query\": {\n    \"variable\": \"n0_7mu_vertical_motion\",\n    \"state\": \"strong_up\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "combined_vertical_motion": "down"
+        },
+        "query": {
+          "variable": "n0_7mu_vertical_motion",
+          "state": "strong_up"
+        }
+      },
+      "query_var": "n0_7mu_vertical_motion",
+      "query_state": "strong_up",
+      "evidence": {
+        "combined_vertical_motion": "down"
+      },
+      "posterior": {
+        "down": 0.5804394046775337,
+        "neutral": 0.16300496102055279,
+        "strong_up": 0.07937632884479094,
+        "weak_up": 0.1771793054571226
+      },
+      "evidence_prob": 0.176375
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 8,
+      "evidences": [
+        "The combined vertical motion is weakly upward.",
+        "The quasigeostrophic vertical motion is also weakly upward."
+      ],
+      "query": "What is the likelihood of the 10.7mu vertical motion being downward?",
+      "gold": 0.10872894,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.10872894333843798,
+      "abs_error": 3.3384379843903744e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 434,
+        "completion_tokens": 61,
+        "cost_usd": 0.0001017
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"combined_vertical_motion\": \"weak_up\",\n    \"quasigeostrophic_vertical_motion\": \"weak_up\"\n  },\n  \"query\": {\n    \"variable\": \"n0_7mu_vertical_motion\",\n    \"state\": \"down\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "combined_vertical_motion": "weak_up",
+          "quasigeostrophic_vertical_motion": "weak_up"
+        },
+        "query": {
+          "variable": "n0_7mu_vertical_motion",
+          "state": "down"
+        }
+      },
+      "query_var": "n0_7mu_vertical_motion",
+      "query_state": "down",
+      "evidence": {
+        "combined_vertical_motion": "weak_up",
+        "quasigeostrophic_vertical_motion": "weak_up"
+      },
+      "posterior": {
+        "down": 0.10872894333843798,
+        "neutral": 0.23889739663093412,
+        "strong_up": 0.29402756508422667,
+        "weak_up": 0.35834609494640124
+      },
+      "evidence_prob": 0.061218749999999995
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 0,
+      "evidences": [
+        "The subjective judgment of vertical motion is neutral.",
+        "The 10.7mu vertical motion is strong up."
+      ],
+      "query": "What is the likelihood of the area of meso-alpha being down?",
+      "gold": 0.02,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.020000000000000004,
+      "abs_error": 3.469446951953614e-18,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 431,
+        "completion_tokens": 58,
+        "cost_usd": 9.945e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"subjective_vertical_motion\": \"neutral\",\n    \"n0_7mu_vertical_motion\": \"strong_up\"\n  },\n  \"query\": {\n    \"variable\": \"area_meso_alpha\",\n    \"state\": \"down\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "subjective_vertical_motion": "neutral",
+          "n0_7mu_vertical_motion": "strong_up"
+        },
+        "query": {
+          "variable": "area_meso_alpha",
+          "state": "down"
+        }
+      },
+      "query_var": "area_meso_alpha",
+      "query_state": "down",
+      "evidence": {
+        "subjective_vertical_motion": "neutral",
+        "n0_7mu_vertical_motion": "strong_up"
+      },
+      "posterior": {
+        "down": 0.020000000000000004,
+        "neutral": 0.2575,
+        "strong_up": 0.2475,
+        "weak_up": 0.475
+      },
+      "evidence_prob": 0.125
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 1,
+      "evidences": [
+        "The 10.7mu vertical motion is moving downward.",
+        "A subjective judgment of vertical motion is moving downward."
+      ],
+      "query": "What is the likelihood of the combined vertical motion being neutral?",
+      "gold": 0.21,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.21,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 430,
+        "completion_tokens": 57,
+        "cost_usd": 9.87e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"n0_7mu_vertical_motion\": \"down\",\n    \"subjective_vertical_motion\": \"down\"\n  },\n  \"query\": {\n    \"variable\": \"combined_vertical_motion\",\n    \"state\": \"neutral\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "n0_7mu_vertical_motion": "down",
+          "subjective_vertical_motion": "down"
+        },
+        "query": {
+          "variable": "combined_vertical_motion",
+          "state": "neutral"
+        }
+      },
+      "query_var": "combined_vertical_motion",
+      "query_state": "neutral",
+      "evidence": {
+        "n0_7mu_vertical_motion": "down",
+        "subjective_vertical_motion": "down"
+      },
+      "posterior": {
+        "down": 0.7449999999999999,
+        "neutral": 0.21,
+        "strong_up": 0.015,
+        "weak_up": 0.03
+      },
+      "evidence_prob": 0.05
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 2,
+      "evidences": [
+        "The quasigeostrophic vertical motion is strongly upward.",
+        "The combined vertical motion is strongly upward.",
+        "The 10.7mu vertical motion is downward."
+      ],
+      "query": "What is the likelihood of a neutral subjective judgment of vertical motion?",
+      "gold": 0.60606061,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.6060606060606061,
+      "abs_error": 3.9393939221810115e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 440,
+        "completion_tokens": 71,
+        "cost_usd": 0.0001086
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"quasigeostrophic_vertical_motion\": \"strong_up\",\n    \"combined_vertical_motion\": \"strong_up\",\n    \"n0_7mu_vertical_motion\": \"down\"\n  },\n  \"query\": {\n    \"variable\": \"subjective_vertical_motion\",\n    \"state\": \"neutral\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "quasigeostrophic_vertical_motion": "strong_up",
+          "combined_vertical_motion": "strong_up",
+          "n0_7mu_vertical_motion": "down"
+        },
+        "query": {
+          "variable": "subjective_vertical_motion",
+          "state": "neutral"
+        }
+      },
+      "query_var": "subjective_vertical_motion",
+      "query_state": "neutral",
+      "evidence": {
+        "quasigeostrophic_vertical_motion": "strong_up",
+        "combined_vertical_motion": "strong_up",
+        "n0_7mu_vertical_motion": "down"
+      },
+      "posterior": {
+        "down": 0.12121212121212123,
+        "neutral": 0.6060606060606061,
+        "strong_up": 0.18181818181818182,
+        "weak_up": 0.09090909090909091
+      },
+      "evidence_prob": 0.006187499999999999
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 3,
+      "evidences": [
+        "The area of meso-alpha is neutral.",
+        "The 10.7mu vertical motion is down.",
+        "The combined vertical motion is neutral.",
+        "The quasigeostrophic vertical motion is neutral."
+      ],
+      "query": "What is the likelihood of a strong upward subjective judgment of vertical motion?",
+      "gold": 0.15652174,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.1565217391304348,
+      "abs_error": 8.695651976253771e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 449,
+        "completion_tokens": 80,
+        "cost_usd": 0.00011535
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"area_meso_alpha\": \"neutral\",\n    \"n0_7mu_vertical_motion\": \"down\",\n    \"combined_vertical_motion\": \"neutral\",\n    \"quasigeostrophic_vertical_motion\": \"neutral\"\n  },\n  \"query\": {\n    \"variable\": \"subjective_vertical_motion\",\n    \"state\": \"strong_up\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "area_meso_alpha": "neutral",
+          "n0_7mu_vertical_motion": "down",
+          "combined_vertical_motion": "neutral",
+          "quasigeostrophic_vertical_motion": "neutral"
+        },
+        "query": {
+          "variable": "subjective_vertical_motion",
+          "state": "strong_up"
+        }
+      },
+      "query_var": "subjective_vertical_motion",
+      "query_state": "strong_up",
+      "evidence": {
+        "area_meso_alpha": "neutral",
+        "n0_7mu_vertical_motion": "down",
+        "combined_vertical_motion": "neutral",
+        "quasigeostrophic_vertical_motion": "neutral"
+      },
+      "posterior": {
+        "down": 0.10434782608695653,
+        "neutral": 0.6086956521739131,
+        "strong_up": 0.1565217391304348,
+        "weak_up": 0.13043478260869565
+      },
+      "evidence_prob": 0.071875
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 4,
+      "evidences": [
+        "The combined vertical motion is neutral.",
+        "The quasigeostrophic vertical motion is moving downward.",
+        "The subjective judgment of vertical motion is a weak upward motion."
+      ],
+      "query": "What is the likelihood of the 10.7mu vertical motion being neutral?",
+      "gold": 0.27027027,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.2702702702702703,
+      "abs_error": 2.7027030613524516e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 443,
+        "completion_tokens": 71,
+        "cost_usd": 0.00010905
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"combined_vertical_motion\": \"neutral\",\n    \"quasigeostrophic_vertical_motion\": \"down\",\n    \"subjective_vertical_motion\": \"weak_up\"\n  },\n  \"query\": {\n    \"variable\": \"n0_7mu_vertical_motion\",\n    \"state\": \"neutral\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "combined_vertical_motion": "neutral",
+          "quasigeostrophic_vertical_motion": "down",
+          "subjective_vertical_motion": "weak_up"
+        },
+        "query": {
+          "variable": "n0_7mu_vertical_motion",
+          "state": "neutral"
+        }
+      },
+      "query_var": "n0_7mu_vertical_motion",
+      "query_state": "neutral",
+      "evidence": {
+        "combined_vertical_motion": "neutral",
+        "quasigeostrophic_vertical_motion": "down",
+        "subjective_vertical_motion": "weak_up"
+      },
+      "posterior": {
+        "down": 0.10810810810810813,
+        "neutral": 0.2702702702702703,
+        "strong_up": 0.24324324324324326,
+        "weak_up": 0.3783783783783784
+      },
+      "evidence_prob": 0.013874999999999998
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 6,
+      "evidences": [
+        "The quasigeostrophic vertical motion is moving downwards.",
+        "The area of meso-alpha is also moving downwards.",
+        "The 10.7mu vertical motion is neutral.",
+        "The subjective judgment of vertical motion is neutral."
+      ],
+      "query": "What is the likelihood of the combined vertical motion being strongly upwards?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 455,
+        "completion_tokens": 80,
+        "cost_usd": 0.00011625
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"quasigeostrophic_vertical_motion\": \"down\",\n    \"area_meso_alpha\": \"down\",\n    \"n0_7mu_vertical_motion\": \"neutral\",\n    \"subjective_vertical_motion\": \"neutral\"\n  },\n  \"query\": {\n    \"variable\": \"combined_vertical_motion\",\n    \"state\": \"strong_up\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "quasigeostrophic_vertical_motion": "down",
+          "area_meso_alpha": "down",
+          "n0_7mu_vertical_motion": "neutral",
+          "subjective_vertical_motion": "neutral"
+        },
+        "query": {
+          "variable": "combined_vertical_motion",
+          "state": "strong_up"
+        }
+      },
+      "query_var": "combined_vertical_motion",
+      "query_state": "strong_up",
+      "evidence": {
+        "quasigeostrophic_vertical_motion": "down",
+        "area_meso_alpha": "down",
+        "n0_7mu_vertical_motion": "neutral",
+        "subjective_vertical_motion": "neutral"
+      },
+      "posterior": {
+        "down": 1.0,
+        "neutral": 0.0,
+        "strong_up": 0.0,
+        "weak_up": 0.0
+      },
+      "evidence_prob": 0.0075
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 9,
+      "evidences": [
+        "The area of meso-alpha is currently in a downward trend.",
+        "The combined vertical motion has been decreasing."
+      ],
+      "query": "What is the likelihood of the 10.7mu vertical motion being weakly upward?",
+      "gold": 0.17717931,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.1771793054571226,
+      "abs_error": 4.542877407587298e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 435,
+        "completion_tokens": 58,
+        "cost_usd": 0.00010005
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"area_meso_alpha\": \"down\",\n    \"combined_vertical_motion\": \"down\"\n  },\n  \"query\": {\n    \"variable\": \"n0_7mu_vertical_motion\",\n    \"state\": \"weak_up\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "area_meso_alpha": "down",
+          "combined_vertical_motion": "down"
+        },
+        "query": {
+          "variable": "n0_7mu_vertical_motion",
+          "state": "weak_up"
+        }
+      },
+      "query_var": "n0_7mu_vertical_motion",
+      "query_state": "weak_up",
+      "evidence": {
+        "area_meso_alpha": "down",
+        "combined_vertical_motion": "down"
+      },
+      "posterior": {
+        "down": 0.5804394046775337,
+        "neutral": 0.16300496102055279,
+        "strong_up": 0.07937632884479094,
+        "weak_up": 0.1771793054571226
+      },
+      "evidence_prob": 0.176375
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 10,
+      "evidences": [
+        "The 10.7mu vertical motion is strong up.",
+        "The area of meso-alpha is currently down.",
+        "The quasigeostrophic vertical motion is neutral."
+      ],
+      "query": "What is the likelihood of the combined vertical motion being down?",
+      "gold": 1.0,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 441,
+        "completion_tokens": 71,
+        "cost_usd": 0.00010875
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"n0_7mu_vertical_motion\": \"strong_up\",\n    \"area_meso_alpha\": \"down\",\n    \"quasigeostrophic_vertical_motion\": \"neutral\"\n  },\n  \"query\": {\n    \"variable\": \"combined_vertical_motion\",\n    \"state\": \"down\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "n0_7mu_vertical_motion": "strong_up",
+          "area_meso_alpha": "down",
+          "quasigeostrophic_vertical_motion": "neutral"
+        },
+        "query": {
+          "variable": "combined_vertical_motion",
+          "state": "down"
+        }
+      },
+      "query_var": "combined_vertical_motion",
+      "query_state": "down",
+      "evidence": {
+        "n0_7mu_vertical_motion": "strong_up",
+        "area_meso_alpha": "down",
+        "quasigeostrophic_vertical_motion": "neutral"
+      },
+      "posterior": {
+        "down": 1.0,
+        "neutral": 0.0,
+        "strong_up": 0.0,
+        "weak_up": 0.0
+      },
+      "evidence_prob": 0.0025000000000000005
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 11,
+      "evidences": [
+        "The subjective judgment of vertical motion is weak.",
+        "The 10.7mu vertical motion is neutral.",
+        "The combined vertical motion is neutral."
+      ],
+      "query": "What is the likelihood of the quasigeostrophic vertical motion being strongly upward?",
+      "gold": 0.043478261,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.04347826086956521,
+      "abs_error": 1.3043478797047925e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 440,
+        "completion_tokens": 71,
+        "cost_usd": 0.0001086
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"subjective_vertical_motion\": \"weak_up\",\n    \"n0_7mu_vertical_motion\": \"neutral\",\n    \"combined_vertical_motion\": \"neutral\"\n  },\n  \"query\": {\n    \"variable\": \"quasigeostrophic_vertical_motion\",\n    \"state\": \"strong_up\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "subjective_vertical_motion": "weak_up",
+          "n0_7mu_vertical_motion": "neutral",
+          "combined_vertical_motion": "neutral"
+        },
+        "query": {
+          "variable": "quasigeostrophic_vertical_motion",
+          "state": "strong_up"
+        }
+      },
+      "query_var": "quasigeostrophic_vertical_motion",
+      "query_state": "strong_up",
+      "evidence": {
+        "subjective_vertical_motion": "weak_up",
+        "n0_7mu_vertical_motion": "neutral",
+        "combined_vertical_motion": "neutral"
+      },
+      "posterior": {
+        "down": 0.19323671497584538,
+        "neutral": 0.6763285024154588,
+        "strong_up": 0.04347826086956521,
+        "weak_up": 0.08695652173913042
+      },
+      "evidence_prob": 0.019406250000000003
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 12,
+      "evidences": [
+        "A person's subjective judgment of vertical motion is strongly up.",
+        "The 10.7 micron vertical motion is strongly up."
+      ],
+      "query": "What is the likelihood of the combined vertical motion being weakly up?",
+      "gold": 0.215,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.21499999999999997,
+      "abs_error": 2.7755575615628914e-17,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 433,
+        "completion_tokens": 60,
+        "cost_usd": 0.00010095
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"subjective_vertical_motion\": \"strong_up\",\n    \"n0_7mu_vertical_motion\": \"strong_up\"\n  },\n  \"query\": {\n    \"variable\": \"combined_vertical_motion\",\n    \"state\": \"weak_up\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "subjective_vertical_motion": "strong_up",
+          "n0_7mu_vertical_motion": "strong_up"
+        },
+        "query": {
+          "variable": "combined_vertical_motion",
+          "state": "weak_up"
+        }
+      },
+      "query_var": "combined_vertical_motion",
+      "query_state": "weak_up",
+      "evidence": {
+        "subjective_vertical_motion": "strong_up",
+        "n0_7mu_vertical_motion": "strong_up"
+      },
+      "posterior": {
+        "down": 0.02,
+        "neutral": 0.09,
+        "strong_up": 0.6749999999999999,
+        "weak_up": 0.21499999999999997
+      },
+      "evidence_prob": 0.037500000000000006
+    },
+    {
+      "network": "hailfinder0",
+      "pair_id": 13,
+      "evidences": [
+        "The area of meso-alpha is neutral.",
+        "The 10.7mu vertical motion is strongly upwards.",
+        "A subjective judgment of vertical motion is strongly upwards.",
+        "The combined vertical motion is neutral."
+      ],
+      "query": "What is the likelihood of the quasigeostrophic vertical motion being neutral?",
+      "gold": 0.55555556,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.5555555555555556,
+      "abs_error": 4.444444368090217e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 451,
+        "completion_tokens": 82,
+        "cost_usd": 0.00011685
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"area_meso_alpha\": \"neutral\",\n    \"n0_7mu_vertical_motion\": \"strong_up\",\n    \"subjective_vertical_motion\": \"strong_up\",\n    \"combined_vertical_motion\": \"neutral\"\n  },\n  \"query\": {\n    \"variable\": \"quasigeostrophic_vertical_motion\",\n    \"state\": \"neutral\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "area_meso_alpha": "neutral",
+          "n0_7mu_vertical_motion": "strong_up",
+          "subjective_vertical_motion": "strong_up",
+          "combined_vertical_motion": "neutral"
+        },
+        "query": {
+          "variable": "quasigeostrophic_vertical_motion",
+          "state": "neutral"
+        }
+      },
+      "query_var": "quasigeostrophic_vertical_motion",
+      "query_state": "neutral",
+      "evidence": {
+        "area_meso_alpha": "neutral",
+        "n0_7mu_vertical_motion": "strong_up",
+        "subjective_vertical_motion": "strong_up",
+        "combined_vertical_motion": "neutral"
+      },
+      "posterior": {
+        "down": 0.4444444444444445,
+        "neutral": 0.5555555555555556,
+        "strong_up": 0.0,
+        "weak_up": 0.0
+      },
+      "evidence_prob": 0.003375
+    },
+    {
+      "network": "water1",
+      "pair_id": 1,
+      "evidences": [
+        "The Carbonaceous Biochemical Oxygen Demand for Nitrogen (CBODN) was measured at 12:15 and was equal to 10 mg/L."
+      ],
+      "query": "What is the likelihood of the CBODN being 20 mg/L at 12:00?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 403,
+        "completion_tokens": 50,
+        "cost_usd": 9.045e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cbodn_12_15\": \"10\"\n  },\n  \"query\": {\n    \"variable\": \"cbodn_12_00\",\n    \"state\": \"20\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cbodn_12_15": "10"
+        },
+        "query": {
+          "variable": "cbodn_12_00",
+          "state": "20"
+        }
+      },
+      "query_var": "cbodn_12_00",
+      "query_state": "20",
+      "evidence": {
+        "cbodn_12_15": "10"
+      },
+      "posterior": {
+        "10": 1.0,
+        "15": 0.0,
+        "20": 0.0,
+        "5": 0.0
+      },
+      "evidence_prob": 0.9922
+    },
+    {
+      "network": "water1",
+      "pair_id": 7,
+      "evidences": [
+        "The Carbonaceous Biochemical Oxygen Demand for Nitrogen (CBODN) was measured at 12:00 and the value was 10 mg/L."
+      ],
+      "query": "What is the likelihood of the CBODN being 15 mg/L at 12:15?",
+      "gold": 0.0078,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0078,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 403,
+        "completion_tokens": 51,
+        "cost_usd": 9.105e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cbodn_12_00\": \"10\"\n  },\n  \"query\": {\n    \"variable\": \"cbodn_12_15\",\n    \"state\": \"15\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cbodn_12_00": "10"
+        },
+        "query": {
+          "variable": "cbodn_12_15",
+          "state": "15"
+        }
+      },
+      "query_var": "cbodn_12_15",
+      "query_state": "15",
+      "evidence": {
+        "cbodn_12_00": "10"
+      },
+      "posterior": {
+        "10": 0.9922,
+        "15": 0.0078,
+        "20": 0.0,
+        "5": 0.0
+      },
+      "evidence_prob": 1.0
+    },
+    {
+      "network": "water1",
+      "pair_id": 2,
+      "evidences": [
+        "The concentration of a nitrogenous compound (CNON) at 12:00 is 4 mg/L."
+      ],
+      "query": "What is the likelihood of the Carbonaceous Biochemical Oxygen Demand being 25 mg/L at 12:00?",
+      "gold": 0.0,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 397,
+        "completion_tokens": 49,
+        "cost_usd": 8.895e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cnon_12_00\": \"4\"\n  },\n  \"query\": {\n    \"variable\": \"cbodd_12_00\",\n    \"state\": \"25\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cnon_12_00": "4"
+        },
+        "query": {
+          "variable": "cbodd_12_00",
+          "state": "25"
+        }
+      },
+      "query_var": "cbodd_12_00",
+      "query_state": "25",
+      "evidence": {
+        "cnon_12_00": "4"
+      },
+      "posterior": {
+        "15": 0.0,
+        "20": 1.0,
+        "25": 0.0,
+        "30": 0.0
+      },
+      "evidence_prob": 1.0
+    },
+    {
+      "network": "water1",
+      "pair_id": 3,
+      "evidences": [
+        "The Carbonaceous Biochemical Oxygen Demand for Nitrogen (CBODN) was 10 mg/L at 12:15."
+      ],
+      "query": "What is the likelihood of the concentration of some nitrogenous compound being 6 mg/L at 12:00?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 401,
+        "completion_tokens": 49,
+        "cost_usd": 8.955e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cbodn_12_15\": \"10\"\n  },\n  \"query\": {\n    \"variable\": \"cnon_12_00\",\n    \"state\": \"6\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cbodn_12_15": "10"
+        },
+        "query": {
+          "variable": "cnon_12_00",
+          "state": "6"
+        }
+      },
+      "query_var": "cnon_12_00",
+      "query_state": "6",
+      "evidence": {
+        "cbodn_12_15": "10"
+      },
+      "posterior": {
+        "10": 0.0,
+        "2": 0.0,
+        "4": 1.0,
+        "6": 0.0
+      },
+      "evidence_prob": 0.9922
+    },
+    {
+      "network": "water1",
+      "pair_id": 4,
+      "evidences": [
+        "The CBODN was 15 mg/L at 12:15.",
+        "The Carbonaceous Biochemical Oxygen Demand for Nitrogen (CBODN) was 10 mg/L at 12:00."
+      ],
+      "query": "What is the likelihood of the Carbonaceous Biochemical Oxygen Demand (CBODD) being 20 mg/L at 12:00?",
+      "gold": 1.0,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 422,
+        "completion_tokens": 63,
+        "cost_usd": 0.0001011
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cbodn_12_15\": \"15\",\n    \"cbodn_12_00\": \"10\"\n  },\n  \"query\": {\n    \"variable\": \"cbodd_12_00\",\n    \"state\": \"20\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cbodn_12_15": "15",
+          "cbodn_12_00": "10"
+        },
+        "query": {
+          "variable": "cbodd_12_00",
+          "state": "20"
+        }
+      },
+      "query_var": "cbodd_12_00",
+      "query_state": "20",
+      "evidence": {
+        "cbodn_12_15": "15",
+        "cbodn_12_00": "10"
+      },
+      "posterior": {
+        "15": 0.0,
+        "20": 1.0,
+        "25": 0.0,
+        "30": 0.0
+      },
+      "evidence_prob": 0.0078
+    },
+    {
+      "network": "water1",
+      "pair_id": 0,
+      "evidences": [
+        "The concentration of a nitrogenous compound (CNON) at 12:00 is 4 mg/L."
+      ],
+      "query": "What is the likelihood of the Carbonaceous Biochemical Oxygen Demand (CBODN) being 15 mg/L at 12:00?",
+      "gold": 0.0,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 402,
+        "completion_tokens": 50,
+        "cost_usd": 9.03e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cnon_12_00\": \"4\"\n  },\n  \"query\": {\n    \"variable\": \"cbodn_12_00\",\n    \"state\": \"15\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cnon_12_00": "4"
+        },
+        "query": {
+          "variable": "cbodn_12_00",
+          "state": "15"
+        }
+      },
+      "query_var": "cbodn_12_00",
+      "query_state": "15",
+      "evidence": {
+        "cnon_12_00": "4"
+      },
+      "posterior": {
+        "10": 1.0,
+        "15": 0.0,
+        "20": 0.0,
+        "5": 0.0
+      },
+      "evidence_prob": 1.0
+    },
+    {
+      "network": "water1",
+      "pair_id": 5,
+      "evidences": [
+        "The concentration of a nitrogenous compound (CNON) at 12:00 is 4 mg/L.",
+        "The Carbonaceous Biochemical Oxygen Demand for Nitrogen (CBODN) at 12:15 is 15 mg/L."
+      ],
+      "query": "What is the likelihood of the Carbonaceous Biochemical Oxygen Demand for Nitrogen (CBODN) being 20 mg/L at 12:00?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 432,
+        "completion_tokens": 63,
+        "cost_usd": 0.0001026
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cnon_12_00\": \"4\",\n    \"cbodn_12_15\": \"15\"\n  },\n  \"query\": {\n    \"variable\": \"cbodn_12_00\",\n    \"state\": \"20\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cnon_12_00": "4",
+          "cbodn_12_15": "15"
+        },
+        "query": {
+          "variable": "cbodn_12_00",
+          "state": "20"
+        }
+      },
+      "query_var": "cbodn_12_00",
+      "query_state": "20",
+      "evidence": {
+        "cnon_12_00": "4",
+        "cbodn_12_15": "15"
+      },
+      "posterior": {
+        "10": 1.0,
+        "15": 0.0,
+        "20": 0.0,
+        "5": 0.0
+      },
+      "evidence_prob": 0.0078
+    },
+    {
+      "network": "water1",
+      "pair_id": 6,
+      "evidences": [
+        "The Carbonaceous Biochemical Oxygen Demand for Nitrogen (CBODN) was 10 mg/L at 12:15."
+      ],
+      "query": "What is the likelihood of the concentration of some nitrogenous compound (CNON) being 6 mg/L at 12:00?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 405,
+        "completion_tokens": 50,
+        "cost_usd": 9.075e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cbodn_12_15\": \"10\"\n  },\n  \"query\": {\n    \"variable\": \"cnon_12_00\",\n    \"state\": \"6\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cbodn_12_15": "10"
+        },
+        "query": {
+          "variable": "cnon_12_00",
+          "state": "6"
+        }
+      },
+      "query_var": "cnon_12_00",
+      "query_state": "6",
+      "evidence": {
+        "cbodn_12_15": "10"
+      },
+      "posterior": {
+        "10": 0.0,
+        "2": 0.0,
+        "4": 1.0,
+        "6": 0.0
+      },
+      "evidence_prob": 0.9922
+    },
+    {
+      "network": "water1",
+      "pair_id": 8,
+      "evidences": [
+        "The Carbonaceous Biochemical Oxygen Demand for Nitrogen (CBODN) was 10 mg/L at 12:15."
+      ],
+      "query": "What is the likelihood of the concentration of some nitrogenous compound being 4 mg/L at 12:00?",
+      "gold": 1.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 401,
+        "completion_tokens": 50,
+        "cost_usd": 9.015e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cbodn_12_15\": \"10\"\n  },\n  \"query\": {\n    \"variable\": \"cnon_12_00\",\n    \"state\": \"4\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cbodn_12_15": "10"
+        },
+        "query": {
+          "variable": "cnon_12_00",
+          "state": "4"
+        }
+      },
+      "query_var": "cnon_12_00",
+      "query_state": "4",
+      "evidence": {
+        "cbodn_12_15": "10"
+      },
+      "posterior": {
+        "10": 0.0,
+        "2": 0.0,
+        "4": 1.0,
+        "6": 0.0
+      },
+      "evidence_prob": 0.9922
+    },
+    {
+      "network": "water1",
+      "pair_id": 9,
+      "evidences": [
+        "The concentration of a nitrogenous compound (CNON) is 4 mg/L at 12:00."
+      ],
+      "query": "What is the likelihood of the Carbonaceous Biochemical Oxygen Demand for Nitrogen (CBODN) being 5 mg/L at 12:00?",
+      "gold": 0.0,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 405,
+        "completion_tokens": 50,
+        "cost_usd": 9.075e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cnon_12_00\": \"4\"\n  },\n  \"query\": {\n    \"variable\": \"cbodn_12_00\",\n    \"state\": \"5\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cnon_12_00": "4"
+        },
+        "query": {
+          "variable": "cbodn_12_00",
+          "state": "5"
+        }
+      },
+      "query_var": "cbodn_12_00",
+      "query_state": "5",
+      "evidence": {
+        "cnon_12_00": "4"
+      },
+      "posterior": {
+        "10": 1.0,
+        "15": 0.0,
+        "20": 0.0,
+        "5": 0.0
+      },
+      "evidence_prob": 1.0
+    },
+    {
+      "network": "water1",
+      "pair_id": 10,
+      "evidences": [
+        "The Carbonaceous Biochemical Oxygen Demand for Nitrogen (CBODN) was measured at 12:15 and the result was 15 mg/L."
+      ],
+      "query": "What is the likelihood of the concentration of some nitrogenous compound being 4 mg/L at 12:00?",
+      "gold": 1.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 406,
+        "completion_tokens": 50,
+        "cost_usd": 9.09e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"cbodn_12_15\": \"15\"\n  },\n  \"query\": {\n    \"variable\": \"cnon_12_00\",\n    \"state\": \"4\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "cbodn_12_15": "15"
+        },
+        "query": {
+          "variable": "cnon_12_00",
+          "state": "4"
+        }
+      },
+      "query_var": "cnon_12_00",
+      "query_state": "4",
+      "evidence": {
+        "cbodn_12_15": "15"
+      },
+      "posterior": {
+        "10": 0.0,
+        "2": 0.0,
+        "4": 1.0,
+        "6": 0.0
+      },
+      "evidence_prob": 0.0078
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 9,
+      "evidences": [
+        "The level of MEK is high."
+      ],
+      "query": "What is the likelihood of the level of Raf being high?",
+      "gold": 0.88394073,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.8840045750032294,
+      "abs_error": 6.384500322942355e-05,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 459,
+        "completion_tokens": 39,
+        "cost_usd": 9.225e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"mek\": \"high\"\n  },\n  \"query\": {\n    \"variable\": \"raf\",\n    \"state\": \"high\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "mek": "high"
+        },
+        "query": {
+          "variable": "raf",
+          "state": "high"
+        }
+      },
+      "query_var": "raf",
+      "query_state": "high",
+      "evidence": {
+        "mek": "high"
+      },
+      "posterior": {
+        "average": 0.1158158478824957,
+        "high": 0.8840045750032294,
+        "low": 0.0001795771142748669
+      },
+      "evidence_prob": 0.1130901748923405
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 4,
+      "evidences": [
+        "The level of Akt is high.",
+        "The level of protein kinase C (PKC) is low."
+      ],
+      "query": "What is the likelihood of Jnk being average?",
+      "gold": 0.24586071,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.24586072398752187,
+      "abs_error": 1.3987521862990349e-08,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 470,
+        "completion_tokens": 48,
+        "cost_usd": 9.93e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"akt\": \"high\",\n    \"pkc\": \"low\"\n  },\n  \"query\": {\n    \"variable\": \"jnk\",\n    \"state\": \"average\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "akt": "high",
+          "pkc": "low"
+        },
+        "query": {
+          "variable": "jnk",
+          "state": "average"
+        }
+      },
+      "query_var": "jnk",
+      "query_state": "average",
+      "evidence": {
+        "akt": "high",
+        "pkc": "low"
+      },
+      "posterior": {
+        "average": 0.24586072398752187,
+        "high": 0.46385976601351747,
+        "low": 0.2902795099989606
+      },
+      "evidence_prob": 0.07687594447549162
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 2,
+      "evidences": [
+        "The level of MAPK/ERK kinase (Mek) is low."
+      ],
+      "query": "What is the likelihood of the level of Extracellular signal-regulated kinases (Erk) being average?",
+      "gold": 0.6271779,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.6261184583781172,
+      "abs_error": 0.0010594416218827618,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 478,
+        "completion_tokens": 39,
+        "cost_usd": 9.51e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"mek\": \"low\"\n  },\n  \"query\": {\n    \"variable\": \"erk\",\n    \"state\": \"average\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "mek": "low"
+        },
+        "query": {
+          "variable": "erk",
+          "state": "average"
+        }
+      },
+      "query_var": "erk",
+      "query_state": "average",
+      "evidence": {
+        "mek": "low"
+      },
+      "posterior": {
+        "average": 0.6261184583781172,
+        "high": 0.17619545333160286,
+        "low": 0.19768608829028003
+      },
+      "evidence_prob": 0.5731136772002465
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 0,
+      "evidences": [
+        "The AKT protein level is average.",
+        "The ERK protein level is low."
+      ],
+      "query": "What is the likelihood of the JNK protein level being HIGH?",
+      "gold": 0.15703602,
+      "reasoning_types": [],
+      "pred": 0.15771271394718048,
+      "abs_error": 0.0006766939471804789,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 469,
+        "completion_tokens": 47,
+        "cost_usd": 9.855e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"akt\": \"average\",\n    \"erk\": \"low\"\n  },\n  \"query\": {\n    \"variable\": \"jnk\",\n    \"state\": \"high\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "akt": "average",
+          "erk": "low"
+        },
+        "query": {
+          "variable": "jnk",
+          "state": "high"
+        }
+      },
+      "query_var": "jnk",
+      "query_state": "high",
+      "evidence": {
+        "akt": "average",
+        "erk": "low"
+      },
+      "posterior": {
+        "average": 0.3939095211333469,
+        "high": 0.15771271394718048,
+        "low": 0.44837776491947273
+      },
+      "evidence_prob": 0.04515291599008231
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 6,
+      "evidences": [
+        "The level of Protein Kinase C (PKC) is high."
+      ],
+      "query": "What is the likelihood of PKC being high?",
+      "gold": 1.0,
+      "reasoning_types": [
+        "observation"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 463,
+        "completion_tokens": 40,
+        "cost_usd": 9.345e-05
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"pkc\": \"high\"\n  },\n  \"query\": {\n    \"variable\": \"pkc\",\n    \"state\": \"high\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "pkc": "high"
+        },
+        "query": {
+          "variable": "pkc",
+          "state": "high"
+        }
+      },
+      "query_var": "pkc",
+      "query_state": "high",
+      "evidence": {
+        "pkc": "high"
+      },
+      "posterior": {
+        "average": 0.0,
+        "high": 1.0,
+        "low": 0.0
+      },
+      "evidence_prob": 0.09421034642226857
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 1,
+      "evidences": [
+        "Raf is at an average level.",
+        "Protein Kinase C (PKC) is at an average level.",
+        "Akt is at an average level.",
+        "Jnk is at an average level.",
+        "Mek is at an average level.",
+        "PKA is at an average level.",
+        "P38 is at an average level."
+      ],
+      "query": "What is the likelihood of Erk being at a low level?",
+      "gold": 0.056300659,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.05630065851038703,
+      "abs_error": 4.89612975163034e-10,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 516,
+        "completion_tokens": 89,
+        "cost_usd": 0.0001308
+      },
+      "raw_response": "```json\n{\n  \"evidence\": {\n    \"raf\": \"average\",\n    \"pkc\": \"average\",\n    \"akt\": \"average\",\n    \"jnk\": \"average\",\n    \"mek\": \"average\",\n    \"pka\": \"average\",\n    \"p38\": \"average\"\n  },\n  \"query\": {\n    \"variable\": \"erk\",\n    \"state\": \"low\"\n  }\n}\n```",
+      "response_json": {
+        "evidence": {
+          "raf": "average",
+          "pkc": "average",
+          "akt": "average",
+          "jnk": "average",
+          "mek": "average",
+          "pka": "average",
+          "p38": "average"
+        },
+        "query": {
+          "variable": "erk",
+          "state": "low"
+        }
+      },
+      "query_var": "erk",
+      "query_state": "low",
+      "evidence": {
+        "raf": "average",
+        "pkc": "average",
+        "akt": "average",
+        "jnk": "average",
+        "mek": "average",
+        "pka": "average",
+        "p38": "average"
+      },
+      "posterior": {
+        "average": 0.3936871226944515,
+        "high": 0.5500122187951615,
+        "low": 0.05630065851038703
+      },
+      "evidence_prob": 0.0029669929769355337
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 3,
+      "evidences": [
+        "The JNK level is low.",
+        "The ERK level is low.",
+        "The P38 level is low.",
+        "The PKA level is high.",
+        "The Raf level is low."
+      ],
+      "query": "What is the likelihood of the PKC level being low?",
+      "gold": 0.96901669,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.9690166927817185,
+      "abs_error": 2.7817185221934437e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 489,
+        "completion_tokens": 71,
+        "cost_usd": 0.00011595
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"jnk\": \"low\",\n    \"erk\": \"low\",\n    \"p38\": \"low\",\n    \"pka\": \"high\",\n    \"raf\": \"low\"\n  },\n  \"query\": {\n    \"variable\": \"pkc\",\n    \"state\": \"low\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "jnk": "low",
+          "erk": "low",
+          "p38": "low",
+          "pka": "high",
+          "raf": "low"
+        },
+        "query": {
+          "variable": "pkc",
+          "state": "low"
+        }
+      },
+      "query_var": "pkc",
+      "query_state": "low",
+      "evidence": {
+        "jnk": "low",
+        "erk": "low",
+        "p38": "low",
+        "pka": "high",
+        "raf": "low"
+      },
+      "posterior": {
+        "average": 0.02838044864221971,
+        "high": 0.0026028585760617105,
+        "low": 0.9690166927817185
+      },
+      "evidence_prob": 0.005071170292235444
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 5,
+      "evidences": [
+        "The level of P38 is low.",
+        "The level of PKC is low.",
+        "The level of PKA is low.",
+        "The level of Jnk is low.",
+        "The level of Akt is high.",
+        "The level of Erk is average.",
+        "The level of Mek is high."
+      ],
+      "query": "What is the likelihood of the level of Raf being average?",
+      "gold": 0.11070896,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.11070896238689053,
+      "abs_error": 2.3868905324464507e-09,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 510,
+        "completion_tokens": 85,
+        "cost_usd": 0.0001275
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"p38\": \"low\",\n    \"pkc\": \"low\",\n    \"pka\": \"low\",\n    \"jnk\": \"low\",\n    \"akt\": \"high\",\n    \"erk\": \"average\",\n    \"mek\": \"high\"\n  },\n  \"query\": {\n    \"variable\": \"raf\",\n    \"state\": \"average\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "p38": "low",
+          "pkc": "low",
+          "pka": "low",
+          "jnk": "low",
+          "akt": "high",
+          "erk": "average",
+          "mek": "high"
+        },
+        "query": {
+          "variable": "raf",
+          "state": "average"
+        }
+      },
+      "query_var": "raf",
+      "query_state": "average",
+      "evidence": {
+        "p38": "low",
+        "pkc": "low",
+        "pka": "low",
+        "jnk": "low",
+        "akt": "high",
+        "erk": "average",
+        "mek": "high"
+      },
+      "posterior": {
+        "average": 0.11070896238689053,
+        "high": 0.8892719905548603,
+        "low": 1.904705824911431e-05
+      },
+      "evidence_prob": 3.577694259804232e-07
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 7,
+      "evidences": [
+        "The level of P38 is low.",
+        "The level of PKC is low.",
+        "The level of PKA is low.",
+        "The level of Jnk is low.",
+        "The level of Akt is high.",
+        "The level of Erk is average.",
+        "The level of Mek is high."
+      ],
+      "query": "What is the likelihood of PKA being high?",
+      "gold": 0.0,
+      "reasoning_types": [
+        "observation"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 508,
+        "completion_tokens": 86,
+        "cost_usd": 0.0001278
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"p38\": \"low\",\n    \"pkc\": \"low\",\n    \"pka\": \"low\",\n    \"jnk\": \"low\",\n    \"akt\": \"high\",\n    \"erk\": \"average\",\n    \"mek\": \"high\"\n  },\n  \"query\": {\n    \"variable\": \"pka\",\n    \"state\": \"high\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "p38": "low",
+          "pkc": "low",
+          "pka": "low",
+          "jnk": "low",
+          "akt": "high",
+          "erk": "average",
+          "mek": "high"
+        },
+        "query": {
+          "variable": "pka",
+          "state": "high"
+        }
+      },
+      "query_var": "pka",
+      "query_state": "high",
+      "evidence": {
+        "p38": "low",
+        "pkc": "low",
+        "pka": "low",
+        "jnk": "low",
+        "akt": "high",
+        "erk": "average",
+        "mek": "high"
+      },
+      "posterior": {
+        "average": 0.0,
+        "high": 0.0,
+        "low": 1.0
+      },
+      "evidence_prob": 3.5776942598042326e-07
+    },
+    {
+      "network": "sachs1",
+      "pair_id": 8,
+      "evidences": [
+        "The MAPK/ERK kinase signal transduction pathway is highly active.",
+        "The protein kinase A is at a low level.",
+        "The Raf family of proteins is at an average level.",
+        "The c-Jun N-terminal kinases are highly active.",
+        "The Protein Kinase C is at an average level."
+      ],
+      "query": "What is the likelihood of the P38 group of MAPKs being at an average level?",
+      "gold": 0.3493,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.34740882917466415,
+      "abs_error": 0.0018911708253358528,
+      "ok_0_01": true,
+      "ok_0_05": true,
+      "failure_mode": null,
+      "usage": {
+        "prompt_tokens": 519,
+        "completion_tokens": 70,
+        "cost_usd": 0.00011985
+      },
+      "raw_response": "{\n  \"evidence\": {\n    \"erk\": \"high\",\n    \"pka\": \"low\",\n    \"raf\": \"average\",\n    \"jnk\": \"high\",\n    \"pkc\": \"average\"\n  },\n  \"query\": {\n    \"variable\": \"p38\",\n    \"state\": \"average\"\n  }\n}",
+      "response_json": {
+        "evidence": {
+          "erk": "high",
+          "pka": "low",
+          "raf": "average",
+          "jnk": "high",
+          "pkc": "average"
+        },
+        "query": {
+          "variable": "p38",
+          "state": "average"
+        }
+      },
+      "query_var": "p38",
+      "query_state": "average",
+      "evidence": {
+        "erk": "high",
+        "pka": "low",
+        "raf": "average",
+        "jnk": "high",
+        "pkc": "average"
+      },
+      "posterior": {
+        "average": 0.34740882917466415,
+        "high": 0.0002020406101626427,
+        "low": 0.6523891302151732
+      },
+      "evidence_prob": 1.858779079210146e-07
+    }
+  ],
+  "timestamp": "2026-05-03T13:31:42Z",
+  "_meta": {
+    "prompt_tokens": 37823,
+    "completion_tokens": 4335,
+    "total_cost_usd": 0.008274450000000001,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "fe83209f",
+    "timestamp_utc": "2026-05-03T13:31:42.754736+00:00",
+    "script": "baselines/run_quite_registered_e2e.py",
+    "n_networks": 5,
+    "n_queries": 75,
+    "preset": "hard-compute-expanded-75",
+    "limit_total": null
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "preference": {
+    "task": "preference",
+    "model": "openai/gpt-4o-mini",
+    "n_samples": 200,
+    "parse_accuracy": 0.82,
+    "structural_parse_accuracy": 0.82,
+    "parse_field_accuracy": {
+      "n_features": 0.82,
+      "feature_names": 0.82,
+      "preference_values": 0.82,
+      "observations_choice": 0.82,
+      "current_options": 0.82
+    },
+    "compute_accuracy": 0.275,
+    "decide_accuracy": 1.0
+  }
+}

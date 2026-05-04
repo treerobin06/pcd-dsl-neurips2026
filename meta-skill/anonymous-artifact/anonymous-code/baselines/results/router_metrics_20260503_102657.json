@@ -1,0 +1,170 @@
+{
+  "experiment": "router_scope_gate_metrics",
+  "source_artifact": "baselines/results/all_family_mixed_e2e_openai_gpt-4o-mini_20260502_221603.json",
+  "summary": {
+    "route_accuracy": {
+      "n": 650,
+      "correct": 650,
+      "rate": 1.0,
+      "wilson_95ci": [
+        0.9941245708440697,
+        0.9999999999999999
+      ]
+    },
+    "supported_recall": {
+      "n": 600,
+      "correct": 600,
+      "rate": 1.0,
+      "wilson_95ci": [
+        0.9936380666717896,
+        1.0
+      ]
+    },
+    "unsupported_reject_recall": {
+      "n": 50,
+      "correct": 50,
+      "rate": 1.0,
+      "wilson_95ci": [
+        0.9286499658256813,
+        1.0
+      ]
+    },
+    "supported_precision": {
+      "n": 600,
+      "correct": 600,
+      "rate": 1.0,
+      "wilson_95ci": [
+        0.9936380666717896,
+        1.0
+      ]
+    },
+    "reject_precision": {
+      "n": 50,
+      "correct": 50,
+      "rate": 1.0,
+      "wilson_95ci": [
+        0.9286499658256813,
+        1.0
+      ]
+    },
+    "false_reject": {
+      "count": 0,
+      "denominator": 600
+    },
+    "false_accept": {
+      "count": 0,
+      "denominator": 50
+    },
+    "by_family": {
+      "blind": {
+        "n": 100,
+        "correct": 100,
+        "rate": 1.0,
+        "wilson_95ci": [
+          0.9630051925239981,
+          0.9999999999999999
+        ]
+      },
+      "flight": {
+        "n": 100,
+        "correct": 100,
+        "rate": 1.0,
+        "wilson_95ci": [
+          0.9630051925239981,
+          0.9999999999999999
+        ]
+      },
+      "hmm": {
+        "n": 100,
+        "correct": 100,
+        "rate": 1.0,
+        "wilson_95ci": [
+          0.9630051925239981,
+          0.9999999999999999
+        ]
+      },
+      "hotel": {
+        "n": 100,
+        "correct": 100,
+        "rate": 1.0,
+        "wilson_95ci": [
+          0.9630051925239981,
+          0.9999999999999999
+        ]
+      },
+      "nb": {
+        "n": 100,
+        "correct": 100,
+        "rate": 1.0,
+        "wilson_95ci": [
+          0.9630051925239981,
+          0.9999999999999999
+        ]
+      },
+      "textbandit": {
+        "n": 100,
+        "correct": 100,
+        "rate": 1.0,
+        "wilson_95ci": [
+          0.9630051925239981,
+          0.9999999999999999
+        ]
+      },
+      "unsupported": {
+        "n": 50,
+        "correct": 50,
+        "rate": 1.0,
+        "wilson_95ci": [
+          0.9286499658256813,
+          1.0
+        ]
+      }
+    },
+    "confusion": [
+      {
+        "gold": "blind",
+        "route": "blind",
+        "count": 100
+      },
+      {
+        "gold": "flight",
+        "route": "flight",
+        "count": 100
+      },
+      {
+        "gold": "hmm",
+        "route": "hmm",
+        "count": 100
+      },
+      {
+        "gold": "hotel",
+        "route": "hotel",
+        "count": 100
+      },
+      {
+        "gold": "nb",
+        "route": "nb",
+        "count": 100
+      },
+      {
+        "gold": "textbandit",
+        "route": "textbandit",
+        "count": 100
+      },
+      {
+        "gold": "unsupported",
+        "route": "reject",
+        "count": 50
+      }
+    ]
+  },
+  "_meta": {
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_cost_usd": 0.0,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "9a80bb50",
+    "timestamp_utc": "2026-05-03T10:26:57.204006+00:00",
+    "script": "baselines/summarize_router_metrics.py"
+  }
+}

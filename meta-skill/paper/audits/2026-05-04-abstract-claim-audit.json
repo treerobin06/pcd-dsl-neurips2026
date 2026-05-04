@@ -1,0 +1,137 @@
+{
+  "date": "2026-05-04",
+  "scope": "paper/main.tex abstract lines 76-87",
+  "overall_verdict": "PASS",
+  "note": "Abstract numbers match raw evidence. The direct baseline is now paired to the same five adversarial NB/HMM task-set seeds as the VSI result.",
+  "claims": [
+    {
+      "id": 1,
+      "location": "main.tex:78",
+      "paper_value": "28%-78% preference Compute",
+      "evidence_value": "27.5%-77.5%, rounded to 28%-78%",
+      "status": "rounding_ok",
+      "evidence_files": [
+        "baselines/results/pcd_openai_gpt-4o-mini_20260313_175446.json",
+        "baselines/results/pcd_openai_gpt-4o_20260313_191642.json",
+        "baselines/results/pcd_openai_gpt-5.4_20260313_215141.json",
+        "baselines/results/pcd_anthropic_claude-sonnet-4_20260313_211844.json",
+        "baselines/results/pcd_google_gemini-3.1-pro-preview_20260313_221431.json",
+        "baselines/results/pcd_anthropic_claude-opus-4-6_20260313_220117.json"
+      ]
+    },
+    {
+      "id": 2,
+      "location": "main.tex:78",
+      "paper_value": "3%-11% depth-10 Bayesian networks",
+      "evidence_value": "3/100, 5/100, 9/100, 11/100 across available BLInD depth-10 detail files",
+      "status": "exact_match",
+      "evidence_files": [
+        "baselines/results/pcd_openai_gpt-4o-mini_bn_20260313_182537_details.json",
+        "baselines/results/pcd_openai_gpt-4o_bn_20260313_193258_details.json",
+        "baselines/results/pcd_openai_gpt-5.4_bn_20260313_192813_details.json",
+        "baselines/results/pcd_anthropic_claude-sonnet-4_bn_20260313_213010_details.json"
+      ]
+    },
+    {
+      "id": 3,
+      "location": "main.tex:83",
+      "paper_value": "five families: preference, bandits, BN, NB, HMM",
+      "evidence_value": "covered by paper/raw result set",
+      "status": "exact_match"
+    },
+    {
+      "id": 4,
+      "location": "main.tex:84",
+      "paper_value": "1,150 Flight/BLInD instances",
+      "evidence_value": "test_equivalence_full.py: BLInD 900/900 + Flight 250/250",
+      "status": "exact_match",
+      "evidence_files": ["tests/test_equivalence_full.py"]
+    },
+    {
+      "id": 5,
+      "location": "main.tex:84",
+      "paper_value": "400 finite-query bnlearn checks",
+      "evidence_value": "400/400",
+      "status": "exact_match",
+      "evidence_files": ["baselines/results/bnlearn_dsl_100q_seed2026_20260502.json"]
+    },
+    {
+      "id": 6,
+      "location": "main.tex:84",
+      "paper_value": "bnlearn compiled exact while PAL frequently fails",
+      "evidence_value": "compiled 400/400; PAL 28/120 or 29/120 in GPT-5.4 runs",
+      "status": "exact_match",
+      "evidence_files": [
+        "baselines/results/bnlearn_dsl_100q_seed2026_20260502.json",
+        "baselines/results/bnlearn_openai_gpt-5.4_20260315_211432.json",
+        "baselines/results/bnlearn_openai_gpt-5.4_20260315_204433.json"
+      ]
+    },
+    {
+      "id": 7,
+      "location": "main.tex:85",
+      "paper_value": "QUITE VSI 96.0%",
+      "evidence_value": "72/75 = 96.0%",
+      "status": "exact_match",
+      "evidence_files": ["baselines/results/quite_registered_hard_compute_expanded_75_openai_gpt-4o-mini_20260503_213142.json"]
+    },
+    {
+      "id": 8,
+      "location": "main.tex:85",
+      "paper_value": "QUITE direct 36.0%-60.0%",
+      "evidence_value": "27/75 = 36.0%; 45/75 = 60.0%",
+      "status": "exact_match",
+      "evidence_files": [
+        "baselines/results/quite_direct_numeric_hard_compute_expanded_75_openai_gpt-4o-mini_20260503_213252.json",
+        "baselines/results/quite_direct_numeric_hard_compute_expanded_75_openai_gpt-5.4_20260503_213312.json"
+      ]
+    },
+    {
+      "id": 9,
+      "location": "main.tex:85",
+      "paper_value": "QUITE PAL 24.0%-88.0%",
+      "evidence_value": "18/75 = 24.0%; 66/75 = 88.0%",
+      "status": "exact_match",
+      "evidence_files": [
+        "baselines/results/quite_registered_pal_hard_compute_expanded_75_openai_gpt-4o-mini_20260503_213758.json",
+        "baselines/results/quite_registered_pal_hard_compute_expanded_75_openai_gpt-5.4_20260503_213922.json"
+      ]
+    },
+    {
+      "id": 10,
+      "location": "main.tex:85",
+      "paper_value": "substantially higher cost",
+      "evidence_value": "VSI $0.00827 vs direct $0.04765/$0.23531 and PAL $0.11512/$2.48970",
+      "status": "exact_match"
+    },
+    {
+      "id": 11,
+      "location": "main.tex:86",
+      "paper_value": "18.2% / 32.4% paired direct-compute baseline",
+      "evidence_value": "NB 109/600 = 18.17%; HMM 162/500 = 32.4%",
+      "status": "rounding_ok",
+      "evidence_files": [
+        "baselines/results/adversarial_direct_multiseed_summary_20260503_225039.json"
+      ]
+    },
+    {
+      "id": 12,
+      "location": "main.tex:86",
+      "paper_value": "90.8% / 97.6% across five independently generated task sets",
+      "evidence_value": "NB 545/600 = 90.833%; HMM 488/500 = 97.6%; n_artifacts=5",
+      "status": "rounding_ok",
+      "evidence_files": ["baselines/results/adversarial_nl_e2e_multiseed_summary_20260503_183611.json"]
+    },
+    {
+      "id": 13,
+      "location": "main.tex:86",
+      "paper_value": "paired direct-compute baseline and VSI are compared on the same five adversarial NB/HMM task-set seeds",
+      "evidence_value": "direct summary uses seed pairs 7000/8000 through 11000/12000; VSI summary uses the same seed pairs",
+      "status": "exact_match",
+      "evidence_files": [
+        "baselines/results/adversarial_direct_multiseed_summary_20260503_225039.json",
+        "baselines/results/adversarial_nl_e2e_multiseed_summary_20260503_183611.json"
+      ]
+    }
+  ]
+}

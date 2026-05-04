@@ -1,0 +1,152 @@
+{
+  "experiment": "adversarial NB/HMM NL E2E multi-seed summary",
+  "model": "openai/gpt-4o-mini",
+  "n_artifacts": 5,
+  "artifacts": [
+    {
+      "artifact": "baselines/results/adversarial_nl_e2e_20260503_183047.json",
+      "nb_base_seed": 7000,
+      "hmm_base_seed": 8000,
+      "nb": {
+        "n": 120,
+        "correct": 111,
+        "rate": 0.925,
+        "wilson_95ci": [
+          0.8635894316089088,
+          0.9600433379935513
+        ]
+      },
+      "hmm": {
+        "n": 100,
+        "correct": 98,
+        "rate": 0.98,
+        "wilson_95ci": [
+          0.9299868370580063,
+          0.9944981477650318
+        ]
+      }
+    },
+    {
+      "artifact": "baselines/results/adversarial_nl_e2e_20260503_183210.json",
+      "nb_base_seed": 8000,
+      "hmm_base_seed": 9000,
+      "nb": {
+        "n": 120,
+        "correct": 110,
+        "rate": 0.9166666666666666,
+        "wilson_95ci": [
+          0.8533762622701224,
+          0.9541068451832697
+        ]
+      },
+      "hmm": {
+        "n": 100,
+        "correct": 98,
+        "rate": 0.98,
+        "wilson_95ci": [
+          0.9299868370580063,
+          0.9944981477650318
+        ]
+      }
+    },
+    {
+      "artifact": "baselines/results/adversarial_nl_e2e_20260503_183332.json",
+      "nb_base_seed": 9000,
+      "hmm_base_seed": 10000,
+      "nb": {
+        "n": 120,
+        "correct": 109,
+        "rate": 0.9083333333333333,
+        "wilson_95ci": [
+          0.843290092093749,
+          0.9480433532105753
+        ]
+      },
+      "hmm": {
+        "n": 100,
+        "correct": 96,
+        "rate": 0.96,
+        "wilson_95ci": [
+          0.9016278276739262,
+          0.984336949448152
+        ]
+      }
+    },
+    {
+      "artifact": "baselines/results/adversarial_nl_e2e_20260503_183452.json",
+      "nb_base_seed": 10000,
+      "hmm_base_seed": 11000,
+      "nb": {
+        "n": 120,
+        "correct": 108,
+        "rate": 0.9,
+        "wilson_95ci": [
+          0.8333168001483641,
+          0.9418669830068925
+        ]
+      },
+      "hmm": {
+        "n": 100,
+        "correct": 99,
+        "rate": 0.99,
+        "wilson_95ci": [
+          0.9455124752390653,
+          0.9982326134344526
+        ]
+      }
+    },
+    {
+      "artifact": "baselines/results/adversarial_nl_e2e_20260503_183611.json",
+      "nb_base_seed": 11000,
+      "hmm_base_seed": 12000,
+      "nb": {
+        "n": 120,
+        "correct": 107,
+        "rate": 0.8916666666666667,
+        "wilson_95ci": [
+          0.8234449199472613,
+          0.9355892010589275
+        ]
+      },
+      "hmm": {
+        "n": 100,
+        "correct": 97,
+        "rate": 0.97,
+        "wilson_95ci": [
+          0.915479219195973,
+          0.9897456617765851
+        ]
+      }
+    }
+  ],
+  "pooled": {
+    "nb": {
+      "n": 600,
+      "correct": 545,
+      "rate": 0.9083333333333333,
+      "wilson_95ci": [
+        0.8825737689213148,
+        0.9288973188606467
+      ]
+    },
+    "hmm": {
+      "n": 500,
+      "correct": 488,
+      "rate": 0.976,
+      "wilson_95ci": [
+        0.9585225403081018,
+        0.9862188228504781
+      ]
+    },
+    "overall": {
+      "n": 1100,
+      "correct": 1033,
+      "rate": 0.9390909090909091,
+      "wilson_95ci": [
+        0.9233712240229046,
+        0.9517543374707009
+      ]
+    }
+  },
+  "timestamp": "2026-05-03T10:36:37Z"
+}

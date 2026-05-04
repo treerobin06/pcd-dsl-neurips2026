@@ -1,0 +1,94 @@
+{
+  "bn": {
+    "task": "bn",
+    "model": "openai/gpt-5.4",
+    "n_samples": 900,
+    "parse_accuracy": 0.30666666666666664,
+    "parse_field_accuracy": {
+      "variables": 0.9988888888888889,
+      "edges": 0.9988888888888889,
+      "query_variable": 0.5266666666666666,
+      "query_value": 0.5422222222222223,
+      "evidence": 0.7488888888888889,
+      "cpt_values": 0.9988888888888889
+    },
+    "compute_accuracy": 0.31222222222222223,
+    "compute_depth_stats": {
+      "2": {
+        "total": 100,
+        "correct": 81
+      },
+      "3": {
+        "total": 100,
+        "correct": 56
+      },
+      "4": {
+        "total": 100,
+        "correct": 41
+      },
+      "5": {
+        "total": 100,
+        "correct": 24
+      },
+      "6": {
+        "total": 100,
+        "correct": 20
+      },
+      "7": {
+        "total": 100,
+        "correct": 23
+      },
+      "8": {
+        "total": 100,
+        "correct": 13
+      },
+      "9": {
+        "total": 100,
+        "correct": 12
+      },
+      "10": {
+        "total": 100,
+        "correct": 11
+      }
+    },
+    "decide_accuracy": 1.0,
+    "parse_by_depth": {
+      "2": {
+        "total": 100,
+        "correct": 81
+      },
+      "3": {
+        "total": 100,
+        "correct": 56
+      },
+      "4": {
+        "total": 100,
+        "correct": 38
+      },
+      "5": {
+        "total": 100,
+        "correct": 25
+      },
+      "6": {
+        "total": 100,
+        "correct": 19
+      },
+      "7": {
+        "total": 100,
+        "correct": 23
+      },
+      "8": {
+        "total": 100,
+        "correct": 13
+      },
+      "9": {
+        "total": 100,
+        "correct": 11
+      },
+      "10": {
+        "total": 100,
+        "correct": 10
+      }
+    }
+  }
+}

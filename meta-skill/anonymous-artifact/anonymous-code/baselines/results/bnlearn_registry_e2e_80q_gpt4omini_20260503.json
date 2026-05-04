@@ -1,0 +1,3717 @@
+{
+  "route": "bnlearn NL query -> LLM registry/evidence/query parser -> deterministic DSL backend",
+  "mode": "registry",
+  "model": "openai/gpt-4o-mini",
+  "queries_per_net": 20,
+  "networks": [
+    "asia",
+    "child",
+    "insurance",
+    "alarm"
+  ],
+  "seed": 2026,
+  "summary": {
+    "correct": 79,
+    "total": 80,
+    "accuracy": 0.9875,
+    "ci_lo": 0.9325372992233133,
+    "ci_hi": 0.9977900244795476,
+    "by_network": {
+      "child": {
+        "correct": 19,
+        "total": 20,
+        "failures": {
+          "gold_tie_strict_label_mismatch": 1
+        },
+        "accuracy": 0.95,
+        "ci_lo": 0.763868806553258,
+        "ci_hi": 0.9911185511992047
+      },
+      "insurance": {
+        "correct": 20,
+        "total": 20,
+        "failures": {},
+        "accuracy": 1.0,
+        "ci_lo": 0.8388748419471806,
+        "ci_hi": 1
+      },
+      "asia": {
+        "correct": 20,
+        "total": 20,
+        "failures": {},
+        "accuracy": 1.0,
+        "ci_lo": 0.8388748419471806,
+        "ci_hi": 1
+      },
+      "alarm": {
+        "correct": 20,
+        "total": 20,
+        "failures": {},
+        "accuracy": 1.0,
+        "ci_lo": 0.8388748419471806,
+        "ci_hi": 1
+      }
+    }
+  },
+  "tie_aware_summary": {
+    "correct": 80,
+    "total": 80,
+    "accuracy": 1.0,
+    "ci_lo": 0.9541818704644728,
+    "ci_hi": 0.9999999999999999,
+    "by_network": {
+      "child": {
+        "correct": 20,
+        "total": 20,
+        "failures": {},
+        "accuracy": 1.0,
+        "ci_lo": 0.8388748419471806,
+        "ci_hi": 1
+      },
+      "insurance": {
+        "correct": 20,
+        "total": 20,
+        "failures": {},
+        "accuracy": 1.0,
+        "ci_lo": 0.8388748419471806,
+        "ci_hi": 1
+      },
+      "asia": {
+        "correct": 20,
+        "total": 20,
+        "failures": {},
+        "accuracy": 1.0,
+        "ci_lo": 0.8388748419471806,
+        "ci_hi": 1
+      },
+      "alarm": {
+        "correct": 20,
+        "total": 20,
+        "failures": {},
+        "accuracy": 1.0,
+        "ci_lo": 0.8388748419471806,
+        "ci_hi": 1
+      }
+    }
+  },
+  "results": [
+    {
+      "network": "child",
+      "query_id": 4,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "TGA",
+      "gold": "TGA",
+      "gold_map_states": [
+        "TGA"
+      ],
+      "gold_posterior": {
+        "PFC": 0.05931,
+        "TGA": 0.415423,
+        "Fallot": 0.363368,
+        "PAIVS": 0.031352,
+        "TAPVD": 0.067038,
+        "Lung": 0.06351
+      },
+      "posterior": {
+        "PFC": 0.0593097445462085,
+        "TGA": 0.41542279424183687,
+        "Fallot": 0.3633676776067746,
+        "PAIVS": 0.031351863884034194,
+        "TAPVD": 0.06703812093788565,
+        "Lung": 0.06350979878326012
+      },
+      "evidence": {
+        "LVH": "no"
+      },
+      "query_variable": "Disease",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "Disease",
+        "evidence": {
+          "LVH": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 184,
+        "completion_tokens": 29,
+        "cost_usd": 4.5e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 8,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Older",
+      "gold": "Older",
+      "gold_map_states": [
+        "Older"
+      ],
+      "gold_posterior": {
+        "Current": 0.135421,
+        "Older": 0.864579
+      },
+      "posterior": {
+        "Current": 0.13542145574203313,
+        "Older": 0.864578544257967
+      },
+      "evidence": {
+        "Cushioning": "Poor",
+        "ThisCarCost": "TenThou",
+        "Theft": "True"
+      },
+      "query_variable": "VehicleYear",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "VehicleYear",
+        "evidence": {
+          "Cushioning": "Poor",
+          "ThisCarCost": "TenThou",
+          "Theft": "True"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 200,
+        "completion_tokens": 56,
+        "cost_usd": 6.36e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 7,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Middle",
+      "gold": "Middle",
+      "gold_map_states": [
+        "Middle"
+      ],
+      "gold_posterior": {
+        "Prole": 0.173859,
+        "Middle": 0.46987,
+        "UpperMiddle": 0.34276,
+        "Wealthy": 0.013511
+      },
+      "posterior": {
+        "Prole": 0.17385894508604371,
+        "Middle": 0.4698695501814414,
+        "UpperMiddle": 0.34276048217005645,
+        "Wealthy": 0.01351102256245841
+      },
+      "evidence": {
+        "CarValue": "TwentyThou",
+        "ThisCarCost": "TenThou"
+      },
+      "query_variable": "SocioEcon",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "SocioEcon",
+        "evidence": {
+          "CarValue": "TwentyThou",
+          "ThisCarCost": "TenThou"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 200,
+        "completion_tokens": 49,
+        "cost_usd": 5.94e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 6,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.012236,
+        "no": 0.987764
+      },
+      "posterior": {
+        "yes": 0.012236445783132528,
+        "no": 0.9877635542168675
+      },
+      "evidence": {
+        "lung": "no",
+        "dysp": "yes",
+        "bronc": "no"
+      },
+      "query_variable": "asia",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "asia",
+        "evidence": {
+          "lung": "no",
+          "dysp": "yes",
+          "bronc": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 195,
+        "completion_tokens": 49,
+        "cost_usd": 5.865e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 14,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "<5",
+      "gold": "<5",
+      "gold_map_states": [
+        "<5"
+      ],
+      "gold_posterior": {
+        "<5": 0.508642,
+        "5-12": 0.395679,
+        "12+": 0.095679
+      },
+      "posterior": {
+        "<5": 0.5086418445422982,
+        "5-12": 0.3956790777288508,
+        "12+": 0.09567907772885087
+      },
+      "evidence": {
+        "HypoxiaInO2": "Severe",
+        "RUQO2": "12+"
+      },
+      "query_variable": "LowerBodyO2",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "LowerBodyO2",
+        "evidence": {
+          "HypoxiaInO2": "Severe",
+          "RUQO2": "12+"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 202,
+        "completion_tokens": 52,
+        "cost_usd": 6.15e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 0,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "HIGH",
+      "gold": "HIGH",
+      "gold_map_states": [
+        "HIGH"
+      ],
+      "gold_posterior": {
+        "LOW": 0.094713,
+        "NORMAL": 0.103443,
+        "HIGH": 0.801843
+      },
+      "posterior": {
+        "LOW": 0.09471333242657737,
+        "NORMAL": 0.10344333245975137,
+        "HIGH": 0.8018433351136713
+      },
+      "evidence": {
+        "CATECHOL": "HIGH",
+        "PULMEMBOLUS": "TRUE",
+        "VENTMACH": "HIGH"
+      },
+      "query_variable": "HRSAT",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "HRSAT",
+        "evidence": {
+          "CATECHOL": "HIGH",
+          "PULMEMBOLUS": "TRUE",
+          "VENTMACH": "HIGH"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 207,
+        "completion_tokens": 59,
+        "cost_usd": 6.645e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 7,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Normal",
+      "gold": "Normal",
+      "gold_map_states": [
+        "Normal"
+      ],
+      "gold_posterior": {
+        "Normal": 0.589918,
+        "Congested": 0.106658,
+        "Abnormal": 0.303424
+      },
+      "posterior": {
+        "Normal": 0.5899184782608695,
+        "Congested": 0.10665760869565219,
+        "Abnormal": 0.30342391304347827
+      },
+      "evidence": {
+        "BirthAsphyxia": "yes",
+        "CardiacMixing": "Mild"
+      },
+      "query_variable": "LungParench",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "LungParench",
+        "evidence": {
+          "BirthAsphyxia": "yes",
+          "CardiacMixing": "Mild"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 198,
+        "completion_tokens": 50,
+        "cost_usd": 5.97e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 1,
+      "ok": false,
+      "failure_mode": "gold_tie_strict_label_mismatch",
+      "answer_correct": false,
+      "strict_answer_correct": false,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Unequal",
+      "gold": "Equal",
+      "gold_map_states": [
+        "Equal",
+        "Unequal"
+      ],
+      "gold_posterior": {
+        "Equal": 0.5,
+        "Unequal": 0.5
+      },
+      "posterior": {
+        "Equal": 0.49999999999999994,
+        "Unequal": 0.5
+      },
+      "evidence": {
+        "Disease": "PFC"
+      },
+      "query_variable": "HypDistrib",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "HypDistrib",
+        "evidence": {
+          "Disease": "PFC"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 186,
+        "completion_tokens": 31,
+        "cost_usd": 4.65e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 6,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Poor",
+      "gold": "Poor",
+      "gold_map_states": [
+        "Poor"
+      ],
+      "gold_posterior": {
+        "Poor": 0.338863,
+        "Fair": 0.25662,
+        "Good": 0.247475,
+        "Excellent": 0.157041
+      },
+      "posterior": {
+        "Poor": 0.3388630747951577,
+        "Fair": 0.25662043190200245,
+        "Good": 0.24747500094629582,
+        "Excellent": 0.15704149235654405
+      },
+      "evidence": {
+        "DrivQuality": "Excellent",
+        "DrivHist": "Many"
+      },
+      "query_variable": "Cushioning",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "Cushioning",
+        "evidence": {
+          "DrivQuality": "Excellent",
+          "DrivHist": "Many"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 195,
+        "completion_tokens": 47,
+        "cost_usd": 5.745e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 16,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Thousand",
+      "gold": "Thousand",
+      "gold_map_states": [
+        "Thousand"
+      ],
+      "gold_posterior": {
+        "Thousand": 0.824874,
+        "TenThou": 0.089381,
+        "HundredThou": 0.085731,
+        "Million": 1.3e-05
+      },
+      "posterior": {
+        "Thousand": 0.8248740301871352,
+        "TenThou": 0.0893809849923896,
+        "HundredThou": 0.085731497693591,
+        "Million": 1.3487126884295695e-05
+      },
+      "evidence": {
+        "SeniorTrain": "True",
+        "RiskAversion": "Psychopath"
+      },
+      "query_variable": "OtherCarCost",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "OtherCarCost",
+        "evidence": {
+          "SeniorTrain": "True",
+          "RiskAversion": "Psychopath"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 196,
+        "completion_tokens": 45,
+        "cost_usd": 5.64e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 0,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.156346,
+        "no": 0.843654
+      },
+      "posterior": {
+        "yes": 0.15634609880708078,
+        "no": 0.8436539011929192
+      },
+      "evidence": {
+        "either": "yes",
+        "dysp": "yes"
+      },
+      "query_variable": "tub",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "tub",
+        "evidence": {
+          "either": "yes",
+          "dysp": "yes"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 189,
+        "completion_tokens": 42,
+        "cost_usd": 5.355e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 18,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "City",
+      "gold": "City",
+      "gold_map_states": [
+        "City"
+      ],
+      "gold_posterior": {
+        "Secure": 0.286088,
+        "City": 0.316257,
+        "Suburb": 0.291001,
+        "Rural": 0.106654
+      },
+      "posterior": {
+        "Secure": 0.2860875890119767,
+        "City": 0.3162568552563968,
+        "Suburb": 0.2910010722290515,
+        "Rural": 0.10665448350257506
+      },
+      "evidence": {
+        "GoodStudent": "False",
+        "OtherCar": "True",
+        "Accident": "Mild"
+      },
+      "query_variable": "HomeBase",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "HomeBase",
+        "evidence": {
+          "GoodStudent": "False",
+          "OtherCar": "True",
+          "Accident": "Mild"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 196,
+        "completion_tokens": 52,
+        "cost_usd": 6.06e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 2,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Thousand",
+      "gold": "Thousand",
+      "gold_map_states": [
+        "Thousand"
+      ],
+      "gold_posterior": {
+        "Thousand": 0.739212,
+        "TenThou": 0.118872,
+        "HundredThou": 0.081555,
+        "Million": 0.06036
+      },
+      "posterior": {
+        "Thousand": 0.7392122611577732,
+        "TenThou": 0.11887219293298179,
+        "HundredThou": 0.08155514554843948,
+        "Million": 0.060360400360805526
+      },
+      "evidence": {
+        "OtherCarCost": "Million",
+        "DrivQuality": "Poor"
+      },
+      "query_variable": "MedCost",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "MedCost",
+        "evidence": {
+          "OtherCarCost": "Million",
+          "DrivQuality": "Poor"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 194,
+        "completion_tokens": 44,
+        "cost_usd": 5.55e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 10,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "TGA",
+      "gold": "TGA",
+      "gold_map_states": [
+        "TGA"
+      ],
+      "gold_posterior": {
+        "PFC": 0.042,
+        "TGA": 0.356235,
+        "Fallot": 0.315852,
+        "PAIVS": 0.241965,
+        "TAPVD": 0.025428,
+        "Lung": 0.018519
+      },
+      "posterior": {
+        "PFC": 0.04200025461237522,
+        "TGA": 0.35623531876654174,
+        "Fallot": 0.31585213180442506,
+        "PAIVS": 0.24196498703287633,
+        "TAPVD": 0.025428139281351934,
+        "Lung": 0.018519168502429767
+      },
+      "evidence": {
+        "CO2": "Low",
+        "GruntingReport": "no"
+      },
+      "query_variable": "Disease",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "Disease",
+        "evidence": {
+          "CO2": "Low",
+          "GruntingReport": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 191,
+        "completion_tokens": 43,
+        "cost_usd": 5.445e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 0,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Senior",
+      "gold": "Senior",
+      "gold_map_states": [
+        "Senior"
+      ],
+      "gold_posterior": {
+        "Adolescent": 0.0,
+        "Adult": 0.0,
+        "Senior": 1.0
+      },
+      "posterior": {
+        "Adolescent": 0.0,
+        "Adult": 0.0,
+        "Senior": 1.0
+      },
+      "evidence": {
+        "SeniorTrain": "True",
+        "Antilock": "True",
+        "Airbag": "True"
+      },
+      "query_variable": "Age",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "Age",
+        "evidence": {
+          "SeniorTrain": "True",
+          "Antilock": "True",
+          "Airbag": "True"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 197,
+        "completion_tokens": 51,
+        "cost_usd": 6.015e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 8,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.225198,
+        "no": 0.774802
+      },
+      "posterior": {
+        "yes": 0.22519784417151475,
+        "no": 0.7748021558284852
+      },
+      "evidence": {
+        "HypDistrib": "Equal",
+        "Age": "4-10_days",
+        "LVHreport": "no"
+      },
+      "query_variable": "Sick",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "Sick",
+        "evidence": {
+          "HypDistrib": "Equal",
+          "Age": "4-10_days",
+          "LVHreport": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 200,
+        "completion_tokens": 53,
+        "cost_usd": 6.18e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 2,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.206879,
+        "no": 0.793121
+      },
+      "posterior": {
+        "yes": 0.20687904621025424,
+        "no": 0.7931209537897458
+      },
+      "evidence": {
+        "LVH": "yes",
+        "CO2": "Low"
+      },
+      "query_variable": "GruntingReport",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "GruntingReport",
+        "evidence": {
+          "LVH": "yes",
+          "CO2": "Low"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 194,
+        "completion_tokens": 44,
+        "cost_usd": 5.55e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 4,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Adult",
+      "gold": "Adult",
+      "gold_map_states": [
+        "Adult"
+      ],
+      "gold_posterior": {
+        "Adolescent": 0.209417,
+        "Adult": 0.531687,
+        "Senior": 0.258896
+      },
+      "posterior": {
+        "Adolescent": 0.20941714754314927,
+        "Adult": 0.5316872990931639,
+        "Senior": 0.2588955533636867
+      },
+      "evidence": {
+        "DrivHist": "One",
+        "MedCost": "Million",
+        "ThisCarCost": "HundredThou"
+      },
+      "query_variable": "Age",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "Age",
+        "evidence": {
+          "DrivHist": "One",
+          "MedCost": "Million",
+          "ThisCarCost": "HundredThou"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 200,
+        "completion_tokens": 55,
+        "cost_usd": 6.3e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 12,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.41,
+        "no": 0.59
+      },
+      "posterior": {
+        "yes": 0.41,
+        "no": 0.5900000000000001
+      },
+      "evidence": {
+        "lung": "no",
+        "tub": "no"
+      },
+      "query_variable": "dysp",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "dysp",
+        "evidence": {
+          "lung": "no",
+          "tub": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 190,
+        "completion_tokens": 37,
+        "cost_usd": 5.07e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 18,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "TGA",
+      "gold": "TGA",
+      "gold_map_states": [
+        "TGA"
+      ],
+      "gold_posterior": {
+        "PFC": 0.002569,
+        "TGA": 0.959778,
+        "Fallot": 0.020988,
+        "PAIVS": 0.016298,
+        "TAPVD": 0.000229,
+        "Lung": 0.000138
+      },
+      "posterior": {
+        "PFC": 0.00256925953183024,
+        "TGA": 0.9597784035989397,
+        "Fallot": 0.020987801726754754,
+        "PAIVS": 0.01629770805610698,
+        "TAPVD": 0.00022926692898019856,
+        "Lung": 0.00013756015738811914
+      },
+      "evidence": {
+        "CardiacMixing": "Transp.",
+        "LungParench": "Normal"
+      },
+      "query_variable": "Disease",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "Disease",
+        "evidence": {
+          "CardiacMixing": "Transp.",
+          "LungParench": "Normal"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 194,
+        "completion_tokens": 46,
+        "cost_usd": 5.67e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 9,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "True",
+      "gold": "True",
+      "gold_map_states": [
+        "True"
+      ],
+      "gold_posterior": {
+        "True": 0.682762,
+        "False": 0.317238
+      },
+      "posterior": {
+        "True": 0.6827615349993624,
+        "False": 0.31723846500063757
+      },
+      "evidence": {
+        "Antilock": "False",
+        "ILiCost": "TenThou",
+        "HomeBase": "Secure"
+      },
+      "query_variable": "AntiTheft",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "AntiTheft",
+        "evidence": {
+          "Antilock": "False",
+          "ILiCost": "TenThou",
+          "HomeBase": "Secure"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 204,
+        "completion_tokens": 56,
+        "cost_usd": 6.42e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 3,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "City",
+      "gold": "City",
+      "gold_map_states": [
+        "City"
+      ],
+      "gold_posterior": {
+        "Secure": 0.156399,
+        "City": 0.488877,
+        "Suburb": 0.229309,
+        "Rural": 0.125416
+      },
+      "posterior": {
+        "Secure": 0.15639872755754375,
+        "City": 0.48887697070210967,
+        "Suburb": 0.22930877317288142,
+        "Rural": 0.1254155285674651
+      },
+      "evidence": {
+        "DrivingSkill": "SubStandard",
+        "Airbag": "False"
+      },
+      "query_variable": "HomeBase",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "HomeBase",
+        "evidence": {
+          "DrivingSkill": "SubStandard",
+          "Airbag": "False"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 192,
+        "completion_tokens": 44,
+        "cost_usd": 5.52e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 1,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "yes",
+      "gold": "yes",
+      "gold_map_states": [
+        "yes"
+      ],
+      "gold_posterior": {
+        "yes": 0.98,
+        "no": 0.02
+      },
+      "posterior": {
+        "yes": 0.98,
+        "no": 0.02
+      },
+      "evidence": {
+        "bronc": "no",
+        "either": "yes",
+        "lung": "yes"
+      },
+      "query_variable": "xray",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "xray",
+        "evidence": {
+          "bronc": "no",
+          "either": "yes",
+          "lung": "yes"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 195,
+        "completion_tokens": 48,
+        "cost_usd": 5.805e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 0,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Normal",
+      "gold": "Normal",
+      "gold_map_states": [
+        "Normal"
+      ],
+      "gold_posterior": {
+        "Normal": 0.870768,
+        "Congested": 0.05882,
+        "Abnormal": 0.070412
+      },
+      "posterior": {
+        "Normal": 0.8707677599027847,
+        "Congested": 0.05882034034949804,
+        "Abnormal": 0.07041189974771729
+      },
+      "evidence": {
+        "Grunting": "no",
+        "GruntingReport": "yes",
+        "LVHreport": "yes"
+      },
+      "query_variable": "LungParench",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "LungParench",
+        "evidence": {
+          "Grunting": "no",
+          "GruntingReport": "yes",
+          "LVHreport": "yes"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 202,
+        "completion_tokens": 55,
+        "cost_usd": 6.33e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 15,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "yes",
+      "gold": "yes",
+      "gold_map_states": [
+        "yes"
+      ],
+      "gold_posterior": {
+        "yes": 0.8,
+        "no": 0.2
+      },
+      "posterior": {
+        "yes": 0.8,
+        "no": 0.2
+      },
+      "evidence": {
+        "bronc": "yes",
+        "either": "no"
+      },
+      "query_variable": "dysp",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "dysp",
+        "evidence": {
+          "bronc": "yes",
+          "either": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 191,
+        "completion_tokens": 36,
+        "cost_usd": 5.025e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 13,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Normal",
+      "gold": "Normal",
+      "gold_map_states": [
+        "Normal"
+      ],
+      "gold_posterior": {
+        "Poor": 0.184096,
+        "Normal": 0.614525,
+        "Excellent": 0.201379
+      },
+      "posterior": {
+        "Poor": 0.18409605581566707,
+        "Normal": 0.6145247388154829,
+        "Excellent": 0.20137920536885012
+      },
+      "evidence": {
+        "ThisCarDam": "None",
+        "SocioEcon": "Middle",
+        "SeniorTrain": "False"
+      },
+      "query_variable": "DrivQuality",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "DrivQuality",
+        "evidence": {
+          "ThisCarDam": "None",
+          "SocioEcon": "Middle",
+          "SeniorTrain": "False"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 203,
+        "completion_tokens": 55,
+        "cost_usd": 6.345e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 3,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "HIGH",
+      "gold": "HIGH",
+      "gold_map_states": [
+        "HIGH"
+      ],
+      "gold_posterior": {
+        "LOW": 0.059309,
+        "NORMAL": 0.088256,
+        "HIGH": 0.852435
+      },
+      "posterior": {
+        "LOW": 0.05930923581044002,
+        "NORMAL": 0.08825572283065146,
+        "HIGH": 0.8524350413589085
+      },
+      "evidence": {
+        "HISTORY": "TRUE",
+        "MINVOL": "LOW"
+      },
+      "query_variable": "ARTCO2",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "ARTCO2",
+        "evidence": {
+          "HISTORY": "TRUE",
+          "MINVOL": "LOW"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 193,
+        "completion_tokens": 44,
+        "cost_usd": 5.535e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 19,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Normal",
+      "gold": "Normal",
+      "gold_map_states": [
+        "Normal"
+      ],
+      "gold_posterior": {
+        "Psychopath": 0.004295,
+        "Adventurous": 0.127131,
+        "Normal": 0.612165,
+        "Cautious": 0.25641
+      },
+      "posterior": {
+        "Psychopath": 0.004294670329785833,
+        "Adventurous": 0.12713078275628212,
+        "Normal": 0.6121646056766127,
+        "Cautious": 0.2564099412373193
+      },
+      "evidence": {
+        "Mileage": "Domino",
+        "Cushioning": "Fair",
+        "DrivQuality": "Normal"
+      },
+      "query_variable": "RiskAversion",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "RiskAversion",
+        "evidence": {
+          "Mileage": "Domino",
+          "Cushioning": "Fair",
+          "DrivQuality": "Normal"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 200,
+        "completion_tokens": 55,
+        "cost_usd": 6.3e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 10,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "yes",
+      "gold": "yes",
+      "gold_map_states": [
+        "yes"
+      ],
+      "gold_posterior": {
+        "yes": 0.98,
+        "no": 0.02
+      },
+      "posterior": {
+        "yes": 0.98,
+        "no": 0.02
+      },
+      "evidence": {
+        "tub": "yes",
+        "lung": "yes"
+      },
+      "query_variable": "xray",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "xray",
+        "evidence": {
+          "tub": "yes",
+          "lung": "yes"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 189,
+        "completion_tokens": 37,
+        "cost_usd": 5.055e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 18,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.0104,
+        "no": 0.9896
+      },
+      "posterior": {
+        "yes": 0.0104,
+        "no": 0.9895999999999999
+      },
+      "evidence": {
+        "lung": "yes",
+        "bronc": "yes",
+        "dysp": "no"
+      },
+      "query_variable": "tub",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "tub",
+        "evidence": {
+          "lung": "yes",
+          "bronc": "yes",
+          "dysp": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 195,
+        "completion_tokens": 49,
+        "cost_usd": 5.865e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 5,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "High",
+      "gold": "High",
+      "gold_map_states": [
+        "High"
+      ],
+      "gold_posterior": {
+        "Normal": 0.347986,
+        "Low": 0.291861,
+        "High": 0.360154
+      },
+      "posterior": {
+        "Normal": 0.3479855273968789,
+        "Low": 0.2918607471083934,
+        "High": 0.36015372549472774
+      },
+      "evidence": {
+        "LVH": "yes",
+        "DuctFlow": "Rt_to_Lt"
+      },
+      "query_variable": "LungFlow",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "LungFlow",
+        "evidence": {
+          "LVH": "yes",
+          "DuctFlow": "Rt_to_Lt"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 196,
+        "completion_tokens": 42,
+        "cost_usd": 5.46e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 1,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "NORMAL",
+      "gold": "NORMAL",
+      "gold_map_states": [
+        "NORMAL"
+      ],
+      "gold_posterior": {
+        "NORMAL": 0.896924,
+        "HIGH": 0.103076
+      },
+      "posterior": {
+        "NORMAL": 0.8969236887398648,
+        "HIGH": 0.1030763112601352
+      },
+      "evidence": {
+        "HRBP": "NORMAL"
+      },
+      "query_variable": "SHUNT",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "SHUNT",
+        "evidence": {
+          "HRBP": "NORMAL"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 186,
+        "completion_tokens": 31,
+        "cost_usd": 4.65e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 5,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.019813,
+        "no": 0.980187
+      },
+      "posterior": {
+        "yes": 0.019812531923411425,
+        "no": 0.9801874680765886
+      },
+      "evidence": {
+        "dysp": "yes",
+        "lung": "no"
+      },
+      "query_variable": "either",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "either",
+        "evidence": {
+          "dysp": "yes",
+          "lung": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 189,
+        "completion_tokens": 35,
+        "cost_usd": 4.935e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 4,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "HIGH",
+      "gold": "HIGH",
+      "gold_map_states": [
+        "HIGH"
+      ],
+      "gold_posterior": {
+        "ZERO": 0.008564,
+        "LOW": 0.009592,
+        "NORMAL": 0.143532,
+        "HIGH": 0.838312
+      },
+      "posterior": {
+        "ZERO": 0.008563990134283368,
+        "LOW": 0.00959166895039737,
+        "NORMAL": 0.14353247465058921,
+        "HIGH": 0.8383118662647301
+      },
+      "evidence": {
+        "VENTTUBE": "HIGH",
+        "FIO2": "LOW",
+        "PVSAT": "LOW"
+      },
+      "query_variable": "VENTMACH",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "VENTMACH",
+        "evidence": {
+          "VENTTUBE": "HIGH",
+          "FIO2": "LOW",
+          "PVSAT": "LOW"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 205,
+        "completion_tokens": 55,
+        "cost_usd": 6.375e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 17,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.251107,
+        "no": 0.748893
+      },
+      "posterior": {
+        "yes": 0.2511067717290039,
+        "no": 0.748893228270996
+      },
+      "evidence": {
+        "LVHreport": "no",
+        "RUQO2": "12+"
+      },
+      "query_variable": "Grunting",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "Grunting",
+        "evidence": {
+          "LVHreport": "no",
+          "RUQO2": "12+"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 196,
+        "completion_tokens": 47,
+        "cost_usd": 5.76e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 6,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "NORMAL",
+      "gold": "NORMAL",
+      "gold_map_states": [
+        "NORMAL"
+      ],
+      "gold_posterior": {
+        "LOW": 0.1808,
+        "NORMAL": 0.7788,
+        "HIGH": 0.0404
+      },
+      "posterior": {
+        "LOW": 0.18080000000000004,
+        "NORMAL": 0.7788,
+        "HIGH": 0.040400000000000005
+      },
+      "evidence": {
+        "MINVOLSET": "NORMAL",
+        "VENTMACH": "NORMAL"
+      },
+      "query_variable": "STROKEVOLUME",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "STROKEVOLUME",
+        "evidence": {
+          "MINVOLSET": "NORMAL",
+          "VENTMACH": "NORMAL"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 200,
+        "completion_tokens": 48,
+        "cost_usd": 5.88e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 10,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Many",
+      "gold": "Many",
+      "gold_map_states": [
+        "Many"
+      ],
+      "gold_posterior": {
+        "Zero": 0.35602,
+        "One": 0.233995,
+        "Many": 0.409984
+      },
+      "posterior": {
+        "Zero": 0.35602029117352374,
+        "One": 0.23399528292366914,
+        "Many": 0.40998442590280715
+      },
+      "evidence": {
+        "SeniorTrain": "True",
+        "ILiCost": "Million"
+      },
+      "query_variable": "DrivHist",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "DrivHist",
+        "evidence": {
+          "SeniorTrain": "True",
+          "ILiCost": "Million"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 195,
+        "completion_tokens": 44,
+        "cost_usd": 5.565e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 5,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "NORMAL",
+      "gold": "NORMAL",
+      "gold_map_states": [
+        "NORMAL"
+      ],
+      "gold_posterior": {
+        "LOW": 0.114341,
+        "NORMAL": 0.678729,
+        "HIGH": 0.20693
+      },
+      "posterior": {
+        "LOW": 0.11434099999999997,
+        "NORMAL": 0.678729,
+        "HIGH": 0.20692999999999998
+      },
+      "evidence": {
+        "INTUBATION": "ONESIDED",
+        "CATECHOL": "HIGH"
+      },
+      "query_variable": "PCWP",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "PCWP",
+        "evidence": {
+          "INTUBATION": "ONESIDED",
+          "CATECHOL": "HIGH"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 198,
+        "completion_tokens": 48,
+        "cost_usd": 5.85e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 17,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.413937,
+        "no": 0.586063
+      },
+      "posterior": {
+        "yes": 0.41393714285714284,
+        "no": 0.5860628571428571
+      },
+      "evidence": {
+        "lung": "no"
+      },
+      "query_variable": "dysp",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "dysp",
+        "evidence": {
+          "lung": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 185,
+        "completion_tokens": 29,
+        "cost_usd": 4.515e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 9,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Normal",
+      "gold": "Normal",
+      "gold_map_states": [
+        "Normal"
+      ],
+      "gold_posterior": {
+        "Normal": 0.8,
+        "Oligaemic": 0.06,
+        "Plethoric": 0.06,
+        "Grd_Glass": 0.02,
+        "Asy/Patchy": 0.06
+      },
+      "posterior": {
+        "Normal": 0.8,
+        "Oligaemic": 0.06,
+        "Plethoric": 0.06,
+        "Grd_Glass": 0.02,
+        "Asy/Patchy": 0.06
+      },
+      "evidence": {
+        "ChestXray": "Normal",
+        "HypoxiaInO2": "Moderate"
+      },
+      "query_variable": "XrayReport",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "XrayReport",
+        "evidence": {
+          "ChestXray": "Normal",
+          "HypoxiaInO2": "Moderate"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 197,
+        "completion_tokens": 49,
+        "cost_usd": 5.895e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 9,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "yes",
+      "gold": "yes",
+      "gold_map_states": [
+        "yes"
+      ],
+      "gold_posterior": {
+        "yes": 0.687754,
+        "no": 0.312246
+      },
+      "posterior": {
+        "yes": 0.6877538533851288,
+        "no": 0.31224614661487116
+      },
+      "evidence": {
+        "xray": "yes"
+      },
+      "query_variable": "smoke",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "smoke",
+        "evidence": {
+          "xray": "yes"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 184,
+        "completion_tokens": 30,
+        "cost_usd": 4.56e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 6,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Complete",
+      "gold": "Complete",
+      "gold_map_states": [
+        "Complete"
+      ],
+      "gold_posterior": {
+        "None": 0.037562,
+        "Mild": 0.115533,
+        "Complete": 0.799368,
+        "Transp.": 0.047538
+      },
+      "posterior": {
+        "None": 0.0375616997668094,
+        "Mild": 0.1155328893614814,
+        "Complete": 0.7993677457228043,
+        "Transp.": 0.04753766514890499
+      },
+      "evidence": {
+        "XrayReport": "Oligaemic",
+        "LungFlow": "Low"
+      },
+      "query_variable": "CardiacMixing",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "CardiacMixing",
+        "evidence": {
+          "XrayReport": "Oligaemic",
+          "LungFlow": "Low"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 199,
+        "completion_tokens": 49,
+        "cost_usd": 5.925e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 19,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.396917,
+        "no": 0.603083
+      },
+      "posterior": {
+        "yes": 0.3969174111709746,
+        "no": 0.6030825888290253
+      },
+      "evidence": {
+        "asia": "yes",
+        "dysp": "no"
+      },
+      "query_variable": "smoke",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "smoke",
+        "evidence": {
+          "asia": "yes",
+          "dysp": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 189,
+        "completion_tokens": 42,
+        "cost_usd": 5.355e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 5,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "False",
+      "gold": "False",
+      "gold_map_states": [
+        "False"
+      ],
+      "gold_posterior": {
+        "True": 0.000791,
+        "False": 0.999209
+      },
+      "posterior": {
+        "True": 0.0007909279308570953,
+        "False": 0.9992090720691429
+      },
+      "evidence": {
+        "OtherCarCost": "Million",
+        "DrivQuality": "Normal",
+        "MakeModel": "FamilySedan"
+      },
+      "query_variable": "Theft",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "Theft",
+        "evidence": {
+          "OtherCarCost": "Million",
+          "DrivQuality": "Normal",
+          "MakeModel": "FamilySedan"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 200,
+        "completion_tokens": 55,
+        "cost_usd": 6.3e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 7,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "NORMAL",
+      "gold": "NORMAL",
+      "gold_map_states": [
+        "NORMAL"
+      ],
+      "gold_posterior": {
+        "LOW": 0.114341,
+        "NORMAL": 0.731104,
+        "HIGH": 0.154555
+      },
+      "posterior": {
+        "LOW": 0.114341,
+        "NORMAL": 0.7311040000000001,
+        "HIGH": 0.15455499999999997
+      },
+      "evidence": {
+        "PULMEMBOLUS": "TRUE",
+        "HR": "NORMAL"
+      },
+      "query_variable": "CVP",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "CVP",
+        "evidence": {
+          "PULMEMBOLUS": "TRUE",
+          "HR": "NORMAL"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 194,
+        "completion_tokens": 45,
+        "cost_usd": 5.61e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 13,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.01,
+        "no": 0.99
+      },
+      "posterior": {
+        "yes": 0.01,
+        "no": 0.99
+      },
+      "evidence": {
+        "smoke": "no"
+      },
+      "query_variable": "asia",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "asia",
+        "evidence": {
+          "smoke": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 183,
+        "completion_tokens": 29,
+        "cost_usd": 4.485e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 1,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "FiftyThou",
+      "gold": "FiftyThou",
+      "gold_map_states": [
+        "FiftyThou"
+      ],
+      "gold_posterior": {
+        "FiveThou": 0.056778,
+        "TwentyThou": 0.395973,
+        "FiftyThou": 0.419042,
+        "Domino": 0.128207
+      },
+      "posterior": {
+        "FiveThou": 0.05677783362993826,
+        "TwentyThou": 0.39597330963216015,
+        "FiftyThou": 0.41904210917274465,
+        "Domino": 0.12820674756515693
+      },
+      "evidence": {
+        "ThisCarCost": "HundredThou"
+      },
+      "query_variable": "Mileage",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "Mileage",
+        "evidence": {
+          "ThisCarCost": "HundredThou"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 187,
+        "completion_tokens": 34,
+        "cost_usd": 4.845e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 11,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Thousand",
+      "gold": "Thousand",
+      "gold_map_states": [
+        "Thousand"
+      ],
+      "gold_posterior": {
+        "Thousand": 0.962813,
+        "TenThou": 0.018933,
+        "HundredThou": 0.010952,
+        "Million": 0.007302
+      },
+      "posterior": {
+        "Thousand": 0.9628126047928947,
+        "TenThou": 0.018933042626924433,
+        "HundredThou": 0.010952475264966618,
+        "Million": 0.007301877315214272
+      },
+      "evidence": {
+        "ThisCarCost": "TenThou",
+        "Cushioning": "Fair",
+        "CarValue": "FiftyThou"
+      },
+      "query_variable": "ILiCost",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "ILiCost",
+        "evidence": {
+          "ThisCarCost": "TenThou",
+          "Cushioning": "Fair",
+          "CarValue": "FiftyThou"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 205,
+        "completion_tokens": 60,
+        "cost_usd": 6.675e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 9,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "FALSE",
+      "gold": "FALSE",
+      "gold_map_states": [
+        "FALSE"
+      ],
+      "gold_posterior": {
+        "TRUE": 0.009996,
+        "FALSE": 0.990004
+      },
+      "posterior": {
+        "TRUE": 0.00999614734204989,
+        "FALSE": 0.9900038526579501
+      },
+      "evidence": {
+        "LVFAILURE": "TRUE",
+        "CO": "LOW",
+        "VENTTUBE": "LOW"
+      },
+      "query_variable": "PULMEMBOLUS",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "PULMEMBOLUS",
+        "evidence": {
+          "LVFAILURE": "TRUE",
+          "CO": "LOW",
+          "VENTTUBE": "LOW"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 207,
+        "completion_tokens": 56,
+        "cost_usd": 6.465e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 8,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "yes",
+      "gold": "yes",
+      "gold_map_states": [
+        "yes"
+      ],
+      "gold_posterior": {
+        "yes": 0.98,
+        "no": 0.02
+      },
+      "posterior": {
+        "yes": 0.98,
+        "no": 0.02
+      },
+      "evidence": {
+        "smoke": "no",
+        "lung": "yes",
+        "bronc": "yes"
+      },
+      "query_variable": "xray",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "xray",
+        "evidence": {
+          "smoke": "no",
+          "lung": "yes",
+          "bronc": "yes"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 195,
+        "completion_tokens": 49,
+        "cost_usd": 5.865e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 10,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "HIGH",
+      "gold": "HIGH",
+      "gold_map_states": [
+        "HIGH"
+      ],
+      "gold_posterior": {
+        "LOW": 0.043146,
+        "NORMAL": 0.044347,
+        "HIGH": 0.912507
+      },
+      "posterior": {
+        "LOW": 0.04314609335830365,
+        "NORMAL": 0.04434707900570892,
+        "HIGH": 0.9125068276359874
+      },
+      "evidence": {
+        "VENTTUBE": "LOW"
+      },
+      "query_variable": "ARTCO2",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "ARTCO2",
+        "evidence": {
+          "VENTTUBE": "LOW"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 190,
+        "completion_tokens": 33,
+        "cost_usd": 4.83e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 11,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "HIGH",
+      "gold": "HIGH",
+      "gold_map_states": [
+        "HIGH"
+      ],
+      "gold_posterior": {
+        "LOW": 0.135155,
+        "NORMAL": 0.101095,
+        "HIGH": 0.763749
+      },
+      "posterior": {
+        "LOW": 0.13515533339258465,
+        "NORMAL": 0.10109531301987583,
+        "HIGH": 0.7637493535875395
+      },
+      "evidence": {
+        "DISCONNECT": "TRUE",
+        "KINKEDTUBE": "TRUE"
+      },
+      "query_variable": "HREKG",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "HREKG",
+        "evidence": {
+          "DISCONNECT": "TRUE",
+          "KINKEDTUBE": "TRUE"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 196,
+        "completion_tokens": 47,
+        "cost_usd": 5.76e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 14,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Adult",
+      "gold": "Adult",
+      "gold_map_states": [
+        "Adult"
+      ],
+      "gold_posterior": {
+        "Adolescent": 0.298987,
+        "Adult": 0.571316,
+        "Senior": 0.129697
+      },
+      "posterior": {
+        "Adolescent": 0.2989872952034936,
+        "Adult": 0.571315932805937,
+        "Senior": 0.12969677199056942
+      },
+      "evidence": {
+        "OtherCarCost": "Million"
+      },
+      "query_variable": "Age",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "Age",
+        "evidence": {
+          "OtherCarCost": "Million"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 185,
+        "completion_tokens": 31,
+        "cost_usd": 4.635e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 8,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "FALSE",
+      "gold": "FALSE",
+      "gold_map_states": [
+        "FALSE"
+      ],
+      "gold_posterior": {
+        "TRUE": 0.007765,
+        "FALSE": 0.992235
+      },
+      "posterior": {
+        "TRUE": 0.007764789249921027,
+        "FALSE": 0.9922352107500789
+      },
+      "evidence": {
+        "HRBP": "LOW",
+        "FIO2": "LOW",
+        "VENTLUNG": "ZERO"
+      },
+      "query_variable": "ANAPHYLAXIS",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "ANAPHYLAXIS",
+        "evidence": {
+          "HRBP": "LOW",
+          "FIO2": "LOW",
+          "VENTLUNG": "ZERO"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 207,
+        "completion_tokens": 56,
+        "cost_usd": 6.465e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 2,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.0104,
+        "no": 0.9896
+      },
+      "posterior": {
+        "yes": 0.010400000000000001,
+        "no": 0.9895999999999999
+      },
+      "evidence": {
+        "lung": "yes"
+      },
+      "query_variable": "tub",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "tub",
+        "evidence": {
+          "lung": "yes"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 183,
+        "completion_tokens": 29,
+        "cost_usd": 4.485e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 12,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "NORMAL",
+      "gold": "NORMAL",
+      "gold_map_states": [
+        "NORMAL"
+      ],
+      "gold_posterior": {
+        "LOW": 0.1808,
+        "NORMAL": 0.7788,
+        "HIGH": 0.0404
+      },
+      "posterior": {
+        "LOW": 0.18080000000000002,
+        "NORMAL": 0.7788,
+        "HIGH": 0.04040000000000001
+      },
+      "evidence": {
+        "EXPCO2": "HIGH",
+        "ERRCAUTER": "TRUE"
+      },
+      "query_variable": "STROKEVOLUME",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "STROKEVOLUME",
+        "evidence": {
+          "EXPCO2": "HIGH",
+          "ERRCAUTER": "TRUE"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 201,
+        "completion_tokens": 50,
+        "cost_usd": 6.015e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 17,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "FamilySedan",
+      "gold": "FamilySedan",
+      "gold_map_states": [
+        "FamilySedan"
+      ],
+      "gold_posterior": {
+        "SportsCar": 0.168966,
+        "Economy": 0.21319,
+        "FamilySedan": 0.385086,
+        "Luxury": 0.227586,
+        "SuperLuxury": 0.005172
+      },
+      "posterior": {
+        "SportsCar": 0.1689655172467405,
+        "Economy": 0.21318965517324667,
+        "FamilySedan": 0.38508620689370565,
+        "Luxury": 0.22758620689326525,
+        "SuperLuxury": 0.005172413793041893
+      },
+      "evidence": {
+        "VehicleYear": "Current"
+      },
+      "query_variable": "MakeModel",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "MakeModel",
+        "evidence": {
+          "VehicleYear": "Current"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 186,
+        "completion_tokens": 31,
+        "cost_usd": 4.65e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 16,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "<7.5",
+      "gold": "<7.5",
+      "gold_map_states": [
+        "<7.5"
+      ],
+      "gold_posterior": {
+        "<7.5": 0.77114,
+        ">=7.5": 0.22886
+      },
+      "posterior": {
+        "<7.5": 0.7711404116574508,
+        ">=7.5": 0.22885958834254916
+      },
+      "evidence": {
+        "XrayReport": "Plethoric"
+      },
+      "query_variable": "CO2Report",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "CO2Report",
+        "evidence": {
+          "XrayReport": "Plethoric"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 191,
+        "completion_tokens": 35,
+        "cost_usd": 4.965e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 4,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.0104,
+        "no": 0.9896
+      },
+      "posterior": {
+        "yes": 0.010400000000000001,
+        "no": 0.9896
+      },
+      "evidence": {
+        "lung": "no"
+      },
+      "query_variable": "either",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "either",
+        "evidence": {
+          "lung": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 183,
+        "completion_tokens": 29,
+        "cost_usd": 4.485e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 14,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.3145,
+        "no": 0.6855
+      },
+      "posterior": {
+        "yes": 0.31450000000000006,
+        "no": 0.6855
+      },
+      "evidence": {
+        "tub": "no",
+        "smoke": "no"
+      },
+      "query_variable": "dysp",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "dysp",
+        "evidence": {
+          "tub": "no",
+          "smoke": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 190,
+        "completion_tokens": 43,
+        "cost_usd": 5.43e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 11,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.1,
+        "no": 0.9
+      },
+      "posterior": {
+        "yes": 0.1,
+        "no": 0.9
+      },
+      "evidence": {
+        "lung": "no",
+        "either": "no",
+        "bronc": "no"
+      },
+      "query_variable": "dysp",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "dysp",
+        "evidence": {
+          "lung": "no",
+          "either": "no",
+          "bronc": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 196,
+        "completion_tokens": 49,
+        "cost_usd": 5.88e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 13,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "NORMAL",
+      "gold": "NORMAL",
+      "gold_map_states": [
+        "NORMAL"
+      ],
+      "gold_posterior": {
+        "LOW": 0.049956,
+        "NORMAL": 0.899223,
+        "HIGH": 0.050821
+      },
+      "posterior": {
+        "LOW": 0.049956216524913936,
+        "NORMAL": 0.8992228433172221,
+        "HIGH": 0.05082094015786384
+      },
+      "evidence": {
+        "STROKEVOLUME": "LOW",
+        "SHUNT": "NORMAL",
+        "EXPCO2": "NORMAL"
+      },
+      "query_variable": "PAP",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "PAP",
+        "evidence": {
+          "STROKEVOLUME": "LOW",
+          "SHUNT": "NORMAL",
+          "EXPCO2": "NORMAL"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 201,
+        "completion_tokens": 55,
+        "cost_usd": 6.315e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 15,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "FALSE",
+      "gold": "FALSE",
+      "gold_map_states": [
+        "FALSE"
+      ],
+      "gold_posterior": {
+        "TRUE": 0.05,
+        "FALSE": 0.95
+      },
+      "posterior": {
+        "TRUE": 0.05000000000000001,
+        "FALSE": 0.95
+      },
+      "evidence": {
+        "INSUFFANESTH": "TRUE"
+      },
+      "query_variable": "LVFAILURE",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "LVFAILURE",
+        "evidence": {
+          "INSUFFANESTH": "TRUE"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 192,
+        "completion_tokens": 35,
+        "cost_usd": 4.98e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 14,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "LOW",
+      "gold": "LOW",
+      "gold_map_states": [
+        "LOW"
+      ],
+      "gold_posterior": {
+        "LOW": 0.796426,
+        "NORMAL": 0.031616,
+        "HIGH": 0.171958
+      },
+      "posterior": {
+        "LOW": 0.7964263500498454,
+        "NORMAL": 0.03161577528483688,
+        "HIGH": 0.17195787466531787
+      },
+      "evidence": {
+        "TPR": "HIGH",
+        "LVFAILURE": "TRUE",
+        "CVP": "HIGH"
+      },
+      "query_variable": "SAO2",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "SAO2",
+        "evidence": {
+          "TPR": "HIGH",
+          "LVFAILURE": "TRUE",
+          "CVP": "HIGH"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 200,
+        "completion_tokens": 53,
+        "cost_usd": 6.18e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 2,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "NORMAL",
+      "gold": "NORMAL",
+      "gold_map_states": [
+        "NORMAL"
+      ],
+      "gold_posterior": {
+        "LOW": 0.0965,
+        "NORMAL": 0.8555,
+        "HIGH": 0.048
+      },
+      "posterior": {
+        "LOW": 0.09650000000000002,
+        "NORMAL": 0.8554999999999999,
+        "HIGH": 0.04800000000000001
+      },
+      "evidence": {
+        "PAP": "LOW",
+        "HREKG": "NORMAL",
+        "HYPOVOLEMIA": "FALSE"
+      },
+      "query_variable": "LVEDVOLUME",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "LVEDVOLUME",
+        "evidence": {
+          "PAP": "LOW",
+          "HREKG": "NORMAL",
+          "HYPOVOLEMIA": "FALSE"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 204,
+        "completion_tokens": 57,
+        "cost_usd": 6.48e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 7,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.413937,
+        "no": 0.586063
+      },
+      "posterior": {
+        "yes": 0.41393714285714284,
+        "no": 0.5860628571428571
+      },
+      "evidence": {
+        "lung": "no"
+      },
+      "query_variable": "dysp",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "dysp",
+        "evidence": {
+          "lung": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 185,
+        "completion_tokens": 30,
+        "cost_usd": 4.575e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 16,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "LOW",
+      "gold": "LOW",
+      "gold_map_states": [
+        "LOW"
+      ],
+      "gold_posterior": {
+        "LOW": 0.949156,
+        "NORMAL": 0.016974,
+        "HIGH": 0.033871
+      },
+      "posterior": {
+        "LOW": 0.9491559611806061,
+        "NORMAL": 0.016973512442410077,
+        "HIGH": 0.03387052637698396
+      },
+      "evidence": {
+        "KINKEDTUBE": "TRUE",
+        "HR": "LOW"
+      },
+      "query_variable": "PVSAT",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "PVSAT",
+        "evidence": {
+          "KINKEDTUBE": "TRUE",
+          "HR": "LOW"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 195,
+        "completion_tokens": 45,
+        "cost_usd": 5.625e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 3,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.410584,
+        "no": 0.589416
+      },
+      "posterior": {
+        "yes": 0.4105837992417214,
+        "no": 0.5894162007582786
+      },
+      "evidence": {
+        "xray": "no"
+      },
+      "query_variable": "dysp",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "dysp",
+        "evidence": {
+          "xray": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 186,
+        "completion_tokens": 30,
+        "cost_usd": 4.59e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 12,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Zero",
+      "gold": "Zero",
+      "gold_map_states": [
+        "Zero"
+      ],
+      "gold_posterior": {
+        "Zero": 0.541693,
+        "One": 0.253181,
+        "Many": 0.205126
+      },
+      "posterior": {
+        "Zero": 0.5416925705238405,
+        "One": 0.2531811267541556,
+        "Many": 0.205126302722004
+      },
+      "evidence": {
+        "DrivingSkill": "Normal",
+        "Accident": "Mild",
+        "Theft": "True"
+      },
+      "query_variable": "DrivHist",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "DrivHist",
+        "evidence": {
+          "DrivingSkill": "Normal",
+          "Accident": "Mild",
+          "Theft": "True"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 198,
+        "completion_tokens": 53,
+        "cost_usd": 6.15e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 17,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "HIGH",
+      "gold": "HIGH",
+      "gold_map_states": [
+        "HIGH"
+      ],
+      "gold_posterior": {
+        "LOW": 0.09843,
+        "NORMAL": 0.060915,
+        "HIGH": 0.840655
+      },
+      "posterior": {
+        "LOW": 0.0984299978132341,
+        "NORMAL": 0.06091499905637703,
+        "HIGH": 0.8406550031303889
+      },
+      "evidence": {
+        "PCWP": "LOW",
+        "CATECHOL": "HIGH"
+      },
+      "query_variable": "HRBP",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "HRBP",
+        "evidence": {
+          "PCWP": "LOW",
+          "CATECHOL": "HIGH"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 194,
+        "completion_tokens": 45,
+        "cost_usd": 5.61e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 13,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.252035,
+        "no": 0.747965
+      },
+      "posterior": {
+        "yes": 0.25203487494784377,
+        "no": 0.7479651250521562
+      },
+      "evidence": {
+        "CO2Report": ">=7.5",
+        "LungFlow": "High",
+        "Sick": "no"
+      },
+      "query_variable": "Grunting",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "Grunting",
+        "evidence": {
+          "CO2Report": ">=7.5",
+          "LungFlow": "High",
+          "Sick": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 201,
+        "completion_tokens": 56,
+        "cost_usd": 6.375e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 19,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Complete",
+      "gold": "Complete",
+      "gold_map_states": [
+        "Complete"
+      ],
+      "gold_posterior": {
+        "None": 0.249698,
+        "Mild": 0.206818,
+        "Complete": 0.272976,
+        "Transp.": 0.270508
+      },
+      "posterior": {
+        "None": 0.24969762965448378,
+        "Mild": 0.2068179159135117,
+        "Complete": 0.2729764262240016,
+        "Transp.": 0.2705080282080029
+      },
+      "evidence": {
+        "HypDistrib": "Unequal"
+      },
+      "query_variable": "CardiacMixing",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "CardiacMixing",
+        "evidence": {
+          "HypDistrib": "Unequal"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 191,
+        "completion_tokens": 33,
+        "cost_usd": 4.845e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 19,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "FALSE",
+      "gold": "FALSE",
+      "gold_map_states": [
+        "FALSE"
+      ],
+      "gold_posterior": {
+        "TRUE": 0.100202,
+        "FALSE": 0.899798
+      },
+      "posterior": {
+        "TRUE": 0.10020248043078953,
+        "FALSE": 0.8997975195692105
+      },
+      "evidence": {
+        "HRSAT": "NORMAL",
+        "CVP": "HIGH"
+      },
+      "query_variable": "INSUFFANESTH",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "INSUFFANESTH",
+        "evidence": {
+          "HRSAT": "NORMAL",
+          "CVP": "HIGH"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 200,
+        "completion_tokens": 47,
+        "cost_usd": 5.82e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "alarm",
+      "query_id": 18,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "NORMAL",
+      "gold": "NORMAL",
+      "gold_map_states": [
+        "NORMAL"
+      ],
+      "gold_posterior": {
+        "LOW": 0.013212,
+        "NORMAL": 0.969323,
+        "HIGH": 0.017464
+      },
+      "posterior": {
+        "LOW": 0.013212480301912192,
+        "NORMAL": 0.9693234541503596,
+        "HIGH": 0.017464065547728235
+      },
+      "evidence": {
+        "CO": "NORMAL",
+        "BP": "LOW",
+        "HRBP": "LOW"
+      },
+      "query_variable": "STROKEVOLUME",
+      "parsed_fields": {
+        "network": "alarm",
+        "query_variable": "STROKEVOLUME",
+        "evidence": {
+          "CO": "NORMAL",
+          "BP": "LOW",
+          "HRBP": "LOW"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 201,
+        "completion_tokens": 52,
+        "cost_usd": 6.135e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "insurance",
+      "query_id": 15,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Poor",
+      "gold": "Poor",
+      "gold_map_states": [
+        "Poor"
+      ],
+      "gold_posterior": {
+        "Poor": 0.949401,
+        "Normal": 0.04383,
+        "Excellent": 0.006769
+      },
+      "posterior": {
+        "Poor": 0.9494011857425892,
+        "Normal": 0.04382954223750556,
+        "Excellent": 0.006769272019905187
+      },
+      "evidence": {
+        "ThisCarCost": "TenThou"
+      },
+      "query_variable": "DrivQuality",
+      "parsed_fields": {
+        "network": "insurance",
+        "query_variable": "DrivQuality",
+        "evidence": {
+          "ThisCarCost": "TenThou"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 191,
+        "completion_tokens": 35,
+        "cost_usd": 4.965e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "asia",
+      "query_id": 16,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.021621,
+        "no": 0.978379
+      },
+      "posterior": {
+        "yes": 0.02162104675431716,
+        "no": 0.9783789532456829
+      },
+      "evidence": {
+        "dysp": "no",
+        "asia": "no"
+      },
+      "query_variable": "either",
+      "parsed_fields": {
+        "network": "asia",
+        "query_variable": "either",
+        "evidence": {
+          "dysp": "no",
+          "asia": "no"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 189,
+        "completion_tokens": 36,
+        "cost_usd": 4.995e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 3,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Normal",
+      "gold": "Normal",
+      "gold_map_states": [
+        "Normal"
+      ],
+      "gold_posterior": {
+        "Normal": 0.631721,
+        "Low": 0.072861,
+        "High": 0.295419
+      },
+      "posterior": {
+        "Normal": 0.6317205065228456,
+        "Low": 0.07286076939588117,
+        "High": 0.2954187240812731
+      },
+      "evidence": {
+        "GruntingReport": "yes"
+      },
+      "query_variable": "CO2",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "CO2",
+        "evidence": {
+          "GruntingReport": "yes"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 187,
+        "completion_tokens": 32,
+        "cost_usd": 4.725e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 12,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Normal",
+      "gold": "Normal",
+      "gold_map_states": [
+        "Normal"
+      ],
+      "gold_posterior": {
+        "Normal": 0.696568,
+        "Low": 0.083471,
+        "High": 0.219961
+      },
+      "posterior": {
+        "Normal": 0.6965676558111241,
+        "Low": 0.08347142424022545,
+        "High": 0.21996091994865033
+      },
+      "evidence": {
+        "HypoxiaInO2": "Mild"
+      },
+      "query_variable": "CO2",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "CO2",
+        "evidence": {
+          "HypoxiaInO2": "Mild"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 189,
+        "completion_tokens": 35,
+        "cost_usd": 4.935e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 15,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "Oligaemic",
+      "gold": "Oligaemic",
+      "gold_map_states": [
+        "Oligaemic"
+      ],
+      "gold_posterior": {
+        "Normal": 0.239055,
+        "Oligaemic": 0.426276,
+        "Plethoric": 0.116404,
+        "Grd_Glass": 0.067859,
+        "Asy/Patchy": 0.150406
+      },
+      "posterior": {
+        "Normal": 0.23905496726984599,
+        "Oligaemic": 0.426276454183248,
+        "Plethoric": 0.11640382465115777,
+        "Grd_Glass": 0.06785897682448853,
+        "Asy/Patchy": 0.15040577707125968
+      },
+      "evidence": {
+        "DuctFlow": "Lt_to_Rt",
+        "Age": "4-10_days"
+      },
+      "query_variable": "XrayReport",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "XrayReport",
+        "evidence": {
+          "DuctFlow": "Lt_to_Rt",
+          "Age": "4-10_days"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 200,
+        "completion_tokens": 50,
+        "cost_usd": 6e-05
+      },
+      "raw_response": null
+    },
+    {
+      "network": "child",
+      "query_id": 11,
+      "ok": true,
+      "failure_mode": null,
+      "answer_correct": true,
+      "strict_answer_correct": true,
+      "tie_aware_answer_correct": true,
+      "tie_aware_ok": true,
+      "parse_exact": true,
+      "pred": "no",
+      "gold": "no",
+      "gold_map_states": [
+        "no"
+      ],
+      "gold_posterior": {
+        "yes": 0.234358,
+        "no": 0.765642
+      },
+      "posterior": {
+        "yes": 0.23435760733068428,
+        "no": 0.7656423926693158
+      },
+      "evidence": {
+        "RUQO2": "12+",
+        "HypoxiaInO2": "Severe",
+        "LowerBodyO2": "<5"
+      },
+      "query_variable": "Grunting",
+      "parsed_fields": {
+        "network": "child",
+        "query_variable": "Grunting",
+        "evidence": {
+          "RUQO2": "12+",
+          "HypoxiaInO2": "Severe",
+          "LowerBodyO2": "<5"
+        }
+      },
+      "usage": {
+        "prompt_tokens": 207,
+        "completion_tokens": 59,
+        "cost_usd": 6.645e-05
+      },
+      "raw_response": null
+    }
+  ],
+  "_meta": {
+    "prompt_tokens": 15581,
+    "completion_tokens": 3561,
+    "total_cost_usd": 0.00447375,
+    "model_id": "openai/gpt-4o-mini",
+    "git_commit": "a43f7d6a",
+    "timestamp_utc": "2026-05-02T16:23:10.947851+00:00",
+    "script": "baselines/run_bnlearn_nl_e2e.py",
+    "mode": "registry",
+    "n_samples": 80,
+    "queries_per_net": 20,
+    "networks": [
+      "asia",
+      "child",
+      "insurance",
+      "alarm"
+    ],
+    "concurrency": 10
+  }
+}

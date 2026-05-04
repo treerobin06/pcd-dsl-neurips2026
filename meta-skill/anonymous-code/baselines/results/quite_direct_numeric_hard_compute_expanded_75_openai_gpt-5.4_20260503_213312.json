@@ -1,0 +1,1938 @@
+{
+  "experiment": "QUITE direct natural-language probability baseline",
+  "model": "openai/gpt-5.4",
+  "config": {
+    "model": "openai/gpt-5.4",
+    "modes": [
+      "numeric"
+    ],
+    "limit_per_mode": null,
+    "networks": null,
+    "query_limit_per_network": null,
+    "preset": "hard-compute-expanded-75",
+    "limit_total": null,
+    "include_invalid_gold": false,
+    "sema": 6
+  },
+  "query_plan": {
+    "mildew0": [
+      4,
+      18,
+      5,
+      10,
+      19,
+      0,
+      1,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      20
+    ],
+    "insurance1": [
+      16,
+      18,
+      7,
+      9,
+      12,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      11,
+      13,
+      14,
+      15,
+      17
+    ],
+    "hailfinder0": [
+      5,
+      15,
+      7,
+      14,
+      8,
+      0,
+      1,
+      2,
+      3,
+      4,
+      6,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "water1": [
+      1,
+      7,
+      2,
+      3,
+      4,
+      0,
+      5,
+      6,
+      8,
+      9,
+      10
+    ],
+    "sachs1": [
+      9,
+      4,
+      2,
+      0,
+      6,
+      1,
+      3,
+      5,
+      7,
+      8
+    ]
+  },
+  "elapsed_sec": 33.381855964660645,
+  "summary": {
+    "overall": {
+      "n": 75,
+      "valid": 75,
+      "parse_errors": 0,
+      "within_0_01": 37,
+      "within_0_01_rate": 0.49333333333333335,
+      "within_0_05": 45,
+      "within_0_05_rate": 0.6,
+      "mae": 0.08758911048750923,
+      "rmse": 0.1855219948475205
+    },
+    "numeric": {
+      "n": 75,
+      "valid": 75,
+      "parse_errors": 0,
+      "within_0_01": 37,
+      "within_0_01_rate": 0.49333333333333335,
+      "within_0_05": 45,
+      "within_0_05_rate": 0.6,
+      "mae": 0.08758911048750923,
+      "rmse": 0.1855219948475205
+    }
+  },
+  "results": [
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 5,
+      "gold": 0.35967399,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.19711243834819656,
+      "abs_error": 0.16256155165180344,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.19711243834819656,
+        "brief_reason": "Because meso-alpha downward implies combined motion downward, we sum all cases with combined downward and quasi-geostrophic neutral, then normalize by all downward-combined cases."
+      },
+      "raw_response": "{\"probability\": 0.19711243834819656, \"brief_reason\": \"Because meso-alpha downward implies combined motion downward, we sum all cases with combined downward and quasi-geostrophic neutral, then normalize by all downward-combined cases.\"}",
+      "usage": {
+        "prompt_tokens": 5855,
+        "completion_tokens": 57,
+        "cost_usd": 0.0025325
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 15,
+      "gold": 0.15,
+      "reasoning_types": [],
+      "pred": 0.15,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.15,
+        "brief_reason": "Quasi-geostrophic vertical motion is given an independent prior, so conditioning only on subjective judgment being downward does not change its weakly-up probability."
+      },
+      "raw_response": "{\"probability\": 0.15, \"brief_reason\": \"Quasi-geostrophic vertical motion is given an independent prior, so conditioning only on subjective judgment being downward does not change its weakly-up probability.\"}",
+      "usage": {
+        "prompt_tokens": 5854,
+        "completion_tokens": 49,
+        "cost_usd": 0.004426
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 7,
+      "gold": 0.15,
+      "reasoning_types": [],
+      "pred": 0.15,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.15,
+        "brief_reason": "The subjective judgment has prior probability 0.15 for strong upward and no dependency on the observed 10.7mu motion is specified."
+      },
+      "raw_response": "{\"probability\": 0.15, \"brief_reason\": \"The subjective judgment has prior probability 0.15 for strong upward and no dependency on the observed 10.7mu motion is specified.\"}",
+      "usage": {
+        "prompt_tokens": 5852,
+        "completion_tokens": 47,
+        "cost_usd": 0.004391
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 14,
+      "gold": 0.055279943,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.2,
+      "abs_error": 0.144720057,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.2,
+        "brief_reason": "Using the priors and summing over 10.7mu and quasi-geostrophic states, P(combined=down | judgment=strong up)=0.115 and P(combined=down)=0.08625, so Bayes gives P(judgment=strong up | combined=down)=0.2."
+      },
+      "raw_response": "{\"probability\": 0.2, \"brief_reason\": \"Using the priors and summing over 10.7mu and quasi-geostrophic states, P(combined=down | judgment=strong up)=0.115 and P(combined=down)=0.08625, so Bayes gives P(judgment=strong up | combined=down)=0.2.\"}",
+      "usage": {
+        "prompt_tokens": 5849,
+        "completion_tokens": 85,
+        "cost_usd": 0.0032255
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 8,
+      "gold": 0.10872894,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.12448132780082988,
+      "abs_error": 0.01575238780082988,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.12448132780082988,
+        "brief_reason": "Using Bayes with independent priors, sum the weak-upward combined-motion likelihoods over subjective judgment for each 10.7mu state given quasi-geostrophic weak-upward evidence, then normalize."
+      },
+      "raw_response": "{\"probability\": 0.12448132780082988, \"brief_reason\": \"Using Bayes with independent priors, sum the weak-upward combined-motion likelihoods over subjective judgment for each 10.7mu state given quasi-geostrophic weak-upward evidence, then normalize.\"}",
+      "usage": {
+        "prompt_tokens": 5866,
+        "completion_tokens": 65,
+        "cost_usd": 0.00268
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.02,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.025,
+      "abs_error": 0.005000000000000001,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.025,
+        "brief_reason": "With 10.7mu motion strong up and subjective judgment neutral, meso-alpha is down exactly when combined motion is down, which marginalizes over quasi-geostrophic motion to 0.15*0 + 0.15*0 + 0.5*0 + 0.2*0.1 = 0.025."
+      },
+      "raw_response": "{\"probability\": 0.025, \"brief_reason\": \"With 10.7mu motion strong up and subjective judgment neutral, meso-alpha is down exactly when combined motion is down, which marginalizes over quasi-geostrophic motion to 0.15*0 + 0.15*0 + 0.5*0 + 0.2*0.1 = 0.025.\"}",
+      "usage": {
+        "prompt_tokens": 5863,
+        "completion_tokens": 90,
+        "cost_usd": 0.0030475
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.21,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.275,
+      "abs_error": 0.06500000000000003,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.275,
+        "brief_reason": "With 10.7mu downward and subjective judgment downward, averaging over quasi-geostrophic states gives neutral probability 0.15*0.2 + 0.15*0.2 + 0.5*0.3 + 0.2*0 = 0.275."
+      },
+      "raw_response": "{\"probability\": 0.275, \"brief_reason\": \"With 10.7mu downward and subjective judgment downward, averaging over quasi-geostrophic states gives neutral probability 0.15*0.2 + 0.15*0.2 + 0.5*0.3 + 0.2*0 = 0.275.\"}",
+      "usage": {
+        "prompt_tokens": 5862,
+        "completion_tokens": 80,
+        "cost_usd": 0.002895
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.60606061,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.2,
+      "abs_error": 0.40606061,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.2,
+        "brief_reason": "Given 10.7mu=downward and QG=strongly upward, the strong-up combined-motion likelihoods across subjective states are 0.2, 0.1, 0.2, 0.1; weighting by priors and normalizing gives P(subjective=neutral)=0.2."
+      },
+      "raw_response": "{\"probability\":0.2,\"brief_reason\":\"Given 10.7mu=downward and QG=strongly upward, the strong-up combined-motion likelihoods across subjective states are 0.2, 0.1, 0.2, 0.1; weighting by priors and normalizing gives P(subjective=neutral)=0.2.\"}",
+      "usage": {
+        "prompt_tokens": 5872,
+        "completion_tokens": 82,
+        "cost_usd": 0.003238
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.15652174,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.1,
+      "abs_error": 0.05652173999999999,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1,
+        "brief_reason": "Given 10.7mu=down, QG=neutral, and combined=neutral, the CPT row assigns 10% probability to subjective judgment being strongly up."
+      },
+      "raw_response": "{\"probability\": 0.1, \"brief_reason\": \"Given 10.7mu=down, QG=neutral, and combined=neutral, the CPT row assigns 10% probability to subjective judgment being strongly up.\"}",
+      "usage": {
+        "prompt_tokens": 5881,
+        "completion_tokens": 53,
+        "cost_usd": 0.0025375
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.27027027,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.33333333333333337,
+      "abs_error": 0.06306306333333339,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.33333333333333337,
+        "brief_reason": "Given subjective=weak up and QG=down, the neutral combined-motion likelihood is 0.15 for 10.7mu=strong up, 0.70 for weak up, 0.50 for neutral, and 0.20 for down; weighting by the 10.7mu prior makes neutral posterior 0.50/(0.15+0.70+0.50+0.20)=1/3."
+      },
+      "raw_response": "{\"probability\": 0.33333333333333337, \"brief_reason\": \"Given subjective=weak up and QG=down, the neutral combined-motion likelihood is 0.15 for 10.7mu=strong up, 0.70 for weak up, 0.50 for neutral, and 0.20 for down; weighting by the 10.7mu prior makes neutral posterior 0.50/(0.15+0.70+0.50+0.20)=1/3.\"}",
+      "usage": {
+        "prompt_tokens": 5875,
+        "completion_tokens": 115,
+        "cost_usd": 0.0034525
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 6,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Given 10.7mu=neutral, subjective=neutral, and QG=down, the combined motion cannot be strongly upward; meso-alpha=down further implies combined=down."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Given 10.7mu=neutral, subjective=neutral, and QG=down, the combined motion cannot be strongly upward; meso-alpha=down further implies combined=down.\"}",
+      "usage": {
+        "prompt_tokens": 5887,
+        "completion_tokens": 57,
+        "cost_usd": 0.0026125
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 9,
+      "gold": 0.17717931,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.1,
+      "abs_error": 0.07717931,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1,
+        "brief_reason": "Downward meso-alpha implies the combined vertical motion is downward, and with independent priors this gives P(10.7mu=weak up | combined=down)=0.1."
+      },
+      "raw_response": "{\"probability\": 0.1, \"brief_reason\": \"Downward meso-alpha implies the combined vertical motion is downward, and with independent priors this gives P(10.7mu=weak up | combined=down)=0.1.\"}",
+      "usage": {
+        "prompt_tokens": 5867,
+        "completion_tokens": 57,
+        "cost_usd": 0.0025625
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 10,
+      "gold": 1.0,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.1,
+      "abs_error": 0.9,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1,
+        "brief_reason": "With 10.7mu strong up and quasi-geostrophic motion neutral, meso-alpha down implies combined motion is down, and for strong-up/neutral/neutral the down probability is 0.1."
+      },
+      "raw_response": "{\"probability\": 0.1, \"brief_reason\": \"With 10.7mu strong up and quasi-geostrophic motion neutral, meso-alpha down implies combined motion is down, and for strong-up/neutral/neutral the down probability is 0.1.\"}",
+      "usage": {
+        "prompt_tokens": 5873,
+        "completion_tokens": 62,
+        "cost_usd": 0.0026525
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 11,
+      "gold": 0.043478261,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.043478261,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Given 10.7mu motion is neutral and subjective judgment is weakly upward, combined neutral is impossible when quasigeostrophic motion is strongly upward."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Given 10.7mu motion is neutral and subjective judgment is weakly upward, combined neutral is impossible when quasigeostrophic motion is strongly upward.\"}",
+      "usage": {
+        "prompt_tokens": 5872,
+        "completion_tokens": 50,
+        "cost_usd": 0.00247
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 12,
+      "gold": 0.215,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.125,
+      "abs_error": 0.09,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.125,
+        "brief_reason": "Given 10.7\u03bc motion = strong up and subjective judgment = strong up, averaging over quasi-geostrophic motion states yields P(combined = weak up) = 0.15*0 + 0.15*0.10 + 0.50*0.20 + 0.20*0.50 = 0.215."
+      },
+      "raw_response": "{\"probability\": 0.125, \"brief_reason\": \"Given 10.7\u03bc motion = strong up and subjective judgment = strong up, averaging over quasi-geostrophic motion states yields P(combined = weak up) = 0.15*0 + 0.15*0.10 + 0.50*0.20 + 0.20*0.50 = 0.215.\"}",
+      "usage": {
+        "prompt_tokens": 5865,
+        "completion_tokens": 92,
+        "cost_usd": 0.0030825
+      }
+    },
+    {
+      "network": "hailfinder0",
+      "mode": "numeric",
+      "pair_id": 13,
+      "gold": 0.55555556,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.44444444000000005,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 1.0,
+        "brief_reason": "Given strong-up 10.7mu motion and strong-up subjective judgment, combined neutral occurs only when quasigeostrophic motion is neutral."
+      },
+      "raw_response": "{\"probability\": 1.0, \"brief_reason\": \"Given strong-up 10.7mu motion and strong-up subjective judgment, combined neutral occurs only when quasigeostrophic motion is neutral.\"}",
+      "usage": {
+        "prompt_tokens": 5883,
+        "completion_tokens": 47,
+        "cost_usd": 0.0024525
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 16,
+      "gold": 0.002636998,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0031357565245653265,
+      "abs_error": 0.0004987585245653263,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0031357565245653265,
+        "brief_reason": "With no anti-theft device, the theft rate is the prior-weighted average over home base and car value distributions implied by the network."
+      },
+      "raw_response": "{\"probability\": 0.0031357565245653264, \"brief_reason\": \"With no anti-theft device, the theft rate is the prior-weighted average over home base and car value distributions implied by the network.\"}",
+      "usage": {
+        "prompt_tokens": 7429,
+        "completion_tokens": 53,
+        "cost_usd": 0.0029515
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 18,
+      "gold": 0.77042959,
+      "reasoning_types": [],
+      "pred": 0.6794470685,
+      "abs_error": 0.09098252149999997,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.6794470685,
+        "brief_reason": "Given only car value = $20,000, anti-theft is less likely because many high-probability value-$20,000 cases come from economy/family/sport combinations with relatively low anti-theft rates overall."
+      },
+      "raw_response": "{\"probability\": 0.6794470685, \"brief_reason\": \"Given only car value = $20,000, anti-theft is less likely because many high-probability value-$20,000 cases come from economy/family/sport combinations with relatively low anti-theft rates overall.\"}",
+      "usage": {
+        "prompt_tokens": 7433,
+        "completion_tokens": 67,
+        "cost_usd": 0.0031715
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 7,
+      "gold": 0.1,
+      "reasoning_types": [],
+      "pred": 0.1,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1,
+        "brief_reason": "Mileage is given as an independent prior with 10% probability for 5,000, and the evidence only concerns anti-theft devices."
+      },
+      "raw_response": "{\"probability\": 0.1, \"brief_reason\": \"Mileage is given as an independent prior with 10% probability for 5,000, and the evidence only concerns anti-theft devices.\"}",
+      "usage": {
+        "prompt_tokens": 7434,
+        "completion_tokens": 47,
+        "cost_usd": 0.002874
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 9,
+      "gold": 0.997987,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.998966814228336,
+      "abs_error": 0.00097981422833604,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.998966814228336,
+        "brief_reason": "Conditioning on no anti-theft and 1,000,000 miles, the remaining uncertainty over class, risk, home base, year, model, and value yields an overall non-theft probability of about 99.90%."
+      },
+      "raw_response": "{\"probability\": 0.998966814228336, \"brief_reason\": \"Conditioning on no anti-theft and 1,000,000 miles, the remaining uncertainty over class, risk, home base, year, model, and value yields an overall non-theft probability of about 99.90%.\"}",
+      "usage": {
+        "prompt_tokens": 7442,
+        "completion_tokens": 71,
+        "cost_usd": 0.003254
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 12,
+      "gold": 0.99999776,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.9999949989146735,
+      "abs_error": 2.7610853264858903e-06,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9999949989146735,
+        "brief_reason": "Conditioning on secure parking and marginalizing over anti-theft and car value given 5000 miles yields an overwhelming probability of not being stolen."
+      },
+      "raw_response": "{\"probability\": 0.9999949989146735, \"brief_reason\": \"Conditioning on secure parking and marginalizing over anti-theft and car value given 5000 miles yields an overwhelming probability of not being stolen.\"}",
+      "usage": {
+        "prompt_tokens": 7440,
+        "completion_tokens": 53,
+        "cost_usd": 0.002979
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15302481,
+      "reasoning_types": [
+        "causal",
+        "explaining_away"
+      ],
+      "pred": 0.2199,
+      "abs_error": 0.06687519,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.2199,
+        "brief_reason": "Conditioning on suburb, 20,000 miles, no anti-theft, and stolen favors middle/upper classes and car types where $50,000 value mainly comes from luxury models, giving about 21.99% posterior probability."
+      },
+      "raw_response": "{\"probability\": 0.2199, \"brief_reason\": \"Conditioning on suburb, 20,000 miles, no anti-theft, and stolen favors middle/upper classes and car types where $50,000 value mainly comes from luxury models, giving about 21.99% posterior probability.\"}",
+      "usage": {
+        "prompt_tokens": 7471,
+        "completion_tokens": 68,
+        "cost_usd": 0.0032815
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.27861336,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.4523,
+      "abs_error": 0.17368664,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.4523,
+        "brief_reason": "Conditioning on theft and no anti-theft favors the higher-theft-value categories, and the posterior mass for value $10,000 is about 45.23%."
+      },
+      "raw_response": "{\"probability\": 0.4523, \"brief_reason\": \"Conditioning on theft and no anti-theft favors the higher-theft-value categories, and the posterior mass for value $10,000 is about 45.23%.\"}",
+      "usage": {
+        "prompt_tokens": 7443,
+        "completion_tokens": 55,
+        "cost_usd": 0.0030165
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 3e-06,
+      "abs_error": 3e-06,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 3e-06,
+        "brief_reason": "Given no anti-theft device, secure parking, and a $20,000 value, the premises directly specify a 0.0003% theft chance."
+      },
+      "raw_response": "{\"probability\": 0.000003, \"brief_reason\": \"Given no anti-theft device, secure parking, and a $20,000 value, the premises directly specify a 0.0003% theft chance.\"}",
+      "usage": {
+        "prompt_tokens": 7452,
+        "completion_tokens": 52,
+        "cost_usd": 0.002994
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.0002,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0002,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0002,
+        "brief_reason": "Given no anti-theft device, rural parking, and a $20,000 value, the theft probability is directly 0.02%."
+      },
+      "raw_response": "{\"probability\": 0.0002, \"brief_reason\": \"Given no anti-theft device, rural parking, and a $20,000 value, the theft probability is directly 0.02%.\"}",
+      "usage": {
+        "prompt_tokens": 7463,
+        "completion_tokens": 49,
+        "cost_usd": 0.0029765
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.96770194,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.6908,
+      "abs_error": 0.27690194,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.6908,
+        "brief_reason": "Conditioning on stolen, no anti-theft, value $20k, and 5,000 miles makes city the most likely home base after marginalizing over class, risk, year, and model."
+      },
+      "raw_response": "{\"probability\": 0.6908, \"brief_reason\": \"Conditioning on stolen, no anti-theft, value $20k, and 5,000 miles makes city the most likely home base after marginalizing over class, risk, year, and model.\"}",
+      "usage": {
+        "prompt_tokens": 7462,
+        "completion_tokens": 61,
+        "cost_usd": 0.003154
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 5,
+      "gold": 0.1931662,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.5,
+      "abs_error": 0.3068338,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.5,
+        "brief_reason": "With value $1,000,000 and mileage 20,000, suburb theft risk is identical whether anti-theft is present or not, so the evidence leaves anti-theft at its prior for such cars, which is 0.5."
+      },
+      "raw_response": "{\"probability\": 0.5, \"brief_reason\": \"With value $1,000,000 and mileage 20,000, suburb theft risk is identical whether anti-theft is present or not, so the evidence leaves anti-theft at its prior for such cars, which is 0.5.\"}",
+      "usage": {
+        "prompt_tokens": 7465,
+        "completion_tokens": 69,
+        "cost_usd": 0.0032815
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 6,
+      "gold": 0.026969748,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0822,
+      "abs_error": 0.055230251999999994,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0822,
+        "brief_reason": "Given only mileage=5000 and that the car was stolen, Bayesian updating over all hidden variables makes suburban home base relatively unlikely compared with city and secure locations."
+      },
+      "raw_response": "{\"probability\": 0.0822, \"brief_reason\": \"Given only mileage=5000 and that the car was stolen, Bayesian updating over all hidden variables makes suburban home base relatively unlikely compared with city and secure locations.\"}",
+      "usage": {
+        "prompt_tokens": 7443,
+        "completion_tokens": 52,
+        "cost_usd": 0.0029715
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 8,
+      "gold": 0.089908557,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.1067,
+      "abs_error": 0.016791443000000003,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1067,
+        "brief_reason": "Conditioning on not stolen and anti-theft slightly favors safer locations, but rural remains modest after marginalizing over class, risk, and car value."
+      },
+      "raw_response": "{\"probability\": 0.1067, \"brief_reason\": \"Conditioning on not stolen and anti-theft slightly favors safer locations, but rural remains modest after marginalizing over class, risk, and car value.\"}",
+      "usage": {
+        "prompt_tokens": 7438,
+        "completion_tokens": 50,
+        "cost_usd": 0.002929
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 10,
+      "gold": 0.058412601,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.0364,
+      "abs_error": 0.022012601,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0364,
+        "brief_reason": "Given 1,000,000 miles and not stolen, the posterior for value is dominated by the mileage/year/model value table, and the main $50k mass comes from luxury cars plus a small contribution from older sports cars."
+      },
+      "raw_response": "{\"probability\": 0.0364, \"brief_reason\": \"Given 1,000,000 miles and not stolen, the posterior for value is dominated by the mileage/year/model value table, and the main $50k mass comes from luxury cars plus a small contribution from older sports cars.\"}",
+      "usage": {
+        "prompt_tokens": 7443,
+        "completion_tokens": 66,
+        "cost_usd": 0.0031815
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 11,
+      "gold": 0.15725594,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.03617313239008195,
+      "abs_error": 0.12108280760991806,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.03617313239008195,
+        "brief_reason": "Given theft and a $1,000,000 value at 20,000 miles, secure home base is strongly disfavored because super-luxury cars are almost never stolen anywhere and secure parking is least compatible with theft."
+      },
+      "raw_response": "{\"probability\": 0.03617313239008195, \"brief_reason\": \"Given theft and a $1,000,000 value at 20,000 miles, secure home base is strongly disfavored because super-luxury cars are almost never stolen anywhere and secure parking is least compatible with theft.\"}",
+      "usage": {
+        "prompt_tokens": 7450,
+        "completion_tokens": 70,
+        "cost_usd": 0.003259
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 13,
+      "gold": 0.43177782,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.5172413793103449,
+      "abs_error": 0.08546355931034488,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.5172413793103449,
+        "brief_reason": "Given secure parking, no anti-theft, and value $50,000, only luxury cars fit, and among those cases mileage 20,000 accounts for about 51.7%."
+      },
+      "raw_response": "{\"probability\": 0.5172413793103449, \"brief_reason\": \"Given secure parking, no anti-theft, and value $50,000, only luxury cars fit, and among those cases mileage 20,000 accounts for about 51.7%.\"}",
+      "usage": {
+        "prompt_tokens": 7465,
+        "completion_tokens": 63,
+        "cost_usd": 0.0031915
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 14,
+      "gold": 0.999999,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.9999991661514493,
+      "abs_error": 1.6615144937670578e-07,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.9999991661514493,
+        "brief_reason": "Given a $1,000,000 car with anti-theft devices, averaging over home-base uncertainty makes not-stolen overwhelmingly likely."
+      },
+      "raw_response": "{\"probability\": 0.9999991661514494, \"brief_reason\": \"Given a $1,000,000 car with anti-theft devices, averaging over home-base uncertainty makes not-stolen overwhelmingly likely.\"}",
+      "usage": {
+        "prompt_tokens": 7440,
+        "completion_tokens": 51,
+        "cost_usd": 0.002949
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 15,
+      "gold": 0.10000002,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0138,
+      "abs_error": 0.08620001999999999,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0138,
+        "brief_reason": "Given suburb, no anti-theft, and $1,000,000 value, the evidence strongly points to a super-luxury car, for which 5,000 miles is one of the possible mileage states but not the most common overall."
+      },
+      "raw_response": "{\"probability\": 0.0138, \"brief_reason\": \"Given suburb, no anti-theft, and $1,000,000 value, the evidence strongly points to a super-luxury car, for which 5,000 miles is one of the possible mileage states but not the most common overall.\"}",
+      "usage": {
+        "prompt_tokens": 7464,
+        "completion_tokens": 70,
+        "cost_usd": 0.003294
+      }
+    },
+    {
+      "network": "insurance1",
+      "mode": "numeric",
+      "pair_id": 17,
+      "gold": 0.06778968,
+      "reasoning_types": [],
+      "pred": 0.062,
+      "abs_error": 0.005789680000000005,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.062,
+        "brief_reason": "Given only no anti-theft evidence, the value is inferred through class and risk-aversion, and fifty-thousand-dollar cars are mainly luxury/currently valuable cases with moderate overall prior mass."
+      },
+      "raw_response": "{\"probability\": 0.062, \"brief_reason\": \"Given only no anti-theft evidence, the value is inferred through class and risk-aversion, and fifty-thousand-dollar cars are mainly luxury/currently valuable cases with moderate overall prior mass.\"}",
+      "usage": {
+        "prompt_tokens": 7433,
+        "completion_tokens": 57,
+        "cost_usd": 0.0030215
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.079972639,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0623,
+      "abs_error": 0.017672638999999997,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0623,
+        "brief_reason": "Using Bayes\u2019 rule over all listed LAI and radiation states with biomass fixed at 0.35 kg/m2 gives a posterior temperature-13\u00b0C probability of about 6.23%."
+      },
+      "raw_response": "{\"probability\": 0.0623, \"brief_reason\": \"Using Bayes\u2019 rule over all listed LAI and radiation states with biomass fixed at 0.35 kg/m2 gives a posterior temperature-13\u00b0C probability of about 6.23%.\"}",
+      "usage": {
+        "prompt_tokens": 9591,
+        "completion_tokens": 60,
+        "cost_usd": 0.0035655
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 18,
+      "gold": 0.133,
+      "reasoning_types": [],
+      "pred": 0.13326661330665335,
+      "abs_error": 0.0002666133066533405,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.13326661330665335,
+        "brief_reason": "Radiation and temperature are given as independent priors, so conditioning on radiation 200-249 MJ/m2 leaves the 13.0\u00b0C prior unchanged at 13.3%."
+      },
+      "raw_response": "{\"probability\": 0.13326661330665335, \"brief_reason\": \"Radiation and temperature are given as independent priors, so conditioning on radiation 200-249 MJ/m2 leaves the 13.0\u00b0C prior unchanged at 13.3%.\"}",
+      "usage": {
+        "prompt_tokens": 9588,
+        "completion_tokens": 62,
+        "cost_usd": 0.003588
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 5,
+      "gold": 0.467,
+      "reasoning_types": [],
+      "pred": 0.46699999999999997,
+      "abs_error": 5.551115123125783e-17,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.46699999999999997,
+        "brief_reason": "Radiation is given marginally, and conditioning only on temperature does not change it in this model."
+      },
+      "raw_response": "{\"probability\": 0.46699999999999997, \"brief_reason\": \"Radiation is given marginally, and conditioning only on temperature does not change it in this model.\"}",
+      "usage": {
+        "prompt_tokens": 9582,
+        "completion_tokens": 44,
+        "cost_usd": 0.003303
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 10,
+      "gold": 0.61192722,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.2034,
+      "abs_error": 0.40852721999999997,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.2034,
+        "brief_reason": "Using Bayes\u2019 rule over all LAI and radiation states that allow 0.80 kg/m2 biomass, the posterior mass for temperature 13.0\u201314.9\u00b0C is about 20.34%."
+      },
+      "raw_response": "{\"probability\": 0.2034, \"brief_reason\": \"Using Bayes\u2019 rule over all LAI and radiation states that allow 0.80 kg/m2 biomass, the posterior mass for temperature 13.0\u201314.9\u00b0C is about 20.34%.\"}",
+      "usage": {
+        "prompt_tokens": 9596,
+        "completion_tokens": 65,
+        "cost_usd": 0.003653
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 19,
+      "gold": 0.70098579,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.4914,
+      "abs_error": 0.20958579000000005,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.4914,
+        "brief_reason": "Using Bayes\u2019 rule over all listed LAI and temperature states with biomass fixed at 0.40 kg/m2, the 150-199 MJ/m2 radiation state has the largest posterior mass, about 0.4914."
+      },
+      "raw_response": "{\"probability\": 0.4914, \"brief_reason\": \"Using Bayes\u2019 rule over all listed LAI and temperature states with biomass fixed at 0.40 kg/m2, the 150-199 MJ/m2 radiation state has the largest posterior mass, about 0.4914.\"}",
+      "usage": {
+        "prompt_tokens": 9596,
+        "completion_tokens": 68,
+        "cost_usd": 0.003698
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.69559087,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.5842,
+      "abs_error": 0.11139086999999992,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.5842,
+        "brief_reason": "Given radiation below 150 MJ/m2 and biomass 0.50, only LAI 5.5-6.5 and >6.5 contribute, and Bayes weighting favors temperature 13.0-14.9\u00b0C."
+      },
+      "raw_response": "{\"probability\": 0.5842, \"brief_reason\": \"Given radiation below 150 MJ/m2 and biomass 0.50, only LAI 5.5-6.5 and >6.5 contribute, and Bayes weighting favors temperature 13.0-14.9\u00b0C.\"}",
+      "usage": {
+        "prompt_tokens": 9607,
+        "completion_tokens": 69,
+        "cost_usd": 0.0037405
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Given radiation 250 MJ/m2 and temperature 15.0-16.9\u00b0C, none of the listed conditional distributions assign any probability to biomass 0.20 kg/m2."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Given radiation 250 MJ/m2 and temperature 15.0-16.9\u00b0C, none of the listed conditional distributions assign any probability to biomass 0.20 kg/m2.\"}",
+      "usage": {
+        "prompt_tokens": 9607,
+        "completion_tokens": 57,
+        "cost_usd": 0.0035605
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 6,
+      "gold": 0.08534845,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.003067,
+      "abs_error": 0.08228145,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.003067,
+        "brief_reason": "Given radiation >250 MJ/m2, average the 0.70 kg/m2 probabilities over LAI and temperature priors; only LAI 2.5-3.5, 5.5-6.5, and >6.5 contribute."
+      },
+      "raw_response": "{\"probability\": 0.003067, \"brief_reason\": \"Given radiation >250 MJ/m2, average the 0.70 kg/m2 probabilities over LAI and temperature priors; only LAI 2.5-3.5, 5.5-6.5, and >6.5 contribute.\"}",
+      "usage": {
+        "prompt_tokens": 9591,
+        "completion_tokens": 74,
+        "cost_usd": 0.0037755
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 7,
+      "gold": 0.067,
+      "reasoning_types": [],
+      "pred": 0.067,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.067,
+        "brief_reason": "Radiation is given marginally as 6.7% below 150 MJ/m2, and no dependence of radiation on temperature is specified."
+      },
+      "raw_response": "{\"probability\": 0.067, \"brief_reason\": \"Radiation is given marginally as 6.7% below 150 MJ/m2, and no dependence of radiation on temperature is specified.\"}",
+      "usage": {
+        "prompt_tokens": 9584,
+        "completion_tokens": 48,
+        "cost_usd": 0.003368
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 8,
+      "gold": 0.00492324,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.009737999999999998,
+      "abs_error": 0.004814759999999999,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.009737999999999998,
+        "brief_reason": "Given radiation >250 MJ/m2, 0.90 kg/m2 appears only for LAI 5.5-6.5 at 13\u00b0C/13-14.9\u00b0C and LAI >6.5 at 13\u00b0C/13-14.9\u00b0C, weighted by their priors."
+      },
+      "raw_response": "{\"probability\": 0.009737999999999998, \"brief_reason\": \"Given radiation >250 MJ/m2, 0.90 kg/m2 appears only for LAI 5.5-6.5 at 13\u00b0C/13-14.9\u00b0C and LAI >6.5 at 13\u00b0C/13-14.9\u00b0C, weighted by their priors.\"}",
+      "usage": {
+        "prompt_tokens": 9591,
+        "completion_tokens": 88,
+        "cost_usd": 0.0039855
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 9,
+      "gold": 0.567,
+      "reasoning_types": [],
+      "pred": 0.5667166416791604,
+      "abs_error": 0.00028335832083958845,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.5667166416791604,
+        "brief_reason": "Given only radiation evidence and no dependence of temperature on radiation in the premises, the posterior equals the prior for temperature 13.0-14.9\u00b0C."
+      },
+      "raw_response": "{\"probability\": 0.5667166416791604, \"brief_reason\": \"Given only radiation evidence and no dependence of temperature on radiation in the premises, the posterior equals the prior for temperature 13.0-14.9\u00b0C.\"}",
+      "usage": {
+        "prompt_tokens": 9594,
+        "completion_tokens": 56,
+        "cost_usd": 0.003513
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 11,
+      "gold": 0.06841598,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.1320556,
+      "abs_error": 0.06363962,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1320556,
+        "brief_reason": "Conditioning on temperature at 17\u00b0C and marginalizing over LAI and radiation gives about a 13.21% chance of 0.40 kg/m2 biomass."
+      },
+      "raw_response": "{\"probability\": 0.1320556, \"brief_reason\": \"Conditioning on temperature at 17\u00b0C and marginalizing over LAI and radiation gives about a 13.21% chance of 0.40 kg/m2 biomass.\"}",
+      "usage": {
+        "prompt_tokens": 9585,
+        "completion_tokens": 56,
+        "cost_usd": 0.0034905
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 12,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "A photosynthetic biomass of 0.95 kg/m2 appears only when radiation is 250 MJ/m2, never for 200-249 MJ/m2."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"A photosynthetic biomass of 0.95 kg/m2 appears only when radiation is 250 MJ/m2, never for 200-249 MJ/m2.\"}",
+      "usage": {
+        "prompt_tokens": 9596,
+        "completion_tokens": 52,
+        "cost_usd": 0.003458
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 13,
+      "gold": 0.030202654,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.24036177,
+      "abs_error": 0.210159116,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.24036177,
+        "brief_reason": "Conditioning on temperature 17\u00b0C and marginalizing over LAI and radiation using the given priors gives about a 24.0% chance of 0.35 kg/m2 biomass."
+      },
+      "raw_response": "{\"probability\": 0.24036177, \"brief_reason\": \"Conditioning on temperature 17\\u00b0C and marginalizing over LAI and radiation using the given priors gives about a 24.0% chance of 0.35 kg/m2 biomass.\"}",
+      "usage": {
+        "prompt_tokens": 9588,
+        "completion_tokens": 64,
+        "cost_usd": 0.003618
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 14,
+      "gold": 0.11023269,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0856,
+      "abs_error": 0.02463269,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0856,
+        "brief_reason": "Using Bayes over the LAI states with available CPT rows for radiation 150-199 and biomass 0.45 gives a posterior temperature-13\u00b0C probability of about 0.086."
+      },
+      "raw_response": "{\"probability\": 0.0856, \"brief_reason\": \"Using Bayes over the LAI states with available CPT rows for radiation 150-199 and biomass 0.45 gives a posterior temperature-13\u00b0C probability of about 0.086.\"}",
+      "usage": {
+        "prompt_tokens": 9606,
+        "completion_tokens": 59,
+        "cost_usd": 0.003588
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 15,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Under all listed cases with temperature at 17\u00b0C, every biomass distribution assigns positive mass only to values above 0, so zero biomass is impossible."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Under all listed cases with temperature at 17\u00b0C, every biomass distribution assigns positive mass only to values above 0, so zero biomass is impossible.\"}",
+      "usage": {
+        "prompt_tokens": 9581,
+        "completion_tokens": 49,
+        "cost_usd": 0.0033755
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 16,
+      "gold": 0.067,
+      "reasoning_types": [],
+      "pred": 0.067,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.067,
+        "brief_reason": "Radiation is given marginally with 6.7% probability below 150 MJ/m2, and no dependence of radiation on temperature is specified."
+      },
+      "raw_response": "{\"probability\": 0.067, \"brief_reason\": \"Radiation is given marginally with 6.7% probability below 150 MJ/m2, and no dependence of radiation on temperature is specified.\"}",
+      "usage": {
+        "prompt_tokens": 9584,
+        "completion_tokens": 49,
+        "cost_usd": 0.003383
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 17,
+      "gold": 0.467,
+      "reasoning_types": [],
+      "pred": 0.467,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.467,
+        "brief_reason": "Radiation has the stated prior distribution, and conditioning only on temperature does not change it."
+      },
+      "raw_response": "{\"probability\": 0.467, \"brief_reason\": \"Radiation has the stated prior distribution, and conditioning only on temperature does not change it.\"}",
+      "usage": {
+        "prompt_tokens": 9582,
+        "completion_tokens": 37,
+        "cost_usd": 0.003198
+      }
+    },
+    {
+      "network": "mildew0",
+      "mode": "numeric",
+      "pair_id": 20,
+      "gold": 0.0,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Given radiation between 200-249 MJ/m2, none of the provided conditional biomass distributions assign any probability to 0.25 kg/m2."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Given radiation between 200-249 MJ/m2, none of the provided conditional biomass distributions assign any probability to 0.25 kg/m2.\"}",
+      "usage": {
+        "prompt_tokens": 9594,
+        "completion_tokens": 49,
+        "cost_usd": 0.003408
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 9,
+      "gold": 0.88394073,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.44595335171587314,
+      "abs_error": 0.4379873782841268,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.44595335171587314,
+        "brief_reason": "Conditioning on MEK=high and marginalizing over hidden PKA and PKC gives Raf=high about 0.446."
+      },
+      "raw_response": "{\"probability\": 0.44595335171587316, \"brief_reason\": \"Conditioning on MEK=high and marginalizing over hidden PKA and PKC gives Raf=high about 0.446.\"}",
+      "usage": {
+        "prompt_tokens": 5129,
+        "completion_tokens": 51,
+        "cost_usd": 0.0023555
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 0.24586071,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.2635190265916745,
+      "abs_error": 0.017658316591674467,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.2635190265916745,
+        "brief_reason": "With PKC fixed low, infer PKA from Akt=high via Raf/MEK/ERK, then marginalize Jnk(avg) over PKA using P(Jnk=avg|PKA,PKC=low)."
+      },
+      "raw_response": "{\"probability\": 0.2635190265916745, \"brief_reason\": \"With PKC fixed low, infer PKA from Akt=high via Raf/MEK/ERK, then marginalize Jnk(avg) over PKA using P(Jnk=avg|PKA,PKC=low).\"}",
+      "usage": {
+        "prompt_tokens": 5140,
+        "completion_tokens": 71,
+        "cost_usd": 0.002683
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.6271779,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.4837,
+      "abs_error": 0.14347789999999994,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.4837,
+        "brief_reason": "Given only Mek=low and no evidence on PKA, the provided conditional table directly gives Erk=average as 48.37% for the Mek-low case used here."
+      },
+      "raw_response": "{\"probability\": 0.4837, \"brief_reason\": \"Given only Mek=low and no evidence on PKA, the provided conditional table directly gives Erk=average as 48.37% for the Mek-low case used here.\"}",
+      "usage": {
+        "prompt_tokens": 5148,
+        "completion_tokens": 55,
+        "cost_usd": 0.002463
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.15703602,
+      "reasoning_types": [],
+      "pred": 0.0126619713950139,
+      "abs_error": 0.1443740486049861,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0126619713950139,
+        "brief_reason": "With ERK low and AKT average, infer PKA is mostly low/average, then marginalize JNK-high over PKC and PKA."
+      },
+      "raw_response": "{\"probability\": 0.0126619713950139, \"brief_reason\": \"With ERK low and AKT average, infer PKA is mostly low/average, then marginalize JNK-high over PKC and PKA.\"}",
+      "usage": {
+        "prompt_tokens": 5139,
+        "completion_tokens": 55,
+        "cost_usd": 0.0024405
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 6,
+      "gold": 1.0,
+      "reasoning_types": [
+        "observation"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 1.0,
+        "brief_reason": "The evidence directly states that PKC is high, so its probability is 1 given the evidence."
+      },
+      "raw_response": "{\"probability\": 1.0, \"brief_reason\": \"The evidence directly states that PKC is high, so its probability is 1 given the evidence.\"}",
+      "usage": {
+        "prompt_tokens": 5133,
+        "completion_tokens": 39,
+        "cost_usd": 0.0021855
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.056300659,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.0489,
+      "abs_error": 0.007400659000000004,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0489,
+        "brief_reason": "Given MEK=average and PKA=average, the model directly gives P(Erk=low)=4.89%, and the other evidence is downstream or already fixed."
+      },
+      "raw_response": "{\"probability\": 0.0489, \"brief_reason\": \"Given MEK=average and PKA=average, the model directly gives P(Erk=low)=4.89%, and the other evidence is downstream or already fixed.\"}",
+      "usage": {
+        "prompt_tokens": 5186,
+        "completion_tokens": 56,
+        "cost_usd": 0.002573
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.96901669,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.8666644296102994,
+      "abs_error": 0.10235226038970058,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.8666644296102994,
+        "brief_reason": "Using Bayes with PKC as the hidden parent of PKA, JNK, P38, and Raf, the evidence strongly favors PKC=low over average or high."
+      },
+      "raw_response": "{\"probability\": 0.8666644296102994, \"brief_reason\": \"Using Bayes with PKC as the hidden parent of PKA, JNK, P38, and Raf, the evidence strongly favors PKC=low over average or high.\"}",
+      "usage": {
+        "prompt_tokens": 5159,
+        "completion_tokens": 60,
+        "cost_usd": 0.0025655
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 5,
+      "gold": 0.11070896,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.1472,
+      "abs_error": 0.03649104,
+      "within_0_01": false,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.1472,
+        "brief_reason": "With PKA low and PKC low, Raf is average with probability 14.72%, and the other evidence is downstream or already conditioned on."
+      },
+      "raw_response": "{\"probability\": 0.1472, \"brief_reason\": \"With PKA low and PKC low, Raf is average with probability 14.72%, and the other evidence is downstream or already conditioned on.\"}",
+      "usage": {
+        "prompt_tokens": 5180,
+        "completion_tokens": 50,
+        "cost_usd": 0.002468
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 7,
+      "gold": 0.0,
+      "reasoning_types": [
+        "observation"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The evidence explicitly states PKA is low, so PKA being high is impossible under the conditioning."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The evidence explicitly states PKA is low, so PKA being high is impossible under the conditioning.\"}",
+      "usage": {
+        "prompt_tokens": 5178,
+        "completion_tokens": 39,
+        "cost_usd": 0.002298
+      }
+    },
+    {
+      "network": "sachs1",
+      "mode": "numeric",
+      "pair_id": 8,
+      "gold": 0.3493,
+      "reasoning_types": [
+        "causal",
+        "evidential"
+      ],
+      "pred": 0.3439,
+      "abs_error": 0.005400000000000016,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.3439,
+        "brief_reason": "P38 depends only on PKA and PKC, so with PKA low and PKC average its average-level probability is 34.39%."
+      },
+      "raw_response": "{\"probability\": 0.3439, \"brief_reason\": \"P38 depends only on PKA and PKC, so with PKA low and PKC average its average-level probability is 34.39%.\"}",
+      "usage": {
+        "prompt_tokens": 5189,
+        "completion_tokens": 51,
+        "cost_usd": 0.0025055
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 1,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "At 12:00, CBODN is given with 100% certainty as 10 mg/L, so 20 mg/L is impossible regardless of the 12:15 evidence."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"At 12:00, CBODN is given with 100% certainty as 10 mg/L, so 20 mg/L is impossible regardless of the 12:15 evidence.\"}",
+      "usage": {
+        "prompt_tokens": 8468,
+        "completion_tokens": 57,
+        "cost_usd": 0.003305
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 7,
+      "gold": 0.0078,
+      "reasoning_types": [
+        "causal"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0078,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Given the evidence, CNON=4 and CBODD=20 with certainty at 12:00, and the table gives P(CBODN at 12:15 = 15 | CBODN=10, CNON=4, CBODD=20) = 0.0078."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Given the evidence, CNON=4 and CBODD=20 with certainty at 12:00, and the table gives P(CBODN at 12:15 = 15 | CBODN=10, CNON=4, CBODD=20) = 0.0078.\"}",
+      "usage": {
+        "prompt_tokens": 8468,
+        "completion_tokens": 83,
+        "cost_usd": 0.003695
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 2,
+      "gold": 0.0,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The premises state CBODD at 12:00 is certainly 20 mg/L, so 25 mg/L is impossible."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The premises state CBODD at 12:00 is certainly 20 mg/L, so 25 mg/L is impossible.\"}",
+      "usage": {
+        "prompt_tokens": 8462,
+        "completion_tokens": 45,
+        "cost_usd": 0.00311
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 3,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "CNON at 12:00 is deterministically 4 mg/L, so 6 mg/L has prior and posterior probability 0."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"CNON at 12:00 is deterministically 4 mg/L, so 6 mg/L has prior and posterior probability 0.\"}",
+      "usage": {
+        "prompt_tokens": 8466,
+        "completion_tokens": 47,
+        "cost_usd": 0.00315
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 4,
+      "gold": 1.0,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 1.0,
+        "brief_reason": "The premises state with 100% certainty that CBODD at 12:00 is 20 mg/L."
+      },
+      "raw_response": "{\"probability\": 1.0, \"brief_reason\": \"The premises state with 100% certainty that CBODD at 12:00 is 20 mg/L.\"}",
+      "usage": {
+        "prompt_tokens": 8487,
+        "completion_tokens": 42,
+        "cost_usd": 0.0031275
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 0,
+      "gold": 0.0,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The premises state CBODN at 12:00 is certainly 10 mg/L, so 15 mg/L has probability 0 regardless of CNON=4 mg/L."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The premises state CBODN at 12:00 is certainly 10 mg/L, so 15 mg/L has probability 0 regardless of CNON=4 mg/L.\"}",
+      "usage": {
+        "prompt_tokens": 8467,
+        "completion_tokens": 55,
+        "cost_usd": 0.0032725
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 5,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential",
+        "explaining_away"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The premises state CBODN at 12:00 is certainly 10 mg/L, so 20 mg/L has zero prior probability even after conditioning on the evidence."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The premises state CBODN at 12:00 is certainly 10 mg/L, so 20 mg/L has zero prior probability even after conditioning on the evidence.\"}",
+      "usage": {
+        "prompt_tokens": 8497,
+        "completion_tokens": 53,
+        "cost_usd": 0.0033175
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 6,
+      "gold": 0.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "Given the premises, CNON at 12:00 is certainly 4 mg/L, so 6 mg/L is impossible regardless of the 12:15 evidence."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"Given the premises, CNON at 12:00 is certainly 4 mg/L, so 6 mg/L is impossible regardless of the 12:15 evidence.\"}",
+      "usage": {
+        "prompt_tokens": 8470,
+        "completion_tokens": 53,
+        "cost_usd": 0.00325
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 8,
+      "gold": 1.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 1.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 1.0,
+        "brief_reason": "The premises state with certainty that CNON at 12:00 is 4 mg/L, so the posterior remains 1 even after conditioning on CBODN at 12:15 = 10 mg/L."
+      },
+      "raw_response": "{\"probability\": 1.0, \"brief_reason\": \"The premises state with certainty that CNON at 12:00 is 4 mg/L, so the posterior remains 1 even after conditioning on CBODN at 12:15 = 10 mg/L.\"}",
+      "usage": {
+        "prompt_tokens": 8466,
+        "completion_tokens": 62,
+        "cost_usd": 0.003375
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 9,
+      "gold": 0.0,
+      "reasoning_types": [],
+      "pred": 0.0,
+      "abs_error": 0.0,
+      "within_0_01": true,
+      "within_0_05": true,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.0,
+        "brief_reason": "The premises state CBODN at 12:00 is certainly 10 mg/L, so 5 mg/L is impossible regardless of CNON=4 mg/L."
+      },
+      "raw_response": "{\"probability\": 0.0, \"brief_reason\": \"The premises state CBODN at 12:00 is certainly 10 mg/L, so 5 mg/L is impossible regardless of CNON=4 mg/L.\"}",
+      "usage": {
+        "prompt_tokens": 8470,
+        "completion_tokens": 53,
+        "cost_usd": 0.00325
+      }
+    },
+    {
+      "network": "water1",
+      "mode": "numeric",
+      "pair_id": 10,
+      "gold": 1.0,
+      "reasoning_types": [
+        "evidential"
+      ],
+      "pred": 0.2501288181306953,
+      "abs_error": 0.7498711818693047,
+      "within_0_01": false,
+      "within_0_05": false,
+      "parse_error": null,
+      "response_json": {
+        "probability": 0.2501288181306953,
+        "brief_reason": "Using Bayes with CBODN(12:00)=10 and CBODD(12:00)=20 known, CNON=4 has posterior proportional to 0.25\u00d70.0078 among CNON values {2,4,6,10}."
+      },
+      "raw_response": "{\"probability\": 0.2501288181306953, \"brief_reason\": \"Using Bayes with CBODN(12:00)=10 and CBODD(12:00)=20 known, CNON=4 has posterior proportional to 0.25\u00d70.0078 among CNON values {2,4,6,10}.\"}",
+      "usage": {
+        "prompt_tokens": 8471,
+        "completion_tokens": 80,
+        "cost_usd": 0.0036575
+      }
+    }
+  ],
+  "timestamp": "2026-05-03T13:33:12Z",
+  "_meta": {
+    "prompt_tokens": 562402,
+    "completion_tokens": 4475,
+    "total_cost_usd": 0.23530600000000004,
+    "model_id": "openai/gpt-5.4",
+    "git_commit": "fe83209f",
+    "timestamp_utc": "2026-05-03T13:33:12.755106+00:00",
+    "script": "baselines/run_quite_direct_baseline.py",
+    "n_total": 75,
+    "modes": [
+      "numeric"
+    ],
+    "preset": "hard-compute-expanded-75",
+    "limit_total": null
+  }
+}

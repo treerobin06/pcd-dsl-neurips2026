@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 > **最后更新**: 2026-05-04
 > **论文标题**: Compile Once, Reason Exactly: Verified Solver Induction for LLM Probabilistic Reasoning
 > **目标会议**: NeurIPS 2026
-> **当前状态**: 投稿收口中；核心 E2E/QUITE/图表已写入论文，Figure 1/3 已换 4k 终版，Figure 1 已提前到第 2 页；P0 wording/artifact cleanup 已做，剩最终 claim/citation audit、post-audit clean compile/push、主仓库整理
+> **当前状态**: 投稿收口中；核心 E2E/QUITE/图表已写入论文，Figure 1/3 已换 4k 终版，Figure 1 已提前到第 2 页；P0 wording/artifact cleanup 与匿名补充包已做，剩最终 claim/citation audit、post-audit clean compile/push、主仓库整理
 
 ---
 
@@ -46,6 +46,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **2026-05-03 reviewer-gap 实验批次已跑完并已部分写入论文**：按 Tree “先把 raw 都跑完，具体怎么加再讨论”的要求，补了 structured-output direct baseline、NB/HMM adversarial NL E2E 5 seed、NB/HMM inductor reliability、router 派生指标、QUITE direct baseline，并下载 QUITE / LLM-BI / DisCIPL-self-steering 相关代码数据。Manifest: `baselines/results/reviewer_gap_experiment_manifest_20260503.md`。已进 `paper/main.tex` 的增益项：主文 Held-out 表新增 structured JSON direct baseline（NB **23.3%**，HMM **40.0%**），并把 ours 从单 split **91.7/98.0** 升级为 5-seed pooled **90.8/97.6**；附录新增 NB/HMM reliability（first-pass **95/100=95.0%**，final **96/100=96.0%**）和 QUITE direct external sanity（1154/1154 parsed，within 0.05 **27.7%**，MAE **0.365**）。Router 650/650=100 只作为 appendix/repro sanity，不进主表。关键 raw：structured direct `baselines/results/structured_direct_openai_gpt-4o-mini_20260503_102910.json`；multi-seed summary `baselines/results/adversarial_nl_e2e_multiseed_summary_20260503_183611.json`；reliability `baselines/results/inductor_reliability_nb_hmm_openai_gpt-4o-mini_20260503_183835.json`；QUITE `baselines/results/quite_direct_numeric-wep_openai_gpt-4o-mini_20260503_184206.json`。验证：`python3 tests/test_dsl.py` 25/25 OK，`python3 tests/test_compiler.py` 13/13 OK，`python3 tests/test_equivalence_full.py` BLInD 900/900 + Flight 250/250 OK，`git diff --check` OK。
 - **2026-05-04 Figure 1/3 终版已收口**：正式主文图改为 4k 文件 `paper/figures/figure1_overview_4k_h092.png` 和 `paper/figures/figure3_vsi_4k_h096.png`；Figure 1 LaTeX block 已移动到 Introduction 第一段后，编译后出现在第 2 页顶部；Figure 3 caption 明确 seven primitive tiles 是 unordered palette，不是固定执行顺序。
 - **2026-05-04 P0 wording/artifact cleanup 已执行并推 Overleaf**：`paper/main.tex` 已清理主文和附录中的 `Our DSL` / `DSL backend` / `legacy JSON` / `unavailable` 等松散标签，统一为 `VSI` / `compiled solver` / `result JSON` / `not recorded`；QUITE 30-network smoke 的 63/90=70.0% 负增益段落和 artifact 行已从论文删除，保留 75-query QUITE split 与 full-corpus direct baseline 作为正向证据。`latexmk -pdf` 通过，PDF 为 25 页；Overleaf 最新 commit `9fcc212 Sync from local 2026-05-04 04:02`。
+- **2026-05-04 匿名 supplementary artifact 已重建**：`anonymous-code.zip` 现在从白名单 staging `anonymous-artifact/` 生成，zip 顶层包含 `anonymous-code/`、`data/`、`phase1/`。已清理 `.env`、API key/token、私人路径、Overleaf 同步物、旧 100% mixed sanity、Gate3/debug/失败 scaffold/raw 草稿；保留当前论文证据链需要的 curated JSON、最小数据集和测试。验证：从 zip 解压后 `test_dsl.py` 25/25、`tests.test_compiler` 13/13、`test_equivalence_full.py` BLInD 900/900 + Flight 250/250 OK；staging 内 `verify_bnlearn_dsl_100.py --queries-per-net 100 --seed 2026` 为 400/400 OK。
 
 ### 当前最高优先级 TODO
 
@@ -71,7 +72,7 @@ Tree 当前时间分配策略：先锁 Abstract 和主 claim，不再开会改�
 | 优先级 | 什么时候跑 | Skill / 路由 | 作用 | 是否可能改 Abstract |
 |---|---|---|---|---|
 | **P0-desk** | 最先，提交前必做 | `paper-compile` + 手动 submission checklist | 防 desk reject：NeurIPS 2026 样式、匿名性、9 页主文、references/appendix/checklist 顺序、无 undefined refs/cites、无 overfull、PDF 可打开 | 否 |
-| **P0-desk** | 最先，提交前必做 | 匿名 artifact 手动整理（不走重型 skill） | 因 checklist 已填 code/data Yes，必须有干净 supplementary zip：README、license、requirements、主要 scripts/results、无 token/个人路径/`.DS_Store`/`__pycache__` | 否，除非 artifact 缺少支撑某个数字 |
+| **P0-desk** | 已完成，提交前复查 zip 即可 | 匿名 artifact 手动整理（不走重型 skill） | `anonymous-code.zip` 已重建：README、license、requirements、主要 scripts/results、最小数据、无 token/个人路径/`.DS_Store`/`__pycache__`；投稿前只需重新扫一遍 zip | 否，除非 artifact 缺少支撑某个数字 |
 | **P0-claim** | 文字和表格最终稳定后 | `paper-claim-audit` | 零上下文核对 abstract/main tables/figure captions/appendix 数字是否匹配 raw JSON；重点查 `90.8/97.6`、`96.0 QUITE`、`400/400 bnlearn`、`90.4 mixed`、cost 倍数 | **可能**，只在数字不一致时改 |
 | **P0-citation** | claim audit 后 | `citation-verifier` | 查 hallucinated/broken citations；优先验证正文实际 cite 的 24 条，而不是全 bib；特别查 `qiu2026bayesian`、`schrader2024quite`、`liu2025dellma`、`lew2025discipl`、`curtis2025pomdp` | 通常否，除非核心引用不存在 |
 | **P1-related** | 若 citation audit 通过且还有时间 | `research-lit` / `semantic-scholar` / `arxiv` | 只补强 reviewer 预期的相关工作，不为凑数量。候选方向：semantic parsing to solvers、tool-use/function calling、probabilistic programming、Bayesian network inference、Bayesian Teaching/decision under uncertainty | 一般否，只改 Related Work/Intro 背景 |
