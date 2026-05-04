@@ -49,7 +49,7 @@
     \item {\bf Experimental result reproducibility}
     \item[] Question: Does the paper fully disclose all the information needed to reproduce the main experimental results of the paper to the extent that it affects the main claims and/or conclusions of the paper (regardless of whether the code and data are provided or not)?
     \item[] Answer: \answerYes{}.
-    \item[] Justification: The paper reports model identifiers, task families, sample sizes, evaluation protocols, solver schemas, and scoring rules in \S\ref{sec:pcd}--\ref{sec:e2e} and Appendices~\ref{app:pcd_protocol}--\ref{app:taskspec}. Appendix~\ref{app:e2e_artifacts} maps reported results to artifact groups, and Appendix~\ref{app:cost} reports cost metadata for the claims that use it.
+    \item[] Justification: The paper reports model identifiers, task families, sample sizes, evaluation protocols, solver schemas, scoring rules, and runner metadata in \S\ref{sec:pcd}--\ref{sec:e2e} and Appendices~\ref{app:pcd_protocol}--\ref{app:taskspec}. Appendix~\ref{app:e2e_artifacts} maps reported results to artifact groups, and Appendix~\ref{app:cost} reports cost/time metadata for the claims that use it. The supplementary ZIP includes the code, prompt templates, curated result JSONs, minimal data, and README instructions for audit or rerun.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not include experiments.
@@ -69,7 +69,7 @@
 \item {\bf Open access to data and code}
     \item[] Question: Does the paper provide open access to the data and code, with sufficient instructions to faithfully reproduce the main experimental results, as described in supplemental material?
     \item[] Answer: \answerYes{}.
-    \item[] Justification: The submission includes an anonymized supplementary artifact containing the DSL, compiler, verifier, experiment scripts, prompt templates, generated task records, and result metadata needed to audit the main claims. The code is released under an open license, and external datasets are cited at their original sources.
+    \item[] Justification: The submission includes a single anonymized supplementary ZIP rather than a non-anonymous repository link. It contains the DSL, compiler, verifier, experiment scripts, prompt templates, generated task records, curated result metadata, minimal public benchmark data, and README commands for reproducing the core checks and rerunning LLM-based experiments when API access is available. The code is released under an open license; external datasets remain under their upstream licenses and are cited at their original sources.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that paper does not include experiments requiring code.
@@ -86,7 +86,7 @@
 \item {\bf Experimental setting/details}
     \item[] Question: Does the paper specify all the training and test details (e.g., data splits, hyperparameters, how they were chosen, type of optimizer) necessary to understand the results?
     \item[] Answer: \answerYes{}.
-    \item[] Justification: The experiments use prompting and deterministic backends rather than trained neural models. \S\ref{sec:pcd}--\ref{sec:e2e} and Appendices~\ref{app:pcd_protocol},~\ref{app:dsl}, and~\ref{app:taskspec} describe task construction, sample sizes, prompts, backend solvers, decoding settings, and evaluation metrics.
+    \item[] Justification: The experiments use prompting and deterministic backends rather than trained neural models. \S\ref{sec:pcd}--\ref{sec:e2e} and Appendices~\ref{app:pcd_protocol},~\ref{app:dsl}, and~\ref{app:taskspec} describe task construction, sample sizes, seeds or fixed splits where applicable, prompts, backend solvers, decoding settings, and evaluation metrics. The supplementary artifact includes runner scripts and JSON metadata for the reported experiments.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not include experiments.
@@ -97,7 +97,7 @@
 \item {\bf Experiment statistical significance}
     \item[] Question: Does the paper report error bars suitably and correctly defined or other appropriate information about the statistical significance of the experiments?
     \item[] Answer: \answerYes{}.
-    \item[] Justification: The main accuracy tables report 95\% Wilson or bootstrap confidence intervals where sampling variability matters. Deterministic backend checks are reported as exact agreement/equivalence rates against reference solvers, with undefined-query handling stated for bnlearn.
+    \item[] Justification: The main accuracy tables report 95\% Wilson or bootstrap confidence intervals where sampling variability matters, including pooled multi-seed NB/HMM E2E results. Deterministic backend checks are reported as exact agreement/equivalence rates against reference solvers, with finite-query and undefined-query handling stated for bnlearn.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not include experiments.
@@ -114,7 +114,7 @@
 \item {\bf Experiments compute resources}
     \item[] Question: For each experiment, does the paper provide sufficient information on the computer resources (type of compute workers, memory, time of execution) needed to reproduce the experiments?
     \item[] Answer: \answerYes{}.
-    \item[] Justification: The experiments run on CPU-only local scripts plus commercial LLM APIs, with no GPU training. Appendix~\ref{app:cost} reports the token/cost accounting used in cost claims, and the paper identifies the model providers and model identifiers used for each reported experiment group.
+    \item[] Justification: The experiments run on CPU-only local scripts plus commercial LLM APIs, with no GPU training or fine-tuning. Appendix~\ref{app:cost} reports token, wall-clock, and API-cost metadata where used in cost claims, and the paper identifies the model providers and model identifiers used for each reported experiment group.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not include experiments.
@@ -152,7 +152,7 @@
 \item {\bf Safeguards}
     \item[] Question: Does the paper describe safeguards that have been put in place for responsible release of data or models that have a high risk for misuse (e.g., pre-trained language models, image generators, or scraped datasets)?
     \item[] Answer: \answerNA{}.
-    \item[] Justification: The paper does not release a high-risk pretrained model, scraped dataset, or generative system. The released artifacts are code, prompt templates, generated benchmark tasks, and deterministic solver infrastructure for benchmarked probabilistic reasoning.
+    \item[] Justification: The paper does not release a high-risk pretrained model, scraped dataset, or generative system. The released artifacts are code, prompt templates, generated benchmark tasks, curated benchmark subsets, and deterministic solver infrastructure for benchmarked probabilistic reasoning. The anonymized release was prepared without API keys, account metadata, local absolute paths, or generated build/cache files.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper poses no such risks.
@@ -164,7 +164,7 @@
 \item {\bf Licenses for existing assets}
     \item[] Question: Are the creators or original owners of assets (e.g., code, data, models), used in the paper, properly credited and are the license and terms of use explicitly mentioned and properly respected?
     \item[] Answer: \answerYes{}.
-    \item[] Justification: Existing datasets and libraries are cited in the paper, including BLInD, Flight/Hotel, TextBandit, DeLLMa, QUITE, bnlearn, pgmpy, and ProbLog. The supplementary artifact preserves source/license notes where available and points users to the upstream repositories or papers for external benchmark assets.
+    \item[] Justification: Existing datasets and libraries are cited in the paper, including BLInD, Flight/Hotel, TextBandit, QUITE, bnlearn, pgmpy, and ProbLog. The supplementary artifact preserves source/license notes where available, including QUITE license and citation files, and points users to the upstream repositories or papers for external benchmark assets.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not use existing assets.
@@ -180,7 +180,7 @@
 \item {\bf New assets}
     \item[] Question: Are new assets introduced in the paper well documented and is the documentation provided alongside the assets?
     \item[] Answer: \answerYes{}.
-    \item[] Justification: The new assets are the DSL/compiler/verifier implementation, prompt templates, generated task records, and result metadata. Their syntax, schemas, and evaluation protocol are documented in Appendices~\ref{app:dsl},~\ref{app:taskspec}, and~\ref{app:pcd_protocol}, with file-level organization described in the supplementary artifact.
+    \item[] Justification: The new assets are the DSL/compiler/verifier implementation, prompt templates, generated task records, and result metadata. Their syntax, schemas, and evaluation protocol are documented in Appendices~\ref{app:dsl},~\ref{app:taskspec}, and~\ref{app:pcd_protocol}. The supplementary artifact contains README, ANONYMIZATION, requirements, license, and file-level organization notes.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not release new assets.
@@ -216,7 +216,7 @@
     \item[] Question: Does the paper describe the usage of LLMs if it is an important, original, or non-standard component of the core methods in this research? Note that if the LLM is used only for writing, editing, or formatting purposes and does \emph{not} impact the core methodology, scientific rigor, or originality of the research, declaration is not required.
     %this research?
     \item[] Answer: \answerYes{}.
-    \item[] Justification: LLMs are central to the evaluated induction and baseline steps, and the paper identifies the model providers and model identifiers used in the experiments. Auxiliary LLM assistance was used for prose editing, LaTeX formatting, and script drafting under author review; the scientific claims, analyses, and reported results remain the authors' responsibility.
+    \item[] Justification: LLMs are central to the evaluated induction, parsing, and baseline steps, and the paper identifies the model providers and model identifiers used in the experiments. Auxiliary LLM assistance was used for prose editing, LaTeX formatting, figure drafting, and script drafting under author review; the scientific claims, analyses, and reported results remain the authors' responsibility.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the core method development in this research does not involve LLMs as any important, original, or non-standard components.
