@@ -1,31 +1,12 @@
-"""
-DSL Self-evolving Library Registry — VISION SKETCH (2026-04-28)
+"""DSL macro registry extension hooks.
 
-⚠️ **THIS FILE IS A VISION SKETCH, NOT CONNECTED TO MAIN PIPELINE.** ⚠️
+This optional module sketches a file-based macro registry for future extensions.
+It is not imported by the main DSL package and is not required by the inductor,
+compiler, verifier, or the reported experiments.
 
-Tree 2026-04-28 决策: self-evolving 是 paper 第 3 根 framing pillar 的
-**愿景 / future work**，不是已实现的 feature。本模块**故意不导出**到 dsl/__init__.py，
-inductor / compiler / verifier 主流程不依赖它。论文里只在 Figure 1 / Discussion
-提一嘴 "the architecture supports persistent macro library evolution"，
-不写独立实验或 evaluation Section。
-
-架构（启发自 Claude skill-creator + Python module per file）：
-- 每个 macro 是 dsl/macros/<name>.py 一个独立 Python 模块
-- 模块顶部含 METADATA dict（常量）+ fn callable
-- macros_library 启动时扫描 dsl/macros/*.py → importlib import → 读 METADATA + fn
-- 加新 macro = 扔一个 .py 文件进 dsl/macros/，无需改 macros_library.py
-- 比 JSON manifest 优势：metadata + 实现同处、IDE 类型安全、可加 docstring/examples/自测、
-  fn 直接是 callable 不需要 dotted-path resolve
-
-设计哲学（vision，非已实现）：
-- 7 core ops 是稳定基石（type-checked、verified-correct）
-- Family macros 由 core ops 组合而来，每个 manifest module 描述如何组合
-- 新 family / op 加入时，扔个 .py 文件进 dsl/macros/
-- LLM Inductor 看到 registry → 知道库里有什么可复用 → 不必每次重头组合
-
-两层进化（vision）：
-- Family layer: 新 family 解出 + verifier 通过 → 沉淀新 manifest .py → drop in
-- Op layer:    新 op 提出 + 形式化 + verified → 加入 core set
+Each macro can live in ``dsl/macros/<name>.py`` with a constant ``METADATA``
+dictionary and a callable ``fn`` implementation. At load time, this module scans
+that directory and registers available macro manifests.
 """
 
 import os
@@ -155,7 +136,7 @@ def register_macro_file(
         impl_block = f"from {mod} import {fn_name} as fn"
     else:
         impl_block = (
-            "# TODO: 用 7 core ops 组合实现 fn\n"
+            "# Implement fn using the typed core operations before registering this macro.\n"
             "from dsl.core_ops import (\n"
             "    condition, multiply, marginalize, normalize,\n"
             "    enumerate_hypotheses, expectation, argmax,\n"

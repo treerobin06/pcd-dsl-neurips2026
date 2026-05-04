@@ -1,4 +1,4 @@
-"""Mixed-family End-to-End Benchmark — Tree 2026-04-28 4-level taxonomy Level 2.
+"""Mixed-family end-to-end benchmark over shuffled supported streams.
 
 3 families shuffled (BLInD BN + NB synthetic + HMM synthetic):
 - Mini agent sees NL sample, doesn't know family in advance
@@ -207,7 +207,7 @@ async def main():
         gold = float(row["answers"])
         tasks.append(("blind", sample, gold, None))
 
-    # Shuffle (Tree wants real Mixed)
+    # Shuffle to exercise routing rather than fixed-family execution.
     rng = random.Random(2026)
     rng.shuffle(tasks)
 
@@ -271,7 +271,7 @@ async def main():
         print(f"  {fm}: {c}")
 
     out = {
-        "experiment": "C2 Mixed-family E2E benchmark (Tree 2026-04-28 Level 2)",
+        "experiment": "C2 mixed-family E2E benchmark",
         "model": MODEL,
         "concurrency": SEMA,
         "elapsed_sec": elapsed,

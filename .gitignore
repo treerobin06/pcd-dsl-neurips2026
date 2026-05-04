@@ -34,6 +34,8 @@ venv/
 *.synctex.gz
 meta-skill/paper/overleaf-sync/
 meta-skill/paper/*.pdf
+meta-skill/.codex-review-state.json
+meta-skill/paper/output/work/
 
 # 系统文件
 .DS_Store

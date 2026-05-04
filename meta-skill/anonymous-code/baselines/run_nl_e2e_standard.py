@@ -1,21 +1,15 @@
 """Standard config NL E2E for NB and HMM held-out families.
 
-Tree 2026-04-28 决策: hard/medium difficulty variation 不放 paper (effect 不好稀释 contribution).
-Standard config (NB n_dis=4 n_sym=5 / HMM n_states=3 n_obs=4 seq_length=5) 跑 NL E2E
-显示真"NL→answer 端到端泛化" 数字 (期望 90%+).
-
 Pipeline per sample:
   NL task description (no structured CPT dict)
-    → mini emit TaskSpec via inductor
-    → compile_solver instantiates {NBSolver|HMMSolver}
-    → solver runs 5 dsl ops (condition+multiply+marginalize+normalize+argmax)
-    → predict
-    → compare to gold
+    -> mini emit TaskSpec via inductor
+    -> compile_solver instantiates {NBSolver|HMMSolver}
+    -> solver runs core ops
+    -> predict
+    -> compare to gold
 
-This is **真 NL E2E** (LLM parses NL CPT/likelihoods/transition/emission tables),
-not structured-input component evaluation.
-
-Async sema=25 (CLAUDE.md 强制并发规则).
+This is a natural-language E2E parse-compile-solve evaluation, not a
+structured-input component evaluation.
 """
 
 import sys
@@ -263,7 +257,7 @@ async def main():
             print(f"  i={r['i']} family={r['family']} pred={r['pred']} gold={r['gold']} err={r['err']}")
 
     out = {
-        "experiment": "C2 Standard NL E2E (Tree 2026-04-28: hard 不放 standard 显示泛化)",
+        "experiment": "C2 standard NL E2E",
         "model": MODEL,
         "route": "NL natural-language input → mini emit TaskSpec → compile → run",
         "config": {

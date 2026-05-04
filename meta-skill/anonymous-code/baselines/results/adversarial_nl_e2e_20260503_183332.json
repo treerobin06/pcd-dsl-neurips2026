@@ -1,5 +1,5 @@
 {
-  "experiment": "C2 NL E2E ADVERSARIAL (Tree 2026-04-28: hedge+distractor+shuffle + slight stress)",
+  "experiment": "C2 NL E2E adversarial hedge+distractor+shuffle stress",
   "model": "openai/gpt-4o-mini",
   "route": "Adversarial NL \u2192 mini emit TaskSpec \u2192 compile \u2192 run",
   "config": {

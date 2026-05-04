@@ -1,18 +1,8 @@
 """Adversarial NL E2E for NB and HMM held-out families.
 
-Tree 2026-04-28 决策: stress problem config (大 n) 无效——mini 5/5 全对，因为
-mini 只做 parse + family ID, compiler 精确求解。要让数字降到 93-97%, 必须
-增加 mini parse 的难度——adversarial NL design.
-
-Adversarial NL 设计三招:
-1. **Hedge phrasing** — "around 85%" / "approximately 70%" / "~30%" / "low chance"
-2. **Distractor** — 无关 context 注释 ("Note: this is X" / "In clinical practice...")
-3. **Order shuffle** — symptom 顺序与 likelihood 表不同 + present/absent 写法多变
-   ("not noted" / "absent" / "not present")
-
-期望 mini 错 1-3/30 → 27-29/30 = 90-97% (Wilson [80, 99]).
-
-vs standard NL E2E 50/50 = 100% [92.9, 100] 形成对比.
+This runner stresses the natural-language parsing step with hedge phrasing,
+distractor context, shuffled table order, and varied present/absent wording.
+The deterministic compiler and solver handle inference after parsing.
 
 Async sema=25.
 """
@@ -377,7 +367,7 @@ async def main():
             print(f"  i={r['i']} family={r['family']} pred={r['pred']} gold={r['gold']} err={r['err']}")
 
     out = {
-        "experiment": "C2 NL E2E ADVERSARIAL (Tree 2026-04-28: hedge+distractor+shuffle + slight stress)",
+        "experiment": "C2 NL E2E adversarial hedge+distractor+shuffle stress",
         "model": MODEL,
         "route": "Adversarial NL → mini emit TaskSpec → compile → run",
         "config": {
